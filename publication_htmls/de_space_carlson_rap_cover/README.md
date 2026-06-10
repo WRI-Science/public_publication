@@ -16,6 +16,10 @@ points colored by band cover with per-band hover tooltips.
 
 Almeda Drive (OR 2020, RAP 2019) — Rogue Valley towns; 11.6 MB.  
 Live: [`https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/OR_2020_ALMEDA_DRIVE_rap_cover.html`](https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/OR_2020_ALMEDA_DRIVE_rap_cover.html)
+### [`CA_2018_CAMP_rap_cover.html`](CA_2018_CAMP_rap_cover.html)
+
+Camp (Paradise) (CA 2018, RAP 2018) — Sierra foothills pine; 15.7 MB.  
+Live: [`https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CA_2018_CAMP_rap_cover.html`](https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CA_2018_CAMP_rap_cover.html)
 ### [`CO_2020_EAST_TROUBLESOME_rap_cover.html`](CO_2020_EAST_TROUBLESOME_rap_cover.html)
 
 East Troublesome (CO 2020, RAP 2019) — montane forest; 16.0 MB.  
@@ -28,6 +32,10 @@ Live: [`https://wri-science.github.io/public_publication/publication_htmls/de_sp
 
 Marshall (CO 2021, RAP 2020) — grassland → suburb; 8.6 MB.  
 Live: [`https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CO_2021_MARSHALL_rap_cover.html`](https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CO_2021_MARSHALL_rap_cover.html)
+### [`CA_2018_WOOLSEY_rap_cover.html`](CA_2018_WOOLSEY_rap_cover.html)
+
+Woolsey (CA 2018, RAP 2018) — Santa Monica Mtns chaparral / WUI; 18.3 MB.  
+Live: [`https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CA_2018_WOOLSEY_rap_cover.html`](https://wri-science.github.io/public_publication/publication_htmls/de_space_carlson_rap_cover/CA_2018_WOOLSEY_rap_cover.html)
 
 ## Where the values come from
 
@@ -44,4 +52,4 @@ Authoring pipeline:
 `exploration/de_space_paper/carlson_fire_validation_scripts/01h_extract_rap_cover.py`
 and `01h_validate_rap_cover_maps.py`.
 
-_Generated 2026-06-10 11:54:56 PDT._
+_Generated 2026-06-10 12:57:11 PDT._
