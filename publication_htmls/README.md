@@ -14,3 +14,6 @@ Wildfire risk and significance layers for cultural-resource places nationwide (i
 
 ### [de_space_carlson_structureSize/](de_space_carlson_structureSize/)
 Carlson validation fork QA maps — structure-size-aware 0-100 ft predictor extraction (landcover, NDMI, density) per fire.
+
+### [structure_loss_pipeline/](structure_loss_pipeline/)
+Camp Fire structure-loss QA maps — USA Structures + U-Net predictions + Carlson labels, and a Google / Microsoft building-footprint comparison.
