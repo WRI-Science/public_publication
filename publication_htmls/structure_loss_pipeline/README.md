@@ -4,27 +4,30 @@ Interactive Leaflet maps for visually checking structure-loss labels and
 predictions on the 2018 Camp Fire (Paradise, CA). Built by the
 `structure_loss_pipeline` QA-map stage.
 
-Each map has a circled **i** (top left, and beside every layer). Press
-it for a plain-language glossary (what a “chip” is, who Carlson is,
-what B/U means, and why “outside chips” is not a model miss) plus
-per-layer meaning and sources. A small official NCEAS wordmark in the
-bottom left is embedded in the HTML and links to
+Each map has a compact dark title chip (top left, beside ⓘ), a circled
+**i** (top left, and beside every layer). Press it for a plain-language
+glossary (what a “chip” is, who Carlson is, what B/U means, and why
+“outside chips” is not a model miss) plus per-layer meaning and
+sources. A small official NCEAS wordmark in the bottom left is
+embedded in the HTML and links to
 [nceas.ucsb.edu](https://www.nceas.ucsb.edu/).
 
 ## Maps
 
 ### [`camp_qa.html`](camp_qa.html)
 
-Camp QA — USA Structures footprints, U-Net predictions, and Carlson
-points (destroyed / surviving). 12 MB.  
+Camp QA — title **Camp Fire QA** / Predicted footprints vs Carlson.
+USA Structures footprints, U-Net predictions, and Carlson points
+(destroyed / surviving). 12 MB.  
 Live: [`https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa.html`](https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa.html)
 
 ### [`camp_qa_google_ms.html`](camp_qa_google_ms.html)
 
-Comparison only: same Camp Carlson points against **Overture** footprints
+Comparison only — title **Camp Fire comparison** / Overture MS ∪ OSM vs
+USA Structures. Same Camp Carlson points against **Overture** footprints
 (Microsoft ML Buildings ∪ OpenStreetMap in this extract) and USA
-Structures. Google Open Buildings is **not** in this Camp file. Does not
-change training labels. 12 MB.  
+Structures. Google Open Buildings is **not** in this Camp file (and not
+in the visible title). Does not change training labels. 12 MB.  
 Live: [`https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_google_ms.html`](https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_google_ms.html)
 
 ### [`camp_qa_ms_v2.html`](camp_qa_ms_v2.html)
