@@ -4,12 +4,13 @@ Interactive Leaflet maps for visually checking structure-loss labels and
 predictions on the 2018 Camp Fire (Paradise, CA). Built by the
 `structure_loss_pipeline` QA-map stage.
 
-Each map has a compact dark title chip (top left, beside ⓘ), a circled
-**i** (top left, and beside every layer). Press it for a plain-language
-glossary (what a “chip” is, who Carlson is, what B/U means, and why
-“outside chips” is not a model miss) plus per-layer meaning and
-sources. A small official NCEAS wordmark in the bottom left is
-embedded in the HTML and links to
+Each map has a large centered title (shown on first open; hide with
+×, restore with **Show title**). A circled **i** (top left, in About,
+and beside every layer) opens a plain-language glossary (what a
+“chip” is, who Carlson is, what B/U means, and why “outside chips”
+is not a model miss) plus per-layer meaning and sources. About stays
+short (numbers + jump). A small official NCEAS wordmark in the
+bottom left is embedded in the HTML and links to
 [nceas.ucsb.edu](https://www.nceas.ucsb.edu/).
 
 ## Maps
