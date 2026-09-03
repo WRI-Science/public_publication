@@ -27,6 +27,14 @@ Structures. Google Open Buildings is **not** in this Camp file. Does not
 change training labels. 12 MB.  
 Live: [`https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_google_ms.html`](https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_google_ms.html)
 
+### [`camp_qa_ms_v2.html`](camp_qa_ms_v2.html)
+
+Comparison only: official **Microsoft US Building Footprints v2** (not
+Overture) vs FEMA/USA Structures vs Camp Carlson. CA v2
+`capture_dates_range` is populated; Camp extract is all
+`12/6/2018-12/12/2018`. Does not change training labels. ~2.5 MB.
+Live: [`https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_ms_v2.html`](https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/camp_qa_ms_v2.html)
+
 `nceas-logo.svg` is the official NCEAS wordmark copied from
 https://www.nceas.ucsb.edu/themes/custom/nceas/components/images/logo-nceas.svg
 (also embedded in each HTML so the map is self-contained).
