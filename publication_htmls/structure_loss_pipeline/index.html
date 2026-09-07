@@ -118,6 +118,28 @@ two are always shown side by side.</p>
   <th>MB</th></tr>
   <tr><td>Camp Fire (CA, 2018)</td><td>2018</td><td><a href="inventory_CA_2018_CAMP.html">map</a></td><td>37,460</td><td>35,613</td><td>1,847</td><td>—</td><td>Carlson</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>0.695</td><td>0.726</td><td>1.4</td></tr><tr><td>Eaton Fire (2025 CAL FIRE incident)</td><td>2025</td><td><a href="inventory_DINS_2025_EATON.html">map</a></td><td>75,241</td><td>73,952</td><td>1,289</td><td>2022</td><td>CAL FIRE DINS</td><td>0.764</td><td>5,631 @ 0.9</td><td>0.960</td><td>0.844</td><td class="na">—</td><td class="na">—</td><td>1.7</td></tr></table>
 
+<h2>How good is the answer sheet?</h2>
+<p>Every recall number above is measured against the USGS Carlson points or
+the CAL FIRE DINS inspections. <a href="point_dataset_audit.html">The
+point-dataset audit</a> measures those two datasets themselves — where they
+place a point relative to a building footprint, whether they duplicate
+structures, and how well they agree with <em>each other</em> on the same
+burned buildings — and is why detection is matched at 20&nbsp;m rather than
+5&nbsp;m. It is written by <code>scripts/qa_point_datasets.py</code>, which
+does not read anything the pipeline produced.</p>
+
+<h2>Fires the detector never saw</h2>
+<p>The detection table above is the training fires. <a
+href="detection_vs_dins.html">Detection vs CAL FIRE DINS</a> is its
+out-of-sample counterpart: the pre-fire structure inventory built for seven
+California fires that are in neither the Carlson training set nor the WUI
+counties (Carr, CZU, North Complex, Dixie, Caldor, Park, Mountain), scored
+one-to-one at 20&nbsp;m against every DINS inspection — one column per
+inventory recipe, from footprints alone to each U-Net, with NAIP crops of what
+each recipe <em>missed</em> and the detector's probability raster drawn over
+the imagery. It is written by <code>scripts/qa_detection_report.py</code> from
+<code>scripts/09_validate_detection_vs_dins.py</code> output.</p>
+
 <h2>Reading the maps</h2>
 <ul>
   <li>Each map opens on a dense detail window. The <em>Jump</em> buttons move
