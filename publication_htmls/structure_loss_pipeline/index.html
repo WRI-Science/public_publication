@@ -128,17 +128,24 @@ burned buildings — and is why detection is matched at 20&nbsp;m rather than
 5&nbsp;m. It is written by <code>scripts/qa_point_datasets.py</code>, which
 does not read anything the pipeline produced.</p>
 
-<h2>Fires the detector never saw</h2>
+<h2>What the pipeline adds, on fires it never saw</h2>
 <p>The detection table above is the training fires. <a
-href="detection_vs_dins.html">Detection vs CAL FIRE DINS</a> is its
-out-of-sample counterpart: the pre-fire structure inventory built for seven
-California fires that are in neither the Carlson training set nor the WUI
-counties (Carr, CZU, North Complex, Dixie, Caldor, Park, Mountain), scored
-one-to-one at 20&nbsp;m against every DINS inspection — one column per
-inventory recipe, from footprints alone to each U-Net, with NAIP crops of what
-each recipe <em>missed</em> and the detector's probability raster drawn over
-the imagery. It is written by <code>scripts/qa_detection_report.py</code> from
-<code>scripts/09_validate_detection_vs_dins.py</code> output.</p>
+href="detection_vs_dins.html">What the detector adds to the footprints</a> is
+the out-of-sample counterpart, and it asks the harder question: with the public
+footprint databases (USA Structures ∪ Microsoft) as the <em>baseline</em>, what
+does this pipeline add to them? On fifteen 2023–2025 CAL FIRE DINS incidents
+the detector never saw, matched one-to-one at 10&nbsp;m, that marginal
+contribution is 343 structures — 0.9 points of recall, 3.5&nbsp;% of what the
+databases missed — concentrated on the rural fires where the databases are
+worst. The same page carries the damage model's leave-one-incident-out table
+(v1 against v2) and the operating-point rules, the record of every lever tried
+against the rural gap, the legacy 20&nbsp;m recipe-by-recipe recall table, and
+NAIP crops of what each recipe <em>missed</em> with the detector's probability
+raster drawn over the imagery. It is written by
+<code>scripts/qa_detection_report.py</code> from
+<code>09_validate_detection_vs_dins.py</code>,
+<code>09b_structure_metrics.py</code> and
+<code>10_damage_operating_point.py</code> output.</p>
 
 <h2>Reading the maps</h2>
 <ul>
