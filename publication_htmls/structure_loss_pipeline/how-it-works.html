@@ -1,0 +1,308 @@
+<title>Structure Loss Pipeline, Explained</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --paper-2: #F1EEE6;
+    --ink: #23282D;
+    --ink-2: #4E555C;
+    --ink-3: #7C848C;
+    --rule: #DDD8CC;
+    --footprint: #3D5A80;
+    --detector: #B8860B;
+    --ember: #B5451B;
+    --survivor: #2E7D7B;
+    --ember-soft: #F3DED3;
+    --survivor-soft: #D7EAE8;
+    --footprint-soft: #DCE4EF;
+    --detector-soft: #F2E8CC;
+    --measure: 68ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1E22; --paper-2: #23272C; --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399; --rule: #383D44;
+      --footprint: #8FB0DA; --detector: #E0B64A; --ember: #E8784A; --survivor: #62B7B4;
+      --ember-soft: #4A2C22; --survivor-soft: #1F3B3A; --footprint-soft: #263447; --detector-soft: #3F3520;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E22; --paper-2: #23272C; --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399; --rule: #383D44;
+    --footprint: #8FB0DA; --detector: #E0B64A; --ember: #E8784A; --survivor: #62B7B4;
+    --ember-soft: #4A2C22; --survivor-soft: #1F3B3A; --footprint-soft: #263447; --detector-soft: #3F3520;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; margin: 0; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); font-variation-settings: "opsz" 144; }
+  h2 { font-size: 1.85rem; margin-top: 0.4rem; }
+  h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.4rem; }
+  p { margin: 0 0 1.1rem; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.25rem; }
+  .wide { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
+  header { padding: 3.5rem 0 2rem; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1rem; }
+  .lede { font-size: 1.2rem; color: var(--ink-2); margin-top: 1.2rem; }
+  section.part { padding: 3rem 0 1rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .partlabel { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.5rem; }
+  figure { margin: 2rem 0; }
+  figure.band { background: var(--paper-2); border-radius: 6px; padding: 1.5rem 1.25rem 1rem; }
+  figcaption { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.75rem; max-width: var(--measure); }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink); }
+  svg .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  svg .muted { fill: var(--ink-3); }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.85rem; color: var(--ink-2); margin-top: 0.5rem; }
+  .legend span::before { content: ""; display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.45em; vertical-align: -0.05em; background: var(--sw); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; color: var(--ink-2); font-size: 0.85rem; letter-spacing: 0.02em; }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.9rem; }
+  .tablewrap { overflow-x: auto; margin: 1.5rem 0; }
+  .callout { border-left: 3px solid var(--detector); padding: 0.6rem 1rem; background: var(--paper-2); margin: 1.5rem 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .steps { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0.9rem; }
+  .steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.75rem; align-items: start; }
+  .steps .n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.85rem; color: var(--ink-3); padding-top: 0.25rem; }
+  .steps b { font-weight: 600; }
+  dl.glossary { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.25rem; font-size: 0.95rem; }
+  dl.glossary dt { font-weight: 600; }
+  dl.glossary dd { margin: 0; color: var(--ink-2); }
+  footer { padding: 2.5rem 0 4rem; color: var(--ink-3); font-size: 0.85rem; border-top: 1px solid var(--rule); margin-top: 3rem; }
+  a { color: var(--footprint); }
+  a:focus-visible { outline: 2px solid var(--detector); outline-offset: 2px; }
+  @media (max-width: 640px) { dl.glossary { grid-template-columns: 1fr; } .steps li { grid-template-columns: 1.8rem 1fr; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Wildfire structure loss · Continuing the USGS record from 2023 onward</div>
+    <h1>How the pipeline decides what was there, and what burned</h1>
+    <p class="lede">A plain-language account of the two jobs this pipeline does for every fire: build a defensible list of the buildings that stood before the fire, then decide, building by building, whether the fire destroyed them. It explains the current best version of each, what the numbers mean, and how the same process runs on a fire it has never seen, anywhere in the lower 48 states.</p>
+  </div>
+</header>
+
+<section class="part">
+  <div class="wrap">
+    <div class="partlabel">Why two jobs</div>
+    <h2>A loss count is only as good as the inventory it starts from</h2>
+    <p>Counting destroyed buildings sounds like one task. It is two, and the first is the harder one. Before a fire, you need a list of the structures that existed. After it, you need a call on each one. If the pre-fire list is missing a fifth of the houses, no amount of skill on the burned-or-not question recovers them, and the loss count is wrong by construction.</p>
+    <p>The USGS maintained exactly such a record for fires from 2002 to 2022, digitised by hand from imagery. It stopped. This pipeline continues it using only data that exists for every fire in the country: national building footprint databases, the federal aerial imagery program, and two European satellites that image the whole planet every few days.</p>
+    <figure class="band">
+      <svg viewBox="0 0 960 200" role="img" aria-label="Two-part pipeline: build the pre-fire inventory, then classify each structure as destroyed or surviving">
+        <rect x="20" y="40" width="400" height="120" rx="6" fill="var(--footprint-soft)"/>
+        <text x="40" y="72" font-size="13" class="mono muted">PART 1 · BEFORE THE FIRE</text>
+        <text x="40" y="104" font-size="22" font-weight="600">Pre-fire structure inventory</text>
+        <text x="40" y="132" font-size="14" fill="var(--ink-2)">One point and one probability map per building, with tags</text>
+        <path d="M 425 100 L 530 100" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
+        <path d="M 522 93 L 532 100 L 522 107" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
+        <rect x="540" y="40" width="400" height="120" rx="6" fill="var(--ember-soft)"/>
+        <text x="560" y="72" font-size="13" class="mono muted">PART 2 · AFTER THE FIRE</text>
+        <text x="560" y="104" font-size="22" font-weight="600">Destroyed or surviving</text>
+        <text x="560" y="132" font-size="14" fill="var(--ink-2)">A probability for every structure in the inventory, and a call</text>
+      </svg>
+      <figcaption>Part 2 only ever scores what Part 1 produced. A building absent from the inventory is absent from the loss count.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <div class="partlabel">Part 1</div>
+    <h2>Finding the structures</h2>
+    <p>We spent most of a week trying to beat the existing building footprint databases with a deep-learning detector on aerial imagery. The honest result is that we cannot beat them by much, and the best process is built around that fact rather than against it.</p>
+
+    <h3>Start from the footprints, because they are the product</h3>
+    <p>Two public databases already outline nearly every building in the country: FEMA's USA Structures, and Microsoft's machine-generated footprints. Each polygon carries the date of the imagery it was drawn from, and we admit a footprint only if that date falls before the fire. That rule matters more than it sounds: a footprint traced from post-fire imagery cannot contain a house that burned, so a database used naively undercounts losses in exactly the places that matter.</p>
+
+    <h3>Add what the databases miss, with an imagery detector</h3>
+    <p>A segmentation network reads the most recent pre-fire aerial imagery at 60 centimetre resolution, four bands, with the footprints supplied as a fifth input band so it learns to fill gaps rather than redraw what is already known. Its output is a probability map of where a roof is. We cut that map at a threshold, keep connected patches of at least 20 square metres, and turn each into a point. Any patch that already overlaps a footprint is discarded as redundant. What survives is the detector's genuine addition.</p>
+    <p>Because the aerial program flies each state only every two or three years, we also run the detector on the previous two flights and keep any structure seen in any of them. On the forested rural fires this multi-year union is the single largest improvement we found.</p>
+
+    <figure class="band">
+      <svg viewBox="0 0 960 300" role="img" aria-label="Flow: footprint databases and aerial imagery feed a detector; redundant detections are dropped; the union becomes the tagged inventory">
+        <rect x="20" y="30" width="200" height="70" rx="5" fill="var(--footprint-soft)"/>
+        <text x="120" y="60" font-size="14" font-weight="600" text-anchor="middle">USA Structures</text>
+        <text x="120" y="82" font-size="12" text-anchor="middle" fill="var(--ink-2)">dated before ignition</text>
+        <rect x="20" y="115" width="200" height="70" rx="5" fill="var(--footprint-soft)"/>
+        <text x="120" y="145" font-size="14" font-weight="600" text-anchor="middle">Microsoft footprints</text>
+        <text x="120" y="167" font-size="12" text-anchor="middle" fill="var(--ink-2)">dated before ignition</text>
+        <rect x="20" y="200" width="200" height="70" rx="5" fill="var(--detector-soft)"/>
+        <text x="120" y="230" font-size="14" font-weight="600" text-anchor="middle">Aerial imagery, 0.6 m</text>
+        <text x="120" y="252" font-size="12" text-anchor="middle" fill="var(--ink-2)">latest flight + two earlier</text>
+        <path d="M 225 65 L 300 150" stroke="var(--footprint)" stroke-width="2" fill="none"/>
+        <path d="M 225 150 L 300 150" stroke="var(--footprint)" stroke-width="2" fill="none"/>
+        <path d="M 225 235 L 300 235" stroke="var(--detector)" stroke-width="2" fill="none"/>
+        <rect x="305" y="200" width="200" height="70" rx="5" fill="var(--detector-soft)"/>
+        <text x="405" y="230" font-size="14" font-weight="600" text-anchor="middle">Roof detector</text>
+        <text x="405" y="252" font-size="12" text-anchor="middle" fill="var(--ink-2)">probability map → points</text>
+        <path d="M 300 150 L 380 150 L 380 195" stroke="var(--footprint)" stroke-width="2" fill="none"/>
+        <text x="392" y="145" font-size="11" fill="var(--ink-3)">footprints also go in as a band</text>
+        <path d="M 510 235 L 580 235" stroke="var(--detector)" stroke-width="2" fill="none"/>
+        <rect x="585" y="200" width="150" height="70" rx="5" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
+        <text x="660" y="230" font-size="13" font-weight="600" text-anchor="middle">Drop if it overlaps</text>
+        <text x="660" y="250" font-size="12" text-anchor="middle" fill="var(--ink-2)">a footprint (+3 m)</text>
+        <path d="M 300 150 L 780 150 L 780 105" stroke="var(--footprint)" stroke-width="2" fill="none"/>
+        <path d="M 740 235 L 780 235 L 780 105" stroke="var(--detector)" stroke-width="2" fill="none"/>
+        <path d="M 773 112 L 780 102 L 787 112" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
+        <rect x="690" y="30" width="250" height="70" rx="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+        <text x="815" y="58" font-size="15" font-weight="600" text-anchor="middle">Tagged inventory</text>
+        <text x="815" y="80" font-size="12" text-anchor="middle" fill="var(--ink-2)">source · size class · triage score</text>
+      </svg>
+      <figcaption>The inventory is a union, and every point remembers where it came from. A user who wants only the footprints, or only major buildings, filters by tag.</figcaption>
+    </figure>
+
+    <h3>Tag rather than delete</h3>
+    <p>Every point carries three tags. Its source: which database, or the detector and which year's imagery. Its size class: major above 50 square metres, matching the USGS definition of a building, or minor for sheds and outbuildings. And a triage score for the footprints themselves, explained next.</p>
+
+    <h3>Auditing the footprints: triage, not deletion</h3>
+    <p>About one footprint in seven inside a burned area has no corresponding building in the hand-digitised USGS record. Some are edge-of-area artefacts, some were demolished, some were never real. We would like to remove them. We measured whether the detector can identify them and the answer, at present, is no. The reason is instructive: the production detector takes the footprints as an input band, so it is saturated under exactly the polygons we want to test. A detector run without that band ranks the suspect footprints reasonably well, but no cut-off exceeds 36 percent precision, meaning two real buildings would be deleted for every phantom removed.</p>
+    <p>So the best process is triage. Each footprint carries its prior-free detector score and its distance to the nearest independent detection. Suspect footprints are ranked, kept in the inventory, and flagged for a person to check. Nothing is deleted by a rule we cannot defend.</p>
+
+    <h3>What the numbers say</h3>
+    <p>Two reference datasets score the inventory, and they answer different questions. The USGS record enumerates every major building in a fire's area, so it can measure both what we find and what we invent. California's damage inspections cover only the structures inspectors visited, so they measure recall on damaged neighbourhoods but cannot measure precision at all.</p>
+
+    <figure class="band">
+      <svg viewBox="0 0 960 250" role="img" aria-label="Bar chart: recall of major buildings against the USGS record, footprints alone versus footprints plus detector, and the same against inspections">
+        <text x="20" y="26" font-size="13" class="mono muted">RECALL OF BUILDINGS, HELD-OUT GROUND · MATCH WITHIN 10 M</text>
+        <text x="20" y="70" font-size="14" font-weight="600">vs USGS record (complete)</text>
+        <rect x="260" y="52" width="461" height="22" fill="var(--footprint)"/>
+        <text x="728" y="68" font-size="13" class="mono">0.768 footprints alone</text>
+        <rect x="260" y="80" width="485" height="22" fill="var(--detector)"/>
+        <text x="752" y="96" font-size="13" class="mono">0.809 with detector</text>
+        <text x="20" y="150" font-size="14" font-weight="600">vs CAL FIRE inspections</text>
+        <text x="20" y="170" font-size="12" fill="var(--ink-2)">(15 fires, 2023–2025)</text>
+        <rect x="260" y="132" width="446" height="22" fill="var(--footprint)"/>
+        <text x="713" y="148" font-size="13" class="mono">0.744 footprints alone</text>
+        <rect x="260" y="160" width="452" height="22" fill="var(--detector)"/>
+        <text x="719" y="176" font-size="13" class="mono">0.753 with detector</text>
+        <line x1="260" y1="40" x2="260" y2="200" stroke="var(--rule)"/>
+        <line x1="860" y1="40" x2="860" y2="200" stroke="var(--rule)" stroke-dasharray="3 3"/>
+        <text x="260" y="222" font-size="11" class="mono muted">0</text>
+        <text x="860" y="222" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
+        <text x="560" y="222" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
+      </svg>
+      <figcaption>Against the complete record the detector is worth about four recall points at a cost of two points of precision. Against inspections it looks worth one point, because most of what it adds was never inspected. Precision of the footprint baseline against the USGS record is 0.86 overall and 0.90 away from the edge of the digitised area.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <p><b>The noise floor.</b> Retraining the detector with nothing changed but the random seed moves a single rural fire by up to two recall points and the overall score by a tenth of a point. Every improvement we report is read against that. Most of the levers we tried, including lidar heights, satellite spectral bands, and Google's satellite embeddings, fell inside it and were dropped.</p>
+    </div>
+
+    <h3>What the inventory cannot do</h3>
+    <p>It cannot see a house under a closed tree canopy, and neither can the footprint databases, which were drawn from the same kind of imagery. The one place those structures become visible is after the fire, when the canopy is gone and a concrete pad or a debris field remains. A separate post-fire pass looks for exactly that in the next aerial flight. Its ceiling is set by timing: the next flight is often a year later, and debris removal has usually cleared the lot by then. It adds a few points where the imagery is timely and is kept as an optional step, not a dependency.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <div class="partlabel">Part 2</div>
+    <h2>Deciding whether each structure burned</h2>
+    <p>This is where the pipeline is genuinely strong, and where the week's work moved the number most. The question is asked once per inventory point: given what satellites saw at this spot before and after the fire, was the structure destroyed?</p>
+
+    <h3>Two satellites, one window each side of the fire</h3>
+    <p>Sentinel-2 photographs the ground in visible, near-infrared and shortwave-infrared light at 10 to 20 metre resolution, every five days. Sentinel-1 is a radar: it sends microwave pulses and records what bounces back, at 10 metres, every six to twelve days, and it does not care about cloud or smoke. Both have imaged every fire in the country since 2016.</p>
+    <p>For each structure we build a "before" picture from the 45 days ending the day before ignition, and an "after" picture from a 60 day window that opens two weeks after ignition, once the smoke has cleared. Within each window we take the median of all clear observations, so a single cloudy or smoky pass does not corrupt it.</p>
+
+    <figure class="band">
+      <svg viewBox="0 0 960 190" role="img" aria-label="Timeline: a 45-day pre-fire window ending the day before ignition, the ignition day, then a 60-day post-fire window opening 14 days after ignition">
+        <line x1="40" y1="100" x2="920" y2="100" stroke="var(--rule)" stroke-width="2"/>
+        <rect x="80" y="70" width="330" height="60" rx="4" fill="var(--survivor-soft)"/>
+        <text x="245" y="96" font-size="14" font-weight="600" text-anchor="middle">Before: 45 days</text>
+        <text x="245" y="116" font-size="12" text-anchor="middle" fill="var(--ink-2)">median of clear passes, both satellites</text>
+        <line x1="420" y1="50" x2="420" y2="150" stroke="var(--ember)" stroke-width="3"/>
+        <text x="420" y="40" font-size="13" font-weight="600" text-anchor="middle" fill="var(--ember)">Ignition</text>
+        <rect x="523" y="70" width="380" height="60" rx="4" fill="var(--ember-soft)"/>
+        <text x="713" y="96" font-size="14" font-weight="600" text-anchor="middle">After: 60 days</text>
+        <text x="713" y="116" font-size="12" text-anchor="middle" fill="var(--ink-2)">opens 14 days after ignition, once smoke has cleared</text>
+        <text x="470" y="168" font-size="11" class="mono muted" text-anchor="middle">14 d gap</text>
+        <text x="80" y="168" font-size="11" class="mono muted">−45 d</text>
+        <text x="410" y="168" font-size="11" class="mono muted" text-anchor="end">−1 d</text>
+        <text x="523" y="168" font-size="11" class="mono muted">+14 d</text>
+        <text x="903" y="168" font-size="11" class="mono muted" text-anchor="end">+74 d</text>
+      </svg>
+      <figcaption>The same windows are used for both satellites. Radar scenes are compared only within the same orbit, because the same ground looks different from different viewing angles, and that difference would otherwise masquerade as change.</figcaption>
+    </figure>
+
+    <h3>What the model actually sees</h3>
+    <p>At each structure's own 10 metre pixel, and averaged over the 3 by 3 block around it, we record six optical bands, four vegetation and burn indices built from them, and the before-to-after change in each. From radar we record the two polarisations and their ratio, in decibels, before and after and the change. That is 71 numbers per structure. A gradient-boosted tree ensemble maps them to a probability of destruction. It is a tabular model, not an image model, and it trains in minutes.</p>
+    <p>The optical signal is the familiar one: a burned lot loses its near-infrared brightness and gains shortwave-infrared reflectance. The radar signal surprised us. Destroyed structures get brighter, not darker, on every fire we checked, because rubble on a graded lot scatters more energy back to the sensor than an intact roof does. Radar earns its place where optical is weakest: on structures that sat on bare ground before the fire and had little vegetation to lose.</p>
+
+    <h3>Training on the right labels, and a fixed threshold</h3>
+    <p>The first version trained only on the USGS record and was applied unchanged to recent California fires. The current version also trains on CAL FIRE's damage inspections, which are the labels the product is meant to reproduce. Every score we publish is leave-one-fire-out: the fire being scored is never in its own training set.</p>
+    <p>The destroyed call is made at a single fixed probability, 0.86, chosen to maximise the average F1 across fires rather than the pooled F1, which the two large Los Angeles fires would otherwise dominate. We built and tested seven adaptive threshold rules, including ones keyed to each fire's predicted damage rate, and every one lost to the fixed cut once the model was trained on the right labels.</p>
+
+    <figure class="band">
+      <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the damage model, first version versus current version, across eight inspected fires">
+        <text x="20" y="26" font-size="13" class="mono muted">F1 OF THE DESTROYED CALL, EACH FIRE HELD OUT OF TRAINING</text>
+        <g font-size="13">
+          <text x="20" y="68">Eaton 2025</text>       <rect x="180" y="52" width="506" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="63" width="549" height="9" fill="var(--ember)"/> <text x="736" y="72" class="mono" font-size="12">0.843 → 0.915</text>
+          <text x="20" y="98">Palisades 2025</text>   <rect x="180" y="82" width="505" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="93" width="553" height="9" fill="var(--ember)"/> <text x="740" y="102" class="mono" font-size="12">0.841 → 0.921</text>
+          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="112" width="549" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="123" width="552" height="9" fill="var(--ember)"/> <text x="739" y="132" class="mono" font-size="12">0.915 → 0.920</text>
+          <text x="20" y="158">Park 2024</text>       <rect x="180" y="142" width="541" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="153" width="543" height="9" fill="var(--ember)"/> <text x="730" y="162" class="mono" font-size="12">0.902 → 0.905</text>
+          <text x="20" y="188">Borel 2024</text>      <rect x="180" y="172" width="536" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="183" width="538" height="9" fill="var(--ember)"/> <text x="725" y="192" class="mono" font-size="12">0.893 → 0.896</text>
+          <text x="20" y="218">Airport 2024</text>    <rect x="180" y="202" width="512" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="213" width="511" height="9" fill="var(--ember)"/> <text x="718" y="222" class="mono" font-size="12">0.853 → 0.852</text>
+          <text x="20" y="248">Mountain 2024</text>   <rect x="180" y="232" width="473" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="243" width="496" height="9" fill="var(--ember)"/> <text x="683" y="252" class="mono" font-size="12">0.788 → 0.827</text>
+          <text x="20" y="278">Bridge 2024</text>     <rect x="180" y="262" width="430" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="273" width="434" height="9" fill="var(--ember)"/> <text x="621" y="282" class="mono" font-size="12">0.716 → 0.724</text>
+        </g>
+        <line x1="180" y1="44" x2="180" y2="292" stroke="var(--rule)"/>
+        <line x1="780" y1="44" x2="780" y2="292" stroke="var(--rule)" stroke-dasharray="3 3"/>
+        <text x="180" y="312" font-size="11" class="mono muted">0</text>
+        <text x="480" y="312" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
+        <text x="780" y="312" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
+      </svg>
+      <div class="legend"><span style="--sw: var(--ink-3)">first version: USGS labels only, optical only</span><span style="--sw: var(--ember)">current version: inspection labels, optical + radar, mean of four training seeds</span></div>
+      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.845 → 0.914, area under the curve 0.953 → 0.972. Bridge stays hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
+    </figure>
+
+    <h3>What the damage model cannot do</h3>
+    <p>A 10 metre pixel cannot cleanly separate a destroyed house from an intact neighbour 12 metres away, so the model is weakest where destruction is scattered rather than block by block. It also reads as a severity index rather than a switch: structures inspectors rated lightly damaged score around 0.5, between the intact and the destroyed, and about one in five of them crosses the destroyed threshold. The published dataset carries the probability, so a user who needs a different balance of misses and false alarms can move the cut.</p>
+    <p>Higher-resolution post-fire imagery would resolve individual buildings, but it exists only for some fires. Because the product must run the same way everywhere, it is an upgrade path, not part of the standard process.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <div class="partlabel">Part 3</div>
+    <h2>Running it on a new fire, anywhere in the lower 48</h2>
+    <p>Nothing in the standard process is specific to California except the inspection labels it was validated against. Every input is national or global.</p>
+    <ol class="steps">
+      <li><span class="n">1</span><div><b>Define the fire.</b> An ignition date and an area. For most fires the perimeter from the national incident database is enough; the area is buffered so structures at the edge are included.</div></li>
+      <li><span class="n">2</span><div><b>Build the inventory.</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run the roof detector on the latest and two earlier aerial flights, union and tag. Output: a probability map and a point layer.</div></li>
+      <li><span class="n">3</span><div><b>Sample the satellites.</b> For every point, the before and after windows from Sentinel-2 and Sentinel-1, medians and changes, 71 numbers.</div></li>
+      <li><span class="n">4</span><div><b>Score.</b> The trained model gives each structure a destroyed probability; the fixed cut gives the call. Output: the point layer with probability, call, source and size tags, and summary tables by fire.</div></li>
+      <li><span class="n">5</span><div><b>Validate as truth arrives.</b> New California incidents are scored before they are added to training, so they act as a true forward test. Outside California the USGS record covers about a hundred fires in other states through 2022; the optical model scores 0.985 area under the curve across them when each is held out, which is the evidence the process transfers.</div></li>
+    </ol>
+
+    <h3>What gets published, and how much to trust it</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Product</th><th>What it is</th><th>How it is checked</th></tr></thead>
+        <tbody>
+          <tr><td>Structure probability map</td><td>Raster, one value per 0.6 m pixel, per fire</td><td>Pixel overlap with footprints in unburned areas: intersection over union 0.77</td></tr>
+          <tr><td>Structure points</td><td>One point per building with source, size class, triage score</td><td>Recall 0.81 and precision 0.83 against the USGS record on held-out ground</td></tr>
+          <tr><td>Destroyed probability and call</td><td>Per point, from optical + radar change</td><td>F1 0.914 on 36,272 inspected structures, each fire held out</td></tr>
+          <tr><td>Summary tables</td><td>Counts by fire, by size class, by source</td><td>Derived from the above; carry the same uncertainty</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Three honest limits travel with the dataset. The inventory misses roughly a fifth of major buildings on held-out ground, and misses destroyed buildings harder than surviving ones wherever footprints were drawn from later imagery. About one footprint in seven is a candidate phantom and is flagged rather than removed. And the damage call blurs at the scale of a single house among survivors. Each of these is measured, written into the record, and re-measured whenever the process changes.</p>
+
+    <h3>Glossary</h3>
+    <dl class="glossary">
+      <dt>Footprint</dt><dd>A polygon outlining a building's roof, drawn by hand or by a model from overhead imagery.</dd>
+      <dt>Recall</dt><dd>Of the buildings that really existed, the share we found.</dd>
+      <dt>Precision</dt><dd>Of the buildings we listed, the share that really existed.</dd>
+      <dt>F1</dt><dd>A single score balancing precision and recall; 1.0 is perfect.</dd>
+      <dt>Held out</dt><dd>Data the model never saw during training, used to measure it honestly.</dd>
+      <dt>Major structure</dt><dd>At least 50 square metres of roof, the USGS definition of a building.</dd>
+      <dt>Triage score</dt><dd>A ranking of how suspect a footprint is, for a person to review; never an automatic deletion.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Numbers in this page are copied from the pipeline's own output files as of 9 September 2026. The full record of every experiment, including the ones that failed, is in the project's experiment ledger and change log.</p>
+  </div>
+</footer>

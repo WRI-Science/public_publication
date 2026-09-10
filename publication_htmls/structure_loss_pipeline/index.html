@@ -128,6 +128,14 @@ burned buildings — and is why detection is matched at 20&nbsp;m rather than
 5&nbsp;m. It is written by <code>scripts/qa_point_datasets.py</code>, which
 does not read anything the pipeline produced.</p>
 
+<h2>How it works, in plain language</h2>
+<p><a href="how-it-works.html">Structure Loss Pipeline, Explained</a> is the
+non-technical account of the two jobs: building the pre-fire inventory
+(footprints as the product, the detector as a gap-filler, triage instead of
+deletion) and deciding which structures burned (Sentinel-2 and Sentinel-1
+before and after, one probability per structure, a fixed cut), with the
+numbers behind each step and what they cannot do.</p>
+
 <h2>What the pipeline adds, on fires it never saw</h2>
 <p>The detection table above is the training fires. <a
 href="detection_vs_dins.html">What the detector adds to the footprints</a> is
