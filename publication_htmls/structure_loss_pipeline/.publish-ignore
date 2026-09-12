@@ -25,10 +25,11 @@ dins_*.html
 # Stage-3 detection maps from a detector two versions behind the frozen one.
 detections_*.html
 
-# Inventories on the retired 2.4 km DINS-point buffer frame. The __perimeter
-# successors are published beside them.
-inventory_DINS_2025_EATON.html
-inventory_DINS_2024_NIXON.html
+# (The two legacy DINS-buffer inventories that used to be listed here are gone
+# from this list on purpose: since road-15 those bare names belong to the
+# CANONICAL perimeter-frame pages, and qa_maps skips the legacy product itself
+# when its perimeter sibling exists. Listing them here would suppress the good
+# page, which it did for one run on 2026-09-12.)
 
 # The QA-map landing page. index.html here is the hand-written project landing
 # page; qa_maps.py writes qa-maps-index.html, and a filtered run would publish
@@ -41,3 +42,15 @@ qa-maps-index.html
 # 2026-09-12 with no page linking to it. Delete this line when the whole set
 # is rebuilt and linked from a page that says what it is for.
 damage_*_landsat_v2.html
+
+# Superseded by the v5 damage maps beside them. damage_sentinel2_v4 is the
+# Carlson-only 66-fire bundle at cut 0.84 and never was the production recipe;
+# since road-15 the production bundle has its own 66-fire out-of-fold table, so
+# damage_*_sentinel2_v5.html is the current set.
+damage_*_sentinel2_v4.html
+
+# The run tag is not part of a fire's name. Since road-15 a canonical
+# perimeter-frame product is published under the bare fire id
+# (inventory_DINS_2025_EATON.html), and the un-tagged legacy product beside it
+# is skipped rather than published. These are the old tagged filenames.
+inventory_*__perimeter.html

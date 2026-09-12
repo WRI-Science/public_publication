@@ -215,41 +215,51 @@
     belongs to the operating point rather than to the model.</p>
     <div class="tablewrap">
       <table>
-        <caption>California against everywhere else — bundle <code>damage_sentinel2_v4</code> at
-        its own saved cut of 0.84, 582,554 structures</caption>
-        <thead><tr><th></th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Base rate</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">95 % CI</th><th class="num">At own cut</th><th class="num">Gap</th></tr></thead>
+        <caption>California against everywhere else — 66 fires, 582,554 structures, the
+        shipped bundle <code>damage_sentinel2_v5</code> at its fixed cut 0.85</caption>
+        <thead><tr><th></th><th class="num">Fires</th><th class="num">Structures</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">95 % CI (fires resampled)</th><th class="num">At own cut</th><th class="num">Gap</th></tr></thead>
         <tbody>
-          <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9909</td><td class="num">0.9407</td><td class="num">0.8796</td><td class="num">0.8068</td><td class="ci">[0.770, 0.841]</td><td class="num">0.8290</td><td class="num">0.022</td></tr>
-          <tr><td>everywhere else</td><td class="num">25</td><td class="num">99,673</td><td class="num">0.111</td><td class="num">0.9628</td><td class="num">0.8395</td><td class="num">0.7557</td><td class="num">0.7424</td><td class="ci">[0.668, 0.810]</td><td class="num">0.7976</td><td class="num">0.055</td></tr>
+          <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9908</td><td class="num">0.9398</td><td class="num">0.8806</td><td class="num">0.8072</td><td class="num">0.8286</td><td class="num">0.0214</td><td class="num">0.870</td></tr>
+          <tr><td>Oregon</td><td class="num">9</td><td class="num">35,475</td><td class="num">0.147</td><td class="num">0.9907</td><td class="num">0.9559</td><td class="num">0.9068</td><td class="num">0.8654</td><td class="num">0.8722</td><td class="num">0.0068</td><td class="num">0.850</td></tr>
+          <tr><td>Colorado</td><td class="num">4</td><td class="num">22,909</td><td class="num">0.091</td><td class="num">0.9259</td><td class="num">0.8659</td><td class="num">0.8116</td><td class="num">0.7312</td><td class="num">0.7535</td><td class="num">0.0222</td><td class="num">0.930</td></tr>
+          <tr><td>Washington</td><td class="num">3</td><td class="num">11,267</td><td class="num">0.039</td><td class="num">0.9855</td><td class="num">0.8294</td><td class="num">0.7827</td><td class="num">0.7906</td><td class="num">0.8022</td><td class="num">0.0116</td><td class="num">0.880</td></tr>
+          <tr><td>Tennessee</td><td class="num">2</td><td class="num">9,084</td><td class="num">0.178</td><td class="num">0.9562</td><td class="num">0.8845</td><td class="num">0.5247</td><td class="num">0.5917</td><td class="num">0.7834</td><td class="num">0.1917</td><td class="num">0.655</td></tr>
+          <tr><td>Oklahoma</td><td class="num">2</td><td class="num">7,686</td><td class="num">0.105</td><td class="num">0.9096</td><td class="num">0.5932</td><td class="num">0.4360</td><td class="num">0.4243</td><td class="num">0.6287</td><td class="num">0.2044</td><td class="num">0.420</td></tr>
+          <tr><td>New Mexico</td><td class="num">1</td><td class="num">7,318</td><td class="num">0.023</td><td class="num">0.9711</td><td class="num">0.8801</td><td class="num">0.8521</td><td class="num">0.8521</td><td class="num">0.8696</td><td class="num">0.0175</td><td class="num">0.900</td></tr>
+          <tr><td>Texas</td><td class="num">1</td><td class="num">2,491</td><td class="num">0.096</td><td class="num">0.9333</td><td class="num">0.6915</td><td class="num">0.1723</td><td class="num">0.1723</td><td class="num">0.6759</td><td class="num">0.5036</td><td class="num">0.200</td></tr>
+          <tr><td>Kansas</td><td class="num">1</td><td class="num">1,215</td><td class="num">0.127</td><td class="num">0.9578</td><td class="num">0.7858</td><td class="num">0.7508</td><td class="num">0.7508</td><td class="num">0.7590</td><td class="num">0.0082</td><td class="num">0.820</td></tr>
+          <tr><td>Florida</td><td class="num">1</td><td class="num">1,207</td><td class="num">0.156</td><td class="num">0.9304</td><td class="num">0.8044</td><td class="num">0.6175</td><td class="num">0.6175</td><td class="num">0.7469</td><td class="num">0.1294</td><td class="num">0.280</td></tr>
+          <tr><td>Utah</td><td class="num">1</td><td class="num">1,021</td><td class="num">0.169</td><td class="num">0.9826</td><td class="num">0.9020</td><td class="num">0.8533</td><td class="num">0.8533</td><td class="num">0.8586</td><td class="num">0.0053</td><td class="num">0.720</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/generalization/damage_sentinel2_v4/by_group.csv</code>
-    (<code>grouping = region</code>) and
-    <code>outputs/uncertainty/carlson_sentinel2_v4/by_state_ci.csv</code> (B = 2000, fire
-    resampled, cut 0.84).</p>
+    <p class="src"><b>Source:</b> <code>outputs/generalization/v5/by_group.csv</code>
+    (<code>grouping = region</code>) and <code>outputs/uncertainty/v5/by_state_ci.csv</code>
+    (B = 2000, fire resampled, cut 0.85), both on the shipped bundle and both dated
+    2026-09-12. Until that morning this table was the <code>damage_sentinel2_v4</code>
+    bundle's — optical-only and Carlson-only, never the production recipe — because no 66-fire
+    leave-one-fire-out table existed for v5.</p>
 
     <div class="note warn">
       <p><strong>⚠️ Read those two intervals together, not against each other.</strong> The
-      non-California interval <strong>[0.668, 0.810] contains 0.798</strong> — the own-cut
+      non-California interval <strong>[0.664, 0.803] contains 0.800</strong> — the own-cut
       ceiling this page calls "the size of the prize". Bootstrapping the <em>difference</em>
       directly, which is the actual claim, gives:</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>California − everywhere else</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
           <tbody>
-            <tr><td>mean-fire F1</td><td class="num">+0.0644</td><td class="ci">[−0.0117, +0.1423]</td><td class="fail">no</td></tr>
-            <tr><td>pooled F1</td><td class="num">+0.1240</td><td class="ci">[−0.0281, +0.2529]</td><td class="fail">no</td></tr>
-            <tr><td>pooled precision</td><td class="num">+0.1829</td><td class="ci">[−0.0460, +0.3633]</td><td class="fail">no</td></tr>
-            <tr><td>mean-fire average precision</td><td class="num">+0.0318</td><td class="ci">[−0.0336, +0.1018]</td><td class="fail">no</td></tr>
-            <tr><td><strong>mean-fire AUC</strong></td><td class="num">+0.0223</td><td class="ci">[+0.0018, +0.0508]</td><td class="pass">yes</td></tr>
-            <tr><td><strong>pooled AUC</strong></td><td class="num">+0.0282</td><td class="ci">[+0.0061, +0.0582]</td><td class="pass">yes</td></tr>
+            <tr><td>mean-fire F1</td><td class="num">+0.0726</td><td class="ci">[−0.0110, +0.1630]</td><td class="fail">no</td></tr>
+            <tr><td>pooled F1</td><td class="num">+0.1264</td><td class="ci">[−0.0294, +0.2589]</td><td class="fail">no</td></tr>
+            <tr><td>pooled precision</td><td class="num">+0.1919</td><td class="ci">[−0.0467, +0.3823]</td><td class="fail">no</td></tr>
+            <tr><td>mean-fire average precision</td><td class="num">+0.0291</td><td class="ci">[−0.0339, +0.1002]</td><td class="fail">no</td></tr>
+            <tr><td><strong>mean-fire AUC</strong></td><td class="num">+0.0220</td><td class="ci">[+0.0006, +0.0523]</td><td class="pass">yes</td></tr>
+            <tr><td><strong>pooled AUC</strong></td><td class="num">+0.0316</td><td class="ci">[+0.0068, +0.0648]</td><td class="pass">yes</td></tr>
           </tbody>
         </table>
       </div>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/uncertainty/carlson_sentinel2_v4/region_contrast_ci.csv</code>,
+      <code>outputs/uncertainty/v5/region_contrast_ci.csv</code>,
       <code>excludes_zero</code> column. <strong>The only comparison that clears zero is the
       ranking.</strong> Everything that depends on a threshold is inside the noise of
       twenty-five fires.</p>
@@ -271,79 +281,80 @@
 <text class="tick" x="784.0" y="291" text-anchor="end">mean per-fire F1</text>
 <text class="tick" x="854" y="20" text-anchor="end">gap</text>
 <text x="160" y="50.5" text-anchor="end">Oregon (9)</text>
-<line x1="722.5" y1="47.0" x2="727.9" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="722.5" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="727.9" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="50.5" text-anchor="end">0.008</text>
-<text x="160" y="71.5" text-anchor="end">New Mexico (1)</text>
-<line x1="711.5" y1="68.0" x2="725.7" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="711.5" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="725.7" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="71.5" text-anchor="end">0.020</text>
-<text x="160" y="92.5" text-anchor="end">Utah (1)</text>
-<line x1="704.8" y1="89.0" x2="709.5" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="704.8" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="709.5" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="92.5" text-anchor="end">0.006</text>
+<line x1="722.9" y1="47.0" x2="727.8" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="722.9" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="727.8" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="50.5" text-anchor="end">0.007</text>
+<text x="160" y="71.5" text-anchor="end">Utah (1)</text>
+<line x1="714.1" y1="68.0" x2="718.0" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="714.1" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="718.0" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="71.5" text-anchor="end">0.005</text>
+<text x="160" y="92.5" text-anchor="end">New Mexico (1)</text>
+<line x1="713.3" y1="89.0" x2="725.9" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="713.3" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="725.9" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="92.5" text-anchor="end">0.018</text>
 <text x="160" y="113.5" text-anchor="end">California (41)</text>
-<line x1="680.6" y1="110.0" x2="696.6" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="680.6" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="696.6" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="113.5" text-anchor="end">0.022</text>
+<line x1="680.8" y1="110.0" x2="696.3" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="680.8" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="696.3" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="113.5" text-anchor="end">0.021</text>
 <text x="160" y="134.5" text-anchor="end">Washington (3)</text>
-<line x1="670.2" y1="131.0" x2="675.8" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="670.2" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="675.8" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="134.5" text-anchor="end">0.008</text>
+<line x1="668.9" y1="131.0" x2="677.2" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="668.9" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="677.2" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="134.5" text-anchor="end">0.012</text>
 <text x="160" y="155.5" text-anchor="end">Kansas (1)</text>
-<line x1="628.5" y1="152.0" x2="641.8" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="628.5" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="641.8" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="155.5" text-anchor="end">0.018</text>
+<line x1="640.1" y1="152.0" x2="646.0" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="640.1" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="646.0" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="155.5" text-anchor="end">0.008</text>
 <text x="160" y="176.5" text-anchor="end">Colorado (4)</text>
-<line x1="610.1" y1="173.0" x2="640.8" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="610.1" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="640.8" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="176.5" text-anchor="end">0.043</text>
+<line x1="625.9" y1="173.0" x2="642.1" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="625.9" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="642.1" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="176.5" text-anchor="end">0.022</text>
 <text x="160" y="197.5" text-anchor="end">Florida (1)</text>
-<line x1="601.6" y1="194.0" x2="639.1" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="601.6" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="639.1" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="197.5" text-anchor="end">0.052</text>
+<line x1="543.8" y1="194.0" x2="637.3" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="543.8" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="637.3" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="197.5" text-anchor="end">0.129</text>
 <text x="160" y="218.5" text-anchor="end">Tennessee (2)</text>
-<line x1="520.6" y1="215.0" x2="665.6" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="520.6" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="665.6" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="218.5" text-anchor="end">0.201</text>
+<line x1="525.2" y1="215.0" x2="663.7" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="525.2" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="663.7" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="218.5" text-anchor="end">0.192</text>
 <text x="160" y="239.5" text-anchor="end">Oklahoma (2)</text>
-<line x1="452.2" y1="236.0" x2="550.5" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="452.2" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="550.5" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="239.5" text-anchor="end">0.136</text>
+<line x1="404.3" y1="236.0" x2="551.9" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="404.3" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="551.9" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="239.5" text-anchor="end">0.204</text>
 <text x="160" y="260.5" text-anchor="end">Texas (1)</text>
-<line x1="305.6" y1="257.0" x2="556.6" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="305.6" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="556.6" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="260.5" text-anchor="end">0.347</text>
+<line x1="222.2" y1="257.0" x2="586.0" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="222.2" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="586.0" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="260.5" text-anchor="end">0.504</text>
 <line class="axis" x1="170.0" y1="265" x2="784.0" y2="265" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s1)"></span>at the bundle's fixed cut (0.84)</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>at the shipped fixed cut (0.85)</li>
         <li><span class="swatch" style="background:var(--s2)"></span>at each fire's own best cut — a ceiling, not a proposal</li>
       </ul>
       <figcaption>The length of each bar is what the operating point costs that state. Two
-      shapes: in Texas, Oklahoma and Tennessee the gap is enormous and the AUC is 0.91–0.96 —
-      the model puts the destroyed structures at the top of the list and the fixed cut then
-      calls almost none of them, which is a <strong>threshold</strong> failure a cut rule can
-      fix. Colorado and Washington are the opposite: small gaps and the lowest average precision
-      outside the Plains, so what they lose is <strong>ranking</strong>, and no cut rule will
-      return it.</figcaption>
+      shapes: in Texas, Oklahoma, Tennessee and Florida the gap is enormous while the AUC is
+      0.91–0.96 — the model puts the destroyed structures at the top of the list and the fixed
+      cut then calls almost none of them, which is a <strong>threshold</strong> failure a cut
+      rule can fix. Texas is the extreme: F1 <strong>0.172</strong> at the shipped cut against
+      <strong>0.676</strong> at its own cut of 0.20, on an AUC of 0.933. Colorado and Washington
+      are the opposite shape — small gaps and low average precision, so what they lose is
+      <strong>ranking</strong>, and no cut rule will return it.</figcaption>
     </figure>
   </div>
   <div class="wide">
     <div class="tablewrap">
       <table>
-        <caption>Per state, at cut 0.84 — a state row with one fire is one fire, not a state</caption>
+        <caption>Per state, at the shipped cut 0.85 — a state row with one fire is one fire, not a state</caption>
         <thead><tr><th>State</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Base rate</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">At own cut</th><th class="num">Gap</th><th class="num">Median own cut</th></tr></thead>
         <tbody>
           <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9909</td><td class="num">0.9407</td><td class="num">0.8796</td><td class="num">0.8068</td><td class="num">0.8290</td><td class="num">0.022</td><td class="num">0.88</td></tr>
@@ -360,11 +371,13 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/generalization/damage_sentinel2_v4/by_state.csv</code>. At the alternative
-    fixed cut of 0.90 the same table puts Texas at 0.167 and Oklahoma at 0.402
-    (<code>…_cut090/by_state.csv</code>); the shape of the finding does not change and no number
-    changes sign.</p>
+    <p class="src"><b>Source:</b> <code>outputs/generalization/v5/by_state.csv</code>, the
+    shipped bundle at cut 0.85. ⚠️ The two worst rows moved further down when the bundle changed
+    — Texas 0.2877 → <strong>0.1723</strong> and Florida 0.6975 → <strong>0.6175</strong> — and
+    <strong>this is a threshold effect, not a ranking one</strong>: Texas's AUC went 0.915 →
+    <strong>0.933</strong> and its own-cut ceiling 0.635 → <strong>0.676</strong> over the same
+    fire. The optical bundle ranks Kidd 2022 <em>better</em> than the bundle before it and the
+    fixed cut catches less of it.</p>
     <div class="note">
       <p><strong>⚠️ One trap, recorded so it is not repeated.</strong> The out-of-fold file
       stores a column per <em>candidate</em> learner as well as the one the bundle shipped.
@@ -430,7 +443,11 @@
     <div class="tablewrap">
       <table>
         <caption>All thirteen rules on the fully nested Carlson folds — 66 fires, 582,554
-        structures, baseline <code>fixed@0.90</code> at 0.7751</caption>
+        structures, baseline <code>fixed@0.90</code> at 0.7751. ⚠️ This is the
+        <strong>fold table</strong> of the <code>damage_sentinel2_v4</code> bundle, the analysis
+        as it was run in September 2026; it is the evidence the bar was judged on and it has not
+        been recomputed on the shipped bundle. What happened when the winning rule met the
+        product is the next section.</caption>
         <thead><tr><th>Rule</th><th class="num">Mean-fire F1</th><th class="num">Δ vs <code>fixed@0.84</code></th><th class="num">non-California</th><th class="num">Pooled F1</th><th class="num">p10</th><th class="num">Worst fire</th><th>Adopt</th></tr></thead>
         <tbody>
           <tr><td>ceiling — each fire at its <em>own</em> best cut (needs labels)</td><td class="num">0.8171</td><td class="num">—</td><td class="num">0.7976</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="verdict">not a candidate</td></tr>
@@ -567,14 +584,14 @@
       this site is the fixed cut.</p>
     </div>
     <div class="note ok">
-      <p><strong>⚠️ South Fork has no advisory call at all.</strong> The
-      <code>Direct</code>-scoped rule needs a <code>Direct</code> zone, and South Fork is the
-      one product still on the legacy DINS-buffer frame — it has no perimeter, so no Direct
-      ring, so the rule falls back to the fixed cut and the two columns are the same number.
-      Its adaptive cell reads "—" rather than repeating the fixed one. <em>(The 0.8825 this
-      page carried before <code>v0.4.1</code> was the whole-inventory rule, which no longer
-      ships.)</em> So the one post-2022 non-California fire this project holds
-      cannot speak to the adaptive column either way.</p>
+      <p><strong>⚠️ South Fork came off the legacy frame on 2026-09-12, and its advisory
+      call came back with it.</strong> It was the one product still on the DINS-buffer frame, so
+      it had no <code>Direct</code> ring for the scoped rule to read and fell back to the fixed
+      cut. Rebuilt on its own perimeter frame it has <strong>9,568 structures — 2,357
+      <code>Direct</code>, 7,211 <code>Indirect</code></strong> — and an advisory cut of
+      <strong>0.756</strong>. <em>(The 0.8825 this site withdrew was that same value, which
+      every scoped variant landed on; it now comes from the product rather than from a
+      diagnostic table.)</em></p>
       <p><strong>On Marshall's two independent assessments the advisory call splits</strong> —
       Boulder County 0.9705 → <strong>0.9725</strong>, FEMA MAC 0.9273 → <strong>0.9109</strong>.
       <strong>Two assessments over one fire is not a distribution</strong>, and it does not
@@ -655,19 +672,24 @@
       <table>
         <thead><tr><th></th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Predicted / assessed</th></tr></thead>
         <tbody>
-          <tr><td>at the shipped fixed cut <strong>0.85</strong>, on 1,637 pairs</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.848</td><td class="num">0.985</td><td class="num">0.983</td><td class="num">564 / 742 = 0.760</td></tr>
-          <tr><td>at the <strong>adaptive</strong> cut 0.756</td><td class="num">0.977</td><td class="num">0.805</td><td class="num"><strong>0.882</strong></td><td class="num">0.985</td><td class="num">0.983</td><td class="num">611 / 742 = 0.824</td></tr>
-          <tr><td>at this fire's own best cut of <strong>0.14</strong></td><td class="num">0.953</td><td class="num">0.937</td><td class="num">0.945</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>at the shipped fixed cut <strong>0.85</strong>, on 1,637 pairs</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.848</td><td class="num">0.985</td><td class="num">0.983</td><td class="num">738 destroyed over the whole frame</td></tr>
+          <tr><td>at the <code>Direct</code>-scoped <strong>advisory</strong> cut 0.756</td><td class="num">—</td><td class="num">—</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.983</td><td class="num">799</td></tr>
+          <tr><td>at this fire's own best cut of <strong>0.07</strong></td><td class="num">0.932</td><td class="num">0.958</td><td class="num">0.945</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
     <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code> and
     <code>metrics.json</code>, regenerated 2026-09-12 at bundle
-    <code>damage_sentinel2_v5</code>, unit <code>NM_2024_SOUTH_FORK__v5</code>, 7,931 points
-    scored. Detection recall 0.661 at 10 m and 0.760 at 20 m, 4,507 points inside the assessed
-    area. The threshold gap is <strong>+0.097</strong> at the fixed cut and
-    <strong>+0.062</strong> at the adaptive one.</p>
+    <code>damage_sentinel2_v5</code>, unit <strong><code>NM_2024_SOUTH_FORK__perimeter</code></strong>,
+    <strong>9,568</strong> points scored (2,357 <code>Direct</code>, 7,211
+    <code>Indirect</code>); the advisory F1 from
+    <code>outputs/operating_product/per_fire.csv</code>. Detection recall 0.661 at 10 m and
+    0.760 at 20 m, 4,507 points inside the assessed area; the threshold gap is
+    <strong>+0.096</strong>. ⚠️ The <code>Indirect</code> ring holds <strong>119 pairs and 0
+    destroyed structures</strong>, so it cannot be scored — which is what an Indirect ring
+    usually looks like, and why the <code>Direct</code>-scoped cut is the one that means
+    anything here.</p>
     <div class="note ok">
       <p><strong>This independently reproduces the generalization finding.</strong> The
       Carlson-era row measured, on 25 non-California fires none later than 2022, a mean-fire F1

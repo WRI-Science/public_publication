@@ -183,24 +183,18 @@
 
 <div class="wrap">
   <div class="status">
-    <h3>Which bundle each interval belongs to, 12 September 2026</h3>
-    <p><strong>The DINS half is now the shipped bundle's.</strong>
-    <code>outputs/uncertainty/dins_v5/</code> was run on 2026-09-12 against
-    <code>damage_sentinel2_v5</code> at the fixed cut <strong>0.85</strong> — the recipe
-    <code>v0.4.1</code> ships — so every DINS row and every calibration figure below is
-    current.</p>
-    <p><strong>⚠️ The Carlson half is not, and cannot be yet.</strong> There is no
-    leave-one-fire-out table for the v5 bundle over the 66 Carlson fires, so the national rows
-    — the headline table's Carlson lines and the reliability curve labelled
-    <em>Carlson S2 v4</em> — remain the <code>damage_sentinel2_v4</code> bundle's, at its own
-    cut of 0.84. They are labelled that way wherever they appear. The finding they carry —
-    that the fire is the unit and there are not many fires — does not depend on which of the
-    two bundles is in front of it.</p>
-    <p>Everything here is <code>scripts/13_uncertainty_report.py</code>: CPU only, about two and
-    a half minutes for every source, <strong>nothing refitted</strong>. It reads out-of-fold
-    predictions already on disk and resamples them, and every <code>summary.json</code> it
-    writes carries the bundle and cut it was computed on, so no interval can be read without
-    knowing which generation produced it.</p>
+    <h3>Every interval on this page is the shipped bundle's, 12 September 2026</h3>
+    <p><strong>Both halves are now on <code>damage_sentinel2_v5</code> at the fixed cut
+    0.85</strong> — the recipe <code>v0.4.1</code> ships. The national half is
+    <code>outputs/uncertainty/v5/</code> over the 66 Carlson fires (582,554 structures); the
+    out-of-sample half is <code>outputs/uncertainty/dins_v5/</code> over the eight CAL FIRE
+    DINS incidents. Both were run on 2026-09-12 from out-of-fold predictions already on disk.
+    Until that morning the national rows were the <code>damage_sentinel2_v4</code> bundle's,
+    because no 66-fire leave-one-fire-out table existed for v5; one does now.</p>
+    <p>Everything here is <code>scripts/13_uncertainty_report.py</code>: CPU only,
+    <strong>nothing refitted</strong>. It resamples predictions already written and every
+    <code>summary.json</code> carries the bundle and cut it was computed on, so no interval can
+    be read without knowing which generation produced it.</p>
   </div>
 </div>
 
@@ -210,29 +204,32 @@
   <div class="wide">
     <p class="eyebrow">01 · the headlines</p>
     <h2>Every headline, with its interval</h2>
-    <p class="eyebrow" style="color:var(--s2)">DINS rows: the shipped <code>damage_sentinel2_v5</code> · Carlson rows: <code>damage_sentinel2_v4</code>, the only bundle with a 66-fire table</p>
+    <p class="eyebrow" style="color:var(--s2)">all rows on the shipped <code>damage_sentinel2_v5</code>, cut 0.85</p>
   </div>
   <div class="wrap">
     <div class="tablewrap">
       <table>
         <thead><tr><th>Headline</th><th class="num">Estimate</th><th class="num">95 % CI (fires resampled)</th></tr></thead>
         <tbody>
-          <tr><td>Carlson Sentinel-2 <code>v4</code> leave-one-fire-out, pooled F1 @0.84 (66 fires)</td><td class="num">0.8509</td><td class="ci">[0.762, 0.896]</td></tr>
-          <tr><td>… mean per-fire F1 @0.84</td><td class="num">0.7824</td><td class="ci">[0.744, 0.816]</td></tr>
-          <tr><td>… pooled AUC</td><td class="num">0.9867</td><td class="ci">[0.978, 0.990]</td></tr>
+          <tr><td><strong>Carlson leave-one-fire-out, pooled F1 @0.85 (66 fires, 582,554 structures)</strong></td><td class="num">0.8513</td><td class="ci">[0.7626, 0.8967]</td></tr>
+          <tr><td><strong>… mean per-fire F1</strong></td><td class="num">0.7797</td><td class="ci">[0.7388, 0.8151]</td></tr>
+          <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9860</td><td class="ci">[0.9769, 0.9902]</td></tr>
+          <tr><td>… pooled average precision</td><td class="num">0.9111</td><td class="ci">[0.8232, 0.9523]</td></tr>
           <tr><td><strong>DINS <code>v5</code> (shipped), pooled F1 @0.85 (8 incidents)</strong></td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
           <tr><td><strong>DINS <code>v5</code>, mean per-fire F1 @0.85</strong></td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
           <tr><td><strong>DINS <code>v5</code>, pooled AUC</strong></td><td class="num">0.9740</td><td class="ci">[0.9702, 0.9817]</td></tr>
-          <tr><td>DINS <code>s1_v4</code> (the radar bundle <code>v0.3.0</code> shipped), pooled F1 @0.87</td><td class="num">0.9236</td><td class="ci">[0.859, 0.928]</td></tr>
+          <tr><td>DINS <code>s1_v4</code> — the optical-plus-radar bundle <code>v0.3.0</code> shipped, kept for comparison</td><td class="num">0.9236</td><td class="ci">[0.859, 0.928]</td></tr>
           <tr><td>Detector marginal — share of database-missed records recovered @10 m (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
           <tr><td>… as a count of records</td><td class="num">343</td><td class="ci">[125, 590]</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/{dins_v5,carlson_sentinel2_v4,dins_s1_v4,detector_marginal}/pooled_ci.csv</code>
-    and <code>summary.json</code>; the <code>dins_v5</code> run is dated 2026-09-12 and the
-    Carlson rows 2026-09-10. B = 2000, percentile interval, resampling unit = fire; the
+    <code>outputs/uncertainty/{v5,dins_v5,dins_s1_v4,detector_marginal}/pooled_ci.csv</code>
+    and <code>summary.json</code>; the <code>v5</code> and <code>dins_v5</code> runs are dated
+    2026-09-12, the retained comparison row 2026-09-10. The Carlson table is
+    <code>models/damage_sentinel2_v5/oof_predictions.gpkg</code>, written by
+    <code>outputs/carlson_lofo/v5/</code>. B = 2000, percentile interval, resampling unit = fire; the
     basic and BCa intervals sit beside each estimate in the same files. Stage 9b's detector
     numbers do not go through the Sentinel-2 sampler and did not move when it was fixed.</p>
 
@@ -391,7 +388,7 @@
   <div class="wide">
     <p class="eyebrow">03 · calibration</p>
     <h2><code>destroyed_prob</code> is a ranking, not a probability</h2>
-    <p class="eyebrow" style="color:var(--s2)">the three <code>v4</code> bundles — the shape is unchanged at v5, whose own figures are in the table below</p>
+    <p class="eyebrow" style="color:var(--s2)">both shipped halves of <code>damage_sentinel2_v5</code></p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -418,88 +415,78 @@
 <text class="tick" x="358.0" y="334" text-anchor="middle">1</text>
 <line x1="58" y1="318" x2="358" y2="18" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
 <text class="tick" x="354" y="44" text-anchor="end">perfectly calibrated</text>
-<path d="M58.3,317.9 L58.7,317.9 L59.2,317.8 L59.9,317.7 L61.0,317.6 L62.9,317.2 L66.7,316.6 L77.5,315.3 L156.6,297.1 L347.8,78.8" fill="none" stroke="var(--s1)" stroke-width="2" />
+<path d="M58.3,317.9 L58.8,317.9 L59.3,317.9 L60.0,317.7 L61.0,317.6 L62.9,317.2 L66.5,316.7 L76.9,315.1 L150.9,297.1 L345.6,79.2" fill="none" stroke="var(--s1)" stroke-width="2" />
 <circle cx="58.3" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="58.7" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="59.2" cy="317.8" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="59.9" cy="317.7" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="58.8" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="59.3" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="60.0" cy="317.7" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
 <circle cx="61.0" cy="317.6" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
 <circle cx="62.9" cy="317.2" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="66.7" cy="316.6" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="77.5" cy="315.3" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="156.6" cy="297.1" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="347.8" cy="78.8" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<path d="M59.3,317.4 L62.5,315.4 L70.3,311.4 L97.6,298.7 L205.7,237.8 L327.6,117.3 L352.0,45.1 L355.9,26.7 L357.1,21.3 L357.6,18.3" fill="none" stroke="var(--s3)" stroke-width="2" />
-<circle cx="59.3" cy="317.4" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="62.5" cy="315.4" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="70.3" cy="311.4" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="97.6" cy="298.7" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="205.7" cy="237.8" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="327.6" cy="117.3" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="352.0" cy="45.1" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="355.9" cy="26.7" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.1" cy="21.3" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.6" cy="18.3" r="4" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="1.5" />
-<path d="M60.8,316.9 L66.6,316.0 L81.1,312.4 L125.5,300.3 L240.4,245.5 L335.7,110.1 L353.4,42.7 L356.4,26.3 L357.3,20.4 L357.7,18.8" fill="none" stroke="var(--s2)" stroke-width="2" />
-<circle cx="60.8" cy="316.9" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="66.6" cy="316.0" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="81.1" cy="312.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="125.5" cy="300.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="240.4" cy="245.5" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="335.7" cy="110.1" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="353.4" cy="42.7" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="356.4" cy="26.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.3" cy="20.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.7" cy="18.8" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="66.5" cy="316.7" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="76.9" cy="315.1" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="150.9" cy="297.1" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="345.6" cy="79.2" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
+<path d="M59.3,317.4 L62.5,315.4 L70.3,311.4 L97.6,298.7 L205.7,237.8 L327.6,117.3 L352.0,45.1 L355.9,26.7 L357.1,21.3 L357.6,18.3" fill="none" stroke="var(--s2)" stroke-width="2" />
+<circle cx="59.3" cy="317.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="62.5" cy="315.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="70.3" cy="311.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="97.6" cy="298.7" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="205.7" cy="237.8" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="327.6" cy="117.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="352.0" cy="45.1" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="355.9" cy="26.7" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="357.1" cy="21.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
+<circle cx="357.6" cy="18.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
 <line class="axis" x1="58" y1="318" x2="358" y2="318" />
 <line class="axis" x1="58" y1="18" x2="58" y2="318" />
 <text class="tick" x="208" y="352" text-anchor="middle">mean predicted destroyed_prob in the bin</text>
 <text class="tick" x="16" y="168" transform="rotate(-90 16 168)" text-anchor="middle">observed share destroyed</text>
 <rect x="384" y="28" width="11" height="11" rx="2" fill="var(--s1)" />
-<text x="402" y="38">Carlson S2 v4, 66 fires</text>
-<text class="tick" x="402" y="51">ECE 0.054</text>
-<rect x="384" y="62" width="11" height="11" rx="2" fill="var(--s3)" />
-<text x="402" y="72">DINS v4 optical only</text>
-<text class="tick" x="402" y="85">ECE 0.065</text>
-<rect x="384" y="96" width="11" height="11" rx="2" fill="var(--s2)" />
-<text x="402" y="106">DINS v4 + radar (production)</text>
-<text class="tick" x="402" y="119">ECE 0.095</text>
+<text x="402" y="38">Carlson, 66 fires · cut 0.85</text>
+<text class="tick" x="402" y="51">ECE 0.0514 → 0.0005 calibrated</text>
+<rect x="384" y="68" width="11" height="11" rx="2" fill="var(--s2)" />
+<text x="402" y="78">CAL FIRE DINS, 8 incidents · cut 0.85</text>
+<text class="tick" x="402" y="91">ECE 0.0651 → 0.0071 calibrated</text>
+<text class="tick" x="384" y="130">both on the shipped bundle</text>
+<text class="tick" x="384" y="144">damage_sentinel2_v5</text>
 </svg>
-      <figcaption>Pooled reliability in 10 equal-count bins, all three <code>v4</code> bundles.
-      Every curve sits <strong>below</strong> the diagonal: the model is over-confident nearly
-      everywhere. Across the three bundles the observed frequency is below the predicted
-      probability in <strong>29 of the 30 bins</strong>; the single exception is the top bin of
-      the optical-only DINS bundle, under-confident by +0.0001 on 3,628 rows, which is a
-      rounding artefact and not a change of direction.</figcaption>
+      <figcaption>Pooled reliability in 10 equal-count bins, both halves of the shipped
+      <code>damage_sentinel2_v5</code> bundle. Both curves sit <strong>below</strong> the
+      diagonal: the model is over-confident nearly everywhere. Across the two the observed
+      frequency is below the predicted probability in <strong>19 of the 20 bins</strong>; the
+      single exception is the DINS curve's top bin, under-confident by +0.0001 on 3,628 rows,
+      which is a rounding artefact and not a change of direction.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/{carlson_sentinel2_v4,dins_base_v4,dins_s1_v4}/calibration_pooled.csv</code>,
-    rows with <code>n_bins_requested = 10</code>, <code>scope = pooled</code>. Twenty-bin
-    versions and per-fire curves are in the same directory.</p>
+    <code>outputs/uncertainty/{v5,dins_v5}/calibration_pooled.csv</code>, rows with
+    <code>n_bins_requested = 10</code>, <code>scope = pooled</code>. Twenty-bin versions and
+    per-fire curves are in the same directories.</p>
 
     <div class="tablewrap">
       <table>
         <caption>Calibration error, and what a leave-one-fire-out isotonic map does to it</caption>
         <thead><tr><th>Bundle</th><th class="num">Expected calibration error</th><th class="num">95 % CI</th><th class="num">Maximum calibration error</th><th class="num">Brier</th><th class="num">ECE after isotonic</th></tr></thead>
         <tbody>
-          <tr><td>Carlson Sentinel-2 <code>v4</code> (66 fires)</td><td class="num">0.0543</td><td class="ci">[0.039, 0.076]</td><td class="num">0.2590</td><td class="num">0.0343</td><td class="num">0.0003</td></tr>
-          <tr><td>DINS <code>v4</code>, optical only (8)</td><td class="num">0.0651</td><td class="ci">[0.051, 0.103]</td><td class="num">0.2297</td><td class="num">0.0730</td><td class="num">0.0071</td></tr>
+          <tr><td><strong>Carlson, 66 fires (shipped bundle)</strong></td><td class="num">0.0514</td><td class="ci">[0.0365, 0.0737]</td><td class="num">0.2400</td><td class="num">0.0328</td><td class="num">0.0005</td></tr>
           <tr><td><strong>DINS <code>v5</code>, shipped (8)</strong></td><td class="num">0.0651</td><td class="ci">[0.0514, 0.1032]</td><td class="num">0.2297</td><td class="num">0.0729</td><td class="num">0.0071</td></tr>
-          <tr><td>DINS <code>s1_v4</code>, the radar bundle v0.3.0 shipped</td><td class="num">0.0948</td><td class="ci">[0.079, 0.122]</td><td class="num">0.3662</td><td class="num">0.0805</td><td class="num">0.0069</td></tr>
+          <tr><td>DINS <code>s1_v4</code> — optical plus radar, what <code>v0.4.0</code> replaced</td><td class="num">0.0948</td><td class="ci">[0.079, 0.122]</td><td class="num">0.3662</td><td class="num">0.0805</td><td class="num">0.0069</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/uncertainty/&lt;tag&gt;/calibration_ci.csv</code>
     (B = 2000, 10 bins) and <code>summary.json</code>; maximum calibration error is the largest
-    absolute bin gap in <code>calibration_pooled.csv</code>. On the shipped <code>v5</code>
-    bundle the isotonic map takes ECE 0.0651 → <strong>0.0071</strong> and Brier
-    0.0729 → 0.0616 — <strong>the optical bundle is better calibrated than the radar one it
-    replaced</strong>, which had ECE 0.0948.</p>
+    absolute bin gap in <code>calibration_pooled.csv</code>. On the shipped bundle the isotonic
+    map takes ECE <strong>0.0514 → 0.0005</strong> on the national table and
+    <strong>0.0651 → 0.0071</strong> on the DINS incidents, with Brier 0.0328 → 0.0208 and
+    0.0729 → 0.0616. <strong>The optical bundle is better calibrated than the optical-plus-radar
+    one it replaced</strong>, which had ECE 0.0948.</p>
 
-    <p><strong>The better-ranked bundle is the worse-calibrated one</strong>, which is the
-    clearest sign that the score is an ordering rather than a frequency. The calibrated column
+    <p><strong>The national table is the better-calibrated half and the better-ranked one is
+    not</strong> — which is the clearest sign that the score is an ordering rather than a
+    frequency: the DINS incidents rank at AUC 0.974 and calibrate at ECE 0.065, the 66 Carlson
+    fires rank at 0.986 and calibrate at 0.051. The calibrated column
     ships as <code>destroyed_prob_calibrated</code> <em>beside</em> <code>destroyed_prob</code>,
     not instead of it, and <strong>the operating cut stays on the raw score</strong>: isotonic
     regression is monotone, so it cannot re-rank anything, and moving the cut onto the
@@ -510,8 +497,8 @@
       <p><strong>Calibration is not a per-fire cut rule, and it does not recover the
       out-of-state threshold loss.</strong> Because the map is fitted leave-one-fire-out on 65
       of 66 fires it is nearly the same map every time: the raw score at which the calibrated
-      column reaches 0.5 spans only <strong>0.904–0.932</strong> across the Carlson fires,
-      against per-fire best cuts that run <strong>0.64–0.93</strong>. A rule that <em>does</em>
+      column reaches 0.5 spans only <strong>0.875–0.894</strong> across the Carlson fires,
+      against per-fire best cuts that run <strong>0.20–0.93</strong>. A rule that <em>does</em>
       move with the fire is on the <a href="outside-california.html">outside-California
       page</a>.</p>
     </div>
@@ -677,11 +664,11 @@
       <a href="forward-fires.html">fire by fire</a> ·
       <a href="combined-series.html">the combined series</a> ·
       <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · the DINS intervals and calibration are
-    <code>outputs/uncertainty/dins_v5/</code>, the shipped bundle, computed 2026-09-12; the
-    Carlson rows are the <code>damage_sentinel2_v4</code> bundle's, computed 2026-09-10, and are
-    labelled wherever they appear. ⚠️ There is still no 66-fire leave-one-fire-out table for the
-    v5 bundle.</p>
+    <p>Built 2026-09-12 · every interval is the shipped <code>damage_sentinel2_v5</code>
+    bundle at cut 0.85 — <code>outputs/uncertainty/v5/</code> for the 66 Carlson fires and
+    <code>outputs/uncertainty/dins_v5/</code> for the eight DINS incidents, both computed
+    2026-09-12. The one retained comparison row is the optical-plus-radar bundle
+    <code>v0.3.0</code> shipped, and it is labelled.</p>
   </div>
 </footer>
 
