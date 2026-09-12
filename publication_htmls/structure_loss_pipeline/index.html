@@ -202,8 +202,8 @@
 
 <div class="wide">
   <div class="headline-grid">
-    <div><span class="fig">399,682</span><span class="cap">structure rows in release <code>v0.3.0</code>, over 20 fires</span></div>
-    <div><span class="fig">0.799</span><span class="cap">mean per-fire F1 of the destroyed call against CAL FIRE DINS, 15 fires</span></div>
+    <div><span class="fig">1,922,889</span><span class="cap">structure rows in release <code>v0.4.0</code>, over 376 fires</span></div>
+    <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against CAL FIRE DINS, 15 fires</span></div>
     <div><span class="fig">&kappa; 0.883</span><span class="cap">agreement with Carlson's own hand classification on 282,719 buildings</span></div>
     <div><span class="fig">66 + 15</span><span class="cap">fires the damage model is cross-validated on, and fires the product has been run on</span></div>
   </div>
@@ -233,7 +233,7 @@
     summary of the first half is that the public footprint databases <strong>are</strong> the
     product and our detector is slightly better than them: it recovers 343 buildings across
     fifteen fires, 3.5 % of what those databases missed. The honest summary of the second is
-    that the loss call is good — mean per-fire F1 0.799 against the inspection record, κ 0.883
+    that the loss call is good — mean per-fire F1 0.783 against the inspection record, κ 0.883
     against Carlson's own hand classification — and that the evidence behind it is
     <strong>eight California fires</strong>, two of which hold 84 % of the structures.</p>
 
@@ -241,16 +241,21 @@
     rows and ours side by side and a field only one era can fill left null on the other rather
     than back-filled. Every row carries a continuous destroyed probability, the threshold behind
     the call, the frame and exposure class the structure sat in, and per-row provenance saying
-    which layer found it and which model scored it. Release <code>v0.3.0</code> is 399,682 rows
-    over 20 fires, MIT for the code and CC BY 4.0 for the data.</p>
+    which layer found it and which model scored it. Release <code>v0.4.0</code> carries
+    <strong>all 361 Carlson fires</strong> — 1,770,939 rows, 2002–2022, verbatim — beside our
+    fifteen, and releases 1,922,889 of them. MIT for the code, CC BY 4.0 for the data,
+    copyright Carlo Broderick.</p>
 
     <p>Two rules shape everything here. <strong>No attribute of the fire itself ever reaches the
     model</strong> — not size, perimeter, dNBR, region, state or year — so a loss call is never
     a restatement of the fire's own attributes; perimeters decide where to look and never what
     to predict. And <strong>every promotion bar is written down before the number that would
     clear it is measured</strong>, which is why this site publishes results that point away from
-    what shipped: a component of the production model that no longer clears its own promotion
-    rule, and a cut rule that now clears a bar that once rejected it.</p>
+    what shipped. Two of them are on this site now: a component of the production model that
+    stopped clearing its own promotion rule and was <em>removed</em> because of it, and a cut
+    rule that cleared a pre-registered bar, was adopted, and then <em>did not transfer to the
+    product</em> — so it ships as a second column with the reason written down rather than
+    quietly replacing the first.</p>
   </div>
 </section>
 
@@ -281,34 +286,37 @@
     <p class="eyebrow">status</p>
     <h2>Where the project is, 12 September 2026</h2>
     <div class="status">
-      <p><strong>Published here is the last committed state of the project:</strong> release
-      <code>v0.3.0</code> (cut 2026-09-11) and the <code>v4</code> corrected-sampler metric
-      tables. The production recipe behind every number on this site is the detector
+      <p><strong>Published here is release <code>v0.4.0</code>, cut 2026-09-12 and
+      committed.</strong> The production recipe behind every number on this site is the detector
       <code>seg_all_v4</code> on each fire's own public-perimeter frame, the damage bundle
-      <code>damage_sentinel2s1_v4</code>, and a fixed cut of <strong>0.87</strong>.</p>
-      <p>Three pieces of work were in flight while these pages were written, and
-      <strong>none of their results appear on this site</strong>:</p>
+      <code>damage_sentinel2_v5</code> — optical only, no radar — and a fixed cut of
+      <strong>0.85</strong>.</p>
+      <p><strong>What changed from <code>v0.3.0</code>, all four of it owner decisions:</strong></p>
       <ul class="tight">
-        <li><span class="pill flight">in flight</span> <strong>Roadmap 11 — <code>v0.4.0</code>.</strong>
-        On 2026-09-11 the owner decided the licence, adopted a <em>per-fire</em> operating rule
-        in place of the fixed cut, and dropped Sentinel-1 radar from production. The
-        optical-only bundle, its folds and a <code>v0.4.0</code> package began appearing on the
-        data share on 2026-09-12 while these pages were being written — <strong>none of it is
-        committed, and no number from it appears on this site.</strong> The evidence behind both
-        decisions <em>is</em> published, in the
-        <a href="pipeline-overview.html#rejected">deep dive</a> and on the
-        <a href="outside-california.html">outside-California page</a>.</li>
-        <li><span class="pill flight">in flight</span> <strong>Roadmap 12 — the 2016–2022
-        retrospective.</strong> Part 1 (which fires can carry the era comparison, and the damage
-        half on 23 fires instead of 10) landed 2026-09-12 and is reported, marked as such. Part
-        2, the structure count on seventeen rebuilt inventories, is still running.</li>
-        <li><span class="pill flight">in flight</span> <strong>Roadmap 13 — augmented Carlson
-        rasters.</strong> Nothing from it is reported.</li>
+        <li><strong>The series carries all of Carlson</strong> — 361 fires and 1,770,939 rows,
+        2002–2022, verbatim, where it used to carry the five that happened to be cached. Two new
+        flag columns mark what would break a naive count on that half.</li>
+        <li><strong>Radar left production.</strong> It no longer cleared the rule that put it
+        there, and removing it costs nothing measurable: −0.0039 mean-fire F1 on an interval
+        that includes zero.</li>
+        <li><strong>A second loss call ships beside the first</strong>, cut per fire.
+        <strong>It is advisory.</strong> The rule cleared a pre-registered bar on the fold
+        tables and then cost 0.035 mean-fire F1 on the product, because the two are different
+        populations — the <a href="pipeline-overview.html#population">deep dive</a> is where
+        that story is told, and it is the most important caveat on this site.</li>
+        <li><strong>The licence is decided</strong> — MIT and CC BY 4.0, copyright Carlo
+        Broderick, with the ODbL problem resolved by dropping the affected rows rather than
+        arguing about them. The DOI is the only open item.</li>
       </ul>
-      <p>These pages are refreshed by re-reading the same files. <strong>Every number on this
-      site names the file it came from</strong>, in a source line under the table that uses it.
-      Where a published claim is known to have moved, the older number is kept beside the newer
-      one rather than deleted.</p>
+      <p><span class="pill flight">in flight</span> Roadmap 12 is still building eighteen
+      retrospective 2016–2022 inventories, which are not series rows yet; Roadmap 13 is not
+      reported at all. And two supporting outputs are <strong>one release behind</strong> and
+      are labelled wherever they appear: there is <strong>no bootstrap run for the v5
+      bundle</strong>, so the interval tables are its predecessor's, and the
+      <strong>ICS-209 count check</strong> still holds the <code>v0.3.0</code> predictions.</p>
+      <p><strong>Every number on this site names the file it came from</strong>, in a source
+      line under the table that uses it. Where a published claim is known to have moved, the
+      older number is kept beside the newer one rather than deleted.</p>
     </div>
   </div>
 </section>
@@ -338,43 +346,48 @@
             remote-sensing reader's level; the frame, the exposure class and the three eras;
             one quantified section per comparison dataset; what was tried and rejected; known
             limitations; releases and licence.</td>
-            <td class="date">v0.3.0<br>2026-09-11</td>
+            <td class="date">v0.4.0<br>2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="forward-fires.html">forward-fires.html</a></td>
             <td class="what">Every fire, scored</td>
             <td>A sortable table of all seventeen fires the pipeline has produced a loss call
-            for — the fifteen in the series plus South Fork NM and Marshall CO — with detection
-            recall, precision, recall, F1 at 10 m and 20 m, AUC and a link to each fire's map.
-            Explains the two low rows.</td>
-            <td class="date">2026-09-11</td>
+            for — the fifteen in the series plus South Fork NM and Marshall CO — with both
+            destroyed counts, the per-fire adaptive cut, detection recall, P / R / F1 at 10 m
+            and 20 m, AUC and a link to each fire's map. Carries the two-cuts explanation and
+            the three-totals caveat.</td>
+            <td class="date">v0.4.0<br>2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="combined-series.html">combined-series.html</a></td>
             <td class="what">The dataset itself</td>
-            <td>What is inside release <code>v0.3.0</code>: rows per era, every fire's
-            structure and destroyed counts, our count against the inspectors' and the incident
-            commander's, the Carlson-vs-us comparability table, and the six ways the two halves
-            are not equivalent.</td>
-            <td class="date">v0.3.0<br>2026-09-11</td>
+            <td>What is inside release <code>v0.4.0</code>: rows per era across all 376 fires,
+            every fire's structure and destroyed counts fixed and adaptive, the ODbL exclusion
+            per fire, our count against the inspectors' and the incident commander's, the
+            Carlson-vs-us comparability table, the two flags on Carlson's own release, and the
+            six ways the two halves are not equivalent.</td>
+            <td class="date">v0.4.0<br>2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="uncertainty.html">uncertainty.html</a></td>
             <td class="what">How wide the numbers are</td>
             <td>A fire-level cluster bootstrap on every headline; per-incident intervals;
-            reliability diagrams showing the score is over-confident in 29 of 30 bins; the two
-            paired comparisons that changed the reading of a decision already made; and why
-            nothing here is yet a forward hold-out.</td>
-            <td class="date">v4 tables<br>2026-09-10/11</td>
+            reliability diagrams showing the score is over-confident in 29 of 30 bins; the three
+            paired comparisons that changed the reading of a decision already made — including
+            the <code>v0.3.0</code> → <code>v0.4.0</code> release change; and why nothing here
+            is yet a forward hold-out. ⚠️ The interval tables are the <em>previous</em> bundle's:
+            no bootstrap run exists for <code>damage_sentinel2_v5</code>.</td>
+            <td class="date">v4 tables 2026-09-10/11<br>release comparison 2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="outside-california.html">outside-california.html</a></td>
             <td class="what">Where it travels, and where it does not</td>
             <td>Sixty-six fires in eleven states; the region contrast with intervals; thirteen
-            label-free cut rules against a bar written first, fully nested; what per-structure
-            truth actually exists outside California (mostly: none); South Fork NM end to end;
-            and the pre-2016 era penalty measured on Landsat.</td>
-            <td class="date">2026-09-10/11</td>
+            label-free cut rules against a bar written first, fully nested — and then what
+            happened when the winning rule met the product; what per-structure truth actually
+            exists outside California (mostly: none); South Fork NM end to end; and the pre-2016
+            era penalty measured on Landsat.</td>
+            <td class="date">2026-09-10/11,<br>product comparison 2026-09-12</td>
           </tr>
         </tbody>
       </table>
@@ -390,9 +403,11 @@
             <td class="what">The method, in plain language</td>
             <td>The general-audience explainer: the inventory problem, how the detector is
             trained and what its ignore mask and footprint prior are for, what a before/after
-            reflectance pair can see, and a glossary. Describes the shipped
-            <code>v0.3.0</code> recipe (radar included, one fixed cut).</td>
-            <td class="date">2026-09-09</td>
+            reflectance pair can see, and a glossary. ⚠️ <strong>It describes the
+            <code>v0.3.0</code> recipe</strong> — radar in the model, one fixed cut at 0.87 —
+            and both halves of that are now out of date. The method it explains is unchanged;
+            the bundle it names is not.</td>
+            <td class="date">2026-09-09<br>needs a refresh</td>
           </tr>
           <tr>
             <td class="page"><a href="detection_vs_dins.html">detection_vs_dins.html</a></td>
@@ -438,25 +453,27 @@
             <td class="num">15</td>
             <td><strong>The product itself.</strong> The pre-fire inventory for one forward
             fire on its own public-perimeter frame, coloured by predicted destroyed probability
-            and checked against the CAL FIRE DINS inspections. Linked per fire from the
-            <a href="forward-fires.html">fire-by-fire page</a>.</td>
-            <td class="date">2026-09-10/11</td>
+            and checked against the CAL FIRE DINS inspections. <strong>Rebuilt at
+            <code>v0.4.0</code></strong>, so the calls drawn are the shipped ones. Linked per
+            fire from the <a href="forward-fires.html">fire-by-fire page</a>.</td>
+            <td class="date">v0.4.0<br>2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="inventory_CO_2021_MARSHALL.html"><code>inventory_CO_2021_MARSHALL.html</code></a></td>
             <td class="num">1</td>
             <td>Marshall CO 2021 — the only fire in the project with two independent
             per-structure assessments nobody here drew, and the fire that bounds Carlson's own
-            label noise. Not a series row; it is in Carlson's era.</td>
-            <td class="date">2026-09-10</td>
+            label noise. Rebuilt at <code>v0.4.0</code>. Not a series row; it is in Carlson's
+            era.</td>
+            <td class="date">v0.4.0<br>2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><a href="inventory_CA_2018_CAMP.html"><code>inventory_CA_2018_CAMP.html</code></a></td>
             <td class="num">1</td>
             <td>Camp 2018 — the training fire the detector is hardest on (Paradise's small
             homes under dense canopy), and the demonstration of what the detector adds over the
-            footprint database.</td>
-            <td class="date">2026-09-10</td>
+            footprint database. Rebuilt 2026-09-12.</td>
+            <td class="date">2026-09-12</td>
           </tr>
           <tr>
             <td class="page"><code>damage_&lt;fire&gt;_sentinel2_v4.html</code></td>
@@ -464,8 +481,10 @@
             <td>Leave-one-fire-out damage calls on each Carlson training fire, coloured true
             positive / false positive / false negative / true negative, on the
             <strong>corrected-sampler</strong> feature tables. These are the visual behind the
-            era and generalization tables.</td>
-            <td class="date">2026-09-10</td>
+            era and generalization tables. ⚠️ <strong>Still the <code>v4</code> bundle</strong>:
+            <code>damage_sentinel2_v5</code> has no 66-fire out-of-fold layer, so the QA script
+            cannot draw them at <code>v0.4.0</code>.</td>
+            <td class="date">v4 bundle<br>2026-09-10</td>
           </tr>
           <tr>
             <td class="page"><code>detection_crops/</code></td>
@@ -532,12 +551,12 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0; no DOI has
+    <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0, copyright Carlo Broderick; no DOI has
     been minted yet. Analysis follows the NCEAS Coding-Agent Rules for Data Science — literate
     scripts, one settings block, explicit filters, archive rather than delete, and a dated
     change record.</p>
-    <p>Pages built 2026-09-12 from release <code>v0.3.0</code> (2026-09-11) and the
-    <code>v4</code> metric tables.</p>
+    <p>Pages built 2026-09-12 from release <code>v0.4.0</code> (2026-09-12). Two
+    supporting outputs are one release behind and are labelled where they appear.</p>
   </div>
 </footer>
 

@@ -183,14 +183,25 @@
 
 <div class="wrap">
   <div class="status">
-    <h3>What produced these intervals</h3>
-    <p>All of it is <code>scripts/13_uncertainty_report.py</code>: CPU only, about two and a
-    half minutes for every source, <strong>nothing refitted</strong>. It reads the out-of-fold
-    predictions already on disk and resamples them. Every <code>summary.json</code> it writes
-    carries a <code>tables_vintage</code> field, so no interval on this page can be read without
-    knowing which generation of the feature tables produced it — all of them here are the
-    <strong><code>v4</code> corrected-sampler tables</strong>. The pre-fix <code>v3</code>
-    directories were not overwritten and sit beside them on disk.</p>
+    <h3>⚠️ Which bundle these intervals belong to, 12 September 2026</h3>
+    <p><strong>Most of this page is the previous production bundle's, and it is labelled that
+    way throughout.</strong> Release <code>v0.4.0</code> ships
+    <code>damage_sentinel2_v5</code> — optical only, fixed cut 0.85 — and
+    <strong>no bootstrap run exists for it</strong>: every directory under
+    <code>outputs/uncertainty/</code> predates 2026-09-11 and none mentions the v5 bundle. The
+    intervals and reliability curves below are therefore <code>damage_sentinel2s1_v4</code>'s
+    and its siblings', at cuts 0.84 and 0.87. They remain the best available statement of how
+    wide this project's numbers are, and the finding they carry — that the fire is the unit and
+    there are eight of them — does not depend on which of the two bundles is in front of it.</p>
+    <p><strong>One v0.4.0-era interval set does exist</strong>, from a different stage: the
+    paired before/after comparison of the two release generations and of the two cuts, over the
+    fifteen forward fires. It is <a href="#release">at the bottom of this page</a> and it is
+    the one place here you can read <code>v0.4.0</code> with an interval on it.</p>
+    <p>Everything else is <code>scripts/13_uncertainty_report.py</code>: CPU only, about two and
+    a half minutes for every source, <strong>nothing refitted</strong>. It reads out-of-fold
+    predictions already on disk and resamples them, and every <code>summary.json</code> it
+    writes carries a <code>tables_vintage</code> field, so no interval can be read without
+    knowing which generation of the feature tables produced it.</p>
   </div>
 </div>
 
@@ -200,6 +211,7 @@
   <div class="wide">
     <p class="eyebrow">01 · the headlines</p>
     <h2>Every headline, with its interval</h2>
+    <p class="eyebrow" style="color:var(--s2)">bundle <code>damage_sentinel2s1_v4</code> and its siblings, not the shipped v5</p>
   </div>
   <div class="wrap">
     <div class="tablewrap">
@@ -238,6 +250,7 @@
   <div class="wide">
     <p class="eyebrow">02 · per fire</p>
     <h2>The eight incidents, one at a time</h2>
+    <p class="eyebrow" style="color:var(--s2)">bundle <code>damage_sentinel2s1_v4</code>, cut 0.87</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -375,6 +388,7 @@
   <div class="wide">
     <p class="eyebrow">03 · calibration</p>
     <h2><code>destroyed_prob</code> is a ranking, not a probability</h2>
+    <p class="eyebrow" style="color:var(--s2)">the three <code>v4</code> bundles; v5's own calibration is quoted below</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -501,47 +515,85 @@
 <section class="part">
   <div class="wide">
     <p class="eyebrow">04 · paired comparisons</p>
-    <h2>What the intervals did to two pre-registered decisions</h2>
+    <h2>What the intervals did to three decisions</h2>
   </div>
   <div class="wrap">
     <p>A paired fire-level bootstrap — the same fires, the same rows, the same draws on both
     sides, so the fire-to-fire spread that dominates each estimate individually cancels — is the
-    right instrument for "is this change real". It was applied twice, to two decisions that had
-    already been made, and it changed the reading of both.</p>
+    right instrument for "is this change real". It has now been applied three times to decisions
+    that had already been made, and it changed the reading of all three.</p>
 
-    <h3>Sentinel-1 radar against the optical-only bundle</h3>
+    <h3 id="release">The release change itself — <code>v0.3.0</code> to <code>v0.4.0</code></h3>
+    <p>Two things changed at once on 2026-09-12: radar left the model, and a second cut was
+    added beside the fixed one. A single after-number would say nothing, so the comparison was
+    run three ways on <strong>the same fires, the same truth records and the same matched
+    pairs</strong> — a damage-only re-score touches no geometry, so the pairing is exact.</p>
     <div class="tablewrap">
       <table>
-        <caption>Paired Δ, <code>s1_point</code> − <code>base</code>, 8 incidents, B = 2000</caption>
-        <thead><tr><th>Scope · metric</th><th class="num">With radar</th><th class="num">Optical only</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+        <caption>Three questions, fifteen forward fires, cluster bootstrap with the fire as the
+        unit, B = 2000</caption>
+        <thead><tr><th>Comparison</th><th>What it isolates</th><th class="num">Mean-fire F1 Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
         <tbody>
-          <tr><td>pooled · F1</td><td class="num">0.9236</td><td class="num">0.9135</td><td class="num">+0.0101</td><td class="ci">[+0.0009, +0.0130]</td><td class="yes">yes</td></tr>
-          <tr><td>pooled · recall</td><td class="num">0.9206</td><td class="num">0.8967</td><td class="num">+0.0239</td><td class="ci">[+0.0010, +0.0361]</td><td class="yes">yes</td></tr>
-          <tr><td>pooled · precision</td><td class="num">0.9266</td><td class="num">0.9309</td><td class="num">−0.0044</td><td class="ci">[−0.0099, +0.0012]</td><td class="no">no</td></tr>
-          <tr><td>pooled · AUC</td><td class="num">0.9763</td><td class="num">0.9740</td><td class="num">+0.0023</td><td class="ci">[−0.0010, +0.0055]</td><td class="no">no</td></tr>
-          <tr><td>pooled · average precision</td><td class="num">0.9751</td><td class="num">0.9729</td><td class="num">+0.0022</td><td class="ci">[−0.0017, +0.0047]</td><td class="no">no</td></tr>
-          <tr><td>mean-fire · F1</td><td class="num">0.8742</td><td class="num">0.8679</td><td class="num">+0.0064</td><td class="ci">[+0.0011, +0.0118]</td><td class="yes">yes</td></tr>
-          <tr><td>mean-fire · AUC</td><td class="num">0.9742</td><td class="num">0.9741</td><td class="num">+0.0001</td><td class="ci">[−0.0019, +0.0022]</td><td class="no">no</td></tr>
-          <tr><td>mean-fire · average precision</td><td class="num">0.9370</td><td class="num">0.9364</td><td class="num">+0.0006</td><td class="ci">[−0.0018, +0.0028]</td><td class="no">no</td></tr>
+          <tr><td><code>v0.4.0</code> − <code>v0.3.0</code></td><td>the whole release change — new model <em>and</em> new cut</td><td class="num">−0.0051</td><td class="ci">[−0.0090, −0.0011]</td><td class="yes">yes</td></tr>
+          <tr><td>…holding the cut, changing only the model</td><td><strong>dropping radar</strong></td><td class="num">−0.0039</td><td class="ci">[−0.0106, +0.0025]</td><td class="no">no</td></tr>
+          <tr><td>adaptive − fixed, same release</td><td><strong>the per-fire cut</strong></td><td class="num"><strong>−0.0352</strong></td><td class="ci">[−0.0709, −0.0127]</td><td class="yes">yes</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/dins_s1_v4/paired_delta_ci.csv</code>; the pre-fix version is
-    <code>outputs/uncertainty/dins_s1_v3/paired_delta_ci.csv</code>, unchanged on disk.</p>
-    <div class="note warn">
-      <p><strong>⚠️ The threshold-free half of the radar claim does not survive the sampler
-      fix.</strong> On the pre-fix tables the published reading was that the pooled-F1 gain was
-      the fragile half and "the threshold-free half survives cleanly, which is the half the
-      README leads with". On corrected features it is exactly backwards: mean-fire AUC falls
-      from +0.0017 [+0.00005, +0.0037] to <strong>+0.0001 [−0.0019, +0.0022]</strong> and
-      mean-fire average precision from +0.0039 to <strong>+0.0006</strong>, and neither excludes
-      zero any more. What radar still does is move structures across the cut — recall
-      0.897 → 0.921 for a precision cost of 0.931 → 0.927 — and it still does it where it was
-      supposed to, on bare ground. <strong>It no longer demonstrably improves the
-      ranking.</strong> Re-applying the bar that promoted it in the first place, it clears
-      <strong>two of five</strong> criteria; the owner's decision on 2026-09-11 was to drop it.</p>
+    <code>outputs/forward_damage/before_after/paired_delta_ci.csv</code> — comparisons
+    <code>after − before</code>, <code>after_scores − before_scores</code> and
+    <code>adaptive − fixed</code> — with the levels in <code>pooled_ci.csv</code>. Stage
+    <code>22_operating_before_after</code>, generated 2026-09-12. The two outside-California
+    truth sets are reported per fire and are deliberately <em>not</em> in the bootstrap: three
+    assessments over two fires is not a distribution.</p>
+    <div class="note ok">
+      <p><strong>Dropping radar is not what moved anything.</strong> Holding the cut fixed and
+      changing only the model costs <strong>−0.0039 mean-fire F1 on an interval that includes
+      zero</strong> — exactly what the promotion rule predicted when radar failed to clear its
+      own bar on the corrected tables. Removing it also removes a dependency: the optical
+      bundle needs no Sentinel-1 archive and can be run on a fire from before October 2014,
+      which the radar bundle could not.</p>
     </div>
+    <div class="note warn">
+      <p><strong>⚠️ The per-fire cut is what moved, and it moved down.</strong> −0.0352
+      mean-fire F1, −0.0939 precision, +0.0435 recall, all excluding zero. The cut rule cleared
+      a pre-registered five-criterion bar on the leave-one-fire-out <em>fold tables</em>, where
+      every row is an inspected structure at a base rate near 0.49; the product applies it to a
+      whole inventory at a base rate near 0.09, and because the rule reads the fire's own score
+      distribution the cut falls from the folds' 0.79–0.88 to the product's
+      <strong>0.158–0.792</strong>. <strong>The pass stands on the population it was measured
+      on and does not transfer to this one</strong>
+      (<code>open-adaptive-rule-population-shift</code>). The ranking is untouched either way:
+      pooled AUC 0.981 → 0.979. What the adaptive call buys is the destroyed <em>count</em>,
+      from 0.810 of the inspected total to 0.991.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <caption>The levels behind those deltas, pooled over the fifteen fires</caption>
+        <thead><tr><th>Generation</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th></tr></thead>
+        <tbody>
+          <tr><td><code>v0.3.0</code> — v4 + radar @0.87</td><td class="num">0.9337</td><td class="num">0.9282</td><td class="num">0.9309</td><td class="num">0.9810</td></tr>
+          <tr><td><code>v0.3.0</code>, 95 % CI</td><td class="ci">[0.830, 0.947]</td><td class="ci">[0.889, 0.953]</td><td class="ci">[0.862, 0.937]</td><td class="ci">[0.979, 0.987]</td></tr>
+          <tr><td><strong><code>v0.4.0</code> — v5 optical @0.85</strong></td><td class="num">0.9347</td><td class="num">0.9135</td><td class="num">0.9239</td><td class="num">0.9793</td></tr>
+          <tr><td><code>v0.4.0</code>, 95 % CI</td><td class="ci">[0.824, 0.945]</td><td class="ci">[0.884, 0.934]</td><td class="ci">[0.856, 0.927]</td><td class="ci">[0.977, 0.986]</td></tr>
+          <tr><td><code>v0.4.0</code> adaptive column</td><td class="num">0.8653</td><td class="num">0.9659</td><td class="num">0.9129</td><td class="num">—</td></tr>
+          <tr><td>adaptive, 95 % CI</td><td class="ci">[0.722, 0.883]</td><td class="ci">[0.941, 0.979]</td><td class="ci">[0.819, 0.919]</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/forward_damage/before_after/pooled_ci.csv</code>, generations
+    <code>before</code>, <code>after</code> and <code>after_adaptive</code>.</p>
+
+    <h3>And the calibration the shipped bundle carries</h3>
+    <p><code>damage_sentinel2_v5</code> ships its own leave-one-fire-out isotonic map, and it
+    does the same job as its predecessors': expected calibration error
+    <strong>0.0651 → 0.0071</strong>, maximum calibration error 0.2297 → 0.0200, Brier
+    0.0729 → 0.0616. The operating cut stays on the raw score for the same reason as before —
+    isotonic regression is monotone and re-orders nothing.
+    <span class="src" style="display:inline"><b>Source:</b> <code>logs/CHANGELOG.md</code>
+    2026-09-12 11:15 PT §2.</span></p>
 
     <h3>The sampler fix itself</h3>
     <p>The correction to the Sentinel-2 read window was <strong>expected in advance</strong> to
@@ -613,8 +665,10 @@
       <a href="forward-fires.html">fire by fire</a> ·
       <a href="combined-series.html">the combined series</a> ·
       <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · intervals from the <code>v4</code> corrected-sampler tables, computed
-    2026-09-10/11.</p>
+    <p>Built 2026-09-12 · the headline, per-fire and calibration intervals are the
+    <code>v4</code> corrected-sampler tables, computed 2026-09-10/11; the release comparison is
+    <code>v0.4.0</code>, computed 2026-09-12. ⚠️ No bootstrap run exists for the shipped
+    <code>damage_sentinel2_v5</code> bundle itself.</p>
   </div>
 </footer>
 

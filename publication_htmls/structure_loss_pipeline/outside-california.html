@@ -186,10 +186,16 @@
     <p><strong>The ranking travels and is measurably a little worse outside California; the
     fixed cut fails badly on specific fires.</strong> That is the careful form, it is supported
     twice on independent evidence, and the stronger version — "the model loses seven F1 points
-    outside California" — is <em>not</em> supported: twenty-five fires cannot resolve it.
-    <span class="pill flight">in flight</span> On 2026-09-11 the owner adopted a per-fire
-    operating rule in place of the single fixed cut, on the evidence below. No released product
-    carries it yet; everything reported here is measured at fixed cuts.</p>
+    outside California" — is <em>not</em> supported: twenty-five fires cannot resolve it.</p>
+    <p><strong>The fix for the threshold half was adopted, applied, and then did not
+    transfer.</strong> A label-free per-fire cut rule cleared a five-criterion bar written down
+    before it was scored, twice over. Applied to the product it costs
+    <strong>−0.0352 mean-fire F1</strong> and gains the destroyed <em>count</em>, because the
+    fold table it was validated on and the inventory it is applied to are different
+    populations. Since <code>v0.4.0</code> it therefore ships as a <strong>second
+    column</strong> beside the fixed cut, not instead of it —
+    <a href="#population">the section below</a> is the whole story, and it is the most
+    important caveat on this page.</p>
   </div>
 </div>
 
@@ -396,7 +402,9 @@
     0.0002. On the corrected tables, with the Carlson half <strong>fully nested</strong> —
     for every held-out fire <em>f</em> and every other fire <em>g</em>, a probability from a
     model trained on the 64 fires that are neither, 66 outer + 2,145 pair fits =
-    <strong>2,211</strong> — one rule clears all five.</p>
+    <strong>2,211</strong> — one rule clears all five. <strong>That pass is real and nothing
+    below contradicts it.</strong> What it does not do is transfer to the product, and
+    <a href="#population">why not</a> is the next section.</p>
     <div class="tablewrap">
       <table>
         <caption>The bar, criterion by criterion, for <code>expected_f1_isotonic</code></caption>
@@ -478,6 +486,75 @@
     each. Under the rule, Texas goes 0.167 → 0.462 and Oklahoma 0.402 → 0.524 at the 0.90
     baseline, and California <em>gains</em> 0.005 rather than paying for it.</p>
 
+    <h3 id="population">And then it was applied to the product</h3>
+    <p>The bar was answered honestly and the owner adopted the rule. Applying it to the
+    fifteen forward fires showed something the fold table could not: <strong>the rule was
+    validated on one population and applied to another.</strong></p>
+    <div class="tablewrap">
+      <table>
+        <caption>Two populations, one rule</caption>
+        <thead><tr><th></th><th>The leave-one-fire-out fold table</th><th>The product</th></tr></thead>
+        <tbody>
+          <tr><td>what a row is</td><td>a CAL FIRE <strong>inspected</strong> structure</td><td>any structure in the inventory — most never inspected, out to 2.4 km from the perimeter</td></tr>
+          <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
+          <tr><td>base rate</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
+          <tr><td>cuts the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.158 – 0.792</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>logs/CHANGELOG.md</code> 2026-09-12 11:15 PT §1; fold
+    cuts from <code>outputs/forward_damage/per_fire.csv</code> <code>threshold_fold</code>,
+    realised cuts from <code>operating_cut_adaptive</code> in the same file.</p>
+    <p>The rule reads <em>the fire's own score distribution</em> and nothing else — that is
+    what makes it label-free and keeps it inside the covariate rule, and it is also what makes
+    it move when the population underneath it changes. On a table of inspected structures where
+    roughly half burned, the expected-F1 cut sits near the shipped one. On a whole inventory
+    where nine in a hundred burned, the same arithmetic drags the cut down — to 0.158 on
+    Coches 2 — and the model begins calling structures destroyed that nobody ever looked at.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Adaptive − fixed on the fifteen forward fires, paired on identical rows,
+        fire-level bootstrap, B = 2000</caption>
+        <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+        <tbody>
+          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0352</strong></td><td class="ci">[−0.0709, −0.0127]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>mean-fire precision</td><td class="num">−0.0939</td><td class="ci">[−0.1559, −0.0518]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0435</strong></td><td class="ci">[+0.0217, +0.0647]</td><td class="pass">yes — better</td></tr>
+          <tr><td>mean-fire average precision</td><td class="num">−0.0657</td><td class="ci">[−0.1185, −0.0332]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>mean-fire AUC</td><td class="num">−0.0073</td><td class="ci">[−0.0249, +0.0082]</td><td class="no">no</td></tr>
+          <tr><td>pooled F1</td><td class="num">−0.0111</td><td class="ci">[−0.0415, −0.0052]</td><td class="fail">yes — worse</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/forward_damage/before_after/paired_delta_ci.csv</code>, comparison
+    <code>adaptive − fixed</code>. AUC is computed on the score and does not depend on a cut,
+    which is why it barely moves — <strong>the ranking is unaffected either way</strong>,
+    pooled 0.981 → 0.979.</p>
+    <div class="note warn">
+      <p><strong>⚠️ The pre-registered pass stands on the population it was measured on.</strong>
+      Nothing about the bar was wrong: it answered a question about labelled folds and was read
+      as an answer about the product. The open row names the next test rather than closing the
+      question — <strong>the same five criteria evaluated on the product population</strong>, a
+      Direct-zone-only variant whose base rate is nearer the fold table's and a whole-inventory
+      variant, each pre-registered before it is run, as the original bar was
+      (<code>open-adaptive-rule-population-shift</code>).</p>
+      <p><strong>What the adaptive call does buy is the count.</strong> Predicted destroyed over
+      the fifteen fires' whole inventories goes <strong>14,504 → 17,735</strong> against 17,902
+      inspected as destroyed — a ratio of <strong>0.810 → 0.991</strong>. The release notes
+      reduce the choice to one line: <em>use <code>damage_class</code> to classify buildings;
+      use <code>damage_class_adaptive</code> if you are counting them</em>. Every headline on
+      this site is the fixed cut.</p>
+    </div>
+    <div class="note ok">
+      <p><strong>⚠️ Outside California the adaptive call is the better of the two, on the one
+      post-2022 non-California truth set that exists.</strong> South Fork NM 2024 goes
+      <strong>F1 0.8484 → 0.8825</strong>. On Marshall's two independent assessments it splits
+      — Boulder County 0.9705 → 0.9727, FEMA MAC 0.9273 → 0.8901. <strong>Three assessments
+      over two fires is not a distribution</strong>, and this does not overturn the paragraph
+      above. It does point the same way as everything else on this page: the ranking travels,
+      and it is the threshold that does not.</p>
+    </div>
     <h3>Why no single rule can win</h3>
     <p>The states split into two shapes and the label-free signal that fixes one wrecks the
     other.</p>
@@ -550,24 +627,30 @@
       <table>
         <thead><tr><th></th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Predicted / assessed</th></tr></thead>
         <tbody>
-          <tr><td>at the shipped cut 0.87, on 1,637 one-to-one pairs</td><td class="num">0.980</td><td class="num">0.801</td><td class="num">0.881</td><td class="num">0.986</td><td class="num">0.985</td><td class="num">606 / 742 = 0.817</td></tr>
-          <tr><td>at this fire's own cut of <strong>0.21</strong></td><td class="num">0.968</td><td class="num">0.925</td><td class="num"><strong>0.947</strong></td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>at the shipped fixed cut <strong>0.85</strong>, on 1,637 pairs</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.848</td><td class="num">0.985</td><td class="num">0.983</td><td class="num">564 / 742 = 0.760</td></tr>
+          <tr><td>at the <strong>adaptive</strong> cut 0.756</td><td class="num">0.977</td><td class="num">0.805</td><td class="num"><strong>0.882</strong></td><td class="num">0.985</td><td class="num">0.983</td><td class="num">611 / 742 = 0.824</td></tr>
+          <tr><td>at this fire's own best cut of <strong>0.14</strong></td><td class="num">0.953</td><td class="num">0.937</td><td class="num">0.945</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
-    <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code>, bundle
-    <code>damage_sentinel2s1_v4</code>. Detection recall 0.661 at 10 m, 0.760 at 20 m over 7,931
-    enumerated structures, 4,507 of them inside the assessed area.</p>
+    <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code> and
+    <code>metrics.json</code>, regenerated 2026-09-12 at bundle
+    <code>damage_sentinel2_v5</code>, unit <code>NM_2024_SOUTH_FORK__v5</code>, 7,931 points
+    scored. Detection recall 0.661 at 10 m and 0.760 at 20 m, 4,507 points inside the assessed
+    area. The threshold gap is <strong>+0.097</strong> at the fixed cut and
+    <strong>+0.062</strong> at the adaptive one.</p>
     <div class="note ok">
       <p><strong>This independently reproduces the generalization finding.</strong> The
       Carlson-era row measured, on 25 non-California fires none later than 2022, a mean-fire F1
       of 0.742 at the fixed cut against 0.798 at each fire's own cut — a gap of 0.055, with the
       ranking intact. On a <strong>2024</strong> fire, in a state the Carlson sample barely
       contains, against a truth set that did not exist when that row was written, the same shape
-      appears: AUC <strong>0.986</strong>, and 0.881 → 0.947 at the fire's own cut, a gap of
-      <strong>0.066</strong>. <em>The ranking travels and the fixed cut does not</em> — measured
-      twice, on independent evidence, two years apart.</p>
+      appears: AUC <strong>0.985</strong>, and <strong>0.848 → 0.945</strong> at the fire's own
+      cut, a gap of <strong>0.097</strong> — wider at <code>v0.4.0</code>'s cut of 0.85 than it
+      was at <code>v0.3.0</code>'s 0.87. <em>The ranking travels and the fixed cut does not</em>
+      — measured twice, on independent evidence, two years apart. It is also the one place the
+      per-fire cut clearly helps: 0.848 → 0.882.</p>
     </div>
     <p>Three things this number is <strong>not</strong>. It is <em>not a precision estimate for
     the inventory</em>: 4,507 inventory points sit inside the assessed area and only 2,488
@@ -662,7 +745,10 @@
       <a href="combined-series.html">the combined series</a> ·
       <a href="uncertainty.html">how wide the numbers are</a>.</p>
     <p>Built 2026-09-12 · generalization tables computed 2026-09-10, the nested operating-point
-    run 2026-09-11.</p>
+    run 2026-09-11, the product comparison 2026-09-12. ⚠️ The 66-fire generalization and
+    operating-point tables on this page are the <strong>Carlson</strong> bundle's and have not
+    been re-run against <code>damage_sentinel2_v5</code>; the product comparison at the bottom
+    of §02 is.</p>
   </div>
 </footer>
 

@@ -1,0 +1,43 @@
+# Pages this directory has retired. `scripts/qa_maps.py` copies its whole
+# output folder and never removes, so without this list every page deleted
+# here comes back the next time anybody runs any part of that script — which
+# is exactly what happened on 2026-09-12, when an unrelated run restored all
+# 199 pages retired that morning.
+#
+# One shell glob per line, matched against the file name only.
+# The reasoning for each group is docs/publication-inventory.md in the
+# structure-loss-pipeline repository (ledger `pub-2026-09-12`).
+
+# v1 Landsat damage maps: built through the read window road-7 fixed, and the
+# product does not ship a Landsat damage model.
+damage_*_landsat.html
+
+# Pre-sampler-fix Sentinel-2 damage maps. Superseded by the _sentinel2_v4
+# siblings, which are published.
+damage_*_sentinel2.html
+
+# The damage_sentinel2_v2 bundle: superseded by s1_v3, then s1_v4, then v5.
+damage_*_sentinel2_v2.html
+
+# Pre-sampler-fix Stage-7 out-of-sample checks.
+dins_*.html
+
+# Stage-3 detection maps from a detector two versions behind the frozen one.
+detections_*.html
+
+# Inventories on the retired 2.4 km DINS-point buffer frame. The __perimeter
+# successors are published beside them.
+inventory_DINS_2025_EATON.html
+inventory_DINS_2024_NIXON.html
+
+# The QA-map landing page. index.html here is the hand-written project landing
+# page; qa_maps.py writes qa-maps-index.html, and a filtered run would publish
+# an index of only the fires that run happened to rebuild.
+qa-maps-index.html
+
+# Landsat damage maps from the corrected `damage_landsat_v2` tables. That
+# bundle is the era-check bundle: advisory, not production, and nothing points
+# at it. One fire of its hundred arrived here from an unrelated run on
+# 2026-09-12 with no page linking to it. Delete this line when the whole set
+# is rebuilt and linked from a page that says what it is for.
+damage_*_landsat_v2.html
