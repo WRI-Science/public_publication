@@ -184,7 +184,7 @@
 <div class="wrap">
   <div class="status">
     <h3>Status, 12 September 2026</h3>
-    <p>The published series is <strong><code>v0.4.0</code></strong>, cut 2026-09-12, and it is
+    <p>The published series is <strong><code>v0.4.1</code></strong>, cut 2026-09-12, and it is
     the first version that carries <strong>all of Carlson</strong>: 361 fires and
     <strong>1,770,939</strong> rows, 2002–2022, verbatim. Until now the series read the five
     per-fire extracts that happened to be cached, so a layer calling itself 2002-onward held
@@ -193,8 +193,9 @@
     <strong>1,922,889</strong> after the licence exclusion below.</p>
     <p>Three other things changed with it: the production damage model is
     <strong>optical-only</strong> (<code>damage_sentinel2_v5</code>, no radar) at a fixed cut of
-    <strong>0.85</strong>; a <strong>second loss call</strong> ships beside the first; and the
-    <strong>licence is decided</strong>. <span class="pill flight">in flight</span> Roadmap 12
+    <strong>0.85</strong>; a <strong>second, advisory loss call</strong> ships beside the first,
+    cut per fire by a rule scoped to the <code>Direct</code> zone since <code>v0.4.1</code>; and
+    the <strong>licence is decided</strong>. <span class="pill flight">in flight</span> Roadmap 12
     is still building eighteen retrospective 2016–2022 inventories, which are <em>not</em>
     series rows yet, and Roadmap 13 is not reported at all.</p>
   </div>
@@ -216,7 +217,7 @@
         <tbody>
           <tr><td><code>pre2016_carlson_only</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">160</td><td class="num">973,491</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
           <tr><td><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">201</td><td class="num">797,448</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
-          <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">15</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">17,362</td><td class="num">879</td></tr>
+          <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">15</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">879</td></tr>
           <tr class="total"><td>internal build</td><td>—</td><td class="num">376</td><td class="num">1,939,136</td><td class="num">73,534 + 14,504</td><td class="num">—</td><td class="num">879</td></tr>
           <tr class="total"><td>released package, after the ODbL exclusion</td><td>—</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
         </tbody>
@@ -333,32 +334,35 @@
 
     <div class="tablewrap">
       <table>
-        <caption>Our fifteen fires — all <code>damage_sentinel2_v5</code> at the fixed cut
-        0.85, inventory <code>stage8_roll_forward</code> on the perimeter frame, NAIP 2022</caption>
-        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, fixed</th><th class="num">Destroyed, adaptive</th><th class="num">Destr. share</th><th class="num">ODbL dropped</th><th class="num">Released</th><th>Score</th></tr></thead>
+        <caption>Our fifteen fires — all <code>damage_sentinel2_v5</code>, shipped call at the
+        fixed cut 0.85 and advisory call at the fire's own <code>Direct</code>-scoped cut;
+        inventory <code>stage8_roll_forward</code> on the perimeter frame, NAIP 2022</caption>
+        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, fixed</th><th class="num">Destroyed, adaptive</th><th class="num">Adaptive cut</th><th class="num">ODbL dropped</th><th class="num">Released</th><th>Score</th></tr></thead>
         <tbody>
-          <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,637</td><td class="num">9,041</td><td class="num">0.1187</td><td class="num">6,336</td><td class="num">57,983</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Palisades 2025</td><td class="num">2025-01-07</td><td class="num">28,837</td><td class="num">27,608</td><td class="num">1,229</td><td class="num">5,522</td><td class="num">6,650</td><td class="num">0.1915</td><td class="num">2,269</td><td class="num">26,568</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Mountain 2024</td><td class="num">2024-11-06</td><td class="num">23,241</td><td class="num">22,551</td><td class="num">690</td><td class="num">262</td><td class="num">389</td><td class="num">0.0113</td><td class="num">1,186</td><td class="num">22,055</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Line 2024</td><td class="num">2024-09-05</td><td class="num">11,892</td><td class="num">11,410</td><td class="num">482</td><td class="num">15</td><td class="num">33</td><td class="num">0.0013</td><td class="num">2,420</td><td class="num">9,472</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Coches 2 2025</td><td class="num">2025-09-08</td><td class="num">7,463</td><td class="num">7,229</td><td class="num">234</td><td class="num">1</td><td class="num">34</td><td class="num">0.0001</td><td class="num">456</td><td class="num">7,007</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Thompson 2024</td><td class="num">2024-07-02</td><td class="num">5,969</td><td class="num">5,680</td><td class="num">289</td><td class="num">28</td><td class="num">41</td><td class="num">0.0047</td><td class="num">432</td><td class="num">5,537</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Airport 2024</td><td class="num">2024-09-09</td><td class="num">5,937</td><td class="num">5,775</td><td class="num">162</td><td class="num">127</td><td class="num">146</td><td class="num">0.0214</td><td class="num">153</td><td class="num">5,784</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Bridge 2024</td><td class="num">2024-09-08</td><td class="num">4,567</td><td class="num">4,212</td><td class="num">355</td><td class="num">78</td><td class="num">85</td><td class="num">0.0171</td><td class="num">1,115</td><td class="num">3,452</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Park 2024</td><td class="num">2024-07-24</td><td class="num">4,097</td><td class="num">3,911</td><td class="num">186</td><td class="num">453</td><td class="num">467</td><td class="num">0.1106</td><td class="num">598</td><td class="num">3,499</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>Franklin 2024</td><td class="num">2024-12-09</td><td class="num">3,004</td><td class="num">2,865</td><td class="num">139</td><td class="num">35</td><td class="num">58</td><td class="num">0.0165</td><td class="num">306</td><td class="num">2,698</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Canyon 2025</td><td class="num">2025-08-07</td><td class="num">2,247</td><td class="num">2,165</td><td class="num">82</td><td class="num">17</td><td class="num">22</td><td class="num">0.0076</td><td class="num">86</td><td class="num">2,161</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Borel 2024</td><td class="num">2024-07-24</td><td class="num">2,132</td><td class="num">1,926</td><td class="num">206</td><td class="num">206</td><td class="num">226</td><td class="num">0.0966</td><td class="num">244</td><td class="num">1,888</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>TCU Complex 2025</td><td class="num">2025-09-02</td><td class="num">2,070</td><td class="num">1,934</td><td class="num">136</td><td class="num">87</td><td class="num">118</td><td class="num">0.0420</td><td class="num">297</td><td class="num">1,773</td><td><span class="era-tag slp">lofo</span></td></tr>
-          <tr><td>French 2024</td><td class="num">2024-07-04</td><td class="num">1,609</td><td class="num">1,491</td><td class="num">118</td><td class="num">5</td><td class="num">15</td><td class="num">0.0031</td><td class="num">151</td><td class="num">1,458</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr><td>Nixon 2024</td><td class="num">2024-07-29</td><td class="num">813</td><td class="num">681</td><td class="num">132</td><td class="num">31</td><td class="num">37</td><td class="num">0.0381</td><td class="num">198</td><td class="num">615</td><td><span class="era-tag carlson">production</span></td></tr>
-          <tr class="total"><td>fifteen fires</td><td class="num">—</td><td class="num">168,197</td><td class="num">156,430</td><td class="num">11,767</td><td class="num">14,504</td><td class="num">17,362</td><td class="num">0.0862</td><td class="num">16,247</td><td class="num">151,950</td><td>—</td></tr>
+          <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">6,336</td><td class="num">57,983</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Palisades 2025</td><td class="num">2025-01-07</td><td class="num">28,837</td><td class="num">27,608</td><td class="num">1,229</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">2,269</td><td class="num">26,568</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Mountain 2024</td><td class="num">2024-11-06</td><td class="num">23,241</td><td class="num">22,551</td><td class="num">690</td><td class="num">262</td><td class="num">379</td><td class="num">0.661</td><td class="num">1,186</td><td class="num">22,055</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Line 2024</td><td class="num">2024-09-05</td><td class="num">11,892</td><td class="num">11,410</td><td class="num">482</td><td class="num">15</td><td class="num">22</td><td class="num">0.637</td><td class="num">2,420</td><td class="num">9,472</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Coches 2 2025</td><td class="num">2025-09-08</td><td class="num">7,463</td><td class="num">7,229</td><td class="num">234</td><td class="num">1</td><td class="num">4</td><td class="num">0.671</td><td class="num">456</td><td class="num">7,007</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Thompson 2024</td><td class="num">2024-07-02</td><td class="num">5,969</td><td class="num">5,680</td><td class="num">289</td><td class="num">28</td><td class="num">33</td><td class="num">0.708</td><td class="num">432</td><td class="num">5,537</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Airport 2024</td><td class="num">2024-09-09</td><td class="num">5,937</td><td class="num">5,775</td><td class="num">162</td><td class="num">127</td><td class="num">135</td><td class="num">0.782</td><td class="num">153</td><td class="num">5,784</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Bridge 2024</td><td class="num">2024-09-08</td><td class="num">4,567</td><td class="num">4,212</td><td class="num">355</td><td class="num">78</td><td class="num">85</td><td class="num">0.753</td><td class="num">1,115</td><td class="num">3,452</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Park 2024</td><td class="num">2024-07-24</td><td class="num">4,097</td><td class="num">3,911</td><td class="num">186</td><td class="num">453</td><td class="num">467</td><td class="num">0.792</td><td class="num">598</td><td class="num">3,499</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Franklin 2024</td><td class="num">2024-12-09</td><td class="num">3,004</td><td class="num">2,865</td><td class="num">139</td><td class="num">35</td><td class="num">68</td><td class="num">0.620</td><td class="num">306</td><td class="num">2,698</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Canyon 2025</td><td class="num">2025-08-07</td><td class="num">2,247</td><td class="num">2,165</td><td class="num">82</td><td class="num">17</td><td class="num">20</td><td class="num">0.771</td><td class="num">86</td><td class="num">2,161</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Borel 2024</td><td class="num">2024-07-24</td><td class="num">2,132</td><td class="num">1,926</td><td class="num">206</td><td class="num">206</td><td class="num">226</td><td class="num">0.756</td><td class="num">244</td><td class="num">1,888</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>TCU Complex 2025</td><td class="num">2025-09-02</td><td class="num">2,070</td><td class="num">1,934</td><td class="num">136</td><td class="num">87</td><td class="num">98</td><td class="num">0.750</td><td class="num">297</td><td class="num">1,773</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>French 2024</td><td class="num">2024-07-04</td><td class="num">1,609</td><td class="num">1,491</td><td class="num">118</td><td class="num">5</td><td class="num">14</td><td class="num">0.655</td><td class="num">151</td><td class="num">1,458</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Nixon 2024</td><td class="num">2024-07-29</td><td class="num">813</td><td class="num">681</td><td class="num">132</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">198</td><td class="num">615</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr class="total"><td>fifteen fires</td><td class="num">—</td><td class="num">168,197</td><td class="num">156,430</td><td class="num">11,767</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">16,247</td><td class="num">151,950</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/combined_series/per_fire_summary.csv</code>,
-    the 15 rows with <code>series_source = slp</code>; the two right-hand columns from
-    <code>outputs/releases/v0.4.0/odbl_excluded_per_fire.csv</code>. <code>major</code> /
+    the 15 rows with <code>series_source = slp</code> — <code>n_destroyed_adaptive</code> and
+    <code>destroyed_threshold_adaptive</code> are filled for the first time in
+    <code>v0.4.1</code>; the two right-hand columns from
+    <code>outputs/releases/v0.4.1/odbl_excluded_per_fire.csv</code>. <code>major</code> /
     <code>minor</code> split at 50 m² of footprint — the project's own Carlson-compatible line.
     Every fire's frame is its public perimeter and <code>frame_clip.csv</code> records
     <strong>0 rows dropped outside the frame</strong> on all fifteen. Every one of the 168,197
@@ -390,15 +394,15 @@
 <text x="166" y="51.8" text-anchor="end">Eaton 2025</text>
 <line x1="695.4" y1="48.3" x2="707.4" y2="48.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="707.4" cy="48.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="705.0" cy="48.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="699.0" cy="48.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="695.4" cy="48.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="51.8" text-anchor="end">0.81 / 0.96</text>
+<text class="val" x="854" y="51.8" text-anchor="end">0.81 / 0.86</text>
 <text x="166" y="74.8" text-anchor="end">Palisades 2025</text>
 <line x1="676.9" y1="71.3" x2="689.2" y2="71.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="689.2" cy="71.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="687.5" cy="71.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="683.8" cy="71.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="676.9" cy="71.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="74.8" text-anchor="end">0.81 / 0.97</text>
+<text class="val" x="854" y="74.8" text-anchor="end">0.81 / 0.91</text>
 <text x="166" y="97.8" text-anchor="end">Park 2024</text>
 <line x1="534.2" y1="94.3" x2="560.1" y2="94.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="560.1" cy="94.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
@@ -406,11 +410,11 @@
 <circle cx="534.2" cy="94.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="97.8" text-anchor="end">0.64 / 0.65</text>
 <text x="166" y="120.8" text-anchor="end">Mountain 2024</text>
-<line x1="498.7" y1="117.3" x2="525.5" y2="117.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="498.7" y1="117.3" x2="524.1" y2="117.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="498.7" cy="117.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="525.5" cy="117.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="524.1" cy="117.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="503.0" cy="117.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="120.8" text-anchor="end">1.08 / 1.60</text>
+<text class="val" x="854" y="120.8" text-anchor="end">1.08 / 1.56</text>
 <text x="166" y="143.8" text-anchor="end">Borel 2024</text>
 <line x1="489.3" y1="140.3" x2="494.6" y2="140.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="493.8" cy="140.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
@@ -420,15 +424,15 @@
 <text x="166" y="166.8" text-anchor="end">Airport 2024</text>
 <line x1="461.7" y1="163.3" x2="474.9" y2="163.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="474.9" cy="163.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="469.6" cy="163.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="465.2" cy="163.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="461.7" cy="163.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="166.8" text-anchor="end">0.79 / 0.91</text>
+<text class="val" x="854" y="166.8" text-anchor="end">0.79 / 0.84</text>
 <text x="166" y="189.8" text-anchor="end">TCU Complex 2025</text>
-<line x1="440.1" y1="186.3" x2="457.5" y2="186.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="440.1" y1="186.3" x2="446.9" y2="186.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="445.1" cy="186.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="457.5" cy="186.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="446.9" cy="186.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="440.1" cy="186.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="189.8" text-anchor="end">0.92 / 1.24</text>
+<text class="val" x="854" y="189.8" text-anchor="end">0.92 / 1.03</text>
 <text x="166" y="212.8" text-anchor="end">Bridge 2024</text>
 <line x1="433.9" y1="209.3" x2="438.8" y2="209.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="436.0" cy="209.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
@@ -436,47 +440,47 @@
 <circle cx="433.9" cy="209.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="212.8" text-anchor="end">0.96 / 1.05</text>
 <text x="166" y="235.8" text-anchor="end">Franklin 2024</text>
-<line x1="356.2" y1="232.3" x2="417.0" y2="232.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="356.2" y1="232.3" x2="426.0" y2="232.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="356.2" cy="232.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="417.0" cy="232.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="426.0" cy="232.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="388.1" cy="232.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="235.8" text-anchor="end">1.75 / 2.90</text>
+<text class="val" x="854" y="235.8" text-anchor="end">1.75 / 3.40</text>
 <text x="166" y="258.8" text-anchor="end">Nixon 2024</text>
 <line x1="381.2" y1="255.3" x2="395.8" y2="255.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="395.8" cy="255.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="391.3" cy="255.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="388.1" cy="255.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="381.2" cy="255.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="258.8" text-anchor="end">0.78 / 0.93</text>
+<text class="val" x="854" y="258.8" text-anchor="end">0.78 / 0.88</text>
 <text x="166" y="281.8" text-anchor="end">Thompson 2024</text>
-<line x1="371.2" y1="278.3" x2="397.2" y2="278.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="371.2" y1="278.3" x2="384.8" y2="278.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="371.2" cy="278.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="397.2" cy="278.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="384.8" cy="278.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="375.4" cy="278.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="281.8" text-anchor="end">1.08 / 1.58</text>
+<text class="val" x="854" y="281.8" text-anchor="end">1.08 / 1.27</text>
 <text x="166" y="304.8" text-anchor="end">Canyon 2025</text>
-<line x1="339.8" y1="301.3" x2="361.6" y2="301.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="339.8" y1="301.3" x2="356.2" y2="301.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="339.8" cy="301.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="361.6" cy="301.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="356.2" cy="301.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="346.9" cy="301.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="304.8" text-anchor="end">1.13 / 1.47</text>
+<text class="val" x="854" y="304.8" text-anchor="end">1.13 / 1.33</text>
 <text x="166" y="327.8" text-anchor="end">Line 2024</text>
-<line x1="224.8" y1="324.3" x2="384.8" y2="324.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="224.8" y1="324.3" x2="361.6" y2="324.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="224.8" cy="324.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="384.8" cy="324.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="361.6" cy="324.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="339.8" cy="324.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="327.8" text-anchor="end">7.50 / 16.50</text>
+<text class="val" x="854" y="327.8" text-anchor="end">7.50 / 11.00</text>
 <text x="166" y="350.8" text-anchor="end">French 2024</text>
-<line x1="277.1" y1="347.3" x2="339.8" y2="347.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="277.1" y1="347.3" x2="335.9" y2="347.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="322.1" cy="347.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="339.8" cy="347.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="335.9" cy="347.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="277.1" cy="347.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="350.8" text-anchor="end">0.45 / 1.36</text>
+<text class="val" x="854" y="350.8" text-anchor="end">0.45 / 1.27</text>
 <text x="166" y="373.8" text-anchor="end">Coches 2 2025</text>
-<line x1="185.3" y1="370.3" x2="386.5" y2="370.3" stroke="var(--rule-2)" stroke-width="2" />
+<line x1="185.3" y1="370.3" x2="310.6" y2="370.3" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="310.6" cy="370.3" r="5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="386.5" cy="370.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="264.4" cy="370.3" r="4.5" fill="var(--s4)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="185.3" cy="370.3" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="373.8" text-anchor="end">0.11 / 3.78</text>
+<text class="val" x="854" y="373.8" text-anchor="end">0.11 / 0.44</text>
 <line class="axis" x1="176.0" y1="379" x2="730.0" y2="379" />
 </svg>
       <ul class="legend">
@@ -486,7 +490,7 @@
       <figcaption>Per fire, on a log scale because the fires span one destroyed structure to
       nine thousand. Pooled, the fixed cut calls <strong>14,504</strong> destroyed against
       DINS's <strong>17,902</strong> — a ratio of <strong>0.810</strong> — and the adaptive
-      column calls <strong>17,362</strong>, a ratio of <strong>0.970</strong>. The fires where
+      column calls <strong>15,951</strong>, a ratio of <strong>0.891</strong>. The fires where
       the fixed ratio is worst are the small ones, where a handful of structures is the whole
       score: Coches 2 calls one where nine burned.</figcaption>
     </figure>
@@ -497,22 +501,27 @@
     column from <code>outputs/forward_damage/per_fire.csv</code>
     (<code>n_dins_destroyed</code>).</p>
     <div class="note warn">
-      <p><strong>⚠️ The adaptive count was published wrong for a few hours, and this is the
-      corrected number.</strong> The release reported the adaptive column calling
-      <strong>17,735</strong> structures destroyed, a ratio of 0.991. It is
-      <strong>17,362</strong> and <strong>0.970</strong>. Roadmap 14 traced the difference: the
-      release summed Franklin's <em>stale</em> <code>summary.json</code>, which records 431
-      adaptive calls from before the overlap-attribution rule ran, instead of the GeoPackage the
-      product actually ships, which records <strong>58</strong>. 17,362 + 373 = 17,735. The
-      fixed-cut total, <strong>14,504</strong> and a ratio of <strong>0.810</strong>, was never
-      affected and is correct as published, and no F1 anywhere moves, because those are computed
-      on matched pairs from the shipped call.</p>
+      <p><strong>⚠️ The adaptive count was published wrong once, and the column has since been
+      replaced.</strong> <code>v0.4.0</code> reported its adaptive column calling
+      <strong>17,735</strong> structures destroyed, a ratio of 0.991 against the inspected
+      total. That was an artefact: the release summed Franklin's <em>stale</em>
+      <code>summary.json</code>, which records 431 adaptive calls from before the
+      overlap-attribution rule ran, instead of the GeoPackage the product ships, which records
+      58. The true figure for that column was <strong>17,362</strong> and
+      <strong>0.970</strong>.</p>
+      <p><strong>Since <code>v0.4.1</code> it is a different column.</strong> The advisory rule
+      is now scoped to the <code>Direct</code> zone, and it calls <strong>15,951</strong>
+      destroyed — a ratio of <strong>0.891</strong>. The fixed-cut total,
+      <strong>14,504</strong> and <strong>0.810</strong>, has never changed and was never
+      affected, and no F1 anywhere moved, because those are computed on matched pairs from the
+      shipped call. The correction is recorded here rather than deleted because the wrong
+      number was published on this page.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/operating_product/report.md</code> and <code>decision.md</code>; ledger
-      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>. The count
-      used here, 17,362, is the sum of the shipped <code>destroyed_pred_adaptive</code> column
-      in <code>outputs/combined_series/per_fire_summary.csv</code>; Roadmap 14's own variant
-      table records 17,384 for the same quantity on its 17-fire basis.</p>
+      <code>outputs/operating_product/report.md</code>; ledger
+      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>; the
+      <code>v0.4.1</code> column from <code>outputs/combined_series/per_fire_summary.csv</code>
+      and <code>outputs/forward_damage/metrics.json</code>, commits <code>1499150</code> and
+      <code>22c8736</code>.</p>
     </div>
 
     <div class="tablewrap">
@@ -523,19 +532,19 @@
           <tr><td>ICS-209, reported by the incident commander</td><td class="num">17,879</td><td>ICS-209 ÷ DINS all</td><td class="num">0.9992</td></tr>
           <tr><td>CAL FIRE DINS, destroyed, all categories</td><td class="num">17,893</td><td>ICS-209 ÷ DINS <strong>major</strong></td><td class="num"><strong>1.3696</strong></td></tr>
           <tr><td>CAL FIRE DINS, destroyed, <strong>major</strong> only</td><td class="num">13,054</td><td>ours (fixed) ÷ DINS all</td><td class="num">0.810</td></tr>
-          <tr class="total"><td>our predicted destroyed — fixed 0.85 / adaptive</td><td class="num">14,504 / 17,362</td><td>ours (adaptive) ÷ DINS all</td><td class="num">0.970</td></tr>
+          <tr class="total"><td>our predicted destroyed — fixed 0.85 / adaptive</td><td class="num">14,504 / 15,951</td><td>ours (adaptive) ÷ DINS all</td><td class="num">0.891</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the three truth counts and the two ICS-209 ratios from
-    <code>outputs/ics209_check/summary.json</code>; 14 of the 15 fires matched an ICS-209
-    incident — Coches 2 (9 destroyed) never reached the national situation report. ⚠️ <b>That
-    file is one release behind</b> — it was written 2026-09-11 and its own
-    <code>pred_destroyed</code> column is the <code>v0.3.0</code> bundle at cut 0.87 — so our
-    two counts here come from <code>outputs/combined_series/per_fire_summary.csv</code> and the
-    <code>ours ÷ DINS</code> ratios are those counts over 17,902, the pooled DINS destroyed in
-    <code>outputs/forward_damage/metrics.json</code>. The ICS-209 file uses 17,893 for the same
-    quantity; the nine-record difference is not explained in either file.</p>
+    <code>outputs/ics209_check/summary.json</code>, <strong>re-run on <code>v0.4.1</code></strong>
+    (2026-09-12), so its prediction column is current: 14,504 predicted destroyed against 17,879
+    ICS-209 is a ratio of <strong>0.811</strong>. 14 of the 15 fires matched an ICS-209 incident
+    — Coches 2 (9 destroyed) never reached the national situation report. The adaptive count
+    comes from <code>outputs/combined_series/per_fire_summary.csv</code>, which the ICS-209
+    check does not carry. ⚠️ That file records pooled DINS destroyed as 17,893 where
+    <code>outputs/forward_damage/metrics.json</code> records 17,902; neither file explains the
+    nine-record difference, and each ratio here uses its own file's denominator.</p>
 
     <div class="note warn">
       <p><strong>⚠️ Read the major-only comparison, not the all-categories one.</strong>
@@ -867,22 +876,24 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.4.0</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.4.1</code>, cut 2026-09-12</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">1,939,136 / <strong>1,922,889</strong></td></tr>
           <tr><td>fires</td><td class="num">376 — 361 Carlson, 15 ours</td></tr>
           <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">18 / 2,163.6 MB</td></tr>
+          <tr><td>files / size</td><td class="num">18 / 2,166.3 MB</td></tr>
           <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 17 of 17</td></tr>
-          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85</td></tr>
+          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td>gates</td><td class="num">all three clear, no override — <code>heterogeneity_warning</code> null, no stale bundle, no fire without a call</td></tr>
           <tr><td>DOI</td><td class="num">⚠️ none minted; the citation file keeps the slot</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.0/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.0.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.1.
+    <code>v0.4.1</code> is a PATCH: <code>damage_class</code> is byte-identical to
+    <code>v0.4.0</code>'s, and only the advisory column and its threshold changed.</p>
     <p><strong>The licence is decided:</strong> MIT for the code, <strong>CC BY 4.0</strong> for
     the data, copyright <strong>Carlo Broderick</strong>. The PROVISIONAL markers are gone. The
     ODbL question is resolved <em>by exclusion, not by argument</em>: every row whose geometry
@@ -923,7 +934,7 @@
       <a href="forward-fires.html">fire by fire</a> ·
       <a href="uncertainty.html">how wide the numbers are</a> ·
       <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · release <code>v0.4.0</code>, cut 2026-09-12 ·
+    <p>Built 2026-09-12 · release <code>v0.4.1</code> ·
     the full crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing document
     is <code>docs/data-descriptor.md</code>, both shipped inside every release.</p>
   </div>

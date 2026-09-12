@@ -550,8 +550,7 @@
       the fixed cut, a destroyed-count ratio of <strong>0.891</strong>, realised cuts
       0.601–0.792 instead of 0.158–0.792 — and it <em>gains</em> outside California, 0.8986 →
       <strong>0.9121</strong> mean-fire F1, which is the one place on this page it matters most.
-      It is being swapped in as the advisory column in a <code>v0.4.1</code> that has not been
-      cut; until it is, the advisory column on this site is the whole-inventory variant.</p>
+      <strong>It was swapped in on 2026-09-12 and is the advisory column this page now reports</strong> — <code>v0.4.1</code>, a PATCH whose <code>damage_class</code> is byte-identical to <code>v0.4.0</code>'s, so only the advisory column moved; its per-fire cuts were verified against the Stage 24 table on 15 of 15 fires.</p>
       <p>One check is worth keeping. Re-fitting the isotonic map leave-one-fire-out — the leak a
       reader would reasonably suspect — produces a variant that is <strong>bit-identical on
       204,797 of 204,797 inventory rows</strong>, because the product already reads each
@@ -561,20 +560,28 @@
       bar pre-registered <code>logs/CHANGELOG.md</code> 2026-09-12 11:28 PT; commit
       <code>fb8378d</code>.</p>
       <p><strong>What the adaptive call does buy is the count.</strong> Predicted destroyed over
-      the fifteen fires' whole inventories goes <strong>14,504 → 17,362</strong> against 17,902
-      inspected as destroyed — a ratio of <strong>0.810 → 0.970</strong>. The release notes
+      the fifteen fires' whole inventories goes <strong>14,504 → 15,951</strong> against 17,902
+      inspected as destroyed — a ratio of <strong>0.810 → 0.891</strong>. The release notes
       reduce the choice to one line: <em>use <code>damage_class</code> to classify buildings;
       use <code>damage_class_adaptive</code> if you are counting them</em>. Every headline on
       this site is the fixed cut.</p>
     </div>
     <div class="note ok">
-      <p><strong>⚠️ Outside California the adaptive call is the better of the two, on the one
-      post-2022 non-California truth set that exists.</strong> South Fork NM 2024 goes
-      <strong>F1 0.8484 → 0.8825</strong>. On Marshall's two independent assessments it splits
-      — Boulder County 0.9705 → 0.9727, FEMA MAC 0.9273 → 0.8901. <strong>Three assessments
-      over two fires is not a distribution</strong>, and this does not overturn the paragraph
-      above. It does point the same way as everything else on this page: the ranking travels,
-      and it is the threshold that does not.</p>
+      <p><strong>⚠️ South Fork has no advisory call at all.</strong> The
+      <code>Direct</code>-scoped rule needs a <code>Direct</code> zone, and South Fork is the
+      one product still on the legacy DINS-buffer frame — it has no perimeter, so no Direct
+      ring, so the rule falls back to the fixed cut and the two columns are the same number.
+      Its adaptive cell reads "—" rather than repeating the fixed one. <em>(The 0.8825 this
+      page carried before <code>v0.4.1</code> was the whole-inventory rule, which no longer
+      ships.)</em> So the one post-2022 non-California fire this project holds
+      cannot speak to the adaptive column either way.</p>
+      <p><strong>On Marshall's two independent assessments the advisory call splits</strong> —
+      Boulder County 0.9705 → <strong>0.9725</strong>, FEMA MAC 0.9273 → <strong>0.9109</strong>.
+      <strong>Two assessments over one fire is not a distribution</strong>, and it does not
+      overturn the paragraph above. What the <code>Direct</code>-scoped rule does have in its
+      favour outside California is the 66-fire table: non-California mean-fire F1
+      <strong>0.8986 → 0.9121</strong>, the one criterion where it beats the fixed cut
+      outright.</p>
     </div>
     <h3>Why no single rule can win</h3>
     <p>The states split into two shapes and the label-free signal that fixes one wrecks the

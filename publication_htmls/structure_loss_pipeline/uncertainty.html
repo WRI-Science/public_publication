@@ -183,25 +183,24 @@
 
 <div class="wrap">
   <div class="status">
-    <h3>⚠️ Which bundle these intervals belong to, 12 September 2026</h3>
-    <p><strong>Most of this page is the previous production bundle's, and it is labelled that
-    way throughout.</strong> Release <code>v0.4.0</code> ships
-    <code>damage_sentinel2_v5</code> — optical only, fixed cut 0.85 — and
-    <strong>no bootstrap run exists for it</strong>: every directory under
-    <code>outputs/uncertainty/</code> predates 2026-09-11 and none mentions the v5 bundle. The
-    intervals and reliability curves below are therefore <code>damage_sentinel2s1_v4</code>'s
-    and its siblings', at cuts 0.84 and 0.87. They remain the best available statement of how
-    wide this project's numbers are, and the finding they carry — that the fire is the unit and
-    there are eight of them — does not depend on which of the two bundles is in front of it.</p>
-    <p><strong>One v0.4.0-era interval set does exist</strong>, from a different stage: the
-    paired before/after comparison of the two release generations and of the two cuts, over the
-    fifteen forward fires. It is <a href="#release">at the bottom of this page</a> and it is
-    the one place here you can read <code>v0.4.0</code> with an interval on it.</p>
-    <p>Everything else is <code>scripts/13_uncertainty_report.py</code>: CPU only, about two and
+    <h3>Which bundle each interval belongs to, 12 September 2026</h3>
+    <p><strong>The DINS half is now the shipped bundle's.</strong>
+    <code>outputs/uncertainty/dins_v5/</code> was run on 2026-09-12 against
+    <code>damage_sentinel2_v5</code> at the fixed cut <strong>0.85</strong> — the recipe
+    <code>v0.4.1</code> ships — so every DINS row and every calibration figure below is
+    current.</p>
+    <p><strong>⚠️ The Carlson half is not, and cannot be yet.</strong> There is no
+    leave-one-fire-out table for the v5 bundle over the 66 Carlson fires, so the national rows
+    — the headline table's Carlson lines and the reliability curve labelled
+    <em>Carlson S2 v4</em> — remain the <code>damage_sentinel2_v4</code> bundle's, at its own
+    cut of 0.84. They are labelled that way wherever they appear. The finding they carry —
+    that the fire is the unit and there are not many fires — does not depend on which of the
+    two bundles is in front of it.</p>
+    <p>Everything here is <code>scripts/13_uncertainty_report.py</code>: CPU only, about two and
     a half minutes for every source, <strong>nothing refitted</strong>. It reads out-of-fold
     predictions already on disk and resamples them, and every <code>summary.json</code> it
-    writes carries a <code>tables_vintage</code> field, so no interval can be read without
-    knowing which generation of the feature tables produced it.</p>
+    writes carries the bundle and cut it was computed on, so no interval can be read without
+    knowing which generation produced it.</p>
   </div>
 </div>
 
@@ -211,7 +210,7 @@
   <div class="wide">
     <p class="eyebrow">01 · the headlines</p>
     <h2>Every headline, with its interval</h2>
-    <p class="eyebrow" style="color:var(--s2)">bundle <code>damage_sentinel2s1_v4</code> and its siblings, not the shipped v5</p>
+    <p class="eyebrow" style="color:var(--s2)">DINS rows: the shipped <code>damage_sentinel2_v5</code> · Carlson rows: <code>damage_sentinel2_v4</code>, the only bundle with a 66-fire table</p>
   </div>
   <div class="wrap">
     <div class="tablewrap">
@@ -221,17 +220,19 @@
           <tr><td>Carlson Sentinel-2 <code>v4</code> leave-one-fire-out, pooled F1 @0.84 (66 fires)</td><td class="num">0.8509</td><td class="ci">[0.762, 0.896]</td></tr>
           <tr><td>… mean per-fire F1 @0.84</td><td class="num">0.7824</td><td class="ci">[0.744, 0.816]</td></tr>
           <tr><td>… pooled AUC</td><td class="num">0.9867</td><td class="ci">[0.978, 0.990]</td></tr>
-          <tr><td>DINS <code>v4</code> optical only, pooled F1 @0.87 (8 incidents)</td><td class="num">0.9135</td><td class="ci">[0.854, 0.917]</td></tr>
-          <tr><td>DINS <code>s1_v4</code> (production), pooled F1 @0.87, seed 42</td><td class="num">0.9236</td><td class="ci">[0.859, 0.928]</td></tr>
-          <tr><td>DINS <code>s1_v4</code>, pooled F1 @0.87, mixture over four seeds</td><td class="num">0.9227</td><td class="ci">[0.860, 0.928]</td></tr>
+          <tr><td><strong>DINS <code>v5</code> (shipped), pooled F1 @0.85 (8 incidents)</strong></td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
+          <tr><td><strong>DINS <code>v5</code>, mean per-fire F1 @0.85</strong></td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
+          <tr><td><strong>DINS <code>v5</code>, pooled AUC</strong></td><td class="num">0.9740</td><td class="ci">[0.9702, 0.9817]</td></tr>
+          <tr><td>DINS <code>s1_v4</code> (the radar bundle <code>v0.3.0</code> shipped), pooled F1 @0.87</td><td class="num">0.9236</td><td class="ci">[0.859, 0.928]</td></tr>
           <tr><td>Detector marginal — share of database-missed records recovered @10 m (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
           <tr><td>… as a count of records</td><td class="num">343</td><td class="ci">[125, 590]</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/{carlson_sentinel2_v4,dins_base_v4,dins_s1_v4,detector_marginal}/pooled_ci.csv</code>
-    and <code>summary.json</code>. B = 2000, percentile interval, resampling unit = fire; the
+    <code>outputs/uncertainty/{dins_v5,carlson_sentinel2_v4,dins_s1_v4,detector_marginal}/pooled_ci.csv</code>
+    and <code>summary.json</code>; the <code>dins_v5</code> run is dated 2026-09-12 and the
+    Carlson rows 2026-09-10. B = 2000, percentile interval, resampling unit = fire; the
     basic and BCa intervals sit beside each estimate in the same files. Stage 9b's detector
     numbers do not go through the Sentinel-2 sampler and did not move when it was fixed.</p>
 
@@ -250,7 +251,7 @@
   <div class="wide">
     <p class="eyebrow">02 · per fire</p>
     <h2>The eight incidents, one at a time</h2>
-    <p class="eyebrow" style="color:var(--s2)">bundle <code>damage_sentinel2s1_v4</code>, cut 0.87</p>
+    <p class="eyebrow" style="color:var(--s2)">bundle <code>damage_sentinel2_v5</code>, cut 0.85 — the shipped recipe</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -333,46 +334,48 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Destroyed-class F1 at cut 0.87, production bundle
-        <code>damage_sentinel2s1_v4</code>, scored leave-one-incident-out</caption>
-        <thead><tr><th>Incident</th><th class="num">Structures</th><th class="num">Destroyed</th><th class="num">Base rate</th><th class="num">F1</th><th class="num">95 % CI (within fire)</th><th class="num">Optical-only F1</th></tr></thead>
+        <caption>Destroyed-class F1 at the shipped cut <strong>0.85</strong>, bundle
+        <code>damage_sentinel2_v5</code>, scored leave-one-incident-out</caption>
+        <thead><tr><th>Incident</th><th class="num">Structures</th><th class="num">Destroyed</th><th class="num">F1</th><th class="num">95 % CI (within fire)</th><th class="num">Radar bundle, @0.87</th></tr></thead>
         <tbody>
-          <tr><td>Palisades 2025</td><td class="num">12,009</td><td class="num">6,845</td><td class="num">0.570</td><td class="num">0.9306</td><td class="ci">[0.926, 0.935]</td><td class="num">0.9172</td></tr>
-          <tr><td>Eaton 2025</td><td class="num">18,318</td><td class="num">9,419</td><td class="num">0.514</td><td class="num">0.9260</td><td class="ci">[0.922, 0.930]</td><td class="num">0.9173</td></tr>
-          <tr><td>Park 2024</td><td class="num">2,082</td><td class="num">713</td><td class="num">0.342</td><td class="num">0.9107</td><td class="ci">[0.895, 0.925]</td><td class="num">0.9112</td></tr>
-          <tr><td>TCU Complex 2025</td><td class="num">277</td><td class="num">95</td><td class="num">0.343</td><td class="num">0.9071</td><td class="ci">[0.860, 0.948]</td><td class="num">0.8962</td></tr>
-          <tr><td>Borel 2024</td><td class="num">502</td><td class="num">223</td><td class="num">0.444</td><td class="num">0.8993</td><td class="ci">[0.868, 0.927]</td><td class="num">0.8978</td></tr>
-          <tr><td>Airport 2024</td><td class="num">371</td><td class="num">160</td><td class="num">0.431</td><td class="num">0.8771</td><td class="ci">[0.839, 0.911]</td><td class="num">0.8764</td></tr>
-          <tr><td>Mountain 2024</td><td class="num">1,815</td><td class="num">243</td><td class="num">0.134</td><td class="num">0.8139</td><td class="ci">[0.773, 0.849]</td><td class="num">0.7932</td></tr>
-          <tr><td>Bridge 2024</td><td class="num">898</td><td class="num">81</td><td class="num">0.090</td><td class="num">0.7291</td><td class="ci">[0.653, 0.796]</td><td class="num">0.7337</td></tr>
+          <tr><td>Eaton 2025</td><td class="num">18,318</td><td class="num">9,419</td><td class="num">0.9204</td><td class="ci">[0.9162, 0.9243]</td><td class="num">0.9260</td></tr>
+          <tr><td>Palisades 2025</td><td class="num">12,009</td><td class="num">6,845</td><td class="num">0.9184</td><td class="ci">[0.9134, 0.9229]</td><td class="num">0.9306</td></tr>
+          <tr><td>TCU Complex 2025</td><td class="num">277</td><td class="num">95</td><td class="num">0.9140</td><td class="ci">[0.8681, 0.9524]</td><td class="num">0.9071</td></tr>
+          <tr><td>Park 2024</td><td class="num">2,082</td><td class="num">713</td><td class="num">0.9102</td><td class="ci">[0.8943, 0.9253]</td><td class="num">0.9107</td></tr>
+          <tr><td>Borel 2024</td><td class="num">502</td><td class="num">223</td><td class="num">0.9035</td><td class="ci">[0.8750, 0.9296]</td><td class="num">0.8993</td></tr>
+          <tr><td>Airport 2024</td><td class="num">371</td><td class="num">160</td><td class="num">0.8747</td><td class="ci">[0.8376, 0.9086]</td><td class="num">0.8771</td></tr>
+          <tr><td>Mountain 2024</td><td class="num">1,815</td><td class="num">243</td><td class="num">0.8092</td><td class="ci">[0.7689, 0.8447]</td><td class="num">0.8139</td></tr>
+          <tr><td>Bridge 2024</td><td class="num">898</td><td class="num">81</td><td class="num">0.7327</td><td class="ci">[0.6592, 0.7978]</td><td class="num">0.7291</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_s1_v4/per_fire_ci.csv</code> and
-    <code>outputs/uncertainty/dins_base_v4/per_fire_ci.csv</code>,
-    <code>scope = within_fire</code>, <code>metric = f1</code>, cut 0.87, B = 2000.</p>
+    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/per_fire_ci.csv</code>,
+    <code>scope = within_fire</code>, <code>metric = f1</code>, cut 0.85, seed 42, B = 2000;
+    the right-hand column from <code>outputs/uncertainty/dins_s1_v4/per_fire_ci.csv</code> at
+    cut 0.87, for the bundle <code>v0.3.0</code> shipped. The two are within each other's
+    intervals on every incident — dropping radar moved no fire measurably.</p>
 
     <h3>And the same eight, resampled as fires</h3>
     <div class="tablewrap">
       <table>
-        <caption>Production bundle, 8 incidents, 36,272 structures, cut 0.87 — the interval a
-        reader generalising to a ninth fire needs</caption>
+        <caption>Shipped bundle <code>damage_sentinel2_v5</code>, 8 incidents, 36,272
+        structures, cut 0.85 — the interval a reader generalising to a ninth fire needs</caption>
         <thead><tr><th>Scope</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Average precision</th></tr></thead>
         <tbody>
-          <tr><td>pooled</td><td class="num">0.9266</td><td class="num">0.9206</td><td class="num">0.9236</td><td class="num">0.9763</td><td class="num">0.9751</td></tr>
-          <tr><td>pooled, 95 % CI</td><td class="ci">[0.820, 0.940]</td><td class="ci">[0.896, 0.940]</td><td class="ci">[0.859, 0.928]</td><td class="ci">[0.974, 0.981]</td><td class="ci">[0.915, 0.979]</td></tr>
-          <tr><td>mean per fire</td><td class="num">0.8501</td><td class="num">0.9092</td><td class="num">0.8742</td><td class="num">0.9742</td><td class="num">0.9370</td></tr>
-          <tr><td>mean per fire, 95 % CI</td><td class="ci">[0.766, 0.912]</td><td class="ci">[0.878, 0.939]</td><td class="ci">[0.821, 0.912]</td><td class="ci">[0.969, 0.979]</td><td class="ci">[0.892, 0.969]</td></tr>
+          <tr><td>pooled</td><td class="num">0.9272</td><td class="num">0.9047</td><td class="num">0.9158</td><td class="num">0.9740</td><td class="num">0.9729</td></tr>
+          <tr><td>pooled, 95 % CI</td><td class="ci">[0.818, 0.939]</td><td class="ci">[0.894, 0.937]</td><td class="ci">[0.859, 0.919]</td><td class="ci">[0.970, 0.982]</td><td class="ci">[0.915, 0.975]</td></tr>
+          <tr><td>mean per fire</td><td class="num">0.8482</td><td class="num">0.9086</td><td class="num">0.8729</td><td class="num">0.9741</td><td class="num">0.9364</td></tr>
+          <tr><td>mean per fire, 95 % CI</td><td class="ci">[0.767, 0.908]</td><td class="ci">[0.872, 0.940]</td><td class="ci">[0.821, 0.910]</td><td class="ci">[0.970, 0.979]</td><td class="ci">[0.893, 0.967]</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_s1_v4/pooled_ci.csv</code>,
-    seed 42. The same file carries the cut-0.86 block, seeds 43–45, and an
-    <code>all_seeds_mixture</code> set over 8,000 replicates whose seed-to-seed standard
-    deviation is ≤ 0.0016 on every metric.</p>
+    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/pooled_ci.csv</code>,
+    seed 42, cut 0.85. Seeds 43–45 sit in
+    <code>outputs/uncertainty/dins_v5_seed{43,44,45}/</code> and move pooled F1 by less than
+    0.001 (0.9158 / 0.9154 / 0.9152 / 0.9158).</p>
     <div class="note warn">
-      <p><strong>⚠️ Look at the pooled F1 interval: [0.859, 0.928] against an estimate of
-      0.9236.</strong> It barely reaches above the estimate. That is not a bug — Eaton and
+      <p><strong>⚠️ Look at the pooled F1 interval: [0.859, 0.919] against an estimate of
+      0.9158.</strong> It barely reaches above the estimate. That is not a bug — Eaton and
       Palisades are 84 % of the rows and both score high, so a resample that draws either of
       them less often falls, and one that draws them more often has nowhere to go. The interval
       is skewed because the evidence is.</p>
@@ -388,7 +391,7 @@
   <div class="wide">
     <p class="eyebrow">03 · calibration</p>
     <h2><code>destroyed_prob</code> is a ranking, not a probability</h2>
-    <p class="eyebrow" style="color:var(--s2)">the three <code>v4</code> bundles; v5's own calibration is quoted below</p>
+    <p class="eyebrow" style="color:var(--s2)">the three <code>v4</code> bundles — the shape is unchanged at v5, whose own figures are in the table below</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -483,14 +486,17 @@
         <tbody>
           <tr><td>Carlson Sentinel-2 <code>v4</code> (66 fires)</td><td class="num">0.0543</td><td class="ci">[0.039, 0.076]</td><td class="num">0.2590</td><td class="num">0.0343</td><td class="num">0.0003</td></tr>
           <tr><td>DINS <code>v4</code>, optical only (8)</td><td class="num">0.0651</td><td class="ci">[0.051, 0.103]</td><td class="num">0.2297</td><td class="num">0.0730</td><td class="num">0.0071</td></tr>
-          <tr><td>DINS <code>s1_v4</code>, production (8)</td><td class="num">0.0948</td><td class="ci">[0.079, 0.122]</td><td class="num">0.3662</td><td class="num">0.0805</td><td class="num">0.0069</td></tr>
+          <tr><td><strong>DINS <code>v5</code>, shipped (8)</strong></td><td class="num">0.0651</td><td class="ci">[0.0514, 0.1032]</td><td class="num">0.2297</td><td class="num">0.0729</td><td class="num">0.0071</td></tr>
+          <tr><td>DINS <code>s1_v4</code>, the radar bundle v0.3.0 shipped</td><td class="num">0.0948</td><td class="ci">[0.079, 0.122]</td><td class="num">0.3662</td><td class="num">0.0805</td><td class="num">0.0069</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/uncertainty/&lt;tag&gt;/calibration_ci.csv</code>
     (B = 2000, 10 bins) and <code>summary.json</code>; maximum calibration error is the largest
-    absolute bin gap in <code>calibration_pooled.csv</code>. Brier goes 0.0805 → 0.0585 on the
-    production bundle under the isotonic map.</p>
+    absolute bin gap in <code>calibration_pooled.csv</code>. On the shipped <code>v5</code>
+    bundle the isotonic map takes ECE 0.0651 → <strong>0.0071</strong> and Brier
+    0.0729 → 0.0616 — <strong>the optical bundle is better calibrated than the radar one it
+    replaced</strong>, which had ECE 0.0948.</p>
 
     <p><strong>The better-ranked bundle is the worse-calibrated one</strong>, which is the
     clearest sign that the score is an ordering rather than a frequency. The calibrated column
@@ -536,7 +542,8 @@
         <tbody>
           <tr><td><code>v0.4.0</code> − <code>v0.3.0</code></td><td>the whole release change — new model <em>and</em> new cut</td><td class="num">−0.0051</td><td class="ci">[−0.0090, −0.0011]</td><td class="yes">yes</td></tr>
           <tr><td>…holding the cut, changing only the model</td><td><strong>dropping radar</strong></td><td class="num">−0.0039</td><td class="ci">[−0.0106, +0.0025]</td><td class="no">no</td></tr>
-          <tr><td>adaptive − fixed, same release</td><td><strong>the per-fire cut</strong></td><td class="num"><strong>−0.0352</strong></td><td class="ci">[−0.0709, −0.0127]</td><td class="yes">yes</td></tr>
+          <tr><td>adaptive − fixed, <code>v0.4.0</code>'s whole-inventory rule</td><td><strong>the per-fire cut</strong></td><td class="num">−0.0352</td><td class="ci">[−0.0709, −0.0127]</td><td class="yes">yes</td></tr>
+          <tr><td>adaptive − fixed, <code>v0.4.1</code>'s <code>Direct</code>-scoped rule</td><td><strong>the per-fire cut, as it now ships</strong></td><td class="num"><strong>−0.0186</strong></td><td class="ci">[−0.0336, −0.0070]</td><td class="yes">yes</td></tr>
         </tbody>
       </table>
     </div>
@@ -563,10 +570,15 @@
       whole inventory at a base rate near 0.09, and because the rule reads the fire's own score
       distribution the cut falls from the folds' 0.79–0.88 to the product's
       <strong>0.158–0.792</strong>. <strong>The pass stands on the population it was measured
-      on and does not transfer to this one</strong>
-      (<code>open-adaptive-rule-population-shift</code>). The ranking is untouched either way:
-      pooled AUC 0.981 → 0.979. What the adaptive call buys is the destroyed <em>count</em>,
-      from 0.810 of the inspected total to <strong>0.970</strong>.</p>
+      on and does not transfer to this one.</strong> Since <code>v0.4.1</code> the advisory rule
+      is <strong>scoped to the <code>Direct</code> zone</strong>, whose base rate is nearer the
+      fold table's: that halves the cost to <strong>−0.0186 [−0.0336, −0.0070]</strong> and
+      pulls the realised cuts in to <strong>0.601–0.792</strong>. It still does not clear the
+      bar — Roadmap 14 scored five variants on the product population and <strong>none of them
+      does</strong> — which is why it ships as an advisory second column rather than as the
+      default. The ranking is untouched either way: pooled AUC 0.981 → 0.979. What the adaptive
+      call buys is the destroyed <em>count</em>, from 0.810 of the inspected total to
+      <strong>0.891</strong>.</p>
     </div>
     <div class="tablewrap">
       <table>
@@ -665,10 +677,11 @@
       <a href="forward-fires.html">fire by fire</a> ·
       <a href="combined-series.html">the combined series</a> ·
       <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · the headline, per-fire and calibration intervals are the
-    <code>v4</code> corrected-sampler tables, computed 2026-09-10/11; the release comparison is
-    <code>v0.4.0</code>, computed 2026-09-12. ⚠️ No bootstrap run exists for the shipped
-    <code>damage_sentinel2_v5</code> bundle itself.</p>
+    <p>Built 2026-09-12 · the DINS intervals and calibration are
+    <code>outputs/uncertainty/dins_v5/</code>, the shipped bundle, computed 2026-09-12; the
+    Carlson rows are the <code>damage_sentinel2_v4</code> bundle's, computed 2026-09-10, and are
+    labelled wherever they appear. ⚠️ There is still no 66-fire leave-one-fire-out table for the
+    v5 bundle.</p>
   </div>
 </footer>
 

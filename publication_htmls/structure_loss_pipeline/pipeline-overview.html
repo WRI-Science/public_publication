@@ -198,10 +198,11 @@
 
 <div class="wrap">
   <div class="status">
-    <h3>Status, 12 September 2026 — release <code>v0.4.0</code></h3>
+    <h3>Status, 12 September 2026 — release <code>v0.4.1</code></h3>
     <p><strong>Everything on this page is committed and on disk.</strong> Release
-    <code>v0.4.0</code> was cut on 2026-09-12 and applies four owner decisions taken the day
-    before:</p>
+    <code>v0.4.1</code> was cut on 2026-09-12. <code>v0.4.0</code> applied four owner decisions
+    taken the day before, and <code>v0.4.1</code> is a PATCH on top of it that changes only the
+    advisory column — <code>damage_class</code> is byte-identical between the two:</p>
     <ul class="tight">
       <li><strong>The series carries all of Carlson</strong> — 361 fires, 1,770,939 rows,
       2002–2022, verbatim, where it used to carry the five fires that happened to have a cached
@@ -211,20 +212,21 @@
       <code>damage_sentinel2_v5</code> — 62 optical features, no Sentinel-1 — at a fixed cut of
       <strong>0.85</strong>. It costs nothing measurable and removes a dependency.</li>
       <li><strong>A second loss call ships beside the first</strong>, cut per fire by a
-      label-free rule. <strong>It is advisory</strong>, and why is the most important thing on
+      label-free rule, <strong>scoped since <code>v0.4.1</code> to the <code>Direct</code>
+      zone</strong>. <strong>It is advisory</strong>, and why is the most important thing on
       this page: <a href="#population">a rule validated on the fold table does not transfer to
       the product</a>.</li>
       <li><strong>The licence is decided</strong> — MIT and CC BY 4.0, with the ODbL problem
       resolved by exclusion rather than by argument. Only the DOI is still open.</li>
     </ul>
-    <p><strong>Two corrections since the release was cut.</strong> The release reported the
-    adaptive column calling 17,735 structures destroyed, a ratio of 0.991; it is
-    <strong>17,362</strong> and <strong>0.970</strong>, because one fire's stale summary file
-    was summed instead of the product it ships. And the question the release left open — does
-    the cut rule clear its bar on the <em>product's</em> population? — is now answered:
-    <strong>no variant clears it and nothing changes</strong>
-    (<a href="#population">below</a>). A <code>v0.4.1</code> swapping the advisory column to the
-    best of them has not been cut.</p>
+    <p><strong>Two corrections after <code>v0.4.0</code>, both carried on this page.</strong>
+    Its adaptive column was reported as calling 17,735 structures destroyed, a ratio of 0.991;
+    that was an artefact of summing one fire's stale summary file, and the true figure for that
+    column was <strong>17,362</strong> and <strong>0.970</strong>. And the question it left open
+    — does the cut rule clear its bar on the <em>product's</em> population? — is answered
+    <strong>no, by none of five variants</strong> (<a href="#population">below</a>).
+    <code>v0.4.1</code> swapped the advisory column to the best of them, the
+    <code>Direct</code>-scoped cut.</p>
     <p><span class="pill flight">in flight</span> Roadmap 12 is still building eighteen
     retrospective 2016–2022 inventories, which are not series rows yet; Roadmap 13 is partly
     landed and not reported here. And two supporting outputs have <strong>not</strong> been re-run at
@@ -988,7 +990,8 @@
           <tr><td>what a row is</td><td>a CAL FIRE <strong>inspected</strong> structure</td><td>any structure in the inventory — most never inspected, out to 2.4 km from the perimeter</td></tr>
           <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
           <tr><td>base rate</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
-          <tr><td>cuts the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.158 – 0.792</strong></td></tr>
+          <tr><td>cuts the whole-inventory rule landed on (<code>v0.4.0</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.158 – 0.792</strong></td></tr>
+          <tr><td>cuts the <code>Direct</code>-scoped rule lands on (<code>v0.4.1</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
           <tr><td>what the bar's DINS criterion measured there</td><td class="num">+0.0029 / +0.0036 — no cost</td><td class="num">—</td></tr>
         </tbody>
       </table>
@@ -1045,9 +1048,7 @@
       applies it to every row: mean-fire F1 <strong>−0.0186 [−0.0336, −0.0070]</strong> against
       the fixed cut, a destroyed-count ratio of <strong>0.891</strong>, realised cuts
       0.601–0.792 instead of 0.158–0.792 — and it <em>gains</em> outside California, 0.8986 →
-      <strong>0.9121</strong> mean-fire F1. It is being swapped in as the advisory column in a
-      <code>v0.4.1</code> that has not been cut; until it is, the advisory column on this site
-      is the whole-inventory variant described above.</p>
+      <strong>0.9121</strong> mean-fire F1. <strong>It was swapped in on 2026-09-12 and is the advisory column this page now reports</strong> — <code>v0.4.1</code>, a PATCH whose <code>damage_class</code> is byte-identical to <code>v0.4.0</code>'s, so only the advisory column moved; its per-fire cuts were verified against the Stage 24 table on 15 of 15 fires.</p>
       <p>One check is worth keeping. Re-fitting the isotonic map leave-one-fire-out — the leak
       a reader would reasonably suspect — produces a variant that is <strong>bit-identical on
       204,797 of 204,797 inventory rows</strong>, because the product already reads each
@@ -1059,17 +1060,24 @@
     </div>
     <div class="note">
       <p><strong>And what the adaptive call buys is the count.</strong> Predicted destroyed over
-      the fifteen fires' whole inventories goes <strong>14,504 → 17,362</strong> against 17,902
-      inspected as destroyed — a ratio of <strong>0.810 → 0.970</strong>. So the two columns
+      the fifteen fires' whole inventories goes <strong>14,504 → 15,951</strong> against 17,902
+      inspected as destroyed — a ratio of <strong>0.810 → 0.891</strong>. So the two columns
       disagree in a legible way: the fixed cut is the better classifier per structure, and the
       adaptive cut gets the total right. The release notes reduce it to one line: <em>use
       <code>damage_class</code> to classify buildings; use <code>damage_class_adaptive</code> if
       you are counting them</em> — and say which column you used.</p>
-      <p>⚠️ Outside California the adaptive call is the better of the two on the one post-2022
-      non-California truth set that exists: South Fork NM 2024 goes
-      <strong>F1 0.8484 → 0.8825</strong>. On Marshall's two independent assessments it splits
-      (Boulder 0.9705 → 0.9727, FEMA MAC 0.9273 → 0.8901). Three assessments over two fires is
-      not a distribution.</p>
+      <p><strong>⚠️ South Fork has no advisory call at all.</strong> The
+      <code>Direct</code>-scoped rule needs a <code>Direct</code> zone, and South Fork is the
+      one product still on the legacy DINS-buffer frame — it has no perimeter, so no Direct
+      ring, so the rule falls back to the fixed cut and the two columns are the same number.
+      Its adaptive cell reads "—" rather than repeating the fixed one. <em>(The 0.8825 this
+      page carried before <code>v0.4.1</code> was the whole-inventory rule, which no longer
+      ships.)</em></p>
+      <p>On Marshall's two independent assessments the advisory call splits — Boulder County
+      0.9705 → <strong>0.9725</strong>, FEMA MAC 0.9273 → <strong>0.9109</strong>. Two
+      assessments over one fire is not a distribution. Where the <code>Direct</code>-scoped
+      rule does win outside California is the 66-fire table: non-California mean-fire F1
+      <strong>0.8986 → 0.9121</strong>.</p>
     </div>
   </div>
 </section>
@@ -1308,19 +1316,19 @@
           <tr><td>ICS-209 destroyed</td><td class="num">17,879</td><td>ICS-209 ÷ DINS all</td><td class="num">0.9992</td></tr>
           <tr><td>DINS destroyed, all categories</td><td class="num">17,893</td><td>ICS-209 ÷ DINS <strong>major</strong></td><td class="num"><strong>1.3696</strong></td></tr>
           <tr><td>DINS destroyed, major only</td><td class="num">13,054</td><td>ours (fixed) ÷ DINS all</td><td class="num">0.810</td></tr>
-          <tr class="total"><td>our predicted destroyed — fixed 0.85 / adaptive</td><td class="num">14,504 / 17,362</td><td>ours (fixed) ÷ DINS major</td><td class="num">1.111</td></tr>
+          <tr class="total"><td>our predicted destroyed — fixed 0.85 / adaptive</td><td class="num">14,504 / 15,951</td><td>ours (fixed) ÷ ICS-209</td><td class="num">0.811</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the three truth counts and the two ICS-209 ratios from
-    <code>outputs/ics209_check/summary.json</code>; <code>docs/outside-ca-truth.md</code> §1.
-    ⚠️ <b>That file is one release behind</b> — written 2026-09-11, its own prediction column is
-    the <code>v0.3.0</code> bundle at cut 0.87 — so our two counts come from
-    <code>outputs/combined_series/per_fire_summary.csv</code> and the
-    <code>ours ÷ DINS</code> ratios are those counts over the pooled DINS totals beside them.
-    The ICS-209 file records pooled DINS destroyed as 17,893 where
-    <code>forward_damage</code> records 17,902; neither file explains the nine-record
-    difference.</p>
+    <code>outputs/ics209_check/summary.json</code>, <strong>re-run on <code>v0.4.1</code></strong>
+    (2026-09-12), so its prediction column is current: 14,504 predicted destroyed against 17,879
+    ICS-209 is a ratio of <strong>0.811</strong>. 14 of the 15 fires matched an ICS-209 incident
+    — Coches 2 (9 destroyed) never reached the national situation report. The adaptive count
+    comes from <code>outputs/combined_series/per_fire_summary.csv</code>, which the ICS-209
+    check does not carry. ⚠️ That file records pooled DINS destroyed as 17,893 where
+    <code>outputs/forward_damage/metrics.json</code> records 17,902; neither file explains the
+    nine-record difference, and each ratio here uses its own file's denominator.</p>
 
     <div class="note warn">
       <p><strong>⚠️ In California the ICS-209 count is not independent of DINS, and the
@@ -1828,7 +1836,7 @@
     <h2>Releases, licence, and how to check one</h2>
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.4.0</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.4.1</code>, cut 2026-09-12</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">1,939,136 / <strong>1,922,889</strong></td></tr>
@@ -1837,17 +1845,19 @@
           <tr><td>pipeline rows (15 fires, 2024–2025)</td><td class="num">168,197 built, 151,950 released — 14,504 destroyed at the fixed cut</td></tr>
           <tr><td>rows with no damage call</td><td class="num">879 — all ceded to a later fire by the attribution rule</td></tr>
           <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
-          <tr><td>files / size / checksums</td><td class="num">18 / 2,163.6 MB / SHA-256, verified 17 of 17</td></tr>
-          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85</td></tr>
+          <tr><td>files / size / checksums</td><td class="num">18 / 2,166.3 MB / SHA-256, verified 17 of 17</td></tr>
+          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td><code>heterogeneity_warning</code></td><td class="num">null — computed, not asserted</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.0/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.0.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.1.
+    <code>v0.4.1</code> is a PATCH — <code>damage_class</code> is byte-identical to
+    <code>v0.4.0</code>'s, and only the advisory column and its threshold changed.</p>
     <p>Three release gates have to clear with no override before a version is not a prerelease:
     no <code>heterogeneity_warning</code>, no damage bundle older than the configured production
-    bundle, and no 2023+ fire without a damage call. <code>v0.4.0</code> clears all three.
+    bundle, and no 2023+ fire without a damage call. <code>v0.4.1</code> clears all three.
     ⚠️ It is a <strong>MINOR under the <code>major_zero</code> carve-out and would be a MAJOR
     after v1.0.0</strong>: four columns were added, <code>destroyed_threshold</code> went from
     one constant to a per-fire value, the production bundle changed, 356 fires were added, and
@@ -1911,8 +1921,10 @@
       <a href="outside-california.html">outside California</a>.
     </p>
     <p>Built 2026-09-12 · data as of release <code>v0.4.0</code> (2026-09-12). ⚠️ Two
-    supporting outputs are one release behind and are labelled where they appear: the bootstrap
-    interval tables (no v5 run exists) and the ICS-209 count check.</p>
+    ⚠️ Two things remain one bundle behind and are labelled where they appear: the
+    <strong>Carlson-side</strong> interval rows and the 66 <code>damage_*</code> maps, both of
+    which need a 66-fire leave-one-fire-out table for the v5 bundle that does not exist. The
+    DINS intervals and the ICS-209 check are current.</p>
   </div>
 </footer>
 

@@ -3,573 +3,164 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Structure Loss Pipeline</title>
-<meta name="description" content="Continuing the USGS Carlson structure-loss record past 2022 from public data: what the project is, and every published page with what it shows." />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<title>Structure Loss Pipeline — QA maps</title>
 <style>
-  :root {
-    --paper: #FAF8F3;
-    --paper-2: #F1EEE6;
-    --paper-3: #E9E4D8;
-    --ink: #23282D;
-    --ink-2: #4E555C;
-    --ink-3: #7C848C;
-    --rule: #DDD8CC;
-    --rule-2: #C8C1B0;
-    --s1: #2A62B0;   /* footprints / baseline */
-    --s2: #BF4415;   /* destroyed / this pipeline */
-    --s3: #0E9C86;   /* surviving / Carlson */
-    --s4: #B08300;   /* detector */
-    --s1-soft: #DCE4EF;
-    --s2-soft: #F5DFD5;
-    --s3-soft: #D5EDE7;
-    --s4-soft: #F2E8CC;
-    --good: #0ca30c;
-    --warn: #a5700a;
-    --crit: #c0392b;
-    --measure: 68ch;
-    --shell: 1140px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
-      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
-      --rule: #383D44; --rule-2: #4B525B;
-      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
-      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
-      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
-    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
-    --rule: #383D44; --rule-2: #4B525B;
-    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
-    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
-    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--paper); color: var(--ink);
-    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-    font-size: 17px; line-height: 1.62; margin: 0;
+    margin: 0; padding: 0 0 72px 0; background: #f6f6f4; color: #1c1c1c;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
   }
-  h1, h2, h3, h4 {
-    font-family: "Fraunces", Georgia, "Times New Roman", serif;
-    font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0;
+  header#pageTitle {
+    background: #1c1c1c; color: #fff; padding: 22px 24px 20px 24px; text-align: center;
   }
-  h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-variation-settings: "opsz" 144; }
-  h2 { font-size: clamp(1.5rem, 3vw, 1.95rem); }
-  h3 { font-size: 1.22rem; margin-top: 2.2rem; margin-bottom: 0.4rem; }
-  h4 { font-size: 1.02rem; margin-top: 1.6rem; margin-bottom: 0.3rem; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
-  p { margin: 0 0 1.05rem; }
-  a { color: var(--s1); text-underline-offset: 2px; }
-  a:focus-visible, button:focus-visible, th button:focus-visible {
-    outline: 2px solid var(--s2); outline-offset: 2px;
+  header#pageTitle h1 { margin: 0; font-size: 26px; font-weight: 650; }
+  header#pageTitle p {
+    margin: 6px 0 0 0; font-size: 14px; color: rgba(255,255,255,0.68);
   }
-  code, .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; font-size: 0.88em; }
-  code { background: var(--paper-2); padding: 0.08em 0.34em; border-radius: 3px; }
-  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 20px; }
-  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: 20px; }
-  .eyebrow {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
-    margin: 0 0 0.55rem;
+  main { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  h2 { font-size: 18px; margin: 28px 0 8px 0; }
+  p, li { font-size: 14px; }
+  table {
+    width: 100%; border-collapse: collapse; background: #fff; font-size: 13px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.14); font-variant-numeric: tabular-nums;
   }
-  .lede { font-size: 1.16rem; color: var(--ink-2); }
-  header.masthead { border-bottom: 2px solid var(--ink); padding-block: 3rem 1.6rem; }
-  header.masthead .kicker {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
-    margin: 0 0 1rem;
+  th, td { border: 1px solid #e2e2e0; padding: 5px 8px; text-align: right; }
+  th { background: #ecece9; font-weight: 700; }
+  th:first-child, td:first-child,
+  th:nth-child(2), td:nth-child(2) { text-align: left; }
+  td.na { color: #999; }
+  caption { caption-side: bottom; text-align: left; padding: 6px 2px; color: #555;
+    font-size: 12px; }
+  a { color: #1c5d99; }
+  footer { max-width: 1100px; margin: 32px auto 0 auto; padding: 0 20px;
+    color: #555; font-size: 12px; }
+  #nceasLogo {
+    position: fixed; left: 12px; bottom: 12px; z-index: 10;
+    display: inline-flex; align-items: center;
+    background: #1c1c1c; padding: 5px 8px; border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35); text-decoration: none;
   }
-  section.part { padding-block: 2.6rem 0.6rem; }
-  section.part + section.part { border-top: 1px solid var(--rule); }
-  .stack { display: flex; flex-direction: column; gap: 1rem; }
-  .grid { display: grid; gap: 1rem; }
-  /* ---- tables ---- */
-  .tablewrap { overflow-x: auto; margin: 1rem 0 0.2rem; border-block: 1px solid var(--rule); }
-  /* Tables and charts inside a prose column break out to the page shell so a
-     wide table is read rather than scrolled. The maths: the element is as wide
-     as the shell (or the viewport less its gutters), and the negative inline
-     margin re-centres it on the narrower parent. */
-  .wrap .tablewrap,
-  .wrap figure.band,
-  .wrap .tablewrap + .src {
-    --breakout: min(var(--shell), calc(100vw - 40px));
-    width: var(--breakout);
-    margin-inline: calc(50% - var(--breakout) / 2);
-  }
-  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
-  caption { caption-side: top; text-align: left; font-size: 0.95rem; color: var(--ink-2); padding-bottom: 0.5rem; }
-  th, td { text-align: left; padding: 0.42rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  thead th {
-    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
-    font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-2);
-    border-bottom: 1px solid var(--rule-2); position: sticky; top: 0;
-    background: var(--paper); white-space: nowrap;
-  }
-  tbody tr:last-child td { border-bottom: 0; }
-  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.86rem; }
-  tr.total td { font-weight: 600; border-top: 1px solid var(--rule-2); background: var(--paper-2); }
-  .src {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.73rem;
-    color: var(--ink-3); margin: 0.45rem 0 1.6rem; line-height: 1.5;
-    word-break: break-word;
-  }
-  .src b { font-weight: 500; color: var(--ink-2); }
-  /* ---- callouts ---- */
-  .note, .status {
-    background: var(--paper-2); border-left: 3px solid var(--rule-2);
-    padding: 0.9rem 1.1rem; margin: 1.3rem 0; font-size: 0.96rem;
-  }
-  .note.warn { border-left-color: var(--s2); background: var(--s2-soft); }
-  .note.ok { border-left-color: var(--s3); background: var(--s3-soft); }
-  .note p:last-child, .status p:last-child { margin-bottom: 0; }
-  .status { border-left-color: var(--s4); background: var(--s4-soft); }
-  .status h3 { margin-top: 0; font-size: 1.05rem; }
-  /* ---- charts ---- */
-  figure { margin: 1.6rem 0; }
-  figure.band { background: var(--paper-2); padding: 1.2rem 1.1rem 0.9rem; border-radius: 4px; }
-  figcaption { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.7rem; max-width: 72ch; }
-  svg { display: block; width: 100%; height: auto; }
-  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
-  svg text.tick { fill: var(--ink-3); font-size: 10px; }
-  svg text.val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px; }
-  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
-  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
-  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; font-size: 0.84rem; color: var(--ink-2); margin: 0.6rem 0 0; padding: 0; list-style: none; }
-  .legend li { display: flex; align-items: center; gap: 0.45em; }
-  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
-  img { max-width: 100%; height: auto; }
-  /* ---- misc ---- */
-  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.2rem; }
-  ul.tight li, ol.tight li { margin-bottom: 0.4rem; }
-  .pill {
-    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 0.12em 0.5em; border-radius: 2px; border: 1px solid currentColor;
-    vertical-align: 0.08em;
-  }
-  .pill.live { color: var(--good); }
-  .pill.flight { color: var(--warn); }
-  .pill.hist { color: var(--ink-3); }
-  footer.pagefoot { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: 0.9rem; }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-  @media (max-width: 560px) {
-    body { font-size: 16px; }
-    th, td { padding: 0.38rem 0.45rem; }
-  }
-  .doorway {
-    display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    margin: 1.8rem 0 0.4rem;
-  }
-  .doorway a {
-    display: block; text-decoration: none; color: inherit;
-    border: 1px solid var(--rule-2); border-radius: 4px; padding: 1rem 1.1rem;
-    background: var(--paper-2);
-  }
-  .doorway a:hover { border-color: var(--s2); }
-  .doorway .t { font-family: "Fraunces", Georgia, serif; font-size: 1.18rem; font-weight: 600;
-    display: block; margin-bottom: 0.35rem; color: var(--s1); }
-  .doorway a:hover .t { color: var(--s2); }
-  .doorway .d { font-size: 0.92rem; color: var(--ink-2); }
-  .doorway a.lead { background: var(--s2-soft); border-color: var(--s2); }
-  td.page { white-space: nowrap; }
-  td.page a { font-weight: 500; }
-  td.what { min-width: 22ch; }
-  td.date { white-space: nowrap; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.8rem; }
-  .headline-grid { display: grid; gap: 0.9rem;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin: 1.6rem 0 0.4rem; }
-  .headline-grid div { border-top: 2px solid var(--ink); padding-top: 0.55rem; }
-  .headline-grid .fig { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.5rem; line-height: 1.1; display: block; }
-  .headline-grid .cap { font-size: 0.83rem; color: var(--ink-2); display: block; margin-top: 0.3rem; }
+  #nceasLogo img { height: 20px; width: auto; display: block; }
 </style>
 </head>
 <body>
-
-<header class="masthead">
-  <div class="wrap">
-    <p class="kicker">WRI Science · public publication</p>
-    <h1>Structure Loss Pipeline</h1>
-    <p class="lede">A reproducible pipeline that finds the structures standing before a wildfire
-    and predicts which of them were destroyed, from public data only — so the USGS Carlson
-    structure-loss record (2002–2022) can be continued to the present and rolled forward as new
-    fires happen.</p>
-  </div>
+<header id="pageTitle">
+  <h1>Structure Loss Pipeline — QA maps</h1>
+  <p>Structure Loss Pipeline · QA maps</p>
 </header>
-
-<div class="wide">
-  <div class="headline-grid">
-    <div><span class="fig">1,922,889</span><span class="cap">structure rows in release <code>v0.4.0</code>, over 376 fires</span></div>
-    <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against CAL FIRE DINS, 15 fires</span></div>
-    <div><span class="fig">&kappa; 0.883</span><span class="cap">agreement with Carlson's own hand classification on 282,719 buildings</span></div>
-    <div><span class="fig">66 + 15</span><span class="cap">fires the damage model is cross-validated on, and fires the product has been run on</span></div>
-  </div>
-</div>
-
 <main>
 
-<section class="part">
-  <div class="wrap">
-    <p class="eyebrow">what this is</p>
-    <h2>The project in four paragraphs</h2>
+<h2>What this is</h2>
+<p>The <strong>Structure Loss Pipeline</strong> extends the USGS Carlson
+structure-loss record (2002–2022) to the present using public data only. It
+does two things in order: it finds the <strong>structures that stood before a
+wildfire</strong> — USA Structures footprints plus a U-Net run on 0.6&nbsp;m
+NAIP aerial imagery — and then predicts <strong>which of them were
+destroyed</strong>, from before / after Sentinel-2 and Landsat reflectance at
+each building. Every map below is one fire, drawn on satellite imagery so the
+predictions can be judged by eye rather than taken on trust.</p>
 
-    <p>The USGS Carlson building-loss dataset is a per-building census of what wildfires
-    destroyed in the conterminous United States between 2002 and 2022 — 361 fires, 1,770,939
-    rows, hand digitised. It is the reference layer for anyone modelling wildfire exposure, and
-    it stops at 2022. This project continues it with a pipeline that runs on public data only:
-    <strong>NAIP</strong> aerial imagery and the <strong>USA Structures</strong> and
-    <strong>Microsoft</strong> footprint databases to enumerate the buildings that stood before
-    a fire, then before-and-after <strong>Sentinel-2</strong> and <strong>Sentinel-1</strong>
-    at each building to decide which of them burned.</p>
+<h2>The two recall numbers</h2>
+<p>Detection accuracy is reported twice, and the pair is the point.
+<strong>Recall</strong> is the <em>product</em> number: of the buildings
+Carlson recorded, how many did the pipeline find? <strong>Recall given the
+point is inside a label</strong> is the <em>model</em> number: of Carlson's
+buildings that were actually inside a USA Structures training polygon, how many
+did the network find? An early version of this pipeline reported 55&nbsp;%
+recall, which turned out to be 88&nbsp;% on labelled buildings and 6&nbsp;% on
+unlabelled ones — a label-coverage result reported as a model result. Both are
+shown so nobody tunes the network to fix the labels.</p>
 
-    <p>The two halves are judged separately, against different truth sets, because they are
-    different mistakes. The inventory is scored against Carlson's <em>census</em> — which
-    enumerates every major building inside a fire's footprint, so a missing building is
-    measurable — and the loss call against CAL FIRE <em>inspections</em> of fires that happened
-    after Carlson ends, which is the only truly out-of-sample evidence that exists. The honest
-    summary of the first half is that the public footprint databases <strong>are</strong> the
-    product and our detector is slightly better than them: it recovers 343 buildings across
-    fifteen fires, 3.5 % of what those databases missed. The honest summary of the second is
-    that the loss call is good — mean per-fire F1 0.783 against the inspection record, κ 0.883
-    against Carlson's own hand classification — and that the evidence behind it is
-    <strong>eight California fires</strong>, two of which hold 84 % of the structures.</p>
+<h2>Detections vs Carlson</h2>
+<p><em>No detections maps yet — stage 3 output not found.</em></p>
 
-    <p>The output is one layer on one schema, one row per structure per fire, with Carlson's
-    rows and ours side by side and a field only one era can fill left null on the other rather
-    than back-filled. Every row carries a continuous destroyed probability, the threshold behind
-    the call, the frame and exposure class the structure sat in, and per-row provenance saying
-    which layer found it and which model scored it. Release <code>v0.4.0</code> carries
-    <strong>all 361 Carlson fires</strong> — 1,770,939 rows, 2002–2022, verbatim — beside our
-    fifteen, and releases 1,922,889 of them. MIT for the code, CC BY 4.0 for the data,
-    copyright Carlo Broderick.</p>
+<h2>Damage calls</h2>
+<p><em>No damage maps yet — stages 6 and 7 have not written <code>oof_predictions.gpkg</code> / <code>predictions.gpkg</code>.</em></p>
 
-    <p>Two rules shape everything here. <strong>No attribute of the fire itself ever reaches the
-    model</strong> — not size, perimeter, dNBR, region, state or year — so a loss call is never
-    a restatement of the fire's own attributes; perimeters decide where to look and never what
-    to predict. And <strong>every promotion bar is written down before the number that would
-    clear it is measured</strong>, which is why this site publishes results that point away from
-    what shipped. Two of them are on this site now: a component of the production model that
-    stopped clearing its own promotion rule and was <em>removed</em> because of it, and a cut
-    rule that cleared a pre-registered bar, was adopted, and then <em>did not transfer to the
-    product</em> — so it ships as a second column with the reason written down rather than
-    quietly replacing the first.</p>
-  </div>
-</section>
+<h2>Inventory / roll-forward</h2>
+<p>The two tables above measure the pieces. This one is the whole product on
+one fire: build the pre-fire structure inventory from public data, call the
+damage, and check both against an answer sheet that arrived after the models
+were trained. <strong>Detection recall</strong> asks whether the inventory even
+knew the building was there; the damage columns ask whether it called the
+outcome right, on the buildings it did know about. A high damage score on an
+inventory that missed a third of the buildings is not a working product, so the
+two are always shown side by side.</p>
+<table>
+  <caption>Stage 4 / 8 (<code>04_build_structure_inventory.py</code>,
+  <code>08_roll_forward.py</code>). The product itself: the pre-fire structure
+  inventory for one unit, and — where the unit has been scored — its damage
+  calls. Detection recall and coverage are the share of the answer sheet's
+  points with an inventory point within the match radius. Read straight from
+  each unit's <code>summary.json</code>.</caption>
+  <tr><th>Unit</th><th>Year</th><th>Map</th><th>Inventory n</th>
+  <th>USA Structures</th><th>U-Net only</th><th>NAIP</th><th>Checked against</th>
+  <th>Detection recall</th><th>Called destroyed</th><th>Damage AUC</th>
+  <th>Damage F1</th><th>Carlson cov. USS</th><th>Carlson cov. union</th>
+  <th>MB</th></tr>
+  <tr><td>Franklin  Perimeter Fire (2024 CAL FIRE incident)</td><td>2024</td><td><a href="inventory_DINS_2024_FRANKLIN__perimeter.html">map</a></td><td>3,004</td><td>2,595</td><td>103</td><td>2022</td><td>CAL FIRE DINS</td><td>0.726</td><td>35 @ 0.87</td><td>0.950</td><td>0.273</td><td class="na">—</td><td class="na">—</td><td>0.3</td></tr><tr><td>Palisades  Perimeter Fire (2025 CAL FIRE incident)</td><td>2025</td><td><a href="inventory_DINS_2025_PALISADES__perimeter.html">map</a></td><td>28,837</td><td>26,282</td><td>286</td><td>2022</td><td>CAL FIRE DINS</td><td>0.780</td><td>5,712 @ 0.87</td><td>0.980</td><td>0.938</td><td class="na">—</td><td class="na">—</td><td>1.5</td></tr></table>
 
-<section class="part">
-  <div class="wrap">
-    <p class="eyebrow">start here</p>
-    <h2>Two ways in</h2>
-    <div class="doorway">
-      <a class="lead" href="pipeline-overview.html">
-        <span class="t">Project overview — the deep dive →</span>
-        <span class="d">What the product is, how both halves are built, and the quantified
-        relationship to every other dataset that covers the same buildings: the footprint
-        databases, CAL FIRE DINS, the Carlson record, ICS-209, and the two fires outside
-        California with truth sets of their own. Written for a remote-sensing or ML reader.</span>
-      </a>
-      <a href="how-it-works.html">
-        <span class="t">How it works, in plain language →</span>
-        <span class="d">The same method with no jargon: why a loss count is only as good as the
-        inventory it starts from, how a network learns to see a roof, and what a
-        before-and-after satellite pair can and cannot tell you about a building.</span>
-      </a>
-    </div>
-  </div>
-</section>
+<h2>How good is the answer sheet?</h2>
+<p>Every recall number above is measured against the USGS Carlson points or
+the CAL FIRE DINS inspections. <a href="point_dataset_audit.html">The
+point-dataset audit</a> measures those two datasets themselves — where they
+place a point relative to a building footprint, whether they duplicate
+structures, and how well they agree with <em>each other</em> on the same
+burned buildings — and is why detection is matched at 20&nbsp;m rather than
+5&nbsp;m. It is written by <code>scripts/qa_point_datasets.py</code>, which
+does not read anything the pipeline produced.</p>
 
-<section class="part">
-  <div class="wrap">
-    <p class="eyebrow">status</p>
-    <h2>Where the project is, 12 September 2026</h2>
-    <div class="status">
-      <p><strong>Published here is release <code>v0.4.0</code>, cut 2026-09-12 and
-      committed.</strong> The production recipe behind every number on this site is the detector
-      <code>seg_all_v4</code> on each fire's own public-perimeter frame, the damage bundle
-      <code>damage_sentinel2_v5</code> — optical only, no radar — and a fixed cut of
-      <strong>0.85</strong>.</p>
-      <p><strong>What changed from <code>v0.3.0</code>, all four of it owner decisions:</strong></p>
-      <ul class="tight">
-        <li><strong>The series carries all of Carlson</strong> — 361 fires and 1,770,939 rows,
-        2002–2022, verbatim, where it used to carry the five that happened to be cached. Two new
-        flag columns mark what would break a naive count on that half.</li>
-        <li><strong>Radar left production.</strong> It no longer cleared the rule that put it
-        there, and removing it costs nothing measurable: −0.0039 mean-fire F1 on an interval
-        that includes zero.</li>
-        <li><strong>A second loss call ships beside the first</strong>, cut per fire.
-        <strong>It is advisory.</strong> The rule cleared a pre-registered bar on the fold
-        tables and then cost 0.035 mean-fire F1 on the product, because the two are different
-        populations — the <a href="pipeline-overview.html#population">deep dive</a> is where
-        that story is told, and it is the most important caveat on this site.</li>
-        <li><strong>The licence is decided</strong> — MIT and CC BY 4.0, copyright Carlo
-        Broderick, with the ODbL problem resolved by dropping the affected rows rather than
-        arguing about them. The DOI is the only open item.</li>
-      </ul>
-      <p><strong>Two corrections since the release was cut, both published here rather than
-      quietly applied.</strong> The release reported the adaptive column calling 17,735
-      structures destroyed, a ratio of 0.991 against the inspected total; it is
-      <strong>17,362</strong> and <strong>0.970</strong> — the release summed one fire's stale
-      summary file instead of the product it ships. And the open question the release left —
-      does the cut rule clear its bar on the <em>product's</em> population rather than the fold
-      table's? — has been answered: <strong>no candidate clears it, and nothing changes.</strong>
-      The best variant scopes the cut to the <code>Direct</code> zone and is being swapped in as
-      the advisory column in a <code>v0.4.1</code> that has not been cut yet.
-      <span class="mono">(<code>outputs/operating_product/</code>,
-      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>.)</span></p>
-      <p><span class="pill flight">in flight</span> <code>v0.4.1</code> will swap the advisory
-      column. Roadmap 12 is still building eighteen retrospective 2016–2022 inventories, which
-      are not series rows yet; Roadmap 13 is partly landed and not reported here. And two supporting outputs are <strong>one release behind</strong> and
-      are labelled wherever they appear: there is <strong>no bootstrap run for the v5
-      bundle</strong>, so the interval tables are its predecessor's, and the
-      <strong>ICS-209 count check</strong> still holds the <code>v0.3.0</code> predictions.</p>
-      <p><strong>Every number on this site names the file it came from</strong>, in a source
-      line under the table that uses it. Where a published claim is known to have moved, the
-      older number is kept beside the newer one rather than deleted.</p>
-    </div>
-  </div>
-</section>
+<h2>How it works, in plain language</h2>
+<p><a href="how-it-works.html">Structure Loss Pipeline, Explained</a> is the
+non-technical account of the two jobs: building the pre-fire inventory
+(footprints as the product, the detector as a gap-filler, triage instead of
+deletion) and deciding which structures burned (Sentinel-2 and Sentinel-1
+before and after, one probability per structure, a fixed cut), with the
+numbers behind each step and what they cannot do.</p>
 
-<section class="part">
-  <div class="wide">
-    <p class="eyebrow">the inventory</p>
-    <h2>Every page published here</h2>
-  </div>
-  <div class="wrap">
-    <p>Three kinds of page. <strong>Reports</strong> are hand-written and carry the argument;
-    <strong>read-outs</strong> are generated by a QA script from the pipeline's own output files
-    and recompute nothing; <strong>maps</strong> are one self-contained Leaflet page per fire,
-    drawn on satellite imagery so a prediction can be judged by eye rather than taken on
-    trust.</p>
-  </div>
-  <div class="wide">
-    <div class="tablewrap">
-      <table>
-        <caption>Reports — written for this publication, 2026-09-12</caption>
-        <thead><tr><th class="page">Page</th><th class="what">What it shows</th><th>In detail</th><th class="date">Data date</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="page"><a href="pipeline-overview.html">pipeline-overview.html</a></td>
-            <td class="what">The project, end to end</td>
-            <td>What the product is and who it is for; both halves of the method at a
-            remote-sensing reader's level; the frame, the exposure class and the three eras;
-            one quantified section per comparison dataset; what was tried and rejected; known
-            limitations; releases and licence.</td>
-            <td class="date">v0.4.0<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="forward-fires.html">forward-fires.html</a></td>
-            <td class="what">Every fire, scored</td>
-            <td>A sortable table of all seventeen fires the pipeline has produced a loss call
-            for — the fifteen in the series plus South Fork NM and Marshall CO — with both
-            destroyed counts, the per-fire adaptive cut, detection recall, P / R / F1 at 10 m
-            and 20 m, AUC and a link to each fire's map. Carries the two-cuts explanation and
-            the three-totals caveat.</td>
-            <td class="date">v0.4.0<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="combined-series.html">combined-series.html</a></td>
-            <td class="what">The dataset itself</td>
-            <td>What is inside release <code>v0.4.0</code>: rows per era across all 376 fires,
-            every fire's structure and destroyed counts fixed and adaptive, the ODbL exclusion
-            per fire, our count against the inspectors' and the incident commander's, the
-            Carlson-vs-us comparability table, the two flags on Carlson's own release, and the
-            six ways the two halves are not equivalent.</td>
-            <td class="date">v0.4.0<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="uncertainty.html">uncertainty.html</a></td>
-            <td class="what">How wide the numbers are</td>
-            <td>A fire-level cluster bootstrap on every headline; per-incident intervals;
-            reliability diagrams showing the score is over-confident in 29 of 30 bins; the three
-            paired comparisons that changed the reading of a decision already made — including
-            the <code>v0.3.0</code> → <code>v0.4.0</code> release change; and why nothing here
-            is yet a forward hold-out. ⚠️ The interval tables are the <em>previous</em> bundle's:
-            no bootstrap run exists for <code>damage_sentinel2_v5</code>.</td>
-            <td class="date">v4 tables 2026-09-10/11<br>release comparison 2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="outside-california.html">outside-california.html</a></td>
-            <td class="what">Where it travels, and where it does not</td>
-            <td>Sixty-six fires in eleven states; the region contrast with intervals; thirteen
-            label-free cut rules against a bar written first, fully nested — and then what
-            happened when the winning rule met the product; what per-structure truth actually
-            exists outside California (mostly: none); South Fork NM end to end; and the pre-2016
-            era penalty measured on Landsat.</td>
-            <td class="date">2026-09-10/11,<br>product comparison 2026-09-12</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<h2>What the pipeline adds, on fires it never saw</h2>
+<p>The detection table above is the training fires. <a
+href="detection_vs_dins.html">What the detector adds to the footprints</a> is
+the out-of-sample counterpart, and it asks the harder question: with the public
+footprint databases (USA Structures ∪ Microsoft) as the <em>baseline</em>, what
+does this pipeline add to them? On fifteen 2023–2025 CAL FIRE DINS incidents
+the detector never saw, matched one-to-one at 10&nbsp;m, that marginal
+contribution is 343 structures — 0.9 points of recall, 3.5&nbsp;% of what the
+databases missed — concentrated on the rural fires where the databases are
+worst. The same page carries the damage model's leave-one-incident-out table
+(v1 against v2) and the operating-point rules, the record of every lever tried
+against the rural gap, the legacy 20&nbsp;m recipe-by-recipe recall table, and
+NAIP crops of what each recipe <em>missed</em> with the detector's probability
+raster drawn over the imagery. It is written by
+<code>scripts/qa_detection_report.py</code> from
+<code>09_validate_detection_vs_dins.py</code>,
+<code>09b_structure_metrics.py</code> and
+<code>10_damage_operating_point.py</code> output.</p>
 
-    <div class="tablewrap">
-      <table>
-        <caption>Explainers and read-outs</caption>
-        <thead><tr><th class="page">Page</th><th class="what">What it shows</th><th>In detail</th><th class="date">Data date</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="page"><a href="how-it-works.html">how-it-works.html</a></td>
-            <td class="what">The method, in plain language</td>
-            <td>The general-audience explainer: the inventory problem, how the detector is
-            trained and what its ignore mask and footprint prior are for, what a before/after
-            reflectance pair can see, and a glossary. ⚠️ <strong>It describes the
-            <code>v0.3.0</code> recipe</strong> — radar in the model, one fixed cut at 0.87 —
-            and both halves of that are now out of date. The method it explains is unchanged;
-            the bundle it names is not.</td>
-            <td class="date">2026-09-09<br>needs a refresh</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="detection_vs_dins.html">detection_vs_dins.html</a></td>
-            <td class="what">Every detector recipe, side by side</td>
-            <td>The full Stage-9 read-out: 20 fires × 30 inventory recipes, led by the marginal
-            metric — what the detector adds over the public footprints at 10 m — plus the
-            levers that were tried against the rural gap and what each was worth, and rendered
-            crop grids of the misses, the calls and random windows. Its damage section is the
-            <code>v2</code> optical baseline, kept as the comparison every later damage number
-            is measured against.</td>
-            <td class="date">regenerated<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="point_dataset_audit.html">point_dataset_audit.html</a></td>
-            <td class="what">How good the answer sheets are</td>
-            <td>Audits the <em>truth</em>, not the model: how Carlson and CAL FIRE DINS place
-            their points against pre-fire footprints, whether either double-counts within a
-            fire, how well the two agree with each other, and therefore why validation matches
-            at 20 m. Reads nothing the pipeline produced.</td>
-            <td class="date">regenerated<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="camp_qa_ms_v2.html">camp_qa_ms_v2.html</a></td>
-            <td class="what">Microsoft v2 against USA Structures, on Camp 2018</td>
-            <td>The footprint-source comparison behind the licence decision: official Microsoft
-            US Building Footprints v2 against FEMA/ORNL USA Structures against Carlson's points
-            on the 2018 Camp Fire, with Microsoft's own capture dates shown. Comparison only —
-            it never changed a training label. Kept because it is the evidence for excluding the
-            ODbL-licensed rows from the released package.</td>
-            <td class="date">2026-09-03</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<h2>Reading the maps</h2>
+<ul>
+  <li>Each map opens on a dense detail window. The <em>Jump</em> buttons move
+  between windows; the fire-wide grid button zooms out and turns on a coarse
+  grid covering every point in the fire.</li>
+  <li>The circled <strong>i</strong> at the top left opens a plain-language
+  explainer: a glossary, what each layer is, where it came from, and exactly
+  how much of the fire is drawn in detail.</li>
+  <li>The headline numbers stay on screen, bottom left, with every panel
+  closed.</li>
+</ul>
 
-    <div class="tablewrap">
-      <table>
-        <caption>Maps — one page per fire, generated by <code>scripts/qa_maps.py</code></caption>
-        <thead><tr><th class="page">Group</th><th class="num">Pages</th><th>What each shows</th><th class="date">Data date</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="page"><code>inventory_&lt;fire&gt;__perimeter.html</code></td>
-            <td class="num">15</td>
-            <td><strong>The product itself.</strong> The pre-fire inventory for one forward
-            fire on its own public-perimeter frame, coloured by predicted destroyed probability
-            and checked against the CAL FIRE DINS inspections. <strong>Rebuilt at
-            <code>v0.4.0</code></strong>, so the calls drawn are the shipped ones. Linked per
-            fire from the <a href="forward-fires.html">fire-by-fire page</a>.</td>
-            <td class="date">v0.4.0<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="inventory_CO_2021_MARSHALL.html"><code>inventory_CO_2021_MARSHALL.html</code></a></td>
-            <td class="num">1</td>
-            <td>Marshall CO 2021 — the only fire in the project with two independent
-            per-structure assessments nobody here drew, and the fire that bounds Carlson's own
-            label noise. Rebuilt at <code>v0.4.0</code>. Not a series row; it is in Carlson's
-            era.</td>
-            <td class="date">v0.4.0<br>2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><a href="inventory_CA_2018_CAMP.html"><code>inventory_CA_2018_CAMP.html</code></a></td>
-            <td class="num">1</td>
-            <td>Camp 2018 — the training fire the detector is hardest on (Paradise's small
-            homes under dense canopy), and the demonstration of what the detector adds over the
-            footprint database. Rebuilt 2026-09-12.</td>
-            <td class="date">2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><code>damage_&lt;fire&gt;_sentinel2_v4.html</code></td>
-            <td class="num">66</td>
-            <td>Leave-one-fire-out damage calls on each Carlson training fire, coloured true
-            positive / false positive / false negative / true negative, on the
-            <strong>corrected-sampler</strong> feature tables. These are the visual behind the
-            era and generalization tables. ⚠️ <strong>Still the <code>v4</code> bundle</strong>:
-            <code>damage_sentinel2_v5</code> has no 66-fire out-of-fold layer, so the QA script
-            cannot draw them at <code>v0.4.0</code>.</td>
-            <td class="date">v4 bundle<br>2026-09-10</td>
-          </tr>
-          <tr>
-            <td class="page"><code>detection_crops/</code></td>
-            <td class="num">482</td>
-            <td>Rendered image grids referenced by the detection read-out: the records a recipe
-            missed, the inventory points it called, and random windows anywhere in the frame —
-            on a fixed seed, so two recipes can be read tile by tile on the same ground.</td>
-            <td class="date">2026-09-12</td>
-          </tr>
-          <tr>
-            <td class="page"><code>point_audit/</code></td>
-            <td class="num">10</td>
-            <td>Image grids for the point-dataset audit.</td>
-            <td class="date">2026-09-12</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>What was removed on 2026-09-12, and why:</b> 199 pages produced by
-    superseded pipelines — 100 Landsat damage maps and 66 Sentinel-2 damage maps built through
-    the defective read window that <code>road-7</code> fixed, 16 pre-fix out-of-sample checks,
-    8 maps of a damage bundle superseded twice over, 5 detection maps from a detector two
-    versions behind the frozen one, 2 inventory maps on the retired DINS-buffer frame, and 2
-    Camp comparison maps whose framing predates the footprint baseline. Git history keeps every
-    one of them. The reasoning per file is in <code>docs/publication-inventory.md</code> in the
-    pipeline repository.</p>
-  </div>
-</section>
-
-<section class="part">
-  <div class="wrap">
-    <p class="eyebrow">provenance</p>
-    <h2>Where the numbers come from</h2>
-    <p>Every figure on this site is transcribed from a file the pipeline wrote — a
-    <code>metrics.json</code>, a <code>summary.json</code>, a per-fire CSV or a release
-    manifest — and the source line under each table names it. Nothing on these pages is
-    recomputed, and nothing is recalled from memory. The internal record behind them is the
-    project's dated change log and an experiment ledger with one row for every idea,
-    experiment, data source and decision, including the ones that failed; both live in the
-    pipeline repository alongside the scripts that produced every output cited here.</p>
-    <div class="tablewrap">
-      <table>
-        <caption>The inputs, all public</caption>
-        <thead><tr><th>Role</th><th>Dataset</th><th>Licence</th></tr></thead>
-        <tbody>
-          <tr><td>Structure labels and inventory source</td><td>FEMA / ORNL <strong>USA Structures</strong></td><td>CC BY 4.0</td></tr>
-          <tr><td>Imagery for detection</td><td><strong>NAIP</strong> 0.6 m 4-band</td><td>public domain</td></tr>
-          <tr><td>Before/after imagery</td><td><strong>Sentinel-2 L2A</strong> (2016+), <strong>Sentinel-1 RTC</strong>, <strong>Landsat Collection 2 L2</strong></td><td>open</td></tr>
-          <tr><td>Training and validation labels</td><td><strong>Carlson et al. 2025</strong>, USGS structure-loss points 2002–2022, doi:10.5066/P1QX6UXD</td><td>CC0</td></tr>
-          <tr><td>Out-of-sample labels</td><td><strong>CAL FIRE DINS</strong> damage inspections</td><td>public</td></tr>
-          <tr><td>Prior band and inventory source — never a training label</td><td><strong>Microsoft US Building Footprints v2</strong></td><td>ODbL — excluded from the released package</td></tr>
-          <tr><td>Count-level validation, never a model input</td><td><strong>ICS-209</strong> structures destroyed, 2007–2026, doi:10.6084/m9.figshare.33406060.v2</td><td>CC BY 4.0</td></tr>
-          <tr><td>Per-structure truth outside California — scored against, never re-published</td><td><strong>FEMA US&amp;R</strong> (Ruidoso NM 2024); <strong>Boulder County</strong> and <strong>FEMA MAC</strong> (Marshall CO 2021)</td><td>⚠️ none stated</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>README.md</code> §"Data sources";
-    <code>docs/data-provenance.md</code>; <code>docs/licence-decision.md</code>;
-    <code>docs/outside-ca-truth.md</code> §2.</p>
-  </div>
-</section>
-
-</main>
-
-<footer class="pagefoot">
-  <div class="wrap">
-    <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0, copyright Carlo Broderick; no DOI has
-    been minted yet. Analysis follows the NCEAS Coding-Agent Rules for Data Science — literate
-    scripts, one settings block, explicit filters, archive rather than delete, and a dated
-    change record.</p>
-    <p>Pages built 2026-09-12 from release <code>v0.4.0</code> (2026-09-12). Two
-    supporting outputs are one release behind and are labelled where they appear.</p>
-  </div>
+<footer>
+  <p>Generated 2026-09-11 14:52:33 PDT by <code>scripts/qa_maps.py</code> from
+  <code>/home/shares/wwri-wildfire/structure_loss_pipeline/outputs/validate_carlson</code>, <code>/home/shares/wwri-wildfire/structure_loss_pipeline/models</code>
+  and <code>/home/shares/wwri-wildfire/structure_loss_pipeline/outputs/dins_check</code>. Maps are self-contained HTML: the
+  data is embedded, only the Leaflet library and the Esri basemap tiles are
+  fetched. Published at <a href="https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/">https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/</a>.</p>
+  <p>Data: USGS Carlson et al. 2025 (doi:10.5066/P1QX6UXD) · FEMA / ORNL USA
+  Structures · USDA NAIP · Sentinel-2 · Landsat · CAL FIRE DINS. Built at
+  <a href="https://www.nceas.ucsb.edu/">NCEAS</a>, UC Santa Barbara.</p>
 </footer>
 
+</main>
+<a id="nceasLogo" href="https://www.nceas.ucsb.edu/" target="_blank" rel="noopener noreferrer" title="National Center for Ecological Analysis and Synthesis"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTA3IiBoZWlnaHQ9Ijk2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMDcgOTQuMzUxVjk2SDB2LTEuNjQ5aDEwN3ptLTIuMzY4LTI2LjMxMWMyLjE3MyAxLjc1MS0uMTMgNC41MjEtMi4wNDcgMy4xMi0yLjM2NS0xLjQ5Ni03LjczNi0yLjE5Ny04LjQwNyAxLjExNS0uODYzIDUuMjIyIDEzLjA0MyAyLjIzIDEyLjgyIDEwLjctLjIyNSA4LjA4OC0xMS45ODkgOC4yNzktMTYuNDAxIDQuNjQ5LTEuMDU1LS44Ni0xLjAyMy0yLjI2Mi0uNDQ4LTMuMTIxLjgzMS0uODI4IDEuNzU4LTEuMTE0IDIuODQ1LS4yMjMgMi42MjEgMS43ODQgOS4zNjggMy4xMiA5Ljg0Ny0xLjQwMS0uNDE2LTQuNzEzLTEzLjcxNC0xLjg3OS0xMi43MjQtMTAuOTIzLjczNi02LjE3NiAxMC4xMDMtNy4yOTIgMTQuNTE1LTMuOTE2em0tNjkuNzItMS40MzNjMi43ODEgMCA0Ljk4Ny44MjcgNy4zMiAyLjgzNC44NjQuNzk2Ljk2IDIuMTk3LjA5NyAzLjA4OS0uODYzLjc2NC0yLjE3NC42NjktMi45NDItLjA5Ni0xLjMxLTEuMzY5LTIuNjUzLTEuNzUxLTQuNDc1LTEuNzUxLTQuOTIzIDAtNy4yOSAzLjQ3MS03LjI5IDcuMzU2IDAgMy45NDkgMi4zMzUgNy41NzkgNy4yOSA3LjU3OSAxLjgyMiAwIDMuNTE2LS43MzMgNC45ODctMi4wMzguOTkxLS43NjUgMi4zNjYtLjM4MyAyLjk0LjM4Mi41MTMuNy43NjggMS44NzktLjM1IDIuOTkzLTIuMjM4IDIuMDctNC45MjQgMi40ODQtNy41NzcgMi40ODQtNy43MzcgMC0xMS4yMjEtNS4yNTUtMTEuMjIxLTExLjQgMC02LjE0NiAzLjg2OC0xMS40MzIgMTEuMjItMTEuNDMyem00My40MSAxLjY4N2w5LjAxNiAxNy44NjVjMS4zMSAyLjQ4My0yLjU1OCA0LjQ1OC0zLjcwOCAxLjk3NGwtMS40MDctMi44MDJINzAuNDI2bC0xLjM3NCAyLjgwMmMtLjUxMiAxLjA4My0xLjY5NSAxLjMwNi0yLjg0NSAxLjA4My0xLjAyNC0uNTc0LTEuNjYzLTEuNzItMS4wMjQtMy4wNTdsOS4xNzUtMTcuODY1Yy44NjQtMS42ODcgMy4xNjUtMS43NSAzLjk2NSAwem0tNTkuMjY1LTEuNGMxLjE1MSAwIDIuMjcgMS4xNDYgMi4yNyAyLjE5N3YxNy45MjhjMCAxLjQwMS0uODY0IDEuOTQyLTEuNjk1IDIuMTk3LTEuMTE4IDAtMS42NjItLjI1NS0yLjU5LTEuMTE0TDYuNDYzIDc0LjcyN3YxMi4yOTJjMCAxLjQwMS0uODY0IDIuMTk3LTIuMDE1IDIuMTk3LTEuMTUgMC0yLjE3My0uNzk2LTIuMTczLTIuMTk3di0xNy42MWMwLTEuMTQ2LjI1NS0yLjI2IDEuOTE4LTIuMjYgMS4xNSAwIDEuNDA2LjI4NSAyLjI3IDEuMTE0bDEwLjU4IDEzLjE4M1Y2OS4wOTFjMC0xLjA1MS45MjgtMi4xOTcgMi4wMTUtMi4xOTd6bTQxLjM2NS4yODZjMi45NCAwIDIuODc3IDQuMTQgMCA0LjE0aC05LjIwOHY0Ljc3Nmg4LjA1N2MyLjg0NSAwIDIuODQ1IDQuMTcyIDAgNC4xNzJoLTguMDU3djQuNzc2aDkuNzVjMi45MSAwIDMuMTM0IDQuMTcyIDAgNC4xNzJoLTEyLjAyYy0xLjExOCAwLTEuOTgxLS44Ni0xLjk4MS0xLjk3NFY2OS4xNTRjMC0xLjE0Ni44NjMtMS45NzQgMS45ODEtMS45NzRoMTEuNDc4em0xNS45MTggNi4wODJsLTMuOTMyIDcuODY2aDcuNTQ1bC0zLjYxMy03Ljg2NnpNMzUuODAyLjI5OGMxMC4yNjUtMi41MzYgMjMuMTIzIDExLjM4NSAyMS42ODcgMzAuODU5bC4zNzQtMS4wNTVhNzEuNTkxIDcxLjU5MSAwIDAwMi4zMDUtNy42OTNjLjYyNi0yLjU5NCAxLjA0My01LjIzNSAxLjEyMy03Ljg3Ny4wNS0yLjYyNS0uMjYxLTUuMzE1LTEuNDg5LTcuNjMzLTEuMTg0LTIuMzE0LTMuNDczLTQuMTEtNi4xNzItNC41NjQgMS4zNjUuMDQgMi43MjIuNDg1IDMuOTEzIDEuMjA5IDEuMTk2LjcyMyAyLjIwMSAxLjc2MyAyLjk1OCAyLjk1MSAxLjUwNCAyLjQxMiAyLjAxOCA1LjI3OSAyLjA3NyA4LjAzNy4wODEgNS41NzYtMS4zODcgMTAuOTYtMy4xNTMgMTYuMTE1bC0uMTUuNDA4YzEzLjY2NS0xMi45NjkgMzMuNTg2LTEzLjk1NyAzOC4zOTgtNC45MjkgNS4wNSA5LjQ3Ni05Ljc1NiAxNi42NC05Ljc1NiAxNi42NC0yLjMzNiAxLjI2My00LjkyNCAyLjM1LTcuNDM4IDMuMjU5IDEuMDk5IDQuOTYxLTEuNTEyIDEwLjkxNC02LjQ3MiAxNC4yNUgxMDd2MS42NDhINzAuNzg3Yy0uOTQuMzQ4LTEuOTM0LjYwOS0yLjk3Ny43NjgtMi42Mi40LTQuOTg0LjA3OC03LjAxLS43NjdIMHYtMS42NWw1OC4wMDYuMDAxYy00LjM4LTMuNDc1LTYuMTE5LTkuODc1LTMuNjg1LTE1LjU1OSAyLjk5LTYuOTgzIDExLjc1Mi01LjkgMTEuNzUyLTUuOS0xLjYwOC0xLjA5OC0yLjM3OC0yLjYyOS0yLjI2Mi0zLjg4Mi4wOC0uODc4LjE1OC0xLjM5OC43MTYtMi4yMzQgMS40NTItMi4xNzQgNS4wNC00LjMzMSA3LjM1LTUuNDQ2IDQuNDctMi4xNTcgMTAuOTE5LTMuOTI2IDE2LjQ1LTEuNTA0IDUuNTMgMi40MjQgNS4yMjggNi40NjYuOTA1IDEwLjUxMy00LjMyMyA0LjA0NS0xMi4wMDcgNC40OS0xMi4wMDcgNC40OS45MTUgMS4wMjUgMi42NDEgMy4xOTggMy4wMzIgNC40NDJsLjEyMi0uMDQxQzkyLjM3IDQwLjU4OSA5OS4zMTIgMzIuNTg3IDk0LjYxNCAyNi4yNGMtMy44MzctNC42MTUtMTEuMDMtNS4yMzItMjAuODQzLTIuMzctNi43ODIgMS45NzgtMTIuMDYxIDUuNjE3LTE0LjY3NiA3LjY3N2wuMzMtLjlhMTA2LjE3NyAxMDYuMTc3IDAgMDEtMy4wNjIgNy41OTRjLTEuMTM0IDIuNDc4LTIuMzE1IDQuOTMzLTMuNTk5IDcuMzMzYTE1MC4wNzMgMTUwLjA3MyAwIDAxLTguMzg0IDEzLjk3OWMyLjQ1MS00Ljg0NyA0LjkxOC05LjY2OCA3LjIyOC0xNC41NTMgMS4xMzgtMi40NSAyLjI4LTQuODk2IDMuMzE5LTcuMzgzYTEyMi45OCAxMjIuOTggMCAwMDIuNDgtNi4yMzNjLS4wMzQtMi4wNDktLjQ4NS03LjYzNi0zLjk2LTE0Ljg3LTQuNDEzLTkuMTg3LTkuNjc2LTE0LjEwOS0xNS42ODktMTMuODctNy44NzkuNzU0LTkuMjI0IDExLjI0My00LjYyOCAyMy4xODRsLjA1LjExNmMxLjE5LS41NCAzLjk2Ny0uNzEyIDUuMzQ1LS43MTcgMCAwLTQuOC01Ljk5My00LjY2My0xMS45LjEzOC01LjkwOCAyLjk1OC04LjgzIDguNDYtNi4zNSA1LjUwNCAyLjQ4MyA4LjQ4OSA4LjQ0OCA5Ljg2MiAxMy4yMDEuNzA5IDIuNDU4IDEuNDkyIDYuNTYuODM3IDkuMDg3LS4yNTIuOTcyLS41ODkgMS4zNzgtMS4xOSAyLjAyMy0uODYuOTIzLTIuNTE5IDEuMzc0LTQuNDEzLjkxNCAwIDAgNi42NiA1Ljc3NiAzLjQ0IDEyLjY1NC00LjEyNCA4LjgtMTYuNDQ1IDExLjEzNy0yMi40NDEgMi4wMDItNC44NzMtNy40MjUtMi4wNDMtMTcuMTI4IDMuOTk1LTIwLjUyNC0xLTIuNDctMS45MTctNS4xMTUtMi41MzEtNy42OTEgMCAwLTQuNTMzLTE1Ljc2MiA1LjkyMS0xOC4zNDV6bTMwLjMxOSAzOS43MzZjLTIuMzUzLS40MjgtNS4xNjMtLjAzOS03LjMzIDEuNTAyLTEuMTQuODEtMS40OSAxLjMzOC0yLjExNCAyLjM0MS00LjM0IDcuNTk4IDIuNjUyIDE1LjgzIDguNjYgMTYuMjcgNy45Ny41ODQgMTMuMTA1LTQuODk4IDE0LjAzMi05Ljc2NGE3Ljg5NSA3Ljg5NSAwIDAwLS4yMjEtMy44OWMtLjg2LjI5NC0xLjcwNC41NjYtMi41Mi44MTUuOTI4IDQuODQxLTMuMjI0IDguNjI1LTYuODQ3IDkuNzM1LTEuNzA3LjUyMi0zLjUyMi42NzYtNS4zMy4yMjUtMi4xMDItLjUyMi00LjE1Ny0xLjg5NC01LjQ1LTQuOTc0LTIuNDA2LTUuNzMzIDQuMzQ3LTE0LjAxNiAxMS45NTYtOS44NDUgMCAwIC4yNzQuMTI0LjQzNy4xMjMuMTYxLS4wMDIuNjA2LS4wNi0uMzItLjYyOGExMy42NzIgMTMuNjcyIDAgMDAtNC45NTMtMS45MXptNi4xOCA2LjA1NmMtMi43NTItMy45Ni04LjMwMS0yLjE5NS0xMC4xNTYgMS4wMjYtLjkxMyAxLjU4NC0xLjE2IDMuNDkzLS42MDMgNS4wMDguNTc0IDEuNTYxIDEuOTg0IDIuNzEzIDMuMjM3IDMuMjQ1IDEuNzQuNzM2IDMuNDgyLjMgNC4zMzguMDE3LjMwOC0uMTAyLjQwNy0uMTguNDA3LS4xOC0uMDQ0LS4wNDYtLjQxOC0uMDIxLS45NC0uMDM0LS41NzctLjAxMy0xLjU0NC0uMTU2LTMuMjEtMS4wNjItMy4wNTItMS42NjUtMS4zMjctMy41NjctMS4xOTItMy43MDggMS43MDktMS41MjIgNS43MTItMi4xNSA2LjM2LTIuMjQ0Ljc0LS4yMTggMS41NDgtLjQ1OCAyLjM3OC0uNzA1LS4yNS0uOC0uNjItMS4zNjMtLjYyLTEuMzYzem0uODE2IDIuMjI4Yy0yLjk4NS43OTctNS4wMjcgMS4xOTQtNS4wMjcgMS4xOTRzLS4zNTcuMDg3LS44NC4xOTdjLTIuNjI1LjcxMi00LjA2MyAxLjc4Ny0xLjU5NSAzLjQ4IDIuODQ0IDEuOTUgNS41NTQtLjEgNS41NTQtLjEgMS44NDYtMS4zOSAyLjEyOC0zLjI5IDEuOTA4LTQuNzcxek0zMi45NSAyNy42MzVhNy45MzYgNy45MzYgMCAwMC0zLjA1NSAyLjQzM2MtMy4wMTggMy45MzctMy42ODcgMTEuNDA2IDIuMDcyIDE2LjkyNCA0LjM0MSA0LjE2IDE1LjE2MSAzLjg0OCAxNy45NDMtNC40NDMuMzMyLTEuMTMzLjQ5Mi0xLjc0NC4zMzctMy4xMjgtLjI5Ni0yLjYzOC0xLjg4MS00Ljk4Mi0zLjc3Mi02LjQ0YTEzLjY2MSAxMy42NjEgMCAwMC00LjczNS0yLjM5OGMtMS4wNDEtLjMwNy0uNzg4LjA2MS0uNjgyLjE4My4xMDcuMTIuMzgzLjI0Mi4zODMuMjQyIDguMTk4IDIuODU2IDYuNTE3IDEzLjM5NC42MjYgMTUuNDM5LTMuMTY2IDEuMDk5LTUuNTYyLjQ5LTcuMzU2LS43Mi0xLjU0NC0xLjA0LTIuNjQxLTIuNDktMy4zOTEtNC4xMDItMS41OS0zLjQyOS0xLjUzNC05LjAzNCAyLjcwMi0xMS41NzhhODcuMzMzIDg3LjMzMyAwIDAxLTEuMDcyLTIuNDEyem0zNi43OTUgMTMuMDUybC4xMjEuMDRjMS40MTMuNDY2IDUuMzI1IDIuMDYgNi41MyA1LjY4My44OTgtLjI3MyAxLjczNS0uNTMgMi40MzgtLjc1My0xLjM1Mi0zLjExNS00LjE5OC00LjY5OC00LjE5OC00LjY5OHMtMi4yNDMuNDQ4LTQuODkxLS4yNzJ6bS0yNS45MDYtLjAzYzEuMTY2LTMuNTI2LTEuMjItOC44MTgtNi4wMTctOC4yMTMgMCAwLS42NjcuMTAyLTEuNDMxLjQ0OC4zNy43ODMuNzMxIDEuNTQxIDEuMDYyIDIuMjM1LjM2My41NDMgMi41NjYgMy45MzEgMi41NyA2LjIxNS0uMDE2LjE5NC0uMjg3IDIuNzQzLTMuNTY4IDEuNTktMS43OS0uNjI4LTIuNTQyLTEuMjUtMi45MzktMS42Ny0uMzU3LS4zNzctLjU4OC0uNjcxLS42NTEtLjY3NSAwIDAgLjAwNy4xMjcuMTM3LjQyMy4zNi44MjUgMS4xOTcgMi40MDYgMi45MSAzLjIwNSAxLjIzMi41NzQgMy4wMzUuODUgNC41ODYuMjMzIDEuNTA0LS41OTkgMi43NjYtMi4wNTYgMy4zNC0zLjc5em0tOC4yMjYtNy4zMzNjLTEuMjU0LjgyNi0yLjQ4NSAyLjMwNS0yLjI5IDQuNjAxIDAgMCAuMjc2IDMuMzc4IDMuNjMyIDQuMTg1IDIuOTEzLjcgMi43NTYtMS4wODUgMS41MzYtMy41MDUtLjI0Mi0uNDMzLS40MTUtLjc1NS0uNDE1LS43NTVzLTEuMDY2LTEuNzgtMi40NjMtNC41MjZ6bTMzLjczOCA3LjI0OGMuMTMyLjA0Mi4yNjQuMDc5LjM5NC4xMTUtLjI0OS0uMDc4LS4zOTQtLjExNS0uMzk0LS4xMTV6bTE0LjgyLTEyLjIyOGMtMi41NzYtLjk1NC02LjE1LS45Mi0xMC42NDQgMS4zMTMtLjQyLjIxLTEuMDQ5LjQ1OS0xLjQ2My43ODUtLjQxMi4yMjItLjY4Mi40Mi0xLjA0Ni42NTQtMi40MyAxLjU2Mi00LjU5IDMuODg1LTQuMDEzIDUuNjU0bC4wMTcuMDY3Yy4yMTMuODQ4LjU0NSAxLjA5IDEuMDE4IDEuNDYgMi4zNjcgMS44NDYgNS43ODMgMS42MTggNS43ODMgMS42MThsLS45MDEtLjg5Mi0uMzctLjA5MXMtMi42OTUtLjM1Ni0yLjkxNi0yLjQ4N2MtLjIyMi0yLjEzMyAzLjQzNC00LjYyMiA1LjgzNi01LjYxNSAyLjAyMi0uODM1IDcuMjEzLTEuNjMgOC4zNiAxLjIzIDEuMTQ3IDIuODYtNC43OSA1LjcxLTguNjk5IDYuODEybC44NjYuNzM3czQuNjkyLS44NDIgNy44MTUtMy4zYy43ODQtLjYxOCAxLjUxNi0xLjM2IDEuOTY1LTIuMTA3LjY3MS0xLjExNS44Mi0yLjMxMy42NjctMy4yMy0uMTk5LTEuMTktMS4zNDItMi4yNjMtMi4yNzQtMi42MDh6bS00LjA5OSA3LjU4MWMyLjUyNi0yLjEyNSAxLjU4NC01LjY5Mi0yLjc5My00LjUwNC00LjM3MSAxLjE4Ni02LjIyMiAzLjExNS01LjY3NCA0Ljg4NC4wNDcuMTUuMDc3LjQ4Ny4yNzYuNzU1LjI1NC4zNDUuNzA0LjYzLjk2OS44MDMuMTk3LjEzLjM2LjE4Ni40OS4yMDcuMTAxLjAzMS42MzUuMTY5IDEuMzk2LjA4M2wuMDA3LjAwN3MyLjgwNC0uMTExIDUuMzMtMi4yMzV6bS0zNi41MDEtNS4xOTNsLjE2Ny4xMDUuMTcuMTAyYy0uMDMtLjAyLS4xNS0uMDk3LS4zNDEtLjIxbC4wMDQuMDAzem0tMy40NzQtMy40NDhzLTMuMDgzLTEuMDUzLTYuMzE0LjAyNWMuMzAzLjY3LjY3IDEuNDYyIDEuMDY0IDIuMzEgMy42Mi0xLjU3MyA3LjU0OS40MjUgOC43MiAxLjExLTIuMzA2LTEuNDgzLTMuNDctMy40NDUtMy40Ny0zLjQ0NXptMy4wNi0xNS40OTVjLS44ODEtLjQ2MS0yLjQ0NS0uNTkyLTMuNDY3LjA1Ni0uNzg3LjQ5OC0xLjU4NCAxLjQwOC0xLjk2OSAyLjY1LS4yNTcuODMyLS4zMjUgMS44Ny0uMjYyIDIuODY1LjI0OCAzLjk1NyAyLjc1MiA3Ljk5OCAyLjc1MiA3Ljk5OGwxLjEyOC4xNWMtMS43ODYtMy42MzQtMy42Mi05Ljk0LS43MTgtMTAuOTk5IDIuOTA0LTEuMDYgNS43NzcgMy4zMjIgNi41MDMgNS4zNzguODYyIDIuNDQ1IDEuNDQyIDYuODE3LS4yOTkgOC4wNzYtMS43NCAxLjI2LTMuODA2LS41LTMuODA2LS41bC0uMzE2LS4yMTUtMS4yNjctLjA3M3MyLjExIDIuNjg2IDUuMDcxMy4yMDljLjU5LjEwNC45OTMuMTg5IDEuNzctLjIyLjAyLS4wMS4wNDEtLjAyLjA2MS0uMDMyIDEuNzA4LS43NTQgMi4wMDItMy45MDYgMS41NDYtNi43NTEtLjA2OS0uNDI2LS4xLS43Ni0uMjEtMS4yMTMtLjAzMi0uNTIzLS4yNjYtMS4xNTctLjM5LTEuNjA5LTEuMzMyLTQuODI0LTMuNjkzLTcuNDk3LTYuMTI4LTguNzd6bTIuMzAzIDcuMTY2Yy0yLjAzNC00LjA0LTUuMzI5LTIuMzU1LTUuMjMxLjkzNi4xIDMuMjkgMS44ODggNS40NDQgMS44ODggNS40NDRoLjAxMWMuNDQzLjYyMi45MDQuOTI3Ljk5NC45ODMuMTAyLjA3OC4yNTQuMTY0LjQ4MS4yMjMuMzA3LjA4LjgyLjIyNCAxLjI0Ny4xODIuMzM0LS4wMzIuNjA2LS4yMzUuNzQ5LS4zIDEuNjg5LS43NzQgMS44OTMtMy40MzUtLjEzOS03LjQ2OHptMzguNTgtNS42NjVhMTAuNzcgMTAuNzcgMCAwMC02LjkzOS0xLjAxM2MtMi4yOTIuNDQyLTQuMzg2IDEuNjA3LTYuMiAzLjEwN2EyMy40NjggMjMuNDY4IDAgMDAtMi41ODMgMi40NDhjLS44MjQuODY3LTEuNTcxIDEuODA4LTIuMzE4IDIuNzU2LTEuNDcyIDEuOTEzLTIuODEzIDMuOTQ1LTQuMTcgNS45OTZhMzMuMjkyIDMzLjI5MiAwIDAxMy4yODktNi42MTNjMS4zNC0yLjA4NSAyLjk1My00LjAzMiA0LjkwNy01LjY1Ljk5LS43OSAyLjA1Ny0xLjUwMyAzLjIyMi0yLjA0OSAxLjE2NC0uNTMyIDIuNDEzLS45MjggMy42OTgtMS4wNTIgMi41NTktLjI4MiA1LjIyMS40NDcgNy4wOTUgMi4wN3oiIGZpbGw9IiNGRkYiIC8+PC9zdmc+" alt="National Center for Ecological Analysis and Synthesis" /></a>
 </body>
 </html>
