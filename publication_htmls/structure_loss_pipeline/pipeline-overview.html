@@ -217,9 +217,17 @@
       <li><strong>The licence is decided</strong> — MIT and CC BY 4.0, with the ODbL problem
       resolved by exclusion rather than by argument. Only the DOI is still open.</li>
     </ul>
+    <p><strong>Two corrections since the release was cut.</strong> The release reported the
+    adaptive column calling 17,735 structures destroyed, a ratio of 0.991; it is
+    <strong>17,362</strong> and <strong>0.970</strong>, because one fire's stale summary file
+    was summed instead of the product it ships. And the question the release left open — does
+    the cut rule clear its bar on the <em>product's</em> population? — is now answered:
+    <strong>no variant clears it and nothing changes</strong>
+    (<a href="#population">below</a>). A <code>v0.4.1</code> swapping the advisory column to the
+    best of them has not been cut.</p>
     <p><span class="pill flight">in flight</span> Roadmap 12 is still building eighteen
-    retrospective 2016–2022 inventories, which are not series rows yet; Roadmap 13 is not
-    reported at all. And two supporting outputs have <strong>not</strong> been re-run at
+    retrospective 2016–2022 inventories, which are not series rows yet; Roadmap 13 is partly
+    landed and not reported here. And two supporting outputs have <strong>not</strong> been re-run at
     <code>v0.4.0</code> and are labelled wherever they appear: there is
     <strong>no bootstrap run for the v5 bundle</strong>, so the interval tables are its
     predecessor's, and the <strong>ICS-209 count check</strong> still holds the
@@ -830,9 +838,10 @@
     <p class="src"><b>Source:</b> <code>outputs/forward_damage/metrics.json</code>, generated
     2026-09-12, bundle <code>damage_sentinel2_v5</code>; the adaptive count is the sum of the
     shipped column in <code>outputs/combined_series/per_fire_summary.csv</code> — the same file
-    reported as 17,735 in <code>forward_damage</code>, and the
-    <a href="forward-fires.html">fire-by-fire page</a> explains the 373-row difference. Ledger
-    <code>road-8</code>, <code>road-10</code>, <code>road-11</code>.</p>
+    reported as 17,735 in <code>forward_damage</code> — an artefact Roadmap 14 traced and
+    corrected, and the <a href="forward-fires.html">fire-by-fire page</a> explains it. Ledger
+    <code>road-8</code>, <code>road-10</code>, <code>road-11</code>,
+    <code>open-adaptive-count-ratio-artifact</code>.</p>
 
     <p><strong>Each fold's own cut is recorded and not shipped.</strong> Fitted the production
     way on out-of-fold scores, the nine folds want <strong>0.79–0.88</strong> against the
@@ -1026,11 +1035,32 @@
       Direct-zone-only variant whose base rate is nearer the fold table's and a whole-inventory
       variant, each pre-registered before it is run, as the original bar was
       (<code>open-adaptive-rule-population-shift</code>).</p>
+      <p><strong>⚠️ That question has now been answered, and the answer is no.</strong>
+      Roadmap 14 re-ran the same five criteria at the same thresholds on <strong>the product's
+      own population</strong> — three populations, five candidate variants, the bar
+      pre-registered again before anything was scored — and
+      <strong>no candidate clears it. Nothing changes; the fixed cut stays the default.</strong>
+      The best of them is the <strong>Direct-zone-scoped</strong> cut, which takes the rule's
+      threshold from the <code>Direct</code> zone (base rate nearer the fold table's) and
+      applies it to every row: mean-fire F1 <strong>−0.0186 [−0.0336, −0.0070]</strong> against
+      the fixed cut, a destroyed-count ratio of <strong>0.891</strong>, realised cuts
+      0.601–0.792 instead of 0.158–0.792 — and it <em>gains</em> outside California, 0.8986 →
+      <strong>0.9121</strong> mean-fire F1. It is being swapped in as the advisory column in a
+      <code>v0.4.1</code> that has not been cut; until it is, the advisory column on this site
+      is the whole-inventory variant described above.</p>
+      <p>One check is worth keeping. Re-fitting the isotonic map leave-one-fire-out — the leak
+      a reader would reasonably suspect — produces a variant that is <strong>bit-identical on
+      204,797 of 204,797 inventory rows</strong>, because the product already reads each
+      held-out fire's own fold calibration. Scored rather than asserted.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/operating_product/{decision.md,report.md,by_variant.csv,paired_delta_ci.csv}</code>;
+      bar pre-registered <code>logs/CHANGELOG.md</code> 2026-09-12 11:28 PT; commit
+      <code>fb8378d</code>.</p>
     </div>
     <div class="note">
       <p><strong>And what the adaptive call buys is the count.</strong> Predicted destroyed over
-      the fifteen fires' whole inventories goes <strong>14,504 → 17,735</strong> against 17,902
-      inspected as destroyed — a ratio of <strong>0.810 → 0.991</strong>. So the two columns
+      the fifteen fires' whole inventories goes <strong>14,504 → 17,362</strong> against 17,902
+      inspected as destroyed — a ratio of <strong>0.810 → 0.970</strong>. So the two columns
       disagree in a legible way: the fixed cut is the better classifier per structure, and the
       adaptive cut gets the total right. The release notes reduce it to one line: <em>use
       <code>damage_class</code> to classify buildings; use <code>damage_class_adaptive</code> if

@@ -497,17 +497,22 @@
     column from <code>outputs/forward_damage/per_fire.csv</code>
     (<code>n_dins_destroyed</code>).</p>
     <div class="note warn">
-      <p><strong>⚠️ Three committed files report three different adaptive totals, and this page
-      uses the products' own.</strong> Summing the shipped <code>destroyed_pred_adaptive</code>
-      column across the fifteen products gives <strong>17,362</strong>, which is what
-      <code>per_fire_summary.csv</code> reports. <code>forward_damage/per_fire.csv</code> and
-      the release notes report <strong>17,735</strong>, because Franklin is counted there at
-      431 rather than the 58 it ships — the difference is exactly the 373 calls the overlap
-      rule cedes to Palisades. <code>forward_damage/before_after/metrics.json</code> reports a
-      third figure, <strong>14,963</strong>, which this page could not reconstruct from any
-      product column. The <strong>fixed-cut total is 14,504 in all three</strong> and is not in
-      doubt, and no F1 anywhere is affected, because those are computed on matched pairs from
-      the shipped call.</p>
+      <p><strong>⚠️ The adaptive count was published wrong for a few hours, and this is the
+      corrected number.</strong> The release reported the adaptive column calling
+      <strong>17,735</strong> structures destroyed, a ratio of 0.991. It is
+      <strong>17,362</strong> and <strong>0.970</strong>. Roadmap 14 traced the difference: the
+      release summed Franklin's <em>stale</em> <code>summary.json</code>, which records 431
+      adaptive calls from before the overlap-attribution rule ran, instead of the GeoPackage the
+      product actually ships, which records <strong>58</strong>. 17,362 + 373 = 17,735. The
+      fixed-cut total, <strong>14,504</strong> and a ratio of <strong>0.810</strong>, was never
+      affected and is correct as published, and no F1 anywhere moves, because those are computed
+      on matched pairs from the shipped call.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/operating_product/report.md</code> and <code>decision.md</code>; ledger
+      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>. The count
+      used here, 17,362, is the sum of the shipped <code>destroyed_pred_adaptive</code> column
+      in <code>outputs/combined_series/per_fire_summary.csv</code>; Roadmap 14's own variant
+      table records 17,384 for the same quantity on its 17-fire basis.</p>
     </div>
 
     <div class="tablewrap">
