@@ -209,10 +209,11 @@
       On 2026-09-11 the owner decided three things: the licence (below), a <em>per-fire</em>
       operating rule in place of the single fixed cut, and dropping Sentinel-1 radar from
       production for a 62-feature optical-only bundle. The code and the documentation carry
-      those decisions; the bundle <code>damage_sentinel2_v5</code> was written this afternoon
-      and its leave-one-fire-out folds, the re-score of every fire, and the release that would
-      publish them <strong>do not exist yet</strong>. <strong>Everything below is the shipped
-      <code>v0.3.0</code> product</strong> — the 71-feature <code>damage_sentinel2s1_v4</code>
+      those decisions, and the optical-only bundle, its leave-one-fire-out folds and a
+      <code>v0.4.0</code> package began appearing on the data share while this page was being
+      written — <strong>none of it is committed, and no number from it is reported
+      here.</strong> <strong>Everything below is the last committed release,
+      <code>v0.3.0</code></strong> — the 71-feature <code>damage_sentinel2s1_v4</code>
       at the fixed cut <strong>0.87</strong> — and the reasoning behind both decisions is
       reported in its own right, in
       <a href="#rejected">what was tried and rejected</a> and
@@ -1580,8 +1581,8 @@
       drop radar</strong> for the 62-feature optical bundle — which is also the bundle a fire
       before the radar archive opened (October 2014) needs
       (<code>open-radar-after-sampler-fix</code>, measured rather than open-and-unmeasured;
-      <code>config/params.yaml</code> <code>damage:</code> block). That bundle is being built as
-      this page is published and nothing below is scored by it.</p>
+      <code>config/params.yaml</code> <code>damage:</code> block). That bundle was being built as
+      this page was published and <strong>nothing below is scored by it</strong>.</p>
     </div>
 
     <h3>The defect that moved every damage number on this page</h3>
