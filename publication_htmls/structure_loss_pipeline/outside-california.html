@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Outside California</title>
+<meta name="description" content="Where the structure-loss model travels and where it does not: eleven states, one national count source, and the two fires outside California with truth sets of their own." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --paper-2: #F1EEE6;
+    --paper-3: #E9E4D8;
+    --ink: #23282D;
+    --ink-2: #4E555C;
+    --ink-3: #7C848C;
+    --rule: #DDD8CC;
+    --rule-2: #C8C1B0;
+    --s1: #2A62B0;   /* footprints / baseline */
+    --s2: #BF4415;   /* destroyed / this pipeline */
+    --s3: #0E9C86;   /* surviving / Carlson */
+    --s4: #B08300;   /* detector */
+    --s1-soft: #DCE4EF;
+    --s2-soft: #F5DFD5;
+    --s3-soft: #D5EDE7;
+    --s4-soft: #F2E8CC;
+    --good: #0ca30c;
+    --warn: #a5700a;
+    --crit: #c0392b;
+    --measure: 68ch;
+    --shell: 1140px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+      --rule: #383D44; --rule-2: #4B525B;
+      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+    --rule: #383D44; --rule-2: #4B525B;
+    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.62; margin: 0;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-variation-settings: "opsz" 144; }
+  h2 { font-size: clamp(1.5rem, 3vw, 1.95rem); }
+  h3 { font-size: 1.22rem; margin-top: 2.2rem; margin-bottom: 0.4rem; }
+  h4 { font-size: 1.02rem; margin-top: 1.6rem; margin-bottom: 0.3rem; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, th button:focus-visible {
+    outline: 2px solid var(--s2); outline-offset: 2px;
+  }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; font-size: 0.88em; }
+  code { background: var(--paper-2); padding: 0.08em 0.34em; border-radius: 3px; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 20px; }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: 20px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.55rem;
+  }
+  .lede { font-size: 1.16rem; color: var(--ink-2); }
+  header.masthead { border-bottom: 2px solid var(--ink); padding-block: 3rem 1.6rem; }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 1rem;
+  }
+  section.part { padding-block: 2.6rem 0.6rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; margin: 1rem 0 0.2rem; border-block: 1px solid var(--rule); }
+  /* Tables and charts inside a prose column break out to the page shell so a
+     wide table is read rather than scrolled. The maths: the element is as wide
+     as the shell (or the viewport less its gutters), and the negative inline
+     margin re-centres it on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 40px));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  caption { caption-side: top; text-align: left; font-size: 0.95rem; color: var(--ink-2); padding-bottom: 0.5rem; }
+  th, td { text-align: left; padding: 0.42rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-2);
+    border-bottom: 1px solid var(--rule-2); position: sticky; top: 0;
+    background: var(--paper); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.86rem; }
+  tr.total td { font-weight: 600; border-top: 1px solid var(--rule-2); background: var(--paper-2); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.73rem;
+    color: var(--ink-3); margin: 0.45rem 0 1.6rem; line-height: 1.5;
+    word-break: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border-left: 3px solid var(--rule-2);
+    padding: 0.9rem 1.1rem; margin: 1.3rem 0; font-size: 0.96rem;
+  }
+  .note.warn { border-left-color: var(--s2); background: var(--s2-soft); }
+  .note.ok { border-left-color: var(--s3); background: var(--s3-soft); }
+  .note p:last-child, .status p:last-child { margin-bottom: 0; }
+  .status { border-left-color: var(--s4); background: var(--s4-soft); }
+  .status h3 { margin-top: 0; font-size: 1.05rem; }
+  /* ---- charts ---- */
+  figure { margin: 1.6rem 0; }
+  figure.band { background: var(--paper-2); padding: 1.2rem 1.1rem 0.9rem; border-radius: 4px; }
+  figcaption { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.7rem; max-width: 72ch; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px; }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; font-size: 0.84rem; color: var(--ink-2); margin: 0.6rem 0 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.2rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.4rem; }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.12em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  footer.pagefoot { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    th, td { padding: 0.38rem 0.45rem; }
+  }
+  .pass { color: var(--good); font-weight: 600; }
+  .fail { color: var(--crit); font-weight: 600; }
+  .verdict { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; white-space: nowrap; }
+  .ci { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.84rem; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · generalization</p>
+    <h1>Outside California</h1>
+    <p class="lede">Every out-of-sample number this project publishes is CAL FIRE DINS, and DINS
+    is California only. The product is not. This page is everything the project knows about what
+    happens beyond the state line — eleven states of leave-one-fire-out evidence, one national
+    count source, and the two fires with per-structure truth sets nobody here drew.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <h3>The finding, in one sentence, dated 12 September 2026</h3>
+    <p><strong>The ranking travels and is measurably a little worse outside California; the
+    fixed cut fails badly on specific fires.</strong> That is the careful form, it is supported
+    twice on independent evidence, and the stronger version — "the model loses seven F1 points
+    outside California" — is <em>not</em> supported: twenty-five fires cannot resolve it.
+    <span class="pill flight">in flight</span> On 2026-09-11 the owner adopted a per-fire
+    operating rule in place of the single fixed cut, on the evidence below. No released product
+    carries it yet; everything reported here is measured at fixed cuts.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">01 · the national evidence</p>
+    <h2>Sixty-six fires in eleven states</h2>
+  </div>
+  <div class="wrap">
+    <p>The only national evidence the project holds is the Carlson bundle's own
+    leave-one-fire-out table: 66 Sentinel-2 fires, each scored by a model that never saw it.
+    Two columns carry the whole argument — F1 at the bundle's fixed cut, and the F1 each fire
+    would reach at <strong>its own</strong> best cut. The second needs that fire's labels, so it
+    is a <em>ceiling</em> and not a proposal; the difference between them is the loss that
+    belongs to the operating point rather than to the model.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>California against everywhere else — bundle <code>damage_sentinel2_v4</code> at
+        its own saved cut of 0.84, 582,554 structures</caption>
+        <thead><tr><th></th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Base rate</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">95 % CI</th><th class="num">At own cut</th><th class="num">Gap</th></tr></thead>
+        <tbody>
+          <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9909</td><td class="num">0.9407</td><td class="num">0.8796</td><td class="num">0.8068</td><td class="ci">[0.770, 0.841]</td><td class="num">0.8290</td><td class="num">0.022</td></tr>
+          <tr><td>everywhere else</td><td class="num">25</td><td class="num">99,673</td><td class="num">0.111</td><td class="num">0.9628</td><td class="num">0.8395</td><td class="num">0.7557</td><td class="num">0.7424</td><td class="ci">[0.668, 0.810]</td><td class="num">0.7976</td><td class="num">0.055</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/generalization/damage_sentinel2_v4/by_group.csv</code>
+    (<code>grouping = region</code>) and
+    <code>outputs/uncertainty/carlson_sentinel2_v4/by_state_ci.csv</code> (B = 2000, fire
+    resampled, cut 0.84).</p>
+
+    <div class="note warn">
+      <p><strong>⚠️ Read those two intervals together, not against each other.</strong> The
+      non-California interval <strong>[0.668, 0.810] contains 0.798</strong> — the own-cut
+      ceiling this page calls "the size of the prize". Bootstrapping the <em>difference</em>
+      directly, which is the actual claim, gives:</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>California − everywhere else</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+          <tbody>
+            <tr><td>mean-fire F1</td><td class="num">+0.0644</td><td class="ci">[−0.0117, +0.1423]</td><td class="fail">no</td></tr>
+            <tr><td>pooled F1</td><td class="num">+0.1240</td><td class="ci">[−0.0281, +0.2529]</td><td class="fail">no</td></tr>
+            <tr><td>pooled precision</td><td class="num">+0.1829</td><td class="ci">[−0.0460, +0.3633]</td><td class="fail">no</td></tr>
+            <tr><td>mean-fire average precision</td><td class="num">+0.0318</td><td class="ci">[−0.0336, +0.1018]</td><td class="fail">no</td></tr>
+            <tr><td><strong>mean-fire AUC</strong></td><td class="num">+0.0223</td><td class="ci">[+0.0018, +0.0508]</td><td class="pass">yes</td></tr>
+            <tr><td><strong>pooled AUC</strong></td><td class="num">+0.0282</td><td class="ci">[+0.0061, +0.0582]</td><td class="pass">yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/uncertainty/carlson_sentinel2_v4/region_contrast_ci.csv</code>,
+      <code>excludes_zero</code> column. <strong>The only comparison that clears zero is the
+      ranking.</strong> Everything that depends on a threshold is inside the noise of
+      twenty-five fires.</p>
+    </div>
+  </div>
+
+  <div class="wide">
+    <h3>State by state, and the two shapes of failure</h3>
+    <figure class="band">
+      <svg viewBox="0 0 860 311" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="242.2" y1="26" x2="242.2" y2="265" />
+<text class="tick" x="242.2" y="20" text-anchor="middle">0.2</text>
+<line class="grid-line" x1="386.7" y1="26" x2="386.7" y2="265" />
+<text class="tick" x="386.7" y="20" text-anchor="middle">0.4</text>
+<line class="grid-line" x1="531.2" y1="26" x2="531.2" y2="265" />
+<text class="tick" x="531.2" y="20" text-anchor="middle">0.6</text>
+<line class="grid-line" x1="675.6" y1="26" x2="675.6" y2="265" />
+<text class="tick" x="675.6" y="20" text-anchor="middle">0.8</text>
+<text class="tick" x="784.0" y="291" text-anchor="end">mean per-fire F1</text>
+<text class="tick" x="854" y="20" text-anchor="end">gap</text>
+<text x="160" y="50.5" text-anchor="end">Oregon (9)</text>
+<line x1="722.5" y1="47.0" x2="727.9" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="722.5" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="727.9" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="50.5" text-anchor="end">0.008</text>
+<text x="160" y="71.5" text-anchor="end">New Mexico (1)</text>
+<line x1="711.5" y1="68.0" x2="725.7" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="711.5" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="725.7" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="71.5" text-anchor="end">0.020</text>
+<text x="160" y="92.5" text-anchor="end">Utah (1)</text>
+<line x1="704.8" y1="89.0" x2="709.5" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="704.8" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="709.5" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="92.5" text-anchor="end">0.006</text>
+<text x="160" y="113.5" text-anchor="end">California (41)</text>
+<line x1="680.6" y1="110.0" x2="696.6" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="680.6" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="696.6" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="113.5" text-anchor="end">0.022</text>
+<text x="160" y="134.5" text-anchor="end">Washington (3)</text>
+<line x1="670.2" y1="131.0" x2="675.8" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="670.2" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="675.8" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="134.5" text-anchor="end">0.008</text>
+<text x="160" y="155.5" text-anchor="end">Kansas (1)</text>
+<line x1="628.5" y1="152.0" x2="641.8" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="628.5" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="641.8" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="155.5" text-anchor="end">0.018</text>
+<text x="160" y="176.5" text-anchor="end">Colorado (4)</text>
+<line x1="610.1" y1="173.0" x2="640.8" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="610.1" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="640.8" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="176.5" text-anchor="end">0.043</text>
+<text x="160" y="197.5" text-anchor="end">Florida (1)</text>
+<line x1="601.6" y1="194.0" x2="639.1" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="601.6" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="639.1" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="197.5" text-anchor="end">0.052</text>
+<text x="160" y="218.5" text-anchor="end">Tennessee (2)</text>
+<line x1="520.6" y1="215.0" x2="665.6" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="520.6" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="665.6" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="218.5" text-anchor="end">0.201</text>
+<text x="160" y="239.5" text-anchor="end">Oklahoma (2)</text>
+<line x1="452.2" y1="236.0" x2="550.5" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="452.2" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="550.5" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="239.5" text-anchor="end">0.136</text>
+<text x="160" y="260.5" text-anchor="end">Texas (1)</text>
+<line x1="305.6" y1="257.0" x2="556.6" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="305.6" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="556.6" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="260.5" text-anchor="end">0.347</text>
+<line class="axis" x1="170.0" y1="265" x2="784.0" y2="265" />
+</svg>
+      <ul class="legend">
+        <li><span class="swatch" style="background:var(--s1)"></span>at the bundle's fixed cut (0.84)</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>at each fire's own best cut — a ceiling, not a proposal</li>
+      </ul>
+      <figcaption>The length of each bar is what the operating point costs that state. Two
+      shapes: in Texas, Oklahoma and Tennessee the gap is enormous and the AUC is 0.91–0.96 —
+      the model puts the destroyed structures at the top of the list and the fixed cut then
+      calls almost none of them, which is a <strong>threshold</strong> failure a cut rule can
+      fix. Colorado and Washington are the opposite: small gaps and the lowest average precision
+      outside the Plains, so what they lose is <strong>ranking</strong>, and no cut rule will
+      return it.</figcaption>
+    </figure>
+  </div>
+  <div class="wide">
+    <div class="tablewrap">
+      <table>
+        <caption>Per state, at cut 0.84 — a state row with one fire is one fire, not a state</caption>
+        <thead><tr><th>State</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Base rate</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">At own cut</th><th class="num">Gap</th><th class="num">Median own cut</th></tr></thead>
+        <tbody>
+          <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9909</td><td class="num">0.9407</td><td class="num">0.8796</td><td class="num">0.8068</td><td class="num">0.8290</td><td class="num">0.022</td><td class="num">0.88</td></tr>
+          <tr><td>Oregon</td><td class="num">9</td><td class="num">35,475</td><td class="num">0.147</td><td class="num">0.9902</td><td class="num">0.9541</td><td class="num">0.9058</td><td class="num">0.8649</td><td class="num">0.8724</td><td class="num">0.008</td><td class="num">0.87</td></tr>
+          <tr><td>Colorado</td><td class="num">4</td><td class="num">22,909</td><td class="num">0.091</td><td class="num">0.9318</td><td class="num">0.8620</td><td class="num">0.7939</td><td class="num">0.7093</td><td class="num">0.7518</td><td class="num">0.043</td><td class="num">0.95</td></tr>
+          <tr><td>Washington</td><td class="num">3</td><td class="num">11,267</td><td class="num">0.039</td><td class="num">0.9857</td><td class="num">0.8370</td><td class="num">0.7842</td><td class="num">0.7924</td><td class="num">0.8002</td><td class="num">0.008</td><td class="num">0.87</td></tr>
+          <tr><td>Tennessee</td><td class="num">2</td><td class="num">9,084</td><td class="num">0.178</td><td class="num">0.9609</td><td class="num">0.8992</td><td class="num">0.5265</td><td class="num">0.5854</td><td class="num">0.7861</td><td class="num">0.201</td><td class="num">0.67</td></tr>
+          <tr><td>Oklahoma</td><td class="num">2</td><td class="num">7,686</td><td class="num">0.105</td><td class="num">0.9095</td><td class="num">0.5995</td><td class="num">0.5023</td><td class="num">0.4907</td><td class="num">0.6268</td><td class="num">0.136</td><td class="num">0.46</td></tr>
+          <tr><td>New Mexico</td><td class="num">1</td><td class="num">7,318</td><td class="num">0.023</td><td class="num">0.9764</td><td class="num">0.8779</td><td class="num">0.8497</td><td class="num">0.8497</td><td class="num">0.8693</td><td class="num">0.020</td><td class="num">0.90</td></tr>
+          <tr><td>Texas</td><td class="num">1</td><td class="num">2,491</td><td class="num">0.096</td><td class="num">0.9149</td><td class="num">0.6596</td><td class="num">0.2877</td><td class="num">0.2877</td><td class="num">0.6352</td><td class="num">0.347</td><td class="num">0.23</td></tr>
+          <tr><td>Kansas</td><td class="num">1</td><td class="num">1,215</td><td class="num">0.127</td><td class="num">0.9550</td><td class="num">0.7690</td><td class="num">0.7347</td><td class="num">0.7347</td><td class="num">0.7531</td><td class="num">0.018</td><td class="num">0.87</td></tr>
+          <tr><td>Florida</td><td class="num">1</td><td class="num">1,207</td><td class="num">0.156</td><td class="num">0.9487</td><td class="num">0.8102</td><td class="num">0.6975</td><td class="num">0.6975</td><td class="num">0.7494</td><td class="num">0.052</td><td class="num">0.31</td></tr>
+          <tr><td>Utah</td><td class="num">1</td><td class="num">1,021</td><td class="num">0.169</td><td class="num">0.9761</td><td class="num">0.8710</td><td class="num">0.8404</td><td class="num">0.8404</td><td class="num">0.8468</td><td class="num">0.006</td><td class="num">0.79</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/generalization/damage_sentinel2_v4/by_state.csv</code>. At the alternative
+    fixed cut of 0.90 the same table puts Texas at 0.167 and Oklahoma at 0.402
+    (<code>…_cut090/by_state.csv</code>); the shape of the finding does not change and no number
+    changes sign.</p>
+    <div class="note">
+      <p><strong>⚠️ One trap, recorded so it is not repeated.</strong> The out-of-fold file
+      stores a column per <em>candidate</em> learner as well as the one the bundle shipped.
+      Grouping <code>oof_prob_random_forest</code> — which this bundle did <strong>not</strong>
+      ship — gives a non-California mean-fire F1 of 0.662 against the shipped 0.742, a far more
+      alarming picture than the product has. A <code>by_learner.csv</code> table exists so that
+      mistake is visible rather than repeated.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">02 · the fix, measured against a bar written first</p>
+    <h2>Can a label-free cut rule fix it?</h2>
+  </div>
+  <div class="wrap">
+    <p>If the loss belongs to the threshold, the fix — if there is one — is a rule that reads
+    only the model's own scores. Thirteen such rules were scored leave-one-fire-out on the same
+    66-fire table with the <strong>fire</strong> as the unit: fixed cuts, the best-F1 cut
+    refitted on the training fires' pooled scores, the cut with the best mean per-fire F1, the
+    median of the training fires' own cuts, predicted-base-rate → cut (two forms), the plug-in
+    expected-F1 cut on calibrated probabilities (two forms), Saerens–Latinne–Decaestecker EM
+    prior adjustment (two forms) and two score-quantile rules.</p>
+    <div class="note warn">
+      <p><strong>⚠️ No fire attribute reaches any rule.</strong> Size, perimeter, dNBR, region,
+      state and year are never supplied, at fitting or at application
+      (<code>goal-no-fire-covariates</code>); a test pins it by renaming a fire and moving it to
+      another state and asserting the cut does not budge. State appears in the table above only
+      to report the result.</p>
+    </div>
+    <p><strong>The candidates, the protocol and the promotion bar were pre-registered in the
+    change log on 2026-09-10 at 17:50 PT, before the first fold was scored.</strong> On the
+    pre-fix tables <em>nothing</em> cleared it and the best rule missed the gain criterion by
+    0.0002. On the corrected tables, with the Carlson half <strong>fully nested</strong> —
+    for every held-out fire <em>f</em> and every other fire <em>g</em>, a probability from a
+    model trained on the 64 fires that are neither, 66 outer + 2,145 pair fits =
+    <strong>2,211</strong> — one rule clears all five.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>The bar, criterion by criterion, for <code>expected_f1_isotonic</code></caption>
+        <thead><tr><th>Criterion</th><th>Bar</th><th class="num">Unnested v4</th><th class="num">Nested v4</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>(a) mean-fire F1 gain over <code>fixed@0.90</code></td><td>≥ +0.010</td><td class="num">+0.0114</td><td class="num">+0.0130</td><td class="pass verdict">pass · margin doubles</td></tr>
+          <tr><td>(b) California drop</td><td>≤ 0.005</td><td class="num">−0.0050</td><td class="num">−0.0054</td><td class="pass verdict">pass · a gain</td></tr>
+          <tr><td>(c) worst state drop</td><td>≤ 0.020</td><td class="num">NM +0.0181</td><td class="num">NM +0.0172</td><td class="pass verdict">pass</td></tr>
+          <tr><td>(d) DINS cost vs <code>fixed@0.87</code></td><td>≤ 0.005</td><td class="num">+0.0036</td><td class="num">+0.0036</td><td class="pass verdict">pass · DINS was already nested</td></tr>
+          <tr><td>(e) p10 / worst-fire drop</td><td>≤ 0.020 / 0.050</td><td class="num">−0.0446</td><td class="num">−0.0446</td><td class="pass verdict">pass · both improve</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/operating_conus/v4_nested/decision.{md,json}</code> and
+    <code>manifest.json</code> (2,211 fits, 1,901.7 s on 112 workers, seed 42). Bar
+    pre-registered in <code>logs/CHANGELOG.md</code> 2026-09-10 17:50 PT; ledger
+    <code>road-2</code>, <code>road-9</code>,
+    <code>open-conus-rule-after-sampler-fix</code>.</p>
+  </div>
+
+  <div class="wide">
+    <div class="tablewrap">
+      <table>
+        <caption>All thirteen rules on the fully nested Carlson folds — 66 fires, 582,554
+        structures, baseline <code>fixed@0.90</code> at 0.7751</caption>
+        <thead><tr><th>Rule</th><th class="num">Mean-fire F1</th><th class="num">Δ vs <code>fixed@0.84</code></th><th class="num">non-California</th><th class="num">Pooled F1</th><th class="num">p10</th><th class="num">Worst fire</th><th>Adopt</th></tr></thead>
+        <tbody>
+          <tr><td>ceiling — each fire at its <em>own</em> best cut (needs labels)</td><td class="num">0.8171</td><td class="num">—</td><td class="num">0.7976</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="verdict">not a candidate</td></tr>
+          <tr class="total"><td><strong><code>expected_f1_isotonic</code></strong></td><td class="num">0.7881</td><td class="num">+0.0057</td><td class="num">0.7556</td><td class="num">0.8524</td><td class="num">0.5880</td><td class="num">0.2880</td><td class="pass verdict">✅ adopted</td></tr>
+          <tr><td><code>expected_f1_platt</code></td><td class="num">0.7870</td><td class="num">+0.0046</td><td class="num">0.7535</td><td class="num">0.8500</td><td class="num">0.5847</td><td class="num">0.2873</td><td class="fail verdict">fails (d)</td></tr>
+          <tr><td><code>fixed@0.84</code> — the bundle's own saved cut</td><td class="num">0.7824</td><td class="num">0.0000</td><td class="num">0.7424</td><td class="num">0.8509</td><td class="num">0.5832</td><td class="num">0.2877</td><td class="fail verdict">fails (a), (c)</td></tr>
+          <tr><td><code>fixed@0.87</code> — what <code>v0.3.0</code> ships</td><td class="num">0.7806</td><td class="num">−0.0018</td><td class="num">0.7388</td><td class="num">0.8536</td><td class="num">0.5608</td><td class="num">0.2271</td><td class="fail verdict">fails (a), (c)</td></tr>
+          <tr><td><code>base_rate_isotonic</code></td><td class="num">0.7806</td><td class="num">−0.0019</td><td class="num">0.7410</td><td class="num">0.8477</td><td class="num">0.5797</td><td class="num">0.2880</td><td class="fail verdict">fails (a), (c)</td></tr>
+          <tr><td><code>mean_fire_f1</code></td><td class="num">0.7804</td><td class="num">−0.0021</td><td class="num">0.7400</td><td class="num">0.8519</td><td class="num">0.5793</td><td class="num">0.2391</td><td class="fail verdict">fails (a), (c)</td></tr>
+          <tr><td><code>base_rate_loglinear</code> / <code>median_f1</code></td><td class="num">0.7796</td><td class="num">−0.0028</td><td class="num">0.7372</td><td class="num">0.8517</td><td class="num">0.5506</td><td class="num">0.2082</td><td class="fail verdict">fails (a), (c)</td></tr>
+          <tr><td><code>global_f1</code></td><td class="num">0.7778</td><td class="num">−0.0046</td><td class="num">0.7342</td><td class="num">0.8540</td><td class="num">0.5538</td><td class="num">0.1673</td><td class="fail verdict">fails (a)</td></tr>
+          <tr><td><code>fixed@0.90</code> — the baseline the bar is measured against</td><td class="num">0.7751</td><td class="num">−0.0074</td><td class="num">0.7301</td><td class="num">0.8539</td><td class="num">0.5435</td><td class="num">0.1673</td><td class="verdict">—</td></tr>
+          <tr><td><code>sld_em_expected_f1</code></td><td class="num">0.6978</td><td class="num">−0.0846</td><td class="num">0.6660</td><td class="num">0.8047</td><td class="num">0.3162</td><td class="num">0.0000</td><td class="fail verdict">fails all</td></tr>
+          <tr><td><code>quantile_fitted</code></td><td class="num">0.6936</td><td class="num">−0.0889</td><td class="num">0.6636</td><td class="num">0.7649</td><td class="num">0.4439</td><td class="num">0.1570</td><td class="fail verdict">fails all</td></tr>
+          <tr><td><code>sld_em_trained</code></td><td class="num">0.6835</td><td class="num">−0.0989</td><td class="num">0.6414</td><td class="num">0.7925</td><td class="num">0.3653</td><td class="num">0.0000</td><td class="fail verdict">fails all</td></tr>
+          <tr><td><code>quantile_predicted_rate</code></td><td class="num">0.6592</td><td class="num">−0.1233</td><td class="num">0.6497</td><td class="num">0.7343</td><td class="num">0.4252</td><td class="num">0.2642</td><td class="fail verdict">fails all</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/operating_conus/v4_nested/carlson_s2/summary.json</code> and
+    <code>per_fire_rules.csv</code>. Prior adjustment
+    (Saerens–Latinne–Decaestecker EM), the textbook answer to a shifted base rate, is the
+    <em>worst</em> rule here: it assumes the class-conditional score densities are unchanged on
+    the new fire, which between chaparral and grass they are not, so it reads a density shift as
+    a prior shift and collapses to calling nothing on four of the 66 fires.</p>
+  </div>
+
+  <div class="wrap">
+    <p><strong>Two internal checks say the nesting actually happened.</strong> Every rule that
+    fits <em>nothing</em> — <code>fixed@0.84</code>, <code>fixed@0.87</code>,
+    <code>fixed@0.90</code> and <code>quantile_predicted_rate</code>, which reads only the
+    held-out fire's own mean score — is <strong>bit-identical</strong> between the nested and
+    unnested runs. Only rules that fit something on the other fires' scores move at all, which
+    is exactly and only what nesting can change. And the outer half reproduces the published
+    <code>destroyed_prob</code> to a maximum absolute difference of
+    <strong>3.0 × 10⁻⁸ on 100.00 %</strong> of the 582,554 rows, so this is the same bundle
+    refitted, not a different experiment.</p>
+
+    <div class="note">
+      <p><strong>The assumption behind the last remaining caveat was wrong in sign, and it was
+      worth checking rather than believing.</strong> Removing the leak was expected to
+      <em>shrink</em> the adaptive rules' advantage — that is the safe direction for a rejection
+      and the unsafe one for an adoption. It <strong>grew</strong> it, by +0.0016 mean-fire F1
+      for the winning rule. The effect is small either way; every fitted rule moves by less than
+      ±0.0033. The honest summary is that <strong>nesting was not what was holding this result
+      up</strong>.</p>
+    </div>
+
+    <p><strong>What remains is the whole of the case against adopting, and it is not a caveat a
+    bigger computer can remove:</strong> a narrow pass on 66 fires, 25 of them outside
+    California, with Texas, Kansas, Florida, New Mexico and Utah represented by a single fire
+    each. Under the rule, Texas goes 0.167 → 0.462 and Oklahoma 0.402 → 0.524 at the 0.90
+    baseline, and California <em>gains</em> 0.005 rather than paying for it.</p>
+
+    <h3>Why no single rule can win</h3>
+    <p>The states split into two shapes and the label-free signal that fixes one wrecks the
+    other.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th class="num">Shipped cut 0.90</th><th class="num"><code>quantile_predicted_rate</code></th><th class="num"><code>expected_f1_platt</code></th><th class="num">Ceiling (own cut)</th></tr></thead>
+        <tbody>
+          <tr><td>Texas — Kidd 2022</td><td class="num">0.109</td><td class="num"><strong>0.623</strong></td><td class="num">0.338</td><td class="num">0.622</td></tr>
+          <tr><td>Oklahoma — 2 fires</td><td class="num">0.328</td><td class="num"><strong>0.614</strong></td><td class="num">0.489</td><td class="num">0.624</td></tr>
+          <tr><td>California — 41 fires</td><td class="num">0.785</td><td class="num">0.652</td><td class="num"><strong>0.790</strong></td><td class="num">0.808</td></tr>
+          <tr><td>Oregon — 9 fires</td><td class="num">0.850</td><td class="num">0.755</td><td class="num"><strong>0.854</strong></td><td class="num">0.863</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/operating_conus/carlson_s2/by_state.csv</code>
+    (the pre-fix v3 run, which is where this diagnostic was measured and where the shipped cut
+    was 0.90).</p>
+    <p>A rule that fits nothing at all — call the top <code>mean(prob)</code> of the fire's own
+    scores — reaches Texas F1 <strong>0.623</strong> against a labelled ceiling of
+    <strong>0.622</strong>, from 0.109. <strong>The signal is genuinely there in the score
+    distribution, with no labels and no fire attribute.</strong> It then costs California 13
+    points, because California's 41 fires are already at their cut. California is 41 of 66
+    fires, so a rule that helps eleven fires a lot and hurts forty a little can still post a
+    positive mean — which is exactly what the California, per-state and worst-fire criteria
+    exist to catch.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">03 · truth that is not DINS</p>
+    <h2>What actually exists outside California</h2>
+    <p class="lede" style="max-width:68ch">Verified by live query, not assumed. Most of it does
+    not exist.</p>
+  </div>
+  <div class="wide">
+    <div class="tablewrap">
+      <table>
+        <caption>Per-structure damage assessments outside California — record counts are what
+        the service returned on 2026-09-10</caption>
+        <thead><tr><th>Candidate</th><th>Exists</th><th class="num">Records</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><strong>South Fork / Salt, Ruidoso NM, Jun 2024</strong> — FEMA Urban Search &amp; Rescue, hosted by the Village of Ruidoso</td><td>✅</td><td class="num">2,488</td><td><strong>used.</strong> The only verified post-2022 non-California per-structure set with real negatives</td></tr>
+          <tr><td><strong>Marshall, Boulder County CO, Dec 2021</strong> — county field damage assessment</td><td>✅</td><td class="num">1,473</td><td><strong>used.</strong> An independent check on <em>Carlson's</em> era, not forward truth</td></tr>
+          <tr><td><strong>Marshall CO, Dec 2021</strong> — FEMA MAC final damage assessment</td><td>✅</td><td class="num">2,941</td><td><strong>used.</strong> Carries 1,723 negatives and building geometry. ⚠️ a remote-sensing call, and spatially truncated to the Superior / Louisville core</td></tr>
+          <tr><td>Rowena, Wasco County OR, Jun 2025 — Oregon State Fire Marshal</td><td>✅</td><td class="num">202</td><td>real and post-2022, but <strong>19 surviving structures</strong> cannot support a precision estimate. Cached, not scored</td></tr>
+          <tr><td>Gray Fire + Oregon Road Fire, Spokane County WA, Aug 2023</td><td>❌</td><td class="num">—</td><td><strong>does not exist.</strong> The county catalogue holds 45 datasets and none is a damage assessment; the assessor's list was compiled for tax relief and never published</td></tr>
+          <tr><td>Smokehouse Creek, TX Panhandle, Feb 2024</td><td>❌</td><td class="num">—</td><td><strong>does not exist.</strong> The Panhandle fires received suppression cost-share only, so no federal individual-assistance inspections happened; the public aggregates disagree threefold</td></tr>
+          <tr><td>Lahaina / Maui HI, Aug 2023 — County of Maui</td><td>✅</td><td class="num">7,602</td><td><strong>unusable by this pipeline.</strong> Off-CONUS: a NAIP search over the Lahaina bbox returns <em>zero</em> items, so there is no pre-fire 0.6 m imagery and no inventory can be built at all</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>docs/outside-ca-truth.md</code> §2 and
+    <code>outputs/ics209_check/outside_ca/candidates.csv</code>; ledger
+    <code>src-dmg-ruidoso-southfork</code>, <code>src-dmg-marshall</code>,
+    <code>src-dmg-spokane-none</code>, <code>src-dmg-lahaina</code>, <code>road-4</code>.
+    ⚠️ <strong>None of the five that exist carries an open licence</strong> — attribution is
+    mandatory and redistribution is unsettled, so all five are scored against and never
+    re-published.</p>
+  </div>
+
+  <div class="wrap">
+    <h3>South Fork NM 2024, end to end</h3>
+    <p>Frame: the assessment hull, 39.7 km². An assessment is not a census — enumerating over
+    the whole 17,569-acre fire and scoring against 2,488 observations would make every
+    uninspected building a false positive by construction. Imagery: NAIP 2022, the newest year
+    before ignition. Truth recoded by the same &gt;50 % / ≤25 % rule the pipeline applies to CAL
+    FIRE's classes, because both use the NAPSG percentage scale under different words.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Predicted / assessed</th></tr></thead>
+        <tbody>
+          <tr><td>at the shipped cut 0.87, on 1,637 one-to-one pairs</td><td class="num">0.980</td><td class="num">0.801</td><td class="num">0.881</td><td class="num">0.986</td><td class="num">0.985</td><td class="num">606 / 742 = 0.817</td></tr>
+          <tr><td>at this fire's own cut of <strong>0.21</strong></td><td class="num">0.968</td><td class="num">0.925</td><td class="num"><strong>0.947</strong></td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code>, bundle
+    <code>damage_sentinel2s1_v4</code>. Detection recall 0.661 at 10 m, 0.760 at 20 m over 7,931
+    enumerated structures, 4,507 of them inside the assessed area.</p>
+    <div class="note ok">
+      <p><strong>This independently reproduces the generalization finding.</strong> The
+      Carlson-era row measured, on 25 non-California fires none later than 2022, a mean-fire F1
+      of 0.742 at the fixed cut against 0.798 at each fire's own cut — a gap of 0.055, with the
+      ranking intact. On a <strong>2024</strong> fire, in a state the Carlson sample barely
+      contains, against a truth set that did not exist when that row was written, the same shape
+      appears: AUC <strong>0.986</strong>, and 0.881 → 0.947 at the fire's own cut, a gap of
+      <strong>0.066</strong>. <em>The ranking travels and the fixed cut does not</em> — measured
+      twice, on independent evidence, two years apart.</p>
+    </div>
+    <p>Three things this number is <strong>not</strong>. It is <em>not a precision estimate for
+    the inventory</em>: 4,507 inventory points sit inside the assessed area and only 2,488
+    structures were observed, and Urban Search &amp; Rescue teams searched <em>streets</em>, not
+    every building — an unmatched inventory point is far more likely to be a real building
+    nobody walked past than a false detection. It is <em>not the whole fire</em>: there are no
+    Mescalero Apache Reservation records, so the Salt Fire side is absent entirely. And it is
+    <em>not an official assessment</em> — the publisher says so explicitly.</p>
+    <p>Its low detection recall is structural rather than model quality: New Mexico has no
+    cached Microsoft footprint layer, so the detector's prior band is USA Structures alone — a
+    weaker prior than any California run has had — and Lincoln County's USA Structures extract
+    carries a <strong>single <code>IMAGE_DATE</code> of 2017-05-26</strong>, seven years before
+    the fire, so anything built after 2017 is missing from the footprint half of the inventory
+    entirely.</p>
+
+    <h3>The count-level check, and why it only earns its keep outside California</h3>
+    <p>ICS-209 structures-destroyed counts are the only per-incident loss figure that exists
+    nationally. The source is the <em>Dataset of United States Incident Management Situation
+    Reports from 2007 to 2026</em> (CC BY 4.0), 21,733 incidents after normalisation. Two
+    alternatives were checked and rejected: ICS-209-PLUS stops at 2020 and cannot answer a 2023+
+    question, and <strong>WFIGS is a verified negative</strong> — its public layer publishes 97
+    fields and <em>none</em> of them names a destroyed, damaged or threatened structure count,
+    which is checkable rather than remembered.</p>
+    <div class="note warn">
+      <p><strong>⚠️ In California the ICS-209 count is not independent of DINS.</strong> 12 of
+      the 14 matched forward fires give a ratio of exactly 1.000, because CAL FIRE runs the
+      damage inspection <em>and</em> files the situation report. It is a validity check on the
+      plumbing and it passes; it is not external corroboration. <strong>Outside California,
+      where nothing cross-checks it, the floor is demonstrably soft</strong>: Smokehouse Creek
+      (TX, 2024) reports <strong>0</strong> structures lost against roughly 138 in the state's
+      own investigation, because the fire left the situation report before any assessment
+      landed. Read an ICS-209 count as a floor, and remember it includes sheds and detached
+      garages Carlson never counted — pooled, it is <strong>1.370×</strong> the DINS
+      <em>major</em> count.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/ics209_check/{forward_fires.csv,summary.json}</code>;
+      <code>docs/outside-ca-truth.md</code> §1.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">04 · the era question</p>
+    <h2>And does it travel backwards in time?</h2>
+    <p>The Sentinel-2 bundle starts in 2016, so its era table has one row. The
+    <strong>Landsat</strong> bundle — 100 fires, 2002–2022, 30 m pixels — answers the question
+    instead. It was rebuilt through the corrected sampler on 2026-09-10 and is scored at v1's
+    own cut of 0.65 so the two generations are comparable:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Non-California</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Mean-fire F1</th><th class="num">At own cut</th><th class="num">Gap</th></tr></thead>
+        <tbody>
+          <tr><td>pre-2016 — v1 (defective sampler)</td><td class="num">18</td><td class="num">59,650</td><td class="num">0.604</td><td class="num">0.658</td><td class="num">0.054</td></tr>
+          <tr><td><strong>pre-2016 — v2 (corrected)</strong></td><td class="num">18</td><td class="num">59,638</td><td class="num"><strong>0.629</strong></td><td class="num"><strong>0.686</strong></td><td class="num">0.057</td></tr>
+          <tr><td>2016+ — v1</td><td class="num">26</td><td class="num">92,736</td><td class="num">0.646</td><td class="num">0.702</td><td class="num">0.056</td></tr>
+          <tr><td><strong>2016+ — v2 (corrected)</strong></td><td class="num">26</td><td class="num">92,581</td><td class="num"><strong>0.668</strong></td><td class="num"><strong>0.722</strong></td><td class="num">0.054</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/generalization/damage_landsat_v2_cut065/per_fire.csv</code> and
+    <code>outputs/generalization/damage_landsat/per_fire.csv</code>, the non-California rows
+    grouped by <code>era</code> — <code>by_group.csv</code> carries region and era as separate
+    slices, and this is the cross of the two. Ledger
+    <code>open-landsat-sampler-rebuild</code>, <code>dmg-landsat-v2-bundle</code>.</p>
+    <p><strong>Both eras rose by about two and a half points and the era penalty did not
+    move</strong> — 3.9 points on the corrected tables against 4.2 on the defective ones.
+    <strong>Age costs about four points, and it does not change the diagnosis.</strong> This is
+    the project's only pre-2016 evidence, which is why it was worth rebuilding rather than
+    annotating.</p>
+    <p>⚠️ Landsat is <strong>not on the production path</strong> for a 2023+ fire and no default
+    points at it. <code>damage_landsat_v2</code> exists to answer the era question and to be the
+    advisory row in the operating-point table.</p>
+    <div class="note">
+      <p><strong>⚠️ What none of this evidence is.</strong> Twenty-five fires outside
+      California, none after 2022, several states with one fire each. Every number on this page
+      above the South Fork section is Carlson-era leave-one-fire-out, so <strong>it says nothing
+      about a 2023+ out-of-state fire</strong> — which is exactly the case the product is for,
+      and which exactly one truth set in the world covers.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Companion pages: <a href="index.html">the index</a> ·
+      <a href="pipeline-overview.html">the deep dive</a> ·
+      <a href="forward-fires.html">fire by fire</a> ·
+      <a href="combined-series.html">the combined series</a> ·
+      <a href="uncertainty.html">how wide the numbers are</a>.</p>
+    <p>Built 2026-09-12 · generalization tables computed 2026-09-10, the nested operating-point
+    run 2026-09-11.</p>
+  </div>
+</footer>
+
+</body>
+</html>

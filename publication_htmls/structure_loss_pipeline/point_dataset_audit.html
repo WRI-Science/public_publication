@@ -185,58 +185,7 @@ rendered by <code>scripts/qa_audit_crops.py</code>. The tallies below are a
 human reading of every tile — they are typed into the script's settings
 block, not computed, and they are what turns "median 8.6&nbsp;m" into
 something you can act on.</p>
-
-<figure>
-  <img src="point_audit/camp_B.png"
-       alt="Camp Fire — Carlson destroyed (B)" loading="lazy" />
-  <figcaption>
-    <strong>Camp Fire — Carlson destroyed (B)</strong> — 16 random Carlson B points, NAIP 2018 (pre-fire), 120 m windows.
-    Red circle = the audited point, cyan outline = USA Structures footprint.
-    <br /><em>What a person saw:</em> 11 of 16 on a clearly visible building; 3 in dense canopy with no building visible at all; 2 ambiguous (yard or parking-lot edge). In about 5 of the 16 tiles there were clearly visible houses with no USA Structures polygon.
-    <br /><span class="muted">NAIP items: ca_m_3912111_se_10_060_20180718_20190209, ca_m_3912112_nw_10_060_20180718_20190209, ca_m_3912112_sw_10_060_20180718_20190209, ca_m_3912119_ne_10_060_20180718_20190209 … ·
-    <a href="point_audit/camp_B.png.json">tile
-    coordinates</a></span>
-  </figcaption>
-</figure>
-
-<figure>
-  <img src="point_audit/camp_U.png"
-       alt="Camp Fire — Carlson surviving (U)" loading="lazy" />
-  <figcaption>
-    <strong>Camp Fire — Carlson surviving (U)</strong> — 16 random Carlson U points, NAIP 2018 (pre-fire), 120 m windows.
-    Red circle = the audited point, cyan outline = USA Structures footprint.
-    <br /><em>What a person saw:</em> 14 of 16 on a clearly visible building; 2 in canopy or a clearing with a small structure. Placement is visibly better than on the destroyed points.
-    <br /><span class="muted">NAIP items: ca_m_3912104_sw_10_060_20180718_20190210, ca_m_3912110_se_10_060_20180716_20190210, ca_m_3912111_se_10_060_20180718_20190209, ca_m_3912112_nw_10_060_20180718_20190209 … ·
-    <a href="point_audit/camp_U.png.json">tile
-    coordinates</a></span>
-  </figcaption>
-</figure>
-
-<figure>
-  <img src="point_audit/tubbs_B.png"
-       alt="Tubbs Fire — Carlson destroyed (B)" loading="lazy" />
-  <figcaption>
-    <strong>Tubbs Fire — Carlson destroyed (B)</strong> — 16 random Carlson B points, NAIP 2016 (pre-fire), 120 m windows.
-    Red circle = the audited point, cyan outline = USA Structures footprint.
-    <br /><em>What a person saw:</em> 15 of 16 on a visible house (one of them in a mobile-home park); 1 in dense canopy with a roof only partly visible. Sonoma has almost no pre-fire USA Structures extraction, so no cyan outlines.
-    <br /><span class="muted">NAIP items: ca_m_3812227_sw_10_.6_20160611_20161004, ca_m_3812234_ne_10_.6_20160611_20161004, ca_m_3812235_nw_10_.6_20160611_20161004 ·
-    <a href="point_audit/tubbs_B.png.json">tile
-    coordinates</a></span>
-  </figcaption>
-</figure>
-
-<figure>
-  <img src="point_audit/eaton_dins.png"
-       alt="Eaton Fire — CAL FIRE DINS inspections" loading="lazy" />
-  <figcaption>
-    <strong>Eaton Fire — CAL FIRE DINS inspections</strong> — 16 random DINS points, NAIP 2022 (pre-fire), 120 m windows.
-    Red circle = the audited point, cyan outline = USA Structures footprint.
-    <br /><em>What a person saw:</em> All 16 within about 10 m of a building, but only ~9 on the roof; the other ~7 on the driveway, in the yard, or between buildings. This is what an inspector-placed point looks like.
-    <br /><span class="muted">NAIP items: ca_m_3411855_ne_11_060_20220505, ca_m_3411855_se_11_060_20220511, ca_m_3411856_se_11_060_20220512, ca_m_3411856_sw_11_060_20220512 ·
-    <a href="point_audit/eaton_dins.png.json">tile
-    coordinates</a></span>
-  </figcaption>
-</figure>
+<p>The NAIP crop grids were not available when this page was built — run <code>scripts/qa_audit_crops.py</code> and rebuild.</p>
 
 <h2>What this means for validating the pipeline</h2>
 <ul>
@@ -272,7 +221,7 @@ it is deliberately a separate script so this page can be rebuilt offline.
 Full write-up: <code>docs/point-dataset-audit.md</code>.</p>
 
 <footer>
-  <p>Generated 2026-09-06 13:07:02 PDT by
+  <p>Generated 2026-09-12 10:40:50 PDT by
   <code>scripts/qa_point_datasets.py</code>. Inputs:
   <code>raw/carlson/</code>, <code>raw/usa_structures/</code>,
   <code>raw/dins_all_years/dins_all.gpkg</code>. Match radius

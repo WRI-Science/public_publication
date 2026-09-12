@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Combined Series</title>
+<meta name="description" content="The USGS Carlson record and this pipeline's products on one schema: what is in release v0.3.0, era by era and fire by fire, and where the two halves are not equivalent." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --paper-2: #F1EEE6;
+    --paper-3: #E9E4D8;
+    --ink: #23282D;
+    --ink-2: #4E555C;
+    --ink-3: #7C848C;
+    --rule: #DDD8CC;
+    --rule-2: #C8C1B0;
+    --s1: #2A62B0;   /* footprints / baseline */
+    --s2: #BF4415;   /* destroyed / this pipeline */
+    --s3: #0E9C86;   /* surviving / Carlson */
+    --s4: #B08300;   /* detector */
+    --s1-soft: #DCE4EF;
+    --s2-soft: #F5DFD5;
+    --s3-soft: #D5EDE7;
+    --s4-soft: #F2E8CC;
+    --good: #0ca30c;
+    --warn: #a5700a;
+    --crit: #c0392b;
+    --measure: 68ch;
+    --shell: 1140px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+      --rule: #383D44; --rule-2: #4B525B;
+      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+    --rule: #383D44; --rule-2: #4B525B;
+    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.62; margin: 0;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-variation-settings: "opsz" 144; }
+  h2 { font-size: clamp(1.5rem, 3vw, 1.95rem); }
+  h3 { font-size: 1.22rem; margin-top: 2.2rem; margin-bottom: 0.4rem; }
+  h4 { font-size: 1.02rem; margin-top: 1.6rem; margin-bottom: 0.3rem; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, th button:focus-visible {
+    outline: 2px solid var(--s2); outline-offset: 2px;
+  }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; font-size: 0.88em; }
+  code { background: var(--paper-2); padding: 0.08em 0.34em; border-radius: 3px; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 20px; }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: 20px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.55rem;
+  }
+  .lede { font-size: 1.16rem; color: var(--ink-2); }
+  header.masthead { border-bottom: 2px solid var(--ink); padding-block: 3rem 1.6rem; }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 1rem;
+  }
+  section.part { padding-block: 2.6rem 0.6rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; margin: 1rem 0 0.2rem; border-block: 1px solid var(--rule); }
+  /* Tables and charts inside a prose column break out to the page shell so a
+     wide table is read rather than scrolled. The maths: the element is as wide
+     as the shell (or the viewport less its gutters), and the negative inline
+     margin re-centres it on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 40px));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  caption { caption-side: top; text-align: left; font-size: 0.95rem; color: var(--ink-2); padding-bottom: 0.5rem; }
+  th, td { text-align: left; padding: 0.42rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-2);
+    border-bottom: 1px solid var(--rule-2); position: sticky; top: 0;
+    background: var(--paper); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.86rem; }
+  tr.total td { font-weight: 600; border-top: 1px solid var(--rule-2); background: var(--paper-2); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.73rem;
+    color: var(--ink-3); margin: 0.45rem 0 1.6rem; line-height: 1.5;
+    word-break: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border-left: 3px solid var(--rule-2);
+    padding: 0.9rem 1.1rem; margin: 1.3rem 0; font-size: 0.96rem;
+  }
+  .note.warn { border-left-color: var(--s2); background: var(--s2-soft); }
+  .note.ok { border-left-color: var(--s3); background: var(--s3-soft); }
+  .note p:last-child, .status p:last-child { margin-bottom: 0; }
+  .status { border-left-color: var(--s4); background: var(--s4-soft); }
+  .status h3 { margin-top: 0; font-size: 1.05rem; }
+  /* ---- charts ---- */
+  figure { margin: 1.6rem 0; }
+  figure.band { background: var(--paper-2); padding: 1.2rem 1.1rem 0.9rem; border-radius: 4px; }
+  figcaption { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.7rem; max-width: 72ch; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px; }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; font-size: 0.84rem; color: var(--ink-2); margin: 0.6rem 0 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.2rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.4rem; }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.12em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  footer.pagefoot { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    th, td { padding: 0.38rem 0.45rem; }
+  }
+  .era-tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.68rem;
+    letter-spacing: 0.04em; text-transform: uppercase; padding: 0.1em 0.4em;
+    border-radius: 2px; border: 1px solid currentColor; white-space: nowrap; }
+  .era-tag.carlson { color: var(--s3); }
+  .era-tag.slp { color: var(--s2); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · the dataset</p>
+    <h1>One layer, two eras</h1>
+    <p class="lede">The USGS Carlson building-loss record and this pipeline's per-fire products,
+    harmonised onto one schema, one row per structure per fire — so a user reads a single file
+    instead of joining two datasets and discovering the joins do not work. This page is what is
+    inside release <code>v0.3.0</code>, and where the two halves are not equivalent.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <h3>Status, 12 September 2026</h3>
+    <p>The published series is <code>v0.3.0</code>, cut 2026-09-11: <strong>399,682 rows over
+    20 fires</strong>, five Carlson fires of 2017–2018 and fifteen of ours from 2024–2025.
+    <span class="pill flight">in flight</span> Two things will change it and neither is
+    reported here: Roadmap 11 puts <strong>all 361 Carlson fires</strong> (1,770,939 rows) into
+    the series instead of the five that happened to have a cached extract, and Roadmap 12 is
+    building eighteen retrospective 2016–2022 inventories that are <em>not</em> series rows yet.
+    Everything below is the file on disk.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">01 · the shape of it</p>
+    <h2>What is in the release</h2>
+  </div>
+  <div class="wrap">
+    <div class="tablewrap">
+      <table>
+        <caption>Release <code>v0.3.0</code> — <code>combined_structures.gpkg</code>,
+        43 columns, EPSG:5070</caption>
+        <thead><tr><th>Era</th><th>Source</th><th class="num">Fires</th><th class="num">Rows</th><th class="num">Destroyed</th><th class="num">Surviving</th><th class="num">No call</th><th class="num">Direct</th><th class="num">Indirect</th></tr></thead>
+        <tbody>
+          <tr><td><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">5</td><td class="num">231,485</td><td class="num">24,314</td><td class="num">207,171</td><td class="num">0</td><td class="num">58,578</td><td class="num">172,907</td></tr>
+          <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">15</td><td class="num">168,197</td><td class="num">14,819</td><td class="num">152,501</td><td class="num">877</td><td class="num">32,179</td><td class="num">136,018</td></tr>
+          <tr class="total"><td>total</td><td>—</td><td class="num">20</td><td class="num">399,682</td><td class="num">39,133</td><td class="num">359,672</td><td class="num">877</td><td class="num">90,757</td><td class="num">308,925</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/combined_series/manifest.json</code> and
+    <code>per_fire_summary.csv</code> (byte-identical to
+    <code>outputs/releases/v0.3.0/per_fire_summary.csv</code>). The 877 rows with no damage call
+    are all Franklin 2024 rows ceded to Palisades 2025 by the overlap-attribution rule; each
+    carries <code>damage_null_reason = overlapped_by_DINS_2025_PALISADES</code>.</p>
+
+    <p>Every row carries <code>series_source</code> (<code>carlson</code> or <code>slp</code>),
+    an <code>era</code> whose boundaries are <strong>sensor launch dates rather than
+    preferences</strong>, harmonised damage fields, per-row provenance, and the uncertainty its
+    era can support: <strong>ours carries <code>destroyed_prob</code>; Carlson's is explicitly
+    null rather than faked.</strong> A field only one era can fill is null on the other side and
+    is never back-filled.</p>
+
+    <p>The 2023+ half is <strong>one detector on one frame with one damage bundle</strong> —
+    <code>seg_all_v4</code>, the perimeter frame, <code>damage_sentinel2s1_v4</code> at 0.87 —
+    and the build manifest <em>computes</em> that rather than asserting it:
+    <code>heterogeneity_warning</code> is null. <code>prob_source</code> says on every row
+    whether the call came from the production bundle scoring a fire it had never seen
+    (<code>production</code>, 32,997 rows) or from a leave-one-fire-out refit because the fire
+    sits in that bundle's own training pool (<code>lofo</code>, 135,200 rows).
+    <strong>An in-sample score is never shipped.</strong></p>
+  </div>
+
+  <div class="wide">
+    <h3>The three eras</h3>
+    <figure class="band">
+      <svg viewBox="0 0 860 228" role="img" preserveAspectRatio="xMidYMin meet">
+<text x="106" y="39" text-anchor="end" style="font-weight:600">2002–2015</text>
+<rect x="118" y="26" width="693.1" height="22" rx="3" fill="var(--ink-3)" />
+<text class="val" x="820.1" y="41">160 fires · 973,491 points</text>
+<text class="tick" x="118" y="65">Carlson only — no Sentinel-2 exists</text>
+<text x="106" y="101" text-anchor="end" style="font-weight:600">2016–2022</text>
+<rect x="118" y="88" width="567.8" height="22" rx="3" fill="var(--s3)" />
+<text class="val" x="694.8" y="103">201 fires · 797,448 points</text>
+<text class="tick" x="118" y="127">Carlson; our method could run retrospectively</text>
+<text x="106" y="163" text-anchor="end" style="font-weight:600">2023 onward</text>
+<rect x="118" y="150" width="119.8" height="22" rx="3" fill="var(--s2)" />
+<text class="val" x="246.8" y="165">15 fires · 168,197 points</text>
+<text class="tick" x="118" y="189">this pipeline; Carlson stops at 2022</text>
+<line class="axis" x1="118" y1="20" x2="118" y2="198" />
+</svg>
+      <figcaption>The two records do not overlap in time, and the middle era is the only ground
+      on which the two methods can be compared at all.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Era</th><th>Years</th><th>Who holds it</th><th>Could our method produce it?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pre-2016</strong></td><td>2002–2015</td><td>Carlson only</td>
+            <td><strong>No, not even in principle.</strong> Sentinel-2 does not exist, so there
+            is no before/after optical pair at 10 m. 160 fires, 973,491 points.</td></tr>
+          <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>Carlson</td>
+            <td><strong>Yes, retrospectively.</strong> 201 fires, 797,448 points.</td></tr>
+          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline</td>
+            <td>Carlson stops at 2022. 2023 itself is empty — no CAL FIRE DINS incident that
+            year clears 100 inspections.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §"Read this first:
+    the three eras".</p>
+    <div class="note warn">
+      <p><strong>⚠️ The retrospective era's real floor is a footprint database's extraction
+      calendar, not Sentinel-2's launch date.</strong> USA Structures post-dates every fire in
+      that era, so a retrospective inventory keeps only footprints whose <code>IMAGE_DATE</code>
+      precedes ignition. From <strong>2019 on that costs nothing</strong> — 129,680 of 129,680
+      footprints over twelve fires. Before 2019 it costs 8.5 %, county by county: Kern County's
+      whole extract comes from scenes taken five and six weeks <em>after</em> the Erskine fire,
+      so <strong>Erskine 2016 has no pre-fire footprint at all and was refused</strong> rather
+      than approximated. <span class="mono">(<code>outputs/combined_retrospective/footprint_vintage.csv</code>,
+      ledger <code>road-12-uss-vintage</code>, 2026-09-12.)</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">02 · per fire</p>
+    <h2>Every fire in the series</h2>
+  </div>
+  <div class="wide">
+    <div class="tablewrap">
+      <table>
+        <caption>Carlson's five fires — <code>n_destroyed</code> is Carlson's own hand
+        <code>B</code> count, carried verbatim</caption>
+        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Destroyed</th><th class="num">Destroyed share</th><th class="num">Direct</th><th class="num">Indirect</th></tr></thead>
+        <tbody>
+          <tr><td>Camp 2018</td><td class="num">2018-11-08</td><td class="num">29,948</td><td class="num">16,493</td><td class="num">0.5507</td><td class="num">21,333</td><td class="num">8,615</td></tr>
+          <tr><td>Tubbs 2017</td><td class="num">2017-10-09</td><td class="num">32,832</td><td class="num">5,185</td><td class="num">0.1579</td><td class="num">8,314</td><td class="num">24,518</td></tr>
+          <tr><td>Woolsey 2018</td><td class="num">2018-11-08</td><td class="num">68,833</td><td class="num">1,508</td><td class="num">0.0219</td><td class="num">18,414</td><td class="num">50,419</td></tr>
+          <tr><td>Thomas 2017</td><td class="num">2017-12-05</td><td class="num">65,794</td><td class="num">976</td><td class="num">0.0148</td><td class="num">7,503</td><td class="num">58,291</td></tr>
+          <tr><td>Creek 2017</td><td class="num">2017-12-05</td><td class="num">34,078</td><td class="num">152</td><td class="num">0.0045</td><td class="num">3,014</td><td class="num">31,064</td></tr>
+          <tr class="total"><td>five fires</td><td class="num">—</td><td class="num">231,485</td><td class="num">24,314</td><td class="num">0.1050</td><td class="num">58,578</td><td class="num">172,907</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/combined_series/per_fire_summary.csv</code>,
+    rows with <code>series_source = carlson</code>.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Our fifteen fires — all <code>damage_sentinel2s1_v4</code> at threshold 0.87,
+        inventory <code>stage8_roll_forward</code> on the perimeter frame, NAIP 2022</caption>
+        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed</th><th class="num">Destroyed share</th><th class="num">Mean <code>destroyed_prob</code></th><th>Score</th></tr></thead>
+        <tbody>
+          <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,771</td><td class="num">0.1208</td><td class="num">0.2003</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Palisades 2025</td><td class="num">2025-01-07</td><td class="num">28,837</td><td class="num">27,608</td><td class="num">1,229</td><td class="num">5,712</td><td class="num">0.1981</td><td class="num">0.2823</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Park 2024</td><td class="num">2024-07-24</td><td class="num">4,097</td><td class="num">3,911</td><td class="num">186</td><td class="num">443</td><td class="num">0.1081</td><td class="num">0.1482</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Mountain 2024</td><td class="num">2024-11-06</td><td class="num">23,241</td><td class="num">22,551</td><td class="num">690</td><td class="num">283</td><td class="num">0.0122</td><td class="num">0.0770</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Borel 2024</td><td class="num">2024-07-24</td><td class="num">2,132</td><td class="num">1,926</td><td class="num">206</td><td class="num">199</td><td class="num">0.0933</td><td class="num">0.1442</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Airport 2024</td><td class="num">2024-09-09</td><td class="num">5,937</td><td class="num">5,775</td><td class="num">162</td><td class="num">125</td><td class="num">0.0211</td><td class="num">0.0906</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>TCU Complex 2025</td><td class="num">2025-09-02</td><td class="num">2,070</td><td class="num">1,934</td><td class="num">136</td><td class="num">82</td><td class="num">0.0396</td><td class="num">0.0902</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Bridge 2024</td><td class="num">2024-09-08</td><td class="num">4,567</td><td class="num">4,212</td><td class="num">355</td><td class="num">80</td><td class="num">0.0175</td><td class="num">0.0545</td><td><span class="era-tag slp">lofo</span></td></tr>
+          <tr><td>Franklin 2024</td><td class="num">2024-12-09</td><td class="num">3,004</td><td class="num">2,865</td><td class="num">139</td><td class="num">35</td><td class="num">0.0165</td><td class="num">0.0936</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Nixon 2024</td><td class="num">2024-07-29</td><td class="num">813</td><td class="num">681</td><td class="num">132</td><td class="num">29</td><td class="num">0.0357</td><td class="num">0.0988</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Thompson 2024</td><td class="num">2024-07-02</td><td class="num">5,969</td><td class="num">5,680</td><td class="num">289</td><td class="num">27</td><td class="num">0.0045</td><td class="num">0.0393</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Canyon 2025</td><td class="num">2025-08-07</td><td class="num">2,247</td><td class="num">2,165</td><td class="num">82</td><td class="num">15</td><td class="num">0.0067</td><td class="num">0.0385</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Line 2024</td><td class="num">2024-09-05</td><td class="num">11,892</td><td class="num">11,410</td><td class="num">482</td><td class="num">10</td><td class="num">0.0008</td><td class="num">0.0221</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>French 2024</td><td class="num">2024-07-04</td><td class="num">1,609</td><td class="num">1,491</td><td class="num">118</td><td class="num">6</td><td class="num">0.0037</td><td class="num">0.0344</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr><td>Coches 2 2025</td><td class="num">2025-09-08</td><td class="num">7,463</td><td class="num">7,229</td><td class="num">234</td><td class="num">2</td><td class="num">0.0003</td><td class="num">0.0342</td><td><span class="era-tag carlson">production</span></td></tr>
+          <tr class="total"><td>fifteen fires</td><td class="num">—</td><td class="num">168,197</td><td class="num">156,430</td><td class="num">11,767</td><td class="num">14,819</td><td class="num">0.0881</td><td class="num">—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/combined_series/per_fire_summary.csv</code>,
+    rows with <code>series_source = slp</code>. <code>major</code> / <code>minor</code> split at
+    50 m² of footprint — the project's own Carlson-compatible line. Every fire's frame is its
+    public perimeter (13 from NIFC/WFIGS <code>wfigs_to_date</code>, 2 from CAL FIRE FRAP);
+    <code>frame_clip.csv</code> records <strong>0 rows dropped outside the frame on all
+    fifteen</strong>.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">03 · against the counts</p>
+    <h2>Our destroyed count against the inspectors' and the incident commander's</h2>
+  </div>
+  <div class="wide">
+    <figure class="band">
+      <svg viewBox="0 0 860 410" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="197.8" y1="26" x2="197.8" y2="364" />
+<text class="tick" x="197.8" y="20" text-anchor="middle">2</text>
+<line class="grid-line" x1="296.4" y1="26" x2="296.4" y2="364" />
+<text class="tick" x="296.4" y="20" text-anchor="middle">10</text>
+<line class="grid-line" x1="437.4" y1="26" x2="437.4" y2="364" />
+<text class="tick" x="437.4" y="20" text-anchor="middle">100</text>
+<line class="grid-line" x1="578.4" y1="26" x2="578.4" y2="364" />
+<text class="tick" x="578.4" y="20" text-anchor="middle">1,000</text>
+<line class="grid-line" x1="719.4" y1="26" x2="719.4" y2="364" />
+<text class="tick" x="719.4" y="20" text-anchor="middle">10,000</text>
+<text class="tick" x="740.0" y="390" text-anchor="end">structures called destroyed (log scale)</text>
+<text class="tick" x="854" y="20" text-anchor="end">ours ÷ DINS</text>
+<text x="166" y="51.1" text-anchor="end">Eaton 2025</text>
+<line x1="704.0" y1="47.6" x2="715.7" y2="47.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="715.7" cy="47.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="704.0" cy="47.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="51.1" text-anchor="end">0.83</text>
+<text x="166" y="73.1" text-anchor="end">Palisades 2025</text>
+<line x1="685.1" y1="69.6" x2="696.2" y2="69.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="696.2" cy="69.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="685.1" cy="69.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="73.1" text-anchor="end">0.83</text>
+<text x="166" y="95.1" text-anchor="end">Park 2024</text>
+<line x1="528.5" y1="91.6" x2="557.7" y2="91.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="557.7" cy="91.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="528.5" cy="91.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="95.1" text-anchor="end">0.62</text>
+<text x="166" y="117.1" text-anchor="end">Mountain 2024</text>
+<line x1="491.8" y1="113.6" x2="501.1" y2="113.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="491.8" cy="113.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="501.1" cy="113.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="117.1" text-anchor="end">1.16</text>
+<text x="166" y="139.1" text-anchor="end">Borel 2024</text>
+<line x1="479.5" y1="135.6" x2="486.5" y2="135.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="486.5" cy="135.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="479.5" cy="135.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="139.1" text-anchor="end">0.89</text>
+<text x="166" y="161.1" text-anchor="end">Airport 2024</text>
+<line x1="451.1" y1="157.6" x2="466.2" y2="157.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="466.2" cy="157.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="451.1" cy="157.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="161.1" text-anchor="end">0.78</text>
+<text x="166" y="183.1" text-anchor="end">TCU Complex 2025</text>
+<line x1="425.2" y1="179.6" x2="434.3" y2="179.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="434.3" cy="179.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="425.2" cy="179.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="183.1" text-anchor="end">0.86</text>
+<text x="166" y="205.1" text-anchor="end">Bridge 2024</text>
+<line x1="423.7" y1="201.6" x2="424.5" y2="201.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="424.5" cy="201.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="423.7" cy="201.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="205.1" text-anchor="end">0.99</text>
+<text x="166" y="227.1" text-anchor="end">Franklin 2024</text>
+<line x1="338.8" y1="223.6" x2="373.1" y2="223.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="338.8" cy="223.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="373.1" cy="223.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="227.1" text-anchor="end">1.75</text>
+<text x="166" y="249.1" text-anchor="end">Nixon 2024</text>
+<line x1="361.6" y1="245.6" x2="381.3" y2="245.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="381.3" cy="245.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="361.6" cy="245.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="249.1" text-anchor="end">0.72</text>
+<text x="166" y="271.1" text-anchor="end">Thompson 2024</text>
+<line x1="354.9" y1="267.6" x2="357.2" y2="267.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="354.9" cy="267.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="357.2" cy="267.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="271.1" text-anchor="end">1.04</text>
+<text x="166" y="293.1" text-anchor="end">Canyon 2025</text>
+<line x1="321.2" y1="289.6" x2="321.2" y2="289.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="321.2" cy="289.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="321.2" cy="289.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="293.1" text-anchor="end">1.00</text>
+<text x="166" y="315.1" text-anchor="end">Line 2024</text>
+<line x1="197.8" y1="311.6" x2="296.4" y2="311.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="197.8" cy="311.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="296.4" cy="311.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="315.1" text-anchor="end">5.00</text>
+<text x="166" y="337.1" text-anchor="end">French 2024</text>
+<line x1="265.1" y1="333.6" x2="302.2" y2="333.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="302.2" cy="333.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="265.1" cy="333.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="337.1" text-anchor="end">0.55</text>
+<text x="166" y="359.1" text-anchor="end">Coches 2 2025</text>
+<line x1="197.8" y1="355.6" x2="289.9" y2="355.6" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="289.9" cy="355.6" r="4.5" fill="var(--s3)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="197.8" cy="355.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="359.1" text-anchor="end">0.22</text>
+<line class="axis" x1="176.0" y1="364" x2="740.0" y2="364" />
+</svg>
+      <ul class="legend">
+        <li><span class="swatch" style="background:var(--s3)"></span>CAL FIRE DINS, inspected as destroyed</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>our call at the shipped cut</li>
+      </ul>
+      <figcaption>Per fire, on a log scale because the fires span 2 destroyed structures to
+      9,419. Pooled, the product calls <strong>14,819</strong> against DINS's
+      <strong>17,902</strong> destroyed-all — a ratio of 0.828 — and the fires where the ratio
+      is worst are the small ones, where a handful of structures is the whole score.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <p class="src"><b>Source:</b> <code>outputs/forward_damage/per_fire.csv</code>
+    (<code>n_predicted_destroyed</code>, <code>n_dins_destroyed</code>).</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Three counts of the same fires, pooled over the fifteen</caption>
+        <thead><tr><th>Count</th><th class="num">Structures</th><th>Ratio</th><th class="num"></th></tr></thead>
+        <tbody>
+          <tr><td>ICS-209, reported by the incident commander</td><td class="num">17,879</td><td>ICS-209 ÷ DINS all</td><td class="num">0.9992</td></tr>
+          <tr><td>CAL FIRE DINS, destroyed, all categories</td><td class="num">17,893</td><td>ICS-209 ÷ DINS <strong>major</strong></td><td class="num"><strong>1.3696</strong></td></tr>
+          <tr><td>CAL FIRE DINS, destroyed, <strong>major</strong> only</td><td class="num">13,054</td><td>ours ÷ DINS all</td><td class="num">0.8282</td></tr>
+          <tr class="total"><td>our predicted destroyed</td><td class="num">14,819</td><td>ours ÷ DINS major</td><td class="num">1.1352</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/ics209_check/forward_fires.csv</code> and
+    <code>summary.json</code>; 14 of the 15 fires matched an ICS-209 incident — Coches 2
+    (9 destroyed) never reached the national situation report. The
+    <code>ours ÷ DINS</code> ratios are computed from the pooled counts in the same file.</p>
+
+    <div class="note warn">
+      <p><strong>⚠️ Read the major-only comparison, not the all-categories one.</strong>
+      Carlson counted <em>major</em> buildings; CAL FIRE DINS inspects sheds, detached garages
+      and mobile homes it never counted, and several DINS records can share one building. The
+      ratio in Carlson's units is <strong>1.135</strong>, not 0.828. And in California the
+      ICS-209 count is <strong>not independent of DINS</strong> — 12 of the 14 matched fires
+      give a ratio of exactly 1.000, because CAL FIRE runs the damage inspection <em>and</em>
+      files the situation report. That is a validity check on the plumbing, and it passes; it is
+      not external corroboration.</p>
+    </div>
+  </div>
+  <div class="wide">
+    <figure class="band">
+      <svg viewBox="0 0 860 395" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="170.0" y1="26" x2="170.0" y2="349" />
+<text class="tick" x="170.0" y="20" text-anchor="middle">0</text>
+<line class="grid-line" x1="284.8" y1="26" x2="284.8" y2="349" />
+<text class="tick" x="284.8" y="20" text-anchor="middle">1</text>
+<line class="grid-line" x1="399.6" y1="26" x2="399.6" y2="349" />
+<text class="tick" x="399.6" y="20" text-anchor="middle">2</text>
+<line class="grid-line" x1="514.4" y1="26" x2="514.4" y2="349" />
+<text class="tick" x="514.4" y="20" text-anchor="middle">3</text>
+<line class="grid-line" x1="629.3" y1="26" x2="629.3" y2="349" />
+<text class="tick" x="629.3" y="20" text-anchor="middle">4</text>
+<line class="grid-line" x1="744.1" y1="26" x2="744.1" y2="349" />
+<text class="tick" x="744.1" y="20" text-anchor="middle">5</text>
+<line x1="284.8" y1="26" x2="284.8" y2="349" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
+<text class="tick" x="284.8" y="375" text-anchor="middle">parity</text>
+<text x="160" y="48.5" text-anchor="end">Canyon 2025</text>
+<rect x="170.0" y="37.0" width="574.1" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="751.1" y="48.5">5.00</text>
+<text x="160" y="69.5" text-anchor="end">French 2024</text>
+<rect x="170.0" y="58.0" width="315.7" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="492.7" y="69.5">2.75</text>
+<text x="160" y="90.5" text-anchor="end">Franklin 2024</text>
+<rect x="170.0" y="79.0" width="255.1" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="432.1" y="90.5">2.22</text>
+<text x="160" y="111.5" text-anchor="end">Thompson 2024</text>
+<rect x="170.0" y="100.0" width="229.6" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="406.6" y="111.5">2.00</text>
+<text x="160" y="132.5" text-anchor="end">TCU Complex 2025</text>
+<rect x="170.0" y="121.0" width="218.1" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="395.1" y="132.5">1.90</text>
+<text x="160" y="153.5" text-anchor="end">Bridge 2024</text>
+<rect x="170.0" y="142.0" width="202.2" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="379.2" y="153.5">1.76</text>
+<text x="160" y="174.5" text-anchor="end">Nixon 2024</text>
+<rect x="170.0" y="163.0" width="199.7" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="376.7" y="174.5">1.74</text>
+<text x="160" y="195.5" text-anchor="end">Park 2024</text>
+<rect x="170.0" y="184.0" width="185.9" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="362.9" y="195.5">1.62</text>
+<text x="160" y="216.5" text-anchor="end">Eaton 2025</text>
+<rect x="170.0" y="205.0" width="172.2" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="349.2" y="216.5">1.50</text>
+<text x="160" y="237.5" text-anchor="end">Borel 2024</text>
+<rect x="170.0" y="226.0" width="167.4" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="344.4" y="237.5">1.46</text>
+<text x="160" y="258.5" text-anchor="end">Mountain 2024</text>
+<rect x="170.0" y="247.0" width="150.9" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="327.9" y="258.5">1.31</text>
+<text x="160" y="279.5" text-anchor="end">Airport 2024</text>
+<rect x="170.0" y="268.0" width="149.4" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="326.4" y="279.5">1.30</text>
+<text x="160" y="300.5" text-anchor="end">Palisades 2025</text>
+<rect x="170.0" y="289.0" width="137.1" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="314.1" y="300.5">1.19</text>
+<text x="160" y="321.5" text-anchor="end">Line 2024</text>
+<rect x="170.0" y="310.0" width="57.4" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="234.4" y="321.5">0.50</text>
+<text x="160" y="342.5" text-anchor="end">Pooled (14 fires)</text>
+<rect x="170.0" y="331.0" width="157.3" height="13" rx="3" fill="var(--s4)" />
+<text class="val" x="334.3" y="342.5">1.370</text>
+<line class="axis" x1="170.0" y1="349" x2="790.0" y2="349" />
+</svg>
+      <figcaption>The ratio that does carry information: ICS-209's destroyed count against
+      DINS's destroyed <em>major</em> structures. The gap above parity is the minor-structure
+      content of an ICS-209 total — 1.370 pooled, 1.19 to 5.00 per fire. A 2023+ count read
+      against Carlson's series has to carry that factor or it compares two different
+      populations.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <p class="src"><b>Source:</b> <code>outputs/ics209_check/forward_fires.csv</code>, column
+    <code>ics209_over_dins_major</code>. Line 2024 sits below parity because the national report
+    recorded 1 destroyed structure against DINS's 2.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">04 · across the boundary</p>
+    <h2>Is a 2019-to-2024 trend real, or the method change?</h2>
+    <p class="lede" style="max-width:68ch">The question a user of a joined series actually has.
+    It is answered on the buildings both methods called — Carlson's own points, scored by a
+    model fit that never saw that fire.</p>
+  </div>
+  <div class="wide">
+    <figure class="band">
+      <svg viewBox="0 0 860 330" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="62" y1="305.5" x2="836" y2="305.5" />
+<text class="tick" x="54" y="309.0" text-anchor="end">0.5</text>
+<line class="grid-line" x1="62" y1="262.5" x2="836" y2="262.5" />
+<text class="tick" x="54" y="266.0" text-anchor="end">0.6</text>
+<line class="grid-line" x1="62" y1="219.5" x2="836" y2="219.5" />
+<text class="tick" x="54" y="223.0" text-anchor="end">0.7</text>
+<line class="grid-line" x1="62" y1="176.5" x2="836" y2="176.5" />
+<text class="tick" x="54" y="180.0" text-anchor="end">0.8</text>
+<line class="grid-line" x1="62" y1="133.5" x2="836" y2="133.5" />
+<text class="tick" x="54" y="137.0" text-anchor="end">0.9</text>
+<line class="grid-line" x1="62" y1="90.5" x2="836" y2="90.5" />
+<text class="tick" x="54" y="94.0" text-anchor="end">1.0</text>
+<line class="grid-line" x1="62" y1="47.5" x2="836" y2="47.5" />
+<text class="tick" x="54" y="51.0" text-anchor="end">1.1</text>
+<line class="grid-line" x1="134.5" y1="26" x2="134.5" y2="284" />
+<text class="tick" x="134.5" y="300" text-anchor="middle">0.5 %</text>
+<line class="grid-line" x1="232.9" y1="26" x2="232.9" y2="284" />
+<text class="tick" x="232.9" y="300" text-anchor="middle">1 %</text>
+<line class="grid-line" x1="363.0" y1="26" x2="363.0" y2="284" />
+<text class="tick" x="363.0" y="300" text-anchor="middle">2.5 %</text>
+<line class="grid-line" x1="461.4" y1="26" x2="461.4" y2="284" />
+<text class="tick" x="461.4" y="300" text-anchor="middle">5 %</text>
+<line class="grid-line" x1="559.8" y1="26" x2="559.8" y2="284" />
+<text class="tick" x="559.8" y="300" text-anchor="middle">10 %</text>
+<line class="grid-line" x1="689.8" y1="26" x2="689.8" y2="284" />
+<text class="tick" x="689.8" y="300" text-anchor="middle">25 %</text>
+<line class="grid-line" x1="788.2" y1="26" x2="788.2" y2="284" />
+<text class="tick" x="788.2" y="300" text-anchor="middle">50 %</text>
+<line x1="62" y1="90.5" x2="836" y2="90.5" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
+<text class="tick" x="832" y="84.5" text-anchor="end">Carlson’s own count</text>
+<line x1="509.1" y1="26" x2="509.1" y2="284" stroke="var(--s4)" stroke-width="1.5" stroke-dasharray="3 3" />
+<text class="tick" x="514.1" y="36" fill="var(--s4)">7 % destroyed</text>
+<circle cx="119.6" cy="246.2" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="128.6" y="249.7" text-anchor="start">Creek 2017</text>
+<circle cx="288.6" cy="121.9" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="297.6" y="125.4" text-anchor="start">Thomas 2017</text>
+<circle cx="344.2" cy="242.3" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="353.2" y="245.8" text-anchor="start">Woolsey 2018</text>
+<circle cx="522.5" cy="167.9" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="531.5" y="171.4" text-anchor="start">CZU 2020</text>
+<circle cx="540.3" cy="86.2" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="549.3" y="89.7" text-anchor="start">Caldor 2021</text>
+<circle cx="580.2" cy="130.1" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="589.2" y="133.6" text-anchor="start">Carr 2018</text>
+<circle cx="583.4" cy="75.4" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="592.4" y="78.9" text-anchor="start">Dixie 2021</text>
+<circle cx="624.6" cy="144.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="615.6" y="148.2" text-anchor="end">Tubbs 2017</text>
+<circle cx="659.9" cy="64.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="650.9" y="68.2" text-anchor="end">North Complex 2020</text>
+<circle cx="801.9" cy="84.5" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="792.9" y="88.0" text-anchor="end">Camp 2018</text>
+<line class="axis" x1="62" y1="284" x2="836" y2="284" />
+<line class="axis" x1="62" y1="26" x2="62" y2="284" />
+<text class="tick" x="836" y="322" text-anchor="end">share of the fire’s buildings Carlson called destroyed (log scale)</text>
+<text class="tick" x="16" y="155" transform="rotate(-90 16 155)" text-anchor="middle">our destroyed ÷ Carlson’s</text>
+</svg>
+      <ul class="legend">
+        <li><span class="swatch" style="background:var(--s2)"></span>fires below 2.5 % destroyed</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>fires above 2.5 % destroyed</li>
+      </ul>
+      <figcaption>Our destroyed count ÷ Carlson's, against how much of the fire's building
+      stock Carlson called destroyed. Catastrophic fires cross the boundary safely; a trend
+      built from many low-loss fires does not, because the method change alone pushes their
+      counts down.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <div class="tablewrap">
+      <table>
+        <caption>Carlson's hand call against our leave-one-fire-out call, per fire</caption>
+        <thead><tr><th>Fire</th><th class="num">Compared</th><th class="num">Carlson destroyed</th><th class="num">Ours</th><th class="num">Ratio</th><th class="num">Agreement</th><th class="num">Cohen's κ</th><th class="num">P / R / F1</th><th class="num">AUC</th></tr></thead>
+        <tbody>
+          <tr><td>Camp 2018</td><td class="num">29,894</td><td class="num">16,468</td><td class="num">16,701</td><td class="num">1.014</td><td class="num">0.9306</td><td class="num">0.860</td><td class="num">0.931 / 0.944 / 0.937</td><td class="num">0.9785</td></tr>
+          <tr><td>North Complex 2020</td><td class="num">6,393</td><td class="num">1,294</td><td class="num">1,372</td><td class="num">1.060</td><td class="num">0.9571</td><td class="num">0.870</td><td class="num">0.872 / 0.924 / 0.897</td><td class="num">0.9859</td></tr>
+          <tr><td>Dixie 2021</td><td class="num">8,732</td><td class="num">1,031</td><td class="num">1,067</td><td class="num">1.035</td><td class="num">0.9851</td><td class="num">0.930</td><td class="num">0.922 / 0.954 / 0.938</td><td class="num">0.9961</td></tr>
+          <tr><td>Caldor 2021</td><td class="num">10,810</td><td class="num">943</td><td class="num">952</td><td class="num">1.010</td><td class="num">0.9892</td><td class="num">0.932</td><td class="num">0.934 / 0.943 / 0.938</td><td class="num">0.9970</td></tr>
+          <tr><td>Thomas 2017</td><td class="num">65,793</td><td class="num">976</td><td class="num">905</td><td class="num">0.927</td><td class="num">0.9877</td><td class="num">0.564</td><td class="num">0.592 / 0.549 / 0.570</td><td class="num">0.9752</td></tr>
+          <tr><td>Carr 2018</td><td class="num">14,543</td><td class="num">1,680</td><td class="num">1,526</td><td class="num">0.908</td><td class="num">0.9647</td><td class="num">0.820</td><td class="num">0.882 / 0.801 / 0.840</td><td class="num">0.9891</td></tr>
+          <tr><td>Tubbs 2017</td><td class="num">32,832</td><td class="num">5,185</td><td class="num">4,534</td><td class="num">0.874</td><td class="num">0.9716</td><td class="num">0.887</td><td class="num">0.969 / 0.847 / 0.904</td><td class="num">0.9925</td></tr>
+          <tr><td>CZU 2020</td><td class="num">10,863</td><td class="num">835</td><td class="num">685</td><td class="num">0.820</td><td class="num">0.9685</td><td class="num">0.758</td><td class="num">0.860 / 0.705 / 0.775</td><td class="num">0.9765</td></tr>
+          <tr><td>Woolsey 2018</td><td class="num">68,784</td><td class="num">1,508</td><td class="num">976</td><td class="num">0.647</td><td class="num">0.9877</td><td class="num">0.654</td><td class="num">0.840 / 0.544 / 0.660</td><td class="num">0.9854</td></tr>
+          <tr><td>Creek 2017</td><td class="num">34,075</td><td class="num">152</td><td class="num">97</td><td class="num">0.638</td><td class="num">0.9962</td><td class="num">0.472</td><td class="num">0.608 / 0.388 / 0.474</td><td class="num">0.9848</td></tr>
+          <tr class="total"><td>pooled</td><td class="num">282,719</td><td class="num">30,072</td><td class="num">28,815</td><td class="num">0.958</td><td class="num">0.9782</td><td class="num">0.883</td><td class="num">0.915 / 0.877 / 0.895</td><td class="num">0.9920</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code> and
+    <code>comparability.json</code> — leave-one-fire-out, cut 0.90, bundle
+    <code>damage_sentinel2</code>, on Carlson's own points so the inventory is taken out of the
+    question. Spec §A.</p>
+
+    <div class="note warn">
+      <p><strong>⚠️ Two things published about this table have since been corrected, and both
+      corrections are here.</strong></p>
+      <p>(1) <em>"Every fire above ~7 % destroyed lands between 0.82 and 1.06 of Carlson's
+      count"</em> is <strong>false on 23 fires</strong>. Roadmap 12 put every California Carlson
+      fire of 2016–2022 through four admission tests and took eighteen, spanning all seven
+      years; on 23 fires and 394,460 buildings the same code gives agreement 0.979, κ 0.871,
+      destroyed P/R/F1 0.903 / 0.863 / 0.883, AUC 0.991, and <strong>four of the twelve fires
+      above 7 % fall outside the published band</strong> — two of them not by rounding: Creek
+      2020 at 1.13 and Zogg 2020 at 1.61. What survives is the direction (mean ratio
+      <strong>1.041</strong> above 7 % against <strong>0.720</strong> below 2.5 %), and a fourth
+      low-loss confirmation nobody had looked at: Kincade 2019, 1.7 % destroyed, ratio 0.67.
+      Zogg 2020 is the worst fire in the era — AUC 0.897 against 0.975–1.000 everywhere else —
+      and not for want of observations.</p>
+      <p>(2) The guidance was written on a bundle fitted through a sampler that read the wrong
+      pixel for 85.1 % of rows. On the corrected tables the low-loss under-call is
+      <strong>mostly gone</strong>: mean ratio below 2.5 % destroyed <strong>0.720 →
+      0.952</strong>, Kincade 0.67 → 0.90, Creek 2017 0.64 → 0.91. And the apparent year trend
+      mostly goes with it — the per-fire ratio correlates with fire year at Spearman
+      <strong>+0.572 (p 0.004)</strong> on the old bundle and <strong>+0.310 (p 0.15)</strong>
+      on the corrected one. It is not a Sentinel-2 constellation effect: median post-fire
+      observations do not rise with the year (ρ +0.061). Every version of it points
+      <em>up</em>, so a destroyed count that rises across 2022/2023 cannot be blamed on the
+      model getting more conservative.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/combined_retrospective/</code>; <code>docs/combined-series-spec.md</code>
+      §A2; ledger <code>road-12</code>, <code>road-12-era-trend</code>, 2026-09-12.</p>
+    </div>
+
+    <h3>The structure count, on the same ground</h3>
+    <p>The damage call is only half of a count. For the five 2018–2021 California fires Carlson
+    covers <em>and</em> DINS inspected, counts recomputed inside the region both datasets looked
+    at — within 250 m of a point from each:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fire</th><th class="num">Carlson</th><th class="num">Carlson destroyed</th><th class="num">DINS</th><th class="num">DINS destroyed</th><th class="num">DINS ÷ Carlson destroyed</th><th class="num">our inventory</th><th class="num">Recall vs Carlson @10 m</th><th class="num">Precision</th></tr></thead>
+        <tbody>
+          <tr><td>Carr 2018</td><td class="num">4,170</td><td class="num">1,668</td><td class="num">1,882</td><td class="num">1,608</td><td class="num">0.96</td><td class="num">3,540</td><td class="num">0.766</td><td class="num">0.925</td></tr>
+          <tr><td>CZU 2020</td><td class="num">4,540</td><td class="num">835</td><td class="num">4,588</td><td class="num">1,311</td><td class="num">1.57</td><td class="num">4,093</td><td class="num">0.763</td><td class="num">0.892</td></tr>
+          <tr><td>North Complex 2020</td><td class="num">1,905</td><td class="num">1,279</td><td class="num">3,054</td><td class="num">2,246</td><td class="num">1.76</td><td class="num">1,732</td><td class="num">0.750</td><td class="num">0.885</td></tr>
+          <tr><td>Caldor 2021</td><td class="num">3,891</td><td class="num">930</td><td class="num">4,338</td><td class="num">991</td><td class="num">1.07</td><td class="num">3,077</td><td class="num">0.671</td><td class="num">0.894</td></tr>
+          <tr><td>Dixie 2021</td><td class="num">3,282</td><td class="num">1,025</td><td class="num">3,690</td><td class="num">1,269</td><td class="num">1.24</td><td class="num">2,846</td><td class="num">0.726</td><td class="num">0.890</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code>
+    (<code>counts_on_the_same_ground</code>); spec §B. Roadmap 12 is rebuilding these five rows
+    on the perimeter frame so the extended table is one method throughout — that work is
+    <span class="pill flight">in flight</span> and is not reported here.</p>
+    <p><strong>The two truth sources disagree with each other by up to 1.8×.</strong> On the
+    same ground DINS records 76 % more destroyed structures than Carlson on North Complex,
+    57 % more on CZU, and 4 % <em>fewer</em> on Carr. And our inventory holds 0.67–0.77 of
+    Carlson's buildings at 0.89–0.93 precision here, so <strong>a structure count is not
+    comparable across the boundary without a fire-specific correction either</strong>.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">05 · the crosswalk</p>
+    <h2>Six ways the two halves are not equivalent</h2>
+  </div>
+  <div class="wrap">
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>Carlson, 2002–2022</th><th>This pipeline, 2023 onward</th></tr></thead>
+        <tbody>
+          <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
+          <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus a call at a published threshold — 0.87 on all fifteen fires, recorded per row in <code>destroyed_threshold</code></td></tr>
+          <tr><td><strong>Exposure class</strong></td><td>measured against a perimeter its authors digitised by hand</td><td>measured against the public perimeter named in <code>perimeter_source</code>, by the same 100 m / 2.4 km rule</td></tr>
+          <tr><td><strong>Geometry</strong></td><td>points</td><td>points, plus a 0.6 m probability raster Carlson has no analogue for — deliberately left out of the join</td></tr>
+          <tr><td><strong>Fire identifiers</strong></td><td><code>MTBS_ID</code> on 359 of 361 fires, <code>IRWIN_ID</code> on 229</td><td>CAL FIRE <code>INCIDENTNUM</code>; <code>irwin_id</code> filled on 14 of 15 fires and <code>wfigs_unique_fire_id</code> on 13, by a deterministic lookup. <code>mtbs_id</code> is null on every row — MTBS runs about two seasons behind</td></tr>
+          <tr><td><strong>Provenance and uncertainty</strong></td><td>no per-row uncertainty, <strong>and none is invented</strong></td><td><code>destroyed_prob</code>, <code>destroyed_prob_calibrated</code>, the threshold and the bundle behind the call</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §"Where the two are
+    NOT equivalent"; identifier fill from
+    <code>outputs/combined_series/manifest.json</code> and
+    <code>outputs/frames/fire_identifiers.csv</code>.</p>
+
+    <h3>Two flags on Carlson's own release</h3>
+    <p>The series carries Carlson <strong>verbatim</strong>. Nothing is dropped, merged,
+    re-attributed or corrected: it is the USGS's release, and silently cleaning another team's
+    published census inside a derived product would make the two impossible to reconcile. A
+    user who counts rows in the <code>carlson</code> half gets exactly what they would get
+    counting rows in the source shapefile. Two properties of that release will nevertheless
+    break a naive count, so they are measured once over the whole national file and shipped as
+    columns:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Column</th><th>True when</th><th class="num">Rows</th></tr></thead>
+        <tbody>
+          <tr><td><code>carlson_exact_duplicate</code></td><td>the row repeats an <em>earlier</em> row exactly — the same twelve published attributes and the same coordinates</td><td class="num">20,296 of 1,770,939</td></tr>
+          <tr><td><code>carlson_multi_fire_location</code></td><td>more than one Carlson fire claims this location, at 0.5 m</td><td class="num">324,910 (18.3 %), at 152,537 distinct locations</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §4c; ledger
+    <code>val-carlson-no-attribution-rule</code>. Both null on every <code>slp</code> row.</p>
+    <p><strong>One fire carries most of the duplication:</strong> <code>CA_2008_SAYRE</code>
+    alone holds 19,859 of the 20,296 repeats — 40,146 rows at 20,287 locations. A national
+    destroyed count that does not drop them is wrong by that much. The multi-fire flag marks
+    <em>every</em> row at such a location, because without an attribution rule there is no
+    "later" fire to prefer. <strong>De-duplicate on geometry before any pooled count across
+    Carlson fires.</strong> These are flags, not fixes, and not a criticism: the duplicates are
+    almost certainly an artefact of the 145-step select-then-merge lineage the release's own
+    metadata records, and the multi-fire locations are a correct consequence of a definition —
+    one row per (structure, fire) — that this series shares.</p>
+    <p><strong>On our own side the same exposure is zero.</strong> Of 399,682 rows, 4,483 sit at
+    a location more than one fire enumerated (2,186 locations), and <strong>0 structures are
+    called destroyed under more than one fire</strong> — 271 were before the attribution rule
+    landed. <span class="mono">(<code>outputs/forward_damage/overlap_series.json</code>.)</span></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Companion pages: <a href="index.html">the index</a> ·
+      <a href="pipeline-overview.html">the deep dive</a> ·
+      <a href="forward-fires.html">fire by fire</a> ·
+      <a href="uncertainty.html">how wide the numbers are</a> ·
+      <a href="outside-california.html">outside California</a>.</p>
+    <p>Built 2026-09-12 · release <code>v0.3.0</code>, cut 2026-09-11 ·
+    the full crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing document
+    is <code>docs/data-descriptor.md</code>, both shipped inside every release.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fire by Fire</title>
+<meta name="description" content="Every fire the structure-loss pipeline has produced a per-structure loss call for, scored against the inspections of that fire." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --paper-2: #F1EEE6;
+    --paper-3: #E9E4D8;
+    --ink: #23282D;
+    --ink-2: #4E555C;
+    --ink-3: #7C848C;
+    --rule: #DDD8CC;
+    --rule-2: #C8C1B0;
+    --s1: #2A62B0;   /* footprints / baseline */
+    --s2: #BF4415;   /* destroyed / this pipeline */
+    --s3: #0E9C86;   /* surviving / Carlson */
+    --s4: #B08300;   /* detector */
+    --s1-soft: #DCE4EF;
+    --s2-soft: #F5DFD5;
+    --s3-soft: #D5EDE7;
+    --s4-soft: #F2E8CC;
+    --good: #0ca30c;
+    --warn: #a5700a;
+    --crit: #c0392b;
+    --measure: 68ch;
+    --shell: 1140px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+      --rule: #383D44; --rule-2: #4B525B;
+      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+    --rule: #383D44; --rule-2: #4B525B;
+    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.62; margin: 0;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-variation-settings: "opsz" 144; }
+  h2 { font-size: clamp(1.5rem, 3vw, 1.95rem); }
+  h3 { font-size: 1.22rem; margin-top: 2.2rem; margin-bottom: 0.4rem; }
+  h4 { font-size: 1.02rem; margin-top: 1.6rem; margin-bottom: 0.3rem; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, th button:focus-visible {
+    outline: 2px solid var(--s2); outline-offset: 2px;
+  }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; font-size: 0.88em; }
+  code { background: var(--paper-2); padding: 0.08em 0.34em; border-radius: 3px; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 20px; }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: 20px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.55rem;
+  }
+  .lede { font-size: 1.16rem; color: var(--ink-2); }
+  header.masthead { border-bottom: 2px solid var(--ink); padding-block: 3rem 1.6rem; }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 1rem;
+  }
+  section.part { padding-block: 2.6rem 0.6rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; margin: 1rem 0 0.2rem; border-block: 1px solid var(--rule); }
+  /* Tables and charts inside a prose column break out to the page shell so a
+     wide table is read rather than scrolled. The maths: the element is as wide
+     as the shell (or the viewport less its gutters), and the negative inline
+     margin re-centres it on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 40px));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  caption { caption-side: top; text-align: left; font-size: 0.95rem; color: var(--ink-2); padding-bottom: 0.5rem; }
+  th, td { text-align: left; padding: 0.42rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-2);
+    border-bottom: 1px solid var(--rule-2); position: sticky; top: 0;
+    background: var(--paper); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.86rem; }
+  tr.total td { font-weight: 600; border-top: 1px solid var(--rule-2); background: var(--paper-2); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.73rem;
+    color: var(--ink-3); margin: 0.45rem 0 1.6rem; line-height: 1.5;
+    word-break: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border-left: 3px solid var(--rule-2);
+    padding: 0.9rem 1.1rem; margin: 1.3rem 0; font-size: 0.96rem;
+  }
+  .note.warn { border-left-color: var(--s2); background: var(--s2-soft); }
+  .note.ok { border-left-color: var(--s3); background: var(--s3-soft); }
+  .note p:last-child, .status p:last-child { margin-bottom: 0; }
+  .status { border-left-color: var(--s4); background: var(--s4-soft); }
+  .status h3 { margin-top: 0; font-size: 1.05rem; }
+  /* ---- charts ---- */
+  figure { margin: 1.6rem 0; }
+  figure.band { background: var(--paper-2); padding: 1.2rem 1.1rem 0.9rem; border-radius: 4px; }
+  figcaption { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.7rem; max-width: 72ch; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px; }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; font-size: 0.84rem; color: var(--ink-2); margin: 0.6rem 0 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.2rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.4rem; }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.12em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  footer.pagefoot { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    th, td { padding: 0.38rem 0.45rem; }
+  }
+  th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+  th.sortable::after { content: "\2195"; opacity: 0.3; margin-left: 0.35em; font-size: 0.9em; }
+  th.sortable[aria-sort="ascending"]::after { content: "\2191"; opacity: 1; }
+  th.sortable[aria-sort="descending"]::after { content: "\2193"; opacity: 1; }
+  th.sortable:hover { color: var(--s2); }
+  td.fire { white-space: nowrap; font-weight: 500; }
+  td.map a { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; }
+  .src-tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.68rem;
+    letter-spacing: 0.04em; text-transform: uppercase; padding: 0.1em 0.4em;
+    border-radius: 2px; border: 1px solid currentColor; }
+  .src-tag.lofo { color: var(--s4); }
+  .src-tag.prod { color: var(--s3); }
+  .hint { font-size: 0.86rem; color: var(--ink-3); margin: 0.4rem 0 0; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · results</p>
+    <h1>Fire by fire</h1>
+    <p class="lede">Every fire this pipeline has produced a per-structure loss call for, and
+    the inspection record it was scored against. Fifteen California fires of 2024–2025 make up
+    the published <code>v0.3.0</code> series; two more sit outside it, one outside California
+    and one inside the Carlson era, because they have truth sets nobody in this project drew.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <h3>What these numbers are, 12 September 2026</h3>
+    <p>Every row is the shipped <code>v0.3.0</code> product: inventory
+    <code>seg_all_v4</code> on each fire's own perimeter frame, damage bundle
+    <code>damage_sentinel2s1_v4</code>, fixed cut <strong>0.87</strong>, after the
+    <code>road-10</code> overlap-attribution rule. <strong>Eight of the fifteen fires are in
+    that bundle's own training pool and none of them is scored by it</strong> — each carries a
+    leave-one-fire-out probability from a model refitted on the other 73 fires, marked
+    <span class="src-tag lofo">lofo</span> below. The optical-only bundle and the per-fire
+    operating rule the owner adopted on 2026-09-11 are still being built and no row here is
+    scored by them.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the product, scored</p>
+    <h2>Seventeen fires</h2>
+  </div>
+  <div class="wrap">
+    <p>Matching is greedy one-to-one at 10 m between our inventory points and the truth
+    records, so a call is only scored where both datasets found the same building.
+    <strong>Detection recall</strong> is the share of truth records our inventory matched;
+    <strong>P / R / F1</strong> are for the destroyed class on the matched pairs only. A
+    detection miss is therefore not counted as a damage error — it is counted in the detection
+    column, where it belongs.</p>
+  </div>
+  <div class="wide">
+    <figure class="band">
+      <svg viewBox="0 0 860 479" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="200.0" y1="26" x2="200.0" y2="433" />
+<text class="tick" x="200.0" y="20" text-anchor="middle">0</text>
+<line class="grid-line" x1="302.3" y1="26" x2="302.3" y2="433" />
+<text class="tick" x="302.3" y="20" text-anchor="middle">0.2</text>
+<line class="grid-line" x1="404.5" y1="26" x2="404.5" y2="433" />
+<text class="tick" x="404.5" y="20" text-anchor="middle">0.4</text>
+<line class="grid-line" x1="506.8" y1="26" x2="506.8" y2="433" />
+<text class="tick" x="506.8" y="20" text-anchor="middle">0.6</text>
+<line class="grid-line" x1="609.1" y1="26" x2="609.1" y2="433" />
+<text class="tick" x="609.1" y="20" text-anchor="middle">0.8</text>
+<line class="grid-line" x1="711.3" y1="26" x2="711.3" y2="433" />
+<text class="tick" x="711.3" y="20" text-anchor="middle">1.0</text>
+<text x="190" y="48.5" text-anchor="end">Marshall CO 2021 · county</text>
+<rect x="200.0" y="37.0" width="496.0" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="703.0" y="48.5">0.970  ·  1,023 pairs</text>
+<text x="190" y="69.5" text-anchor="end">TCU Complex 2025</text>
+<rect x="200.0" y="58.0" width="487.3" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="694.3" y="69.5">0.953  ·  198</text>
+<text x="190" y="90.5" text-anchor="end">Palisades 2025</text>
+<rect x="200.0" y="79.0" width="480.1" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="687.1" y="90.5">0.939  ·  8,949</text>
+<text x="190" y="111.5" text-anchor="end">Eaton 2025</text>
+<rect x="200.0" y="100.0" width="476.0" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="683.0" y="111.5">0.931  ·  14,955</text>
+<text x="190" y="132.5" text-anchor="end">Thompson 2024</text>
+<rect x="200.0" y="121.0" width="475.0" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="682.0" y="132.5">0.929  ·  141</text>
+<text x="190" y="153.5" text-anchor="end">Airport 2024</text>
+<rect x="200.0" y="142.0" width="474.0" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="681.0" y="153.5">0.927  ·  185</text>
+<text x="190" y="174.5" text-anchor="end">Marshall CO 2021 · FEMA MAC</text>
+<rect x="200.0" y="163.0" width="472.5" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="679.5" y="174.5">0.924  ·  2,741</text>
+<text x="190" y="195.5" text-anchor="end">Canyon 2025</text>
+<rect x="200.0" y="184.0" width="468.9" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="675.9" y="195.5">0.917  ·  82</text>
+<text x="190" y="216.5" text-anchor="end">Borel 2024</text>
+<rect x="200.0" y="205.0" width="466.3" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="673.3" y="216.5">0.912  ·  345</text>
+<text x="190" y="237.5" text-anchor="end">Park 2024</text>
+<rect x="200.0" y="226.0" width="465.8" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="672.8" y="237.5">0.911  ·  992</text>
+<text x="190" y="258.5" text-anchor="end">Marshall CO 2021 · Carlson</text>
+<rect x="200.0" y="247.0" width="458.7" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="665.7" y="258.5">0.897  ·  4,767</text>
+<text x="190" y="279.5" text-anchor="end">French 2024</text>
+<rect x="200.0" y="268.0" width="454.6" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="661.6" y="279.5">0.889  ·  174</text>
+<text x="190" y="300.5" text-anchor="end">South Fork NM 2024</text>
+<rect x="200.0" y="289.0" width="450.5" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="657.5" y="300.5">0.881  ·  1,637</text>
+<text x="190" y="321.5" text-anchor="end">Mountain 2024</text>
+<rect x="200.0" y="310.0" width="425.4" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="632.4" y="321.5">0.832  ·  1,444</text>
+<text x="190" y="342.5" text-anchor="end">Nixon 2024</text>
+<rect x="200.0" y="331.0" width="416.7" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="623.7" y="342.5">0.815  ·  69</text>
+<text x="190" y="363.5" text-anchor="end">Bridge 2024</text>
+<rect x="200.0" y="352.0" width="373.3" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="580.3" y="363.5">0.730  ·  447</text>
+<text x="190" y="384.5" text-anchor="end">Line 2024</text>
+<rect x="200.0" y="373.0" width="341.1" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="548.1" y="384.5">0.667  ·  154</text>
+<text x="190" y="405.5" text-anchor="end">Coches 2 2025</text>
+<rect x="200.0" y="394.0" width="170.3" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="377.3" y="405.5">0.333  ·  118</text>
+<text x="190" y="426.5" text-anchor="end">Franklin 2024</text>
+<rect x="200.0" y="415.0" width="153.4" height="13" rx="3" fill="var(--s2)" />
+<text class="val" x="360.4" y="426.5">0.300  ·  463</text>
+<line class="axis" x1="200.0" y1="433" x2="742.0" y2="433" />
+</svg>
+      <figcaption>Destroyed-class F1 on the matched pairs, at the shipped cut. The two fires at
+      the bottom are not model failures in the ordinary sense and both are explained below:
+      <strong>Franklin</strong> is an attribution problem a rule has since largely fixed, and
+      <strong>Coches 2</strong> called 2 destroyed structures where the inspectors recorded 9 —
+      a fire so small that two structures is most of the score.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <p class="src"><b>Source:</b> <code>outputs/forward_damage/per_fire.csv</code> (15 fires,
+    tag <code>seg_all_v4_full__perimeter__forward</code>, generated 2026-09-11) and
+    <code>outputs/ics209_check/outside_ca/{ruidoso_southfork_2024,marshall_boulder_2021,marshall_femamac_2021}/report.md</code>.</p>
+  </div>
+
+  <div class="wide">
+    <h3>The full table</h3>
+    <p class="hint">Click a column heading to sort. Every column is read straight from the
+    per-fire output file; nothing on this page is recomputed.</p>
+    <div class="tablewrap">
+      <table id="fires">
+        <thead>
+          <tr>
+            <th class="sortable" data-type="text" scope="col">Fire</th>
+            <th class="sortable" data-type="text" scope="col">Score</th>
+            <th class="sortable num" data-type="num" scope="col">Inventory</th>
+            <th class="sortable num" data-type="num" scope="col">Predicted destroyed</th>
+            <th class="sortable num" data-type="num" scope="col">Truth destroyed</th>
+            <th class="sortable num" data-type="num" scope="col">Ratio</th>
+            <th class="sortable num" data-type="num" scope="col">Truth records</th>
+            <th class="sortable num" data-type="num" scope="col">Detect. recall</th>
+            <th class="sortable num" data-type="num" scope="col">Pairs @10 m</th>
+            <th class="sortable num" data-type="num" scope="col">P</th>
+            <th class="sortable num" data-type="num" scope="col">R</th>
+            <th class="sortable num" data-type="num" scope="col">F1 @10 m</th>
+            <th class="sortable num" data-type="num" scope="col">F1 @20 m</th>
+            <th class="sortable num" data-type="num" scope="col">AUC</th>
+            <th scope="col">Map</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="fire">Eaton 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">64,319</td><td class="num">7,771</td><td class="num">9,419</td><td class="num">0.825</td><td class="num">18,428</td><td class="num">0.8163</td><td class="num">14,955</td><td class="num">0.9503</td><td class="num">0.9129</td><td class="num">0.9312</td><td class="num">0.9306</td><td class="num">0.9785</td><td class="map"><a href="inventory_DINS_2025_EATON__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Palisades 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">28,837</td><td class="num">5,712</td><td class="num">6,845</td><td class="num">0.834</td><td class="num">12,137</td><td class="num">0.7452</td><td class="num">8,949</td><td class="num">0.9252</td><td class="num">0.9538</td><td class="num">0.9393</td><td class="num">0.9378</td><td class="num">0.9812</td><td class="map"><a href="inventory_DINS_2025_PALISADES__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Mountain 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">23,241</td><td class="num">283</td><td class="num">243</td><td class="num">1.165</td><td class="num">1,840</td><td class="num">0.7967</td><td class="num">1,444</td><td class="num">0.8104</td><td class="num">0.8550</td><td class="num">0.8321</td><td class="num">0.8325</td><td class="num">0.9826</td><td class="map"><a href="inventory_DINS_2024_MOUNTAIN__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Park 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">4,097</td><td class="num">443</td><td class="num">713</td><td class="num">0.621</td><td class="num">2,102</td><td class="num">0.4757</td><td class="num">992</td><td class="num">0.8608</td><td class="num">0.9673</td><td class="num">0.9110</td><td class="num">0.9149</td><td class="num">0.9869</td><td class="map"><a href="inventory_DINS_2024_PARK__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Franklin 2024</td><td><span class="src-tag prod">production</span></td><td class="num">3,004</td><td class="num">35</td><td class="num">20</td><td class="num">1.750</td><td class="num">738</td><td class="num">0.6626</td><td class="num">463</td><td class="num">0.2500</td><td class="num">0.3750</td><td class="num">0.3000</td><td class="num">0.2727</td><td class="num">0.9533</td><td class="map"><a href="inventory_DINS_2024_FRANKLIN__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Bridge 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">4,567</td><td class="num">80</td><td class="num">81</td><td class="num">0.988</td><td class="num">925</td><td class="num">0.4941</td><td class="num">447</td><td class="num">0.5897</td><td class="num">0.9583</td><td class="num">0.7302</td><td class="num">0.7297</td><td class="num">0.9887</td><td class="map"><a href="inventory_DINS_2024_BRIDGE__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Borel 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">2,132</td><td class="num">199</td><td class="num">223</td><td class="num">0.892</td><td class="num">507</td><td class="num">0.6864</td><td class="num">345</td><td class="num">0.9220</td><td class="num">0.9028</td><td class="num">0.9123</td><td class="num">0.9103</td><td class="num">0.9758</td><td class="map"><a href="inventory_DINS_2024_BOREL__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">TCU Complex 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">2,070</td><td class="num">82</td><td class="num">95</td><td class="num">0.863</td><td class="num">278</td><td class="num">0.7158</td><td class="num">198</td><td class="num">0.9683</td><td class="num">0.9385</td><td class="num">0.9531</td><td class="num">0.9457</td><td class="num">0.9968</td><td class="map"><a href="inventory_DINS_2025_TCU__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Airport 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">5,937</td><td class="num">125</td><td class="num">160</td><td class="num">0.781</td><td class="num">379</td><td class="num">0.4934</td><td class="num">185</td><td class="num">0.8723</td><td class="num">0.9880</td><td class="num">0.9266</td><td class="num">0.9266</td><td class="num">0.9605</td><td class="map"><a href="inventory_DINS_2024_AIRPORT__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">French 2024</td><td><span class="src-tag prod">production</span></td><td class="num">1,609</td><td class="num">6</td><td class="num">11</td><td class="num">0.545</td><td class="num">234</td><td class="num">0.7436</td><td class="num">174</td><td class="num">0.8000</td><td class="num">1.0000</td><td class="num">0.8889</td><td class="num">0.8889</td><td class="num">0.9941</td><td class="map"><a href="inventory_DINS_2024_FRENCH__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Line 2024</td><td><span class="src-tag prod">production</span></td><td class="num">11,892</td><td class="num">10</td><td class="num">2</td><td class="num">5.000</td><td class="num">340</td><td class="num">0.4529</td><td class="num">154</td><td class="num">0.5000</td><td class="num">1.0000</td><td class="num">0.6667</td><td class="num">0.5000</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2024_LINE__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Thompson 2024</td><td><span class="src-tag prod">production</span></td><td class="num">5,969</td><td class="num">27</td><td class="num">26</td><td class="num">1.038</td><td class="num">185</td><td class="num">0.7676</td><td class="num">141</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9989</td><td class="map"><a href="inventory_DINS_2024_THOMPSON__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Coches 2 2025</td><td><span class="src-tag prod">production</span></td><td class="num">7,463</td><td class="num">2</td><td class="num">9</td><td class="num">0.222</td><td class="num">143</td><td class="num">0.8252</td><td class="num">118</td><td class="num">1.0000</td><td class="num">0.2000</td><td class="num">0.3333</td><td class="num">0.3333</td><td class="num">0.8814</td><td class="map"><a href="inventory_DINS_2025_COCHES__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Canyon 2025</td><td><span class="src-tag prod">production</span></td><td class="num">2,247</td><td class="num">15</td><td class="num">15</td><td class="num">1.000</td><td class="num">142</td><td class="num">0.6056</td><td class="num">82</td><td class="num">1.0000</td><td class="num">0.8462</td><td class="num">0.9167</td><td class="num">0.9167</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2025_CANYON__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">production</span></td><td class="num">813</td><td class="num">29</td><td class="num">40</td><td class="num">0.725</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9167</td><td class="num">0.7333</td><td class="num">0.8148</td><td class="num">0.8148</td><td class="num">0.9778</td><td class="map"><a href="inventory_DINS_2024_NIXON__perimeter.html">map</a></td></tr>
+          <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">production</span></td><td class="num">7,931</td><td class="num">606</td><td class="num">742</td><td class="num">0.817</td><td class="num">2,488</td><td class="num">0.6610</td><td class="num">1,637</td><td class="num">0.9802</td><td class="num">0.8005</td><td class="num">0.8813</td><td class="num">—</td><td class="num">0.9859</td><td class="map">—</td></tr>
+          <tr><td class="fire">Marshall CO 2021</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,786</td><td class="num">881</td><td class="num">891</td><td class="num">0.989</td><td class="num">1,473</td><td class="num">0.7100</td><td class="num">1,023</td><td class="num">0.9750</td><td class="num">0.9640</td><td class="num">0.9700</td><td class="num">—</td><td class="num">0.9780</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+        </tbody>
+        <tfoot>
+          <tr class="total"><td class="fire">15 series fires, pooled</td><td>—</td><td class="num">168,197</td><td class="num">14,819</td><td class="num">17,902</td><td class="num">0.828</td><td class="num">38,497</td><td class="num">0.7528</td><td class="num">28,716</td><td class="num">—</td><td class="num">—</td><td class="num">0.7990</td><td class="num">0.7855</td><td class="num">—</td><td class="map">—</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/forward_damage/per_fire.csv</code> and
+    <code>metrics.json</code> for the fifteen series fires (truth = CAL FIRE DINS);
+    <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code> (truth = FEMA
+    Urban Search &amp; Rescue, assessment hull only) and
+    <code>…/marshall_boulder_2021/report.md</code> (truth = Boulder County field damage
+    assessment). The pooled F1 rows are the <strong>mean per fire</strong>, not a pooled
+    recomputation; pooled detection recall is over all 38,497 DINS records. The two
+    out-of-series fires are excluded from every pooled figure.</p>
+  </div>
+
+  <div class="wrap">
+    <h3>Reading the two low rows</h3>
+    <div class="note warn">
+      <p><strong>Franklin 2024 was an attribution failure, not a ranking failure.</strong> It
+      scored F1 0.240 at AUC 0.948 in <code>v0.2.0</code> — 333 predicted destroyed against 20
+      inspected as destroyed. The AUC is the tell. Franklin ignited near Malibu on 9 December
+      2024; the Palisades fire burned 13.0 km² of Franklin's Indirect ring on 7 January 2025,
+      <strong>day 29 of Franklin's own 74-day post-fire window</strong>, and 297 of Franklin's
+      333 destroyed calls sat inside the Palisades perimeter. The model read the pixels
+      correctly and filed them under the wrong fire. Since <code>v0.3.0</code> an attribution
+      rule cedes those calls to the later fire: Franklin is now 35 predicted destroyed and F1
+      0.300, and <strong>877 of its rows carry no damage call at all</strong>, with
+      <code>damage_null_reason = overlapped_by_DINS_2025_PALISADES</code> saying why.</p>
+      <p>Truncating Franklin's window at the Palisades ignition was built, applied and
+      <strong>rejected</strong>: the truncated window is 14 days holding one Sentinel-2 scene
+      against the full window's six, median post-fire observations drop 5 → 1, and two of
+      Franklin's three correct destroyed calls are lost. A 14-day composite is a different
+      quantity from the 60-day one the bundle was fitted on, not a shorter look at the same
+      one.</p>
+    </div>
+    <p><strong>Coches 2 2025 is a small-numbers row.</strong> 143 inspections, 9 destroyed, 118
+    matched pairs, 2 called destroyed — precision 1.000 and recall 0.200. It is also the fire
+    where the public footprint database is <em>best</em> (baseline recall 0.825) and where the
+    detector adds nothing at all. One fire of this size moves a mean-per-fire F1 by several
+    points on its own, which is why the pooled row and the per-fire mean are both published.</p>
+
+    <h3>The two fires that are not in the series</h3>
+    <p><strong>South Fork (NM, June 2024)</strong> is the only verified post-2022
+    per-structure damage assessment outside California — FEMA Urban Search &amp; Rescue
+    observations published by the Village of Ruidoso. It is scored on the assessment hull
+    (39.7 km²), not the whole fire, because an assessment is not a census and enumerating over
+    the whole 17,569-acre fire would make every uninspected building a false positive by
+    construction. Its detection recall (0.661) is low for structural reasons: New Mexico has no
+    cached Microsoft footprint layer, so the detector's prior band is USA Structures alone, and
+    Lincoln County's USA Structures extract carries a single <code>IMAGE_DATE</code> of
+    2017-05-26 — seven years before the fire.</p>
+    <p><strong>Marshall (CO, December 2021)</strong> is in Carlson's era, not the forward one,
+    so it is not in the release. It is here because it is the only fire in this project with a
+    public per-structure assessment nobody in this pipeline drew — two of them, in fact, plus
+    Carlson's own points. Scored against all three, on the same 14,786-structure inventory:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Truth set</th><th class="num">Records</th><th class="num">Destroyed</th><th class="num">Pairs @10 m</th><th class="num">Detection recall</th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Own cut → F1</th></tr></thead>
+        <tbody>
+          <tr><td>Boulder County — field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">1,023</td><td class="num">0.710</td><td class="num">0.975</td><td class="num">0.964</td><td class="num">0.970</td><td class="num">0.978</td><td class="num">0.82 → 0.976</td></tr>
+          <tr><td>FEMA MAC — remote sensing</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">2,741</td><td class="num">0.952 ⚠️</td><td class="num">0.895</td><td class="num">0.956</td><td class="num">0.924</td><td class="num">0.983</td><td class="num">0.91 → 0.929</td></tr>
+          <tr><td>Carlson's own points</td><td class="num">14,194</td><td class="num">1,196</td><td class="num">4,767</td><td class="num">0.968 ⚠️</td><td class="num">0.851</td><td class="num">0.948</td><td class="num">0.897</td><td class="num">0.985</td><td class="num">0.91 → 0.907</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b>
+    <code>outputs/ics209_check/outside_ca/marshall_{boulder,femamac}_2021/report.md</code>.
+    ⚠️ FEMA MAC's detection recall is <strong>not comparable</strong> with the other two: its
+    geometry <em>is</em> USA Structures footprints, which is also the main source of our
+    inventory, so the two match each other by construction. Boulder County's 0.710 is an
+    address-point list and is the honest detection figure.</p>
+    <p><strong>Marshall also answered the winter question.</strong> Its pre-fire window gives a
+    median of 6 clear Sentinel-2 observations per structure and its post-fire window a median
+    of <strong>2</strong>, against 9–17 on a summer California fire — and even so only
+    <strong>12 of 14,786</strong> structures (0.08 %) could not be scored. Snow does not stop
+    it; the post composite is simply thin.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the per-fire maps</p>
+    <h2>Look at a fire</h2>
+  </div>
+  <div class="wrap">
+    <p>Each map is one self-contained page: the pre-fire inventory drawn on satellite imagery,
+    coloured by predicted destroyed probability, with the inspection record beside it. Whole
+    fires carry tens of thousands of points and will not fit in one browsable page, so each map
+    draws full detail inside the densest 800 m neighbourhoods plus the cell holding the most
+    model misses outside them — the interesting failure — and covers the rest of the fire with a
+    coarse 250 m rate grid. The sampling is stated on the map itself.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fire</th><th>Map</th><th>Fire</th><th>Map</th></tr></thead>
+        <tbody>
+          <tr><td>Eaton 2025</td><td><a href="inventory_DINS_2025_EATON__perimeter.html">inventory map</a></td><td>Palisades 2025</td><td><a href="inventory_DINS_2025_PALISADES__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Mountain 2024</td><td><a href="inventory_DINS_2024_MOUNTAIN__perimeter.html">inventory map</a></td><td>Park 2024</td><td><a href="inventory_DINS_2024_PARK__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Franklin 2024</td><td><a href="inventory_DINS_2024_FRANKLIN__perimeter.html">inventory map</a></td><td>Bridge 2024</td><td><a href="inventory_DINS_2024_BRIDGE__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Borel 2024</td><td><a href="inventory_DINS_2024_BOREL__perimeter.html">inventory map</a></td><td>TCU Complex 2025</td><td><a href="inventory_DINS_2025_TCU__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Airport 2024</td><td><a href="inventory_DINS_2024_AIRPORT__perimeter.html">inventory map</a></td><td>French 2024</td><td><a href="inventory_DINS_2024_FRENCH__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Line 2024</td><td><a href="inventory_DINS_2024_LINE__perimeter.html">inventory map</a></td><td>Thompson 2024</td><td><a href="inventory_DINS_2024_THOMPSON__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Coches 2 2025</td><td><a href="inventory_DINS_2025_COCHES__perimeter.html">inventory map</a></td><td>Canyon 2025</td><td><a href="inventory_DINS_2025_CANYON__perimeter.html">inventory map</a></td></tr>
+          <tr><td>Nixon 2024</td><td><a href="inventory_DINS_2024_NIXON__perimeter.html">inventory map</a></td><td>Marshall CO 2021</td><td><a href="inventory_CO_2021_MARSHALL.html">inventory map</a></td></tr>
+          <tr><td>Camp 2018 (training fire)</td><td><a href="inventory_CA_2018_CAMP.html">inventory map</a></td><td>South Fork NM 2024</td><td>— no map published</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>scripts/qa_maps.py</code>, generated 2026-09-10 and
+    2026-09-11 from each fire's <code>outputs/inventory/&lt;unit&gt;/structures_damage.gpkg</code>.
+    The maps recompute nothing: every number they show is read from the JSON the pipeline stage
+    wrote, or counted off the rows being drawn.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Companion pages: <a href="index.html">the index</a> ·
+      <a href="pipeline-overview.html">the deep dive</a> ·
+      <a href="combined-series.html">the combined series</a> ·
+      <a href="uncertainty.html">how wide the numbers are</a> ·
+      <a href="outside-california.html">outside California</a>.</p>
+    <p>Built 2026-09-12 · release <code>v0.3.0</code>, cut 2026-09-11.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var table = document.getElementById("fires");
+  if (!table) { return; }
+  var tbody = table.tBodies[0];
+  var heads = Array.prototype.slice.call(table.tHead.rows[0].cells);
+  function value(row, i, type) {
+    var text = row.cells[i].textContent.trim();
+    if (type !== "num") { return text.toLowerCase(); }
+    var n = parseFloat(text.replace(/,/g, ""));
+    return isNaN(n) ? -Infinity : n;   // "—" sorts to the bottom
+  }
+  heads.forEach(function (th, i) {
+    if (!th.classList.contains("sortable")) { return; }
+    th.setAttribute("tabindex", "0");
+    th.setAttribute("role", "button");
+    function sort() {
+      var type = th.dataset.type;
+      var desc = th.getAttribute("aria-sort") !== "descending";
+      heads.forEach(function (o) { o.removeAttribute("aria-sort"); });
+      th.setAttribute("aria-sort", desc ? "descending" : "ascending");
+      var rows = Array.prototype.slice.call(tbody.rows);
+      rows.sort(function (a, b) {
+        var x = value(a, i, type), y = value(b, i, type);
+        if (x < y) { return desc ? 1 : -1; }
+        if (x > y) { return desc ? -1 : 1; }
+        return 0;
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    }
+    th.addEventListener("click", sort);
+    th.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sort(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
