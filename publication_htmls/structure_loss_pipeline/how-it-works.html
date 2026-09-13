@@ -1,86 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Structure Loss Pipeline, Explained</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<meta name="description" content="A plain-language account of the two jobs this pipeline does for every wildfire: list the buildings that stood before it, then decide which of them burned." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
+  /* ============================================================
+     Structure Loss Pipeline — one design system, dark by default.
+     Tokens are declared in full on bare :root (the DARK palette,
+     which is this site's primary theme). Light is redefined in two
+     places so it wins whether the viewer chose it or their OS did.
+     Series colours validated with the dataviz palette checker on
+     each mode's own chart surface: all six checks pass in both.
+     ============================================================ */
   :root {
-    --paper: #FAF8F3;
-    --paper-2: #F1EEE6;
-    --ink: #23282D;
-    --ink-2: #4E555C;
-    --ink-3: #7C848C;
-    --rule: #DDD8CC;
-    --footprint: #3D5A80;
-    --detector: #B8860B;
-    --ember: #B5451B;
-    --survivor: #2E7D7B;
-    --ember-soft: #F3DED3;
-    --survivor-soft: #D7EAE8;
-    --footprint-soft: #DCE4EF;
-    --detector-soft: #F2E8CC;
-    --measure: 68ch;
+    /* ground and ink — near-black with a faint warm bias: ash, not slate */
+    --paper:   #0B0C0E;
+    --paper-2: #14161A;
+    --paper-3: #1E2127;
+    --ink:     #EFEBE3;
+    --ink-2:   #B6B0A6;
+    --ink-3:   #85837E;
+    --rule:    #262A2F;
+    --rule-2:  #3A4047;
+    /* four series, one job each — validated on surface #14161A */
+    --s1: #5B8AD2;   /* the footprint baseline */
+    --s2: #DB6026;   /* destroyed · this pipeline */
+    --s3: #17A188;   /* surviving · the hand survey */
+    --s4: #B38A20;   /* the detector */
+    --s1-soft: #182334;
+    --s2-soft: #32190F;
+    --s3-soft: #0C2A25;
+    --s4-soft: #2C2410;
+    /* status — reserved, never reused as a fifth series */
+    --good: #35B15E;
+    --warn: #D6A02A;
+    --crit: #E0705E;
+    /* type scale */
+    --t-xs: 0.72rem;
+    --t-sm: 0.82rem;
+    --t-ui: 0.9rem;
+    --t-md: 1.12rem;
+    --t-lg: 1.34rem;
+    --t-xl: 1.72rem;
+    --measure: 66ch;
+    --shell: 1140px;
+    --gutter: 20px;
+    color-scheme: dark;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #1B1E22; --paper-2: #23272C; --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399; --rule: #383D44;
-      --footprint: #8FB0DA; --detector: #E0B64A; --ember: #E8784A; --survivor: #62B7B4;
-      --ember-soft: #4A2C22; --survivor-soft: #1F3B3A; --footprint-soft: #263447; --detector-soft: #3F3520;
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+      --rule: #DDD8CC; --rule-2: #C3BCAB;
+      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+      --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+      --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+      color-scheme: light;
     }
   }
-  :root[data-theme="dark"] {
-    --paper: #1B1E22; --paper-2: #23272C; --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399; --rule: #383D44;
-    --footprint: #8FB0DA; --detector: #E0B64A; --ember: #E8784A; --survivor: #62B7B4;
-    --ember-soft: #4A2C22; --survivor-soft: #1F3B3A; --footprint-soft: #263447; --detector-soft: #3F3520;
+  :root[data-theme="light"] {
+    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+    --rule: #DDD8CC; --rule-2: #C3BCAB;
+    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+    --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+    --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+    color-scheme: light;
   }
+
   * { box-sizing: border-box; }
-  body { background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; margin: 0; }
-  h1, h2, h3 { font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; }
-  h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); font-variation-settings: "opsz" 144; }
-  h2 { font-size: 1.85rem; margin-top: 0.4rem; }
-  h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.4rem; }
-  p { margin: 0 0 1.1rem; }
-  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.25rem; }
-  .wide { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
-  header { padding: 3.5rem 0 2rem; border-bottom: 1px solid var(--rule); }
-  .eyebrow { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1rem; }
-  .lede { font-size: 1.2rem; color: var(--ink-2); margin-top: 1.2rem; }
-  section.part { padding: 3rem 0 1rem; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.14; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 2.9rem); font-variation-settings: "opsz" 144; letter-spacing: -0.012em; }
+  h2 { font-size: clamp(1.45rem, 2.8vw, var(--t-xl)); letter-spacing: -0.008em; }
+  h3 { font-size: var(--t-lg); margin-top: 2.4rem; margin-bottom: 0.45rem; }
+  h4 {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 1rem; margin: 1.7rem 0 0.3rem; line-height: 1.3;
+  }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--s2); }
+  :focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; border-radius: 2px; }
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+    font-size: 0.87em;
+  }
+  code { background: var(--paper-2); padding: 0.08em 0.36em; border-radius: 3px; color: var(--ink-2); }
+  strong { font-weight: 600; color: var(--ink); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+  /* ---- shell ---- */
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: var(--gutter); }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
+  .skip {
+    position: absolute; left: -9999px; top: 0; background: var(--paper-2); color: var(--ink);
+    padding: 0.6rem 1rem; z-index: 20; border: 1px solid var(--rule-2); border-radius: 0 0 4px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---- the nav rail: where this page sits in the set of ten ---- */
+  nav.rail {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, blue)) {
+    nav.rail { background: var(--paper); }
+  }
+  nav.rail .inner {
+    max-width: var(--shell); margin: 0 auto; padding: 0.55rem var(--gutter);
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+  }
+  nav.rail a.home {
+    color: var(--ink); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500; white-space: nowrap;
+  }
+  nav.rail a.home:hover { color: var(--s2); }
+  nav.rail .here {
+    color: var(--ink-2); letter-spacing: 0.04em; display: flex; gap: 0.6em;
+    align-items: baseline; white-space: nowrap; flex: none;
+  }
+  nav.rail .here .of { color: var(--ink-3); }
+  nav.rail .sibs {
+    display: flex; gap: 0.95rem; flex-wrap: nowrap; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    padding-bottom: 1px;
+  }
+  nav.rail .sibs::-webkit-scrollbar { display: none; }
+  nav.rail .sibs a { color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+  nav.rail .sibs a:hover { color: var(--s2); }
+  nav.rail .sibs a[aria-current="page"] { color: var(--s2); }
+
+  /* ---- masthead ---- */
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.6rem;
+  }
+  .lede { font-size: var(--t-md); color: var(--ink-2); max-width: var(--measure); }
+  header.masthead {
+    border-bottom: 1px solid var(--rule-2);
+    padding-block: 3.2rem 1.8rem;
+    background:
+      radial-gradient(120% 140% at 12% -10%, var(--s2-soft) 0%, transparent 62%);
+  }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 0.9rem;
+  }
+  header.masthead h1 { margin-bottom: 0.9rem; }
+
+  section.part { padding-block: 2.8rem 0.8rem; }
   section.part + section.part { border-top: 1px solid var(--rule); }
-  .partlabel { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.5rem; }
-  figure { margin: 2rem 0; }
-  figure.band { background: var(--paper-2); border-radius: 6px; padding: 1.5rem 1.25rem 1rem; }
-  figcaption { font-size: 0.9rem; color: var(--ink-2); margin-top: 0.75rem; max-width: var(--measure); }
-  svg { display: block; width: 100%; height: auto; overflow: visible; }
-  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink); }
-  svg .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+
+  /* the eyebrow's counter is the reading order of the deep dive, which is a real
+     sequence; nothing else on the site is numbered. */
+  .against { border-top: 2px solid var(--s2); padding-top: 0.55rem; margin-top: 2.6rem; }
+  .against .who {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--s2);
+  }
+
+  /* ---- tables ---- */
+  .tablewrap {
+    overflow-x: auto; margin: 1.1rem 0 0.2rem;
+    border: 1px solid var(--rule); border-radius: 5px; background: var(--paper-2);
+  }
+  /* A wide table or chart in the prose column breaks out to the page shell, so it
+     is read rather than scrolled: as wide as the shell (or the viewport less its
+     gutters), re-centred on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap details.more,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 2 * var(--gutter)));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table {
+    border-collapse: collapse; width: 100%; font-size: var(--t-ui);
+    font-variant-numeric: tabular-nums;
+  }
+  caption {
+    caption-side: top; text-align: left; font-size: var(--t-ui); color: var(--ink-2);
+    padding: 0.7rem 0.75rem 0.55rem; max-width: 92ch;
+  }
+  th, td {
+    text-align: left; padding: 0.46rem 0.75rem;
+    border-bottom: 1px solid var(--rule); vertical-align: top;
+  }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-xs); letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-2); border-bottom: 1px solid var(--rule-2);
+    position: sticky; top: 0; background: var(--paper-3);
+    white-space: nowrap; vertical-align: bottom;
+  }
+  tbody tr:hover td { background: color-mix(in srgb, var(--paper-3) 55%, transparent); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num {
+    text-align: right;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+  }
+  td.ci, .ci {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+    color: var(--ink-2); white-space: nowrap; text-align: right;
+  }
+  tr.total td {
+    font-weight: 600;
+    border-top: 1px solid var(--rule-2);
+    background: color-mix(in srgb, var(--s2-soft) 60%, transparent);
+  }
+  .pass, .verdict.pass { color: var(--good); font-weight: 600; }
+  .fail, .verdict.fail { color: var(--crit); font-weight: 600; }
+  .no { color: var(--ink-3); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin: 0.5rem 0 1.7rem; line-height: 1.55;
+    overflow-wrap: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  .src code { background: none; padding: 0; }
+
+  /* ---- long tables fold away so the page reads top-down ---- */
+  details.more { margin: 1.2rem 0 1.7rem; }
+  details.more > summary {
+    cursor: pointer; list-style: none;
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-ui); color: var(--ink);
+    padding: 0.6rem 0.9rem; border: 1px solid var(--rule-2); border-radius: 5px;
+    background: var(--paper-2); display: flex; align-items: center; gap: 0.6em;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before {
+    content: "+"; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--s2); font-size: 1.05em; line-height: 1; width: 1ch; flex: none;
+  }
+  details.more[open] > summary::before { content: "\2212"; }
+  details.more > summary:hover { border-color: var(--s2); }
+  details.more[open] > summary { border-radius: 5px 5px 0 0; border-bottom-color: var(--rule); }
+  details.more[open] > summary + * { margin-top: 0; }
+  details.more .tablewrap { border-radius: 0 0 5px 5px; border-top: 0; margin-top: 0; }
+  details.more .src { margin-bottom: 0; }
+
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule-2); border-radius: 0 5px 5px 0;
+    padding: 0.95rem 1.15rem; margin: 1.4rem 0; font-size: var(--t-ui);
+  }
+  .note > :last-child, .status > :last-child { margin-bottom: 0; }
+  .note.warn { border-left-color: var(--s2); background: color-mix(in srgb, var(--s2-soft) 70%, var(--paper-2)); }
+  .note.ok { border-left-color: var(--s3); background: color-mix(in srgb, var(--s3-soft) 70%, var(--paper-2)); }
+  .status { border-left-color: var(--s4); background: color-mix(in srgb, var(--s4-soft) 60%, var(--paper-2)); }
+  .status h3 { margin-top: 0; font-size: var(--t-md); }
+  .note .src, .status .src { margin-bottom: 0; }
+
+  /* ---- figures ---- */
+  figure { margin: 1.7rem 0; }
+  figure.band {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    padding: 1.15rem 1.1rem 1rem; border-radius: 5px;
+  }
+  figcaption {
+    font-size: var(--t-ui); color: var(--ink-2); margin-top: 0.75rem;
+    max-width: 78ch; line-height: 1.55;
+  }
+  figcaption strong:first-child { color: var(--ink); }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px;
+  }
+  /* a halo in the panel colour so a label never has a grid or reference line
+     running through it */
+  figure.band svg text {
+    paint-order: stroke fill; stroke: var(--paper-2); stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--t-sm);
+    color: var(--ink-2); margin: 0.7rem 0 0; padding: 0; list-style: none;
+  }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.35rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.5rem; }
+  ul.tight li::marker, ol.tight li::marker { color: var(--ink-3); }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--t-xs); letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.14em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  nav.toc { margin: 1.9rem 0 0.4rem; }
+  nav.toc ol {
+    list-style: none; margin: 0; padding: 0; counter-reset: toc;
+    display: grid; gap: 0.35rem 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  nav.toc li {
+    counter-increment: toc; font-size: var(--t-ui);
+    border-bottom: 1px solid var(--rule); padding-bottom: 0.32rem;
+  }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin-right: 0.6em;
+  }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  footer.pagefoot {
+    border-top: 1px solid var(--rule-2); margin-top: 3.4rem;
+    padding-block: 1.8rem 3.4rem; color: var(--ink-2); font-size: var(--t-ui);
+  }
+  footer.pagefoot .mono { font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    :root { --gutter: 16px; }
+    th, td { padding: 0.42rem 0.5rem; }
+    header.masthead { padding-block: 2.2rem 1.4rem; }
+    nav.rail .sibs { display: none; }
+  }
+  /* This page's own diagrams name their colours by what they mean, so the names
+     are mapped onto the shared series tokens rather than redefined. */
+  :root {
+    --footprint: var(--s1);   --footprint-soft: var(--s1-soft);
+    --ember: var(--s2);       --ember-soft: var(--s2-soft);
+    --survivor: var(--s3);    --survivor-soft: var(--s3-soft);
+    --detector: var(--s4);    --detector-soft: var(--s4-soft);
+  }
+  .partlabel {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 0.55rem;
+  }
+  svg { overflow: visible; }
+  svg text { fill: var(--ink); }
   svg .muted { fill: var(--ink-3); }
-  .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.85rem; color: var(--ink-2); margin-top: 0.5rem; }
-  .legend span::before { content: ""; display: inline-block; width: 0.75em; height: 0.75em; border-radius: 2px; margin-right: 0.45em; vertical-align: -0.05em; background: var(--sw); }
-  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
-  th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  th { font-weight: 600; color: var(--ink-2); font-size: 0.85rem; letter-spacing: 0.02em; }
-  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.9rem; }
-  .tablewrap { overflow-x: auto; margin: 1.5rem 0; }
-  .callout { border-left: 3px solid var(--detector); padding: 0.6rem 1rem; background: var(--paper-2); margin: 1.5rem 0; }
+  .legend span { display: flex; align-items: center; }
+  .legend span::before {
+    content: ""; display: inline-block; width: 0.8em; height: 0.8em;
+    border-radius: 2px; margin-right: 0.45em; background: var(--sw); flex: none;
+  }
+  .callout {
+    border-left: 3px solid var(--s4); background: color-mix(in srgb, var(--s4-soft) 60%, var(--paper-2));
+    border: 1px solid var(--rule); border-left-width: 3px; border-left-color: var(--s4);
+    border-radius: 0 5px 5px 0; padding: 0.95rem 1.15rem; margin: 1.4rem 0;
+    font-size: var(--t-ui);
+  }
   .callout p:last-child { margin-bottom: 0; }
-  .steps { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0.9rem; }
-  .steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.75rem; align-items: start; }
-  .steps .n { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.85rem; color: var(--ink-3); padding-top: 0.25rem; }
-  .steps b { font-weight: 600; }
-  dl.glossary { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.25rem; font-size: 0.95rem; }
+  .steps { list-style: none; padding: 0; margin: 1.3rem 0; display: grid; gap: 1rem; }
+  .steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.8rem; align-items: start; }
+  .steps .n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+    color: var(--s2); padding-top: 0.2rem;
+  }
+  dl.glossary {
+    display: grid; grid-template-columns: max-content 1fr; gap: 0.55rem 1.4rem;
+    font-size: var(--t-ui); margin: 1.2rem 0 0;
+  }
   dl.glossary dt { font-weight: 600; }
   dl.glossary dd { margin: 0; color: var(--ink-2); }
-  footer { padding: 2.5rem 0 4rem; color: var(--ink-3); font-size: 0.85rem; border-top: 1px solid var(--rule); margin-top: 3rem; }
-  a { color: var(--footprint); }
-  a:focus-visible { outline: 2px solid var(--detector); outline-offset: 2px; }
-  @media (max-width: 640px) { dl.glossary { grid-template-columns: 1fr; } .steps li { grid-template-columns: 1.8rem 1fr; } }
+  @media (max-width: 640px) {
+    dl.glossary { grid-template-columns: 1fr; }
+    .steps li { grid-template-columns: 1.7rem 1fr; }
+  }
 </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="rail" aria-label="Site sections">
+  <div class="inner">
+    <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
+    <span class="here"><span>How it works</span><span class="of">page 1 of 10</span></span>
+    <span class="sibs"><a href="how-it-works.html" aria-current="page">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+  </div>
+</nav>
 
-<header>
+<header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Wildfire structure loss · Continuing the USGS record from 2023 onward</div>
+    <p class="kicker">Structure Loss Pipeline · in plain language</p>
     <h1>How the pipeline decides what was there, and what burned</h1>
     <p class="lede">A plain-language account of the two jobs this pipeline does for every fire: build a defensible list of the buildings that stood before the fire, then decide, building by building, whether the fire destroyed them. It explains the current best version of each, what the numbers mean, and how the same process runs on a fire it has never seen, anywhere in the lower 48 states.</p>
   </div>
 </header>
+
+<main id="main">
 
 <section class="part">
   <div class="wrap">
@@ -301,9 +644,14 @@
   </div>
 </section>
 
-<footer>
+</main>
+
+<footer class="pagefoot">
   <div class="wrap">
     <p>Numbers on this page are copied from the pipeline's own output files as of 12 September 2026. The full record of every experiment, including the ones that failed, is in the project's experiment ledger and change log. Provenance: detector <code>seg_all_v4</code>, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.4.1</code>.</p>
     <p>Companion pages: <a href="index.html">the index</a> · <a href="pipeline-overview.html">the full picture</a> · <a href="forward-fires.html">fire by fire</a> · <a href="changelog.html">what changed</a>.</p>
   </div>
 </footer>
+
+</body>
+</html>

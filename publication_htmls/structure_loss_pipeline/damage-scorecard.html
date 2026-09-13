@@ -8,46 +8,61 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   :root {
-    --paper: #FAF8F3;
-    --paper-2: #F1EEE6;
-    --paper-3: #E9E4D8;
-    --ink: #23282D;
-    --ink-2: #4E555C;
-    --ink-3: #7C848C;
-    --rule: #DDD8CC;
-    --rule-2: #C8C1B0;
-    --s1: #2A62B0;   /* footprints / baseline */
-    --s2: #BF4415;   /* destroyed / this pipeline */
-    --s3: #0E9C86;   /* surviving / Carlson */
-    --s4: #B08300;   /* detector */
-    --s1-soft: #DCE4EF;
-    --s2-soft: #F5DFD5;
-    --s3-soft: #D5EDE7;
-    --s4-soft: #F2E8CC;
-    --good: #0ca30c;
-    --warn: #a5700a;
-    --crit: #c0392b;
-    --measure: 68ch;
+    /* ground and ink — near-black with a faint warm bias: ash, not slate */
+    --paper:   #0B0C0E;
+    --paper-2: #14161A;
+    --paper-3: #1E2127;
+    --ink:     #EFEBE3;
+    --ink-2:   #B6B0A6;
+    --ink-3:   #85837E;
+    --rule:    #262A2F;
+    --rule-2:  #3A4047;
+    /* four series, one job each — validated on surface #14161A */
+    --s1: #5B8AD2;   /* the footprint baseline */
+    --s2: #DB6026;   /* destroyed · this pipeline */
+    --s3: #17A188;   /* surviving · the hand survey */
+    --s4: #B38A20;   /* the detector */
+    --s1-soft: #182334;
+    --s2-soft: #32190F;
+    --s3-soft: #0C2A25;
+    --s4-soft: #2C2410;
+    /* status — reserved, never reused as a fifth series */
+    --good: #35B15E;
+    --warn: #D6A02A;
+    --crit: #E0705E;
+    /* type scale */
+    --t-xs: 0.72rem;
+    --t-sm: 0.82rem;
+    --t-ui: 0.9rem;
+    --t-md: 1.12rem;
+    --t-lg: 1.34rem;
+    --t-xl: 1.72rem;
+    --measure: 66ch;
     --shell: 1140px;
+    --gutter: 20px;
+    color-scheme: dark;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
-      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
-      --rule: #383D44; --rule-2: #4B525B;
-      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
-      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
-      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+      --rule: #DDD8CC; --rule-2: #C3BCAB;
+      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+      --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+      --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+      color-scheme: light;
     }
   }
-  :root[data-theme="dark"] {
-    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
-    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
-    --rule: #383D44; --rule-2: #4B525B;
-    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
-    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
-    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  :root[data-theme="light"] {
+    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+    --rule: #DDD8CC; --rule-2: #C3BCAB;
+    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+    --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+    --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+    color-scheme: light;
   }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
@@ -191,9 +206,53 @@
   .crops { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin: 1.2rem 0 0.4rem; }
   .crops figure { margin: 0; }
   .crops img { border: 1px solid var(--rule-2); border-radius: 3px; display: block; }
+  .skip {
+    position: absolute; left: -9999px; top: 0; background: var(--paper-2); color: var(--ink);
+    padding: 0.6rem 1rem; z-index: 20; border: 1px solid var(--rule-2); border-radius: 0 0 4px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---- the nav rail: where this page sits in the set of ten ---- */
+  nav.rail {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, blue)) {
+    nav.rail { background: var(--paper); }
+  }
+  nav.rail .inner {
+    max-width: var(--shell); margin: 0 auto; padding: 0.5rem var(--gutter);
+    display: flex; align-items: baseline; gap: 0.5rem 1rem; flex-wrap: wrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+  }
+  nav.rail a.home {
+    color: var(--ink); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500; white-space: nowrap;
+  }
+  nav.rail a.home:hover { color: var(--s2); }
+  nav.rail .here {
+    color: var(--ink-2); letter-spacing: 0.04em; display: flex; gap: 0.5em;
+    align-items: baseline; margin-right: auto;
+  }
+  nav.rail .here .of { color: var(--ink-3); }
+  nav.rail .sibs { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  nav.rail .sibs a { color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+  nav.rail .sibs a:hover { color: var(--s2); }
+  nav.rail .sibs a[aria-current="page"] { color: var(--s2); }
+
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="rail" aria-label="Site sections">
+  <div class="inner">
+    <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
+    <span class="here"><span>Did this structure burn?</span><span class="of">page 4 of 10</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html" aria-current="page">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+  </div>
+</nav>
 
 <header class="masthead">
   <div class="wrap">
@@ -224,7 +283,7 @@
   </div>
 </div>
 
-<main>
+<main id="main">
 
 <section class="part">
   <div class="wide">
