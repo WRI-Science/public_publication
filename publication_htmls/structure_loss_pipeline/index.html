@@ -452,7 +452,7 @@
     <div>
       <span class="fig">2,069,752</span>
       <span class="cap">rows in the released dataset, one per building per fire per source</span>
-      <span class="from">releases/v0.8.0/manifest.json</span>
+      <span class="from">releases/v0.9.0/manifest.json</span>
     </div>
     <div>
       <span class="fig">377 fires</span>
@@ -549,7 +549,7 @@
     <p class="eyebrow">status</p>
     <h2>Where the project is, 13 September 2026</h2>
     <div class="status">
-      <p><strong>The published dataset is <code>v0.8.0</code>, cut on 2026-09-13 and
+      <p><strong>The published dataset is <code>v0.9.0</code>, cut on 2026-09-13 and
       committed.</strong> The 2016–2022 era has stopped being "capable, not done":
       <strong>seventeen</strong> fires the hand survey already covers have now been run through
       this pipeline as well — every fire that was ever admitted except one — and each of the
@@ -569,10 +569,10 @@
         seventeen fires are now in the file <em>twice</em>, once per method, and
         <strong>the two descriptions must never be summed</strong>.</li>
         <li><strong>Most rows now carry a third, later loss call.</strong> A second model
-        reads a clean before-and-after pair of annual composites, which only exists once the
-        year is over, and finds <strong>six more points of recall</strong> for one and a half of
-        precision. It is a separate column, never an edit to the first —
-        <a href="pipeline-overview.html#refined">the deep dive</a> has it.</li>
+        reads evidence that only exists once the year after the fire is over, and is better on
+        <em>both</em> precision and recall — and worth <strong>thirty-one points of F1</strong>
+        on the rows the first model is least sure about. It is a separate column, never an edit
+        to the first — <a href="pipeline-overview.html#refined">the deep dive</a> has it.</li>
         <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
         cross-validated or leave-one-fire-out. The fix is time, and it waits on the next
         inspection archive.</li>
@@ -682,7 +682,7 @@
         every fire's building and destroyed counts, the licence exclusion per fire, our count
         against the inspectors' and the incident commander's, and the seven ways the two halves
         are not equivalent.</span>
-        <span class="when">v0.8.0 · 2026-09-13</span>
+        <span class="when">v0.9.0 · 2026-09-13</span>
       </a>
       <a href="augmented-carlson.html">
         <span class="t">The augmented historical record</span>
@@ -717,7 +717,7 @@
         the hand survey also covers, and two are reference fires outside the dataset. Linked per fire
         from <a href="forward-fires.html">fire by fire</a> and
         <a href="retrospective.html">running the pipeline backwards</a>.</span>
-        <span class="when">v0.8.0 · 2026-09-13</span>
+        <span class="when">v0.9.0 · 2026-09-13</span>
       </div>
       <div class="plain">
         <span class="t">Per-fire damage maps — 66 pages</span>
@@ -777,7 +777,7 @@
     for Data Science — literate scripts, one settings block, explicit filters, archive rather
     than delete, and a dated change record.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.8.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.9.0</code>,
     data date 2026-09-13.</p>
   </div>
 </footer>

@@ -413,16 +413,19 @@
         <tbody>
           <tr>
             <td class="when">2026-09-13</td>
-            <td class="what">A second model's call arrives beside the first</td>
-            <td>Most scored rows now carry a <strong>third loss call</strong>, from a model that
-            reads a clean before-and-after pair of annual composites — one year wholly before
-            the fire, one wholly after. That pair only exists once the year is over, so the call
-            is <em>later</em> than the 74-day one and cannot replace it. On the rows that carry
-            both, it is worth <strong>+6.1 points of recall for 1.6 of precision</strong> and
-            +0.021 pooled F1 on an interval that excludes zero. <strong>The primary call is
-            byte-identical to the previous release.</strong> Where the second call cannot be
-            made the column is null <em>with a stated reason</em>, never partial, and it is null
-            throughout the hand survey's half.</td>
+            <td class="what">A second model's call arrives beside the first, and is better on both counts</td>
+            <td>Most scored rows carry a <strong>third loss call</strong>, from a model that
+            reads three things the first cannot: a clean before-and-after pair of annual
+            composites, the per-scene dynamics of the year after ignition, and a second, later
+            post-fire window. None of that exists at 74 days, so the call is <em>later</em> than
+            the primary one and cannot replace it. On the rows that carry both it gains
+            <strong>+2.4 points of precision and +5.1 of recall</strong> — not one bought with
+            the other — <strong>+0.037 pooled F1</strong> and <strong>+0.035 mean per fire</strong>,
+            both on intervals that exclude zero, and <strong>+31 points of F1</strong> on the
+            rows the primary call is least sure about. <strong>The primary call is byte-identical
+            to the previous release.</strong> Where the second call cannot be made the column is
+            null <em>with a stated reason</em> — always a calendar reason, never a failure on
+            the fire — and it is null throughout the hand survey's half.</td>
           </tr>
           <tr>
             <td class="when">2026-09-13</td>
@@ -558,7 +561,8 @@
       <table>
         <thead><tr><th>Release</th><th class="when">Cut</th><th>What it is</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong><code>v0.8.0</code></strong></td><td class="when">2026-09-13</td><td><strong>current.</strong> A second model's call on 250,038 of our rows, null with a stated reason elsewhere. 68 columns, up from 58. Same 377 fires and 2,069,752 rows, and the primary call byte-identical to <code>v0.7.0</code>.</td></tr>
+          <tr class="total"><td><strong><code>v0.9.0</code></strong></td><td class="when">2026-09-13</td><td><strong>current.</strong> The second model gains two more channels and its call improves on both precision and recall. Same columns, rows and fires as <code>v0.8.0</code>, and the primary call byte-identical again.</td></tr>
+          <tr><td><code>v0.8.0</code></td><td class="when">2026-09-13</td><td>a second model's call on our rows, null with a stated reason elsewhere. 68 columns, up from 58.</td></tr>
           <tr><td><code>v0.7.0</code></td><td class="when">2026-09-13</td><td>Dixie 2021 joins as the seventeenth dual-source fire: 377 fires, <strong>394</strong> (fire, source) pairs, 2,069,752 released rows.</td></tr>
           <tr><td><code>v0.6.0</code></td><td class="when">2026-09-13</td><td>same rows and calls as <code>v0.5.0</code>: a corrected no-cell flag, a tenth geometry column, and the build stage's own manifest shipped beside the package's. 58 columns.</td></tr>
           <tr><td><code>v0.5.0</code></td><td class="when">2026-09-12</td><td>377 fires and 2,062,248 released rows. Sixteen of the survey's fires described twice, South Fork NM added to the modern half, and nine geometry columns on every one of the survey's rows. 57 columns, up from 47.</td></tr>
@@ -584,7 +588,7 @@
     <p>Companion pages: <a href="index.html">the index</a> ·
       <a href="pipeline-overview.html">the deep dive</a> ·
       <a href="combined-series.html">the combined dataset</a>.</p>
-    <p class="mono">Provenance: release <code>v0.8.0</code>, data date 2026-09-13.</p>
+    <p class="mono">Provenance: release <code>v0.9.0</code>, data date 2026-09-13.</p>
   </div>
 </footer>
 

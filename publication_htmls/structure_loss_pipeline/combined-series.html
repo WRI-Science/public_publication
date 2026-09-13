@@ -935,7 +935,7 @@
       <table>
         <thead><tr><th></th><th>Carlson, 2002–2022</th><th>This pipeline, 2023 onward</th></tr></thead>
         <tbody>
-          <tr><td><strong>How many loss calls a row carries</strong></td><td>one — a hand <code>B</code>/<code>U</code>, with no threshold and no probability</td><td><strong>up to three</strong> — the primary call at a fixed threshold, an advisory call at a per-fire threshold, and on 250,038 rows a <a href="pipeline-overview.html#refined">second model's call from a later composite year</a>, null with a declared reason where it cannot be made. <strong>No aggregate mixes them</strong></td></tr>
+          <tr><td><strong>How many loss calls a row carries</strong></td><td>one — a hand <code>B</code>/<code>U</code>, with no threshold and no probability</td><td><strong>up to three</strong> — the primary call at a fixed threshold, an advisory call at a per-fire threshold, and on 250,002 rows a <a href="pipeline-overview.html#refined">second model's call from evidence that arrives later</a>, null with a declared reason where it cannot be made. <strong>No aggregate mixes them</strong></td></tr>
           <tr><td><strong>The row unit</strong></td><td colspan="2">one row per structure <strong>per fire per source</strong>. Sixteen fires are described by both, and the two descriptions must never be summed — neither is a subset of the other</td></tr>
           <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
           <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the primary one) and <code>damage_class_adaptive</code> at a per-fire threshold running <strong>0.601–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the advisory threshold</td></tr>
@@ -1004,7 +1004,7 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.8.0</code>, cut 2026-09-13</caption>
+        <caption>Release <code>v0.9.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">2,102,662 / <strong>2,069,752</strong></td></tr>
@@ -1020,7 +1020,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.8.0/manifest.json</code> and
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.9.0/manifest.json</code> and
     <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
     ten columns ships as its own companion archive, <code>carlson_augmented_v0.1.0</code>, on
     its own version line.</p>
@@ -1057,7 +1057,7 @@
       <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="changelog.html">what changed</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.8.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.9.0</code>,
     data date 2026-09-13. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
     user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

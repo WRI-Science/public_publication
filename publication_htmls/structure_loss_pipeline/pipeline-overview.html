@@ -409,7 +409,7 @@
 <div class="wrap">
   <div class="status">
     <h3>Where the project is, 12 September 2026</h3>
-    <p><strong>The published dataset is <code>v0.8.0</code>, cut on 2026-09-13.</strong> One
+    <p><strong>The published dataset is <code>v0.9.0</code>, cut on 2026-09-13.</strong> One
     layer, 377 fires, 2,069,752 released rows: the 2002–2022 hand survey carried verbatim, our
     own sixteen fires of 2024–2025, and seventeen fires the survey already covers that this
     pipeline has now <em>also</em> enumerated — so those sixteen are described twice, and
@@ -422,8 +422,10 @@
       fires whose footprint data is too young to trust.</li>
       <li><strong>Every scored row carries two loss calls</strong> — one at a fixed threshold,
       one fitted per fire. <a href="#population">The second is advisory</a>, and why is the most
-      important caveat on this page. Most rows now carry a <a href="#refined">third, from a
-      second model that reads imagery the first one could not wait for</a>.</li>
+      important caveat on this page. Most rows also carry a <a href="#refined">third, from a
+      second model that reads evidence the first one could not wait for</a> — better on both
+      precision and recall, and worth thirty-one points of F1 on the rows the first is least
+      sure about.</li>
       <li><strong>The ring beyond 100 m from the perimeter carries no signal.</strong> Every
       headline in this project is carried by the near-perimeter quarter of the data.</li>
       <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
@@ -1229,71 +1231,112 @@
     <div class="against"><span class="who">a second model · the call that arrives later</span></div>
     <h2>A second model, on imagery that did not exist yet</h2>
     <p class="lede" style="max-width:68ch">The primary call is made 74 days after a fire, from
-    what the satellites saw by then. A second call is made later, from an annual composite that
-    only exists once the year is over — and it finds buildings the first one misses.</p>
+    what the satellites saw by then. A second call is made later, from evidence that only exists
+    once the year is over — and it is better on both counts, not a trade.</p>
   </div>
   <div class="wrap">
-    <p>Every scored row now carries a <strong>refinement column</strong> beside the primary
-    one: a second model's probability, its own call, its own threshold (<strong>0.69</strong>),
-    and the two composite years it read. The extra evidence is a <strong>clean before-and-after
-    pair of annual land-cover embeddings</strong> — one year wholly before the fire, one wholly
-    after — which is why it cannot be produced at 74 days and why it is a separate column rather
-    than a replacement.</p>
+    <p>Every scored row carries a <strong>refinement column</strong> beside the primary one: a
+    second model's probability, its own call, its own threshold (<strong>0.84</strong>), and the
+    composite years it read. It sees three things the first model cannot: a <strong>clean
+    before-and-after pair of annual land-cover composites</strong> — one year wholly before the
+    fire, one wholly after — the <strong>per-scene dynamics</strong> of the year after ignition,
+    and a <strong>second, later post-fire window</strong>. None of those can be assembled at 74
+    days, which is why this is a separate column and not a replacement.</p>
     <div class="tablewrap">
       <table>
         <caption>The refined call against the primary one, on the rows that carry both —
-        142,129 matched pairs over 28 fires, at 10 m</caption>
+        142,112 matched pairs over 28 fires, at 10 m, each fire against its own truth</caption>
         <thead><tr><th>Pooled</th><th class="num">Primary</th><th class="num">Refined</th><th class="num">Δ</th><th class="num">95 % CI, fire-level paired</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong>F1</strong></td><td class="num">0.9038</td><td class="num"><strong>0.9247</strong></td><td class="num">+0.0210</td><td class="ci">[+0.0095, +0.0304]</td></tr>
-          <tr><td><strong>recall</strong></td><td class="num">0.9037</td><td class="num"><strong>0.9648</strong></td><td class="num">+0.0611</td><td class="ci">—</td></tr>
-          <tr><td>precision</td><td class="num">0.9038</td><td class="num">0.8879</td><td class="num">−0.0159</td><td class="ci">—</td></tr>
-          <tr><td>mean per fire, F1</td><td class="num">0.8263</td><td class="num">0.8281</td><td class="num">+0.0018</td><td class="ci">[−0.0315, +0.0287]</td></tr>
+          <tr class="total"><td><strong>F1</strong></td><td class="num">0.9038</td><td class="num"><strong>0.9407</strong></td><td class="num">+0.0370</td><td class="ci">[+0.0286, +0.0453]</td></tr>
+          <tr><td>precision</td><td class="num">0.9038</td><td class="num"><strong>0.9274</strong></td><td class="num">+0.0236</td><td class="ci">—</td></tr>
+          <tr><td>recall</td><td class="num">0.9037</td><td class="num"><strong>0.9544</strong></td><td class="num">+0.0507</td><td class="ci">—</td></tr>
+          <tr class="total"><td><strong>mean per fire, F1</strong></td><td class="num">0.8263</td><td class="num"><strong>0.8610</strong></td><td class="num">+0.0347</td><td class="ci">[+0.0097, +0.0615]</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/refined_vs_primary/{report.md,metrics.json,per_fire.csv}</code>,
-    generated 2026-09-13. Every paired number is on rows that carry <em>both</em> calls; greedy
-    one-to-one matching at 10 m, historical fires scored inside the same 250 m double disc the
-    structure-count comparison uses.</p>
+    <p class="src"><b>Source:</b> <code>outputs/refined_vs_primary/{report.md,metrics.json,per_fire.csv}</code>
+    and <code>docs/damage-improvement-plan.md</code> §14.3. Every paired number is on rows that
+    carry <em>both</em> calls; greedy one-to-one matching at 10 m, historical fires scored inside
+    the same 250 m double disc the structure-count comparison uses.</p>
+
+    <div class="note ok">
+      <p><strong>Both intervals exclude zero, and that is the thing to notice.</strong> It gains
+      <strong>+2.4 points of precision and +5.1 of recall</strong> — not one bought with the
+      other — and it gains the same amount whether fires are weighted by size (pooled,
+      <strong>+0.037</strong>) or counted equally (mean per fire, <strong>+0.035</strong>).
+      <strong>Twenty-three of the twenty-eight fires gain</strong>, five lose, median
+      <strong>+0.028</strong>; on the eighteen fires with at least a thousand matched pairs,
+      sixteen gain at a mean of +0.039.</p>
+    </div>
+
+    <h3>Where the gain actually is</h3>
+    <p>Read by bucket, on the product's own rows, the column turns out to be aimed squarely at
+    the cases the primary call is worst at:</p>
+    <div class="tablewrap">
+      <table>
+        <caption>142,112 matched pairs, split three ways</caption>
+        <thead><tr><th>Bucket</th><th class="num">Pairs</th><th class="num">Primary F1</th><th class="num">Refined F1</th><th class="num">Δ</th></tr></thead>
+        <tbody>
+          <tr class="total"><td><strong>the rows the primary call is least sure about</strong> — its probability between 0.70 and 0.90</td><td class="num">3,586</td><td class="num">0.4807</td><td class="num"><strong>0.7930</strong></td><td class="num"><strong>+0.3123</strong></td></tr>
+          <tr><td>everywhere else</td><td class="num">138,526</td><td class="num">0.9298</td><td class="num">0.9511</td><td class="num">+0.0213</td></tr>
+          <tr class="total"><td><strong>buildings that stood on bare ground</strong> — least vegetation to lose, so least signal for the first model</td><td class="num">35,539</td><td class="num">0.8558</td><td class="num"><strong>0.9257</strong></td><td class="num"><strong>+0.0699</strong></td></tr>
+          <tr><td>the other three quarters</td><td class="num">106,573</td><td class="num">0.9157</td><td class="num">0.9446</td><td class="num">+0.0288</td></tr>
+          <tr><td>minor structures</td><td class="num">6,279</td><td class="num">0.8811</td><td class="num">0.9113</td><td class="num">+0.0302</td></tr>
+          <tr><td>major structures</td><td class="num">135,833</td><td class="num">0.9055</td><td class="num">0.9430</td><td class="num">+0.0375</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>docs/damage-improvement-plan.md</code> §14.3, computed on
+    the same 142,112 pairs. "Bare ground" is the driest quarter of each fire's own pre-fire
+    greenness, measured within the fire so it is not a proxy for region.</p>
+    <p><strong>Thirty-one points of F1 on the rows the first model is least sure about</strong>
+    is what this column is for. A burned building on bare ground is the case optical change
+    detection has always been worst at — there is no vegetation at the structure to lose — and
+    it is the case an annual composite pair and a later window are best placed to settle.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ It is a recall instrument, and the two intervals say so.</strong> Pooled F1
-      gains <strong>+0.021</strong> on an interval that <em>excludes</em> zero, almost all of it
-      recall: <strong>+6.1 points of recall for 1.6 points of precision</strong>. Mean per fire
-      gains <strong>+0.002</strong> on an interval that <em>includes</em> zero. Pooled and
-      mean-per-fire disagree because the gain is concentrated in the fires with the most
-      buildings to find, and the losses are on small fires where a handful of extra calls is the
-      whole score.</p>
-      <p><strong>Sixteen fires gain, ten lose, two are unchanged.</strong> Biggest gains: South
-      Fork NM <strong>+0.110</strong>, CZU 2020 +0.065, Kincade 2019 +0.059, Ranch 2018 +0.055,
-      Eaton 2025 +0.025, Palisades 2025 +0.021. Biggest losses are all small: French 2024
-      −0.318 on 174 pairs, Oak 2022 −0.129, Airport 2024 −0.067 on 186 pairs.</p>
+      <p><strong>⚠️ The threshold was asked the population question, and the answer was not the
+      one the last release expected.</strong> The threshold this column ships is the one its own
+      folds chose. Four alternatives fitted on the product's own population were scored against
+      the same five pre-registered criteria used for the primary call's advisory threshold, and
+      <strong>none clears the bar</strong>. Nor does the <em>labelled ceiling</em> — the
+      threshold chosen with the answers in hand loses <strong>0.005 mean-fire F1</strong> to the
+      fold threshold. <strong>So for this column there is no population gap to close</strong>:
+      what looked like one in the previous release was the model, and a better model closed it.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/operating_refined/{decision.json,report.md}</code>; the variants, the bar and
+      the expectation were written into <code>logs/CHANGELOG.md</code> before anything was
+      fitted.</p>
     </div>
 
     <p><strong>The primary call did not move.</strong> It is byte-identical to the previous
     release on every row. The refinement is an additional column, never an edit to the first —
-    so a user who needs an answer at 74 days uses the primary one, and a user who can wait for
-    the composite year to close gets the better recall.</p>
+    a user who needs an answer at 74 days uses the primary one, and a user who can wait gets
+    this.</p>
 
     <div class="note">
-      <p><strong>Where it is null, it says why.</strong> The block is refined or null on every
-      row and never partial, and on the survey's half it is null throughout, because no model of
-      ours made those calls. Of the released rows on our side:</p>
+      <p><strong>Where it is null, it says why — and the reason is the calendar, not the
+      method.</strong> The block is refined or null on every row and never partial, and on the
+      survey's half it is null throughout, because no model of ours made those calls. On the 28
+      fires it does reach, its three channels cover <strong>more than 99.9 %</strong> of points;
+      what keeps it off the other six is that the composite years it needs do not exist for
+      them yet.</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Refinement</th><th class="num">Rows</th><th>Why</th></tr></thead>
           <tbody>
-            <tr class="total"><td><strong>present</strong></td><td class="num"><strong>250,038</strong></td><td>83.7 % of our released rows</td></tr>
-            <tr><td><code>fire_before_2017</code></td><td class="num">36,658</td><td>the fire's pre-fire year predates the embedding archive's first year</td></tr>
+            <tr class="total"><td><strong>present</strong></td><td class="num"><strong>250,002</strong></td><td>83.7 % of our released rows, on 28 of the 34 fires scored</td></tr>
+            <tr><td><code>fire_before_2017</code></td><td class="num">36,658</td><td>the fire's pre-fire year predates the composite archive's first year</td></tr>
             <tr><td><code>no_clean_embedding_year</code></td><td class="num">10,941</td><td>the fire's clean post-fire year is not published yet — these fill in as the archive extends</td></tr>
             <tr><td><code>not_scored</code></td><td class="num">1,129</td><td>the row has no primary call either</td></tr>
-            <tr><td><code>no_embedding_pixel</code></td><td class="num">47</td><td>no embedding pixel over the building</td></tr>
+            <tr><td><code>no_embedding_pixel</code></td><td class="num">47</td><td>no composite pixel over the building</td></tr>
+            <tr><td><code>no_post2_observation</code></td><td class="num">36</td><td>the second post-fire window is empty over the building</td></tr>
           </tbody>
         </table>
       </div>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/releases/v0.8.0/manifest.json</code> <code>refined_column</code>; the
+      <code>outputs/releases/v0.9.0/manifest.json</code> <code>refined_column</code>; the
       all-or-nothing rule is enforced by
       <code>slp.eval.combined_series.assert_refined_block_is_all_or_nothing</code>. <strong>No
       aggregate mixes the two calls</strong>, and the spec says so.</p>
@@ -1892,7 +1935,7 @@
     <h2>Releases, licence, and how to check one</h2>
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.8.0</code>, cut 2026-09-13</caption>
+        <caption>Release <code>v0.9.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">2,102,662 / <strong>2,069,752</strong></td></tr>
@@ -1904,13 +1947,13 @@
           <tr><td>rows with no damage call</td><td class="num">879 — all ceded to a later fire by the attribution rule</td></tr>
           <tr><td>schema / CRS</td><td class="num">68 columns / EPSG:5070</td></tr>
           <tr><td>files / size / checksums</td><td class="num">20 / 2,771.1 MB / SHA-256, verified 19 of 19</td></tr>
-          <tr><td>a second model's call, on our rows</td><td class="num">250,038 rows — <a href="#refined">the refinement column</a>, null with a declared reason elsewhere</td></tr>
+          <tr><td>a second model's call, on our rows</td><td class="num">250,002 rows — <a href="#refined">the refinement column</a>, null with a declared reason elsewhere</td></tr>
           <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td><code>heterogeneity_warning</code></td><td class="num">null — computed, not asserted</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.8.0/manifest.json</code> and
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.9.0/manifest.json</code> and
     <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The package now also
     carries <code>build-manifest.json</code>, the build stage's own record, beside the
     package's own — until <code>v0.6.0</code> the second silently overwrote the first.</p>
@@ -1934,7 +1977,7 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/licence-decision.md</code> and
-    <code>outputs/releases/v0.8.0/manifest.json</code> (<code>licence_status</code>,
+    <code>outputs/releases/v0.9.0/manifest.json</code> (<code>licence_status</code>,
     <code>odbl_exclusion</code>). The USA Structures licence was re-verified against the
     publisher's own ArcGIS record on 2026-09-11 rather than against this project's notes.</p>
     <p>The instruction was "as conservative as possible while letting anyone use it". CC BY 4.0
@@ -1977,7 +2020,7 @@
     </p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's public-perimeter
     frame, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, advisory
-    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.8.0</code>. Data date
+    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.9.0</code>. Data date
     2026-09-13.</p>
   </div>
 </footer>
