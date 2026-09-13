@@ -537,11 +537,23 @@
         </table>
       </div>
       <p>So we actually recover <strong>6,451 of the survey's 10,808 destroyed buildings —
-      60 %</strong> — and add <strong>1,862 calls</strong> on structures it did not record as
-      destroyed, 970 of them on buildings it never enumerated at all: outbuildings below its
-      definition, or buildings it missed. The two errors partly cancel and the aggregate count
-      looks better than either half. <strong>This is the single most important caveat this
-      experiment produces, and it is invisible in any total.</strong></p>
+      59.7 %</strong> — and add <strong>1,862 calls</strong> on structures it did not record as
+      destroyed (<strong>+17.2 points</strong>), 970 of them on buildings it never enumerated at
+      all: outbuildings below its definition, or buildings it missed. 59.7 % recovered plus 17.2
+      points added is the 0.769. The two errors partly cancel and the aggregate count looks
+      better than either half. <strong>This is the single most important caveat this experiment
+      produces, and it is invisible in any total.</strong></p>
+      <p>⚠️ <strong>And the detection half is itself biased against the buildings that
+      burned.</strong> Detection recall on the survey's <em>destroyed</em> rows is
+      <strong>0.678</strong> against <strong>0.767</strong> overall — 7,326 of 10,808 matched,
+      against 30,879 of 40,266. That is the same confound
+      <a href="augmented-carlson.html">the augmented historical record</a> measures on geometry,
+      showing up here in the end-to-end count: a building that burned is harder to see before
+      the fire, so the shortfall is not spread evenly over the population.</p>
+      <p>⚠️ <strong>The naive product of the two halves is not this number.</strong> Multiplying
+      detection recall by matched-pair damage recall gives <strong>0.675</strong>, and it has
+      been mistaken for "the share of destroyed buildings we find". It is not: the recovered
+      share is 59.7 %.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b> the four decomposition columns of
       <code>outputs/combined_retrospective/end_to_end.csv</code>, summed over the seventeen
       fires.</p>
