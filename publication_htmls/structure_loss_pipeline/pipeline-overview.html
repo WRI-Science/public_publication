@@ -189,51 +189,39 @@
 
 <div class="wide">
   <div class="headline-grid">
-    <div><span class="fig">1,922,889</span><span class="cap">structure rows in release <code>v0.4.0</code>, over 376 fires, one row per structure per fire</span></div>
-    <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against CAL FIRE DINS, 15 fires, 2024–2025</span></div>
-    <div><span class="fig">0.035</span><span class="cap">share of the buildings the public footprint databases miss that our detector recovers</span></div>
-    <div><span class="fig">&kappa; 0.883</span><span class="cap">agreement with Carlson's own hand classification on 282,719 buildings</span></div>
+    <div><span class="fig">1,922,889</span><span class="cap">structure rows released, over 376 fires and 25 years, one row per structure per fire</span></div>
+    <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against the inspection record, 15 fires</span></div>
+    <div><span class="fig">0.764</span><span class="cap">destroyed count against the hand survey's, running this pipeline end to end on 16 of its own fires</span></div>
+    <div><span class="fig">&kappa; 0.882</span><span class="cap">agreement with the hand survey's own classification on 394,429 buildings</span></div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="status">
-    <h3>Status, 12 September 2026 — release <code>v0.4.1</code></h3>
-    <p><strong>Everything on this page is committed and on disk.</strong> Release
-    <code>v0.4.1</code> was cut on 2026-09-12. <code>v0.4.0</code> applied four owner decisions
-    taken the day before, and <code>v0.4.1</code> is a PATCH on top of it that changes only the
-    advisory column — <code>damage_class</code> is byte-identical between the two:</p>
+    <h3>Where the project is, 12 September 2026</h3>
+    <p><strong>The published dataset is <code>v0.4.1</code>, cut on 2026-09-12.</strong> One
+    layer, 376 fires, 1,922,889 released rows: the 2002–2022 hand survey carried verbatim beside
+    fifteen California fires of 2024–2025 that this pipeline produced.</p>
+    <p><strong>Four things a reader should know before the numbers start.</strong></p>
     <ul class="tight">
-      <li><strong>The series carries all of Carlson</strong> — 361 fires, 1,770,939 rows,
-      2002–2022, verbatim, where it used to carry the five fires that happened to have a cached
-      extract. With our fifteen fires that is 1,939,136 rows built and
-      <strong>1,922,889 released</strong>.</li>
-      <li><strong>Radar left production.</strong> The damage bundle is
-      <code>damage_sentinel2_v5</code> — 62 optical features, no Sentinel-1 — at a fixed cut of
-      <strong>0.85</strong>. It costs nothing measurable and removes a dependency.</li>
-      <li><strong>A second loss call ships beside the first</strong>, cut per fire by a
-      label-free rule, <strong>scoped since <code>v0.4.1</code> to the <code>Direct</code>
-      zone</strong>. <strong>It is advisory</strong>, and why is the most important thing on
-      this page: <a href="#population">a rule validated on the fold table does not transfer to
-      the product</a>.</li>
-      <li><strong>The licence is decided</strong> — MIT and CC BY 4.0, with the ODbL problem
-      resolved by exclusion rather than by argument. Only the DOI is still open.</li>
+      <li><strong>The detector is a small addition to the footprint databases, not a
+      replacement.</strong> Against the inspection record it recovers 3.5 % of what the public
+      databases miss. Against a complete census it is worth four times that, and most on the
+      fires whose footprint data is too young to trust.</li>
+      <li><strong>Every scored row carries two loss calls</strong> — one at a fixed threshold,
+      one fitted per fire. <a href="#population">The second is advisory</a>, and why is the most
+      important caveat on this page.</li>
+      <li><strong>The ring beyond 100 m from the perimeter carries no signal.</strong> Every
+      headline in this project is carried by the near-perimeter quarter of the data.</li>
+      <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
+      cross-validated or leave-one-fire-out; the fix is time, and it waits on the next
+      inspection archive.</li>
     </ul>
-    <p><strong>Two corrections after <code>v0.4.0</code>, both carried on this page.</strong>
-    Its adaptive column was reported as calling 17,735 structures destroyed, a ratio of 0.991;
-    that was an artefact of summing one fire's stale summary file, and the true figure for that
-    column was <strong>17,362</strong> and <strong>0.970</strong>. And the question it left open
-    — does the cut rule clear its bar on the <em>product's</em> population? — is answered
-    <strong>no, by none of five variants</strong> (<a href="#population">below</a>).
-    <code>v0.4.1</code> swapped the advisory column to the best of them, the
-    <code>Direct</code>-scoped cut.</p>
-    <p><span class="pill flight">in flight</span> Roadmap 12 is still building eighteen
-    retrospective 2016–2022 inventories, which are not series rows yet; Roadmap 13 is partly
-    landed and not reported here. And two supporting outputs have <strong>not</strong> been re-run at
-    <code>v0.4.0</code> and are labelled wherever they appear: there is
-    <strong>no bootstrap run for the v5 bundle</strong>, so the interval tables are its
-    predecessor's, and the <strong>ICS-209 count check</strong> still holds the
-    <code>v0.3.0</code> predictions.</p>
+    <p><span class="pill flight">in progress · 13 September 2026</span> A literature review
+    feeding an improvement campaign, and a <code>v0.5.0</code> release that would add the
+    sixteen retrospective fires, South Fork and nine geometry columns. Neither has changed a
+    number here; the published release is <code>v0.4.1</code>. For the error side of the
+    product, read <a href="damage-scorecard.html">Did this structure burn?</a></p>
   </div>
 
   <nav class="toc" aria-label="Contents">
@@ -242,10 +230,10 @@
       <li><a href="#parts">The two parts</a></li>
       <li><a href="#frame">The frame and the eras</a></li>
       <li><a href="#footprints">Against the footprint databases</a></li>
-      <li><a href="#dins">Against CAL FIRE DINS</a></li>
-      <li><a href="#population">The two cuts</a></li>
-      <li><a href="#carlson">Against Carlson</a></li>
-      <li><a href="#ics209">Against ICS-209</a></li>
+      <li><a href="#dins">Against the inspection record</a></li>
+      <li><a href="#population">The two loss calls</a></li>
+      <li><a href="#carlson">Against the historical survey</a></li>
+      <li><a href="#ics209">Against the national count</a></li>
       <li><a href="#outside">Outside California</a></li>
       <li><a href="#rejected">Tried and rejected</a></li>
       <li><a href="#limits">Known limitations</a></li>
@@ -295,19 +283,18 @@
     <code>capture_dates_range</code>; and a <strong>U-Net</strong> (ResNet-34 encoder) run over
     0.6 m NAIP imagery of the whole frame. The network is trained on 24k–43k 512-px chips with
     USA Structures footprints burned as masks and spatial-block splits that no block crosses.</p>
-    <p>Two design choices carry most of the detector's value. From <code>seg_all_v3</code> onward
-    the network takes the <strong>footprint database itself as an input band</strong> — a prior
-    that says "a public layer has a building here" — together with an <strong>ignore mask</strong>
-    (mask value 2) around Carlson and DINS points that no footprint covers, so the loss is not
-    penalised for finding a building nobody drew. The ignore mask alone lifted recall on
-    buildings with no USA Structures label from 0.34 to 0.47 at unchanged precision; feeding the
-    prior took overall Carlson-test recall to 0.814. The canonical detector is
-    <code>seg_all_v4</code> — five input bands, no dead inputs — and detector work is frozen
-    there.</p>
+    <p>Two design choices carry most of the detector's value. The network takes the
+    <strong>footprint database itself as an input band</strong> — a prior that says "a public
+    layer has a building here" — together with an <strong>ignore mask</strong> around truth
+    points that no footprint covers, so the loss is not penalised for finding a building nobody
+    drew. The ignore mask alone lifted recall on buildings with no footprint label from 0.34 to
+    0.47 at unchanged precision, and feeding the prior took overall recall on the held-out
+    census to 0.814. Detector work is frozen at one checkpoint, so later comparisons are about
+    the damage model rather than about a moving inventory.</p>
     <p>A detection is merged into the inventory under a <strong>polygon-union</strong> rule: a
-    detector or Microsoft point is kept unless it falls inside an existing footprint polygon
-    plus 3 m. The older 20 m centroid rule deleted every garage, shed and second dwelling near
-    a house. Structures below 50 m² of footprint are tagged <code>size_class = minor</code> and
+    detected point is kept unless it falls inside an existing footprint polygon plus 3 m — a
+    centroid-distance rule would delete every garage, shed and second dwelling near a house.
+    Structures below 50 m² of footprint are tagged <code>size_class = minor</code> and
     kept, not dropped, because Carlson counted major buildings only and pooling the two silently
     lowers recall.</p>
     <p>The primary artefact is the <strong>0.6 m structure-probability raster</strong> per fire
@@ -322,23 +309,19 @@
     neighbourhood mean, pre, post and delta, for NBR, NDVI, NIR and SWIR among others. What
     carries the signal is <code>post − pre</code> NBR and its neighbourhood mean (Cohen's
     <em>d</em> ≈ −2.4 on Camp), the NIR drop and the SWIR rise.</p>
-    <p>The learner is histogram gradient boosting, fitted on Carlson's hand
-    <code>B</code>/<code>U</code> labels over 66 Sentinel-2 fires plus eight CAL FIRE DINS
-    incidents — 74 fires, 618,826 rows — and scored <strong>leave-one-fire-out</strong>: fit on
-    every other fire, predict the held-out one, pool the out-of-fold predictions. The production
-    bundle is <code>damage_sentinel2_v5</code> at threshold <strong>0.85</strong>, chosen by
-    <code>best_mean_fire_f1</code>.</p>
+    <p>The learner is histogram gradient boosting, fitted on the hand survey's own
+    destroyed/surviving labels over 66 fires plus eight inspection incidents — 74 fires, 618,826
+    rows — and scored <strong>leave-one-fire-out</strong>: fit on every other fire, predict the
+    held-out one, pool the predictions. The threshold is a single fixed <strong>0.85</strong>,
+    chosen to maximise the average F1 across fires rather than the pooled F1, which two large
+    Los Angeles fires would otherwise dominate.</p>
     <div class="note">
-      <p><strong>Sentinel-1 radar was in this bundle and is not any more.</strong> Nine C-band
-      gamma0 columns were promoted into production in September 2026 under a rule written in
-      advance. On the corrected feature tables they no longer clear it — re-measured over four
-      seeds, <strong>+0.0012 short</strong> on pooled F1 and <strong>losing Bridge by
-      −0.0087</strong> against a 0.005 tolerance — and on 2026-09-11 the owner dropped them.
-      <strong>Removing them costs nothing measurable on the product</strong>: holding the cut
-      fixed and changing only the model is −0.0039 mean-fire F1, 95 % CI [−0.0106, +0.0025].
-      It also removes a dependency — the optical bundle can be run on a fire from before the
-      radar archive opened in October 2014, which the radar bundle could not. The archived
-      bundles stay on disk.</p>
+      <p><strong>The model is optical only. Radar was in it and is not any more.</strong> Nine
+      C-band radar columns had been promoted under a rule written in advance; on corrected
+      feature tables they stopped clearing it, and they were dropped. Removing them costs
+      nothing measurable — <strong>−0.0039 mean-fire F1, 95 % CI [−0.0106, +0.0025]</strong> —
+      and it removes a dependency, because an optical-only model can be run on a fire from
+      before the radar archive opened in October 2014.</p>
     </div>
 
     <div class="note warn">
@@ -373,35 +356,16 @@
     2.4 km buffer around CAL FIRE DINS inspection points — enumerated a different population
     by construction and could not define a fire at all outside California, where there are no
     DINS points.</p>
-    <p>Moving to the perimeter frame is the largest single change the product has made, and it
-    was measured before and after on the same truth records:</p>
-
-    <div class="tablewrap">
-      <table>
-        <caption>Re-detecting on each fire's own perimeter frame, against clipping a
-        DINS-buffer product to it — 15 forward fires</caption>
-        <thead><tr><th>Quantity</th><th class="num">Clip the old product</th><th class="num">Re-detect on the frame</th><th class="num">Δ</th></tr></thead>
-        <tbody>
-          <tr><td>inventory rows</td><td class="num">133,468</td><td class="num">168,197</td><td class="num">+34,729</td></tr>
-          <tr><td>USA Structures</td><td class="num">119,445</td><td class="num">149,985</td><td class="num">+30,540</td></tr>
-          <tr><td>Microsoft v2</td><td class="num">11,735</td><td class="num">16,171</td><td class="num">+4,436</td></tr>
-          <tr><td>U-Net only</td><td class="num">2,242</td><td class="num">1,965</td><td class="num">−277</td></tr>
-          <tr><td><code>Direct</code> structures</td><td class="num">32,165</td><td class="num">32,179</td><td class="num">+14</td></tr>
-          <tr><td><code>Indirect</code> structures</td><td class="num">101,303</td><td class="num">136,018</td><td class="num">+34,715</td></tr>
-          <tr class="total"><td>DINS records matched at 10 m</td><td class="num">28,980</td><td class="num">28,980</td><td class="num">0</td></tr>
-          <tr class="total"><td>DINS records in the added ring</td><td class="num">—</td><td class="num">0</td><td class="num">—</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p>Changing to it added roughly a third again as many structures — 133,468 to
+    <strong>168,197</strong> over the fifteen modern fires, almost all of them in the outer ring
+    — and <strong>moved no accuracy number at all</strong>: every inspection record the wider
+    frame reaches was already reached, because inspectors work the perimeter and its margin and
+    everything the ring adds is beyond where anybody looked. What the frame buys is not accuracy
+    but <em>definition</em> — the product now enumerates the population the historical survey
+    enumerated, and it can be run on a fire in a state with no inspection programme at all.</p>
     <p class="src"><b>Source:</b> <code>outputs/frames/redetect_vs_clip_pooled.json</code> and
-    <code>redetect_vs_clip.csv</code>; ring area 1,658.95 km², ring share 0.320. Ledger
-    <code>road-1c</code>.</p>
-    <p>The frame change added a third again as many structures and <strong>moved no accuracy
-    number at all</strong>: every DINS record the wider frame reaches was already reached, because
-    DINS inspects the perimeter and its margin and everything the ring adds is beyond where
-    anybody looked. What it buys is not accuracy but <em>definition</em> — the product now
-    enumerates the population Carlson enumerated, and can be run on a fire in a state with no
-    inspection programme.</p>
+    <code>redetect_vs_clip.csv</code>; added ring area 1,658.95 km², 0 inspection records inside
+    it.</p>
 
     <h3>The three eras</h3>
     <figure class="band">
@@ -420,36 +384,44 @@
 <text class="tick" x="118" y="189">this pipeline; Carlson stops at 2022</text>
 <line class="axis" x1="118" y1="20" x2="118" y2="198" />
 </svg>
-      <figcaption>The Carlson record and this pipeline do not overlap in time. The middle era
-      is the only ground on which the two methods can be compared, and until Roadmap 12 only
-      five of its fires had been put through both.</figcaption>
+      <figcaption>The hand survey and this pipeline do not overlap in time. The middle era is
+      the only ground on which the two methods can be compared at all, and sixteen of its fires
+      have now been put through both — <a href="retrospective.html">running the pipeline
+      backwards</a>.</figcaption>
     </figure>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Era</th><th>Years</th><th>Who holds it</th><th>Could our method produce it?</th></tr></thead>
         <tbody>
-          <tr><td><strong>Pre-2016</strong></td><td>2002–2015</td><td>Carlson only</td>
+          <tr><td><strong>Pre-2016</strong></td><td>2002–2015</td><td>the hand survey only</td>
             <td><strong>No, not even in principle.</strong> Sentinel-2 does not exist, so there is no
             before/after optical pair at 10 m. 160 fires, 973,491 points.</td></tr>
-          <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>Carlson</td>
-            <td><strong>Yes, retrospectively.</strong> 201 fires, 797,448 points. The only ground the
-            two methods can be compared on.</td></tr>
+          <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>the hand survey</td>
+            <td><strong>Yes, retrospectively.</strong> 201 fires, 797,448 points. The only ground
+            the two methods can be compared on, and <a href="retrospective.html">sixteen of them
+            have been</a>.</td></tr>
           <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline</td>
-            <td>Carlson stops at 2022. 2023 itself is empty — no DINS incident that year clears
-            100 inspections.</td></tr>
+            <td>The survey stops at 2022. 2023 itself is empty — no inspection incident that
+            year clears 100 inspections.</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §"Read this first: the
     three eras"; SLP-era counts from <code>outputs/combined_series/manifest.json</code>.</p>
-    <p><strong>The practical floor of the retrospective era is not Sentinel-2's launch date.</strong>
-    Because USA Structures post-dates every fire in that era, each retrospective inventory keeps
-    only footprints whose <code>IMAGE_DATE</code> precedes ignition. From 2019 on that costs
-    nothing — 129,680 of 129,680 footprints over twelve fires. Before 2019 it costs 8.5 %, county
-    by county: Kern County's whole extract comes from scenes taken five and six weeks
-    <em>after</em> the Erskine fire, so Erskine 2016 has no pre-fire footprint at all and was
-    refused. <span class="mono">(<code>outputs/combined_retrospective/</code>, ledger
-    <code>road-12</code>, 2026-09-12.)</span></p>
+    <p><strong>The practical floor of the middle era is not Sentinel-2's launch date.</strong>
+    Because the footprint database post-dates every fire in that era, a retrospective inventory
+    keeps only footprints dated before ignition. From 2019 on that costs nothing — 129,680 of
+    129,680 footprints over twelve fires. Before 2019 it costs 8.5 %, county by county: one
+    county's whole extract comes from scenes taken five and six weeks <em>after</em> the fire in
+    question, which therefore has no pre-fire footprint at all and was refused rather than
+    approximated. <span class="mono">(<code>outputs/combined_retrospective/footprint_vintage.csv</code>,
+    2026-09-12; the full table is on <a href="retrospective.html">the retrospective
+    page</a>.)</span></p>
+    <p><strong>The historical half now has a shape and a raster cell of its own, too.</strong>
+    All 1,770,939 of its buildings carry a polygon and 60-centimetre cells wherever the imagery
+    supports one, so the whole twenty-five years share a single convention — and the measured
+    bias in doing it the easy way is on
+    <a href="augmented-carlson.html">the augmented historical record</a>.</p>
   </div>
 </section>
 
@@ -698,10 +670,10 @@
     structures, not every structure.</p>
 
     <h3>Damage: the loss call, per incident, out of sample</h3>
-    <p>The eight 2024–25 DINS incidents are in the production bundle's own 74-fire training
+    <p>The eight 2024–25 inspection incidents are in the damage model's own 74-fire training
     pool, so none of them is scored by it. Each carries a <strong>leave-one-incident-out</strong>
-    probability from a model refitted on the other seven plus Carlson — same 71 features, same
-    learner, same seed, same cut.</p>
+    probability from a model refitted on the other seven plus the historical fires — same
+    features, same learner, same seed, same threshold.</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -720,155 +692,145 @@
 <text class="tick" x="591.3" y="20" text-anchor="middle">0.9</text>
 <line class="grid-line" x1="665.5" y1="26" x2="665.5" y2="226" />
 <text class="tick" x="665.5" y="20" text-anchor="middle">0.95</text>
-<text class="tick" x="710.0" y="252" text-anchor="end">destroyed-class F1 at the shipped cut 0.87</text>
+<text class="tick" x="710.0" y="252" text-anchor="end">destroyed-class F1 at the shipped cut 0.85</text>
 <text x="166" y="51.9" text-anchor="end">Eaton 2025</text>
-<line x1="624.1" y1="48.4" x2="635.5" y2="48.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="624.1" y1="44.4" x2="624.1" y2="52.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="635.5" y1="44.4" x2="635.5" y2="52.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="629.9" cy="48.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<line x1="615.4" y1="48.4" x2="627.4" y2="48.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="615.4" y1="44.4" x2="615.4" y2="52.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="627.4" y1="44.4" x2="627.4" y2="52.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="621.6" cy="48.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="51.9" text-anchor="end">18,318 · 9,419 destroyed</text>
 <text x="166" y="75.9" text-anchor="end">Palisades 2025</text>
-<line x1="629.8" y1="72.4" x2="643.5" y2="72.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="629.8" y1="68.4" x2="629.8" y2="76.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="643.5" y1="68.4" x2="643.5" y2="76.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="636.7" cy="72.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<line x1="611.2" y1="72.4" x2="625.3" y2="72.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="611.2" y1="68.4" x2="611.2" y2="76.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="625.3" y1="68.4" x2="625.3" y2="76.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="618.6" cy="72.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="75.9" text-anchor="end">12,009 · 6,845</text>
-<text x="166" y="99.9" text-anchor="end">Park 2024</text>
-<line x1="584.4" y1="96.4" x2="628.9" y2="96.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="584.4" y1="92.4" x2="584.4" y2="100.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="628.9" y1="92.4" x2="628.9" y2="100.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="607.2" cy="96.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="99.9" text-anchor="end">2,082 · 713</text>
-<text x="166" y="123.9" text-anchor="end">Mountain 2024</text>
-<line x1="403.4" y1="120.4" x2="516.3" y2="120.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="403.4" y1="116.4" x2="403.4" y2="124.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="516.3" y1="116.4" x2="516.3" y2="124.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="463.6" cy="120.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="123.9" text-anchor="end">1,815 · 243</text>
-<text x="166" y="147.9" text-anchor="end">Bridge 2024</text>
-<line x1="224.7" y1="144.4" x2="436.5" y2="144.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="224.7" y1="140.4" x2="224.7" y2="148.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="436.5" y1="140.4" x2="436.5" y2="148.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="337.8" cy="144.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="147.9" text-anchor="end">898 · 81</text>
-<text x="166" y="171.9" text-anchor="end">Borel 2024</text>
-<line x1="544.3" y1="168.4" x2="631.8" y2="168.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="544.3" y1="164.4" x2="544.3" y2="172.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="631.8" y1="164.4" x2="631.8" y2="172.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="590.3" cy="168.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="171.9" text-anchor="end">502 · 223</text>
-<text x="166" y="195.9" text-anchor="end">Airport 2024</text>
-<line x1="501.3" y1="192.4" x2="607.2" y2="192.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="501.3" y1="188.4" x2="501.3" y2="196.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="607.2" y1="188.4" x2="607.2" y2="196.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="557.4" cy="192.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="195.9" text-anchor="end">371 · 160</text>
-<text x="166" y="219.9" text-anchor="end">TCU Complex 2025</text>
-<line x1="532.3" y1="216.4" x2="662.4" y2="216.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="532.3" y1="212.4" x2="532.3" y2="220.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="662.4" y1="212.4" x2="662.4" y2="220.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="601.9" cy="216.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="219.9" text-anchor="end">277 · 95</text>
+<text x="166" y="99.9" text-anchor="end">TCU Complex 2025</text>
+<line x1="544.0" y1="96.4" x2="669.1" y2="96.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="544.0" y1="92.4" x2="544.0" y2="100.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="669.1" y1="92.4" x2="669.1" y2="100.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="612.1" cy="96.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="99.9" text-anchor="end">277 · 95</text>
+<text x="166" y="123.9" text-anchor="end">Park 2024</text>
+<line x1="582.9" y1="120.4" x2="628.9" y2="120.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="582.9" y1="116.4" x2="582.9" y2="124.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="628.9" y1="116.4" x2="628.9" y2="124.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="606.5" cy="120.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="123.9" text-anchor="end">2,082 · 713</text>
+<text x="166" y="147.9" text-anchor="end">Borel 2024</text>
+<line x1="554.2" y1="144.4" x2="635.2" y2="144.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="554.2" y1="140.4" x2="554.2" y2="148.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="635.2" y1="140.4" x2="635.2" y2="148.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="596.5" cy="144.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="147.9" text-anchor="end">502 · 223</text>
+<text x="166" y="171.9" text-anchor="end">Airport 2024</text>
+<line x1="498.8" y1="168.4" x2="604.1" y2="168.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="498.8" y1="164.4" x2="498.8" y2="172.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="604.1" y1="164.4" x2="604.1" y2="172.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="553.8" cy="168.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="171.9" text-anchor="end">371 · 160</text>
+<text x="166" y="195.9" text-anchor="end">Mountain 2024</text>
+<line x1="396.9" y1="192.4" x2="509.3" y2="192.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="396.9" y1="188.4" x2="396.9" y2="196.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="509.3" y1="188.4" x2="509.3" y2="196.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="456.6" cy="192.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="195.9" text-anchor="end">1,815 · 243</text>
+<text x="166" y="219.9" text-anchor="end">Bridge 2024</text>
+<line x1="234.1" y1="216.4" x2="439.7" y2="216.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="234.1" y1="212.4" x2="234.1" y2="220.4" stroke="var(--s1)" stroke-width="2" />
+<line x1="439.7" y1="212.4" x2="439.7" y2="220.4" stroke="var(--s1)" stroke-width="2" />
+<circle cx="343.2" cy="216.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="219.9" text-anchor="end">898 · 81</text>
 <line class="axis" x1="176.0" y1="226" x2="710.0" y2="226" />
 </svg>
       <ul class="legend">
         <li><span class="swatch" style="background:var(--s2)"></span>F1 on the incident</li>
         <li><span class="swatch" style="background:var(--s1);height:2px;width:1.1em"></span>95 % interval, resampling <em>that fire's own structures</em></li>
       </ul>
-      <figcaption>Destroyed-class F1 at the shipped cut 0.87, with a within-fire cluster
-      bootstrap (B = 2000). These intervals say how precisely each fire was measured. They are
-      <strong>not</strong> the interval for a ninth fire — that one resamples the incidents
+      <figcaption><strong>Two fires are measured to a thousandth and the smallest spans
+      thirteen points — but sample size inside a fire is not this project's scarce resource,
+      fires are.</strong> Destroyed-class F1 at the fixed threshold 0.85, with a within-fire
+      cluster bootstrap (B = 2000). These intervals say how precisely each fire was measured;
+      they are <strong>not</strong> the interval for a ninth fire, which resamples the incidents
       themselves and is much wider.</figcaption>
     </figure>
   </div>
   <div class="wrap">
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_s1_v4/per_fire_ci.csv</code>
-    (<code>scope = within_fire</code>, <code>metric = f1</code>, cut 0.87). ⚠️ This is the
-    <strong>previous</strong> production bundle, <code>damage_sentinel2s1_v4</code>: no
-    bootstrap run exists for <code>damage_sentinel2_v5</code>, so the shape of the evidence is
-    current but the bundle is one release behind. The paired comparison of the two releases,
-    which <em>is</em> at <code>v0.4.0</code>, is on the
-    <a href="uncertainty.html#release">uncertainty page</a>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/per_fire_ci.csv</code>
+    (<code>scope = within_fire</code>, <code>metric = f1</code>, cut 0.85, seed 42, B = 2000),
+    dated 2026-09-12. Every interval this project publishes is on
+    <a href="uncertainty.html">the uncertainty page</a>.</p>
 
     <div class="note warn">
       <p><strong>⚠️ The unit of evidence is the fire, and there are eight of them.</strong>
       Resampling the incidents rather than the structures gives pooled F1
-      <strong>0.9236 [0.8586, 0.9278]</strong> — an interval that barely reaches above the
-      estimate, because Eaton and Palisades hold 84 % of the rows and both score high, so a
-      resample that draws either of them less often falls and one that draws them more often has
-      nowhere to go. <strong>That width is the evidence, not the estimator</strong>, and it is
-      not narrowed anywhere on this page.</p>
+      <strong>0.9158 [0.8591, 0.9190]</strong> — an interval that barely reaches above the
+      estimate, because two fires hold 84 % of the rows and both score high, so a resample that
+      draws either of them less often falls and one that draws them more often has nowhere to
+      go. <strong>That width is the evidence, not the estimator</strong>, and it is not narrowed
+      anywhere on this page.</p>
     </div>
 
     <div class="tablewrap">
       <table>
-        <caption>Pooled and mean-per-fire, with the fire resampled — ⚠️ bundle
-        <code>damage_sentinel2s1_v4</code> at cut 0.87, <strong>the release before this
-        one</strong>; no bootstrap run exists for the shipped <code>v5</code> bundle.
-        8 incidents, 36,272 structures</caption>
+        <caption>Pooled and mean-per-fire, with the fire resampled — 8 incidents, 36,272
+        structures, at the fixed threshold 0.85</caption>
         <thead><tr><th>Scope</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Avg. precision</th></tr></thead>
         <tbody>
-          <tr><td>pooled</td><td class="num">0.9266</td><td class="num">0.9206</td><td class="num">0.9236</td><td class="num">0.9763</td><td class="num">0.9751</td></tr>
-          <tr><td>pooled, 95 % CI</td><td class="num">[0.820, 0.940]</td><td class="num">[0.896, 0.940]</td><td class="num">[0.859, 0.928]</td><td class="num">[0.974, 0.981]</td><td class="num">[0.915, 0.979]</td></tr>
-          <tr><td>mean per fire</td><td class="num">0.8501</td><td class="num">0.9092</td><td class="num">0.8742</td><td class="num">0.9742</td><td class="num">0.9370</td></tr>
-          <tr><td>mean per fire, 95 % CI</td><td class="num">[0.766, 0.912]</td><td class="num">[0.878, 0.939]</td><td class="num">[0.821, 0.912]</td><td class="num">[0.969, 0.979]</td><td class="num">[0.892, 0.969]</td></tr>
+          <tr><td>pooled</td><td class="num">0.9272</td><td class="num">0.9047</td><td class="num">0.9158</td><td class="num">0.9740</td><td class="num">0.9729</td></tr>
+          <tr><td>pooled, 95 % CI</td><td class="num">[0.818, 0.939]</td><td class="num">[0.894, 0.937]</td><td class="num">[0.859, 0.919]</td><td class="num">[0.970, 0.982]</td><td class="num">[0.915, 0.975]</td></tr>
+          <tr><td>mean per fire</td><td class="num">0.8482</td><td class="num">0.9086</td><td class="num">0.8729</td><td class="num">0.9741</td><td class="num">0.9364</td></tr>
+          <tr><td>mean per fire, 95 % CI</td><td class="num">[0.767, 0.908]</td><td class="num">[0.872, 0.940]</td><td class="num">[0.821, 0.910]</td><td class="num">[0.970, 0.979]</td><td class="num">[0.893, 0.967]</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_s1_v4/pooled_ci.csv</code>,
-    seed 42, B = 2000, percentile interval, resampling unit = fire.</p>
+    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/pooled_ci.csv</code>,
+    seed 42, B = 2000, percentile interval, resampling unit = fire, dated 2026-09-12.</p>
 
     <h3>The product itself: fifteen fires, scored end to end</h3>
     <p>Everything above is measured on fires the model was fitted on. This is the shipped
-    product — 168,197 inventory points over the 15 forward fires, <strong>0 refused</strong>,
-    every point carrying a complete pre/post Sentinel-2 composite and a complete Sentinel-1
-    pair — scored against the DINS inspections of the same fires.</p>
+    product — 168,197 inventory points over the 15 modern fires, <strong>0 refused</strong>,
+    every point carrying a complete before-and-after composite — scored against the inspection
+    record of the same fires.</p>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Pooled over 15 fires, 2024–2025</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>inventory points scored / refused</td><td class="num">168,197 / 0</td></tr>
-          <tr><td>predicted destroyed at the fixed cut (<code>Direct</code> / <code>Indirect</code>)</td><td class="num">14,504 (14,396 / 108)</td></tr>
-          <tr><td>predicted destroyed, adaptive column</td><td class="num">17,362</td></tr>
-          <tr><td>DINS records / DINS destroyed</td><td class="num">38,497 / 17,902</td></tr>
-          <tr><td>mean per-fire F1 @ 10 m — fixed / adaptive</td><td class="num"><strong>0.7829</strong> / 0.7408</td></tr>
-          <tr><td>mean per-fire F1 @ 20 m — fixed / adaptive</td><td class="num">0.7733 / 0.7317</td></tr>
-          <tr><td>rows scored by a leave-one-fire-out refit / by the production bundle</td><td class="num">8 fires / 7 fires</td></tr>
+          <tr><td>predicted destroyed, primary call (near-perimeter / beyond)</td><td class="num">14,504 (14,396 / 108)</td></tr>
+          <tr><td>predicted destroyed, advisory call</td><td class="num">15,951</td></tr>
+          <tr><td>inspection records / inspected as destroyed</td><td class="num">38,497 / 17,902</td></tr>
+          <tr class="total"><td>mean per-fire F1 @ 10 m — primary / advisory</td><td class="num"><strong>0.7829</strong> / 0.7559</td></tr>
+          <tr><td>mean per-fire F1 @ 20 m — primary</td><td class="num">0.7733</td></tr>
+          <tr><td>fires scored by a leave-one-fire-out refit / by the production model</td><td class="num">8 / 7</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/forward_damage/metrics.json</code>, generated
-    2026-09-12, bundle <code>damage_sentinel2_v5</code>; the adaptive count is the sum of the
-    shipped column in <code>outputs/combined_series/per_fire_summary.csv</code> — the same file
-    reported as 17,735 in <code>forward_damage</code> — an artefact Roadmap 14 traced and
-    corrected, and the <a href="forward-fires.html">fire-by-fire page</a> explains it. Ledger
-    <code>road-8</code>, <code>road-10</code>, <code>road-11</code>,
-    <code>open-adaptive-count-ratio-artifact</code>.</p>
+    2026-09-12; the advisory count is the sum of the shipped column in
+    <code>outputs/combined_series/per_fire_summary.csv</code>. The fire-by-fire table is on
+    <a href="forward-fires.html">the results page</a>.</p>
 
-    <p><strong>Each fold's own cut is recorded and not shipped.</strong> Fitted the production
-    way on out-of-fold scores, the nine folds want <strong>0.79–0.88</strong> against the
-    shipped 0.85. That spread is narrow, and it is the reason the adaptive rule looked safe on
-    the fold table — and the reason the next section matters, because on the product the same
-    rule lands between 0.158 and 0.792.</p>
+    <p><strong>Each fold's own threshold is recorded and not shipped.</strong> Fitted the
+    production way on out-of-fold scores, the nine folds want <strong>0.79–0.88</strong> against
+    the shipped 0.85. That spread is narrow, and it is why a per-fire rule looked safe on the
+    validation table — and why the next section matters.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ One fire in fifteen was a product defect, and the fix is a rule.</strong>
-      Franklin 2024 ignited near Malibu on 9 December; the Palisades fire burned 13.0 km² of
-      Franklin's Indirect ring on 7 January — <strong>day 29 of Franklin's own 74-day post
-      window</strong> — and 297 of Franklin's 333 destroyed calls sat inside the Palisades
-      perimeter. The AUC (0.948) was the tell: the ranking was fine and the attribution was not.
-      Since <code>v0.3.0</code> an <em>attribution</em> rule decides which fire may claim a
-      structure two fires reached: Franklin went 333 → 35 predicted destroyed and F1
-      0.240 → 0.300, structures called destroyed under two fires went <strong>271 → 0</strong>,
-      and fourteen of fifteen fires were byte-for-byte unchanged. At <code>v0.4.0</code>
-      Franklin still ships <strong>35</strong> destroyed calls and scores F1
-      <strong>0.286</strong>, with <strong>879 of its rows carrying no damage call at
-      all</strong> and <code>damage_null_reason</code> saying why.</p>
+      <p><strong>⚠️ When two fires reach the same building, one rule decides which may claim
+      it.</strong> Franklin 2024 ignited near Malibu on 9 December; the Palisades fire burned
+      13.0 km² of Franklin's outer ring on 7 January — <strong>day 29 of Franklin's own 74-day
+      observation window</strong> — so a building destroyed by Palisades was being attributed to
+      Franklin. The attribution rule took structures called destroyed under two fires from 271
+      to <strong>0</strong>, and left fourteen of fifteen fires byte-for-byte unchanged.
+      Franklin ships <strong>35</strong> destroyed calls and scores F1 <strong>0.286</strong>,
+      with <strong>879 of its rows carrying no damage call at all</strong> and a reason column
+      saying why. It is the worst fire in the set, and this is why.</p>
     </div>
 
-    <h3>Is <code>destroyed_prob</code> a probability?</h3>
+    <h3>Is the destroyed probability a probability?</h3>
     <p>No — it is a ranking, until it is calibrated. Reliability in 10 equal-count bins, pooled,
-    on all three v4 bundles:</p>
+    on both halves of the training pool:</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -930,8 +892,8 @@
 <text class="tick" x="384" y="130">both on the shipped bundle</text>
 <text class="tick" x="384" y="144">damage_sentinel2_v5</text>
 </svg>
-      <figcaption>Both halves of the shipped bundle, in 10 equal-count bins. The model is
-      <strong>over-confident nearly everywhere</strong>: the observed frequency is below the
+      <figcaption><strong>The model is over-confident nearly everywhere.</strong> Both halves
+      of the training pool, in 10 equal-count bins: the observed frequency is below the
       predicted probability in <strong>19 of the 20 bins</strong>. The single exception is the
       DINS curve's top bin, under-confident by +0.0001 on 3,628 rows, which is a rounding
       artefact and not a change of direction.</figcaption>
@@ -939,10 +901,11 @@
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> <code>outputs/uncertainty/{v5,dins_v5}/calibration_pooled.csv</code>
-    (<code>n_bins_requested = 10</code>) and <code>calibration_ci.csv</code>, both on the shipped
-    <code>damage_sentinel2_v5</code> bundle at cut 0.85.</p>
+    (<code>n_bins_requested = 10</code>) and <code>calibration_ci.csv</code>, dated
+    2026-09-12.</p>
     <p>Expected calibration error is <strong>0.0514</strong> [0.0365, 0.0737] on the 66-fire
-    national table and <strong>0.0651</strong> [0.0514, 0.1032] on the eight DINS incidents. An
+    national table and <strong>0.0651</strong> [0.0514, 0.1032] on the eight inspection
+    incidents. An
     isotonic map fitted leave-one-fire-out takes those to <strong>0.0005</strong> and
     <strong>0.0071</strong>, and the Brier score from 0.0328 to 0.0208 and from 0.0729 to
     0.0616. It ships as <code>destroyed_prob_calibrated</code> <em>beside</em>
@@ -955,278 +918,177 @@
 <section class="part" id="population">
   <div class="wide">
     <div class="against"><span class="who">the headline caveat · a rule that passed its bar and failed the product</span></div>
-    <h2>Two cuts, and why the shipped one is still a fixed number</h2>
+    <h2>Two loss calls, and why the fixed threshold is the primary one</h2>
     <p class="lede" style="max-width:68ch">The single most important thing to understand about
-    <code>v0.4.0</code>, and the reason it ships two loss calls instead of replacing one with
-    the other.</p>
+    this dataset, and the reason it ships two destroyed calls instead of replacing one with the
+    other.</p>
   </div>
   <div class="wrap">
     <p>Everywhere else in this project a threshold is a compromise: one number applied to every
-    fire, costing the fires whose score distribution sits somewhere else. A label-free per-fire
-    cut rule was built to fix that, scored leave-one-fire-out against a
-    <strong>five-criterion bar pre-registered before the first fold</strong>, and it cleared all
-    five — unnested, and again with the Carlson half fully nested over 2,211 model fits. The
-    owner adopted it. <strong>That pass is real and nothing here contradicts it.</strong></p>
+    fire, costing the fires whose score distribution sits somewhere else. A per-fire threshold
+    rule that reads only the model's own scores was built to fix that, scored leave-one-fire-out
+    against a <strong>five-criterion bar pre-registered before the first fold</strong>, and it
+    cleared all five — twice, the second time with the fitting fully nested over 2,211 model
+    fits. <strong>That pass is real and nothing here contradicts it.</strong></p>
     <p>Then it was applied to the product, and it did not transfer. The reason is not a flaw in
     the rule or in the bar. <strong>It was validated on one population and applied to
     another.</strong></p>
     <div class="tablewrap">
       <table>
         <caption>Two populations, one rule</caption>
-        <thead><tr><th></th><th>The leave-one-fire-out fold table</th><th>The product</th></tr></thead>
+        <thead><tr><th></th><th>The validation table</th><th>The product</th></tr></thead>
         <tbody>
-          <tr><td>what a row is</td><td>a CAL FIRE <strong>inspected</strong> structure</td><td>any structure in the inventory — most never inspected, out to 2.4 km from the perimeter</td></tr>
+          <tr><td>what a row is</td><td>an <strong>inspected</strong> structure</td><td>any structure in the inventory — most never inspected, out to 2.4 km from the perimeter</td></tr>
           <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
-          <tr><td>base rate</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
-          <tr><td>cuts the whole-inventory rule landed on (<code>v0.4.0</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.158 – 0.792</strong></td></tr>
-          <tr><td>cuts the <code>Direct</code>-scoped rule lands on (<code>v0.4.1</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
-          <tr><td>what the bar's DINS criterion measured there</td><td class="num">+0.0029 / +0.0036 — no cost</td><td class="num">—</td></tr>
+          <tr><td>share of them destroyed</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
+          <tr><td>thresholds the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>logs/CHANGELOG.md</code> 2026-09-12 11:15 PT §1; fold
-    cuts from <code>outputs/forward_damage/per_fire.csv</code> <code>threshold_fold</code>,
-    realised cuts from <code>operating_cut_adaptive</code> in the same file.</p>
+    <p class="src"><b>Source:</b> validation thresholds from
+    <code>outputs/forward_damage/per_fire.csv</code> (<code>threshold_fold</code>), realised
+    thresholds from <code>operating_cut_adaptive</code> in the same file.</p>
     <p>The rule reads <em>the fire's own score distribution</em> and nothing else — that is what
     makes it label-free, and what keeps it inside the covariate rule. It is also what makes it
     move when the population underneath it changes. On a table of inspected structures where
-    roughly half burned, the expected-F1 cut sits near the shipped one. On a whole inventory
-    where nine in a hundred burned, the same arithmetic drags the cut down — as far as 0.158 on
-    Coches 2 — and the model starts calling structures destroyed that nobody ever looked at.</p>
+    roughly half burned, the expected-F1 threshold sits near the fixed one. On a whole inventory
+    where nine in a hundred burned, the same arithmetic drags the threshold down and the model
+    starts calling structures destroyed that nobody ever looked at. Taking the threshold from
+    the near-perimeter zone, whose share destroyed is nearer the validation table's, is what
+    keeps it in range — and it is what ships.</p>
     <div class="tablewrap">
       <table>
-        <caption>Adaptive − fixed on the fifteen forward fires, paired on identical rows,
-        fire-level cluster bootstrap, B = 2000</caption>
+        <caption>Advisory call minus primary call on the fifteen modern fires, paired on
+        identical rows, fire-level cluster bootstrap, B = 2000</caption>
         <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
         <tbody>
-          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0352</strong></td><td class="num">[−0.0709, −0.0127]</td><td>yes — worse</td></tr>
-          <tr><td>mean-fire precision</td><td class="num">−0.0939</td><td class="num">[−0.1559, −0.0518]</td><td>yes — worse</td></tr>
-          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0435</strong></td><td class="num">[+0.0217, +0.0647]</td><td>yes — better</td></tr>
-          <tr><td>mean-fire average precision</td><td class="num">−0.0657</td><td class="num">[−0.1185, −0.0332]</td><td>yes — worse</td></tr>
-          <tr><td>mean-fire AUC</td><td class="num">−0.0073</td><td class="num">[−0.0249, +0.0082]</td><td>no</td></tr>
-          <tr><td>pooled F1</td><td class="num">−0.0111</td><td class="num">[−0.0415, −0.0052]</td><td>yes — worse</td></tr>
+          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td>yes — worse</td></tr>
+          <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td>yes — worse</td></tr>
+          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0265</strong></td><td class="num">[+0.0103, +0.0458]</td><td>yes — better</td></tr>
+          <tr><td>pooled F1</td><td class="num">−0.0046</td><td class="num">[−0.0370, +0.0003]</td><td>no</td></tr>
+          <tr><td>pooled precision</td><td class="num">−0.0396</td><td class="num">[−0.0987, −0.0251]</td><td>yes — worse</td></tr>
+          <tr><td>pooled recall</td><td class="num">+0.0316</td><td class="num">[+0.0233, +0.0485]</td><td>yes — better</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/forward_damage/before_after/paired_delta_ci.csv</code>, comparison
-    <code>adaptive − fixed</code>. AUC is computed on the score and does not depend on a cut,
-    which is why it barely moves: <strong>the ranking is unaffected either way</strong>, pooled
-    0.981 → 0.979.</p>
+    <p class="src"><b>Source:</b> <code>outputs/operating_product/paired_delta_ci.csv</code>,
+    comparison <code>V2 − V4</code>. AUC is computed on the score and does not depend on a
+    threshold, which is why it does not appear: <strong>the ranking is identical either
+    way</strong>.</p>
     <div class="note warn">
-      <p><strong>⚠️ So the rule ships beside the fixed cut, not instead of it.</strong>
-      <code>damage_class</code> is the fixed-cut call and is what every headline on this site
-      reports; <code>damage_class_adaptive</code> and <code>destroyed_threshold_adaptive</code>
-      carry the rule's. Both are on every scored row, both are in the data dictionary, and both
-      are counted in the per-fire summary.</p>
-      <p><strong>The pre-registered pass stands on the population it was measured on.</strong>
-      Nothing about the bar was wrong: it answered a question about labelled folds and was read
-      as an answer about the product. The open row names the next test rather than closing the
-      question — <strong>the same five criteria evaluated on the product population</strong>, a
-      Direct-zone-only variant whose base rate is nearer the fold table's and a whole-inventory
-      variant, each pre-registered before it is run, as the original bar was
-      (<code>open-adaptive-rule-population-shift</code>).</p>
-      <p><strong>⚠️ That question has now been answered, and the answer is no.</strong>
-      Roadmap 14 re-ran the same five criteria at the same thresholds on <strong>the product's
-      own population</strong> — three populations, five candidate variants, the bar
-      pre-registered again before anything was scored — and
-      <strong>no candidate clears it. Nothing changes; the fixed cut stays the default.</strong>
-      The best of them is the <strong>Direct-zone-scoped</strong> cut, which takes the rule's
-      threshold from the <code>Direct</code> zone (base rate nearer the fold table's) and
-      applies it to every row: mean-fire F1 <strong>−0.0186 [−0.0336, −0.0070]</strong> against
-      the fixed cut, a destroyed-count ratio of <strong>0.891</strong>, realised cuts
-      0.601–0.792 instead of 0.158–0.792 — and it <em>gains</em> outside California, 0.8986 →
-      <strong>0.9121</strong> mean-fire F1. <strong>It was swapped in on 2026-09-12 and is the advisory column this page now reports</strong> — <code>v0.4.1</code>, a PATCH whose <code>damage_class</code> is byte-identical to <code>v0.4.0</code>'s, so only the advisory column moved; its per-fire cuts were verified against the Stage 24 table on 15 of 15 fires.</p>
-      <p>One check is worth keeping. Re-fitting the isotonic map leave-one-fire-out — the leak
-      a reader would reasonably suspect — produces a variant that is <strong>bit-identical on
-      204,797 of 204,797 inventory rows</strong>, because the product already reads each
-      held-out fire's own fold calibration. Scored rather than asserted.</p>
+      <p><strong>⚠️ The same five criteria were re-run on the product's own population, and no
+      candidate clears them.</strong> Five variants, three populations, the bar written down
+      again before anything was scored. <strong>So the per-fire rule ships beside the fixed
+      threshold, not instead of it.</strong> <code>damage_class</code> is the fixed-threshold
+      call and is what every headline on this site reports; <code>damage_class_adaptive</code>
+      and <code>destroyed_threshold_adaptive</code> carry the rule's. Both are on every scored
+      row and both are counted in the per-fire summary.</p>
+      <p>One leak a reader would reasonably suspect is closed by measurement rather than
+      assertion: re-fitting the calibration map leave-one-fire-out gives a variant that is
+      <strong>bit-identical on 204,797 of 204,797 rows</strong>, because the product already
+      reads each held-out fire's own fold calibration.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
       <code>outputs/operating_product/{decision.md,report.md,by_variant.csv,paired_delta_ci.csv}</code>;
-      bar pre-registered <code>logs/CHANGELOG.md</code> 2026-09-12 11:28 PT; commit
-      <code>fb8378d</code>.</p>
+      the bar pre-registered in <code>logs/CHANGELOG.md</code> before it was scored.</p>
     </div>
     <div class="note">
-      <p><strong>And what the adaptive call buys is the count.</strong> Predicted destroyed over
+      <p><strong>And what the advisory call buys is the count.</strong> Predicted destroyed over
       the fifteen fires' whole inventories goes <strong>14,504 → 15,951</strong> against 17,902
       inspected as destroyed — a ratio of <strong>0.810 → 0.891</strong>. So the two columns
-      disagree in a legible way: the fixed cut is the better classifier per structure, and the
-      adaptive cut gets the total right. The release notes reduce it to one line: <em>use
+      disagree in a legible way: the fixed threshold is the better classifier per structure, and
+      the per-fire one gets the total right. The release notes reduce it to one line: <em>use
       <code>damage_class</code> to classify buildings; use <code>damage_class_adaptive</code> if
       you are counting them</em> — and say which column you used.</p>
-      <p><strong>⚠️ South Fork has no advisory call at all.</strong> The
-      <code>Direct</code>-scoped rule needs a <code>Direct</code> zone, and South Fork is the
-      one product still on the legacy DINS-buffer frame — it has no perimeter, so no Direct
-      ring, so the rule falls back to the fixed cut and the two columns are the same number.
-      Its adaptive cell reads "—" rather than repeating the fixed one. <em>(The 0.8825 this
-      page carried before <code>v0.4.1</code> was the whole-inventory rule, which no longer
-      ships.)</em></p>
-      <p>On Marshall's two independent assessments the advisory call splits — Boulder County
-      0.9705 → <strong>0.9725</strong>, FEMA MAC 0.9273 → <strong>0.9109</strong>. Two
-      assessments over one fire is not a distribution. Where the <code>Direct</code>-scoped
-      rule does win outside California is the 66-fire table: non-California mean-fire F1
-      <strong>0.8986 → 0.9121</strong>.</p>
+      <p><strong>Outside California it is the better call outright.</strong> On the 66-fire
+      national table non-California mean-fire F1 goes 0.8986 → <strong>0.9121</strong>, and on
+      the one post-2022 non-California assessment that exists, F1 goes 0.8484 →
+      <strong>0.8825</strong>. On the one fire with two independent assessments it splits —
+      0.9705 → 0.9725 on one, 0.9273 → 0.9109 on the other. Three assessments over two fires is
+      not a distribution.</p>
     </div>
   </div>
 </section>
 
 <section class="part" id="carlson">
   <div class="wide">
-    <div class="against"><span class="who">measured against · USGS Carlson 2002–2022</span></div>
+    <div class="against"><span class="who">measured against · the USGS hand survey, 2002–2022</span></div>
     <h2>Against the record this continues</h2>
-    <p class="lede" style="max-width:68ch">If the destroyed count moves across 2022/2023, is
-    that fire behaviour or method change? This is the section a user of the joined series reads
-    first.</p>
+    <p class="lede" style="max-width:68ch">If the destroyed count moves across the 2022/2023
+    join, is that fire behaviour or method change? This is the section a user of the joined
+    dataset reads first.</p>
   </div>
 
   <div class="wrap">
-    <h3>The damage call, on the same buildings</h3>
-    <p>The damage model's leave-one-fire-out predictions are a call on every Carlson point of a
-    fire, made by a fit that never saw that fire. Where Carlson's hand <code>B</code>/<code>U</code>
-    and our model's call both exist, the two can be compared directly — the inventory is taken
-    out of the question, because the comparison runs on Carlson's own points.</p>
-
+    <p>The only way to answer it is to run this pipeline on old fires the survey already covers.
+    Sixteen were rebuilt end to end and twenty-three carry the loss call; the whole experiment
+    is <a href="retrospective.html">running the pipeline backwards</a>, and this is the summary
+    a reader of this page needs.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Carlson's hand call vs our model's</th><th class="num">10 fires (published)</th><th class="num">23 fires (Roadmap 12, 2026-09-12)</th></tr></thead>
+        <caption>This pipeline against the hand survey, on the survey's own fires</caption>
+        <thead><tr><th>What was measured</th><th class="num">Fires</th><th class="num">Result</th></tr></thead>
         <tbody>
-          <tr><td>buildings compared</td><td class="num">282,719</td><td class="num">394,460</td></tr>
-          <tr><td>agreement</td><td class="num">0.978</td><td class="num">0.979</td></tr>
-          <tr><td>Cohen's κ</td><td class="num">0.883</td><td class="num">0.871</td></tr>
-          <tr><td>AUC</td><td class="num">0.992</td><td class="num">0.991</td></tr>
-          <tr><td>destroyed P / R / F1</td><td class="num">0.915 / 0.877 / 0.895</td><td class="num">0.903 / 0.863 / 0.883</td></tr>
-          <tr class="total"><td>our destroyed count ÷ Carlson's</td><td class="num">28,815 / 30,072 = 0.958</td><td class="num">34,066 / 35,668 = 0.955</td></tr>
+          <tr><td>the loss call alone, on the survey's own points, so the inventory is taken out of the question</td><td class="num">23<br>2016–2022<br>394,429 buildings</td><td class="num">agreement <strong>0.980</strong> · κ <strong>0.882</strong> · destroyed P/R/F1 <strong>0.882 / 0.904 / 0.893</strong> · AUC <strong>0.992</strong> · count ratio <strong>1.02</strong></td></tr>
+          <tr class="total"><td><strong>the whole pipeline end to end</strong> — find the buildings, then call the losses</td><td class="num">16<br>28,402 pairs</td><td class="num">destroyed count <strong>0.764</strong> of the survey's, per-fire 0.48 – 1.80; detection recall <strong>0.768</strong>; on matched pairs P/R <strong>0.874 / 0.871</strong></td></tr>
+          <tr><td>how many of the survey's buildings our inventory finds</td><td class="num">16</td><td class="num">recall <strong>0.588 – 0.912</strong>, median 0.771, at precision 0.831 – 0.963</td></tr>
+          <tr><td>does the bias drift with the year?</td><td class="num">16</td><td class="num"><strong>no</strong> — Spearman <strong>+0.098</strong>, p = 0.72</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.{csv,json}</code>
-    (leave-one-fire-out, cut 0.90, bundle <code>damage_sentinel2</code>) and
-    <code>outputs/combined_retrospective/</code>, ledger <code>road-12</code>. Restricted back to
-    the original ten fires the 23-fire code reproduces the published row exactly.</p>
-
-    <p><strong>Four per cent low in aggregate — but it is not evenly spread.</strong></p>
-  </div>
-  <div class="wide">
-    <figure class="band">
-      <svg viewBox="0 0 860 330" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="62" y1="305.5" x2="836" y2="305.5" />
-<text class="tick" x="54" y="309.0" text-anchor="end">0.5</text>
-<line class="grid-line" x1="62" y1="262.5" x2="836" y2="262.5" />
-<text class="tick" x="54" y="266.0" text-anchor="end">0.6</text>
-<line class="grid-line" x1="62" y1="219.5" x2="836" y2="219.5" />
-<text class="tick" x="54" y="223.0" text-anchor="end">0.7</text>
-<line class="grid-line" x1="62" y1="176.5" x2="836" y2="176.5" />
-<text class="tick" x="54" y="180.0" text-anchor="end">0.8</text>
-<line class="grid-line" x1="62" y1="133.5" x2="836" y2="133.5" />
-<text class="tick" x="54" y="137.0" text-anchor="end">0.9</text>
-<line class="grid-line" x1="62" y1="90.5" x2="836" y2="90.5" />
-<text class="tick" x="54" y="94.0" text-anchor="end">1.0</text>
-<line class="grid-line" x1="62" y1="47.5" x2="836" y2="47.5" />
-<text class="tick" x="54" y="51.0" text-anchor="end">1.1</text>
-<line class="grid-line" x1="134.5" y1="26" x2="134.5" y2="284" />
-<text class="tick" x="134.5" y="300" text-anchor="middle">0.5 %</text>
-<line class="grid-line" x1="232.9" y1="26" x2="232.9" y2="284" />
-<text class="tick" x="232.9" y="300" text-anchor="middle">1 %</text>
-<line class="grid-line" x1="363.0" y1="26" x2="363.0" y2="284" />
-<text class="tick" x="363.0" y="300" text-anchor="middle">2.5 %</text>
-<line class="grid-line" x1="461.4" y1="26" x2="461.4" y2="284" />
-<text class="tick" x="461.4" y="300" text-anchor="middle">5 %</text>
-<line class="grid-line" x1="559.8" y1="26" x2="559.8" y2="284" />
-<text class="tick" x="559.8" y="300" text-anchor="middle">10 %</text>
-<line class="grid-line" x1="689.8" y1="26" x2="689.8" y2="284" />
-<text class="tick" x="689.8" y="300" text-anchor="middle">25 %</text>
-<line class="grid-line" x1="788.2" y1="26" x2="788.2" y2="284" />
-<text class="tick" x="788.2" y="300" text-anchor="middle">50 %</text>
-<line x1="62" y1="90.5" x2="836" y2="90.5" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
-<text class="tick" x="832" y="84.5" text-anchor="end">Carlson’s own count</text>
-<line x1="509.1" y1="26" x2="509.1" y2="284" stroke="var(--s4)" stroke-width="1.5" stroke-dasharray="3 3" />
-<text class="tick" x="514.1" y="36" fill="var(--s4)">7 % destroyed</text>
-<circle cx="119.6" cy="246.2" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="128.6" y="249.7" text-anchor="start">Creek 2017</text>
-<circle cx="288.6" cy="121.9" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="297.6" y="125.4" text-anchor="start">Thomas 2017</text>
-<circle cx="344.2" cy="242.3" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="353.2" y="245.8" text-anchor="start">Woolsey 2018</text>
-<circle cx="522.5" cy="167.9" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="531.5" y="171.4" text-anchor="start">CZU 2020</text>
-<circle cx="540.3" cy="86.2" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="549.3" y="89.7" text-anchor="start">Caldor 2021</text>
-<circle cx="580.2" cy="130.1" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="589.2" y="133.6" text-anchor="start">Carr 2018</text>
-<circle cx="583.4" cy="75.4" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="592.4" y="78.9" text-anchor="start">Dixie 2021</text>
-<circle cx="624.6" cy="144.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="615.6" y="148.2" text-anchor="end">Tubbs 2017</text>
-<circle cx="659.9" cy="64.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="650.9" y="68.2" text-anchor="end">North Complex 2020</text>
-<circle cx="801.9" cy="84.5" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="792.9" y="88.0" text-anchor="end">Camp 2018</text>
-<line class="axis" x1="62" y1="284" x2="836" y2="284" />
-<line class="axis" x1="62" y1="26" x2="62" y2="284" />
-<text class="tick" x="836" y="322" text-anchor="end">share of the fire’s buildings Carlson called destroyed (log scale)</text>
-<text class="tick" x="16" y="155" transform="rotate(-90 16 155)" text-anchor="middle">our destroyed ÷ Carlson’s</text>
-</svg>
-      <ul class="legend">
-        <li><span class="swatch" style="background:var(--s2)"></span>fires below 2.5 % destroyed</li>
-        <li><span class="swatch" style="background:var(--s1)"></span>fires above 2.5 % destroyed</li>
-      </ul>
-      <figcaption>Our destroyed count against Carlson's, on the ten fires where both calls
-      exist, plotted against how much of the fire's building stock Carlson called destroyed. The
-      three low-loss fires land at 0.64, 0.65 and 0.93; the catastrophic fires land between 0.82
-      and 1.06. A trend built from catastrophic fires crosses the 2022/2023 boundary safely; a
-      trend that includes many low-loss fires does not.</figcaption>
-    </figure>
-  </div>
-  <div class="wrap">
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code> and
-    <code>manifest.json</code> (<code>destroyed_ratio</code> per fire).</p>
+    <p class="src"><b>Source:</b>
+    <code>outputs/combined_retrospective/{damage_pooled.json,end_to_end.{csv,json},counts_on_the_same_ground.json}</code>,
+    2026-09-12. The loss-call row runs on the Carlson-side fold table of the previous model
+    generation and has not been recomputed on the production model; the end-to-end row has.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ Two things published about this chart have since been corrected, and both
-      corrections are here.</strong> (1) <em>"Every fire above ~7 % destroyed lands between 0.82
-      and 1.06 of Carlson's count"</em> is <strong>false on 23 fires</strong>: four of the twelve
-      above 7 % fall outside, and two are not rounding — Creek 2020 at 1.13 and Zogg 2020 at
-      1.61. What survives is the direction (mean ratio <strong>1.041</strong> above 7 % against
-      <strong>0.720</strong> below 2.5 %), plus a fourth low-loss confirmation nobody had looked
-      at: Kincade 2019, 1.7 % destroyed, ratio 0.67. (2) The guidance was written on a bundle
-      fitted through a sampler that read the wrong pixel for 85.1 % of rows. On the corrected
-      tables the low-loss under-call is <strong>mostly gone</strong> — mean ratio below 2.5 %
-      destroyed <strong>0.720 → 0.952</strong>, Kincade 0.67 → 0.90, Creek 2017 0.64 → 0.91.</p>
-      <p>And the apparent year trend mostly goes with it: the per-fire ratio correlates with fire
-      year at Spearman <strong>+0.572 (p 0.004)</strong> on the old bundle and
-      <strong>+0.310 (p 0.15)</strong> on the corrected one. It is not a Sentinel-2 constellation
-      effect — median post-fire observations do not rise with the year (ρ +0.061). Every version
-      of it points <em>up</em>, so a destroyed count that rises across 2022/2023 cannot be blamed
-      on the model getting more conservative.</p>
+      <p><strong>⚠️ Do not compare a destroyed count from this pipeline to a count from the
+      survey without a factor of about 0.76 — and do not treat that factor as stable.</strong>
+      It runs 0.48 to 1.80 across sixteen fires, it tracks how well the buildings were
+      <em>found</em> rather than anything about the loss model, and it is a net of two large
+      opposite errors: we recover <strong>5,767 of the survey's 9,783</strong> destroyed
+      buildings in region and add <strong>1,711</strong> destroyed calls on structures the survey
+      did not record as destroyed, 877 of them on buildings it never enumerated at all.</p>
+      <p><strong>The threat to a cross-join trend is composition, not time.</strong> The method's
+      bias does not drift with the year; it drifts with the fire, and it tracks how much of a
+      fire's building stock burned. A published rule of thumb that said otherwise — <em>every
+      fire above about 7 % destroyed lands between 0.82 and 1.06 of the survey's count</em> — is
+      false on twenty-three fires and has been withdrawn.</p>
     </div>
 
-    <h3>How good are Carlson's own labels? One fire can say.</h3>
-    <p>Every accuracy figure in this project is against Carlson or against DINS, because nothing
-    else covers the same structures. On the <strong>Marshall fire (CO, December 2021)</strong>
-    three independent lists do — Carlson's points, Boulder County's field damage assessment, and
-    FEMA's remote-sensing MAC assessment. That makes it the only place in this project where
-    Carlson's own label noise can be bounded.</p>
+    <p><strong>The two truth sources also disagree with each other by up to 1.8×.</strong> On the
+    same ground the inspectors record more destroyed structures than the survey on 12 of 16
+    fires, up to 1.84× — they count mobile homes, second dwellings and outbuildings the survey
+    never counted, and several inspection records can sit on one building. A modern count
+    validated against inspections is <em>not in the survey's units</em>, whatever the model
+    does.</p>
+
+    <h3>How good are the survey's own labels? One fire can say.</h3>
+    <p>Every accuracy figure in this project is measured against the survey or against the
+    inspection record, because nothing else covers the same structures. On the
+    <strong>Marshall fire (CO, December 2021)</strong> three independent lists do — the survey's
+    points, a county field damage assessment and a federal remote-sensing assessment. That makes
+    it the only place in this project where the survey's own label noise can be bounded.</p>
     <div class="tablewrap">
       <table>
-        <caption>Carlson's hand call against two lists nobody in this pipeline drew — Marshall CO 2021</caption>
-        <thead><tr><th>Carlson vs</th><th class="num">Pairs</th><th class="num">Agreement</th><th class="num">Cohen's κ</th><th class="num">Carlson destroyed, list not</th><th class="num">List destroyed, Carlson not</th></tr></thead>
+        <caption>The survey's hand call against two lists nobody in this pipeline drew — Marshall CO 2021</caption>
+        <thead><tr><th>The survey vs</th><th class="num">Pairs</th><th class="num">Agreement</th><th class="num">Cohen's κ</th><th class="num">Survey destroyed, list not</th><th class="num">List destroyed, survey not</th></tr></thead>
         <tbody>
-          <tr><td>Boulder County (field)</td><td class="num">1,032</td><td class="num">0.9845</td><td class="num">0.934</td><td class="num">3</td><td class="num">13</td></tr>
-          <tr><td>FEMA MAC (remote sensing)</td><td class="num">2,666</td><td class="num">0.9910</td><td class="num">0.982</td><td class="num">12</td><td class="num">12</td></tr>
+          <tr><td>a county field assessment</td><td class="num">1,032</td><td class="num">0.9845</td><td class="num">0.934</td><td class="num">3</td><td class="num">13</td></tr>
+          <tr><td>a federal remote-sensing assessment</td><td class="num">2,666</td><td class="num">0.9910</td><td class="num">0.982</td><td class="num">12</td><td class="num">12</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/ics209_check/outside_ca/marshall_{boulder,femamac}_2021/report.md</code>;
     ledger <code>road-8</code>.</p>
-    <p><strong>Carlson's labels are good.</strong> On one fire, against two independent lists,
+    <p><strong>The survey's labels are good.</strong> On one fire, against two independent lists,
     they disagree on 1.6 % and 0.9 % of buildings, symmetrically against the larger list. That
     bounds how much of the model's apparent error on the Carlson era could belong to the truth
     set, and the answer is: not much of it. It is one fire, in one state, on a wind-driven
     grassland fire through suburbs — the easiest possible case for a hand call — and it is one
     measurement more than existed before.</p>
 
-    <h3>Two properties of Carlson's release that will break a naive count</h3>
-    <p>The series carries Carlson <strong>verbatim</strong>: nothing is dropped, merged,
+    <h3>Two properties of the survey's release that will break a naive count</h3>
+    <p>The dataset carries the survey <strong>verbatim</strong>: nothing is dropped, merged,
     re-attributed or corrected, because silently cleaning another team's published census inside
     a derived product would make the two impossible to reconcile. Two flags are measured once
     over the whole national file and shipped as columns instead:</p>
@@ -1239,9 +1101,8 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §4c; ledger
-    <code>road-11</code>, <code>val-carlson-no-attribution-rule</code>. Both null on every
-    <code>slp</code> row.</p>
+    <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §4c; both null on
+    every row of the modern half.</p>
     <p><strong>One fire carries most of the duplication:</strong> <code>CA_2008_SAYRE</code>
     alone holds 19,859 of the 20,296 repeats — 40,146 rows at 20,287 locations. A national
     destroyed count that does not drop them is wrong by that much. The multi-fire flag marks
@@ -1250,32 +1111,9 @@
     almost certainly an artefact of the 145-step select-then-merge lineage the release's own
     metadata records, and the multi-fire locations are a correct consequence of a definition —
     one row per (structure, fire) — that this series shares. <strong>On our own side of the
-    series the same exposure is zero:</strong> 0 structures are called destroyed under more than
-    one fire.</p>
+    dataset the same exposure is zero:</strong> 0 structures are called destroyed under more
+    than one fire.</p>
 
-    <h3>The structure count, on the same ground</h3>
-    <p>The damage call is only half of a count. For the five 2018–2021 California fires Carlson
-    covers <em>and</em> DINS inspected, counts recomputed inside the region both datasets looked
-    at (within 250 m of a point from each):</p>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Fire</th><th class="num">Carlson</th><th class="num">Carlson destroyed</th><th class="num">DINS</th><th class="num">DINS destroyed</th><th class="num">DINS ÷ Carlson destroyed</th><th class="num">our inventory recall / precision vs Carlson</th></tr></thead>
-        <tbody>
-          <tr><td>Carr 2018</td><td class="num">4,170</td><td class="num">1,668</td><td class="num">1,882</td><td class="num">1,608</td><td class="num">0.96</td><td class="num">0.766 / 0.925</td></tr>
-          <tr><td>CZU 2020</td><td class="num">4,540</td><td class="num">835</td><td class="num">4,588</td><td class="num">1,311</td><td class="num">1.57</td><td class="num">0.763 / 0.892</td></tr>
-          <tr><td>North Complex 2020</td><td class="num">1,905</td><td class="num">1,279</td><td class="num">3,054</td><td class="num">2,246</td><td class="num">1.76</td><td class="num">0.750 / 0.885</td></tr>
-          <tr><td>Caldor 2021</td><td class="num">3,891</td><td class="num">930</td><td class="num">4,338</td><td class="num">991</td><td class="num">1.07</td><td class="num">0.671 / 0.894</td></tr>
-          <tr><td>Dixie 2021</td><td class="num">3,282</td><td class="num">1,025</td><td class="num">3,690</td><td class="num">1,269</td><td class="num">1.24</td><td class="num">0.726 / 0.890</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code>
-    (<code>counts_on_the_same_ground</code>); spec §B.</p>
-    <p><strong>The two truth sources disagree with each other by up to 1.8×.</strong> On the same
-    ground DINS records 76 % more destroyed structures than Carlson on North Complex, 57 % more
-    on CZU, and 4 % <em>fewer</em> on Carr. DINS inspects mobile homes, ADUs and outbuildings
-    Carlson never counted, and several DINS records can share one building — so a 2023+ count
-    validated against DINS is <em>not in Carlson's units</em>, whatever the model does.</p>
   </div>
 </section>
 
@@ -1436,8 +1274,8 @@
     point</em> rather than to the model.</p>
     <div class="tablewrap">
       <table>
-        <caption>California against everywhere else — 66 fires, 582,554 structures, the
-        shipped bundle <code>damage_sentinel2_v5</code> at its fixed cut 0.85</caption>
+        <caption>California against everywhere else — 66 fires, 582,554 structures, at the
+        fixed threshold 0.85</caption>
         <thead><tr><th></th><th class="num">Fires</th><th class="num">Structures</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">95 % CI (fires resampled)</th><th class="num">At own cut</th><th class="num">Gap</th></tr></thead>
         <tbody>
           <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.9908</td><td class="num">0.9398</td><td class="num">0.8806</td><td class="num">0.8072</td><td class="ci">[0.7707, 0.8452]</td><td class="num">0.8286</td><td class="num">0.021</td></tr>
@@ -1447,7 +1285,7 @@
     </div>
     <p class="src"><b>Source:</b> <code>outputs/generalization/v5/by_group.csv</code>
     (<code>grouping = region</code>) and <code>outputs/uncertainty/v5/by_state_ci.csv</code>
-    (B = 2000, fire resampled, cut 0.85), both on the shipped bundle, both dated 2026-09-12.</p>
+    (B = 2000, fire resampled, threshold 0.85), dated 2026-09-12.</p>
 
     <div class="note warn">
       <p><strong>⚠️ Read those two intervals together, not against each other.</strong> The
@@ -1549,8 +1387,9 @@
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> <code>outputs/generalization/v5/by_state.csv</code>, columns
-    <code>mean_fire_f1</code> / <code>mean_fire_own_f1</code> / <code>mean_fire_gap</code>, cut
-    0.85, shipped bundle.</p>
+    <code>mean_fire_f1</code> / <code>mean_fire_own_f1</code> / <code>mean_fire_gap</code>, at
+    the fixed threshold 0.85. The full state table is on
+    <a href="outside-california.html">the outside-California page</a>.</p>
     <div class="note">
       <p><strong>⚠️ What this evidence is not.</strong> Twenty-five fires outside California,
       none later than 2022, and Texas, Kansas, Florida, New Mexico and Utah are one fire each — a
@@ -1560,50 +1399,28 @@
     </div>
 
     <h3>Can a label-free cut rule fix it? The bar was written down first.</h3>
-    <p>Thirteen per-fire cut rules that read only the model's own scores — never a fire attribute —
-    were scored leave-one-fire-out on the same 66-fire table, with the <strong>fire</strong> as
-    the unit, against a five-criterion promotion bar pre-registered in the CHANGELOG before the
-    first fold was scored. On the pre-fix (v3) tables nothing cleared it. On the corrected v4
-    tables, with the Carlson half <strong>fully nested</strong> (66 outer + 2,145 pair fits =
-    2,211 fits), <code>expected_f1_isotonic</code> clears all five:</p>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Criterion</th><th>Bar</th><th class="num">Unnested v4</th><th class="num">Nested v4</th><th></th></tr></thead>
-        <tbody>
-          <tr><td>(a) mean-fire F1 gain over <code>fixed@0.90</code></td><td>≥ +0.010</td><td class="num">+0.0114</td><td class="num">+0.0130</td><td>✅ margin doubles</td></tr>
-          <tr><td>(b) California drop</td><td>≤ 0.005</td><td class="num">−0.0050</td><td class="num">−0.0054</td><td>✅ a gain</td></tr>
-          <tr><td>(c) worst state drop</td><td>≤ 0.020</td><td class="num">NM +0.0181</td><td class="num">NM +0.0172</td><td>✅</td></tr>
-          <tr><td>(d) DINS cost vs <code>fixed@0.87</code></td><td>≤ 0.005</td><td class="num">+0.0036</td><td class="num">+0.0036</td><td>✅ DINS was already nested</td></tr>
-          <tr><td>(e) p10 / worst-fire drop</td><td>≤ 0.020 / 0.050</td><td class="num">−0.0458</td><td class="num">−0.0446</td><td>✅ both improve</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>outputs/operating_conus/v4_nested/decision.{md,json}</code>
-    and <code>manifest.json</code> (2,211 fits, 1,901.7 s on 112 workers). Bar pre-registered
-    <code>logs/CHANGELOG.md</code> 2026-09-10 17:50 PT; ledger <code>road-9</code>,
-    <code>open-conus-rule-after-sampler-fix</code>.</p>
-    <p>Under the rule, mean-fire F1 goes 0.7751 → <strong>0.7881</strong> and non-California
-    0.7301 → <strong>0.7556</strong>; California <em>gains</em> rather than paying for it. Two
-    internal checks say the nesting actually happened: every rule that fits <em>nothing</em>
-    (<code>fixed@0.84</code>, <code>fixed@0.87</code>, <code>fixed@0.90</code>,
-    <code>quantile_predicted_rate</code>) is bit-identical between the nested and unnested runs,
-    and the outer half reproduces the published <code>destroyed_prob</code> to a maximum absolute
-    difference of <strong>3.0 × 10⁻⁸ on 100.00 %</strong> of the 582,554 rows.</p>
-    <p><strong>The assumption behind the caveat was wrong in sign, and it was worth checking
-    rather than believing.</strong> Removing the leak was expected to <em>shrink</em> the adaptive
-    rules' advantage; it grew it, by +0.0016. The effect is small either way, and the honest
-    summary is that nesting was not what was holding this result up. What remains is the whole of
-    the case against adopting: <strong>a narrow pass on 66 fires, 25 of them outside California,
-    with several states represented by a single fire</strong> — and that is not a caveat a bigger
-    computer can remove.</p>
+    <p>Thirteen per-fire threshold rules that read only the model's own scores — never anything
+    about the fire — were scored leave-one-fire-out on the same 66-fire table, with the
+    <strong>fire</strong> as the unit, against a five-criterion promotion bar written into the
+    project change log before the first fold was scored. One clears all five, and it is the rule
+    that ships as the advisory call: mean-fire F1 <strong>0.775 → 0.788</strong> and
+    non-California <strong>0.730 → 0.756</strong>, with California <em>gaining</em> rather than
+    paying for it. The full table and the criterion-by-criterion verdict are on
+    <a href="outside-california.html">the outside-California page</a>. What that pass does
+    <em>not</em> do is transfer to the product, which is <a href="#population">the section
+    above</a>.</p>
     <p><strong>Why no single rule can win.</strong> The states split into two shapes and the
     label-free signal that fixes one wrecks the other. A rule that fits nothing at all — call the
-    top <code>mean(prob)</code> of the fire's own scores — reaches Texas F1 <strong>0.623</strong>
-    against a labelled ceiling of 0.622, up from 0.109. The signal is genuinely there in the score
-    distribution, with no labels and no fire attribute. It then costs California 13 points,
-    because California's 41 fires are already at their cut. California is 41 of 66 fires, so a
-    rule that helps eleven fires a lot and hurts forty a little can still post a positive mean —
-    which is exactly what the California, per-state and worst-fire criteria exist to catch.</p>
+    top of the fire's own score distribution — takes Texas from F1 0.109 to
+    <strong>0.623</strong> against a labelled ceiling of 0.622: the signal is genuinely there in
+    the scores, with no labels and nothing about the fire. It then costs California 13 points,
+    because California's fires are already at their threshold. California is 41 of the 66 fires,
+    so a rule that helps eleven fires a lot and hurts forty a little can still post a positive
+    average — which is exactly what the California, per-state and worst-fire criteria exist to
+    catch.</p>
+    <p class="src"><b>Source:</b>
+    <code>outputs/operating_conus/v4_nested/{decision.md,carlson_s2/summary.json}</code> and
+    <code>outputs/operating_conus/carlson_s2/by_state.csv</code>.</p>
 
     <h3>Two fires with truth of their own</h3>
     <p>One post-2022 non-California per-structure assessment was found to exist, verified by live
@@ -1615,41 +1432,38 @@
     there is no pre-fire 0.6 m imagery and no inventory can be built at all.</p>
     <div class="tablewrap">
       <table>
-        <caption>Outside California, end to end, on the shipped bundle
-        <code>damage_sentinel2_v5</code> at the fixed cut 0.85, with the advisory
-        <code>Direct</code>-scoped call beside it</caption>
-        <thead><tr><th>Fire / truth set</th><th class="num">Truth records</th><th class="num">Destroyed</th><th class="num">Detection recall @10 m</th><th class="num">Pairs</th><th class="num">P</th><th class="num">R</th><th class="num">F1 fixed</th><th class="num">F1 advisory</th><th class="num">AUC</th><th class="num">Own cut → F1</th></tr></thead>
+        <caption>Outside California, end to end, at the fixed threshold 0.85 with the advisory
+        call beside it</caption>
+        <thead><tr><th>Fire / truth set</th><th class="num">Truth records</th><th class="num">Destroyed</th><th class="num">Detection recall @10 m</th><th class="num">Pairs</th><th class="num">P</th><th class="num">R</th><th class="num">F1 primary</th><th class="num">F1 advisory</th><th class="num">AUC</th><th class="num">Own threshold → F1</th></tr></thead>
         <tbody>
-          <tr><td>South Fork NM 2024 — FEMA US&amp;R</td><td class="num">2,488</td><td class="num">1,144</td><td class="num">0.661</td><td class="num">1,637</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.8484</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.07 → 0.945</td></tr>
-          <tr><td>Marshall CO 2021 — Boulder County (field)</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">0.710</td><td class="num">1,023</td><td class="num">0.981</td><td class="num">0.961</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">0.980</td><td class="num">0.62 → 0.973</td></tr>
-          <tr><td>Marshall CO 2021 — FEMA MAC (remote)</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">0.952</td><td class="num">2,741</td><td class="num">0.907</td><td class="num">0.949</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">0.984</td><td class="num">0.88 → 0.929</td></tr>
+          <tr><td>South Fork NM 2024 — federal search-and-rescue observations</td><td class="num">2,488</td><td class="num">1,144</td><td class="num">0.661</td><td class="num">1,637</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.8484</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.07 → 0.945</td></tr>
+          <tr><td>Marshall CO 2021 — county field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">0.710</td><td class="num">1,023</td><td class="num">0.981</td><td class="num">0.961</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">0.980</td><td class="num">0.62 → 0.973</td></tr>
+          <tr><td>Marshall CO 2021 — federal remote-sensing assessment</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">0.952</td><td class="num">2,741</td><td class="num">0.907</td><td class="num">0.949</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">0.984</td><td class="num">0.88 → 0.929</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b>
     <code>outputs/ics209_check/outside_ca/{ruidoso_southfork_2024,marshall_boulder_2021,marshall_femamac_2021}/report.md</code>
     and <code>metrics.json</code>, regenerated 2026-09-12; the advisory F1 from
-    <code>outputs/operating_product/per_fire.csv</code>. <strong>South Fork now runs on its own
-    perimeter frame</strong> — 9,568 structures, 2,357 <code>Direct</code> and 7,211
-    <code>Indirect</code>, 738 called destroyed at the fixed cut and 799 under the advisory one,
-    all of them <code>Direct</code>. It is scored on the assessment hull (39.7 km²), not the
-    whole fire, and its <code>Indirect</code> ring holds 119 pairs and 0 destroyed structures,
-    so that half cannot be scored.</p>
+    <code>outputs/operating_product/per_fire.csv</code>. South Fork runs on its own perimeter
+    frame — 9,568 structures, 2,357 within 100 m of the perimeter and 7,211 beyond it, 738
+    called destroyed at the fixed threshold and 799 under the advisory one, all of them near the
+    perimeter. It is scored on the assessment hull (39.7 km²), not the whole fire, and its outer
+    ring holds 119 pairs and 0 destroyed structures, so that half cannot be scored.</p>
     <p><strong>South Fork independently reproduces the generalization finding, on a fire two
-    years later than anything in the Carlson sample and in a state that sample barely contains:
-    the ranking travels (AUC 0.986) and the fixed cut does not</strong> — its own cut is 0.21 and
-    the gap is +0.066, against +0.055 on the 25 Carlson non-California fires. Measured twice, on
-    independent evidence.</p>
+    years later than anything in the historical sample and in a state that sample barely
+    contains: the ranking travels (AUC 0.985) and the fixed threshold does not.</strong> Its own
+    threshold gap is +0.097, against +0.066 on the 25 non-California historical fires. Measured
+    twice, on independent evidence.</p>
     <p>Three caveats that belong with these numbers. South Fork's detection recall (0.661) is
     well below California for structural reasons, not model quality: New Mexico has no cached
     Microsoft footprint layer, so the detector's prior band is USA Structures alone, and the USA
-    Structures extract for Lincoln County carries a single <code>IMAGE_DATE</code> of 2017-05-26,
-    seven years before the fire. FEMA MAC's detection recall (0.952) is <em>not</em> comparable
-    with the other two — its geometry <strong>is</strong> USA Structures footprints, which is also
-    the main source of our inventory, so the two match each other by construction; Boulder
-    County's 0.710 is an address-point list and is the honest detection figure. And the Marshall
-    <code>Indirect</code> ring, like South Fork's, holds no destroyed structures at all, so it
-    cannot be scored.</p>
+    Structures extract for that county carries a single image date seven years before the fire.
+    The remote-sensing assessment's detection recall (0.952) is <em>not</em> comparable with the
+    other two — its geometry <strong>is</strong> USA Structures footprints, which is also the
+    main source of our inventory, so the two match each other by construction; the county field
+    list's 0.710 is the honest detection figure. And Marshall's outer ring, like South Fork's,
+    holds no destroyed structures at all, so it cannot be scored.</p>
     <p><strong>Marshall also answered the winter question.</strong> Its pre window gives a median
     of 6 clear Sentinel-2 observations per structure and its post window a median of
     <strong>2</strong>, against 9–17 on a summer California fire — and even so only
@@ -1702,73 +1516,22 @@
         <thead><tr><th>Lever</th><th>Measured on</th><th class="num">Result</th><th>Verdict</th></tr></thead>
         <tbody>
           <tr><td>AlphaEarth embedding as damage features (3 families: 2 scalars, PCA-16, 64 raw deltas)</td><td>5 DINS incidents, 5,668 structures, identical rows</td><td class="num">every variant worse: F1 0.868 → 0.845–0.852</td><td>❌ and worst exactly where it was meant to help</td></tr>
-          <tr><td>30 m contrast features (<code>x − x_n3</code>, 20 columns)</td><td>8 DINS incidents</td><td class="num">+0.002 pooled AUC, −0.003 mean-fire F1</td><td>❌ <code>damage.include_contrast</code> stays false</td></tr>
-          <tr><td>Sentinel-1 temporal standard deviations (<code>s1_full</code>, 39 columns)</td><td>8 DINS incidents</td><td class="num">−0.018 pooled F1; bare-ground recall to 0.702</td><td>❌ actively harmful</td></tr>
-          <tr><td>Sentinel-1 point + 3×3 (18 columns)</td><td>8 DINS incidents, 4 seeds</td><td class="num">per-incident losses real on 3 of 4 seeds</td><td>❌ the same dilution the contrast features hit</td></tr>
-          <tr><td>Four adaptive per-fire cut rules on the DINS folds</td><td>8 DINS incidents</td><td class="num">≤ +0.6 pooled F1 pts, −0.6 to −2.1 mean-fire pts</td><td>❌ pooling is not neutral: two fires are 84 % of the rows</td></tr>
+          <tr><td>30 m contrast features (<code>x − x_n3</code>, 20 columns)</td><td>8 inspection incidents</td><td class="num">+0.002 pooled AUC, −0.003 mean-fire F1</td><td>❌ <code>damage.include_contrast</code> stays false</td></tr>
+          <tr><td>Sentinel-1 temporal standard deviations (39 columns)</td><td>8 inspection incidents</td><td class="num">−0.018 pooled F1; bare-ground recall to 0.702</td><td>❌ actively harmful</td></tr>
+          <tr><td>Sentinel-1 point + 3×3 (18 columns)</td><td>8 inspection incidents, 4 seeds</td><td class="num">per-incident losses real on 3 of 4 seeds</td><td>❌ the same dilution the contrast features hit</td></tr>
+          <tr class="total"><td><strong>Sentinel-1 radar in the production model</strong> (9 columns)</td><td>8 inspection incidents, 4 seeds, corrected tables</td><td class="num">+0.0088 ± 0.0009 pooled F1 against a +0.010 bar, and one incident −0.0087 against a 0.005 tolerance</td><td>❌ <strong>removed.</strong> It had been promoted under this rule and stopped clearing it; taking it out costs −0.0039 mean-fire F1 on an interval that includes zero</td></tr>
+          <tr><td>Four per-fire threshold rules on the inspection folds</td><td>8 inspection incidents</td><td class="num">≤ +0.6 pooled F1 pts, −0.6 to −2.1 mean-fire pts</td><td>❌ pooling is not neutral: two fires are 84 % of the rows</td></tr>
           <tr><td>Truncating a post window at a second fire's ignition</td><td>Franklin 2024</td><td class="num">median post observations 5 → 1; 2 of 3 correct calls lost</td><td>❌ a different quantity, not a shorter look at the same one</td></tr>
-          <tr><td>Expanding the training pool with 25 older DINS incidents</td><td>geometric overlap test, 74,276 structures</td><td class="num">95.3 % sit within 100 m of a Carlson point of the same fire year</td><td>❌ they are re-labels, not new data — and pre-2019 DINS inspected mainly damaged structures</td></tr>
+          <tr><td>Expanding the training pool with 25 older inspection incidents</td><td>geometric overlap test, 74,276 structures</td><td class="num">95.3 % sit within 100 m of a Carlson point of the same fire year</td><td>❌ they are re-labels, not new data — and pre-2019 DINS inspected mainly damaged structures</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/dins_check_v2/{sentinel2_emb,sentinel1}/</code>,
-    <code>outputs/damage/</code>, <code>outputs/forward_damage/overlap.json</code>; ledger
-    <code>dmg-emb-variants</code>, <code>dmg-contrast</code>, <code>dmg-s1-full</code>,
-    <code>dmg-operating-rules</code>, <code>dmg-truncated-window-bias</code>,
-    <code>dmg-pool-expansion</code>.</p>
+    <code>outputs/damage/</code>, <code>outputs/forward_damage/overlap.json</code>,
+    <code>outputs/dins_check_v2/optical_v5/seed_variance.md</code>,
+    <code>outputs/forward_damage/before_after/paired_delta_ci.csv</code>. Every row has a ledger
+    entry in <code>docs/experiment-ledger.md</code>.</p>
 
-    <div class="note warn">
-      <p><strong>⚠️ A component of the shipped model stopped clearing its own promotion rule,
-      and has now been removed.</strong> Sentinel-1 was promoted into production under a bar
-      written in advance: ≥ +0.010 pooled F1 over the optical-only bundle and no incident worse
-      by more than 0.005. Re-applied to the corrected features and re-measured from scratch over
-      four seeds, it fires on <strong>two of five</strong> criteria — the gain is
-      <strong>+0.0088 ± 0.0009</strong>, 0.0012 short, and <strong>Bridge loses 0.0087 on all
-      four seeds</strong>. The wider 3×3 radar variant is worse still: +0.0015 short and Bridge
-      −0.0171. Correcting the sampler ate about a fifth of radar's apparent gain, consistent
-      with part of it having been compensation for optical features read from the wrong pixel.
-      <strong>On 2026-09-11 the owner dropped it</strong>, and the product confirms the rule was
-      right to stop firing: holding the cut fixed and changing only the model costs
-      <strong>−0.0039 mean-fire F1, 95 % CI [−0.0106, +0.0025]</strong> — an interval that
-      includes zero. <code>damage_sentinel2s1_v4</code> and <code>_v3</code> stay on disk,
-      archived. <span class="mono">(<code>outputs/dins_check_v2/optical_v5/seed_variance.md</code>;
-      <code>outputs/forward_damage/before_after/paired_delta_ci.csv</code>;
-      <code>open-radar-after-sampler-fix</code>, closed.)</span></p>
-    </div>
-
-    <h3>The defect that moved every damage number on this page</h3>
-    <p>Stage 5 built its raster read window with <code>rasterio.windows.from_bounds</code>, which
-    returns <strong>fractional</strong> offsets; <code>src.read</code> rounded them and
-    <code>src.window_transform</code> did not, so the array and the transform that indexed it
-    could disagree by a pixel — and how much padding the window carried decided which pixel a
-    structure was read from. Worse, the six reflectance bands were read at a 3-pixel pad and the
-    SCL cloud mask at a 2-pixel one, so a structure's cloud verdict could come from a
-    <em>different pixel</em> than the reflectance it was masking. Both defects were confirmed on
-    a raster whose digital number encodes its own row and column, fixed, and every Sentinel-2
-    feature table rebuilt.</p>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>What the fix changed in the tables</th><th class="num">Sentinel-2</th><th class="num">Landsat</th></tr></thead>
-        <tbody>
-          <tr><td>structures with ≥ 1 changed feature column</td><td class="num">529,772 of 622,581 (<strong>85.1 %</strong>)</td><td class="num">529,661 of 1,031,510 (<strong>51.3 %</strong>)</td></tr>
-          <tr><td>per-fire share changed (min / median)</td><td class="num">20.1 % / 84.6 %</td><td class="num">11.8 % / 56.2 %</td></tr>
-          <tr><td><code>pre_n_obs</code> / <code>post_n_obs</code> changed</td><td class="num">3.3 % / 4.8 %</td><td class="num">4.5 % / 5.7 %</td></tr>
-          <tr class="total"><td>structures that gained or lost a value</td><td class="num">0</td><td class="num">604 gained, 724 lost</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>outputs/damage/table_diff_sampler_v4_all.md</code> and
-    <code>table_diff_sampler_landsat_v2.md</code>; ledger <code>dmg-s2-window-rounding</code>,
-    <code>dmg-s2-qa-window-pad</code>, <code>road-7</code>, <code>road-9</code>.</p>
-    <p><strong>The expectation was pre-registered before the rebuild</strong> — that the corrected
-    tables would land within the four-seed noise band of the old ones. They did not, in the
-    direction that favours the fix: pooled F1 on the eight DINS incidents went
-    0.9138 ± 0.0009 → <strong>0.9227 ± 0.0006</strong>, and at the fire level +0.0113,
-    95 % CI [+0.0013, +0.0126]. The bundle ships <strong>because it is the correct sampler</strong>;
-    that it also scores better is a finding, not the reason. On Landsat, 1,328 rows across 20
-    fires gained or lost a value where Sentinel-2 lost none — 908 of them Marshall CO 2021 alone,
-    because with 30 m pixels and fewer scenes a moved cloud verdict can take away a structure's
-    only clear observation rather than merely swapping which one it gets.</p>
   </div>
 </section>
 
@@ -1785,42 +1548,42 @@
       selection rule applied to 2025 picks exactly the 2025 fires already in the forward set, so
       the empty result is the archive, not the query. This project uses public data only, so the
       hold-out waits on CAL FIRE.</li>
-      <li><strong>Eight fires carry 84 % of the out-of-sample evidence in two of them.</strong>
-      Every DINS interval on this page is a bootstrap over eight incidents, and Eaton and
-      Palisades are most of the rows.</li>
-      <li><strong>The <code>Indirect</code> ring is not scoreable and carries the headline
-      nowhere.</strong> On the Carlson table <code>Indirect</code> is 438,704 of 582,554 rows at a
-      base rate of 0.0009 and the model scores F1 0.10 on them. Every headline in this project is
-      carried by the <code>Direct</code> quarter of the table. On both outside-California fires
-      the Indirect ring holds no destroyed structures at all.</li>
+      <li><strong>Eight fires carry the out-of-sample evidence, and two of them are 84 % of
+      it.</strong> Every inspection interval on this page is a bootstrap over eight incidents.</li>
+      <li><strong>The ring beyond 100 m from the perimeter is not scoreable and carries the
+      headline nowhere.</strong> On the national table it is 438,704 of 582,554 rows at a
+      destroyed rate of 0.0009, and the model scores F1 0.10 on them. Every headline in this
+      project is carried by the near-perimeter quarter. On both outside-California fires that
+      ring holds no destroyed structures at all.</li>
       <li><strong>An inventory of building <em>footprints</em> undercounts DINS
       <em>structures</em></strong> by roughly a fifth wherever several inspected structures sit
       on one parcel. A per-parcel or footprint-splitting step is the next thing to add.</li>
-      <li><strong>One DINS category should be excluded or scored separately.</strong>
+      <li><strong>One inspection category should be excluded or scored separately.</strong>
       Infrastructure scores F1 0.286 (n 259, 16 destroyed): the model over-calls utility
       structures nine times out of ten, and the model and the inspector disagree about what
       "destroyed" means there.</li>
-      <li><strong>The intermediate DINS damage classes do not become separable.</strong>
+      <li><strong>The intermediate damage classes do not become separable.</strong>
       "Affected (&gt;0–10 %)" scores mean 0.475 and "Minor (10–25 %)" 0.488, sitting almost
       exactly between No Damage (0.166) and Destroyed (0.933). Reading the score as a
       damage-<em>severity</em> index is defensible; reading it as "destroyed or not" puts a fifth
       of them over 0.9.</li>
-      <li><strong>Carlson's half has no attribution rule of its own.</strong> 18.3 % of its
-      1,770,939 rows sit at a location a second fire also claims, and its release has no structure
-      identifier. <strong>De-duplicate on geometry before any pooled count across Carlson
-      fires.</strong></li>
-      <li><strong>The detector's additions cannot be proven right from DINS.</strong> At most
-      54 % of the U-Net points inside an inspected area are wrong, and DINS cannot narrow that,
-      because it does not record every structure.</li>
-      <li><strong>Nothing before 2016 can be produced by this method at all</strong>, and nothing
-      after 2022 has a Carlson enumeration to be checked against. The era comparison is bounded
-      on both sides by construction.</li>
+      <li><strong>The historical half has no attribution rule of its own.</strong> 18.3 % of its
+      1,770,939 rows sit at a location a second fire also claims, and its release has no
+      structure identifier. <strong>De-duplicate on geometry before any pooled count across
+      historical fires.</strong></li>
+      <li><strong>The detector's additions cannot be proven right from inspections.</strong> At
+      most 54 % of the detected-only points inside an inspected area are wrong, and the
+      inspection record cannot narrow that, because it does not record every structure.</li>
+      <li><strong>Nothing before 2016 can be produced by this method at all</strong>, and
+      nothing after 2022 has a hand enumeration to be checked against. The era comparison is
+      bounded on both sides by construction.</li>
       <li><strong>Footprints are never removed.</strong> The phantom rate is an upper bound and
       the triage ranking is a queue for a person, not a rule.</li>
     </ol>
     <p class="src"><b>Source:</b> <code>docs/data-descriptor.md</code> §8 "Known limitations";
-    <code>docs/preregistration-2026.md</code>; <code>outputs/generalization/damage_sentinel2_v4/by_group.csv</code>
-    (<code>grouping = exposure</code>); <code>outputs/forward_damage/by_dins_category.csv</code>.</p>
+    <code>docs/preregistration-2026.md</code>;
+    <code>outputs/generalization/v5/by_group.csv</code> (<code>grouping = exposure</code>);
+    <code>outputs/forward_damage/by_dins_category.csv</code>.</p>
   </div>
 </section>
 
@@ -1834,30 +1597,24 @@
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">1,939,136 / <strong>1,922,889</strong></td></tr>
-          <tr><td>fires</td><td class="num">376 — 361 Carlson, 15 ours</td></tr>
-          <tr><td>Carlson rows (2002–2022, verbatim)</td><td class="num">1,770,939 — 73,534 destroyed</td></tr>
-          <tr><td>pipeline rows (15 fires, 2024–2025)</td><td class="num">168,197 built, 151,950 released — 14,504 destroyed at the fixed cut</td></tr>
+          <tr><td>fires</td><td class="num">376 — 361 from the survey, 15 ours</td></tr>
+          <tr><td>hand-survey rows (2002–2022, verbatim)</td><td class="num">1,770,939 — 73,534 destroyed</td></tr>
+          <tr><td>pipeline rows (15 fires, 2024–2025)</td><td class="num">168,197 built, 151,950 released — 14,504 destroyed at the fixed threshold</td></tr>
           <tr><td>rows with no damage call</td><td class="num">879 — all ceded to a later fire by the attribution rule</td></tr>
           <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
           <tr><td>files / size / checksums</td><td class="num">18 / 2,166.3 MB / SHA-256, verified 17 of 17</td></tr>
-          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
+          <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td><code>heterogeneity_warning</code></td><td class="num">null — computed, not asserted</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.1.
-    <code>v0.4.1</code> is a PATCH — <code>damage_class</code> is byte-identical to
-    <code>v0.4.0</code>'s, and only the advisory column and its threshold changed.</p>
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>.</p>
     <p>Three release gates have to clear with no override before a version is not a prerelease:
-    no <code>heterogeneity_warning</code>, no damage bundle older than the configured production
-    bundle, and no 2023+ fire without a damage call. <code>v0.4.1</code> clears all three.
-    ⚠️ It is a <strong>MINOR under the <code>major_zero</code> carve-out and would be a MAJOR
-    after v1.0.0</strong>: four columns were added, <code>destroyed_threshold</code> went from
-    one constant to a per-fire value, the production bundle changed, 356 fires were added, and
-    <strong>the Carlson <code>structure_id</code>s of four fires changed</strong> because
-    <code>carlson_id</code> is now enumerated per fire over the national release rather than
-    over five cached extracts.</p>
+    no heterogeneity warning, no damage model older than the configured production one, and no
+    modern fire without a damage call. All three clear. If you are upgrading from an earlier
+    version, <a href="changelog.html">what changed</a> lists every decision that moved a number
+    or a column.</p>
 
     <h3>Licence — decided 2026-09-11</h3>
     <div class="tablewrap">
@@ -1873,9 +1630,8 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/licence-decision.md</code> and
-    <code>outputs/releases/v0.4.0/manifest.json</code> <code>licence_status</code> /
-    <code>odbl_exclusion</code> (owner decision, 2026-09-11); ledger
-    <code>goal-licence-decided</code>. The USA Structures licence was re-verified against the
+    <code>outputs/releases/v0.4.1/manifest.json</code> (<code>licence_status</code>,
+    <code>odbl_exclusion</code>). The USA Structures licence was re-verified against the
     publisher's own ArcGIS record on 2026-09-11 rather than against this project's notes.</p>
     <p>The instruction was "as conservative as possible while letting anyone use it". CC BY 4.0
     rather than CC0 because USA Structures is CC BY and we cannot dedicate to the public domain
@@ -1888,10 +1644,8 @@
     the full inventory.</p>
     <p>⚠️ <strong>The exclusion is uneven and largest where the footprint database is
     weakest</strong> — 2.6 % of Airport's rows against 24.4 % of Bridge's and Nixon's — so a
-    user counting structures from the package on a rural fire is counting a filtered inventory.
-    The figure has moved as the pipeline improved: 5,701 rows at <code>v0.1.0-rc1</code>,
-    11,781 at <code>v0.2.0-rc1</code>, 16,247 now, because each fire came to search its whole
-    frame.</p>
+    user counting structures from the package on a rural fire is counting a filtered
+    inventory.</p>
     <p>⚠️ Microsoft footprints were also used as a <em>training prior</em> for the detector, which
     is a different question from redistribution: the network reads a raster band saying "a
     footprint database has a building here", and the weights and every structure the detector
@@ -1910,15 +1664,17 @@
       <a href="index.html">the index</a> ·
       <a href="how-it-works.html">how it works, in plain language</a> ·
       <a href="forward-fires.html">fire-by-fire results</a> ·
-      <a href="combined-series.html">the combined series</a> ·
+      <a href="combined-series.html">the combined dataset</a> ·
+      <a href="retrospective.html">running the pipeline backwards</a> ·
+      <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="uncertainty.html">how wide the numbers are</a> ·
-      <a href="outside-california.html">outside California</a>.
+      <a href="outside-california.html">outside California</a> ·
+      <a href="changelog.html">what changed</a>.
     </p>
-    <p>Built 2026-09-12 · data as of release <code>v0.4.0</code> (2026-09-12). ⚠️ Two
-    <strong>Every measurement on this site is now the shipped bundle's.</strong> The 66-fire
-    leave-one-fire-out table for <code>damage_sentinel2_v5</code> was written on 2026-09-12
-    (<code>outputs/carlson_lofo/v5/</code>), which closed the last two gaps — the national
-    interval rows and the per-fire damage maps.</p>
+    <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's public-perimeter
+    frame, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, advisory
+    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.4.1</code>. Data date
+    2026-09-12.</p>
   </div>
 </footer>
 

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What Changed</title>
+<meta name="description" content="The decisions that changed what this dataset contains or what its numbers mean, newest first — for anyone who used an earlier version." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  :root {
+    --paper: #FAF8F3;
+    --paper-2: #F1EEE6;
+    --paper-3: #E9E4D8;
+    --ink: #23282D;
+    --ink-2: #4E555C;
+    --ink-3: #7C848C;
+    --rule: #DDD8CC;
+    --rule-2: #C8C1B0;
+    --s1: #2A62B0;   /* footprints / baseline */
+    --s2: #BF4415;   /* destroyed / this pipeline */
+    --s3: #0E9C86;   /* surviving / Carlson */
+    --s4: #B08300;   /* detector */
+    --s1-soft: #DCE4EF;
+    --s2-soft: #F5DFD5;
+    --s3-soft: #D5EDE7;
+    --s4-soft: #F2E8CC;
+    --good: #0ca30c;
+    --warn: #a5700a;
+    --crit: #c0392b;
+    --measure: 68ch;
+    --shell: 1140px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+      --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+      --rule: #383D44; --rule-2: #4B525B;
+      --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+      --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+      --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1E22; --paper-2: #23272C; --paper-3: #2B3037;
+    --ink: #ECE8DF; --ink-2: #C3BDB1; --ink-3: #8F9399;
+    --rule: #383D44; --rule-2: #4B525B;
+    --s1: #5589D0; --s2: #D2652F; --s3: #0FA184; --s4: #BC8C12;
+    --s1-soft: #24334A; --s2-soft: #402318; --s3-soft: #10332E; --s4-soft: #3A3016;
+    --good: #0ca30c; --warn: #d6a02a; --crit: #e06b5e;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.62; margin: 0;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-variation-settings: "opsz" 144; }
+  h2 { font-size: clamp(1.5rem, 3vw, 1.95rem); }
+  h3 { font-size: 1.22rem; margin-top: 2.2rem; margin-bottom: 0.4rem; }
+  h4 { font-size: 1.02rem; margin-top: 1.6rem; margin-bottom: 0.3rem; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible, th button:focus-visible {
+    outline: 2px solid var(--s2); outline-offset: 2px;
+  }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; font-size: 0.88em; }
+  code { background: var(--paper-2); padding: 0.08em 0.34em; border-radius: 3px; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: 20px; }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: 20px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.55rem;
+  }
+  .lede { font-size: 1.16rem; color: var(--ink-2); }
+  header.masthead { border-bottom: 2px solid var(--ink); padding-block: 3rem 1.6rem; }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 1rem;
+  }
+  section.part { padding-block: 2.6rem 0.6rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; margin: 1rem 0 0.2rem; border-block: 1px solid var(--rule); }
+  /* Tables and charts inside a prose column break out to the page shell so a
+     wide table is read rather than scrolled. The maths: the element is as wide
+     as the shell (or the viewport less its gutters), and the negative inline
+     margin re-centres it on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 40px));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  caption { caption-side: top; text-align: left; font-size: 0.95rem; color: var(--ink-2); padding-bottom: 0.5rem; }
+  th, td { text-align: left; padding: 0.42rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-2);
+    border-bottom: 1px solid var(--rule-2); position: sticky; top: 0;
+    background: var(--paper); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.86rem; }
+  tr.total td { font-weight: 600; border-top: 1px solid var(--rule-2); background: var(--paper-2); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.73rem;
+    color: var(--ink-3); margin: 0.45rem 0 1.6rem; line-height: 1.5;
+    word-break: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border-left: 3px solid var(--rule-2);
+    padding: 0.9rem 1.1rem; margin: 1.3rem 0; font-size: 0.96rem;
+  }
+  .note.warn { border-left-color: var(--s2); background: var(--s2-soft); }
+  .note.ok { border-left-color: var(--s3); background: var(--s3-soft); }
+  .note p:last-child, .status p:last-child { margin-bottom: 0; }
+  .status { border-left-color: var(--s4); background: var(--s4-soft); }
+  .status h3 { margin-top: 0; font-size: 1.05rem; }
+  /* ---- charts ---- */
+  figure { margin: 1.6rem 0; }
+  figure.band { background: var(--paper-2); padding: 1.2rem 1.1rem 0.9rem; border-radius: 4px; }
+  figcaption { font-size: 0.88rem; color: var(--ink-2); margin-top: 0.7rem; max-width: 72ch; }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px; }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.3rem; font-size: 0.84rem; color: var(--ink-2); margin: 0.6rem 0 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.2rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.4rem; }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.12em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  footer.pagefoot { border-top: 2px solid var(--ink); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: 0.9rem; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    th, td { padding: 0.38rem 0.45rem; }
+  }
+  td.when { white-space: nowrap; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.8rem; color: var(--ink-2); }
+  td.what { min-width: 20ch; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · history</p>
+    <h1>What changed</h1>
+    <p class="lede">Every other page on this site describes the dataset as it is now. This one is
+    for anyone who read an earlier version, or an earlier number: the decisions that changed what
+    the dataset contains or what its figures mean, newest first, one line each.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="status">
+    <h3>The short version</h3>
+    <p><strong>If you are holding numbers from before 12 September 2026, replace them.</strong>
+    A defect in how satellite pixels were read moved most damage features; the frame that decides
+    which buildings a fire contains changed; radar left the model; and the dataset went from five
+    fires of the historical record to all 361 of it. Nothing published before that date carries
+    over unchanged.</p>
+  </div>
+</div>
+
+<main>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the record</p>
+    <h2>Decisions a data user would notice</h2>
+  </div>
+  <div class="wide">
+    <div class="tablewrap">
+      <table>
+        <caption>Newest first. The full technical entry for each is in the project change log,
+        under the date given.</caption>
+        <thead><tr><th class="when">Date</th><th class="what">What changed</th><th>Why it matters to you</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="when">2026-09-12</td>
+            <td class="what">The advisory loss call is scoped to the near-perimeter zone</td>
+            <td>The second, advisory destroyed call now takes each fire's threshold from the
+            perimeter-plus-100 m population instead of the whole inventory. Its per-fire
+            thresholds moved from a 0.158–0.792 range to 0.601–0.792 and it calls 15,951
+            structures destroyed rather than 17,362. The primary call did not move at all.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-12</td>
+            <td class="what">The dataset carries the whole historical record</td>
+            <td>361 fires and 1,770,939 rows of the 2002–2022 survey, verbatim, where earlier
+            versions carried only the five fires that happened to be cached. If you joined on a
+            building identifier, note that four fires' identifiers changed: they are now
+            enumerated per fire over the national release.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-12</td>
+            <td class="what">Radar left the damage model</td>
+            <td>The model is optical only. Radar had been promoted under a rule written in
+            advance; on corrected feature tables it no longer cleared that rule, so it was
+            removed. Removing it costs nothing measurable and lets the model run on fires from
+            before the radar archive opened.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-12</td>
+            <td class="what">Two flag columns on the historical half</td>
+            <td>The survey's own release repeats 20,296 rows exactly, and 18.3 % of its rows sit
+            at a location a second fire also claims. Both are now flagged per row rather than
+            silently cleaned. <strong>De-duplicate on geometry before any pooled count.</strong></td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-12</td>
+            <td class="what">A second loss call ships beside the first</td>
+            <td>Every scored row now carries two calls: one at a fixed threshold and one at a
+            per-fire threshold. Use the fixed one to classify buildings and the advisory one if
+            you are counting them — and say which you used.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-11</td>
+            <td class="what">The licence is settled</td>
+            <td>MIT for the code, CC BY 4.0 for the data. Rows whose geometry came from an
+            ODbL-licensed footprint layer are dropped from the released package — 16,247 rows,
+            unevenly distributed, heaviest on rural fires. No DOI has been minted yet.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-11</td>
+            <td class="what">An attribution rule for overlapping fires</td>
+            <td>When two fires reach the same building inside each other's observation windows,
+            one rule decides which fire may claim it. Structures called destroyed under two fires
+            went from 271 to 0. Rows ceded to a later fire carry no damage call and say why.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-10</td>
+            <td class="what">The frame became the fire's public perimeter</td>
+            <td>Which buildings a fire contains is now decided by its published perimeter plus a
+            ring, matching the historical survey's own rule. It replaced a buffer drawn around
+            inspection points, which enumerated a different population and could not define a
+            fire at all in a state with no inspection programme. It added roughly a third again
+            as many structures and moved no accuracy figure.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-10</td>
+            <td class="what">A satellite sampling defect was found and fixed</td>
+            <td><strong>The one that invalidates old numbers.</strong> The read window that pulls
+            reflectance for a building could disagree with the coordinates indexing it by one
+            pixel, and the cloud mask was read at a different padding from the bands it masked —
+            so a building's cloud verdict could come from a different pixel than its reflectance.
+            At least one feature changed for <strong>85 % of buildings</strong> in the 10 m
+            tables and <strong>51 %</strong> in the 30 m ones. Every table was rebuilt and every
+            model refitted.</td>
+          </tr>
+          <tr>
+            <td class="when">2026-09-10</td>
+            <td class="what">The building detector was frozen</td>
+            <td>Detector work stopped at one checkpoint so that later comparisons are about the
+            damage model rather than about a moving inventory.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>logs/CHANGELOG.md</code> in the project repository, the
+    dated entry for each row, and <code>docs/release-notes.md</code>. Each entry carries the
+    measurement behind the decision and the commit that applied it; the experiment ledger
+    (<code>docs/experiment-ledger.md</code>) carries one row per idea, experiment and data
+    source, including the ones that failed.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">versions</p>
+    <h2>Which release you are holding</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Release</th><th class="when">Cut</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr class="total"><td><strong><code>v0.4.1</code></strong></td><td class="when">2026-09-12</td><td><strong>current.</strong> A patch on <code>v0.4.0</code>: only the advisory column and its threshold changed, and the primary loss call is byte-identical between the two.</td></tr>
+          <tr><td><code>v0.4.0</code></td><td class="when">2026-09-12</td><td>the whole historical record, the optical-only damage model, the second loss call, and the licence decision.</td></tr>
+          <tr><td><code>v0.3.0</code></td><td class="when">2026-09-11</td><td>the last release with radar in the model and one loss call.</td></tr>
+          <tr><td><code>v0.2.0</code></td><td class="when">2026-09-10</td><td>the first release to clear all three release gates.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/releases/&lt;version&gt;/manifest.json</code> and
+    <code>docs/release-notes.md</code>. Every release directory carries a checksum file; a
+    version is a prerelease unless three gates clear with no override — no heterogeneity warning,
+    no damage model older than the configured production one, and no modern fire without a loss
+    call.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Companion pages: <a href="index.html">the index</a> ·
+      <a href="pipeline-overview.html">the deep dive</a> ·
+      <a href="combined-series.html">the combined dataset</a>.</p>
+    <p class="mono">Provenance: release <code>v0.4.1</code>, data date 2026-09-12.</p>
+  </div>
+</footer>
+
+</body>
+</html>

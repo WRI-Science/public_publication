@@ -200,8 +200,8 @@
     <h2>Deciding whether each structure burned</h2>
     <p>This is where the pipeline is genuinely strong, and where the week's work moved the number most. The question is asked once per inventory point: given what satellites saw at this spot before and after the fire, was the structure destroyed?</p>
 
-    <h3>Two satellites, one window each side of the fire</h3>
-    <p>Sentinel-2 photographs the ground in visible, near-infrared and shortwave-infrared light at 10 to 20 metre resolution, every five days. Sentinel-1 is a radar: it sends microwave pulses and records what bounces back, at 10 metres, every six to twelve days, and it does not care about cloud or smoke. Both have imaged every fire in the country since 2016.</p>
+    <h3>One window each side of the fire</h3>
+    <p>Sentinel-2 photographs the ground in visible, near-infrared and shortwave-infrared light at 10 to 20 metre resolution, every five days, and has imaged every fire in the country since 2016.</p>
     <p>For each structure we build a "before" picture from the 45 days ending the day before ignition, and an "after" picture from a 60 day window that opens two weeks after ignition, once the smoke has cleared. Within each window we take the median of all clear observations, so a single cloudy or smoky pass does not corrupt it.</p>
 
     <figure class="band">
@@ -221,29 +221,29 @@
         <text x="523" y="168" font-size="11" class="mono muted">+14 d</text>
         <text x="903" y="168" font-size="11" class="mono muted" text-anchor="end">+74 d</text>
       </svg>
-      <figcaption>The same windows are used for both satellites. Radar scenes are compared only within the same orbit, because the same ground looks different from different viewing angles, and that difference would otherwise masquerade as change.</figcaption>
+      <figcaption>Taking the median of every clear pass inside a window, rather than one scene either side, is what makes the comparison survive smoke, haze and a single bad day.</figcaption>
     </figure>
 
     <h3>What the model actually sees</h3>
-    <p>At each structure's own 10 metre pixel, and averaged over the 3 by 3 block around it, we record six optical bands, four vegetation and burn indices built from them, and the before-to-after change in each. From radar we record the two polarisations and their ratio, in decibels, before and after and the change. That is 71 numbers per structure. A gradient-boosted tree ensemble maps them to a probability of destruction. It is a tabular model, not an image model, and it trains in minutes.</p>
-    <p>The optical signal is the familiar one: a burned lot loses its near-infrared brightness and gains shortwave-infrared reflectance. The radar signal surprised us. Destroyed structures get brighter, not darker, on every fire we checked, because rubble on a graded lot scatters more energy back to the sensor than an intact roof does. Radar earns its place where optical is weakest: on structures that sat on bare ground before the fire and had little vegetation to lose.</p>
+    <p>At each structure's own 10 metre pixel, and averaged over the 3 by 3 block around it, we record six bands of light, four vegetation and burn indices built from them, and the before-to-after change in each. That is 62 numbers per structure. A gradient-boosted tree ensemble maps them to a probability of destruction. It is a tabular model, not an image model, and it trains in minutes.</p>
+    <p>The signal is the familiar one: a burned lot loses its near-infrared brightness and gains shortwave-infrared reflectance. The single strongest number is the change in the normalised burn ratio averaged over the 3 by 3 block, and radar was tried alongside it and dropped, because on corrected imagery it no longer earned its place.</p>
 
     <h3>Training on the right labels, and a fixed threshold</h3>
-    <p>The first version trained only on the USGS record and was applied unchanged to recent California fires. The current version also trains on CAL FIRE's damage inspections, which are the labels the product is meant to reproduce. Every score we publish is leave-one-fire-out: the fire being scored is never in its own training set.</p>
-    <p>The destroyed call is made at a single fixed probability, 0.86, chosen to maximise the average F1 across fires rather than the pooled F1, which the two large Los Angeles fires would otherwise dominate. We built and tested seven adaptive threshold rules, including ones keyed to each fire's predicted damage rate, and every one lost to the fixed cut once the model was trained on the right labels.</p>
+    <p>The model trains on the USGS record and on fire-service damage inspections, which are the labels the product is meant to reproduce. Every score we publish is leave-one-fire-out: the fire being scored is never in its own training set.</p>
+    <p>The destroyed call is made at a single fixed probability, 0.85, chosen to maximise the average F1 across fires rather than the pooled F1, which the two large Los Angeles fires would otherwise dominate. A second, advisory call ships beside it, cut at a threshold fitted per fire from that fire's own scores; it gets the destroyed <em>total</em> closer and classifies individual buildings slightly worse, and the reason both are published is set out on <a href="pipeline-overview.html#population">the deep dive</a>.</p>
 
     <figure class="band">
-      <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the damage model, first version versus current version, across eight inspected fires">
+      <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the damage model across eight inspected fires, each held out of training">
         <text x="20" y="26" font-size="13" class="mono muted">F1 OF THE DESTROYED CALL, EACH FIRE HELD OUT OF TRAINING</text>
         <g font-size="13">
-          <text x="20" y="68">Eaton 2025</text>       <rect x="180" y="52" width="506" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="63" width="549" height="9" fill="var(--ember)"/> <text x="736" y="72" class="mono" font-size="12">0.843 → 0.915</text>
-          <text x="20" y="98">Palisades 2025</text>   <rect x="180" y="82" width="505" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="93" width="553" height="9" fill="var(--ember)"/> <text x="740" y="102" class="mono" font-size="12">0.841 → 0.921</text>
-          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="112" width="549" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="123" width="552" height="9" fill="var(--ember)"/> <text x="739" y="132" class="mono" font-size="12">0.915 → 0.920</text>
-          <text x="20" y="158">Park 2024</text>       <rect x="180" y="142" width="541" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="153" width="543" height="9" fill="var(--ember)"/> <text x="730" y="162" class="mono" font-size="12">0.902 → 0.905</text>
-          <text x="20" y="188">Borel 2024</text>      <rect x="180" y="172" width="536" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="183" width="538" height="9" fill="var(--ember)"/> <text x="725" y="192" class="mono" font-size="12">0.893 → 0.896</text>
-          <text x="20" y="218">Airport 2024</text>    <rect x="180" y="202" width="512" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="213" width="511" height="9" fill="var(--ember)"/> <text x="718" y="222" class="mono" font-size="12">0.853 → 0.852</text>
-          <text x="20" y="248">Mountain 2024</text>   <rect x="180" y="232" width="473" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="243" width="496" height="9" fill="var(--ember)"/> <text x="683" y="252" class="mono" font-size="12">0.788 → 0.827</text>
-          <text x="20" y="278">Bridge 2024</text>     <rect x="180" y="262" width="430" height="9" fill="var(--ink-3)" opacity="0.45"/> <rect x="180" y="273" width="434" height="9" fill="var(--ember)"/> <text x="621" y="282" class="mono" font-size="12">0.716 → 0.724</text>
+          <text x="20" y="68">Eaton 2025</text>       <rect x="180" y="56" width="552" height="14" rx="2" fill="var(--ember)"/> <text x="742" y="68" class="mono" font-size="12">0.920</text>
+          <text x="20" y="98">Palisades 2025</text>   <rect x="180" y="86" width="551" height="14" rx="2" fill="var(--ember)"/> <text x="741" y="98" class="mono" font-size="12">0.918</text>
+          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="116" width="548" height="14" rx="2" fill="var(--ember)"/> <text x="738" y="128" class="mono" font-size="12">0.914</text>
+          <text x="20" y="158">Park 2024</text>       <rect x="180" y="146" width="546" height="14" rx="2" fill="var(--ember)"/> <text x="736" y="158" class="mono" font-size="12">0.910</text>
+          <text x="20" y="188">Borel 2024</text>      <rect x="180" y="176" width="542" height="14" rx="2" fill="var(--ember)"/> <text x="732" y="188" class="mono" font-size="12">0.904</text>
+          <text x="20" y="218">Airport 2024</text>    <rect x="180" y="206" width="525" height="14" rx="2" fill="var(--ember)"/> <text x="715" y="218" class="mono" font-size="12">0.875</text>
+          <text x="20" y="248">Mountain 2024</text>   <rect x="180" y="236" width="486" height="14" rx="2" fill="var(--ember)"/> <text x="676" y="248" class="mono" font-size="12">0.809</text>
+          <text x="20" y="278">Bridge 2024</text>     <rect x="180" y="266" width="440" height="14" rx="2" fill="var(--ember)"/> <text x="630" y="278" class="mono" font-size="12">0.733</text>
         </g>
         <line x1="180" y1="44" x2="180" y2="292" stroke="var(--rule)"/>
         <line x1="780" y1="44" x2="780" y2="292" stroke="var(--rule)" stroke-dasharray="3 3"/>
@@ -251,8 +251,8 @@
         <text x="480" y="312" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
         <text x="780" y="312" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
       </svg>
-      <div class="legend"><span style="--sw: var(--ink-3)">first version: USGS labels only, optical only</span><span style="--sw: var(--ember)">current version: inspection labels, optical + radar, mean of four training seeds</span></div>
-      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.845 → 0.914, area under the curve 0.953 → 0.972. Bridge stays hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
+      <div class="legend"><span style="--sw: var(--ember)">F1 of the destroyed call, each fire held out of training</span></div>
+      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.916, area under the curve 0.974. Bridge is hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
     </figure>
 
     <h3>What the damage model cannot do</h3>
@@ -269,9 +269,9 @@
     <ol class="steps">
       <li><span class="n">1</span><div><b>Define the fire.</b> An ignition date and an area. For most fires the perimeter from the national incident database is enough; the area is buffered so structures at the edge are included.</div></li>
       <li><span class="n">2</span><div><b>Build the inventory.</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run the roof detector on the latest and two earlier aerial flights, union and tag. Output: a probability map and a point layer.</div></li>
-      <li><span class="n">3</span><div><b>Sample the satellites.</b> For every point, the before and after windows from Sentinel-2 and Sentinel-1, medians and changes, 71 numbers.</div></li>
+      <li><span class="n">3</span><div><b>Sample the satellite.</b> For every point, the before and after windows from Sentinel-2, medians and changes, 62 numbers.</div></li>
       <li><span class="n">4</span><div><b>Score.</b> The trained model gives each structure a destroyed probability; the fixed cut gives the call. Output: the point layer with probability, call, source and size tags, and summary tables by fire.</div></li>
-      <li><span class="n">5</span><div><b>Validate as truth arrives.</b> New California incidents are scored before they are added to training, so they act as a true forward test. Outside California the USGS record covers about a hundred fires in other states through 2022; the optical model scores 0.985 area under the curve across them when each is held out, which is the evidence the process transfers.</div></li>
+      <li><span class="n">5</span><div><b>Validate as truth arrives.</b> New California incidents are scored before they are added to training, so they act as a true forward test. Outside California the USGS record covers about a hundred fires in other states through 2022; the model scores 0.986 area under the curve across them when each is held out, which is the evidence the process transfers.</div></li>
     </ol>
 
     <h3>What gets published, and how much to trust it</h3>
@@ -281,7 +281,7 @@
         <tbody>
           <tr><td>Structure probability map</td><td>Raster, one value per 0.6 m pixel, per fire</td><td>Pixel overlap with footprints in unburned areas: intersection over union 0.77</td></tr>
           <tr><td>Structure points</td><td>One point per building with source, size class, triage score</td><td>Recall 0.81 and precision 0.83 against the USGS record on held-out ground</td></tr>
-          <tr><td>Destroyed probability and call</td><td>Per point, from optical + radar change</td><td>F1 0.914 on 36,272 inspected structures, each fire held out</td></tr>
+          <tr><td>Destroyed probability and call</td><td>Per point, from before-and-after change in reflectance</td><td>F1 0.916 on 36,272 inspected structures, each fire held out</td></tr>
           <tr><td>Summary tables</td><td>Counts by fire, by size class, by source</td><td>Derived from the above; carry the same uncertainty</td></tr>
         </tbody>
       </table>
@@ -303,6 +303,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Numbers in this page are copied from the pipeline's own output files as of 9 September 2026. The full record of every experiment, including the ones that failed, is in the project's experiment ledger and change log.</p>
+    <p>Numbers on this page are copied from the pipeline's own output files as of 12 September 2026. The full record of every experiment, including the ones that failed, is in the project's experiment ledger and change log. Provenance: detector <code>seg_all_v4</code>, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.4.1</code>.</p>
+    <p>Companion pages: <a href="index.html">the index</a> · <a href="pipeline-overview.html">the full picture</a> · <a href="forward-fires.html">fire by fire</a> · <a href="changelog.html">what changed</a>.</p>
   </div>
 </footer>

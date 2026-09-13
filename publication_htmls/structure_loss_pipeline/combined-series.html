@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Combined Series</title>
-<meta name="description" content="The USGS Carlson record and this pipeline's products on one schema: what is in release v0.3.0, era by era and fire by fire, and where the two halves are not equivalent." />
+<meta name="description" content="The USGS Carlson record and this pipeline's products on one schema: what is in the release, era by era and fire by fire, and where the two halves are not equivalent." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   :root {
@@ -177,27 +177,20 @@
     <p class="lede">The USGS Carlson building-loss record and this pipeline's per-fire products,
     harmonised onto one schema, one row per structure per fire — so a user reads a single file
     instead of joining two datasets and discovering the joins do not work. This page is what is
-    inside release <code>v0.4.0</code>, and where the two halves are not equivalent.</p>
+    inside the release, and the six ways the two halves are not equivalent.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>Status, 12 September 2026</h3>
-    <p>The published series is <strong><code>v0.4.1</code></strong>, cut 2026-09-12, and it is
-    the first version that carries <strong>all of Carlson</strong>: 361 fires and
-    <strong>1,770,939</strong> rows, 2002–2022, verbatim. Until now the series read the five
-    per-fire extracts that happened to be cached, so a layer calling itself 2002-onward held
-    five of Carlson's fires and began in 2017. With our fifteen fires the internal build is
-    <strong>1,939,136 rows over 376 fires</strong>; the released package is
-    <strong>1,922,889</strong> after the licence exclusion below.</p>
-    <p>Three other things changed with it: the production damage model is
-    <strong>optical-only</strong> (<code>damage_sentinel2_v5</code>, no radar) at a fixed cut of
-    <strong>0.85</strong>; a <strong>second, advisory loss call</strong> ships beside the first,
-    cut per fire by a rule scoped to the <code>Direct</code> zone since <code>v0.4.1</code>; and
-    the <strong>licence is decided</strong>. <span class="pill flight">in flight</span> Roadmap 12
-    is still building eighteen retrospective 2016–2022 inventories, which are <em>not</em>
-    series rows yet, and Roadmap 13 is not reported at all.</p>
+    <h3>What you get, 12 September 2026</h3>
+    <p><strong>One file, 376 fires, 1,922,889 rows, one row per structure per fire.</strong>
+    361 of those fires are the 2002–2022 hand survey, carried verbatim — 1,770,939 rows — and
+    fifteen are California fires of 2024–2025 this pipeline produced. Every row says which half
+    it came from, and a field only one half can fill is left null on the other rather than
+    back-filled.</p>
+    <p>The internal build is 1,939,136 rows; 16,247 of them are dropped from the released
+    package for a licence reason set out at the bottom of this page.</p>
   </div>
 </div>
 
@@ -211,22 +204,21 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.4.0</code> — <code>combined_structures.gpkg</code>,
-        47 columns, EPSG:5070</caption>
-        <thead><tr><th>Era</th><th>Source</th><th class="num">Fires</th><th class="num">Rows</th><th class="num">Destroyed, fixed</th><th class="num">Destroyed, adaptive</th><th class="num">No call</th></tr></thead>
+        <caption><code>combined_structures.gpkg</code> — 47 columns, EPSG:5070</caption>
+        <thead><tr><th>Era</th><th>Source</th><th class="num">Fires</th><th class="num">Rows</th><th class="num">Destroyed, primary call</th><th class="num">Destroyed, advisory call</th><th class="num">No call</th></tr></thead>
         <tbody>
           <tr><td><code>pre2016_carlson_only</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">160</td><td class="num">973,491</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
           <tr><td><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">201</td><td class="num">797,448</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
           <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">15</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">879</td></tr>
           <tr class="total"><td>internal build</td><td>—</td><td class="num">376</td><td class="num">1,939,136</td><td class="num">73,534 + 14,504</td><td class="num">—</td><td class="num">879</td></tr>
-          <tr class="total"><td>released package, after the ODbL exclusion</td><td>—</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="total"><td>released package, after the licence exclusion</td><td>—</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/combined_series/manifest.json</code>
     (<code>n_rows_by_era</code>, <code>n_rows_by_series_source</code>) and
     <code>per_fire_summary.csv</code>, summed by <code>series_source</code>; packaged row count
-    from <code>outputs/releases/v0.4.0/manifest.json</code>. Carlson's 73,534 destroyed is the
+    from <code>outputs/releases/v0.4.1/manifest.json</code>. Carlson's 73,534 destroyed is the
     sum of its own hand <code>B</code> calls over all 361 fires and is not a model output. The
     879 rows with no damage call are all Franklin 2024 rows ceded to Palisades 2025 by the
     overlap-attribution rule, each carrying
@@ -239,8 +231,7 @@
     null rather than faked.</strong> A field only one era can fill is null on the other side and
     is never back-filled.</p>
 
-    <p>The 2023+ half is <strong>one detector on one frame with one damage bundle</strong> —
-    <code>seg_all_v4</code>, the perimeter frame, <code>damage_sentinel2_v5</code> at 0.85 —
+    <p>The modern half is <strong>one detector, one frame and one damage model throughout</strong>,
     and the build manifest <em>computes</em> that rather than asserting it:
     <code>heterogeneity_warning</code> is null. <code>prob_source</code> says on every row
     whether the call came from the production bundle scoring a fire it had never seen
@@ -268,9 +259,9 @@
 <line class="axis" x1="118" y1="20" x2="118" y2="198" />
 </svg>
       <figcaption>The two records do not overlap in time, and the middle era is the only ground
-      on which the two methods can be compared at all. Since <code>v0.4.0</code> all three eras
-      are in one layer: the two Carlson eras carry 1,770,939 hand-digitised rows and the third
-      carries our 168,197.</figcaption>
+      on which the two methods can be compared at all. All three eras are in one layer: the two
+      historical eras carry 1,770,939 hand-digitised rows and the modern one carries our
+      168,197.</figcaption>
     </figure>
   </div>
   <div class="wrap">
@@ -280,12 +271,13 @@
         <tbody>
           <tr><td><strong>Pre-2016</strong></td><td>2002–2015</td><td>Carlson</td>
             <td><strong>No, not even in principle.</strong> Sentinel-2 does not exist, so there
-            is no before/after optical pair at 10 m. 160 fires, 973,491 points —
-            <strong>all of them in the series since <code>v0.4.0</code></strong>.</td></tr>
+            is no before/after optical pair at 10 m. 160 fires, 973,491 points, all of them in
+            the layer.</td></tr>
           <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>Carlson</td>
             <td><strong>Yes, retrospectively.</strong> 201 fires, 797,448 points, all in the
-            series. Nothing here has been rebuilt our way — Roadmap 12 is doing that
-            separately.</td></tr>
+            layer as the survey published them. Sixteen of them have also been rebuilt our way
+            as an experiment — <a href="retrospective.html">running the pipeline backwards</a> —
+            and those rebuilds are deliberately <em>not</em> rows here.</td></tr>
           <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline</td>
             <td>Carlson stops at 2022. 2023 itself is empty — no CAL FIRE DINS incident that
             year clears 100 inspections.</td></tr>
@@ -334,10 +326,10 @@
 
     <div class="tablewrap">
       <table>
-        <caption>Our fifteen fires — all <code>damage_sentinel2_v5</code>, shipped call at the
-        fixed cut 0.85 and advisory call at the fire's own <code>Direct</code>-scoped cut;
-        inventory <code>stage8_roll_forward</code> on the perimeter frame, NAIP 2022</caption>
-        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, fixed</th><th class="num">Destroyed, adaptive</th><th class="num">Adaptive cut</th><th class="num">ODbL dropped</th><th class="num">Released</th><th>Score</th></tr></thead>
+        <caption>Our fifteen fires — primary call at the fixed threshold 0.85, advisory call
+        at each fire's own near-perimeter threshold, inventory on the perimeter frame from 2022
+        aerial imagery</caption>
+        <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, primary</th><th class="num">Destroyed, advisory</th><th class="num">Advisory threshold</th><th class="num">Licence-excluded</th><th class="num">Released</th><th>Score</th></tr></thead>
         <tbody>
           <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">6,336</td><td class="num">57,983</td><td><span class="era-tag slp">lofo</span></td></tr>
           <tr><td>Palisades 2025</td><td class="num">2025-01-07</td><td class="num">28,837</td><td class="num">27,608</td><td class="num">1,229</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">2,269</td><td class="num">26,568</td><td><span class="era-tag slp">lofo</span></td></tr>
@@ -500,30 +492,6 @@
     <code>outputs/combined_series/per_fire_summary.csv</code> (the shipped product), the truth
     column from <code>outputs/forward_damage/per_fire.csv</code>
     (<code>n_dins_destroyed</code>).</p>
-    <div class="note warn">
-      <p><strong>⚠️ The adaptive count was published wrong once, and the column has since been
-      replaced.</strong> <code>v0.4.0</code> reported its adaptive column calling
-      <strong>17,735</strong> structures destroyed, a ratio of 0.991 against the inspected
-      total. That was an artefact: the release summed Franklin's <em>stale</em>
-      <code>summary.json</code>, which records 431 adaptive calls from before the
-      overlap-attribution rule ran, instead of the GeoPackage the product ships, which records
-      58. The true figure for that column was <strong>17,362</strong> and
-      <strong>0.970</strong>.</p>
-      <p><strong>Since <code>v0.4.1</code> it is a different column.</strong> The advisory rule
-      is now scoped to the <code>Direct</code> zone, and it calls <strong>15,951</strong>
-      destroyed — a ratio of <strong>0.891</strong>. The fixed-cut total,
-      <strong>14,504</strong> and <strong>0.810</strong>, has never changed and was never
-      affected, and no F1 anywhere moved, because those are computed on matched pairs from the
-      shipped call. The correction is recorded here rather than deleted because the wrong
-      number was published on this page.</p>
-      <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/operating_product/report.md</code>; ledger
-      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>; the
-      <code>v0.4.1</code> column from <code>outputs/combined_series/per_fire_summary.csv</code>
-      and <code>outputs/forward_damage/metrics.json</code>, commits <code>1499150</code> and
-      <code>22c8736</code>.</p>
-    </div>
-
     <div class="tablewrap">
       <table>
         <caption>Three counts of the same fires, pooled over the fifteen</caption>
@@ -638,163 +606,81 @@
 <section class="part">
   <div class="wide">
     <p class="eyebrow">04 · across the boundary</p>
-    <h2>Is a 2019-to-2024 trend real, or the method change?</h2>
-    <p class="lede" style="max-width:68ch">The question a user of a joined series actually has.
-    It is answered on the buildings both methods called — Carlson's own points, scored by a
-    model fit that never saw that fire.</p>
-  </div>
-  <div class="wide">
-    <figure class="band">
-      <svg viewBox="0 0 860 330" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="62" y1="305.5" x2="836" y2="305.5" />
-<text class="tick" x="54" y="309.0" text-anchor="end">0.5</text>
-<line class="grid-line" x1="62" y1="262.5" x2="836" y2="262.5" />
-<text class="tick" x="54" y="266.0" text-anchor="end">0.6</text>
-<line class="grid-line" x1="62" y1="219.5" x2="836" y2="219.5" />
-<text class="tick" x="54" y="223.0" text-anchor="end">0.7</text>
-<line class="grid-line" x1="62" y1="176.5" x2="836" y2="176.5" />
-<text class="tick" x="54" y="180.0" text-anchor="end">0.8</text>
-<line class="grid-line" x1="62" y1="133.5" x2="836" y2="133.5" />
-<text class="tick" x="54" y="137.0" text-anchor="end">0.9</text>
-<line class="grid-line" x1="62" y1="90.5" x2="836" y2="90.5" />
-<text class="tick" x="54" y="94.0" text-anchor="end">1.0</text>
-<line class="grid-line" x1="62" y1="47.5" x2="836" y2="47.5" />
-<text class="tick" x="54" y="51.0" text-anchor="end">1.1</text>
-<line class="grid-line" x1="134.5" y1="26" x2="134.5" y2="284" />
-<text class="tick" x="134.5" y="300" text-anchor="middle">0.5 %</text>
-<line class="grid-line" x1="232.9" y1="26" x2="232.9" y2="284" />
-<text class="tick" x="232.9" y="300" text-anchor="middle">1 %</text>
-<line class="grid-line" x1="363.0" y1="26" x2="363.0" y2="284" />
-<text class="tick" x="363.0" y="300" text-anchor="middle">2.5 %</text>
-<line class="grid-line" x1="461.4" y1="26" x2="461.4" y2="284" />
-<text class="tick" x="461.4" y="300" text-anchor="middle">5 %</text>
-<line class="grid-line" x1="559.8" y1="26" x2="559.8" y2="284" />
-<text class="tick" x="559.8" y="300" text-anchor="middle">10 %</text>
-<line class="grid-line" x1="689.8" y1="26" x2="689.8" y2="284" />
-<text class="tick" x="689.8" y="300" text-anchor="middle">25 %</text>
-<line class="grid-line" x1="788.2" y1="26" x2="788.2" y2="284" />
-<text class="tick" x="788.2" y="300" text-anchor="middle">50 %</text>
-<line x1="62" y1="90.5" x2="836" y2="90.5" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
-<text class="tick" x="832" y="84.5" text-anchor="end">Carlson’s own count</text>
-<line x1="509.1" y1="26" x2="509.1" y2="284" stroke="var(--s4)" stroke-width="1.5" stroke-dasharray="3 3" />
-<text class="tick" x="514.1" y="36" fill="var(--s4)">7 % destroyed</text>
-<circle cx="119.6" cy="246.2" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="128.6" y="249.7" text-anchor="start">Creek 2017</text>
-<circle cx="288.6" cy="121.9" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="297.6" y="125.4" text-anchor="start">Thomas 2017</text>
-<circle cx="344.2" cy="242.3" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="353.2" y="245.8" text-anchor="start">Woolsey 2018</text>
-<circle cx="522.5" cy="167.9" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="531.5" y="171.4" text-anchor="start">CZU 2020</text>
-<circle cx="540.3" cy="86.2" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="549.3" y="89.7" text-anchor="start">Caldor 2021</text>
-<circle cx="580.2" cy="130.1" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="589.2" y="133.6" text-anchor="start">Carr 2018</text>
-<circle cx="583.4" cy="75.4" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="592.4" y="78.9" text-anchor="start">Dixie 2021</text>
-<circle cx="624.6" cy="144.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="615.6" y="148.2" text-anchor="end">Tubbs 2017</text>
-<circle cx="659.9" cy="64.7" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="650.9" y="68.2" text-anchor="end">North Complex 2020</text>
-<circle cx="801.9" cy="84.5" r="5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<text x="792.9" y="88.0" text-anchor="end">Camp 2018</text>
-<line class="axis" x1="62" y1="284" x2="836" y2="284" />
-<line class="axis" x1="62" y1="26" x2="62" y2="284" />
-<text class="tick" x="836" y="322" text-anchor="end">share of the fire’s buildings Carlson called destroyed (log scale)</text>
-<text class="tick" x="16" y="155" transform="rotate(-90 16 155)" text-anchor="middle">our destroyed ÷ Carlson’s</text>
-</svg>
-      <ul class="legend">
-        <li><span class="swatch" style="background:var(--s2)"></span>fires below 2.5 % destroyed</li>
-        <li><span class="swatch" style="background:var(--s1)"></span>fires above 2.5 % destroyed</li>
-      </ul>
-      <figcaption>Our destroyed count ÷ Carlson's, against how much of the fire's building
-      stock Carlson called destroyed. Catastrophic fires cross the boundary safely; a trend
-      built from many low-loss fires does not, because the method change alone pushes their
-      counts down.</figcaption>
-    </figure>
+    <h2>Is a trend across the join real, or is it the method?</h2>
+    <p class="lede" style="max-width:68ch">The question a user of a joined dataset actually has.
+    It is answered by running this pipeline on old fires the survey already covers — twenty-three
+    for the loss call, sixteen end to end.</p>
   </div>
   <div class="wrap">
+    <p>Two experiments answer it, and both are set out in full on
+    <a href="retrospective.html">running the pipeline backwards</a>. The short version:</p>
     <div class="tablewrap">
       <table>
-        <caption>Carlson's hand call against our leave-one-fire-out call, per fire</caption>
-        <thead><tr><th>Fire</th><th class="num">Compared</th><th class="num">Carlson destroyed</th><th class="num">Ours</th><th class="num">Ratio</th><th class="num">Agreement</th><th class="num">Cohen's κ</th><th class="num">P / R / F1</th><th class="num">AUC</th></tr></thead>
+        <caption>Running this pipeline on fires the survey already covers</caption>
+        <thead><tr><th>What was measured</th><th class="num">Fires</th><th class="num">Result</th></tr></thead>
         <tbody>
-          <tr><td>Camp 2018</td><td class="num">29,894</td><td class="num">16,468</td><td class="num">16,701</td><td class="num">1.014</td><td class="num">0.9306</td><td class="num">0.860</td><td class="num">0.931 / 0.944 / 0.937</td><td class="num">0.9785</td></tr>
-          <tr><td>North Complex 2020</td><td class="num">6,393</td><td class="num">1,294</td><td class="num">1,372</td><td class="num">1.060</td><td class="num">0.9571</td><td class="num">0.870</td><td class="num">0.872 / 0.924 / 0.897</td><td class="num">0.9859</td></tr>
-          <tr><td>Dixie 2021</td><td class="num">8,732</td><td class="num">1,031</td><td class="num">1,067</td><td class="num">1.035</td><td class="num">0.9851</td><td class="num">0.930</td><td class="num">0.922 / 0.954 / 0.938</td><td class="num">0.9961</td></tr>
-          <tr><td>Caldor 2021</td><td class="num">10,810</td><td class="num">943</td><td class="num">952</td><td class="num">1.010</td><td class="num">0.9892</td><td class="num">0.932</td><td class="num">0.934 / 0.943 / 0.938</td><td class="num">0.9970</td></tr>
-          <tr><td>Thomas 2017</td><td class="num">65,793</td><td class="num">976</td><td class="num">905</td><td class="num">0.927</td><td class="num">0.9877</td><td class="num">0.564</td><td class="num">0.592 / 0.549 / 0.570</td><td class="num">0.9752</td></tr>
-          <tr><td>Carr 2018</td><td class="num">14,543</td><td class="num">1,680</td><td class="num">1,526</td><td class="num">0.908</td><td class="num">0.9647</td><td class="num">0.820</td><td class="num">0.882 / 0.801 / 0.840</td><td class="num">0.9891</td></tr>
-          <tr><td>Tubbs 2017</td><td class="num">32,832</td><td class="num">5,185</td><td class="num">4,534</td><td class="num">0.874</td><td class="num">0.9716</td><td class="num">0.887</td><td class="num">0.969 / 0.847 / 0.904</td><td class="num">0.9925</td></tr>
-          <tr><td>CZU 2020</td><td class="num">10,863</td><td class="num">835</td><td class="num">685</td><td class="num">0.820</td><td class="num">0.9685</td><td class="num">0.758</td><td class="num">0.860 / 0.705 / 0.775</td><td class="num">0.9765</td></tr>
-          <tr><td>Woolsey 2018</td><td class="num">68,784</td><td class="num">1,508</td><td class="num">976</td><td class="num">0.647</td><td class="num">0.9877</td><td class="num">0.654</td><td class="num">0.840 / 0.544 / 0.660</td><td class="num">0.9854</td></tr>
-          <tr><td>Creek 2017</td><td class="num">34,075</td><td class="num">152</td><td class="num">97</td><td class="num">0.638</td><td class="num">0.9962</td><td class="num">0.472</td><td class="num">0.608 / 0.388 / 0.474</td><td class="num">0.9848</td></tr>
-          <tr class="total"><td>pooled</td><td class="num">282,719</td><td class="num">30,072</td><td class="num">28,815</td><td class="num">0.958</td><td class="num">0.9782</td><td class="num">0.883</td><td class="num">0.915 / 0.877 / 0.895</td><td class="num">0.9920</td></tr>
+          <tr><td>the loss call alone, on the survey's own points, so the inventory is taken out of the question</td><td class="num">23<br>2016–2022</td><td class="num">agreement <strong>0.980</strong>, κ <strong>0.882</strong>, destroyed F1 <strong>0.893</strong>, AUC <strong>0.992</strong>, count ratio <strong>1.02</strong></td></tr>
+          <tr class="total"><td><strong>the whole pipeline end to end</strong> — find the buildings, then call the losses</td><td class="num">16<br>2016–2022</td><td class="num">destroyed count <strong>0.764</strong> of the survey's, per-fire range 0.48–1.80</td></tr>
+          <tr><td>does the bias drift with the year?</td><td class="num">16</td><td class="num"><strong>no</strong> — Spearman <strong>+0.098</strong>, p = 0.72</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code> and
-    <code>comparability.json</code> — leave-one-fire-out, cut 0.90, bundle
-    <code>damage_sentinel2</code>, on Carlson's own points so the inventory is taken out of the
-    question. Spec §A. ⚠️ <b>Carrying all 361 Carlson fires does not widen this evidence</b>,
-    and Stage 11 pins it rather than recomputing from whatever fires are present: it still
-    rests on the same ten fires and reproduces 282,719 points, agreement 0.978, κ 0.883 and
-    destroyed F1 0.895 exactly. Widening it properly is Roadmap 12's separate work.</p>
+    <p class="src"><b>Source:</b>
+    <code>outputs/combined_retrospective/{damage_pooled.json,end_to_end.{csv,json}}</code>,
+    2026-09-12. The comparability section of <code>docs/combined-series-spec.md</code> is pinned
+    to the ten-fire subset it was written on and is reproduced exactly by the wider run.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ Two things published about this table have since been corrected, and both
-      corrections are here.</strong></p>
-      <p>(1) <em>"Every fire above ~7 % destroyed lands between 0.82 and 1.06 of Carlson's
-      count"</em> is <strong>false on 23 fires</strong>. Roadmap 12 put every California Carlson
-      fire of 2016–2022 through four admission tests and took eighteen, spanning all seven
-      years; on 23 fires and 394,460 buildings the same code gives agreement 0.979, κ 0.871,
-      destroyed P/R/F1 0.903 / 0.863 / 0.883, AUC 0.991, and <strong>four of the twelve fires
-      above 7 % fall outside the published band</strong> — two of them not by rounding: Creek
-      2020 at 1.13 and Zogg 2020 at 1.61. What survives is the direction (mean ratio
-      <strong>1.041</strong> above 7 % against <strong>0.720</strong> below 2.5 %), and a fourth
-      low-loss confirmation nobody had looked at: Kincade 2019, 1.7 % destroyed, ratio 0.67.
-      Zogg 2020 is the worst fire in the era — AUC 0.897 against 0.975–1.000 everywhere else —
-      and not for want of observations.</p>
-      <p>(2) The guidance was written on a bundle fitted through a sampler that read the wrong
-      pixel for 85.1 % of rows. On the corrected tables the low-loss under-call is
-      <strong>mostly gone</strong>: mean ratio below 2.5 % destroyed <strong>0.720 →
-      0.952</strong>, Kincade 0.67 → 0.90, Creek 2017 0.64 → 0.91. And the apparent year trend
-      mostly goes with it — the per-fire ratio correlates with fire year at Spearman
-      <strong>+0.572 (p 0.004)</strong> on the old bundle and <strong>+0.310 (p 0.15)</strong>
-      on the corrected one. It is not a Sentinel-2 constellation effect: median post-fire
-      observations do not rise with the year (ρ +0.061). Every version of it points
-      <em>up</em>, so a destroyed count that rises across 2022/2023 cannot be blamed on the
-      model getting more conservative.</p>
+      <p><strong>⚠️ Three things follow for anyone plotting across the join.</strong></p>
+      <p><strong>1. Apply a factor of about 0.76 to a modern destroyed count before comparing it
+      to a historical one — and do not treat that factor as stable.</strong> It runs 0.48 to
+      1.80 across sixteen fires and it tracks how well the buildings were found, not anything
+      about the loss model.</p>
+      <p><strong>2. It is a net of a large miss and a large addition.</strong> We recover 5,767
+      of the survey's 9,783 destroyed buildings in region and add 1,711 destroyed calls on
+      structures it did not record as destroyed, 877 of them on buildings it never enumerated at
+      all. The two partly cancel.</p>
+      <p><strong>3. The threat to a trend is composition, not time.</strong> The bias does not
+      drift with the year; it drifts with the fire, and it tracks how much of a fire's building
+      stock burned. A trend built from catastrophic fires crosses the join safely; one that mixes
+      in many low-loss fires does not.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/combined_retrospective/</code>; <code>docs/combined-series-spec.md</code>
-      §A2; ledger <code>road-12</code>, <code>road-12-era-trend</code>, 2026-09-12.</p>
+      <code>outputs/combined_retrospective/end_to_end.csv</code> and
+      <code>damage_trend.json</code>; the full working is on
+      <a href="retrospective.html">the retrospective page</a>.</p>
+    </div>
+    <div class="note">
+      <p><strong>A published rule of thumb has been withdrawn.</strong> Earlier versions of this
+      dataset told users that <em>every fire above about 7 % destroyed lands between 0.82 and
+      1.06 of the survey's count</em>. On twenty-three fires instead of ten that is false — six
+      of the twelve fires above 7 % fall outside the band. What survives is the direction: the
+      mean ratio is 1.117 above 7 % destroyed against 0.952 below 2.5 %.</p>
     </div>
 
     <h3>The structure count, on the same ground</h3>
-    <p>The damage call is only half of a count. For the five 2018–2021 California fires Carlson
-    covers <em>and</em> DINS inspected, counts recomputed inside the region both datasets looked
-    at — within 250 m of a point from each:</p>
+    <p>Sixteen fires, each inventoried by this pipeline on its own perimeter with only
+    pre-fire footprints, and counted inside the region the survey, the inspectors and this
+    pipeline all saw — <strong>36,984 survey buildings, 29,357 inspection records and 32,249 of
+    ours</strong>.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Fire</th><th class="num">Carlson</th><th class="num">Carlson destroyed</th><th class="num">DINS</th><th class="num">DINS destroyed</th><th class="num">DINS ÷ Carlson destroyed</th><th class="num">our inventory</th><th class="num">Recall vs Carlson @10 m</th><th class="num">Precision</th></tr></thead>
+        <thead><tr><th>Quantity, 16 fires 2016–2022</th><th class="num">Range</th><th class="num">Median</th></tr></thead>
         <tbody>
-          <tr><td>Carr 2018</td><td class="num">4,170</td><td class="num">1,668</td><td class="num">1,882</td><td class="num">1,608</td><td class="num">0.96</td><td class="num">3,540</td><td class="num">0.766</td><td class="num">0.925</td></tr>
-          <tr><td>CZU 2020</td><td class="num">4,540</td><td class="num">835</td><td class="num">4,588</td><td class="num">1,311</td><td class="num">1.57</td><td class="num">4,093</td><td class="num">0.763</td><td class="num">0.892</td></tr>
-          <tr><td>North Complex 2020</td><td class="num">1,905</td><td class="num">1,279</td><td class="num">3,054</td><td class="num">2,246</td><td class="num">1.76</td><td class="num">1,732</td><td class="num">0.750</td><td class="num">0.885</td></tr>
-          <tr><td>Caldor 2021</td><td class="num">3,891</td><td class="num">930</td><td class="num">4,338</td><td class="num">991</td><td class="num">1.07</td><td class="num">3,077</td><td class="num">0.671</td><td class="num">0.894</td></tr>
-          <tr><td>Dixie 2021</td><td class="num">3,282</td><td class="num">1,025</td><td class="num">3,690</td><td class="num">1,269</td><td class="num">1.24</td><td class="num">2,846</td><td class="num">0.726</td><td class="num">0.890</td></tr>
+          <tr><td>share of the survey's buildings our inventory finds, at 10 m</td><td class="num">0.588 – 0.912</td><td class="num">0.771</td></tr>
+          <tr><td>share of ours that is a survey building</td><td class="num">0.831 – 0.963</td><td class="num">0.884</td></tr>
+          <tr class="total"><td><strong>inspectors' destroyed count ÷ the survey's</strong></td><td class="num">0.82 – 1.84</td><td class="num"><strong>1.24</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/comparability.csv</code>
-    (<code>counts_on_the_same_ground</code>); spec §B. Roadmap 12 is rebuilding these five rows
-    on the perimeter frame so the extended table is one method throughout — that work is
-    <span class="pill flight">in flight</span> and is not reported here.</p>
-    <p><strong>The two truth sources disagree with each other by up to 1.8×.</strong> On the
-    same ground DINS records 76 % more destroyed structures than Carlson on North Complex,
-    57 % more on CZU, and 4 % <em>fewer</em> on Carr. And our inventory holds 0.67–0.77 of
-    Carlson's buildings at 0.89–0.93 precision here, so <strong>a structure count is not
-    comparable across the boundary without a fire-specific correction either</strong>.</p>
+    <p class="src"><b>Source:</b>
+    <code>outputs/combined_retrospective/counts_on_the_same_ground.{csv,json}</code>, 2026-09-12.
+    Region = within 250 m of both a survey point and an inspection record.</p>
+    <p><strong>The two truth sources disagree with each other by up to 1.8×, on 12 of 16 fires
+    in the same direction.</strong> Inspectors count mobile homes, second dwellings and
+    outbuildings the survey never counted, and several inspection records can sit on one
+    building. <strong>A modern count validated against inspections is not in the survey's
+    units</strong>, whatever the model does — which is the second reason a structure count is not
+    comparable across the join without a fire-specific correction.</p>
   </div>
 </section>
 
@@ -809,7 +695,7 @@
         <thead><tr><th></th><th>Carlson, 2002–2022</th><th>This pipeline, 2023 onward</th></tr></thead>
         <tbody>
           <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
-          <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the shipped one) and <code>damage_class_adaptive</code> at a per-fire cut running <strong>0.158–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the adaptive threshold</td></tr>
+          <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the primary one) and <code>damage_class_adaptive</code> at a per-fire threshold running <strong>0.601–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the advisory threshold</td></tr>
           <tr><td><strong>Exposure class</strong></td><td>measured against a perimeter its authors digitised by hand</td><td>measured against the public perimeter named in <code>perimeter_source</code>, by the same 100 m / 2.4 km rule</td></tr>
           <tr><td><strong>Geometry</strong></td><td>points</td><td>points, plus a 0.6 m probability raster Carlson has no analogue for — deliberately left out of the join</td></tr>
           <tr><td><strong>Fire identifiers</strong></td><td><code>MTBS_ID</code> on 359 of 361 fires, <code>IRWIN_ID</code> on 229</td><td>CAL FIRE <code>INCIDENTNUM</code>; <code>irwin_id</code> filled on 14 of 15 fires and <code>wfigs_unique_fire_id</code> on 13, by a deterministic lookup. <code>mtbs_id</code> is null on every row — MTBS runs about two seasons behind</td></tr>
@@ -843,8 +729,7 @@
     <code>outputs/combined_series/manifest.json</code> <code>carlson_release_flags</code>,
     measured over the whole national release before any subset is applied;
     <code>docs/combined-series-spec.md</code> §4c. Both null on every <code>slp</code> row, and
-    since <code>v0.4.0</code> both are <strong>written by a stage</strong> rather than being an
-    ad-hoc read. The duplicate flag marks 20,296 rows in 40,580-row duplicate groups at 20,284
+    both are written by a build stage rather than by an ad-hoc read. The duplicate flag marks 20,296 rows in 40,580-row duplicate groups at 20,284
     distinct duplicated rows; the multi-fire flag marks 324,910 rows at 152,537 of the
     release's 1,589,122 distinct locations.</p>
     <p><strong>One fire carries most of the duplication:</strong> <code>CA_2008_SAYRE</code>
@@ -884,20 +769,18 @@
           <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
           <tr><td>files / size</td><td class="num">18 / 2,166.3 MB</td></tr>
           <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 17 of 17</td></tr>
-          <tr><td>detector / damage bundle / cut</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
+          <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td>gates</td><td class="num">all three clear, no override — <code>heterogeneity_warning</code> null, no stale bundle, no fire without a call</td></tr>
           <tr><td>DOI</td><td class="num">⚠️ none minted; the citation file keeps the slot</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code> §v0.4.1.
-    <code>v0.4.1</code> is a PATCH: <code>damage_class</code> is byte-identical to
-    <code>v0.4.0</code>'s, and only the advisory column and its threshold changed.</p>
-    <p><strong>The licence is decided:</strong> MIT for the code, <strong>CC BY 4.0</strong> for
-    the data, copyright <strong>Carlo Broderick</strong>. The PROVISIONAL markers are gone. The
-    ODbL question is resolved <em>by exclusion, not by argument</em>: every row whose geometry
-    came from a Microsoft footprint is dropped from the package —
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>.</p>
+    <p><strong>MIT for the code, CC BY 4.0 for the data</strong>, copyright
+    <strong>Carlo Broderick</strong>. One footprint source is ODbL-licensed, and the question is
+    resolved by exclusion rather than by argument: every row whose geometry came from it is
+    dropped from the package —
     <strong>16,247 of 1,939,136 rows (0.84 %)</strong>, all of them on our fifteen fires, which
     is why the 2023+ half ships <strong>151,950</strong> rows rather than 168,197.</p>
     <div class="note warn">
@@ -913,17 +796,8 @@
       detector outputs are this project's own work. No Microsoft polygon, attribute or
       identifier is redistributed in any form.</p>
     </div>
-    <div class="note">
-      <p><strong>⚠️ Upgrading from <code>v0.3.0</code>? Four things changed under you.</strong>
-      Four columns were added (<code>damage_class_adaptive</code>,
-      <code>destroyed_threshold_adaptive</code>, <code>carlson_exact_duplicate</code>,
-      <code>carlson_multi_fire_location</code>); <code>destroyed_threshold</code> went from one
-      constant to a per-fire value; the production bundle changed; and <strong>the Carlson
-      <code>structure_id</code>s of four fires changed</strong>, because <code>carlson_id</code>
-      is now enumerated per fire over the national release instead of over five cached extracts.
-      <code>CA_2018_WOOLSEY</code> is unchanged only because it happened to be first. This is a
-      MINOR under the <code>major_zero</code> rule and would be a MAJOR after v1.0.0.</p>
-    </div>
+    <p>Upgrading from an earlier version? <a href="changelog.html">What changed</a> lists every
+    decision that moved a number or a column, newest first.</p>
   </div>
 </section>
 
@@ -932,11 +806,14 @@
     <p>Companion pages: <a href="index.html">the index</a> ·
       <a href="pipeline-overview.html">the deep dive</a> ·
       <a href="forward-fires.html">fire by fire</a> ·
-      <a href="uncertainty.html">how wide the numbers are</a> ·
-      <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · release <code>v0.4.1</code> ·
-    the full crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing document
-    is <code>docs/data-descriptor.md</code>, both shipped inside every release.</p>
+      <a href="retrospective.html">running the pipeline backwards</a> ·
+      <a href="augmented-carlson.html">the augmented historical record</a> ·
+      <a href="changelog.html">what changed</a>.</p>
+    <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.4.1</code>,
+    data date 2026-09-12. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
+    user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
+    release.</p>
   </div>
 </footer>
 

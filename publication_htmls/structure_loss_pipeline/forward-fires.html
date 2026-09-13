@@ -187,31 +187,28 @@
     <h1>Fire by fire</h1>
     <p class="lede">Every fire this pipeline has produced a per-structure loss call for, and
     the inspection record it was scored against. Fifteen California fires of 2024–2025 make up
-    the 2023+ half of the published <code>v0.4.0</code> series; two more sit outside it, one outside California
-    and one inside the Carlson era, because they have truth sets nobody in this project drew.</p>
+    the modern half of the published dataset; two more sit outside it — one outside California
+    and one inside the historical era — because they have damage assessments nobody in this
+    project drew.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>What these numbers are, 12 September 2026</h3>
-    <p>Every row is release <strong><code>v0.4.1</code></strong>: inventory
-    <code>seg_all_v4</code> on each fire's own perimeter frame, damage bundle
-    <strong><code>damage_sentinel2_v5</code></strong> — 62 optical features, <strong>no
-    radar</strong> — at the bundle's own fixed cut <strong>0.85</strong>, after the overlap
-    attribution rule. <strong>Eight of the fifteen fires are in that bundle's own training pool
-    and none is scored by it</strong>: each carries a leave-one-fire-out probability from a
-    model refitted on the other fires, marked <span class="src-tag lofo">lofo</span>.</p>
-    <p><strong>A second call ships beside the first.</strong> <code>damage_class</code> is the
-    fixed-cut call and is what every headline on this site is reported at.
-    <code>damage_class_adaptive</code> is the same score cut by a per-fire rule that reads only
-    that fire's own score distribution. Since <code>v0.4.1</code> that rule is
-    <strong>scoped to the <code>Direct</code> zone</strong>
-    (<code>expected_f1_isotonic_direct</code>) — it takes the fire's threshold from the
-    perimeter-plus-100 m population, whose base rate is nearer the one the rule was validated
-    on, and applies it to every row. The adaptive column is <em>advisory</em>: on these fifteen
-    fires it is <strong>worse on F1 and better on count</strong>, and the reason is worth
-    reading before using it — see <a href="#adaptive">the two cuts</a> below.</p>
+    <h3>How to read this table</h3>
+    <p><strong>Detection and damage are scored apart.</strong> Matching is greedy one-to-one at
+    10 m between our inventory and the inspection records, so a building we never found counts
+    against detection recall and not against the loss call. Precision, recall and F1 are for the
+    destroyed class, on matched pairs only.</p>
+    <p><strong>Eight of the fifteen fires taught the damage model, and none of them is scored by
+    it.</strong> Each carries a probability from a model refitted without that fire, marked
+    <span class="src-tag lofo">lofo</span>; the other seven are scored by the production model,
+    marked <span class="src-tag prod">production</span>.</p>
+    <p><strong>Every fire carries two loss calls.</strong> The primary one uses a single
+    threshold of <strong>0.85</strong> for every fire; the advisory one uses a threshold fitted
+    per fire from that fire's own score distribution and nothing else. The advisory column is
+    the better <em>count</em> and the worse <em>classifier</em> —
+    <a href="#adaptive">two loss calls</a>, below, is why.</p>
   </div>
 </div>
 
@@ -220,15 +217,7 @@
 <section class="part">
   <div class="wide">
     <p class="eyebrow">the product, scored</p>
-    <h2>Seventeen fires</h2>
-  </div>
-  <div class="wrap">
-    <p>Matching is greedy one-to-one at 10 m between our inventory points and the truth
-    records, so a call is only scored where both datasets found the same building.
-    <strong>Detection recall</strong> is the share of truth records our inventory matched;
-    <strong>P / R / F1</strong> are for the destroyed class on the matched pairs only. A
-    detection miss is therefore not counted as a damage error — it is counted in the detection
-    column, where it belongs.</p>
+    <h2>Seventeen fires, scored</h2>
   </div>
   <div class="wide">
     <figure class="band">
@@ -331,22 +320,19 @@
         <li><span class="swatch" style="background:var(--s1)"></span>the shipped fixed cut, 0.85</li>
         <li><span class="swatch" style="background:var(--s2)"></span>the advisory adaptive cut, per fire</li>
       </ul>
-      <figcaption>Destroyed-class F1 on the matched pairs at 10 m, <code>v0.4.1</code>. The
-      right-hand column is the cut the adaptive rule actually landed on for that fire. Scoping
-      it to the <code>Direct</code> zone pulls that range in from
-      <strong>0.158–0.792</strong> at <code>v0.4.0</code> to <strong>0.601–0.792</strong>, and
-      the mean-fire F1 cost falls with it, from 0.741 to <strong>0.756</strong> against the
-      fixed cut's 0.783. The adaptive call is still lower on most fires and higher on three
-      (Canyon, Coches 2, Eaton). The two at the bottom are explained below: Franklin is an
-      attribution problem, and Coches 2 is where the fixed cut called a single structure
-      destroyed where nine burned.</figcaption>
+      <figcaption><strong>The fixed threshold is the better classifier on most fires, and the
+      per-fire one is not far behind.</strong> Destroyed-class F1 on matched pairs at 10 m; the
+      right-hand column is the threshold the per-fire rule landed on. Mean per fire:
+      <strong>0.783</strong> fixed against <strong>0.756</strong> advisory, with the advisory
+      call higher on three fires (Canyon, Coches 2, Eaton). The two at the bottom are explained
+      below — Franklin is an attribution problem, and Coches 2 is where the fixed threshold
+      called one structure destroyed where nine burned.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> <code>outputs/forward_damage/per_fire.csv</code>, columns
-    <code>f1_10m</code> and <code>f1_adaptive_10m</code> with the realised cut from
-    <code>operating_cut_adaptive</code> (15 fires, tag
-    <code>seg_all_v4_full__perimeter__forward</code>, generated 2026-09-12); the pooled row from
+    <code>f1_10m</code> and <code>f1_adaptive_10m</code> with the realised threshold from
+    <code>operating_cut_adaptive</code>, 15 fires, generated 2026-09-12; the pooled row from
     <code>metrics.json</code>.</p>
   </div>
 
@@ -395,7 +381,7 @@
           <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">production</span></td><td class="num">813</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">40</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9231</td><td class="num">0.8000</td><td class="num">0.8571</td><td class="num">0.8387</td><td class="num">0.8571</td><td class="num">0.9827</td><td class="map"><a href="inventory_DINS_2024_NIXON.html">map</a></td></tr>
           <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">production</span></td><td class="num">9,568</td><td class="num">738</td><td class="num">799</td><td class="num">0.756</td><td class="num">1,144</td><td class="num">2,488</td><td class="num">0.6610</td><td class="num">1,637</td><td class="num">0.9820</td><td class="num">0.7466</td><td class="num">0.8484</td><td class="num">0.8825</td><td class="num">—</td><td class="num">0.9847</td><td class="map"><a href="inventory_NM_2024_SOUTH_FORK.html">map</a></td></tr>
           <tr><td class="fire">Marshall CO 2021 · county</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,774</td><td class="num">873</td><td class="num">1,455</td><td class="num">0.776</td><td class="num">1,101</td><td class="num">1,473</td><td class="num">0.7100</td><td class="num">1,023</td><td class="num">0.9805</td><td class="num">0.9607</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">—</td><td class="num">0.9800</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
-          <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,774</td><td class="num">1,181</td><td class="num">1,468</td><td class="num">0.776</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9520</td><td class="num">0.9069</td><td class="num">0.9486</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">—</td><td class="num">0.9840</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+          <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,774</td><td class="num">1,181</td><td class="num">1,468</td><td class="num">0.776</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9520</td><td class="num">2,741</td><td class="num">0.9069</td><td class="num">0.9486</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">—</td><td class="num">0.9840</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
         </tbody>
         <tfoot>
           <tr class="total"><td class="fire">15 series fires, pooled</td><td>—</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">17,902</td><td class="num">38,497</td><td class="num">0.7528</td><td class="num">28,716</td><td class="num">—</td><td class="num">—</td><td class="num">0.7829</td><td class="num">0.7559</td><td class="num">0.7733</td><td class="num">—</td><td class="map">—</td></tr>
@@ -403,100 +389,70 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> per-fire metrics from
-    <code>outputs/forward_damage/per_fire.csv</code> (tag
-    <code>seg_all_v4_full__perimeter__forward</code>, generated 2026-09-12) and the pooled row
-    from <code>metrics.json</code>; the two destroyed-count columns from
+    <code>outputs/forward_damage/per_fire.csv</code> and the pooled row from
+    <code>metrics.json</code>; the two destroyed-count columns from
     <code>outputs/combined_series/per_fire_summary.csv</code>, which is the shipped product.
-    Out-of-series fires from
-    <code>outputs/ics209_check/outside_ca/{ruidoso_southfork_2024,marshall_boulder_2021,marshall_femamac_2021}/report.md</code>
-    and <code>metrics.json</code>; Marshall's adaptive F1 from
-    <code>outputs/operating_product/report.md</code>, the per-fire table for the variant that
-    now ships. ⚠️ <strong>South Fork has no adaptive call at all</strong> — see the note under
-    the table. The pooled F1 cells are the
-    <strong>mean per fire</strong>, not a pooled recomputation; the two out-of-series fires are
-    in no pooled figure. P / R / F1 are computed on the product's shipped call, never
-    re-derived from a cut, because the adaptive cut is per fire.</p>
+    The two out-of-dataset fires from
+    <code>outputs/ics209_check/outside_ca/{ruidoso_southfork_2024,marshall_boulder_2021,marshall_femamac_2021}/</code>,
+    and their advisory F1 from <code>outputs/operating_product/per_fire.csv</code>. All dated
+    2026-09-12. The pooled F1 cells are the <strong>mean per fire</strong>, not a pooled
+    recomputation, and the two out-of-dataset fires are in no pooled figure. Precision, recall
+    and F1 are read from the product's shipped call rather than re-derived from a threshold,
+    because the advisory threshold is per fire.</p>
 
-    <div class="note warn">
-      <p><strong>⚠️ The adaptive count was published wrong once, and the column has since been
-      replaced.</strong> <code>v0.4.0</code> reported its adaptive column calling
-      <strong>17,735</strong> structures destroyed, a ratio of 0.991 against the inspected
-      total. That was an artefact: the release summed Franklin's <em>stale</em>
-      <code>summary.json</code>, which records 431 adaptive calls from before the
-      overlap-attribution rule ran, instead of the GeoPackage the product ships, which records
-      58. The true figure for that column was <strong>17,362</strong> and
-      <strong>0.970</strong>.</p>
-      <p><strong>Since <code>v0.4.1</code> it is a different column.</strong> The advisory rule
-      is now scoped to the <code>Direct</code> zone, and it calls <strong>15,951</strong>
-      destroyed — a ratio of <strong>0.891</strong>. The fixed-cut total,
-      <strong>14,504</strong> and <strong>0.810</strong>, has never changed and was never
-      affected, and no F1 anywhere moved, because those are computed on matched pairs from the
-      shipped call. The correction is recorded here rather than deleted because the wrong
-      number was published on this page.</p>
-      <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/operating_product/report.md</code>; ledger
-      <code>open-adaptive-count-ratio-artifact</code>, commit <code>fb8378d</code>; the
-      <code>v0.4.1</code> column from <code>outputs/combined_series/per_fire_summary.csv</code>
-      and <code>outputs/forward_damage/metrics.json</code>, commits <code>1499150</code> and
-      <code>22c8736</code>.</p>
-    </div>
 
   </div>
 
   <div class="wrap" id="adaptive">
-    <h3>The two cuts, and why the fixed one is still the headline</h3>
-    <p>A per-fire cut rule cleared a five-criterion promotion bar that was written down before
-    it was scored, twice — unnested and fully nested over 2,211 model fits. The owner adopted
-    it. Then it was applied to the product and <strong>it did not transfer</strong>, and the
-    reason is not a flaw in the rule or in the bar.</p>
+    <h3>Two loss calls, and why the fixed threshold is the primary one</h3>
+    <p>A per-fire threshold rule that reads only the model's own scores — never anything about
+    the fire itself — was built to replace the single fixed cut, and on a table of inspected
+    structures it clears a five-criterion bar written down before it was scored. On the product
+    it does not, and the reason is not a flaw in the rule. <strong>It was validated on one
+    population and applied to another.</strong></p>
     <div class="tablewrap">
       <table>
         <caption>Where the rule was validated, and where it is applied</caption>
-        <thead><tr><th></th><th>The leave-one-fire-out fold table</th><th>The product</th></tr></thead>
+        <thead><tr><th></th><th>The validation table</th><th>The product</th></tr></thead>
         <tbody>
-          <tr><td>what a row is</td><td>a CAL FIRE <strong>inspected</strong> structure</td><td>any structure in the inventory, most of them never inspected, out to 2.4 km from the perimeter</td></tr>
+          <tr><td>what a row is</td><td>an <strong>inspected</strong> structure</td><td>any structure in the inventory, most never inspected, out to 2.4 km from the perimeter</td></tr>
           <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
-          <tr><td>base rate</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
-          <tr><td>cuts the whole-inventory rule landed on (<code>v0.4.0</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.158 – 0.792</strong></td></tr>
-          <tr><td>cuts the <code>Direct</code>-scoped rule lands on (<code>v0.4.1</code>)</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
+          <tr><td>share of them destroyed</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
+          <tr><td>thresholds the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>logs/CHANGELOG.md</code> 2026-09-12 11:15 PT §1; fold
-    cuts from <code>outputs/forward_damage/per_fire.csv</code> <code>threshold_fold</code>,
-    realised cuts from <code>operating_cut_adaptive</code> in the same file.</p>
-    <p><strong>The rule reads the fire's own score distribution and nothing else</strong> —
-    that is what makes it label-free and what keeps it inside the covariate rule. It is also
-    what makes it move when the population underneath it changes. On a table of inspected
-    structures roughly half of which burned, the expected-F1 cut sits near the shipped one. On
-    a whole inventory where nine structures in a hundred burned, the same arithmetic pulls the
-    cut down — as far as 0.158 on Coches 2 — and the model starts calling structures destroyed
-    that no inspector ever looked at.</p>
+    <p class="src"><b>Source:</b> validation thresholds from
+    <code>outputs/forward_damage/per_fire.csv</code> (<code>threshold_fold</code>), realised
+    thresholds from <code>operating_cut_adaptive</code> in the same file.</p>
+    <p><strong>The rule reads the fire's own score distribution and nothing else</strong> — that
+    is what makes it label-free, and it is also what makes it move when the population
+    underneath it changes. On a table of inspected structures where roughly half burned, the
+    expected-F1 threshold sits near the fixed one. On a whole inventory where nine structures in
+    a hundred burned, the same arithmetic pulls the threshold down and the model starts calling
+    structures destroyed that nobody ever looked at. Taking the threshold from the near-perimeter
+    zone, whose share destroyed is nearer the validation table's, is what keeps it in range.</p>
     <div class="tablewrap">
       <table>
-        <caption>Adaptive − fixed, paired on identical rows, fire-level cluster bootstrap,
-        B = 2000 — the <code>Direct</code>-scoped rule that ships in <code>v0.4.1</code>, with
-        the whole-inventory rule <code>v0.4.0</code> shipped beside it</caption>
-        <thead><tr><th>Scope · metric</th><th class="num"><code>v0.4.1</code> Δ</th><th class="num">95 % CI</th><th class="num"><code>v0.4.0</code> Δ</th><th>Excludes zero?</th></tr></thead>
+        <caption>Advisory call minus primary call, paired on identical rows, fire-level
+        cluster bootstrap, B = 2000, fifteen fires</caption>
+        <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
         <tbody>
-          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td class="num">−0.0352</td><td class="fail">yes — worse</td></tr>
-          <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td class="num">−0.0939</td><td class="fail">yes — worse</td></tr>
-          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0265</strong></td><td class="num">[+0.0103, +0.0458]</td><td class="num">+0.0435</td><td class="pass">yes — better</td></tr>
-          <tr><td>pooled F1</td><td class="num">−0.0046</td><td class="num">[−0.0370, +0.0003]</td><td class="num">−0.0111</td><td class="no">no</td></tr>
-          <tr><td>pooled precision</td><td class="num">−0.0396</td><td class="num">[−0.0987, −0.0251]</td><td class="num">−0.0693</td><td class="fail">yes — worse</td></tr>
-          <tr><td>pooled recall</td><td class="num">+0.0316</td><td class="num">[+0.0233, +0.0485]</td><td class="num">+0.0524</td><td class="pass">yes — better</td></tr>
+          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0265</strong></td><td class="num">[+0.0103, +0.0458]</td><td class="pass">yes — better</td></tr>
+          <tr><td>pooled F1</td><td class="num">−0.0046</td><td class="num">[−0.0370, +0.0003]</td><td class="no">no</td></tr>
+          <tr><td>pooled precision</td><td class="num">−0.0396</td><td class="num">[−0.0987, −0.0251]</td><td class="fail">yes — worse</td></tr>
+          <tr><td>pooled recall</td><td class="num">+0.0316</td><td class="num">[+0.0233, +0.0485]</td><td class="pass">yes — better</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/operating_product/paired_delta_ci.csv</code>,
-    comparisons <code>V2 − V4</code> (the shipped <code>Direct</code>-scoped rule) and
-    <code>V1 − V4</code> (the whole-inventory rule <code>v0.4.0</code> shipped), over 15 DINS
-    fires with the fire as the unit. AUC is computed on the score and does not depend on a cut,
-    so it does not appear here: the ranking is identical under either cut.
-    <strong>Scoping the cut to the <code>Direct</code> zone halves the cost</strong> and takes
-    the pooled-F1 loss inside the noise.</p>
+    comparison <code>V2 − V4</code>, over the 15 inspected fires with the fire as the unit. AUC
+    does not appear because it is computed on the score and does not depend on a threshold:
+    <strong>the ranking is identical under either call</strong>.</p>
     <div class="note warn">
-      <p><strong>⚠️ And what the adaptive call buys is the count.</strong> Over the fifteen
+      <p><strong>⚠️ What the advisory call buys is the count.</strong> Over the fifteen
       fires' whole inventories it calls <strong>15,951</strong> structures destroyed against
       the fixed cut's <strong>14,504</strong> and DINS's <strong>17,902</strong> — a ratio of
       <strong>0.810 → 0.891</strong>. So the two columns disagree in a specific, legible way:
@@ -506,25 +462,21 @@
       one line: <em>"use <code>damage_class</code> to classify buildings; use
       <code>damage_class_adaptive</code> if you are counting them"</em> — and say which column
       you used. Every headline on this site is the fixed cut.</p>
-      <p><strong>⚠️ That question has now been answered, and the answer is no.</strong>
-      Roadmap 14 re-ran the same five criteria at the same thresholds on <strong>the product's
-      own population</strong> — three populations, five candidate variants, the bar
-      pre-registered again before anything was scored — and
-      <strong>no candidate clears it. Nothing changes; the fixed cut stays the default.</strong>
-      The best of them is the <strong>Direct-zone-scoped</strong> cut, which takes the rule's
-      threshold from the <code>Direct</code> zone (base rate nearer the fold table's) and
-      applies it to every row: mean-fire F1 <strong>−0.0186 [−0.0336, −0.0070]</strong> against
-      the fixed cut, a destroyed-count ratio of <strong>0.891</strong>, realised cuts
-      0.601–0.792 instead of 0.158–0.792 — and it <em>gains</em> outside California, 0.8986 →
-      <strong>0.9121</strong> mean-fire F1. <strong>It was swapped in on 2026-09-12 and is the advisory column this page now reports</strong> — <code>v0.4.1</code>, a PATCH whose <code>damage_class</code> is byte-identical to <code>v0.4.0</code>'s, so only the advisory column moved; its per-fire cuts were verified against the Stage 24 table on 15 of 15 fires.</p>
-      <p>One check is worth keeping. Re-fitting the isotonic map leave-one-fire-out — the leak
-      a reader would reasonably suspect — produces a variant that is <strong>bit-identical on
-      204,797 of 204,797 inventory rows</strong>, because the product already reads each
-      held-out fire's own fold calibration. Scored rather than asserted.</p>
+      <p><strong>The rule was scored against the same five criteria on the product's own
+      population, and no variant clears them</strong> — five candidates, three populations, the
+      bar written down before anything was scored. That is why the advisory call is advisory and
+      the fixed threshold is the default. The best candidate is the one that ships: it takes the
+      threshold from the near-perimeter zone, costs <strong>−0.0186 [−0.0336, −0.0070]</strong>
+      mean-fire F1, gets the count to <strong>0.891</strong> of the inspected total, and
+      <em>gains</em> outside California, where mean-fire F1 goes 0.8986 →
+      <strong>0.9121</strong>.</p>
+      <p>One leak a reader would reasonably suspect is closed by measurement rather than
+      assertion: re-fitting the calibration map leave-one-fire-out gives a variant that is
+      <strong>bit-identical on 204,797 of 204,797 rows</strong>, because the product already
+      reads each held-out fire's own fold calibration.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
       <code>outputs/operating_product/{decision.md,report.md,by_variant.csv,paired_delta_ci.csv}</code>;
-      bar pre-registered <code>logs/CHANGELOG.md</code> 2026-09-12 11:28 PT; commit
-      <code>fb8378d</code>.</p>
+      the bar was pre-registered in <code>logs/CHANGELOG.md</code> before it was scored.</p>
     </div>
     <div class="note ok">
       <p><strong>Outside California the advisory call splits, and one fire cannot speak to it
@@ -538,30 +490,23 @@
       ranking travels and the fixed cut does not.</p>
     </div>
 
-    <h3>Reading the two low rows</h3>
-    <h3>The two fires that are not in the series</h3>
-    <div class="note ok"><p><strong>⚠️ South Fork came off the legacy frame on 2026-09-12, and its advisory
-      call came back with it.</strong> It was the one product still on the DINS-buffer frame, so
-      it had no <code>Direct</code> ring for the scoped rule to read and fell back to the fixed
-      cut. Rebuilt on its own perimeter frame it has <strong>9,568 structures — 2,357
-      <code>Direct</code>, 7,211 <code>Indirect</code></strong> — and an advisory cut of
-      <strong>0.756</strong>. <em>(The 0.8825 this site withdrew was that same value, which
-      every scoped variant landed on; it now comes from the product rather than from a
-      diagnostic table.)</em></p></div>
+    <h3>The two fires that are not in the dataset</h3>
     <p><strong>South Fork (NM, June 2024)</strong> is the only verified post-2022
     per-structure damage assessment outside California — FEMA Urban Search &amp; Rescue
     observations published by the Village of Ruidoso. It is scored on the assessment hull
     (39.691 km²), not the whole fire, because an assessment is not a census and enumerating
     over the whole 17,569-acre fire would make every uninspected building a false positive by
-    construction. At <code>v0.4.0</code> it scores P 0.982 / R 0.747 / <strong>F1 0.848</strong>
-    at the shipped cut on 1,637 matched pairs, AUC 0.985, against <strong>F1 0.883</strong>
-    under the adaptive cut and 0.945 at the fire's own best cut of 0.14 — a threshold gap of
-    <strong>+0.097</strong>. Its detection recall (0.661) is low for structural reasons: New Mexico has no
+    construction. It scores P 0.982 / R 0.747 / <strong>F1 0.848</strong> at the fixed threshold
+    on 1,637 matched pairs, AUC 0.985, against <strong>F1 0.883</strong> under the advisory one
+    and 0.945 at the fire's own best threshold — a threshold gap of <strong>+0.097</strong>.
+    It runs on its own perimeter frame: 9,568 structures, 2,357 in the near-perimeter zone and
+    7,211 beyond it, 738 called destroyed at the fixed threshold and 799 under the advisory one,
+    all of them near the perimeter. Its detection recall (0.661) is low for structural reasons: New Mexico has no
     cached Microsoft footprint layer, so the detector's prior band is USA Structures alone, and
     Lincoln County's USA Structures extract carries a single <code>IMAGE_DATE</code> of
     2017-05-26 — seven years before the fire.</p>
-    <p><strong>Marshall (CO, December 2021)</strong> is in Carlson's era, not the forward one,
-    so it is not in the release. It is here because it is the only fire in this project with a
+    <p><strong>Marshall (CO, December 2021)</strong> is in the historical era, not the modern
+    one, so it is not in the release. It is here because it is the only fire in this project with a
     public per-structure assessment nobody in this pipeline drew — two of them, in fact, plus
     Carlson's own points. Scored against all three, on the same 14,786-structure inventory:</p>
     <div class="tablewrap">
@@ -633,12 +578,14 @@
   <div class="wrap">
     <p>Companion pages: <a href="index.html">the index</a> ·
       <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="combined-series.html">the combined series</a> ·
+      <a href="combined-series.html">the combined dataset</a> ·
+      <a href="retrospective.html">running the pipeline backwards</a> ·
       <a href="uncertainty.html">how wide the numbers are</a> ·
       <a href="outside-california.html">outside California</a>.</p>
-    <p>Built 2026-09-12 · release <code>v0.4.1</code>, bundle
-    <code>damage_sentinel2_v5</code> at the fixed cut 0.85, advisory column
-    <code>expected_f1_isotonic_direct</code>.</p>
+    <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's perimeter frame,
+    damage model <code>damage_sentinel2_v5</code> at the fixed cut 0.85, advisory rule
+    <code>expected_f1_isotonic_direct</code>, release <code>v0.4.1</code>, data date
+    2026-09-12.</p>
   </div>
 </footer>
 
