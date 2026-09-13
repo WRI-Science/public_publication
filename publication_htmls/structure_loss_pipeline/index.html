@@ -452,7 +452,7 @@
     <div>
       <span class="fig">2,069,752</span>
       <span class="cap">rows in the released dataset, one per building per fire per source</span>
-      <span class="from">releases/v0.7.0/manifest.json</span>
+      <span class="from">releases/v0.8.0/manifest.json</span>
     </div>
     <div>
       <span class="fig">377 fires</span>
@@ -549,7 +549,7 @@
     <p class="eyebrow">status</p>
     <h2>Where the project is, 13 September 2026</h2>
     <div class="status">
-      <p><strong>The published dataset is <code>v0.7.0</code>, cut on 2026-09-13 and
+      <p><strong>The published dataset is <code>v0.8.0</code>, cut on 2026-09-13 and
       committed.</strong> The 2016–2022 era has stopped being "capable, not done":
       <strong>seventeen</strong> fires the hand survey already covers have now been run through
       this pipeline as well — every fire that was ever admitted except one — and each of the
@@ -568,6 +568,11 @@
         large addition — <a href="retrospective.html">running the pipeline backwards</a>. Those
         seventeen fires are now in the file <em>twice</em>, once per method, and
         <strong>the two descriptions must never be summed</strong>.</li>
+        <li><strong>Most rows now carry a third, later loss call.</strong> A second model
+        reads a clean before-and-after pair of annual composites, which only exists once the
+        year is over, and finds <strong>six more points of recall</strong> for one and a half of
+        precision. It is a separate column, never an edit to the first —
+        <a href="pipeline-overview.html#refined">the deep dive</a> has it.</li>
         <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
         cross-validated or leave-one-fire-out. The fix is time, and it waits on the next
         inspection archive.</li>
@@ -654,7 +659,10 @@
         <strong>0.873</strong> mean per fire and <strong>0.916</strong> pooled on the same
         kind of test, and the best per-building damage F1 anyone has published at 0.3–1 m
         <em>with</em> radar is 0.727. Dietrich et al. (2025), <em>The Potential of
-        Copernicus Satellites for Disaster Response</em>, arXiv:2511.05461.</span>
+        Copernicus Satellites for Disaster Response</em>, arXiv:2511.05461. The improvement
+        campaign that review fed ran <strong>six pre-registered rounds</strong> and moved the
+        74-day call not at all; what it did find ships as
+        <a href="pipeline-overview.html#refined">the later refinement call</a>.</span>
         <span class="when">~90 sources · docs/literature-review-damage.md §d.8</span>
       </div>
       <a href="uncertainty.html">
@@ -674,7 +682,7 @@
         every fire's building and destroyed counts, the licence exclusion per fire, our count
         against the inspectors' and the incident commander's, and the seven ways the two halves
         are not equivalent.</span>
-        <span class="when">v0.7.0 · 2026-09-13</span>
+        <span class="when">v0.8.0 · 2026-09-13</span>
       </a>
       <a href="augmented-carlson.html">
         <span class="t">The augmented historical record</span>
@@ -709,7 +717,7 @@
         the hand survey also covers, and two are reference fires outside the dataset. Linked per fire
         from <a href="forward-fires.html">fire by fire</a> and
         <a href="retrospective.html">running the pipeline backwards</a>.</span>
-        <span class="when">v0.7.0 · 2026-09-13</span>
+        <span class="when">v0.8.0 · 2026-09-13</span>
       </div>
       <div class="plain">
         <span class="t">Per-fire damage maps — 66 pages</span>
@@ -769,7 +777,7 @@
     for Data Science — literate scripts, one settings block, explicit filters, archive rather
     than delete, and a dated change record.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.7.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.8.0</code>,
     data date 2026-09-13.</p>
   </div>
 </footer>

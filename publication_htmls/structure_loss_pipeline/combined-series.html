@@ -426,7 +426,7 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption><code>combined_structures.gpkg</code> — 58 columns, EPSG:5070, one row per
+        <caption><code>combined_structures.gpkg</code> — 68 columns, EPSG:5070, one row per
         structure per fire per source. The internal build is what every number this project
         reports about itself is computed on; the released package is that minus the licence
         exclusion.</caption>
@@ -935,6 +935,7 @@
       <table>
         <thead><tr><th></th><th>Carlson, 2002–2022</th><th>This pipeline, 2023 onward</th></tr></thead>
         <tbody>
+          <tr><td><strong>How many loss calls a row carries</strong></td><td>one — a hand <code>B</code>/<code>U</code>, with no threshold and no probability</td><td><strong>up to three</strong> — the primary call at a fixed threshold, an advisory call at a per-fire threshold, and on 250,038 rows a <a href="pipeline-overview.html#refined">second model's call from a later composite year</a>, null with a declared reason where it cannot be made. <strong>No aggregate mixes them</strong></td></tr>
           <tr><td><strong>The row unit</strong></td><td colspan="2">one row per structure <strong>per fire per source</strong>. Sixteen fires are described by both, and the two descriptions must never be summed — neither is a subset of the other</td></tr>
           <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
           <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the primary one) and <code>damage_class_adaptive</code> at a per-fire threshold running <strong>0.601–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the advisory threshold</td></tr>
@@ -1003,13 +1004,13 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.7.0</code>, cut 2026-09-13</caption>
+        <caption>Release <code>v0.8.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">2,102,662 / <strong>2,069,752</strong></td></tr>
           <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>394</strong> — 361 from the survey, 33 ours, 17 described by both</td></tr>
-          <tr><td>schema / CRS</td><td class="num">58 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">20 / 2,672.5 MB</td></tr>
+          <tr><td>schema / CRS</td><td class="num">68 columns / EPSG:5070</td></tr>
+          <tr><td>files / size</td><td class="num">20 / 2,771.1 MB</td></tr>
           <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 19 of 19</td></tr>
           <tr><td>geometry on the survey's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>what documents the build</td><td class="num"><code>build-manifest.json</code> beside <code>manifest.json</code> — the stage's own record and the package's, no longer the same file</td></tr>
@@ -1019,7 +1020,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.7.0/manifest.json</code> and
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.8.0/manifest.json</code> and
     <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
     ten columns ships as its own companion archive, <code>carlson_augmented_v0.1.0</code>, on
     its own version line.</p>
@@ -1056,7 +1057,7 @@
       <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="changelog.html">what changed</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.7.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.8.0</code>,
     data date 2026-09-13. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
     user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>
