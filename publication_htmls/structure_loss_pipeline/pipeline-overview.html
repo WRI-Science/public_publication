@@ -399,7 +399,7 @@
 
 <div class="wide">
   <div class="headline-grid">
-    <div><span class="fig">1,922,889</span><span class="cap">structure rows released, over 376 fires and 25 years, one row per structure per fire</span></div>
+    <div><span class="fig">2,062,248</span><span class="cap">structure rows released, over 377 fires and 25 years, one row per structure per fire per source</span></div>
     <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against the inspection record, 15 fires</span></div>
     <div><span class="fig">0.764</span><span class="cap">destroyed count against the hand survey's, running this pipeline end to end on 16 of its own fires</span></div>
     <div><span class="fig">&kappa; 0.882</span><span class="cap">agreement with the hand survey's own classification on 394,429 buildings</span></div>
@@ -409,9 +409,11 @@
 <div class="wrap">
   <div class="status">
     <h3>Where the project is, 12 September 2026</h3>
-    <p><strong>The published dataset is <code>v0.4.1</code>, cut on 2026-09-12.</strong> One
-    layer, 376 fires, 1,922,889 released rows: the 2002–2022 hand survey carried verbatim beside
-    fifteen California fires of 2024–2025 that this pipeline produced.</p>
+    <p><strong>The published dataset is <code>v0.5.0</code>, cut on 2026-09-12.</strong> One
+    layer, 377 fires, 2,062,248 released rows: the 2002–2022 hand survey carried verbatim, our
+    own sixteen fires of 2024–2025, and sixteen fires the survey already covers that this
+    pipeline has now <em>also</em> enumerated — so those sixteen are described twice, and
+    <strong>the two descriptions must never be summed</strong>.</p>
     <p><strong>Four things a reader should know before the numbers start.</strong></p>
     <ul class="tight">
       <li><strong>The detector is a small addition to the footprint databases, not a
@@ -428,9 +430,7 @@
       inspection archive.</li>
     </ul>
     <p><span class="pill flight">in progress · 13 September 2026</span> A literature review
-    feeding an improvement campaign, and a <code>v0.5.0</code> release that would add the
-    sixteen retrospective fires, South Fork and nine geometry columns. Neither has changed a
-    number here; the published release is <code>v0.4.1</code>. For the error side of the
+    feeding an improvement campaign. It has changed no number here. For the error side of the
     product, read <a href="damage-scorecard.html">Did this structure burn?</a></p>
   </div>
 
@@ -1360,8 +1360,9 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> the three truth counts and the two ICS-209 ratios from
-    <code>outputs/ics209_check/summary.json</code>, <strong>re-run on <code>v0.4.1</code></strong>
-    (2026-09-12), so its prediction column is current: 14,504 predicted destroyed against 17,879
+    <code>outputs/ics209_check/summary.json</code>, generated 2026-09-12 over the fifteen
+    inspected California fires — South Fork NM is not among them and is in no figure here:
+    14,504 predicted destroyed against 17,879
     ICS-209 is a ratio of <strong>0.811</strong>. 14 of the 15 fires matched an ICS-209 incident
     — Coches 2 (9 destroyed) never reached the national situation report. The adaptive count
     comes from <code>outputs/combined_series/per_fire_summary.csv</code>, which the ICS-209
@@ -1812,23 +1813,27 @@
     <h2>Releases, licence, and how to check one</h2>
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.4.1</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.5.0</code>, cut 2026-09-12</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>rows — internal build / released package</td><td class="num">1,939,136 / <strong>1,922,889</strong></td></tr>
-          <tr><td>fires</td><td class="num">376 — 361 from the survey, 15 ours</td></tr>
+          <tr><td>rows — internal build / released package</td><td class="num">2,093,672 / <strong>2,062,248</strong></td></tr>
+          <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>393</strong> — 361 from the survey, 32 ours, 16 described by both</td></tr>
           <tr><td>hand-survey rows (2002–2022, verbatim)</td><td class="num">1,770,939 — 73,534 destroyed</td></tr>
-          <tr><td>pipeline rows (15 fires, 2024–2025)</td><td class="num">168,197 built, 151,950 released — 14,504 destroyed at the fixed threshold</td></tr>
+          <tr><td>our rows, 2024–2025 (16 fires)</td><td class="num">177,765 built, 158,803 released — 15,242 destroyed at the fixed threshold</td></tr>
+          <tr><td>our rows, retrospective (16 fires the survey also covers)</td><td class="num">144,968 built, 132,506 released — 8,860 destroyed</td></tr>
+          <tr><td>geometry on the survey's rows</td><td class="num">9 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>rows with no damage call</td><td class="num">879 — all ceded to a later fire by the attribution rule</td></tr>
-          <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
-          <tr><td>files / size / checksums</td><td class="num">18 / 2,166.3 MB / SHA-256, verified 17 of 17</td></tr>
+          <tr><td>schema / CRS</td><td class="num">57 columns / EPSG:5070</td></tr>
+          <tr><td>files / size / checksums</td><td class="num">19 / 2,649.5 MB / SHA-256, verified 18 of 18</td></tr>
           <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td><code>heterogeneity_warning</code></td><td class="num">null — computed, not asserted</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code> and
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
+    nine new columns ships as its own companion archive,
+    <code>carlson_augmented_v0.1.0</code>.</p>
     <p>Three release gates have to clear with no override before a version is not a prerelease:
     no heterogeneity warning, no damage model older than the configured production one, and no
     modern fire without a damage call. All three clear. If you are upgrading from an earlier
@@ -1843,13 +1848,13 @@
           <tr><td>Code</td><td><strong>MIT</strong></td></tr>
           <tr><td>Data</td><td><strong>CC BY 4.0</strong></td></tr>
           <tr><td>Copyright holder</td><td><strong>Carlo Broderick</strong></td></tr>
-          <tr><td>The ODbL question</td><td><strong>Microsoft-sourced rows are excluded from the released package</strong> — 16,247 of 1,939,136 rows (0.84 %), all on our fifteen fires. Not argued away; removed, and the PROVISIONAL markers are gone</td></tr>
+          <tr><td>The ODbL question</td><td><strong>Microsoft-sourced rows are excluded from the released package</strong> — 31,424 of 2,093,672 rows (1.50 %) across 28 (fire, source) pairs, every one of them ours. None of the survey's 1,770,939 rows is touched</td></tr>
           <tr><td>DOI</td><td>⚠️ <strong>the only open item.</strong> None minted; the citation file keeps an empty slot</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/licence-decision.md</code> and
-    <code>outputs/releases/v0.4.1/manifest.json</code> (<code>licence_status</code>,
+    <code>outputs/releases/v0.5.0/manifest.json</code> (<code>licence_status</code>,
     <code>odbl_exclusion</code>). The USA Structures licence was re-verified against the
     publisher's own ArcGIS record on 2026-09-11 rather than against this project's notes.</p>
     <p>The instruction was "as conservative as possible while letting anyone use it". CC BY 4.0
@@ -1862,9 +1867,9 @@
     distribution, and every performance number this project reports about itself is computed on
     the full inventory.</p>
     <p>⚠️ <strong>The exclusion is uneven and largest where the footprint database is
-    weakest</strong> — 2.6 % of Airport's rows against 24.4 % of Bridge's and Nixon's — so a
-    user counting structures from the package on a rural fire is counting a filtered
-    inventory.</p>
+    weakest</strong> — 0.03 % of Atlas 2017's rows against 36.1 % of CZU 2020's, with South Fork
+    NM at 28.4 % and Bridge 2024 at 24.4 % — so a user counting structures from the package on a
+    rural fire is counting a filtered inventory.</p>
     <p>⚠️ Microsoft footprints were also used as a <em>training prior</em> for the detector, which
     is a different question from redistribution: the network reads a raster band saying "a
     footprint database has a building here", and the weights and every structure the detector
@@ -1892,8 +1897,8 @@
     </p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's public-perimeter
     frame, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, advisory
-    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.4.1</code>. Data date
-    2026-09-12.</p>
+    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.5.0</code>. Data date
+    2026-09-13.</p>
   </div>
 </footer>
 

@@ -392,8 +392,10 @@
     2016–2022 and it is noisy from fire to fire, so a trend across the 2022/2023 boundary is
     threatened by <em>which</em> fires are in each half, not by <em>when</em> they burned.</p>
     <p>Sixteen California fires were rebuilt end to end on their own public perimeters, with
-    only footprints that predate each fire, and scored against Carlson's own census.
-    Twenty-three carry the damage half. None of them is a row in the published dataset.</p>
+    only footprints that predate each fire, and scored against the survey's own census.
+    Twenty-three carry the damage half. <strong>All sixteen are now rows in the published
+    dataset</strong> — 144,968 of them — beside the survey's own description of the same fires,
+    which is why the release carries a rule against summing the two.</p>
   </div>
 </div>
 
@@ -933,14 +935,50 @@
 </section>
 
 <section class="part">
+  <div class="wide">
+    <p class="eyebrow">the per-fire maps</p>
+    <h2>Look at one of these fires</h2>
+  </div>
+  <div class="wrap">
+    <p>One self-contained page per fire: the pre-fire building list this pipeline produced,
+    drawn on satellite imagery and coloured by predicted destroyed probability, with the
+    inspection record beside it. These are the sixteen rebuilt fires — the same buildings the
+    hand survey enumerated by eye, so the two descriptions can be compared on the ground rather
+    than in a table.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fire</th><th>Map</th><th>Fire</th><th>Map</th></tr></thead>
+        <tbody>
+          <tr><td>Clayton 2016</td><td><a href="inventory_CA_2016_CLAYTON.html">inventory map</a></td><td>Atlas 2017</td><td><a href="inventory_CA_2017_ATLAS.html">inventory map</a></td></tr>
+          <tr><td>Nuns 2017</td><td><a href="inventory_CA_2017_NUNS.html">inventory map</a></td><td>Carr 2018</td><td><a href="inventory_CA_2018_CARR.html">inventory map</a></td></tr>
+          <tr><td>Ranch 2018</td><td><a href="inventory_CA_2018_RANCH.html">inventory map</a></td><td>Kincade 2019</td><td><a href="inventory_CA_2019_KINCADE.html">inventory map</a></td></tr>
+          <tr><td>Creek 2020</td><td><a href="inventory_CA_2020_CREEK.html">inventory map</a></td><td>CZU 2020</td><td><a href="inventory_CA_2020_CZU_AUG_LIGHTNING.html">inventory map</a></td></tr>
+          <tr><td>Glass 2020</td><td><a href="inventory_CA_2020_GLASS.html">inventory map</a></td><td>North Complex 2020</td><td><a href="inventory_CA_2020_NORTH_COMPLEX.html">inventory map</a></td></tr>
+          <tr><td>Zogg 2020</td><td><a href="inventory_CA_2020_ZOGG.html">inventory map</a></td><td>Caldor 2021</td><td><a href="inventory_CA_2021_CALDOR.html">inventory map</a></td></tr>
+          <tr><td>Fawn 2021</td><td><a href="inventory_CA_2021_FAWN.html">inventory map</a></td><td>McKinney 2022</td><td><a href="inventory_CA_2022_MCKINNEY.html">inventory map</a></td></tr>
+          <tr><td>Mill 2022</td><td><a href="inventory_CA_2022_MILL.html">inventory map</a></td><td>Oak 2022</td><td><a href="inventory_CA_2022_OAK.html">inventory map</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>scripts/qa_maps.py</code>, from each fire's
+    <code>outputs/inventory/&lt;unit&gt;/structures_damage.gpkg</code>, generated 2026-09-13.
+    Whole fires carry tens of thousands of points, so each map draws full detail inside the
+    densest neighbourhoods plus the cell holding the most model misses outside them, and covers
+    the rest with a coarse rate grid; the sampling is stated on the map itself.</p>
+  </div>
+</section>
+
+<section class="part">
   <div class="wrap">
     <p class="eyebrow">06 · what this does not settle</p>
     <h2>Four limits worth carrying away</h2>
     <ol class="tight">
-      <li><strong>These sixteen fires are not rows in the published dataset</strong>, and adding
-      them needs a rule that is documented but not yet enforced: never sum across the two halves
-      for the same fire. A fire like Glass 2020 would otherwise carry the hand enumeration
-      <em>and</em> our inventory of the same buildings.</li>
+      <li><strong>These sixteen fires are now rows in the published dataset, and that makes a
+      new mistake possible.</strong> Each is described twice — once by the hand survey, once by
+      this pipeline — and <strong>the two descriptions must never be summed</strong>, because
+      neither is a subset of the other. Group by fire <em>and</em> source; a pooled count over
+      an era picks one. The building identifier is namespaced per source and a test refuses a
+      summary that aggregates across them.</li>
       <li><strong>Sixteen fires in one state is a small sample for a rank correlation</strong>,
       2019 is a single fire, and every ratio is computed at one fixed threshold.</li>
       <li><strong>Six of the sixteen are detector training fires</strong> and score higher. The
@@ -967,7 +1005,7 @@
       <a href="uncertainty.html">how wide the numbers are</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
     <code>damage_sentinel2_v5</code> for the end-to-end half and
-    <code>damage_sentinel2_v4</code> for the damage-only half, release <code>v0.4.1</code>.
+    <code>damage_sentinel2_v4</code> for the damage-only half, release <code>v0.5.0</code>.
     Outputs under <code>outputs/combined_retrospective/</code>, data date 2026-09-12.</p>
   </div>
 </footer>

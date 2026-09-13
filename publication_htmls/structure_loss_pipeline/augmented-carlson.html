@@ -399,7 +399,10 @@
     still misses <strong>33.9 %</strong> of destroyed buildings against <strong>21.0 %</strong>
     of surviving ones.</p>
     <p><strong>361 fires built, 0 failures</strong>, all 1,770,939 buildings carrying a geometry
-    across 26 states, and the published point never moves.</p>
+    across 26 states, and the published point never moves. Since <code>v0.5.0</code> nine of
+    these columns ride on every one of those rows in
+    <a href="combined-series.html">the combined dataset</a>, joined at
+    <strong>100.0000 %</strong> coverage.</p>
   </div>
 </div>
 
@@ -695,9 +698,14 @@
       populations unequally.</li>
     </ol>
     <p class="src"><b>Source:</b> <code>docs/carlson-augmented-schema.md</code> §§4, 5 — the
-    full column dictionary, and the proposed nine-column patch that would carry these fields
-    into the published dataset. The identifiers here are this project's own: the survey's release
-    carries no structure identifier of any kind.</p>
+    full column dictionary. The nine-column patch it proposed has since been applied: those
+    columns are in <a href="combined-series.html">the combined dataset</a> as of
+    <code>v0.5.0</code>, joined on <strong>100.0000 %</strong> of the survey's 1,770,939 rows
+    over 361 fires at a 0.5 m coincidence tolerance, with a maximum coordinate displacement of
+    <strong>1.3 × 10⁻⁸ m</strong>
+    (<code>outputs/releases/v0.5.0/augmented_geometry_coverage.csv</code>, 361 rows, minimum
+    <code>fraction_joined</code> 1.0). The identifiers here are this project's own: the survey's
+    release carries no structure identifier of any kind.</p>
   </div>
 </section>
 

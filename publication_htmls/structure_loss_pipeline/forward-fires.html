@@ -388,11 +388,11 @@
   <div class="wrap">
     <p class="kicker">Structure Loss Pipeline · results</p>
     <h1>Fire by fire</h1>
-    <p class="lede">Every fire this pipeline has produced a per-structure loss call for, and
-    the inspection record it was scored against. Fifteen California fires of 2024–2025 make up
-    the modern half of the published dataset; two more sit outside it — one outside California
-    and one inside the historical era — because they have damage assessments nobody in this
-    project drew.</p>
+    <p class="lede">Every modern fire this pipeline has produced a per-structure loss call for,
+    and the inspection record it was scored against. Sixteen fires make up the modern half of the
+    published dataset — fifteen in California and South Fork in New Mexico. Marshall CO 2021 sits
+    outside it, in the historical era, and is here because it has two damage assessments nobody
+    in this project drew.</p>
   </div>
 </header>
 
@@ -696,10 +696,11 @@
       ranking travels and the fixed cut does not.</p>
     </div>
 
-    <h3>The two fires that are not in the dataset</h3>
-    <p><strong>South Fork (NM, June 2024)</strong> is the only verified post-2022
-    per-structure damage assessment outside California — FEMA Urban Search &amp; Rescue
-    observations published by the Village of Ruidoso. It is scored on the assessment hull
+    <h3>South Fork NM, and the one fire here that is not in the dataset</h3>
+    <p><strong>South Fork (NM, June 2024)</strong> is the only verified post-2022 per-structure
+    damage assessment outside California — federal search-and-rescue observations published by
+    the village it burned — and since <code>v0.5.0</code> it is a row in the dataset, the first
+    one outside California. It is scored on the assessment hull
     (39.691 km²), not the whole fire, because an assessment is not a census and enumerating
     over the whole 17,569-acre fire would make every uninspected building a false positive by
     construction. It scores P 0.982 / R 0.747 / <strong>F1 0.848</strong> at the fixed threshold
@@ -766,15 +767,17 @@
           <tr><td>Airport 2024</td><td><a href="inventory_DINS_2024_AIRPORT.html">inventory map</a></td><td>French 2024</td><td><a href="inventory_DINS_2024_FRENCH.html">inventory map</a></td></tr>
           <tr><td>Line 2024</td><td><a href="inventory_DINS_2024_LINE.html">inventory map</a></td><td>Thompson 2024</td><td><a href="inventory_DINS_2024_THOMPSON.html">inventory map</a></td></tr>
           <tr><td>Coches 2 2025</td><td><a href="inventory_DINS_2025_COCHES.html">inventory map</a></td><td>Canyon 2025</td><td><a href="inventory_DINS_2025_CANYON.html">inventory map</a></td></tr>
-          <tr><td>Nixon 2024</td><td><a href="inventory_DINS_2024_NIXON.html">inventory map</a></td><td>Marshall CO 2021</td><td><a href="inventory_CO_2021_MARSHALL.html">inventory map</a></td></tr>
-          <tr><td>Camp 2018 (training fire)</td><td><a href="inventory_CA_2018_CAMP.html">inventory map</a></td><td>South Fork NM 2024</td><td>— no map published</td></tr>
+          <tr><td>Nixon 2024</td><td><a href="inventory_DINS_2024_NIXON.html">inventory map</a></td><td>South Fork NM 2024</td><td><a href="inventory_NM_2024_SOUTH_FORK.html">inventory map</a></td></tr>
+          <tr><td>Marshall CO 2021 (outside the dataset)</td><td><a href="inventory_CO_2021_MARSHALL.html">inventory map</a></td><td>Camp 2018 (a detector training fire)</td><td><a href="inventory_CA_2018_CAMP.html">inventory map</a></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>scripts/qa_maps.py</code>, generated 2026-09-10 and
-    2026-09-11 from each fire's <code>outputs/inventory/&lt;unit&gt;/structures_damage.gpkg</code>.
-    The maps recompute nothing: every number they show is read from the JSON the pipeline stage
-    wrote, or counted off the rows being drawn.</p>
+    <p class="src"><b>Source:</b> <code>scripts/qa_maps.py</code>, from each fire's
+    <code>outputs/inventory/&lt;unit&gt;/structures_damage.gpkg</code>, regenerated 2026-09-13.
+    The maps recompute nothing: every number they show is read from the file the pipeline stage
+    wrote, or counted off the rows being drawn. The sixteen <em>retrospective</em> fires have
+    maps of their own, linked from
+    <a href="retrospective.html">running the pipeline backwards</a>.</p>
   </div>
 </section>
 
@@ -790,7 +793,7 @@
       <a href="outside-california.html">outside California</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's perimeter frame,
     damage model <code>damage_sentinel2_v5</code> at the fixed cut 0.85, advisory rule
-    <code>expected_f1_isotonic_direct</code>, release <code>v0.4.1</code>, data date
+    <code>expected_f1_isotonic_direct</code>, release <code>v0.5.0</code>, data date
     2026-09-12.</p>
   </div>
 </footer>

@@ -382,21 +382,37 @@
     <h1>One layer, two eras</h1>
     <p class="lede">The USGS Carlson building-loss record and this pipeline's per-fire products,
     harmonised onto one schema, one row per structure per fire — so a user reads a single file
-    instead of joining two datasets and discovering the joins do not work. This page is what is
-    inside the release, and the six ways the two halves are not equivalent.</p>
+    instead of joining two datasets and discovering the joins do not work. Sixteen fires are now
+    described by <em>both</em> methods. This page is what is inside the release, and the ways the
+    two halves are not equivalent.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>What you get, 12 September 2026</h3>
-    <p><strong>One file, 376 fires, 1,922,889 rows, one row per structure per fire.</strong>
-    361 of those fires are the 2002–2022 hand survey, carried verbatim — 1,770,939 rows — and
-    fifteen are California fires of 2024–2025 this pipeline produced. Every row says which half
-    it came from, and a field only one half can fill is left null on the other rather than
-    back-filled.</p>
-    <p>The internal build is 1,939,136 rows; 16,247 of them are dropped from the released
-    package for a licence reason set out at the bottom of this page.</p>
+    <h3>What you get, 13 September 2026</h3>
+    <p><strong>One file, 377 fires, 2,062,248 rows, one row per structure per fire per
+    source.</strong> 361 of those fires are the 2002–2022 hand survey, carried verbatim —
+    1,770,939 rows. Sixteen are fires of 2024–2025 this pipeline produced. And sixteen more are
+    fires the survey already covers that this pipeline has now <em>also</em> enumerated, so they
+    are described <strong>twice</strong>, once by each method.</p>
+    <p>The internal build is 2,093,672 rows; 31,424 of them (1.50 %) are dropped from the
+    released package for a licence reason set out at the bottom of this page.</p>
+    <div class="note warn">
+      <p><strong>⚠️ The row unit is now (fire, source), and the two descriptions of a
+      dual-source fire must never be summed.</strong> Neither is a subset of the other: one is
+      the survey's hand enumeration of a fire's buildings, the other is this pipeline's
+      independent inventory of the same buildings. <strong>Group by
+      <code>(fire_id, series_source)</code>; a pooled count over an era picks one source.</strong>
+      The building identifier is namespaced per source so nothing in the schema can collapse
+      them, and the fire identifier is deliberately the same on both sides so the two
+      descriptions are visibly of one fire. The layer holds <strong>393</strong> such pairs over
+      377 fires, and a test refuses a summary that aggregates across them.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/releases/v0.5.0/manifest.json</code> <code>rule_5b</code> and
+      <code>dual_source_rule</code>; <code>docs/combined-series-spec.md</code> rule 5b, enforced
+      by <code>slp.eval.combined_series.assert_no_cross_source_aggregation</code>.</p>
+    </div>
   </div>
 </div>
 
@@ -410,25 +426,28 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption><code>combined_structures.gpkg</code> — 47 columns, EPSG:5070</caption>
-        <thead><tr><th>Era</th><th>Source</th><th class="num">Fires</th><th class="num">Rows</th><th class="num">Destroyed, primary call</th><th class="num">Destroyed, advisory call</th><th class="num">No call</th></tr></thead>
+        <caption><code>combined_structures.gpkg</code> — 57 columns, EPSG:5070, one row per
+        structure per fire per source. The internal build is what every number this project
+        reports about itself is computed on; the released package is that minus the licence
+        exclusion.</caption>
+        <thead><tr><th>Era</th><th>Source</th><th class="num">Fires</th><th class="num">Rows built</th><th class="num">Rows released</th><th class="num">Destroyed, primary call</th><th class="num">Destroyed, advisory call</th><th class="num">No call</th></tr></thead>
         <tbody>
-          <tr><td><code>pre2016_carlson_only</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">160</td><td class="num">973,491</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
-          <tr><td><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">201</td><td class="num">797,448</td><td class="num" colspan="2">Carlson's own hand call</td><td class="num">0</td></tr>
-          <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">15</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">879</td></tr>
-          <tr class="total"><td>internal build</td><td>—</td><td class="num">376</td><td class="num">1,939,136</td><td class="num">73,534 + 14,504</td><td class="num">—</td><td class="num">879</td></tr>
-          <tr class="total"><td>released package, after the licence exclusion</td><td>—</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td><code>pre2016_carlson_only</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">160</td><td class="num">973,491</td><td class="num">973,491</td><td class="num" colspan="2">the survey's own hand call — 17,352 destroyed</td><td class="num">0</td></tr>
+          <tr><td rowspan="2"><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">201</td><td class="num">797,448</td><td class="num">797,448</td><td class="num" colspan="2">the survey's own hand call — 56,182 destroyed</td><td class="num">0</td></tr>
+          <tr><td><span class="era-tag slp">slp</span></td><td class="num">16</td><td class="num">144,968</td><td class="num">132,506</td><td class="num">8,860</td><td class="num">9,994</td><td class="num">459</td></tr>
+          <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">16</td><td class="num">177,765</td><td class="num">158,803</td><td class="num">15,242</td><td class="num">16,750</td><td class="num">879</td></tr>
+          <tr class="total"><td>the whole layer — 393 (fire, source) pairs</td><td>—</td><td class="num">377</td><td class="num">2,093,672</td><td class="num"><strong>2,062,248</strong></td><td class="num">73,534 hand + 24,102 ours</td><td class="num">26,744</td><td class="num">1,338</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/manifest.json</code>
-    (<code>n_rows_by_era</code>, <code>n_rows_by_series_source</code>) and
-    <code>per_fire_summary.csv</code>, summed by <code>series_source</code>; packaged row count
-    from <code>outputs/releases/v0.4.1/manifest.json</code>. Carlson's 73,534 destroyed is the
-    sum of its own hand <code>B</code> calls over all 361 fires and is not a model output. The
-    879 rows with no damage call are all Franklin 2024 rows ceded to Palisades 2025 by the
-    overlap-attribution rule, each carrying
-    <code>damage_null_reason = overlapped_by_DINS_2025_PALISADES</code>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code>
+    (<code>n_rows_by_era_and_series_source</code>, <code>n_fires_by_era_and_series_source</code>,
+    <code>odbl_exclusion</code>) and both copies of <code>per_fire_summary.csv</code> — the
+    internal one under <code>outputs/combined_series/</code> and the packaged one in the release
+    directory — grouped by <code>(era, series_source)</code>. The survey's 73,534 destroyed is
+    the sum of its own hand calls over all 361 fires and is not a model output. The 879 rows
+    with no damage call are Franklin 2024 rows ceded to a later fire by the overlap-attribution
+    rule, each carrying a reason.</p>
 
     <p>Every row carries <code>series_source</code> (<code>carlson</code> or <code>slp</code>),
     an <code>era</code> whose boundaries are <strong>sensor launch dates rather than
@@ -437,13 +456,22 @@
     null rather than faked.</strong> A field only one era can fill is null on the other side and
     is never back-filled.</p>
 
-    <p>The modern half is <strong>one detector, one frame and one damage model throughout</strong>,
-    and the build manifest <em>computes</em> that rather than asserting it:
-    <code>heterogeneity_warning</code> is null. <code>prob_source</code> says on every row
-    whether the call came from the production bundle scoring a fire it had never seen
-    (<code>production</code>, 32,997 rows) or from a leave-one-fire-out refit because the fire
-    sits in that bundle's own training pool (<code>lofo</code>, 135,200 rows).
-    <strong>An in-sample score is never shipped.</strong></p>
+    <p>Our half is <strong>one detector, one frame and one damage model throughout</strong>, and
+    the build manifest <em>computes</em> that rather than asserting it: the heterogeneity
+    warning is null and no fire is missing a damage call. A provenance column says on every row
+    whether the call came from the production model scoring a fire it had never seen or from a
+    leave-one-fire-out refit because the fire sits in that model's own training pool — which is
+    every one of the sixteen retrospective fires. <strong>An in-sample score is never
+    shipped.</strong></p>
+    <p><strong>Every one of the survey's 1,770,939 rows now also carries nine geometry
+    columns</strong> — which source produced the building's analysis polygon, how confident that
+    is, what kind of raster cell it owns, and whether the detector found it. Join coverage is
+    <strong>100.0000 %</strong> on all 361 fires, maximum coordinate displacement
+    <strong>1.3 × 10⁻⁸ m</strong>. What is behind them is
+    <a href="augmented-carlson.html">the augmented historical record</a>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code>
+    <code>augmented_geometry</code> and <code>augmented_geometry_coverage.csv</code> (361 rows,
+    minimum <code>fraction_joined</code> 1.0, tolerance 0.5 m).</p>
   </div>
 
   <div class="wide">
@@ -480,13 +508,14 @@
             is no before/after optical pair at 10 m. 160 fires, 973,491 points, all of them in
             the layer.</td></tr>
           <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>Carlson</td>
-            <td><strong>Yes, retrospectively.</strong> 201 fires, 797,448 points, all in the
-            layer as the survey published them. Sixteen of them have also been rebuilt our way
-            as an experiment — <a href="retrospective.html">running the pipeline backwards</a> —
-            and those rebuilds are deliberately <em>not</em> rows here.</td></tr>
+            <td><strong>Yes, and sixteen of them now are.</strong> 201 fires and 797,448 points
+            as the survey published them, plus our own inventory of sixteen of those fires —
+            144,968 rows — so each of those sixteen is described twice. This is the only ground
+            the two methods can be compared on: <a href="retrospective.html">running the pipeline
+            backwards</a>.</td></tr>
           <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline</td>
-            <td>Carlson stops at 2022. 2023 itself is empty — no CAL FIRE DINS incident that
-            year clears 100 inspections.</td></tr>
+            <td>The survey stops at 2022. 16 fires, 177,765 points. 2023 itself is empty — no
+            inspection incident that year clears 100 inspections.</td></tr>
         </tbody>
       </table>
     </div>
@@ -514,35 +543,38 @@
   <div class="wide">
     <div class="tablewrap">
       <table>
-        <caption>Carlson's half — 361 fires, carried verbatim</caption>
+        <caption>The survey's half — 361 fires, carried verbatim, now with a geometry on
+        every row</caption>
         <thead><tr><th>Era</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Destroyed</th><th class="num">Surviving</th><th class="num">Direct</th><th class="num">Indirect</th></tr></thead>
         <tbody>
-          <tr><td>pre-2016 (2002–2015)</td><td class="num">160</td><td class="num">973,491</td><td class="num" colspan="4">included in the totals below</td></tr>
-          <tr><td>2016–2022</td><td class="num">201</td><td class="num">797,448</td><td class="num" colspan="4">included in the totals below</td></tr>
+          <tr><td>pre-2016 (2002–2015)</td><td class="num">160</td><td class="num">973,491</td><td class="num">17,352</td><td class="num">956,139</td><td class="num">122,420</td><td class="num">851,071</td></tr>
+          <tr><td>2016–2022</td><td class="num">201</td><td class="num">797,448</td><td class="num">56,182</td><td class="num">741,266</td><td class="num">171,789</td><td class="num">625,659</td></tr>
           <tr class="total"><td>all 361 fires, 2002–2022, 26 states</td><td class="num">361</td><td class="num">1,770,939</td><td class="num">73,534</td><td class="num">1,697,405</td><td class="num">294,209</td><td class="num">1,476,730</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_series/per_fire_summary.csv</code>,
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/per_fire_summary.csv</code>,
     the 361 rows with <code>series_source = carlson</code>, summed. Every one is
-    <code>n_major = n_structures</code> and <code>n_minor = 0</code>: Carlson counted major
-    buildings only and carries no size attribute. <code>inventory_source</code> is
-    <code>carlson_release</code> and <code>damage_source</code> is <code>carlson_manual</code>
-    on all 361; the adaptive columns are zero, because a hand call has no threshold.</p>
+    <code>n_major = n_structures</code> and <code>n_minor = 0</code>: the survey counted major
+    buildings only and carries no size attribute. The advisory columns are zero on all 361,
+    because a hand call has no threshold. <strong>None of these rows is excluded by the
+    licence</strong> — the exclusion only touches rows our detector's footprint prior
+    sourced.</p>
 
     <details class="more">
-      <summary>Every one of the fifteen modern fires, with both destroyed counts</summary>
+      <summary>Every one of the sixteen modern fires, with both destroyed counts</summary>
       <div class="tablewrap">
         <table>
-          <caption>Our fifteen fires — primary call at the fixed threshold 0.85, advisory call
-          at each fire's own near-perimeter threshold, inventory on the perimeter frame from 2022
-          aerial imagery</caption>
+          <caption>Our sixteen modern fires — primary call at the fixed threshold 0.85,
+          advisory call at each fire's own near-perimeter threshold, inventory on each fire's
+          own public-perimeter frame</caption>
           <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, primary</th><th class="num">Destroyed, advisory</th><th class="num">Advisory threshold</th><th class="num">Licence-excluded</th><th class="num">Released</th><th>Score</th></tr></thead>
           <tbody>
             <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">6,336</td><td class="num">57,983</td><td><span class="era-tag slp">lofo</span></td></tr>
             <tr><td>Palisades 2025</td><td class="num">2025-01-07</td><td class="num">28,837</td><td class="num">27,608</td><td class="num">1,229</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">2,269</td><td class="num">26,568</td><td><span class="era-tag slp">lofo</span></td></tr>
             <tr><td>Mountain 2024</td><td class="num">2024-11-06</td><td class="num">23,241</td><td class="num">22,551</td><td class="num">690</td><td class="num">262</td><td class="num">379</td><td class="num">0.661</td><td class="num">1,186</td><td class="num">22,055</td><td><span class="era-tag slp">lofo</span></td></tr>
             <tr><td>Line 2024</td><td class="num">2024-09-05</td><td class="num">11,892</td><td class="num">11,410</td><td class="num">482</td><td class="num">15</td><td class="num">22</td><td class="num">0.637</td><td class="num">2,420</td><td class="num">9,472</td><td><span class="era-tag carlson">production</span></td></tr>
+            <tr><td>South Fork NM 2024</td><td class="num">2024-06-17</td><td class="num">9,568</td><td class="num">9,180</td><td class="num">388</td><td class="num">738</td><td class="num">799</td><td class="num">0.756</td><td class="num">2,715</td><td class="num">6,853</td><td><span class="era-tag carlson">production</span></td></tr>
             <tr><td>Coches 2 2025</td><td class="num">2025-09-08</td><td class="num">7,463</td><td class="num">7,229</td><td class="num">234</td><td class="num">1</td><td class="num">4</td><td class="num">0.671</td><td class="num">456</td><td class="num">7,007</td><td><span class="era-tag carlson">production</span></td></tr>
             <tr><td>Thompson 2024</td><td class="num">2024-07-02</td><td class="num">5,969</td><td class="num">5,680</td><td class="num">289</td><td class="num">28</td><td class="num">33</td><td class="num">0.708</td><td class="num">432</td><td class="num">5,537</td><td><span class="era-tag carlson">production</span></td></tr>
             <tr><td>Airport 2024</td><td class="num">2024-09-09</td><td class="num">5,937</td><td class="num">5,775</td><td class="num">162</td><td class="num">127</td><td class="num">135</td><td class="num">0.782</td><td class="num">153</td><td class="num">5,784</td><td><span class="era-tag slp">lofo</span></td></tr>
@@ -554,21 +586,20 @@
             <tr><td>TCU Complex 2025</td><td class="num">2025-09-02</td><td class="num">2,070</td><td class="num">1,934</td><td class="num">136</td><td class="num">87</td><td class="num">98</td><td class="num">0.750</td><td class="num">297</td><td class="num">1,773</td><td><span class="era-tag slp">lofo</span></td></tr>
             <tr><td>French 2024</td><td class="num">2024-07-04</td><td class="num">1,609</td><td class="num">1,491</td><td class="num">118</td><td class="num">5</td><td class="num">14</td><td class="num">0.655</td><td class="num">151</td><td class="num">1,458</td><td><span class="era-tag carlson">production</span></td></tr>
             <tr><td>Nixon 2024</td><td class="num">2024-07-29</td><td class="num">813</td><td class="num">681</td><td class="num">132</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">198</td><td class="num">615</td><td><span class="era-tag carlson">production</span></td></tr>
-            <tr class="total"><td>fifteen fires</td><td class="num">—</td><td class="num">168,197</td><td class="num">156,430</td><td class="num">11,767</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">16,247</td><td class="num">151,950</td><td>—</td></tr>
+            <tr class="total"><td>sixteen fires</td><td class="num">—</td><td class="num">177,765</td><td class="num">165,610</td><td class="num">12,155</td><td class="num">15,242</td><td class="num">16,750</td><td class="num">0.601–0.792</td><td class="num">18,962</td><td class="num">158,803</td><td>—</td></tr>
           </tbody>
         </table>
       </div>
     </details>
     <p class="src"><b>Source:</b> <code>outputs/combined_series/per_fire_summary.csv</code>,
-    the 15 rows with <code>series_source = slp</code> — <code>n_destroyed_adaptive</code> and
-    <code>destroyed_threshold_adaptive</code> are filled for the first time in
-    <code>v0.4.1</code>; the two right-hand columns from
-    <code>outputs/releases/v0.4.1/odbl_excluded_per_fire.csv</code>. <code>major</code> /
-    <code>minor</code> split at 50 m² of footprint — the project's own Carlson-compatible line.
-    Every fire's frame is its public perimeter and <code>frame_clip.csv</code> records
-    <strong>0 rows dropped outside the frame</strong> on all fifteen. Every one of the 168,197
-    points carries a complete pre and post observation count and <strong>0 were
-    refused</strong>.</p>
+    the 16 rows in the <code>2023_onward_slp</code> era; the two right-hand columns from
+    <code>outputs/releases/v0.5.0/odbl_excluded_per_fire.csv</code>. <code>major</code> /
+    <code>minor</code> split at 50 m² of footprint — the project's own line, matching the
+    survey's definition of a building. Every fire's frame is its public perimeter, and every one
+    of the 177,765 points carries a complete pre and post observation count. The sixteen
+    <em>retrospective</em> fires — this pipeline run on fires the survey already covers — are a
+    separate 144,968 rows, and what they measure is on
+    <a href="retrospective.html">running the pipeline backwards</a>.</p>
   </div>
 </section>
 
@@ -714,8 +745,9 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> the three truth counts and the two ICS-209 ratios from
-    <code>outputs/ics209_check/summary.json</code>, <strong>re-run on <code>v0.4.1</code></strong>
-    (2026-09-12), so its prediction column is current: 14,504 predicted destroyed against 17,879
+    <code>outputs/ics209_check/summary.json</code>, generated 2026-09-12 over the fifteen
+    inspected California fires — South Fork NM is not among them and is not in any figure here:
+    14,504 predicted destroyed against 17,879
     ICS-209 is a ratio of <strong>0.811</strong>. 14 of the 15 fires matched an ICS-209 incident
     — Coches 2 (9 destroyed) never reached the national situation report. The adaptive count
     comes from <code>outputs/combined_series/per_fire_summary.csv</code>, which the ICS-209
@@ -896,24 +928,25 @@
 <section class="part">
   <div class="wide">
     <p class="eyebrow">05 · the crosswalk</p>
-    <h2>Six ways the two halves are not equivalent</h2>
+    <h2>Seven ways the two halves are not equivalent</h2>
   </div>
   <div class="wrap">
     <div class="tablewrap">
       <table>
         <thead><tr><th></th><th>Carlson, 2002–2022</th><th>This pipeline, 2023 onward</th></tr></thead>
         <tbody>
+          <tr><td><strong>The row unit</strong></td><td colspan="2">one row per structure <strong>per fire per source</strong>. Sixteen fires are described by both, and the two descriptions must never be summed — neither is a subset of the other</td></tr>
           <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
           <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the primary one) and <code>damage_class_adaptive</code> at a per-fire threshold running <strong>0.601–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the advisory threshold</td></tr>
           <tr><td><strong>Exposure class</strong></td><td>measured against a perimeter its authors digitised by hand</td><td>measured against the public perimeter named in <code>perimeter_source</code>, by the same 100 m / 2.4 km rule</td></tr>
-          <tr><td><strong>Geometry</strong></td><td>points</td><td>points, plus a 0.6 m probability raster Carlson has no analogue for — deliberately left out of the join</td></tr>
+          <tr><td><strong>Geometry</strong></td><td>points, and since <code>v0.5.0</code> an analysis polygon and a 0.6 m raster cell on every row, each recording its own source and confidence</td><td>points, plus the 0.6 m probability raster they were cut from</td></tr>
           <tr><td><strong>Fire identifiers</strong></td><td><code>MTBS_ID</code> on 359 of 361 fires, <code>IRWIN_ID</code> on 229</td><td>CAL FIRE <code>INCIDENTNUM</code>; <code>irwin_id</code> filled on 14 of 15 fires and <code>wfigs_unique_fire_id</code> on 13, by a deterministic lookup. <code>mtbs_id</code> is null on every row — MTBS runs about two seasons behind</td></tr>
           <tr><td><strong>Provenance and uncertainty</strong></td><td>no per-row uncertainty, <strong>and none is invented</strong></td><td><code>destroyed_prob</code>, <code>destroyed_prob_calibrated</code>, the threshold and the bundle behind the call</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §"Where the two are
-    NOT equivalent"; identifier fill from
+    NOT equivalent" and rule 5b; identifier fill from
     <code>outputs/combined_series/manifest.json</code> and
     <code>outputs/frames/fire_identifiers.csv</code>.</p>
 
@@ -970,35 +1003,38 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.4.1</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.5.0</code>, cut 2026-09-12</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>rows — internal build / released package</td><td class="num">1,939,136 / <strong>1,922,889</strong></td></tr>
-          <tr><td>fires</td><td class="num">376 — 361 Carlson, 15 ours</td></tr>
-          <tr><td>schema / CRS</td><td class="num">47 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">18 / 2,166.3 MB</td></tr>
-          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 17 of 17</td></tr>
+          <tr><td>rows — internal build / released package</td><td class="num">2,093,672 / <strong>2,062,248</strong></td></tr>
+          <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>393</strong> — 361 from the survey, 32 ours, 16 described by both</td></tr>
+          <tr><td>schema / CRS</td><td class="num">57 columns / EPSG:5070</td></tr>
+          <tr><td>files / size</td><td class="num">19 / 2,649.5 MB</td></tr>
+          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 18 of 18</td></tr>
+          <tr><td>geometry on the survey's rows</td><td class="num">9 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
-          <tr><td>gates</td><td class="num">all three clear, no override — <code>heterogeneity_warning</code> null, no stale bundle, no fire without a call</td></tr>
+          <tr><td>gates</td><td class="num">all three clear, no override — no heterogeneity warning, no stale damage model, no fire without a call</td></tr>
           <tr><td>DOI</td><td class="num">⚠️ none minted; the citation file keeps the slot</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.4.1/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code> and
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
+    nine new columns ships as its own companion archive,
+    <code>carlson_augmented_v0.1.0</code>, on its own version line.</p>
     <p><strong>MIT for the code, CC BY 4.0 for the data</strong>, copyright
     <strong>Carlo Broderick</strong>. One footprint source is ODbL-licensed, and the question is
     resolved by exclusion rather than by argument: every row whose geometry came from it is
-    dropped from the package —
-    <strong>16,247 of 1,939,136 rows (0.84 %)</strong>, all of them on our fifteen fires, which
-    is why the 2023+ half ships <strong>151,950</strong> rows rather than 168,197.</p>
+    dropped from the package — <strong>31,424 of 2,093,672 rows (1.50 %)</strong> across 28
+    (fire, source) pairs, every one of them ours. <strong>None of the survey's 1,770,939 rows is
+    touched.</strong></p>
     <div class="note warn">
       <p><strong>⚠️ The exclusion is uneven, and it is largest exactly where the footprint
-      database is weakest.</strong> It removes 2.6 % of Airport's rows and
-      <strong>24.4 %</strong> of Bridge's and Nixon's. A user counting structures from the
-      package on a rural fire is counting a filtered inventory; the internal build keeps those
-      rows and every performance number this project reports about itself is computed on the
-      full one.</p>
+      database is weakest.</strong> It removes 0.03 % of Atlas 2017's rows and
+      <strong>36.1 %</strong> of CZU 2020's, with South Fork NM at 28.4 % and Bridge 2024 at
+      24.4 %. A user counting structures from the package on a rural fire is counting a filtered
+      inventory; the internal build keeps those rows, and every performance number this project
+      reports about itself is computed on the full one.</p>
       <p>Microsoft footprints were also used as a <strong>training prior</strong> for the
       detector, which is a different act from redistribution: the network reads a raster band
       saying a footprint database has a building here, and the weights and every structure the
@@ -1019,8 +1055,8 @@
       <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="changelog.html">what changed</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.4.1</code>,
-    data date 2026-09-12. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.5.0</code>,
+    data date 2026-09-13. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
     user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>
   </div>
