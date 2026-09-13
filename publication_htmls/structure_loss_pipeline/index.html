@@ -450,13 +450,13 @@
 <div class="wide">
   <div class="stats">
     <div>
-      <span class="fig">2,062,248</span>
+      <span class="fig">2,069,752</span>
       <span class="cap">rows in the released dataset, one per building per fire per source</span>
-      <span class="from">releases/v0.6.0/manifest.json</span>
+      <span class="from">releases/v0.7.0/manifest.json</span>
     </div>
     <div>
       <span class="fig">377 fires</span>
-      <span class="cap">across 25 years, 2002–2025 — 361 from the hand survey, 32 from this pipeline, 16 described by both</span>
+      <span class="cap">across 25 years, 2002–2025 — 361 from the hand survey, 33 from this pipeline, 17 described by both</span>
       <span class="from">combined_series/manifest.json</span>
     </div>
     <div>
@@ -549,11 +549,11 @@
     <p class="eyebrow">status</p>
     <h2>Where the project is, 13 September 2026</h2>
     <div class="status">
-      <p><strong>The published dataset is <code>v0.6.0</code>, cut on 2026-09-13 and
-      committed.</strong> Since <code>v0.5.0</code> the 2016–2022 era has stopped being
-      "capable, not done": sixteen fires the hand survey already covers have now been run through
-      this pipeline as well, and every one of the survey's 1,770,939 rows carries a building
-      polygon. Every number on this site is transcribed from a file the pipeline wrote, and the
+      <p><strong>The published dataset is <code>v0.7.0</code>, cut on 2026-09-13 and
+      committed.</strong> The 2016–2022 era has stopped being "capable, not done":
+      <strong>seventeen</strong> fires the hand survey already covers have now been run through
+      this pipeline as well — every fire that was ever admitted except one — and each of the
+      survey's 1,770,939 rows carries a building polygon. Every number on this site is transcribed from a file the pipeline wrote, and the
       source line under each table names it.</p>
       <p><strong>Three caveats a first-time reader should carry.</strong></p>
       <ul class="tight">
@@ -563,19 +563,17 @@
         replacement — <a href="pipeline-overview.html#population">the deep dive</a> tells that
         story, and it is the most important caveat on this site.</li>
         <li><strong>A count from this pipeline is not a count from the hand survey.</strong> Run
-        end to end on sixteen of the survey's own fires it reports about 0.76 of its destroyed
-        count, that factor runs 0.48 to 1.80 fire to fire, and it is a net of a large miss and a
+        end to end on seventeen of the survey's own fires it reports about 0.77 of its
+        destroyed count, that factor runs 0.48 to 1.80 fire to fire, and it is a net of a large miss and a
         large addition — <a href="retrospective.html">running the pipeline backwards</a>. Those
-        sixteen fires are now in the file <em>twice</em>, once per method, and
+        seventeen fires are now in the file <em>twice</em>, once per method, and
         <strong>the two descriptions must never be summed</strong>.</li>
         <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
         cross-validated or leave-one-fire-out. The fix is time, and it waits on the next
         inspection archive.</li>
       </ul>
       <p><span class="pill flight">in progress · 13 September 2026</span> A literature review
-      feeding an improvement campaign, and Dixie 2021 — the one admitted retrospective fire still
-      without an inventory, at 3,959 km² the most expensive frame in the set. Neither has changed
-      a number on this site.</p>
+      feeding an improvement campaign. It has changed no number on this site.</p>
       <p>Upgrading from an earlier version, or holding an older number?
       <a href="changelog.html">What changed</a> is the dated list.</p>
     </div>
@@ -676,7 +674,7 @@
         every fire's building and destroyed counts, the licence exclusion per fire, our count
         against the inspectors' and the incident commander's, and the seven ways the two halves
         are not equivalent.</span>
-        <span class="when">v0.6.0 · 2026-09-13</span>
+        <span class="when">v0.7.0 · 2026-09-13</span>
       </a>
       <a href="augmented-carlson.html">
         <span class="t">The augmented historical record</span>
@@ -704,14 +702,14 @@
     <p class="groupname">Maps</p>
     <div class="cards">
       <div class="plain">
-        <span class="t">Per-fire inventory maps — 34 pages</span>
+        <span class="t">Per-fire inventory maps — 35 pages</span>
         <span class="d">The product itself: the pre-fire building list for one fire on its own
         perimeter frame, coloured by predicted destroyed probability and checked against the
-        inspection record. Sixteen are the modern fires, sixteen are the retrospective fires the
-        hand survey also covers, and two are reference fires outside the dataset. Linked per fire
+        inspection record. Sixteen are the modern fires, seventeen are the retrospective fires
+        the hand survey also covers, and two are reference fires outside the dataset. Linked per fire
         from <a href="forward-fires.html">fire by fire</a> and
         <a href="retrospective.html">running the pipeline backwards</a>.</span>
-        <span class="when">v0.6.0 · 2026-09-13</span>
+        <span class="when">v0.7.0 · 2026-09-13</span>
       </div>
       <div class="plain">
         <span class="t">Per-fire damage maps — 66 pages</span>
@@ -771,7 +769,7 @@
     for Data Science — literate scripts, one settings block, explicit filters, archive rather
     than delete, and a dated change record.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.6.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.7.0</code>,
     data date 2026-09-13.</p>
   </div>
 </footer>

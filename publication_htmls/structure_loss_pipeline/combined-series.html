@@ -391,12 +391,12 @@
 <div class="wrap">
   <div class="status">
     <h3>What you get, 13 September 2026</h3>
-    <p><strong>One file, 377 fires, 2,062,248 rows, one row per structure per fire per
+    <p><strong>One file, 377 fires, 2,069,752 rows, one row per structure per fire per
     source.</strong> 361 of those fires are the 2002–2022 hand survey, carried verbatim —
-    1,770,939 rows. Sixteen are fires of 2024–2025 this pipeline produced. And sixteen more are
-    fires the survey already covers that this pipeline has now <em>also</em> enumerated, so they
-    are described <strong>twice</strong>, once by each method.</p>
-    <p>The internal build is 2,093,672 rows; 31,424 of them (1.50 %) are dropped from the
+    1,770,939 rows. Sixteen are fires of 2024–2025 this pipeline produced. And seventeen more
+    are fires the survey already covers that this pipeline has now <em>also</em> enumerated, so
+    they are described <strong>twice</strong>, once by each method.</p>
+    <p>The internal build is 2,102,662 rows; 32,910 of them (1.57 %) are dropped from the
     released package for a licence reason set out at the bottom of this page.</p>
     <div class="note warn">
       <p><strong>⚠️ The row unit is now (fire, source), and the two descriptions of a
@@ -406,7 +406,7 @@
       <code>(fire_id, series_source)</code>; a pooled count over an era picks one source.</strong>
       The building identifier is namespaced per source so nothing in the schema can collapse
       them, and the fire identifier is deliberately the same on both sides so the two
-      descriptions are visibly of one fire. The layer holds <strong>393</strong> such pairs over
+      descriptions are visibly of one fire. The layer holds <strong>394</strong> such pairs over
       377 fires, and a test refuses a summary that aggregates across them.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
       <code>outputs/releases/v0.5.0/manifest.json</code> <code>rule_5b</code> and
@@ -434,9 +434,9 @@
         <tbody>
           <tr><td><code>pre2016_carlson_only</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">160</td><td class="num">973,491</td><td class="num">973,491</td><td class="num" colspan="2">the survey's own hand call — 17,352 destroyed</td><td class="num">0</td></tr>
           <tr><td rowspan="2"><code>2016_2022_carlson_slp_capable</code></td><td><span class="era-tag carlson">carlson</span></td><td class="num">201</td><td class="num">797,448</td><td class="num">797,448</td><td class="num" colspan="2">the survey's own hand call — 56,182 destroyed</td><td class="num">0</td></tr>
-          <tr><td><span class="era-tag slp">slp</span></td><td class="num">16</td><td class="num">144,968</td><td class="num">132,506</td><td class="num">8,860</td><td class="num">9,994</td><td class="num">459</td></tr>
+          <tr><td><span class="era-tag slp">slp</span></td><td class="num">17</td><td class="num">153,958</td><td class="num">140,010</td><td class="num">10,016</td><td class="num">11,162</td><td class="num">459</td></tr>
           <tr><td><code>2023_onward_slp</code></td><td><span class="era-tag slp">slp</span></td><td class="num">16</td><td class="num">177,765</td><td class="num">158,803</td><td class="num">15,242</td><td class="num">16,750</td><td class="num">879</td></tr>
-          <tr class="total"><td>the whole layer — 393 (fire, source) pairs</td><td>—</td><td class="num">377</td><td class="num">2,093,672</td><td class="num"><strong>2,062,248</strong></td><td class="num">73,534 hand + 24,102 ours</td><td class="num">26,744</td><td class="num">1,338</td></tr>
+          <tr class="total"><td>the whole layer — 394 (fire, source) pairs</td><td>—</td><td class="num">377</td><td class="num">2,102,662</td><td class="num"><strong>2,069,752</strong></td><td class="num">73,534 hand + 25,258 ours</td><td class="num">27,912</td><td class="num">1,338</td></tr>
         </tbody>
       </table>
     </div>
@@ -509,8 +509,8 @@
             the layer.</td></tr>
           <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>Carlson</td>
             <td><strong>Yes, and sixteen of them now are.</strong> 201 fires and 797,448 points
-            as the survey published them, plus our own inventory of sixteen of those fires —
-            144,968 rows — so each of those sixteen is described twice. This is the only ground
+            as the survey published them, plus our own inventory of seventeen of those fires —
+            153,958 rows — so each of those seventeen is described twice. This is the only ground
             the two methods can be compared on: <a href="retrospective.html">running the pipeline
             backwards</a>.</td></tr>
           <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline</td>
@@ -598,7 +598,7 @@
     survey's definition of a building. Every fire's frame is its public perimeter, and every one
     of the 177,765 points carries a complete pre and post observation count. The sixteen
     <em>retrospective</em> fires — this pipeline run on fires the survey already covers — are a
-    separate 144,968 rows, and what they measure is on
+    separate 153,958 rows over seventeen fires, and what they measure is on
     <a href="retrospective.html">running the pipeline backwards</a>.</p>
   </div>
 </section>
@@ -861,8 +861,8 @@
         <thead><tr><th>What was measured</th><th class="num">Fires</th><th class="num">Result</th></tr></thead>
         <tbody>
           <tr><td>the loss call alone, on the survey's own points, so the inventory is taken out of the question</td><td class="num">23<br>2016–2022</td><td class="num">agreement <strong>0.980</strong>, κ <strong>0.882</strong>, destroyed F1 <strong>0.893</strong>, AUC <strong>0.992</strong>, count ratio <strong>1.02</strong></td></tr>
-          <tr class="total"><td><strong>the whole pipeline end to end</strong> — find the buildings, then call the losses</td><td class="num">16<br>2016–2022</td><td class="num">destroyed count <strong>0.764</strong> of the survey's, per-fire range 0.48–1.80</td></tr>
-          <tr><td>does the bias drift with the year?</td><td class="num">16</td><td class="num"><strong>no</strong> — Spearman <strong>+0.098</strong>, p = 0.72</td></tr>
+          <tr class="total"><td><strong>the whole pipeline end to end</strong> — find the buildings, then call the losses</td><td class="num">17<br>2016–2022</td><td class="num">destroyed count <strong>0.769</strong> of the survey's, per-fire range 0.48–1.80</td></tr>
+          <tr><td>does the bias drift with the year?</td><td class="num">17</td><td class="num"><strong>no</strong> — Spearman <strong>+0.105</strong>, p = 0.69</td></tr>
         </tbody>
       </table>
     </div>
@@ -873,13 +873,13 @@
 
     <div class="note warn">
       <p><strong>⚠️ Three things follow for anyone plotting across the join.</strong></p>
-      <p><strong>1. Apply a factor of about 0.76 to a modern destroyed count before comparing it
+      <p><strong>1. Apply a factor of about 0.77 to a modern destroyed count before comparing it
       to a historical one — and do not treat that factor as stable.</strong> It runs 0.48 to
-      1.80 across sixteen fires and it tracks how well the buildings were found, not anything
+      1.80 across seventeen fires and it tracks how well the buildings were found, not anything
       about the loss model.</p>
-      <p><strong>2. It is a net of a large miss and a large addition.</strong> We recover 5,767
-      of the survey's 9,783 destroyed buildings in region and add 1,711 destroyed calls on
-      structures it did not record as destroyed, 877 of them on buildings it never enumerated at
+      <p><strong>2. It is a net of a large miss and a large addition.</strong> We recover 6,451
+      of the survey's 10,808 destroyed buildings in region and add 1,862 destroyed calls on
+      structures it did not record as destroyed, 970 of them on buildings it never enumerated at
       all. The two partly cancel.</p>
       <p><strong>3. The threat to a trend is composition, not time.</strong> The bias does not
       drift with the year; it drifts with the fire, and it tracks how much of a fire's building
@@ -899,16 +899,16 @@
     </div>
 
     <h3>The structure count, on the same ground</h3>
-    <p>Sixteen fires, each inventoried by this pipeline on its own perimeter with only
+    <p>Seventeen fires, each inventoried by this pipeline on its own perimeter with only
     pre-fire footprints, and counted inside the region the survey, the inspectors and this
-    pipeline all saw — <strong>36,984 survey buildings, 29,357 inspection records and 32,249 of
+    pipeline all saw — <strong>40,266 survey buildings, 33,047 inspection records and 35,045 of
     ours</strong>.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Quantity, 16 fires 2016–2022</th><th class="num">Range</th><th class="num">Median</th></tr></thead>
+        <thead><tr><th>Quantity, 17 fires 2016–2022</th><th class="num">Range</th><th class="num">Median</th></tr></thead>
         <tbody>
-          <tr><td>share of the survey's buildings our inventory finds, at 10 m</td><td class="num">0.588 – 0.912</td><td class="num">0.771</td></tr>
-          <tr><td>share of ours that is a survey building</td><td class="num">0.831 – 0.963</td><td class="num">0.884</td></tr>
+          <tr><td>share of the survey's buildings our inventory finds, at 10 m</td><td class="num">0.588 – 0.912</td><td class="num">0.768</td></tr>
+          <tr><td>share of ours that is a survey building</td><td class="num">0.831 – 0.963</td><td class="num">0.886</td></tr>
           <tr class="total"><td><strong>inspectors' destroyed count ÷ the survey's</strong></td><td class="num">0.82 – 1.84</td><td class="num"><strong>1.24</strong></td></tr>
         </tbody>
       </table>
@@ -916,7 +916,7 @@
     <p class="src"><b>Source:</b>
     <code>outputs/combined_retrospective/counts_on_the_same_ground.{csv,json}</code>, 2026-09-12.
     Region = within 250 m of both a survey point and an inspection record.</p>
-    <p><strong>The two truth sources disagree with each other by up to 1.8×, on 12 of 16 fires
+    <p><strong>The two truth sources disagree with each other by up to 1.8×, on 13 of 17 fires
     in the same direction.</strong> Inspectors count mobile homes, second dwellings and
     outbuildings the survey never counted, and several inspection records can sit on one
     building. <strong>A modern count validated against inspections is not in the survey's
@@ -1003,13 +1003,13 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.6.0</code>, cut 2026-09-13</caption>
+        <caption>Release <code>v0.7.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>rows — internal build / released package</td><td class="num">2,093,672 / <strong>2,062,248</strong></td></tr>
-          <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>393</strong> — 361 from the survey, 32 ours, 16 described by both</td></tr>
+          <tr><td>rows — internal build / released package</td><td class="num">2,102,662 / <strong>2,069,752</strong></td></tr>
+          <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>394</strong> — 361 from the survey, 33 ours, 17 described by both</td></tr>
           <tr><td>schema / CRS</td><td class="num">58 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">20 / 2,663.5 MB</td></tr>
+          <tr><td>files / size</td><td class="num">20 / 2,672.5 MB</td></tr>
           <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 19 of 19</td></tr>
           <tr><td>geometry on the survey's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>what documents the build</td><td class="num"><code>build-manifest.json</code> beside <code>manifest.json</code> — the stage's own record and the package's, no longer the same file</td></tr>
@@ -1019,21 +1019,21 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.6.0/manifest.json</code> and
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.7.0/manifest.json</code> and
     <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
     ten columns ships as its own companion archive, <code>carlson_augmented_v0.1.0</code>, on
     its own version line.</p>
     <p><strong>MIT for the code, CC BY 4.0 for the data</strong>, copyright
     <strong>Carlo Broderick</strong>. One footprint source is ODbL-licensed, and the question is
     resolved by exclusion rather than by argument: every row whose geometry came from it is
-    dropped from the package — <strong>31,424 of 2,093,672 rows (1.50 %)</strong> across 28
+    dropped from the package — <strong>32,910 of 2,102,662 rows (1.57 %)</strong> across 29
     (fire, source) pairs, every one of them ours. <strong>None of the survey's 1,770,939 rows is
     touched.</strong></p>
     <div class="note warn">
       <p><strong>⚠️ The exclusion is uneven, and it is largest exactly where the footprint
       database is weakest.</strong> It removes 0.03 % of Atlas 2017's rows and
-      <strong>36.1 %</strong> of CZU 2020's, with South Fork NM at 28.4 % and Bridge 2024 at
-      24.4 %. A user counting structures from the package on a rural fire is counting a filtered
+      <strong>36.1 %</strong> of CZU 2020's, with South Fork NM at 28.4 % and Dixie 2021 at
+      16.5 %. A user counting structures from the package on a rural fire is counting a filtered
       inventory; the internal build keeps those rows, and every performance number this project
       reports about itself is computed on the full one.</p>
       <p>Microsoft footprints were also used as a <strong>training prior</strong> for the
@@ -1056,7 +1056,7 @@
       <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="changelog.html">what changed</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.6.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.7.0</code>,
     data date 2026-09-13. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
     user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

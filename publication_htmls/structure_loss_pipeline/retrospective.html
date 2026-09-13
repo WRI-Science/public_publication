@@ -387,14 +387,14 @@
   <div class="status">
     <h3>What this page tells you</h3>
     <p><strong>Take a destroyed count from this pipeline for a fire in the Carlson era and you
-    get about three-quarters of what Carlson reported — and the missing quarter is buildings we
-    never found, not buildings we mis-called.</strong> That factor is roughly flat across
+    get about three-quarters of what the survey reported — and the missing quarter is buildings
+    we never found, not buildings we mis-called.</strong> That factor is roughly flat across
     2016–2022 and it is noisy from fire to fire, so a trend across the 2022/2023 boundary is
     threatened by <em>which</em> fires are in each half, not by <em>when</em> they burned.</p>
-    <p>Sixteen California fires were rebuilt end to end on their own public perimeters, with
+    <p>Seventeen California fires were rebuilt end to end on their own public perimeters, with
     only footprints that predate each fire, and scored against the survey's own census.
-    Twenty-three carry the damage half. <strong>All sixteen are now rows in the published
-    dataset</strong> — 144,968 of them — beside the survey's own description of the same fires,
+    Twenty-three carry the damage half. <strong>All seventeen are now rows in the published
+    dataset</strong> — 153,958 of them — beside the survey's own description of the same fires,
     which is why the release carries a rule against summing the two.</p>
   </div>
 </div>
@@ -423,7 +423,7 @@
         <caption>Eighty-three candidate fires, one verdict each</caption>
         <thead><tr><th>Outcome</th><th class="num">Fires</th><th>Why</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong>admitted</strong></td><td class="num"><strong>18</strong></td><td>all seven years, 2016 to 2022</td></tr>
+          <tr class="total"><td><strong>admitted</strong></td><td class="num"><strong>18</strong></td><td>all seven years, 2016 to 2022 — <strong>seventeen were built</strong>, and the one that was not is the footprint-vintage case below</td></tr>
           <tr><td>too few buildings on one side</td><td class="num">42</td><td>fewer than 100 destroyed or 100 surviving in Carlson's own census</td></tr>
           <tr><td>no usable inspection record</td><td class="num">2</td><td>no incident reaching 100 inspections</td></tr>
           <tr><td>the inspection covers more than this fire</td><td class="num">4</td><td>the inspectors file two fires as one incident, so its count belongs to both</td></tr>
@@ -438,12 +438,13 @@
     the survey spell the same fire differently.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ Six of the sixteen rebuilt fires are fires the detector was trained
+      <p><strong>⚠️ Six of the seventeen rebuilt fires are fires the detector was trained
       on</strong> — Creek 2020, Zogg 2020, Fawn 2021, McKinney 2022, Oak 2022 and Mill 2022 —
       and they score higher: mean recall <strong>0.792</strong> against <strong>0.751</strong>
-      on the ten it never saw, and the detector's own contribution is <strong>+1.4</strong>
-      points there against <strong>+5.5</strong> here. Read the six as an optimistic bound and
-      the ten as the out-of-sample number. Every row of the per-fire file carries the flag.</p>
+      on the ten it never saw when that comparison was made, and the detector's own contribution
+      is <strong>+1.4</strong> points there against <strong>+5.5</strong> here. Read the six as
+      an optimistic bound and the rest as the out-of-sample number. Every row of the per-fire
+      file carries the flag, and Dixie 2021 — the seventeenth — is not one of them.</p>
     </div>
   </div>
 </section>
@@ -482,8 +483,8 @@
     rather than a year one: Kern County's whole extract was derived from scenes taken five and
     six weeks <em>after</em> the Erskine fire, so Erskine has no pre-fire footprint at all and
     the pipeline refused to build it. Lake County, two months later in the same year, keeps
-    89.6 %. Seventeen of the eighteen admitted fires have an inventory; Erskine is the one that
-    does not, and that is a finding rather than a shortfall.</p>
+    89.6 %. <strong>Seventeen of the eighteen admitted fires now have an inventory, and Erskine
+    is the only one that does not</strong> — a finding rather than a shortfall.</p>
   </div>
 </section>
 
@@ -501,57 +502,69 @@
     building, inside the region both datasets looked at.</p>
     <div class="tablewrap">
       <table>
-        <caption>Sixteen Carlson-era fires, scored end to end</caption>
+        <caption>Seventeen Carlson-era fires, scored end to end</caption>
         <thead><tr><th>Quantity</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>fires</td><td class="num">16</td></tr>
-          <tr><td>matched pairs</td><td class="num">28,402</td></tr>
-          <tr><td>Carlson buildings called destroyed, in region</td><td class="num">9,783</td></tr>
-          <tr><td>our destroyed calls, in region</td><td class="num">7,478</td></tr>
-          <tr class="total"><td><strong>destroyed count, ours ÷ Carlson's</strong></td><td class="num"><strong>0.764</strong></td></tr>
+          <tr><td>fires</td><td class="num">17</td></tr>
+          <tr><td>matched pairs</td><td class="num">30,879</td></tr>
+          <tr><td>survey buildings called destroyed, in region</td><td class="num">10,808</td></tr>
+          <tr><td>our destroyed calls, in region</td><td class="num">8,313</td></tr>
+          <tr class="total"><td><strong>destroyed count, ours ÷ the survey's</strong></td><td class="num"><strong>0.769</strong></td></tr>
           <tr><td>per-fire range</td><td class="num">0.476 (Ranch 2018) – 1.796 (Zogg 2020)</td></tr>
-          <tr><td>detection recall at 10 m, pooled</td><td class="num">0.768</td></tr>
-          <tr><td>on matched pairs: destroyed precision / recall</td><td class="num">0.874 / 0.871</td></tr>
-          <tr><td>on matched pairs: mean per-fire F1</td><td class="num">0.858 (0.633 – 0.949)</td></tr>
+          <tr><td>mean detection recall at 10 m</td><td class="num">0.765</td></tr>
+          <tr><td>on matched pairs: mean per-fire F1</td><td class="num">0.863 (0.633 – 0.949)</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/combined_retrospective/end_to_end.csv</code> and
-    <code>end_to_end.json</code>, sixteen fires, each scored by its own leave-one-fire-out fold
-    of the production damage model, 144,509 structures scored and 459 refused.</p>
+    <code>end_to_end.json</code>, seventeen fires, each scored by its own leave-one-fire-out
+    fold of the production damage model.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ That 0.764 is a net of two large and opposite errors, and reading it as
-      "we find 76 % of the destroyed buildings" is wrong.</strong> Our 7,478 destroyed calls
+      <p><strong>⚠️ That 0.769 is a net of two large and opposite errors, and reading it as
+      "we find 77 % of the destroyed buildings" is wrong.</strong> Our 8,313 destroyed calls
       break down like this:</p>
       <div class="tablewrap">
         <table>
           <thead><tr><th>Our destroyed calls in region</th><th class="num">Count</th></tr></thead>
           <tbody>
-            <tr><td>matched a building Carlson also called destroyed</td><td class="num">5,767</td></tr>
-            <tr><td>matched a building Carlson called <strong>surviving</strong></td><td class="num">834</td></tr>
-            <tr><td>matched <strong>no</strong> Carlson building at all</td><td class="num">877</td></tr>
-            <tr class="total"><td>total</td><td class="num">7,478</td></tr>
-            <tr><td>Carlson's destroyed buildings we did <strong>not</strong> call destroyed</td><td class="num">4,016</td></tr>
+            <tr><td>matched a building the survey also called destroyed</td><td class="num">6,451</td></tr>
+            <tr><td>matched a building the survey called <strong>surviving</strong></td><td class="num">892</td></tr>
+            <tr><td>matched <strong>no</strong> survey building at all</td><td class="num">970</td></tr>
+            <tr class="total"><td>total</td><td class="num">8,313</td></tr>
+            <tr><td>the survey's destroyed buildings we did <strong>not</strong> call destroyed</td><td class="num">4,357</td></tr>
           </tbody>
         </table>
       </div>
-      <p>So we actually recover <strong>5,767 of Carlson's 9,783 destroyed buildings — 59 %
-      </strong> — and add <strong>1,711 calls</strong> on structures Carlson did not record as
-      destroyed, 877 of them on buildings it never enumerated at all: outbuildings below its
+      <p>So we actually recover <strong>6,451 of the survey's 10,808 destroyed buildings —
+      60 %</strong> — and add <strong>1,862 calls</strong> on structures it did not record as
+      destroyed, 970 of them on buildings it never enumerated at all: outbuildings below its
       definition, or buildings it missed. The two errors partly cancel and the aggregate count
       looks better than either half. <strong>This is the single most important caveat this
       experiment produces, and it is invisible in any total.</strong></p>
       <p class="src" style="margin-bottom:0"><b>Source:</b> the four decomposition columns of
-      <code>outputs/combined_retrospective/end_to_end.csv</code>, summed over the sixteen fires.</p>
+      <code>outputs/combined_retrospective/end_to_end.csv</code>, summed over the seventeen
+      fires.</p>
     </div>
 
-    <p><strong>The shortfall is detection, not damage.</strong> On the buildings we do find the
-    calls are good — pooled destroyed precision and recall agree with each other to three
-    thousandths, so the model is neither systematically over- nor under-calling on ground it can
-    see. The end-to-end ratio tracks detection recall at Spearman <strong>+0.550</strong>, and
-    the worst ratios are the worst-detected fires: Ranch 2018 (recall 0.620 → ratio 0.476),
-    Caldor 2021 (0.693 → 0.536), Nuns 2017 (0.668 → 0.595).</p>
+    <p><strong>The shortfall is detection, not damage.</strong> On the buildings we do find, the
+    calls are good, so the model is neither systematically over- nor under-calling on ground it
+    can see. The worst ratios are the worst-detected fires: Ranch 2018 (recall 0.620 → ratio
+    0.476), Caldor 2021 (0.693 → 0.536), Nuns 2017 (0.668 → 0.595).</p>
+    <div class="note ok">
+      <p><strong>The seventeenth fire moved nothing, which is the point of adding it.</strong>
+      Dixie 2021 is the largest frame in the cohort — 3,959 km² and 266 image quads — and it was
+      the one admitted fire still missing when this page was first written. Its own numbers are
+      among the best in the set: detection recall <strong>0.755</strong>, matched-pair F1
+      <strong>0.945</strong> on 2,477 pairs at AUC <strong>0.996</strong>, destroyed-count ratio
+      <strong>0.815</strong>. And <strong>not one published bound on this page moved</strong> —
+      the detection range is still 0.588–0.912, the precision range still 0.831–0.963, and the
+      end-to-end ratio went 0.764 → <strong>0.769</strong>. A cohort whose conclusions survive
+      its largest addition is a cohort worth quoting.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b>
+      <code>outputs/combined_retrospective/{end_to_end.csv,counts_on_the_same_ground.csv}</code>,
+      the <code>CA_2021_DIXIE</code> rows, 2026-09-13.</p>
+    </div>
     <p><strong>Zogg 2020 is the exception in both directions.</strong> It is the only fire that
     over-calls — ratio 1.796, 176 against 98 — and it carries the worst matched-pair numbers in
     the set by a wide margin (κ 0.494, F1 0.633, AUC 0.842). It is also the worst fire on the
@@ -572,8 +585,8 @@
 <text class="tick" x="574.3" y="20" text-anchor="middle">0.75</text>
 <line class="grid-line" x1="709.1" y1="26" x2="709.1" y2="181" />
 <text class="tick" x="709.1" y="20" text-anchor="middle">1.0</text>
-<line x1="582.1" y1="26" x2="582.1" y2="181" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
-<text class="tick" x="582.1" y="207" text-anchor="middle">all sixteen fires pooled: 0.76</text>
+<line x1="584.7" y1="26" x2="584.7" y2="181" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
+<text class="tick" x="584.7" y="207" text-anchor="middle">all seventeen fires pooled: 0.77</text>
 <text x="160" y="48.5" text-anchor="end">2016 · 1 fire</text>
 <rect x="170.0" y="37.0" width="471.2" height="13" rx="3" fill="var(--s1)" />
 <text class="val" x="648.2" y="48.5">0.87</text>
@@ -589,19 +602,19 @@
 <text x="160" y="132.5" text-anchor="end">2020 · 5 fires</text>
 <rect x="170.0" y="121.0" width="475.0" height="13" rx="3" fill="var(--s1)" />
 <text class="val" x="652.0" y="132.5">0.88</text>
-<text x="160" y="153.5" text-anchor="end">2021 · 2 fires</text>
-<rect x="170.0" y="142.0" width="311.6" height="13" rx="3" fill="var(--s1)" />
-<text class="val" x="488.6" y="153.5">0.58</text>
+<text x="160" y="153.5" text-anchor="end">2021 · 3 fires</text>
+<rect x="170.0" y="142.0" width="374.7" height="13" rx="3" fill="var(--s1)" />
+<text class="val" x="551.7" y="153.5">0.69</text>
 <text x="160" y="174.5" text-anchor="end">2022 · 3 fires</text>
 <rect x="170.0" y="163.0" width="403.3" height="13" rx="3" fill="var(--s1)" />
 <text class="val" x="580.3" y="174.5">0.75</text>
 <line class="axis" x1="170.0" y1="181" x2="790.0" y2="181" />
 </svg>
       <figcaption><strong>The method's bias does not drift with the year — it drifts with the
-      fire.</strong> Destroyed count, ours ÷ Carlson's, pooled within each year. Spearman of the
-      per-fire ratio against the fire year is <strong>+0.098, p = 0.72</strong>: no trend. 2021
-      is the low year and 2020 the high one, four years apart in the wrong order for a story
-      about sensors or method drift. <span class="mono">Source:
+      fire.</strong> Destroyed count, ours ÷ the survey's, pooled within each year. Spearman of
+      the per-fire ratio against the fire year is <strong>+0.105, p = 0.69</strong>: no trend.
+      2017 is the low year and 2020 the high one, three years apart in the wrong order for a
+      story about sensors or method drift. <span class="mono">Source:
       <code>outputs/combined_retrospective/end_to_end.csv</code>, pooled by
       <code>fire_year</code>.</span></figcaption>
     </figure>
@@ -774,14 +787,14 @@
     <h2>How many of the survey's buildings the pipeline finds</h2>
   </div>
   <div class="wrap">
-    <p>Sixteen fires, each inventoried on its own public perimeter with only pre-fire
-    footprints, and scored against Carlson's complete enumeration on ground all three datasets
-    saw: <strong>36,984 Carlson buildings, 29,357 inspection records and 32,249 of ours</strong>.</p>
+    <p>Seventeen fires, each inventoried on its own public perimeter with only pre-fire
+    footprints, and scored against the survey's complete enumeration on ground all three datasets
+    saw: <strong>40,266 survey buildings, 33,047 inspection records and 35,045 of ours</strong>.</p>
     <details class="more">
-      <summary>Every one of the sixteen fires, building counts on the same ground</summary>
+      <summary>Every one of the seventeen fires, building counts on the same ground</summary>
       <div class="tablewrap">
         <table>
-          <caption>Sixteen Carlson-era fires, structure counts on the same ground</caption>
+          <caption>Seventeen Carlson-era fires, structure counts on the same ground</caption>
           <thead><tr><th>Fire</th><th class="num">Carlson</th><th class="num">Carlson destroyed</th><th class="num">Inspections</th><th class="num">Ours</th><th class="num">Recall @10 m</th><th class="num">Precision</th><th class="num">Inspected ÷ Carlson destroyed</th></tr></thead>
           <tbody>
             <tr><td>McKinney 2022</td><td class="num">398</td><td class="num">209</td><td class="num">342</td><td class="num">261</td><td class="num">0.588</td><td class="num">0.897</td><td class="num">0.84</td></tr>
@@ -789,6 +802,7 @@
             <tr><td>Nuns 2017</td><td class="num">3,518</td><td class="num">1,020</td><td class="num">1,542</td><td class="num">2,764</td><td class="num">0.668</td><td class="num">0.850</td><td class="num">1.33</td></tr>
             <tr><td>Caldor 2021</td><td class="num">3,891</td><td class="num">930</td><td class="num">4,338</td><td class="num">3,041</td><td class="num">0.693</td><td class="num">0.887</td><td class="num">1.07</td></tr>
             <tr><td>Creek 2020</td><td class="num">3,518</td><td class="num">675</td><td class="num">3,212</td><td class="num">2,959</td><td class="num">0.730</td><td class="num">0.868</td><td class="num">1.25</td></tr>
+            <tr><td>Dixie 2021</td><td class="num">3,282</td><td class="num">1,025</td><td class="num">3,690</td><td class="num">2,796</td><td class="num">0.755</td><td class="num">0.886</td><td class="num">1.24</td></tr>
             <tr><td>Clayton 2016</td><td class="num">747</td><td class="num">246</td><td class="num">327</td><td class="num">645</td><td class="num">0.760</td><td class="num">0.881</td><td class="num">1.22</td></tr>
             <tr><td>Kincade 2019</td><td class="num">2,831</td><td class="num">270</td><td class="num">1,509</td><td class="num">2,610</td><td class="num">0.766</td><td class="num">0.831</td><td class="num">1.27</td></tr>
             <tr><td>Carr 2018</td><td class="num">4,170</td><td class="num">1,668</td><td class="num">1,882</td><td class="num">3,464</td><td class="num">0.768</td><td class="num">0.924</td><td class="num">0.96</td></tr>
@@ -800,7 +814,7 @@
             <tr><td>Zogg 2020</td><td class="num">464</td><td class="num">98</td><td class="num">521</td><td class="num">441</td><td class="num">0.849</td><td class="num">0.893</td><td class="num">1.84</td></tr>
             <tr><td>Fawn 2021</td><td class="num">831</td><td class="num">124</td><td class="num">729</td><td class="num">795</td><td class="num">0.886</td><td class="num">0.926</td><td class="num">1.48</td></tr>
             <tr><td>Mill 2022</td><td class="num">520</td><td class="num">116</td><td class="num">309</td><td class="num">492</td><td class="num">0.912</td><td class="num">0.963</td><td class="num">1.02</td></tr>
-            <tr class="total"><td><strong>sixteen fires</strong></td><td class="num">36,984</td><td class="num">—</td><td class="num">29,357</td><td class="num">32,249</td><td class="num"><strong>0.588–0.912</strong><br>median 0.771</td><td class="num">0.831–0.963<br>median 0.884</td><td class="num">0.82–1.84<br>median 1.24</td></tr>
+            <tr class="total"><td><strong>seventeen fires</strong></td><td class="num">40,266</td><td class="num">—</td><td class="num">33,047</td><td class="num">35,045</td><td class="num"><strong>0.588–0.912</strong><br>median 0.768</td><td class="num">0.831–0.963<br>median 0.886</td><td class="num">0.82–1.84<br>median 1.24</td></tr>
           </tbody>
         </table>
       </div>
@@ -813,7 +827,7 @@
     <div class="note warn">
       <p><strong>⚠️ The two truth sources disagree with each other by up to 1.8×, and that is a
       definition problem, not an error.</strong> The inspectors record more destroyed structures
-      than the survey on <strong>12 of 16</strong> fires — up to 1.84× on Zogg — and fewer on
+      than the survey on <strong>13 of 17</strong> fires — up to 1.84× on Zogg — and fewer on
       four, down to 0.82× on Ranch. Inspectors count mobile homes, second dwellings and
       outbuildings the survey never counted, and several inspection records can sit on one
       building. A modern count validated against inspections is <strong>not in the survey's
@@ -823,18 +837,18 @@
 
   <div class="wide">
     <figure class="band">
-      <svg viewBox="0 0 860 416" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="268.2" y1="26" x2="268.2" y2="370" />
+      <svg viewBox="0 0 860 437" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="268.2" y1="26" x2="268.2" y2="391" />
 <text class="tick" x="268.2" y="20" text-anchor="middle">0.5</text>
-<line class="grid-line" x1="391.0" y1="26" x2="391.0" y2="370" />
+<line class="grid-line" x1="391.0" y1="26" x2="391.0" y2="391" />
 <text class="tick" x="391.0" y="20" text-anchor="middle">0.6</text>
-<line class="grid-line" x1="513.8" y1="26" x2="513.8" y2="370" />
+<line class="grid-line" x1="513.8" y1="26" x2="513.8" y2="391" />
 <text class="tick" x="513.8" y="20" text-anchor="middle">0.7</text>
-<line class="grid-line" x1="636.6" y1="26" x2="636.6" y2="370" />
+<line class="grid-line" x1="636.6" y1="26" x2="636.6" y2="391" />
 <text class="tick" x="636.6" y="20" text-anchor="middle">0.8</text>
-<line class="grid-line" x1="759.4" y1="26" x2="759.4" y2="370" />
+<line class="grid-line" x1="759.4" y1="26" x2="759.4" y2="391" />
 <text class="tick" x="759.4" y="20" text-anchor="middle">0.9</text>
-<text class="tick" x="784.0" y="396" text-anchor="end">share of Carlson&#x27;s buildings found, 10 m</text>
+<text class="tick" x="784.0" y="417" text-anchor="end">share of Carlson&#x27;s buildings found, 10 m</text>
 <text class="tick" x="854" y="20" text-anchor="end">points added</text>
 <text x="160" y="50.5" text-anchor="end">Ranch 2018</text>
 <line x1="249.3" y1="47.0" x2="531.5" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
@@ -876,47 +890,52 @@
 <circle cx="660.6" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="684.8" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="197.5" text-anchor="end">+2.0</text>
-<text x="160" y="218.5" text-anchor="end">Clayton 2016</text>
-<line x1="572.4" y1="215.0" x2="593.0" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="572.4" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="593.0" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="218.5" text-anchor="end">+1.7</text>
-<text x="160" y="239.5" text-anchor="end">McKinney 2022</text>
-<line x1="369.2" y1="236.0" x2="386.1" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="369.2" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="386.1" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="239.5" text-anchor="end">+1.4</text>
-<text x="160" y="260.5" text-anchor="end">North Complex 2020</text>
-<line x1="595.7" y1="257.0" x2="612.0" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="595.7" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="612.0" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="260.5" text-anchor="end">+1.3</text>
-<text x="160" y="281.5" text-anchor="end">CZU 2020</text>
-<line x1="651.9" y1="278.0" x2="665.9" y2="278.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="651.9" cy="278.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="665.9" cy="278.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="281.5" text-anchor="end">+1.1</text>
-<text x="160" y="302.5" text-anchor="end">Fawn 2021</text>
-<line x1="708.7" y1="299.0" x2="722.2" y2="299.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="708.7" cy="299.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="722.2" cy="299.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="160" y="218.5" text-anchor="end">Dixie 2021</text>
+<line x1="602.0" y1="215.0" x2="624.0" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="602.0" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="624.0" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="218.5" text-anchor="end">+1.8</text>
+<text x="160" y="239.5" text-anchor="end">Clayton 2016</text>
+<line x1="572.4" y1="236.0" x2="593.0" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="572.4" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="593.0" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="239.5" text-anchor="end">+1.7</text>
+<text x="160" y="260.5" text-anchor="end">McKinney 2022</text>
+<line x1="369.2" y1="257.0" x2="386.1" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="369.2" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="386.1" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="260.5" text-anchor="end">+1.4</text>
+<text x="160" y="281.5" text-anchor="end">North Complex 2020</text>
+<line x1="595.7" y1="278.0" x2="612.0" y2="278.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="595.7" cy="278.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="612.0" cy="278.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="281.5" text-anchor="end">+1.3</text>
+<text x="160" y="302.5" text-anchor="end">CZU 2020</text>
+<line x1="651.9" y1="299.0" x2="665.9" y2="299.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="651.9" cy="299.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="665.9" cy="299.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="302.5" text-anchor="end">+1.1</text>
-<text x="160" y="323.5" text-anchor="end">Zogg 2020</text>
-<line x1="679.4" y1="320.0" x2="691.2" y2="320.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="679.4" cy="320.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="691.2" cy="320.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="323.5" text-anchor="end">+1.0</text>
-<text x="160" y="344.5" text-anchor="end">Mill 2022</text>
-<line x1="707.7" y1="341.0" x2="719.7" y2="341.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="707.7" cy="341.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="719.7" cy="341.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="160" y="323.5" text-anchor="end">Fawn 2021</text>
+<line x1="708.7" y1="320.0" x2="722.2" y2="320.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="708.7" cy="320.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="722.2" cy="320.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="323.5" text-anchor="end">+1.1</text>
+<text x="160" y="344.5" text-anchor="end">Zogg 2020</text>
+<line x1="679.4" y1="341.0" x2="691.2" y2="341.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="679.4" cy="341.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="691.2" cy="341.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="344.5" text-anchor="end">+1.0</text>
-<text x="160" y="365.5" text-anchor="end">Glass 2020</text>
-<line x1="709.2" y1="362.0" x2="712.4" y2="362.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="709.2" cy="362.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="712.4" cy="362.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="365.5" text-anchor="end">+0.3</text>
-<line class="axis" x1="170.0" y1="370" x2="784.0" y2="370" />
+<text x="160" y="365.5" text-anchor="end">Mill 2022</text>
+<line x1="707.7" y1="362.0" x2="719.7" y2="362.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="707.7" cy="362.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="719.7" cy="362.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="365.5" text-anchor="end">+1.0</text>
+<text x="160" y="386.5" text-anchor="end">Glass 2020</text>
+<line x1="709.2" y1="383.0" x2="712.4" y2="383.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="709.2" cy="383.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="712.4" cy="383.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="386.5" text-anchor="end">+0.3</text>
+<line class="axis" x1="170.0" y1="391" x2="784.0" y2="391" />
 </svg>
       <ul class="legend">
         <li><span class="swatch" style="background:var(--s1)"></span>public footprint databases alone</li>
@@ -924,8 +943,9 @@
       </ul>
       <figcaption><strong>The detector earns its keep exactly where the footprint database is
       too young to trust.</strong> Against a complete census the detector adds a mean of
-      <strong>4.0 recall points</strong> — four times what it is worth against inspection
-      records — and up to <strong>23 points</strong> on Ranch 2018. The three largest gains are
+      <strong>3.8 recall points</strong> and a median of <strong>1.8</strong> — four times what
+      it is worth against inspection records — and up to <strong>23 points</strong> on Ranch
+      2018. The three largest gains are
       the three fires where the pre-ignition cutoff removes the most footprints, in that order.
       The correlation between the gain and the share of footprints that predate the fire is
       Spearman <strong>−0.672</strong>. <span class="mono">Source:
@@ -942,7 +962,7 @@
   <div class="wrap">
     <p>One self-contained page per fire: the pre-fire building list this pipeline produced,
     drawn on satellite imagery and coloured by predicted destroyed probability, with the
-    inspection record beside it. These are the sixteen rebuilt fires — the same buildings the
+    inspection record beside it. These are the seventeen rebuilt fires — the same buildings the
     hand survey enumerated by eye, so the two descriptions can be compared on the ground rather
     than in a table.</p>
     <div class="tablewrap">
@@ -955,8 +975,9 @@
           <tr><td>Creek 2020</td><td><a href="inventory_CA_2020_CREEK.html">inventory map</a></td><td>CZU 2020</td><td><a href="inventory_CA_2020_CZU_AUG_LIGHTNING.html">inventory map</a></td></tr>
           <tr><td>Glass 2020</td><td><a href="inventory_CA_2020_GLASS.html">inventory map</a></td><td>North Complex 2020</td><td><a href="inventory_CA_2020_NORTH_COMPLEX.html">inventory map</a></td></tr>
           <tr><td>Zogg 2020</td><td><a href="inventory_CA_2020_ZOGG.html">inventory map</a></td><td>Caldor 2021</td><td><a href="inventory_CA_2021_CALDOR.html">inventory map</a></td></tr>
-          <tr><td>Fawn 2021</td><td><a href="inventory_CA_2021_FAWN.html">inventory map</a></td><td>McKinney 2022</td><td><a href="inventory_CA_2022_MCKINNEY.html">inventory map</a></td></tr>
-          <tr><td>Mill 2022</td><td><a href="inventory_CA_2022_MILL.html">inventory map</a></td><td>Oak 2022</td><td><a href="inventory_CA_2022_OAK.html">inventory map</a></td></tr>
+          <tr><td>Dixie 2021</td><td><a href="inventory_CA_2021_DIXIE.html">inventory map</a></td><td>Fawn 2021</td><td><a href="inventory_CA_2021_FAWN.html">inventory map</a></td></tr>
+          <tr><td>McKinney 2022</td><td><a href="inventory_CA_2022_MCKINNEY.html">inventory map</a></td><td>Mill 2022</td><td><a href="inventory_CA_2022_MILL.html">inventory map</a></td></tr>
+          <tr><td>Oak 2022</td><td><a href="inventory_CA_2022_OAK.html">inventory map</a></td><td>—</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -973,24 +994,23 @@
     <p class="eyebrow">06 · what this does not settle</p>
     <h2>Four limits worth carrying away</h2>
     <ol class="tight">
-      <li><strong>These sixteen fires are now rows in the published dataset, and that makes a
+      <li><strong>These seventeen fires are now rows in the published dataset, and that makes a
       new mistake possible.</strong> Each is described twice — once by the hand survey, once by
       this pipeline — and <strong>the two descriptions must never be summed</strong>, because
       neither is a subset of the other. Group by fire <em>and</em> source; a pooled count over
       an era picks one. The building identifier is namespaced per source and a test refuses a
       summary that aggregates across them.</li>
-      <li><strong>Sixteen fires in one state is a small sample for a rank correlation</strong>,
-      2019 is a single fire, and every ratio is computed at one fixed threshold.</li>
-      <li><strong>Six of the sixteen are detector training fires</strong> and score higher. The
-      out-of-sample recall is the ten-fire figure, 0.751.</li>
-      <li><strong>Two fires are missing.</strong> Dixie 2021 has no inventory — its frame is
-      3,959 km² and needed a quarter of this experiment's entire imagery budget for one fire —
-      and Erskine 2016 has none for the footprint-vintage reason above.</li>
+      <li><strong>Seventeen fires in one state is a small sample for a rank correlation</strong>,
+      2016 and 2019 are single fires, and every ratio is computed at one fixed threshold.</li>
+      <li><strong>Six of the seventeen are detector training fires</strong> and score higher.
+      The out-of-sample recall is the eleven-fire figure, 0.751 when it was measured on ten.</li>
+      <li><strong>One admitted fire is still missing.</strong> Erskine 2016 has no inventory for
+      the footprint-vintage reason above, and no amount of compute fixes it. Dixie 2021, the
+      other one that used to be missing, landed after 266 image quads and is in.</li>
     </ol>
     <p class="src"><b>Source:</b> <code>docs/combined-series-spec.md</code> §§A, B, C and "How
     to use the series safely"; ledger rows <code>open-combined-retrospective</code>,
-    <code>open-combined-retrospective-series-rows</code>,
-    <code>open-combined-retrospective-dixie</code>, <code>open-uss-vintage-floor</code>.</p>
+    <code>open-combined-retrospective-series-rows</code>, <code>open-uss-vintage-floor</code>.</p>
   </div>
 </section>
 
@@ -1005,7 +1025,7 @@
       <a href="uncertainty.html">how wide the numbers are</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
     <code>damage_sentinel2_v5</code> for the end-to-end half and
-    <code>damage_sentinel2_v4</code> for the damage-only half, release <code>v0.6.0</code>.
+    <code>damage_sentinel2_v4</code> for the damage-only half, release <code>v0.7.0</code>.
     Outputs under <code>outputs/combined_retrospective/</code>, data date 2026-09-12.</p>
   </div>
 </footer>
