@@ -426,7 +426,7 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption><code>combined_structures.gpkg</code> — 57 columns, EPSG:5070, one row per
+        <caption><code>combined_structures.gpkg</code> — 58 columns, EPSG:5070, one row per
         structure per fire per source. The internal build is what every number this project
         reports about itself is computed on; the released package is that minus the licence
         exclusion.</caption>
@@ -463,11 +463,11 @@
     leave-one-fire-out refit because the fire sits in that model's own training pool — which is
     every one of the sixteen retrospective fires. <strong>An in-sample score is never
     shipped.</strong></p>
-    <p><strong>Every one of the survey's 1,770,939 rows now also carries nine geometry
+    <p><strong>Every one of the survey's 1,770,939 rows now also carries ten geometry
     columns</strong> — which source produced the building's analysis polygon, how confident that
-    is, what kind of raster cell it owns, and whether the detector found it. Join coverage is
-    <strong>100.0000 %</strong> on all 361 fires, maximum coordinate displacement
-    <strong>1.3 × 10⁻⁸ m</strong>. What is behind them is
+    is, what kind of raster cell it owns, <strong>how many cells it owns</strong>, and whether
+    the detector found it. Join coverage is <strong>100.0000 %</strong> on all 361 fires,
+    maximum coordinate displacement <strong>1.3 × 10⁻⁸ m</strong>. What is behind them is
     <a href="augmented-carlson.html">the augmented historical record</a>.</p>
     <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code>
     <code>augmented_geometry</code> and <code>augmented_geometry_coverage.csv</code> (361 rows,
@@ -939,7 +939,7 @@
           <tr><td><strong>What counts as a structure</strong></td><td>major buildings only; no size attribute</td><td>major and minor, tagged at 50 m² of footprint; both kept</td></tr>
           <tr><td><strong>The damage vocabulary</strong></td><td>a hand <code>B</code> / <code>U</code></td><td>a continuous probability plus <strong>two</strong> calls: <code>damage_class</code> at a fixed <strong>0.85</strong> (the primary one) and <code>damage_class_adaptive</code> at a per-fire threshold running <strong>0.601–0.792</strong>, each with its threshold recorded per row. ⚠️ Group by fire before comparing a probability to the advisory threshold</td></tr>
           <tr><td><strong>Exposure class</strong></td><td>measured against a perimeter its authors digitised by hand</td><td>measured against the public perimeter named in <code>perimeter_source</code>, by the same 100 m / 2.4 km rule</td></tr>
-          <tr><td><strong>Geometry</strong></td><td>points, and since <code>v0.5.0</code> an analysis polygon and a 0.6 m raster cell on every row, each recording its own source and confidence</td><td>points, plus the 0.6 m probability raster they were cut from</td></tr>
+          <tr><td><strong>Geometry</strong></td><td>points, and since <code>v0.5.0</code> an analysis polygon and a 0.6 m raster cell on every row, each recording its own source, confidence and cell count</td><td>points, plus the 0.6 m probability raster they were cut from</td></tr>
           <tr><td><strong>Fire identifiers</strong></td><td><code>MTBS_ID</code> on 359 of 361 fires, <code>IRWIN_ID</code> on 229</td><td>CAL FIRE <code>INCIDENTNUM</code>; <code>irwin_id</code> filled on 14 of 15 fires and <code>wfigs_unique_fire_id</code> on 13, by a deterministic lookup. <code>mtbs_id</code> is null on every row — MTBS runs about two seasons behind</td></tr>
           <tr><td><strong>Provenance and uncertainty</strong></td><td>no per-row uncertainty, <strong>and none is invented</strong></td><td><code>destroyed_prob</code>, <code>destroyed_prob_calibrated</code>, the threshold and the bundle behind the call</td></tr>
         </tbody>
@@ -1003,25 +1003,26 @@
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.5.0</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.6.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">2,093,672 / <strong>2,062,248</strong></td></tr>
           <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>393</strong> — 361 from the survey, 32 ours, 16 described by both</td></tr>
-          <tr><td>schema / CRS</td><td class="num">57 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">19 / 2,649.5 MB</td></tr>
-          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 18 of 18</td></tr>
-          <tr><td>geometry on the survey's rows</td><td class="num">9 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
+          <tr><td>schema / CRS</td><td class="num">58 columns / EPSG:5070</td></tr>
+          <tr><td>files / size</td><td class="num">20 / 2,663.5 MB</td></tr>
+          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 19 of 19</td></tr>
+          <tr><td>geometry on the survey's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
+          <tr><td>what documents the build</td><td class="num"><code>build-manifest.json</code> beside <code>manifest.json</code> — the stage's own record and the package's, no longer the same file</td></tr>
           <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td>gates</td><td class="num">all three clear, no override — no heterogeneity warning, no stale damage model, no fire without a call</td></tr>
           <tr><td>DOI</td><td class="num">⚠️ none minted; the citation file keeps the slot</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code> and
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.6.0/manifest.json</code> and
     <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
-    nine new columns ships as its own companion archive,
-    <code>carlson_augmented_v0.1.0</code>, on its own version line.</p>
+    ten columns ships as its own companion archive, <code>carlson_augmented_v0.1.0</code>, on
+    its own version line.</p>
     <p><strong>MIT for the code, CC BY 4.0 for the data</strong>, copyright
     <strong>Carlo Broderick</strong>. One footprint source is ODbL-licensed, and the question is
     resolved by exclusion rather than by argument: every row whose geometry came from it is
@@ -1055,7 +1056,7 @@
       <a href="augmented-carlson.html">the augmented historical record</a> ·
       <a href="changelog.html">what changed</a>.</p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.5.0</code>,
+    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.6.0</code>,
     data date 2026-09-13. The full crosswalk is <code>docs/combined-series-spec.md</code> and the
     user-facing document is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

@@ -412,6 +412,17 @@
         <thead><tr><th class="when">Date</th><th class="what">What changed</th><th>Why it matters to you</th></tr></thead>
         <tbody>
           <tr>
+            <td class="when">2026-09-13</td>
+            <td class="what">A wrong flag corrected, and the build's own record finally ships</td>
+            <td>The column saying whether a building owns any 60-centimetre raster cells was set
+            from the shape it was given rather than from the cells it ended up with, so it read
+            <strong>39,646</strong> where the truth is <strong>114,659</strong>. It is corrected,
+            and the count behind it now ships as its own column. Separately, the build stage's
+            manifest was being written and then silently overwritten by the package's: both now
+            ship, and the file table in the data descriptor is accurate for the first time. No
+            row, fire or loss call changed.</td>
+          </tr>
+          <tr>
             <td class="when">2026-09-12</td>
             <td class="what">Sixteen of the survey's own fires are now described twice</td>
             <td>The 2016–2022 era stops being "capable, not done": sixteen fires the hand survey
@@ -522,7 +533,8 @@
       <table>
         <thead><tr><th>Release</th><th class="when">Cut</th><th>What it is</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong><code>v0.5.0</code></strong></td><td class="when">2026-09-12</td><td><strong>current.</strong> 377 fires and 2,062,248 released rows. Sixteen of the survey's fires described twice, South Fork NM added to the modern half, and nine geometry columns on every one of the survey's rows. 57 columns, up from 47.</td></tr>
+          <tr class="total"><td><strong><code>v0.6.0</code></strong></td><td class="when">2026-09-13</td><td><strong>current.</strong> Same 377 fires, 2,062,248 rows and loss calls as <code>v0.5.0</code>. A corrected no-cell flag, a tenth geometry column, and the build stage's own manifest shipped beside the package's. 58 columns.</td></tr>
+          <tr><td><code>v0.5.0</code></td><td class="when">2026-09-12</td><td>377 fires and 2,062,248 released rows. Sixteen of the survey's fires described twice, South Fork NM added to the modern half, and nine geometry columns on every one of the survey's rows. 57 columns, up from 47.</td></tr>
           <tr><td><code>v0.4.1</code></td><td class="when">2026-09-12</td><td>a patch on <code>v0.4.0</code>: only the advisory column and its threshold changed.</td></tr>
           <tr><td><code>v0.4.0</code></td><td class="when">2026-09-12</td><td>the whole historical record, the optical-only damage model, the second loss call, and the licence decision.</td></tr>
           <tr><td><code>v0.3.0</code></td><td class="when">2026-09-11</td><td>the last release with radar in the model and one loss call.</td></tr>
@@ -545,7 +557,7 @@
     <p>Companion pages: <a href="index.html">the index</a> ·
       <a href="pipeline-overview.html">the deep dive</a> ·
       <a href="combined-series.html">the combined dataset</a>.</p>
-    <p class="mono">Provenance: release <code>v0.5.0</code>, data date 2026-09-13.</p>
+    <p class="mono">Provenance: release <code>v0.6.0</code>, data date 2026-09-13.</p>
   </div>
 </footer>
 

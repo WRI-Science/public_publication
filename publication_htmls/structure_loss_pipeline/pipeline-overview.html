@@ -409,7 +409,7 @@
 <div class="wrap">
   <div class="status">
     <h3>Where the project is, 12 September 2026</h3>
-    <p><strong>The published dataset is <code>v0.5.0</code>, cut on 2026-09-12.</strong> One
+    <p><strong>The published dataset is <code>v0.6.0</code>, cut on 2026-09-13.</strong> One
     layer, 377 fires, 2,062,248 released rows: the 2002–2022 hand survey carried verbatim, our
     own sixteen fires of 2024–2025, and sixteen fires the survey already covers that this
     pipeline has now <em>also</em> enumerated — so those sixteen are described twice, and
@@ -1813,7 +1813,7 @@
     <h2>Releases, licence, and how to check one</h2>
     <div class="tablewrap">
       <table>
-        <caption>Release <code>v0.5.0</code>, cut 2026-09-12</caption>
+        <caption>Release <code>v0.6.0</code>, cut 2026-09-13</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
           <tr><td>rows — internal build / released package</td><td class="num">2,093,672 / <strong>2,062,248</strong></td></tr>
@@ -1821,19 +1821,19 @@
           <tr><td>hand-survey rows (2002–2022, verbatim)</td><td class="num">1,770,939 — 73,534 destroyed</td></tr>
           <tr><td>our rows, 2024–2025 (16 fires)</td><td class="num">177,765 built, 158,803 released — 15,242 destroyed at the fixed threshold</td></tr>
           <tr><td>our rows, retrospective (16 fires the survey also covers)</td><td class="num">144,968 built, 132,506 released — 8,860 destroyed</td></tr>
-          <tr><td>geometry on the survey's rows</td><td class="num">9 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
+          <tr><td>geometry on the survey's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>rows with no damage call</td><td class="num">879 — all ceded to a later fire by the attribution rule</td></tr>
-          <tr><td>schema / CRS</td><td class="num">57 columns / EPSG:5070</td></tr>
-          <tr><td>files / size / checksums</td><td class="num">19 / 2,649.5 MB / SHA-256, verified 18 of 18</td></tr>
+          <tr><td>schema / CRS</td><td class="num">58 columns / EPSG:5070</td></tr>
+          <tr><td>files / size / checksums</td><td class="num">20 / 2,663.5 MB / SHA-256, verified 19 of 19</td></tr>
           <tr><td>detector / damage model / threshold</td><td class="num"><code>seg_all_v4</code> / <code>damage_sentinel2_v5</code> / 0.85 fixed, advisory <code>expected_f1_isotonic_direct</code></td></tr>
           <tr><td><code>heterogeneity_warning</code></td><td class="num">null — computed, not asserted</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/v0.5.0/manifest.json</code> and
-    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The geometry behind the
-    nine new columns ships as its own companion archive,
-    <code>carlson_augmented_v0.1.0</code>.</p>
+    <p class="src"><b>Source:</b> <code>outputs/releases/v0.6.0/manifest.json</code> and
+    <code>CHECKSUMS.sha256</code>; <code>docs/release-notes.md</code>. The package now also
+    carries <code>build-manifest.json</code>, the build stage's own record, beside the
+    package's own — until <code>v0.6.0</code> the second silently overwrote the first.</p>
     <p>Three release gates have to clear with no override before a version is not a prerelease:
     no heterogeneity warning, no damage model older than the configured production one, and no
     modern fire without a damage call. All three clear. If you are upgrading from an earlier
@@ -1854,7 +1854,7 @@
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>docs/licence-decision.md</code> and
-    <code>outputs/releases/v0.5.0/manifest.json</code> (<code>licence_status</code>,
+    <code>outputs/releases/v0.6.0/manifest.json</code> (<code>licence_status</code>,
     <code>odbl_exclusion</code>). The USA Structures licence was re-verified against the
     publisher's own ArcGIS record on 2026-09-11 rather than against this project's notes.</p>
     <p>The instruction was "as conservative as possible while letting anyone use it". CC BY 4.0
@@ -1897,7 +1897,7 @@
     </p>
     <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's public-perimeter
     frame, damage model <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, advisory
-    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.5.0</code>. Data date
+    rule <code>expected_f1_isotonic_direct</code>, release <code>v0.6.0</code>. Data date
     2026-09-13.</p>
   </div>
 </footer>

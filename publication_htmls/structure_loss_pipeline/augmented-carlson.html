@@ -666,11 +666,15 @@
     </div>
     <p class="src"><b>Source:</b> <code>docs/carlson-augmented-schema.md</code> §3. Cell kinds
     over all 361 fires: 691,535 detector cells, 817,914 footprint cells and 221,844 circle
-    cells.</p>
+    cells. Since <code>v0.6.0</code> the count itself ships as a column,
+    <code>raster_n_cells</code>, so a reader can filter on it rather than infer it.</p>
     <div class="note warn">
       <p><strong>⚠️ 114,659 buildings — 6.47 % — own no raster cell at all.</strong> A cell holds
       one identifier, so where two survey buildings share one footprint the second is left
-      without. It is worst where the imagery is worst (9.17 % on fires with no pre-fire imagery,
+      without. ⚠️ <strong>The shipped flag used to disagree with this count</strong>: until
+      <code>v0.6.0</code> the dataset marked only 39,646 rows as having no raster source, because
+      the flag was set from the polygon's own kind rather than from whether the building ended
+      up owning any cells. It now reads 114,659, which is what this table has always said. It is worst where the imagery is worst (9.17 % on fires with no pre-fire imagery,
       against 4.46 % at native resolution and 3.29 % upsampled) and worst of all in
       <strong>2008, at 18.8 %</strong>. Those rows are recorded, not hidden: the cell count is a
       column, and zero is a legitimate value in it.</p>
@@ -692,7 +696,9 @@
       building get two different identifiers and two different polygons, because each fire's
       chain ran independently on that fire's own imagery and footprint vintage.</li>
       <li><strong>Filter out inferred shapes for anything that assumes a roof.</strong> One
-      column finds every inferred cell across the whole product, whatever era the fire is in.</li>
+      column finds every inferred cell across the whole product, whatever era the fire is in, and
+      a second gives the number of cells a building actually owns — <strong>zero is a legitimate
+      value and appears on 114,659 rows</strong>.</li>
       <li><strong>Split by the destroyed flag, always.</strong> The residual 13-point matching
       gap means a statistic pooled across destroyed and surviving buildings is measuring the two
       populations unequally.</li>
