@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Giving the Old Record a Footprint</title>
-<meta name="description" content="A polygon and a 0.6 m raster cell for all 1,770,939 buildings in the 2002–2022 structure-loss record, and the measured bias in using a present-day footprint database to supply them." />
+<title>The Historical Companion</title>
+<meta name="description" content="A building outline and its own 60-centimetre image cells for every one of the 1,770,939 building points in the published 2002–2022 record of United States wildfire structure loss, with the measured caveats that come with them." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   /* ============================================================
@@ -370,39 +370,43 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>The old record</span><span class="of">page 9 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html" aria-current="page">The old record</a><a href="changelog.html">What changed</a></span>
+    <span class="here"><span>Historical companion</span><span class="of">page 8 of 9</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="augmented-carlson.html" aria-current="page">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">Structure Loss Pipeline · the old record, upgraded</p>
-    <h1>Giving the old record a footprint</h1>
-    <p class="lede">The 2002–2022 structure-loss record is a set of points: one dot per building,
-    no shape and no pixels behind it. The modern half of this project is a 60-centimetre raster.
-    This work gives every one of the old record's 1,770,939 buildings a polygon and its own
-    raster cells wherever the imagery to support one exists — so the whole twenty-five years
-    share a single convention.</p>
+    <p class="kicker">Structure Loss Pipeline · historical companion</p>
+    <h1>The historical companion</h1>
+    <p class="lede">The published historical record of building loss in United States wildfires —
+    361 fires between 2002 and 2022, hand-assembled by Carlson and colleagues — is a point map:
+    one dot per building, carrying the survey's own call of whether that building was destroyed
+    or survived, and almost nothing else. This project attaches a building outline and a set of
+    60-centimetre image cells to every one of its 1,770,939 points, publishes the extra
+    per-building attributes that come with them, and measures how far each of those attributes
+    can be trusted.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>What this page tells you</h3>
-    <p><strong>You can attach a shape to an old building, but the easiest way to do it is
-    biased — and the bias runs in the worst possible direction.</strong> A present-day footprint
-    database matches only <strong>49 %</strong> of the buildings the survey recorded as destroyed
-    against <strong>82 %</strong> of those that survived, because a building that burned in 2014
-    is often not in a database extracted in 2022. Running our detector on <em>pre-fire</em>
-    aerial imagery instead cuts that gap by <strong>61.9 %</strong> — and does not close it: it
-    still misses <strong>33.9 %</strong> of destroyed buildings against <strong>21.0 %</strong>
-    of surviving ones.</p>
-    <p><strong>361 fires built, 0 failures</strong>, all 1,770,939 buildings carrying a geometry
-    across 26 states, and the published point never moves. Since <code>v0.5.0</code> nine of
-    these columns ride on every one of those rows in
-    <a href="combined-series.html">the combined dataset</a>, joined at
+    <h3>What this page gives you</h3>
+    <p><strong>Every building point in the historical record now has a shape.</strong> Across all
+    361 fires and 26 states, each of the 1,770,939 points carries a polygon, its own image cells
+    wherever imagery exists to support them, and a flag saying which of four methods produced the
+    shape. The published point itself never moves. Ten of these attributes also travel with every
+    row of <a href="combined-series.html">the combined dataset</a>, joined at
     <strong>100.0000 %</strong> coverage.</p>
+    <p><strong>The one caveat to carry with you: how well a shape can be found depends on whether
+    the building burned.</strong> A present-day database of building outlines matches only
+    <strong>49 %</strong> of the points the record calls destroyed against <strong>82 %</strong>
+    of the points it calls surviving, because a building that burned in 2014 is often simply
+    absent from a database compiled in 2022. Finding buildings instead with this project's own
+    detector, run on aerial photography taken <em>before</em> the fire, cuts that gap by
+    <strong>61.9 %</strong> — and does not close it: the detector still misses
+    <strong>33.9 %</strong> of destroyed buildings against <strong>21.0 %</strong> of surviving
+    ones.</p>
   </div>
 </div>
 
@@ -410,30 +414,37 @@
 
 <section class="part">
   <div class="wrap">
-    <p class="eyebrow">01 · the guarantee</p>
-    <h2>The survey's point is the anchor; the detector is never allowed to be</h2>
-    <p>Nothing here edits the published record. No row is dropped, moved, merged or relabelled;
-    the damage call, the exposure class, the fire identifier and the coordinates are exactly what
-    was published. Everything on this page is <em>attached</em> to that row, and every attached
-    value records where it came from and what it is worth.</p>
-    <p>The check runs on every fire and refuses to finish one that fails it: the same number of
-    rows out as in, no published point displaced, and the four published attributes
-    byte-identical. On the largest verified fire — Marshall CO 2021 — <strong>14,194 rows in,
-    14,194 out, maximum displacement 0.000 m</strong>, every attribute preserved, and the
-    confidence column null on exactly the rows whose geometry was inferred rather than
-    observed.</p>
-    <p class="src"><b>Source:</b> <code>docs/carlson-augmented-schema.md</code> §4b; per-fire
-    <code>summary.json</code> field <code>anchor_max_displacement_m</code>.</p>
+    <p class="eyebrow">01 · what is attached</p>
+    <h2>The record's point is the anchor; everything else hangs off it</h2>
+    <p>Nothing in this product edits the published record. No row is dropped, moved, merged or
+    relabelled; the damage call, the exposure class, the fire identifier and the coordinates are
+    exactly as published. Everything described below is <em>attached</em> to that row, and every
+    attached value records where it came from and how much it is worth.</p>
+    <p>Two things come from outside the record. <strong>Building footprint databases</strong> are
+    public maps of building outlines — Microsoft's US Building Footprints and the FEMA / Oak Ridge
+    USA Structures layer — and they supply a ready-made polygon whenever the record's point falls
+    inside one. <strong>This project's building detector</strong> is a neural network trained on
+    <strong>aerial photography</strong>: the US Department of Agriculture's National Agriculture
+    Imagery Program, which photographs the continental United States at roughly 60 cm per pixel
+    and reflies every two to three years. The detector finds buildings the databases miss, and it
+    is run only on photography flown before the fire, so nothing it sees is contaminated by the
+    fire's aftermath.</p>
+    <p>Each row therefore gains a polygon, a count of the 60-centimetre image cells that belong to
+    that building, a source flag naming which of four methods produced the shape, and a confidence
+    value that is <em>null</em> wherever the shape was inferred rather than observed. This page is
+    about that geometry and its limits. How accurately this project calls a building destroyed is
+    a separate question, answered with full confusion matrices on
+    <a href="confusion-matrix.html">the confusion matrix page</a>.</p>
   </div>
 </section>
 
 <section class="part">
   <div class="wrap">
-    <p class="eyebrow">02 · the finding</p>
-    <h2>A present-day footprint database misses the buildings that burned</h2>
-    <p>This is the reason the work exists rather than being a convenience. Four ways of supplying
-    a shape were measured on the same buildings, split by whether the survey recorded the
-    building as destroyed or surviving. If a source were unbiased the two shares would match.</p>
+    <p class="eyebrow">02 · the measured caveat</p>
+    <h2>Buildings that burned are harder to find a shape for than buildings that did not</h2>
+    <p>Four ways of supplying a shape were measured on the same buildings, split by whether the
+    record calls the building destroyed or surviving. If a source were unbiased the two shares
+    would match. They do not, and the size of the mismatch is the number an analyst needs.</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -475,22 +486,24 @@
 <line class="axis" x1="200.0" y1="118" x2="784.0" y2="118" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s1)"></span>buildings recorded destroyed</li>
-        <li><span class="swatch" style="background:var(--s2)"></span>buildings recorded surviving</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>points the record calls destroyed</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>points the record calls surviving</li>
       </ul>
-      <figcaption><strong>The gap is the bias, and the pre-fire detector is the only source that
-      shrinks it.</strong> Measured on the 152 fires with genuine 60-centimetre imagery before
-      the fire — 720,612 buildings, 51,539 of them destroyed. A present-day footprint database
-      matches destroyed buildings 34 points less often than surviving ones; the detector run on
-      pre-fire imagery narrows that to 13. <span class="mono">Source:
-      <code>outputs/carlson_augmented/confound.json</code>, <code>by_era.detector</code>.</span></figcaption>
+      <figcaption><strong>Pre-fire photography is the only source that narrows the gap between
+      destroyed and surviving buildings.</strong> Measured on the 152 fires with genuine
+      60-centimetre photography from before the fire — 720,612 buildings, 51,539 of them
+      destroyed. A present-day footprint database matches destroyed buildings 34 points less often
+      than surviving ones; the detector run on pre-fire photography narrows that to 13.
+      <span class="mono">Source: <code>outputs/carlson_augmented/confound.json</code>,
+      <code>by_era.detector</code>.</span></figcaption>
     </figure>
   </div>
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>The confound, measured — 152 fires with native 60-centimetre pre-fire imagery,
-        720,612 buildings, 51,539 of them destroyed</caption>
+        <caption>How often each way of supplying a shape succeeds, for burned buildings and for
+        unburned ones — 152 fires with 60-centimetre photography flown before the fire, 720,612
+        buildings, 51,539 of them destroyed</caption>
         <thead><tr><th>Geometry source</th><th class="num">Destroyed matched</th><th class="num">Surviving matched</th><th class="num">Gap</th><th class="num">All</th></tr></thead>
         <tbody>
           <tr><td>present-day footprint database</td><td class="num">0.485</td><td class="num">0.822</td><td class="num"><strong>0.337</strong></td><td class="num">0.798</td></tr>
@@ -500,46 +513,52 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/confound.json</code>,
-    <code>by_era.detector</code>; counts 51,539 destroyed and 669,073 surviving. The per-fire
-    equivalents are the four <code>match_*</code> and <code>gap_*</code> column families of
-    <code>summary.csv</code>.</p>
+    <p>Reading it: a present-day footprint database finds a shape for 0.485 of the buildings the
+    record calls destroyed but 0.822 of those it calls surviving, a gap of 0.337; the detector run
+    on pre-fire photography finds 0.662 against 0.790, a gap of 0.128.</p>
+    <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/confound.json</code> on the data
+    share, <code>by_era.detector</code>; counts 51,539 destroyed and 669,073 surviving. The
+    per-fire equivalents are the four <code>match_*</code> and <code>gap_*</code> column families
+    of <code>summary.csv</code>.</p>
+
     <div class="note warn">
-      <p><strong>⚠️ Never pool this measurement across imagery strata.</strong> A fire with no
-      pre-fire aerial imagery has a detector match of <em>zero</em> by construction, so a
-      combined figure would report the absence of imagery as a failure of the detector. Each
-      stratum is measured and reported on its own, and the one above is the only one where the
-      detector runs at full resolution.</p>
-      <p>On the 106 fires whose pre-fire imagery is 1-metre upsampled to the detector's training
-      resolution — 234,294 buildings, 12,289 destroyed — the same comparison gives a footprint
-      gap of <strong>0.482</strong> against a detector gap of <strong>0.068</strong>, an
-      <strong>86.0 %</strong> reduction, but on a coarser image and a much smaller destroyed
-      count. The 103 fires with no pre-fire imagery have footprints and circles only.</p>
+      <p><strong>⚠️ Never show a figure pooled across imagery eras.</strong> The photography
+      available before a fire is not the same in every decade, and a fire with no pre-fire aerial
+      photography at all has a detector match of <em>zero</em> by construction. A combined figure
+      would therefore report the absence of a photograph as a failure of the detector. Each
+      imagery stratum is measured and reported on its own; the table above is the stratum in which
+      the detector runs at its full native resolution.</p>
+      <p>On the 106 fires whose pre-fire photography is 1-metre imagery upsampled to the
+      detector's working resolution — 234,294 buildings, 12,289 destroyed — the same comparison
+      gives a footprint gap of <strong>0.482</strong> against a detector gap of
+      <strong>0.068</strong>, an <strong>86.0 %</strong> reduction, but on a coarser image and a
+      much smaller destroyed count. The 103 fires with no pre-fire photography have footprints and
+      circles only.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b> <code>confound.json</code>,
       <code>by_era.detector_upsampled</code> and <code>by_era.no_imagery</code>.</p>
     </div>
 
-    <div class="note ok">
-      <p><strong>A 61.9 % reduction, and it is the point of the whole exercise.</strong> The gap
-      goes from <strong>0.337</strong> to <strong>0.128</strong>. Prior work on this question
-      used present-day footprints and measured a gap of <strong>0.435</strong> on 178 fires —
-      the same phenomenon, from the other side. Pre-fire imagery is what fixes it, and nothing
-      else available does.</p>
-      <p class="src" style="margin-bottom:0"><b>Source:</b> the prior-art row of
-      <code>confound.json</code> (<code>prior_art_reference</code>): 178 fires, 2017–2022, 18
-      states, N = 159,955, destroyed 0.461 against surviving 0.896.</p>
+    <div class="note">
+      <p><strong>Independent published work finds the same pattern.</strong> A separate analysis
+      of this question, using present-day footprints across 178 fires between 2017 and 2022 in 18
+      states and 159,955 buildings, matches 0.461 of destroyed buildings against 0.896 of
+      surviving ones — a gap of <strong>0.435</strong>. Pre-fire photography is what narrows a gap
+      of this kind, from <strong>0.337</strong> to <strong>0.128</strong> here, and nothing else
+      available does.</p>
+      <p class="src" style="margin-bottom:0"><b>Source:</b> the published-comparison row of
+      <code>confound.json</code> (<code>prior_art_reference</code>).</p>
     </div>
 
     <div class="note warn">
-      <p><strong>⚠️ And the residual is real.</strong> Thirteen points of gap remain after the
-      detector: it misses <strong>33.9 %</strong> of destroyed buildings against
-      <strong>21.0 %</strong> of surviving ones. Some of it is buildings genuinely invisible at 60 cm — small, under canopy,
-      shaded — and some is that the buildings which burn are, on average, the ones a machine
-      finds hardest. <strong>Any analysis that uses these polygons to compare destroyed with
-      surviving buildings inherits that residual and must say so.</strong> The per-building
-      columns make it filterable: every row records which source produced its shape, and a
-      confidence value that is <em>null</em> wherever the shape was inferred rather than
-      observed.</p>
+      <p><strong>⚠️ The residual gap is real and it is yours to carry.</strong> Thirteen points of
+      gap remain after the detector: it misses <strong>33.9 %</strong> of destroyed buildings
+      against <strong>21.0 %</strong> of surviving ones. Some of that is buildings genuinely
+      invisible at 60 cm — small, under canopy, shaded — and some is that the buildings which burn
+      are, on average, the ones a machine finds hardest. <strong>Any analysis that uses these
+      polygons to compare destroyed with surviving buildings inherits that residual and must say
+      so.</strong> The per-building columns make it filterable: every row records which source
+      produced its shape, and a confidence value that is <em>null</em> wherever the shape was
+      inferred rather than observed.</p>
     </div>
   </div>
 </section>
@@ -547,47 +566,52 @@
 <section class="part">
   <div class="wrap">
     <p class="eyebrow">03 · how a shape is chosen</p>
-    <h2>Four ranked sources, and the row says which one it got</h2>
-    <p>The first source that produces a geometry wins, and the choice is recorded per building.</p>
+    <h2>Four ranked sources, and the row tells you which one it got</h2>
+    <p>The sources are tried in order and the first one that produces a geometry wins. The choice
+    is recorded for every building, so any source can be filtered out.</p>
     <div class="tablewrap">
       <table>
-        <caption>The geometry chain, and how often each rank fired over all 361 fires</caption>
+        <caption>Where the shapes come from: the four sources in order, and how many buildings
+        each one supplied across all 361 fires</caption>
         <thead><tr><th class="rank">rank</th><th>Source</th><th>What it is</th><th class="num">Buildings</th><th class="num">Share</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td>matched footprint</td><td>a public footprint polygon the point falls inside, or within 1 m of</td><td class="num">1,440,236</td><td class="num">81.3 %</td></tr>
-          <tr><td class="rank">2</td><td>detector instance</td><td>a connected component of our detector on pre-fire imagery, matched one-to-one within 10 m, at least 20 m²</td><td class="num">104,873</td><td class="num">5.9 %</td></tr>
+          <tr><td class="rank">2</td><td>detector instance</td><td>a connected blob of our detector's output on pre-fire photography, matched one-to-one within 10 m, at least 20 m²</td><td class="num">104,873</td><td class="num">5.9 %</td></tr>
           <tr><td class="rank">3</td><td>fallback circle</td><td>a circle of the mean diameter of the ten nearest observed matches in the same fire</td><td class="num">225,830</td><td class="num">12.8 %</td></tr>
           <tr><td class="rank">4</td><td>median-diameter circle</td><td>the fallback for a fire with fewer than ten observed matches of any kind — ⚠️ <strong>it never fired on any fire, so it is untested on real data</strong></td><td class="num">0</td><td class="num">0.0 %</td></tr>
         </tbody>
       </table>
     </div>
+    <p>Reading it: 81.3 % of buildings take a real footprint polygon and 5.9 % an outline the
+    detector drew, while 12.8 % get a circle standing in for a shape nobody ever observed.</p>
     <p class="src"><b>Source:</b> the four <code>geometry_source__*</code> columns of
-    <code>outputs/carlson_augmented/summary.csv</code>, summed over 361 fires (1,770,939 rows);
-    the chain itself is <code>docs/carlson-augmented-schema.md</code> §2.</p>
+    <code>outputs/carlson_augmented/summary.csv</code> on the data share, summed over 361 fires
+    (1,770,939 rows).</p>
 
-    <p><strong>Rank 1 uses a present-day database on purpose, and the row says so.</strong> A
-    strictly pre-fire filter would leave rank 1 empty for nearly every fire before 2013 — one
-    California county's entire extract has two scene dates, both in 2015, so a pre-fire filter
-    keeps 0 of 7,673 footprints there. Rather than hide that, every rank-1 row carries the
-    footprint's own image date and a flag saying whether it predates the fire, so a user can keep
-    only genuinely pre-fire shapes — and on almost every fire that is none.</p>
+    <p><strong>Rank 1 uses a present-day database deliberately, and the row says so.</strong> A
+    strictly pre-fire filter would leave rank 1 empty for nearly every fire before 2013: one
+    California county's entire extract carries two scene dates, both in 2015, so a pre-fire filter
+    keeps 0 of its 7,673 footprints. Every rank-1 row therefore carries the footprint's own image
+    date and a flag saying whether that date precedes the fire, so a user who needs strictly
+    pre-fire shapes can keep only those — on almost every fire, that is none of them.</p>
     <div class="note">
-      <p><strong>The detector's own inputs are not relaxed in the same way.</strong> The prior
-      band the network reads is built only from footprints that strictly predate ignition; a
-      county with no pre-fire footprint at all is logged and skipped. <strong>No post-fire
-      polygon ever enters what the model sees.</strong></p>
+      <p><strong>The detector's own inputs are strictly pre-fire.</strong> The reference band the
+      network reads is built only from footprints dated before ignition; a county with no pre-fire
+      footprint at all is logged and skipped. <strong>No post-fire polygon ever enters what the
+      model sees.</strong></p>
     </div>
-    <p><strong>Where ranks 1 and 2 both exist they agree.</strong> Median intersection-over-union
-    between the footprint polygon and the detector's instance for the same building is
-    <strong>0.81</strong>, and <strong>96 %</strong> of pairs are within a factor of two on area.
-    That is the check that the detector is finding the building and not its driveway.
+    <p><strong>Where ranks 1 and 2 both exist, they agree.</strong> The median
+    intersection-over-union — the shared area of two outlines divided by their combined area, so 1
+    is a perfect overlap — between the footprint polygon and the detector's outline for the same
+    building is <strong>0.81</strong>, and <strong>96 %</strong> of pairs are within a factor of
+    two on area. That is the check that the detector is finding the building and not its driveway.
     <span class="mono">(<code>summary.csv</code> columns <code>agree_iou_median</code>,
     <code>agree_area_within_2x</code>, median over fires.)</span></p>
     <div class="note warn">
-      <p><strong>⚠️ A circle is not a roof.</strong> 12.8 % of buildings have a circle rather
-      than a shape, sitting over whatever is there — ground, vegetation, a driveway. Filter on
-      the cell-kind column before any analysis that assumes the polygon is a building surface.
-      Prior work on this question had to redo a vegetation calibration for exactly this reason.</p>
+      <p><strong>⚠️ A circle is not a roof.</strong> 12.8 % of buildings have a circle rather than
+      a shape, sitting over whatever happens to be there — ground, vegetation, a driveway. Filter
+      on the cell-kind column before any analysis that assumes the polygon covers a building
+      surface.</p>
     </div>
   </div>
 </section>
@@ -595,13 +619,14 @@
 <section class="part">
   <div class="wrap">
     <p class="eyebrow">04 · coverage</p>
-    <h2>What the imagery supports, era by era</h2>
-    <p>Whether a fire can have a detector run at all is <em>measured</em>, not assumed: the
-    imagery catalogue is probed per state per year and the answer is written down.</p>
+    <h2>What the photography supports, era by era</h2>
+    <p>Whether a fire can have the detector run on it at all is <em>measured</em> rather than
+    assumed: the imagery catalogue is checked for every state and year, and the answer is written
+    down and published alongside the buildings.</p>
     <div class="tablewrap">
       <table>
-        <caption>All 361 fires by what imagery exists before them — <strong>never pool these
-        rows</strong></caption>
+        <caption>The three imagery eras, and what each supports — <strong>these rows must never be
+        added together</strong></caption>
         <thead><tr><th>Stratum</th><th class="num">Fires</th><th class="num">Years</th><th class="num">States</th><th class="num">Buildings</th><th class="num">Destroyed</th><th class="num">Footprint gap → detector gap</th><th>Detector</th></tr></thead>
         <tbody>
           <tr class="total"><td><strong>native 0.6 m before the fire</strong></td><td class="num">152</td><td class="num">2013–2022</td><td class="num">17</td><td class="num">720,612</td><td class="num">51,539</td><td class="num"><strong>0.337 → 0.128</strong><br>−61.9 %</td><td>runs at full resolution — this is the stratum the headline is from</td></tr>
@@ -610,76 +635,82 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/summary.csv</code> grouped by
-    <code>era</code>, and <code>naip_coverage.csv</code> (the catalogue probe); destroyed counts
-    and gaps from <code>confound.json</code>. 26 states in total; 134 of the 361 fires are in
-    California and carry 1,360,437 of the buildings.</p>
+    <p>Reading it: the newest 152 fires have real 60-centimetre photography from before the fire
+    and carry the headline numbers, while the oldest 103 have no pre-fire photography at all, so
+    their detector match is zero for want of an image rather than for want of a building — which
+    is exactly why a row pooled across these three strata would mislead.</p>
+    <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/summary.csv</code> on the data
+    share, grouped by <code>era</code>, and <code>naip_coverage.csv</code> (the catalogue check);
+    destroyed counts and gaps from <code>confound.json</code>. 26 states in total; 134 of the 361
+    fires are in California and carry 1,360,437 of the buildings.</p>
     <p>The detector ran on <strong>256 of the 361 fires</strong> and matched a building on
-    <strong>691,535</strong> of them; on a further 246,913 it ran and found nothing where the
-    survey says a building stood, which is the honest counted outcome rather than a silent
-    absence. <strong>832,491</strong> buildings had no pre-fire raster for it to run on at all.
-    Total compute: <strong>34.6 GPU job-hours</strong> across 6,702 rasters, about
-    <strong>6.4 hours</strong> of wall time, with <strong>0 fires failing</strong>.</p>
-    <p class="src"><b>Source:</b> the three <code>detector_outcome__*</code> columns and
-    <code>gpu_seconds</code>, <code>n_rasters</code> of <code>summary.csv</code>.</p>
+    <strong>691,535</strong> of the record's points. On a further 246,913 points it ran and found
+    nothing where the record says a building stood, and that outcome is counted and published
+    rather than left silent. <strong>832,491</strong> buildings had no pre-fire image for it to
+    run on at all.</p>
+    <p class="src"><b>Source:</b> the three <code>detector_outcome__*</code> columns of
+    <code>summary.csv</code> on the data share.</p>
   </div>
 </section>
 
 <section class="part">
   <div class="wrap">
     <p class="eyebrow">05 · what you would download</p>
-    <h2>Packaging, and the one product that is meant to be rebuilt</h2>
+    <h2>What ships, and the one product you rebuild instead of downloading</h2>
     <div class="tablewrap">
       <table>
-        <caption>What was built, and what the release archive contains</caption>
+        <caption>How big each part of the product is, and whether it is in the download</caption>
         <thead><tr><th>Component</th><th class="num">Built, on the data share</th><th class="num">In the release archive</th></tr></thead>
         <tbody>
           <tr><td>probability rasters</td><td class="num">4.77 GB</td><td class="num">— regenerable, so not shipped</td></tr>
           <tr><td>instance rasters (these carry the building identifier)</td><td class="num">3.46 GB</td><td class="num">shipped</td></tr>
           <tr><td>vectors — points and polygons</td><td class="num">1.95 GB</td><td class="num">shipped</td></tr>
-          <tr class="total"><td><strong>total</strong></td><td class="num">10.18 GB</td><td class="num"><strong>5.41 GB</strong>, 7,447 files</td></tr>
+          <tr class="total"><td><strong>total</strong></td><td class="num">10.2 GB</td><td class="num"><strong>5.41 GB</strong>, 7,447 files</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/releases/carlson_augmented_v0.1.0/manifest.json</code> (5,406,590,266 bytes,
-    7,447 files, checksums verified) and the built directory measured on the data share; the
-    vector total is the <code>gpkg_bytes</code> column of <code>summary.csv</code>. The
-    packaging decision is <code>docs/carlson-augmented-schema.md</code> §4c (owner, 2026-09-12).
-    This product carries its own version line, <code>v0.1.0</code>: it is not a bump of the
-    combined dataset.</p>
+    <p>Reading it: 10.2 GB exists on the data share but only 5.41 GB is distributed, because the
+    probability rasters are the one part a user can recreate.</p>
+    <p class="src"><b>Source:</b> <code>manifest.json</code> in the release directory on the data
+    share (5,409,626,355 bytes, 7,447 files, 7,448 checksum lines verified), and the built
+    directory measured on the data share; the vector total is the <code>gpkg_bytes</code> column
+    of <code>summary.csv</code>.</p>
     <p><strong>The probability surface is the one product a user rebuilds rather than
-    downloads.</strong> Points can be re-cut at any threshold from a stored probability raster
-    with no GPU at all, so 5.41 GB ships and the rest stays regenerable. Every building still
-    resolves to its own 60-centimetre cells in the smaller archive, because it is the instance
-    raster — not the probability raster — that carries the identifier.</p>
+    downloads.</strong> A probability raster stores, for each 60-centimetre cell, how confident
+    the detector is that a building is there; points can be re-cut from it at any confidence
+    threshold with no graphics hardware at all. So 5.41 GB ships and the rest stays regenerable.
+    Every building still resolves to its own 60-centimetre cells in the smaller archive, because
+    it is the instance raster — not the probability raster — that carries the identifier.</p>
     <div class="tablewrap">
       <table>
-        <caption>What a raster cell means</caption>
+        <caption>What a single image cell means when you open the instance raster</caption>
         <thead><tr><th>Value in the instance raster</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td><strong>positive</strong></td><td>the identifier of the survey building that claimed this detection — a cell resolves to a building in one lookup</td></tr>
-          <tr><td><strong>negative</strong></td><td>a real detection that <em>no</em> survey building claimed: an outbuilding, a structure outside the survey's definition, or a false positive. Kept and signed rather than deleted, because deleting them would be a claim this work cannot support</td></tr>
+          <tr><td><strong>positive</strong></td><td>the identifier of the record building that claimed this detection — a cell resolves to a building in one lookup</td></tr>
+          <tr><td><strong>negative</strong></td><td>a real detection that <em>no</em> record building claimed: an outbuilding, a structure outside the record's definition, or a false positive. Kept and signed rather than deleted, because deleting them would be a claim this work cannot support</td></tr>
           <tr><td><code>0</code></td><td>no structure</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>docs/carlson-augmented-schema.md</code> §3. Cell kinds
-    over all 361 fires: 691,535 detector cells, 817,914 footprint cells and 221,844 circle
-    cells. Since <code>v0.6.0</code> the count itself ships as a column,
+    <p>Reading it: a positive cell value is the identity of a building in the record, a negative
+    one is a building the detector found that the record does not list, and zero is ground with
+    nothing on it.</p>
+    <p class="src"><b>Source:</b> the <code>raster_cell_kind__*</code> columns of
+    <code>summary.csv</code> on the data share, and the column dictionary
+    <code>carlson-augmented-schema.md</code> shipped with the release. Cell kinds over all 361
+    fires: 691,535 detector cells, 743,759 footprint cells and 220,986 circle cells, and
+    <strong>114,659</strong> buildings with no cell of their own. That count ships as a column,
     <code>raster_n_cells</code>, so a reader can filter on it rather than infer it.</p>
     <div class="note warn">
-      <p><strong>⚠️ 114,659 buildings — 6.47 % — own no raster cell at all.</strong> A cell holds
-      one identifier, so where two survey buildings share one footprint the second is left
-      without. ⚠️ <strong>The shipped flag used to disagree with this count</strong>: until
-      <code>v0.6.0</code> the dataset marked only 39,646 rows as having no raster source, because
-      the flag was set from the polygon's own kind rather than from whether the building ended
-      up owning any cells. It now reads 114,659, which is what this table has always said. It is worst where the imagery is worst (9.17 % on fires with no pre-fire imagery,
-      against 4.46 % at native resolution and 3.29 % upsampled) and worst of all in
-      <strong>2008, at 18.8 %</strong>. Those rows are recorded, not hidden: the cell count is a
-      column, and zero is a legitimate value in it.</p>
+      <p><strong>⚠️ 114,659 buildings — 6.47 % — own no image cell at all.</strong> A cell can
+      hold only one identifier, so where two record buildings share a single footprint the second
+      is left without one. The shortfall tracks the photography: <strong>9.17 %</strong> on fires
+      with no pre-fire imagery, against <strong>4.46 %</strong> at native resolution and
+      <strong>3.29 %</strong> on upsampled imagery, and worst of all in <strong>2008, at
+      18.8 %</strong>. Those rows are recorded rather than hidden: the cell count is a column, and
+      zero is a legitimate value in it.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/carlson_augmented/summary.csv</code>, column
+      <code>outputs/carlson_augmented/summary.csv</code> on the data share, column
       <code>n_structures_without_a_cell</code>, summed and grouped by <code>era</code> and by
       <code>fire_year</code>.</p>
     </div>
@@ -692,26 +723,28 @@
     <h2>Three things to do before you use these polygons</h2>
     <ol class="tight">
       <li><strong>De-duplicate on geometry before any pooled statistic.</strong> 18.3 % of the
-      survey's national rows sit at a location more than one fire claims. Two rows for one
-      building get two different identifiers and two different polygons, because each fire's
-      chain ran independently on that fire's own imagery and footprint vintage.</li>
-      <li><strong>Filter out inferred shapes for anything that assumes a roof.</strong> One
-      column finds every inferred cell across the whole product, whatever era the fire is in, and
-      a second gives the number of cells a building actually owns — <strong>zero is a legitimate
+      record's national rows sit at a location that more than one fire claims. Two rows for one
+      building get two different identifiers and two different polygons, because each fire's chain
+      of sources ran independently, on that fire's own photography and its own footprint
+      vintage.</li>
+      <li><strong>Filter out inferred shapes for anything that assumes a roof.</strong> One column
+      finds every inferred cell across the whole product, whatever era the fire falls in, and a
+      second gives the number of cells a building actually owns — <strong>zero is a legitimate
       value and appears on 114,659 rows</strong>.</li>
-      <li><strong>Split by the destroyed flag, always.</strong> The residual 13-point matching
-      gap means a statistic pooled across destroyed and surviving buildings is measuring the two
-      populations unequally.</li>
+      <li><strong>Split by the destroyed flag, always, and never across imagery eras.</strong> The
+      residual 13-point matching gap means a statistic pooled across destroyed and surviving
+      buildings is measuring the two populations unequally, and a statistic pooled across the
+      three imagery eras is measuring the photography rather than the buildings.</li>
     </ol>
-    <p class="src"><b>Source:</b> <code>docs/carlson-augmented-schema.md</code> §§4, 5 — the
-    full column dictionary. The nine-column patch it proposed has since been applied: those
-    columns are in <a href="combined-series.html">the combined dataset</a> as of
-    <code>v0.5.0</code>, joined on <strong>100.0000 %</strong> of the survey's 1,770,939 rows
-    over 361 fires at a 0.5 m coincidence tolerance, with a maximum coordinate displacement of
-    <strong>1.3 × 10⁻⁸ m</strong>
-    (<code>outputs/releases/v0.5.0/augmented_geometry_coverage.csv</code>, 361 rows, minimum
-    <code>fraction_joined</code> 1.0). The identifiers here are this project's own: the survey's
-    release carries no structure identifier of any kind.</p>
+    <p class="src"><b>Source:</b> the full column dictionary,
+    <code>carlson-augmented-schema.md</code>, shipped with the release. Ten of these columns are
+    in <a href="combined-series.html">the combined dataset</a>, joined on
+    <strong>100.0000 %</strong> of the record's 1,770,939 rows over 361 fires at a 0.5 m
+    coincidence tolerance, with a maximum coordinate displacement of
+    <strong>1.3 × 10⁻⁸ m</strong> (<code>augmented_geometry_coverage.csv</code> in the release
+    directory on the data share, 361 rows, minimum <code>fraction_joined</code> 1.0). The building
+    identifiers here are this project's own: the record's published release carries no structure
+    identifier of any kind.</p>
   </div>
 </section>
 
@@ -719,14 +752,12 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Companion pages: <a href="index.html">the index</a> ·
-      <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="retrospective.html">running the pipeline backwards</a> ·
+    <p>Companion pages: <a href="index.html">start here</a> ·
+      <a href="pipeline-overview.html">the method in full</a> ·
+      <a href="confusion-matrix.html">the confusion matrix</a> ·
       <a href="combined-series.html">the combined dataset</a>.</p>
-    <p class="mono">Provenance: detector <code>seg_all_v4</code> on pre-fire NAIP, product
-    release <code>carlson_augmented_v0.1.0</code>, schema version 4. Outputs under
-    <code>outputs/carlson_augmented/</code>, schema
-    <code>docs/carlson-augmented-schema.md</code>, data date 2026-09-13.</p>
+    <p class="mono">Provenance: release <code>carlson_augmented_v0.1.1</code>, data date
+    2026-09-13.</p>
   </div>
 </footer>
 

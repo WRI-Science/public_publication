@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fire by Fire</title>
-<meta name="description" content="Every fire the structure-loss pipeline has produced a per-structure loss call for, scored against the inspections of that fire." />
+<title>Results by Fire</title>
+<meta name="description" content="Every wildfire this project has scored: how many buildings the model calls destroyed, how many inspectors recorded as destroyed, and how closely the two agree." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   /* ============================================================
@@ -379,42 +379,52 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Fire by fire</span><span class="of">page 3 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html" aria-current="page">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+    <span class="here"><span>Results by fire</span><span class="of">page 4 of 9</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html" aria-current="page">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">Structure Loss Pipeline · results</p>
-    <h1>Fire by fire</h1>
-    <p class="lede">Every modern fire this pipeline has produced a per-structure loss call for,
-    and the inspection record it was scored against. Sixteen fires make up the modern half of the
-    published dataset — fifteen in California and South Fork in New Mexico. Marshall CO 2021 sits
-    outside it, in the historical era, and is here because it has two damage assessments nobody
-    in this project drew.</p>
+    <p class="kicker">Structure Loss Pipeline &middot; results by fire</p>
+    <h1>Results by fire</h1>
+    <p class="lede">This project estimates, building by building, which structures a wildfire
+    destroyed, using free satellite imagery and public maps of building outlines. One row of the
+    table below is one fire: how many buildings stood in the area around it, how many the model
+    calls destroyed, and how many a ground survey recorded as destroyed. Across the fifteen
+    California fires with a full inspection record, the estimate scores a mean F1 per fire of
+    <strong>0.783</strong> on the destroyed class &mdash; F1 being the combined measure of how
+    often our destroyed calls are right and how much of the real destruction we find.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>How to read this table</h3>
-    <p><strong>Detection and damage are scored apart.</strong> Matching is greedy one-to-one at
-    10 m between our inventory and the inspection records, so a building we never found counts
-    against detection recall and not against the loss call. Precision, recall and F1 are for the
-    destroyed class, on matched pairs only.</p>
-    <p><strong>Eight of the fifteen fires taught the damage model, and none of them is scored by
-    it.</strong> Each carries a probability from a model refitted without that fire, marked
-    <span class="src-tag lofo">lofo</span>; the other seven are scored by the production model,
-    marked <span class="src-tag prod">production</span>.</p>
-    <p><strong>Every fire carries two loss calls, and most rows now carry a third.</strong>
-    The primary one uses a single threshold of <strong>0.85</strong> for every fire; the
-    advisory one uses a threshold fitted per fire from that fire's own score distribution and
-    nothing else, and is the better <em>count</em> and the worse <em>classifier</em> —
-    <a href="#adaptive">two loss calls</a>, below, is why. The third comes from
-    <a href="pipeline-overview.html#refined">a second model reading evidence that arrives
-    later</a>; it is better on both precision and recall, and too late to be the headline.
-    <strong>The table below is the primary call throughout.</strong></p>
+    <h3>How to read a row</h3>
+    <p><strong>A row is one fire, and the two columns to compare are the two destroyed
+    counts.</strong> <em>Destroyed, primary estimate</em> is this project's answer: it is made
+    about two and a half months after a fire starts, from before-and-after satellite images, and
+    it exists for every building in every fire here. <em>Destroyed, ground truth</em> is the
+    number of buildings a survey on the ground recorded as destroyed. Everything else in the row
+    describes how well those two agree, and where they disagree.</p>
+    <p><strong>Ground truth means somebody went and looked.</strong> For the California fires it
+    is CAL FIRE's damage inspection programme: after a fire, inspectors visit each structure
+    inside the burn area and record whether it was destroyed, damaged or untouched. The two fires
+    outside California are scored instead against independent damage assessments &mdash; one-off
+    post-fire surveys by FEMA and by Boulder County, drawn by people with no connection to this
+    project.</p>
+    <p><strong>No fire is scored by a model that had seen it.</strong> Eight of the fifteen
+    California fires contributed training examples to the damage model; each of those is scored
+    by a copy of the model refitted with that fire removed, marked
+    <span class="src-tag lofo">held out</span>. The other fires never entered training at all and
+    are marked <span class="src-tag prod">never trained on</span>. Either way, the model that
+    scored a fire never saw that fire.</p>
+    <p><strong>A later, more accurate estimate also exists.</strong> A refined estimate is
+    published about a year after each fire, once a second post-fire image window and a
+    year-over-year satellite summary of the landscape exist; it is more accurate, and it covers
+    most buildings in most fires but not all. This page reports the primary estimate throughout
+    &mdash; see <a href="pipeline-overview.html">the method in full</a> for how the two are
+    built.</p>
   </div>
 </div>
 
@@ -422,8 +432,8 @@
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">the product, scored</p>
-    <h2>Seventeen fires, scored</h2>
+    <p class="eyebrow">the headline</p>
+    <h2>How close the estimate comes, fire by fire</h2>
   </div>
   <div class="wide">
     <figure class="band">
@@ -523,129 +533,162 @@
 <line class="axis" x1="180.0" y1="370" x2="784.0" y2="370" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s1)"></span>the shipped fixed cut, 0.85</li>
-        <li><span class="swatch" style="background:var(--s2)"></span>the advisory adaptive cut, per fire</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>the published call: one
+        fixed probability cut-off, 0.85, for every fire</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>the count-tuned call: a
+        cut-off set separately for each fire</li>
       </ul>
-      <figcaption><strong>The fixed threshold is the better classifier on most fires, and the
-      per-fire one is not far behind.</strong> Destroyed-class F1 on matched pairs at 10 m; the
-      right-hand column is the threshold the per-fire rule landed on. Mean per fire:
-      <strong>0.783</strong> fixed against <strong>0.756</strong> advisory, with the advisory
-      call higher on three fires (Canyon, Coches 2, Eaton). The two at the bottom are explained
-      below — Franklin is an attribution problem, and Coches 2 is where the fixed threshold
-      called one structure destroyed where nine burned.</figcaption>
+      <figcaption><strong>On most fires the estimate agrees with the inspectors on the great
+      majority of destroyed buildings.</strong> Each bar is one fire's F1 on the destroyed class,
+      counting only buildings that both the survey and this project know about; the right-hand
+      column is the cut-off the per-fire rule settled on. Averaged over fires, the published call
+      scores <strong>0.783</strong> and the count-tuned call <strong>0.756</strong>, with the
+      count-tuned call ahead on three fires (Canyon, Coches 2 and Eaton). The two fires at the
+      bottom are the ones with almost nothing to find: Franklin, where the survey records
+      <strong>20</strong> destroyed buildings, and Coches 2, where it records <strong>9</strong>
+      and the estimate calls <strong>1</strong>. With denominators that small, a handful of
+      buildings moves F1 a long way.</figcaption>
     </figure>
   </div>
   <div class="wrap">
-    <p class="src"><b>Source:</b> <code>outputs/forward_damage/per_fire.csv</code>, columns
-    <code>f1_10m</code> and <code>f1_adaptive_10m</code> with the realised threshold from
-    <code>operating_cut_adaptive</code>, 15 fires, generated 2026-09-12; the pooled row from
-    <code>metrics.json</code>.</p>
+    <p class="src"><b>Source:</b> destroyed-class F1 per fire, with the realised per-fire
+    cut-off, from <code>forward_damage/per_fire.csv</code> on the data share (15 fires,
+    generated 2026-09-12); the summary row from the matching <code>metrics.json</code>.</p>
+
+    <div class="note">
+      <p><strong>What precision, recall and F1 mean here.</strong> Precision is the share of the
+      buildings we called destroyed that really were. Recall is the share of the really destroyed
+      buildings that we found. F1 is their harmonic mean, so it punishes both mistakes and cannot
+      be gamed by being timid or by over-calling. The four underlying counts &mdash; agreed
+      destroyed, missed, false alarm, agreed standing &mdash; are set out on
+      <a href="confusion-matrix.html">the confusion matrix page</a>.</p>
+      <p><strong>Why we do not quote accuracy.</strong> Only about nine buildings in a hundred
+      inside a fire's study area are destroyed. A model that called every building
+      &ldquo;survived&rdquo; would therefore be right about nine times out of ten while finding
+      nothing at all, so a high accuracy figure would tell a reader nothing.</p>
+    </div>
+
+    <div class="note">
+      <p><strong>What &ldquo;matched at 10&nbsp;m&rdquo; means.</strong> A ground-truth point and
+      one of our building locations are treated as the same building when they lie within
+      10&nbsp;m of one another, matched one to one so that no building is counted twice.
+      Precision, recall and F1 are computed on those matched pairs only. A destroyed building the
+      survey knows about but our list of buildings never contained is therefore not blamed on the
+      damage call: it counts against <em>detection recall</em>, the separate column showing what
+      share of the survey's buildings we had at all. The 20&nbsp;m column repeats the whole
+      exercise with the matching distance loosened, as a check that the results do not hinge on
+      where exactly a point was placed.</p>
+      <p><strong>What the study area is.</strong> The area scored around a fire is the official
+      fire perimeter plus a 2.4&nbsp;km margin. Buildings inside the perimeter, or just outside
+      it, are the <em>directly exposed</em> ones; buildings further out are counted in the
+      inventory but are very rarely destroyed.</p>
+      <p><strong>What the cut-off is.</strong> The model gives every building a probability of
+      having been destroyed. The published call treats a building as destroyed when that
+      probability exceeds <strong>0.85</strong>, a number fixed in advance and identical for
+      every fire. AUC, in the last numeric column, measures how well the probabilities rank
+      destroyed buildings above surviving ones whatever cut-off you choose.</p>
+    </div>
+
+    <div class="note">
+      <p><strong>Why two kinds of average.</strong> A pooled figure counts every building equally,
+      so the largest fires dominate it; a mean per fire counts every fire equally, so the smallest
+      fire in the table weighs exactly as much as the largest. The two answer different
+      questions &mdash; &ldquo;how good is this on a building?&rdquo; against &ldquo;how good is
+      this on a fire?&rdquo; &mdash; so both are reported. In the summary row of the table below
+      the counts are pooled across fires, while the precision, recall and F1 cells are averages
+      over fires.</p>
+    </div>
   </div>
 
   <div class="wide">
     <h3>The full table</h3>
     <p class="hint">Click a column heading to sort. Every column is read straight from the
-    per-fire output file; nothing on this page is recomputed.</p>
+    per-fire results file; nothing on this page is recomputed.</p>
     <details class="more">
-      <summary>The full table — 17 fires, 17 columns, sortable</summary>
+      <summary>The full table &mdash; 17 fires, 17 columns, sortable</summary>
       <div class="tablewrap">
         <table id="fires">
+          <caption>Every fire scored: buildings at risk, buildings called destroyed, buildings
+          recorded destroyed, and how well the two agree. Marshall appears twice because two
+          independent assessments cover it.</caption>
           <thead>
             <tr>
               <th class="sortable" data-type="text" scope="col">Fire</th>
-              <th class="sortable" data-type="text" scope="col">Score</th>
-              <th class="sortable num" data-type="num" scope="col">Inventory</th>
-              <th class="sortable num" data-type="num" scope="col">Destroyed, fixed</th>
-              <th class="sortable num" data-type="num" scope="col">Destroyed, adaptive</th>
-              <th class="sortable num" data-type="num" scope="col">Adaptive cut</th>
-              <th class="sortable num" data-type="num" scope="col">DINS destroyed</th>
-              <th class="sortable num" data-type="num" scope="col">DINS records</th>
-              <th class="sortable num" data-type="num" scope="col">Detect. recall</th>
-              <th class="sortable num" data-type="num" scope="col">Pairs @10 m</th>
-              <th class="sortable num" data-type="num" scope="col">P</th>
-              <th class="sortable num" data-type="num" scope="col">R</th>
+              <th class="sortable" data-type="text" scope="col">Scored by</th>
+              <th class="sortable num" data-type="num" scope="col">Buildings in study area</th>
+              <th class="sortable num" data-type="num" scope="col">Destroyed, primary estimate</th>
+              <th class="sortable num" data-type="num" scope="col">Destroyed, count-tuned</th>
+              <th class="sortable num" data-type="num" scope="col">Count-tuned cut-off</th>
+              <th class="sortable num" data-type="num" scope="col">Destroyed, ground truth</th>
+              <th class="sortable num" data-type="num" scope="col">Ground-truth records</th>
+              <th class="sortable num" data-type="num" scope="col">Detection recall</th>
+              <th class="sortable num" data-type="num" scope="col">Matched pairs @10 m</th>
+              <th class="sortable num" data-type="num" scope="col">Precision</th>
+              <th class="sortable num" data-type="num" scope="col">Recall</th>
               <th class="sortable num" data-type="num" scope="col">F1 @10 m</th>
-              <th class="sortable num" data-type="num" scope="col">F1 adaptive</th>
+              <th class="sortable num" data-type="num" scope="col">F1, count-tuned</th>
               <th class="sortable num" data-type="num" scope="col">F1 @20 m</th>
               <th class="sortable num" data-type="num" scope="col">AUC</th>
               <th scope="col">Map</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="fire">Eaton 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">64,319</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">9,419</td><td class="num">18,428</td><td class="num">0.8163</td><td class="num">14,955</td><td class="num">0.9486</td><td class="num">0.9048</td><td class="num">0.9262</td><td class="num">0.9276</td><td class="num">0.9255</td><td class="num">0.9782</td><td class="map"><a href="inventory_DINS_2025_EATON.html">map</a></td></tr>
-            <tr><td class="fire">Palisades 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">28,837</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">6,845</td><td class="num">12,137</td><td class="num">0.7452</td><td class="num">8,949</td><td class="num">0.9310</td><td class="num">0.9267</td><td class="num">0.9288</td><td class="num">0.9201</td><td class="num">0.9264</td><td class="num">0.9756</td><td class="map"><a href="inventory_DINS_2025_PALISADES.html">map</a></td></tr>
-            <tr><td class="fire">Mountain 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">23,241</td><td class="num">262</td><td class="num">379</td><td class="num">0.661</td><td class="num">243</td><td class="num">1,840</td><td class="num">0.7967</td><td class="num">1,444</td><td class="num">0.8259</td><td class="num">0.8300</td><td class="num">0.8279</td><td class="num">0.7930</td><td class="num">0.8284</td><td class="num">0.9817</td><td class="map"><a href="inventory_DINS_2024_MOUNTAIN.html">map</a></td></tr>
-            <tr><td class="fire">Line 2024</td><td><span class="src-tag prod">production</span></td><td class="num">11,892</td><td class="num">15</td><td class="num">22</td><td class="num">0.637</td><td class="num">2</td><td class="num">340</td><td class="num">0.4529</td><td class="num">154</td><td class="num">0.2500</td><td class="num">1.0000</td><td class="num">0.4000</td><td class="num">0.3333</td><td class="num">0.2857</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2024_LINE.html">map</a></td></tr>
-            <tr><td class="fire">Coches 2 2025</td><td><span class="src-tag prod">production</span></td><td class="num">7,463</td><td class="num">1</td><td class="num">4</td><td class="num">0.671</td><td class="num">9</td><td class="num">143</td><td class="num">0.8252</td><td class="num">118</td><td class="num">1.0000</td><td class="num">0.2000</td><td class="num">0.3333</td><td class="num">0.5714</td><td class="num">0.3333</td><td class="num">0.8920</td><td class="map"><a href="inventory_DINS_2025_COCHES.html">map</a></td></tr>
-            <tr><td class="fire">Thompson 2024</td><td><span class="src-tag prod">production</span></td><td class="num">5,969</td><td class="num">28</td><td class="num">33</td><td class="num">0.708</td><td class="num">26</td><td class="num">185</td><td class="num">0.7676</td><td class="num">141</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.8667</td><td class="num">0.9286</td><td class="num">0.9983</td><td class="map"><a href="inventory_DINS_2024_THOMPSON.html">map</a></td></tr>
-            <tr><td class="fire">Airport 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">5,937</td><td class="num">127</td><td class="num">135</td><td class="num">0.782</td><td class="num">160</td><td class="num">379</td><td class="num">0.4934</td><td class="num">185</td><td class="num">0.8817</td><td class="num">0.9880</td><td class="num">0.9318</td><td class="num">0.9121</td><td class="num">0.9318</td><td class="num">0.9549</td><td class="map"><a href="inventory_DINS_2024_AIRPORT.html">map</a></td></tr>
-            <tr><td class="fire">Bridge 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">4,567</td><td class="num">78</td><td class="num">85</td><td class="num">0.753</td><td class="num">81</td><td class="num">925</td><td class="num">0.4941</td><td class="num">447</td><td class="num">0.5750</td><td class="num">0.9583</td><td class="num">0.7188</td><td class="num">0.6866</td><td class="num">0.7200</td><td class="num">0.9879</td><td class="map"><a href="inventory_DINS_2024_BRIDGE.html">map</a></td></tr>
-            <tr><td class="fire">Park 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">4,097</td><td class="num">453</td><td class="num">467</td><td class="num">0.792</td><td class="num">713</td><td class="num">2,102</td><td class="num">0.4757</td><td class="num">992</td><td class="num">0.8540</td><td class="num">0.9782</td><td class="num">0.9119</td><td class="num">0.9012</td><td class="num">0.9170</td><td class="num">0.9878</td><td class="map"><a href="inventory_DINS_2024_PARK.html">map</a></td></tr>
-            <tr><td class="fire">Franklin 2024</td><td><span class="src-tag prod">production</span></td><td class="num">3,004</td><td class="num">35</td><td class="num">68</td><td class="num">0.620</td><td class="num">20</td><td class="num">738</td><td class="num">0.6626</td><td class="num">462</td><td class="num">0.2308</td><td class="num">0.3750</td><td class="num">0.2857</td><td class="num">0.2439</td><td class="num">0.2609</td><td class="num">0.9111</td><td class="map"><a href="inventory_DINS_2024_FRANKLIN.html">map</a></td></tr>
-            <tr><td class="fire">Canyon 2025</td><td><span class="src-tag prod">production</span></td><td class="num">2,247</td><td class="num">17</td><td class="num">20</td><td class="num">0.771</td><td class="num">15</td><td class="num">142</td><td class="num">0.6056</td><td class="num">82</td><td class="num">1.0000</td><td class="num">0.9231</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2025_CANYON.html">map</a></td></tr>
-            <tr><td class="fire">Borel 2024</td><td><span class="src-tag lofo">lofo</span></td><td class="num">2,132</td><td class="num">206</td><td class="num">226</td><td class="num">0.756</td><td class="num">223</td><td class="num">507</td><td class="num">0.6864</td><td class="num">345</td><td class="num">0.8966</td><td class="num">0.9028</td><td class="num">0.8997</td><td class="num">0.8970</td><td class="num">0.8980</td><td class="num">0.9750</td><td class="map"><a href="inventory_DINS_2024_BOREL.html">map</a></td></tr>
-            <tr><td class="fire">TCU Complex 2025</td><td><span class="src-tag lofo">lofo</span></td><td class="num">2,070</td><td class="num">87</td><td class="num">98</td><td class="num">0.750</td><td class="num">95</td><td class="num">278</td><td class="num">0.7158</td><td class="num">198</td><td class="num">0.9677</td><td class="num">0.9231</td><td class="num">0.9449</td><td class="num">0.9474</td><td class="num">0.9375</td><td class="num">0.9951</td><td class="map"><a href="inventory_DINS_2025_TCU.html">map</a></td></tr>
-            <tr><td class="fire">French 2024</td><td><span class="src-tag prod">production</span></td><td class="num">1,609</td><td class="num">5</td><td class="num">14</td><td class="num">0.655</td><td class="num">11</td><td class="num">234</td><td class="num">0.7436</td><td class="num">174</td><td class="num">0.8000</td><td class="num">1.0000</td><td class="num">0.8889</td><td class="num">0.5000</td><td class="num">0.8889</td><td class="num">0.9941</td><td class="map"><a href="inventory_DINS_2024_FRENCH.html">map</a></td></tr>
-            <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">production</span></td><td class="num">813</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">40</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9231</td><td class="num">0.8000</td><td class="num">0.8571</td><td class="num">0.8387</td><td class="num">0.8571</td><td class="num">0.9827</td><td class="map"><a href="inventory_DINS_2024_NIXON.html">map</a></td></tr>
-            <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">production</span></td><td class="num">9,568</td><td class="num">738</td><td class="num">799</td><td class="num">0.756</td><td class="num">1,144</td><td class="num">2,488</td><td class="num">0.6610</td><td class="num">1,637</td><td class="num">0.9820</td><td class="num">0.7466</td><td class="num">0.8484</td><td class="num">0.8825</td><td class="num">—</td><td class="num">0.9847</td><td class="map"><a href="inventory_NM_2024_SOUTH_FORK.html">map</a></td></tr>
-            <tr><td class="fire">Marshall CO 2021 · county</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,774</td><td class="num">873</td><td class="num">1,455</td><td class="num">0.776</td><td class="num">1,101</td><td class="num">1,473</td><td class="num">0.7100</td><td class="num">1,023</td><td class="num">0.9805</td><td class="num">0.9607</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">—</td><td class="num">0.9800</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
-            <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">lofo</span></td><td class="num">14,774</td><td class="num">1,181</td><td class="num">1,468</td><td class="num">0.776</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9520</td><td class="num">2,741</td><td class="num">0.9069</td><td class="num">0.9486</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">—</td><td class="num">0.9840</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+            <tr><td class="fire">Eaton 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">64,319</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">9,419</td><td class="num">18,428</td><td class="num">0.8163</td><td class="num">14,955</td><td class="num">0.9486</td><td class="num">0.9048</td><td class="num">0.9262</td><td class="num">0.9276</td><td class="num">0.9255</td><td class="num">0.9782</td><td class="map"><a href="inventory_DINS_2025_EATON.html">map</a></td></tr>
+            <tr><td class="fire">Palisades 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">28,837</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">6,845</td><td class="num">12,137</td><td class="num">0.7452</td><td class="num">8,949</td><td class="num">0.9310</td><td class="num">0.9267</td><td class="num">0.9288</td><td class="num">0.9201</td><td class="num">0.9264</td><td class="num">0.9756</td><td class="map"><a href="inventory_DINS_2025_PALISADES.html">map</a></td></tr>
+            <tr><td class="fire">Mountain 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">23,241</td><td class="num">262</td><td class="num">379</td><td class="num">0.661</td><td class="num">243</td><td class="num">1,840</td><td class="num">0.7967</td><td class="num">1,444</td><td class="num">0.8259</td><td class="num">0.8300</td><td class="num">0.8279</td><td class="num">0.7930</td><td class="num">0.8284</td><td class="num">0.9817</td><td class="map"><a href="inventory_DINS_2024_MOUNTAIN.html">map</a></td></tr>
+            <tr><td class="fire">Line 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">11,892</td><td class="num">15</td><td class="num">22</td><td class="num">0.637</td><td class="num">2</td><td class="num">340</td><td class="num">0.4529</td><td class="num">154</td><td class="num">0.2500</td><td class="num">1.0000</td><td class="num">0.4000</td><td class="num">0.3333</td><td class="num">0.2857</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2024_LINE.html">map</a></td></tr>
+            <tr><td class="fire">Coches 2 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">7,463</td><td class="num">1</td><td class="num">4</td><td class="num">0.671</td><td class="num">9</td><td class="num">143</td><td class="num">0.8252</td><td class="num">118</td><td class="num">1.0000</td><td class="num">0.2000</td><td class="num">0.3333</td><td class="num">0.5714</td><td class="num">0.3333</td><td class="num">0.8920</td><td class="map"><a href="inventory_DINS_2025_COCHES.html">map</a></td></tr>
+            <tr><td class="fire">Thompson 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">5,969</td><td class="num">28</td><td class="num">33</td><td class="num">0.708</td><td class="num">26</td><td class="num">185</td><td class="num">0.7676</td><td class="num">141</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.8667</td><td class="num">0.9286</td><td class="num">0.9983</td><td class="map"><a href="inventory_DINS_2024_THOMPSON.html">map</a></td></tr>
+            <tr><td class="fire">Airport 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">5,937</td><td class="num">127</td><td class="num">135</td><td class="num">0.782</td><td class="num">160</td><td class="num">379</td><td class="num">0.4934</td><td class="num">185</td><td class="num">0.8817</td><td class="num">0.9880</td><td class="num">0.9318</td><td class="num">0.9121</td><td class="num">0.9318</td><td class="num">0.9549</td><td class="map"><a href="inventory_DINS_2024_AIRPORT.html">map</a></td></tr>
+            <tr><td class="fire">Bridge 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,567</td><td class="num">78</td><td class="num">85</td><td class="num">0.753</td><td class="num">81</td><td class="num">925</td><td class="num">0.4941</td><td class="num">447</td><td class="num">0.5750</td><td class="num">0.9583</td><td class="num">0.7188</td><td class="num">0.6866</td><td class="num">0.7200</td><td class="num">0.9879</td><td class="map"><a href="inventory_DINS_2024_BRIDGE.html">map</a></td></tr>
+            <tr><td class="fire">Park 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,097</td><td class="num">453</td><td class="num">467</td><td class="num">0.792</td><td class="num">713</td><td class="num">2,102</td><td class="num">0.4757</td><td class="num">992</td><td class="num">0.8540</td><td class="num">0.9782</td><td class="num">0.9119</td><td class="num">0.9012</td><td class="num">0.9170</td><td class="num">0.9878</td><td class="map"><a href="inventory_DINS_2024_PARK.html">map</a></td></tr>
+            <tr><td class="fire">Franklin 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">3,004</td><td class="num">35</td><td class="num">68</td><td class="num">0.620</td><td class="num">20</td><td class="num">738</td><td class="num">0.6626</td><td class="num">462</td><td class="num">0.2308</td><td class="num">0.3750</td><td class="num">0.2857</td><td class="num">0.2439</td><td class="num">0.2609</td><td class="num">0.9111</td><td class="map"><a href="inventory_DINS_2024_FRANKLIN.html">map</a></td></tr>
+            <tr><td class="fire">Canyon 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">2,247</td><td class="num">17</td><td class="num">20</td><td class="num">0.771</td><td class="num">15</td><td class="num">142</td><td class="num">0.6056</td><td class="num">82</td><td class="num">1.0000</td><td class="num">0.9231</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2025_CANYON.html">map</a></td></tr>
+            <tr><td class="fire">Borel 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,132</td><td class="num">206</td><td class="num">226</td><td class="num">0.756</td><td class="num">223</td><td class="num">507</td><td class="num">0.6864</td><td class="num">345</td><td class="num">0.8966</td><td class="num">0.9028</td><td class="num">0.8997</td><td class="num">0.8970</td><td class="num">0.8980</td><td class="num">0.9750</td><td class="map"><a href="inventory_DINS_2024_BOREL.html">map</a></td></tr>
+            <tr><td class="fire">TCU Complex 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,070</td><td class="num">87</td><td class="num">98</td><td class="num">0.750</td><td class="num">95</td><td class="num">278</td><td class="num">0.7158</td><td class="num">198</td><td class="num">0.9677</td><td class="num">0.9231</td><td class="num">0.9449</td><td class="num">0.9474</td><td class="num">0.9375</td><td class="num">0.9951</td><td class="map"><a href="inventory_DINS_2025_TCU.html">map</a></td></tr>
+            <tr><td class="fire">French 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">1,609</td><td class="num">5</td><td class="num">14</td><td class="num">0.655</td><td class="num">11</td><td class="num">234</td><td class="num">0.7436</td><td class="num">174</td><td class="num">0.8000</td><td class="num">1.0000</td><td class="num">0.8889</td><td class="num">0.5000</td><td class="num">0.8889</td><td class="num">0.9941</td><td class="map"><a href="inventory_DINS_2024_FRENCH.html">map</a></td></tr>
+            <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">813</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">40</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9231</td><td class="num">0.8000</td><td class="num">0.8571</td><td class="num">0.8387</td><td class="num">0.8571</td><td class="num">0.9827</td><td class="map"><a href="inventory_DINS_2024_NIXON.html">map</a></td></tr>
+            <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">9,568</td><td class="num">738</td><td class="num">799</td><td class="num">0.756</td><td class="num">1,144</td><td class="num">2,488</td><td class="num">0.6610</td><td class="num">1,637</td><td class="num">0.9820</td><td class="num">0.7466</td><td class="num">0.8484</td><td class="num">0.8825</td><td class="num">—</td><td class="num">0.9847</td><td class="map"><a href="inventory_NM_2024_SOUTH_FORK.html">map</a></td></tr>
+            <tr><td class="fire">Marshall CO 2021 · county</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">873</td><td class="num">1,455</td><td class="num">0.776</td><td class="num">1,101</td><td class="num">1,473</td><td class="num">0.7100</td><td class="num">1,023</td><td class="num">0.9805</td><td class="num">0.9607</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">—</td><td class="num">0.9800</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+            <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">1,181</td><td class="num">1,468</td><td class="num">0.776</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9520</td><td class="num">2,741</td><td class="num">0.9069</td><td class="num">0.9486</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">—</td><td class="num">0.9840</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
           </tbody>
           <tfoot>
-            <tr class="total"><td class="fire">15 series fires, pooled</td><td>—</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">17,902</td><td class="num">38,497</td><td class="num">0.7528</td><td class="num">28,716</td><td class="num">—</td><td class="num">—</td><td class="num">0.7829</td><td class="num">0.7559</td><td class="num">0.7733</td><td class="num">—</td><td class="map">—</td></tr>
+            <tr class="total"><td class="fire">Fifteen California fires together</td><td>—</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">17,902</td><td class="num">38,497</td><td class="num">0.7528</td><td class="num">28,716</td><td class="num">—</td><td class="num">—</td><td class="num">0.7829</td><td class="num">0.7559</td><td class="num">0.7733</td><td class="num">—</td><td class="map">—</td></tr>
           </tfoot>
         </table>
       </div>
     </details>
-    <p class="src"><b>Source:</b> per-fire metrics from
-    <code>outputs/forward_damage/per_fire.csv</code> and the pooled row from
-    <code>metrics.json</code>; the two destroyed-count columns from
-    <code>outputs/combined_series/per_fire_summary.csv</code>, which is the shipped product.
-    The two out-of-dataset fires from
-    <code>outputs/ics209_check/outside_ca/{ruidoso_southfork_2024,marshall_boulder_2021,marshall_femamac_2021}/</code>,
-    and their advisory F1 from <code>outputs/operating_product/per_fire.csv</code>. All dated
-    2026-09-12. The pooled F1 cells are the <strong>mean per fire</strong>, not a pooled
-    recomputation, and the two out-of-dataset fires are in no pooled figure. Precision, recall
-    and F1 are read from the product's shipped call rather than re-derived from a threshold,
-    because the advisory threshold is per fire.</p>
-
-
+    <p class="src"><b>Source:</b> per-fire metrics from <code>forward_damage/per_fire.csv</code>
+    and the summary row from the matching <code>metrics.json</code>; the two destroyed-count
+    columns from <code>combined_series/per_fire_summary.csv</code>, which is the published
+    per-building product. The two fires outside California come from their own scoring reports
+    under <code>outside_ca/</code>, with their count-tuned F1 from
+    <code>operating_product/per_fire.csv</code>. All dated 2026-09-12. In the summary row the F1
+    cells are means over fires rather than a pooled recomputation, and the two fires outside
+    California are in no summary figure. Precision, recall and F1 are read from the product's
+    published call rather than re-derived, because the count-tuned cut-off differs by fire.</p>
+    <p class="hint"><strong>Reading it:</strong> on the large, well-inspected fires the two
+    destroyed counts land within a few per cent of one another and the destroyed-class F1 runs
+    around 0.9262 on Eaton and 0.9288 on Palisades, while the small fires lower down the table
+    swing widely because only a handful of buildings burned in them at all.</p>
   </div>
+</section>
 
-  <div class="wrap" id="adaptive">
-    <h3>Two loss calls, and why the fixed threshold is the primary one</h3>
-    <p>A per-fire threshold rule that reads only the model's own scores — never anything about
-    the fire itself — was built to replace the single fixed cut, and on a table of inspected
-    structures it clears a five-criterion bar written down before it was scored. On the product
-    it does not, and the reason is not a flaw in the rule. <strong>It was validated on one
-    population and applied to another.</strong></p>
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">a second column</p>
+    <h2>One call for classifying buildings, one for counting them</h2>
+    <p>The published per-building file carries two destroyed calls, and the table above shows
+    both. The <strong>primary</strong> one applies the same fixed cut-off of 0.85 to every fire.
+    The <strong>count-tuned</strong> one sets its cut-off separately for each fire, reading only
+    the spread of that fire's own model scores and nothing about the fire itself. The two are
+    built for different questions: the fixed cut-off is the better per-building classifier, and
+    the count-tuned one gets a fire's total closer to what inspectors found.</p>
     <div class="tablewrap">
       <table>
-        <caption>Where the rule was validated, and where it is applied</caption>
-        <thead><tr><th></th><th>The validation table</th><th>The product</th></tr></thead>
-        <tbody>
-          <tr><td>what a row is</td><td>an <strong>inspected</strong> structure</td><td>any structure in the inventory, most never inspected, out to 2.4 km from the perimeter</td></tr>
-          <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
-          <tr><td>share of them destroyed</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
-          <tr><td>thresholds the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> validation thresholds from
-    <code>outputs/forward_damage/per_fire.csv</code> (<code>threshold_fold</code>), realised
-    thresholds from <code>operating_cut_adaptive</code> in the same file.</p>
-    <p><strong>The rule reads the fire's own score distribution and nothing else</strong> — that
-    is what makes it label-free, and it is also what makes it move when the population
-    underneath it changes. On a table of inspected structures where roughly half burned, the
-    expected-F1 threshold sits near the fixed one. On a whole inventory where nine structures in
-    a hundred burned, the same arithmetic pulls the threshold down and the model starts calling
-    structures destroyed that nobody ever looked at. Taking the threshold from the near-perimeter
-    zone, whose share destroyed is nearer the validation table's, is what keeps it in range.</p>
-    <div class="tablewrap">
-      <table>
-        <caption>Advisory call minus primary call, paired on identical rows, fire-level
-        cluster bootstrap, B = 2000, fifteen fires</caption>
-        <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+        <caption>What the count-tuned call gains and loses against the published call, measured
+        on exactly the same buildings</caption>
+        <thead><tr><th>Scope &middot; measure</th><th class="num">Difference</th><th class="num">95&nbsp;% interval</th><th>Clear of zero?</th></tr></thead>
         <tbody>
           <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td class="fail">yes — worse</td></tr>
           <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td class="fail">yes — worse</td></tr>
@@ -656,111 +699,121 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/operating_product/paired_delta_ci.csv</code>,
-    comparison <code>V2 − V4</code>, over the 15 inspected fires with the fire as the unit. AUC
-    does not appear because it is computed on the score and does not depend on a threshold:
-    <strong>the ranking is identical under either call</strong>.</p>
+    <p class="src"><b>Source:</b> <code>operating_product/paired_delta_ci.csv</code> on the data
+    share, over the fifteen inspected fires with the fire as the unit of resampling. The
+    intervals come from resampling whole fires 2000 times, which says how much each number
+    would move if the project happened to cover a different set of fires. AUC does not appear
+    because it is computed on the probability itself and does not depend on a cut-off: the
+    ranking is identical under either call.</p>
+    <p class="hint"><strong>Reading it:</strong> the count-tuned call reliably finds more of the
+    destroyed buildings (recall up) and is reliably wrong more often when it does (precision
+    down), which nets out slightly against it on F1.</p>
     <div class="note warn">
-      <p><strong>⚠️ What the advisory call buys is the count.</strong> Over the fifteen
-      fires' whole inventories it calls <strong>15,951</strong> structures destroyed against
-      the fixed cut's <strong>14,504</strong> and DINS's <strong>17,902</strong> — a ratio of
-      <strong>0.810 → 0.891</strong>. So the two columns disagree in a specific, legible way:
-      the fixed cut is the better <em>classifier</em> per structure and the adaptive cut gets
-      the <em>total</em> much closer. Which one a reader wants depends on whether they are
-      asking about a building or about a fire, and that is exactly why both ship. The release notes put it in
-      one line: <em>"use <code>damage_class</code> to classify buildings; use
-      <code>damage_class_adaptive</code> if you are counting them"</em> — and say which column
-      you used. Every headline on this site is the fixed cut.</p>
-      <p><strong>The rule was scored against the same five criteria on the product's own
-      population, and no variant clears them</strong> — five candidates, three populations, the
-      bar written down before anything was scored. That is why the advisory call is advisory and
-      the fixed threshold is the default. The best candidate is the one that ships: it takes the
-      threshold from the near-perimeter zone, costs <strong>−0.0186 [−0.0336, −0.0070]</strong>
-      mean-fire F1, gets the count to <strong>0.891</strong> of the inspected total, and
-      <em>gains</em> outside California, where mean-fire F1 goes 0.8986 →
-      <strong>0.9121</strong>.</p>
-      <p>One leak a reader would reasonably suspect is closed by measurement rather than
-      assertion: re-fitting the calibration map leave-one-fire-out gives a variant that is
-      <strong>bit-identical on 204,797 of 204,797 rows</strong>, because the product already
-      reads each held-out fire's own fold calibration.</p>
-      <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/operating_product/{decision.md,report.md,by_variant.csv,paired_delta_ci.csv}</code>;
-      the bar was pre-registered in <code>logs/CHANGELOG.md</code> before it was scored.</p>
+      <p><strong>⚠️ What the count-tuned call buys is the total.</strong> Across the
+      fifteen fires' whole building inventories it calls <strong>15,951</strong> buildings
+      destroyed, against the fixed cut-off's <strong>14,504</strong> and the inspectors'
+      <strong>17,902</strong> &mdash; so the share of the inspected loss that the published count
+      reproduces rises from <strong>0.810</strong> to <strong>0.891</strong>. The two columns
+      therefore disagree in a legible way: the fixed cut-off is the better classifier of an
+      individual building, and the count-tuned one gets the fire total much closer. Which one a
+      reader wants depends on whether the question is about a building or about a fire, which is
+      why both are published. In the per-building file, use <code>damage_class</code> to classify
+      buildings and <code>damage_class_adaptive</code> if you are counting them, and say which
+      column you used. Every headline figure on this site is the fixed cut-off.</p>
     </div>
-    <div class="note ok">
-      <p><strong>Outside California the advisory call splits, and one fire cannot speak to it
-      at all.</strong> On Marshall's two independent assessments: Boulder County
-      0.9705 → <strong>0.9725</strong>, FEMA MAC 0.9273 → <strong>0.9109</strong>.
-      <strong>And on South Fork NM 2024 — the only post-2022 non-California per-structure truth
-      set that exists — the advisory call is clearly the better of the two</strong>:
-      F1 <strong>0.8484 → 0.8825</strong> at its Direct-scoped cut of 0.756, against an own-cut
-      ceiling of 0.945 and an AUC of 0.985. Three assessments over two fires is not a
-      distribution, but all of this project's out-of-state evidence points the same way: the
-      ranking travels and the fixed cut does not.</p>
-    </div>
+  </div>
+</section>
 
-    <h3>South Fork NM, and the one fire here that is not in the dataset</h3>
-    <p><strong>South Fork (NM, June 2024)</strong> is the only verified post-2022 per-structure
-    damage assessment outside California — federal search-and-rescue observations published by
-    the village it burned — and since <code>v0.5.0</code> it is a row in the dataset, the first
-    one outside California. It is scored on the assessment hull
-    (39.691 km²), not the whole fire, because an assessment is not a census and enumerating
-    over the whole 17,569-acre fire would make every uninspected building a false positive by
-    construction. It scores P 0.982 / R 0.747 / <strong>F1 0.848</strong> at the fixed threshold
-    on 1,637 matched pairs, AUC 0.985, against <strong>F1 0.883</strong> under the advisory one
-    and 0.945 at the fire's own best threshold — a threshold gap of <strong>+0.097</strong>.
-    It runs on its own perimeter frame: 9,568 structures, 2,357 in the near-perimeter zone and
-    7,211 beyond it, 738 called destroyed at the fixed threshold and 799 under the advisory one,
-    all of them near the perimeter. Its detection recall (0.661) is low for structural reasons: New Mexico has no
-    cached Microsoft footprint layer, so the detector's prior band is USA Structures alone, and
-    Lincoln County's USA Structures extract carries a single <code>IMAGE_DATE</code> of
-    2017-05-26 — seven years before the fire.</p>
-    <p><strong>Marshall (CO, December 2021)</strong> is in the historical era, not the modern
-    one, so it is not in the release. It is here because it is the only fire in this project with a
-    public per-structure assessment nobody in this pipeline drew — two of them, in fact, plus
-    Carlson's own points. Scored against all three, on the same 14,786-structure inventory:</p>
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">outside California</p>
+    <h2>The two fires scored against other people's assessments</h2>
+    <p><strong>South Fork (New Mexico, June 2024)</strong> is the only fire outside California in
+    the published dataset, and the only verified per-building damage assessment outside
+    California since 2022: federal search-and-rescue observations released by the village that
+    burned. It is scored on the area the assessment actually covered (39.691&nbsp;km&sup2;)
+    rather than the whole 17,569-acre fire, because an assessment is not a census and scoring
+    beyond its edge would turn every uninspected building into a false alarm by construction. At
+    the fixed cut-off it scores precision 0.982, recall 0.747 and <strong>F1 0.848</strong> on
+    1,637 matched pairs, with an AUC of 0.985; the count-tuned call reaches
+    <strong>F1 0.883</strong>, and the best cut-off this fire could possibly have been given
+    would reach 0.945 &mdash; a gap of <strong>+0.097</strong> between the fixed cut-off and a
+    perfectly chosen one. The fire's study area holds 9,568 buildings, 2,357 of them directly
+    exposed (inside the perimeter or just outside it) and 7,211 further out; 738 are called
+    destroyed at the fixed cut-off and 799 under the count-tuned one, all of them among the
+    directly exposed.</p>
+    <p>Its detection recall (0.661) is lower than the California fires for a reason a user should
+    know: Microsoft's building-footprint layer is not available for New Mexico here, so the
+    starting list of buildings is the FEMA / Oak Ridge USA Structures layer alone, and the
+    Lincoln County extract of that layer carries a single image date of 2017-05-26 &mdash; seven
+    years before the fire. Buildings put up after that date are not in the starting list, and our
+    building detector has to find them from aerial photography.</p>
+    <p><strong>Marshall (Colorado, December 2021)</strong> is not part of the published dataset;
+    it sits before the period the dataset covers. It is here because it is the only fire in this
+    project with public per-building damage assessments that nobody here drew &mdash; two of
+    them, in fact: a door-to-door field assessment by Boulder County, and a remote-sensing
+    assessment by the FEMA Modeling and Analysis Center, which the table below shortens to
+    FEMA MAC. Both are scored against the same inventory of 14,786 buildings.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Truth set</th><th class="num">Records</th><th class="num">Destroyed</th><th class="num">Pairs @10 m</th><th class="num">Detection recall</th><th class="num">P</th><th class="num">R</th><th class="num">F1 (fixed 0.85)</th><th class="num">F1 (adaptive)</th><th class="num">AUC</th><th class="num">Own cut → F1</th><th class="num">Predicted / assessed</th></tr></thead>
+        <caption>One fire, one inventory, two independent damage assessments</caption>
+        <thead><tr><th>Assessment</th><th class="num">Records</th><th class="num">Destroyed</th><th class="num">Matched pairs @10 m</th><th class="num">Detection recall</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1 (fixed 0.85)</th><th class="num">F1 (count-tuned)</th><th class="num">AUC</th><th class="num">Best possible cut-off &rarr; F1</th><th class="num">Called / assessed</th></tr></thead>
         <tbody>
           <tr><td>Boulder County — field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">1,023</td><td class="num">0.710</td><td class="num">0.981</td><td class="num">0.961</td><td class="num">0.971</td><td class="num">0.9725</td><td class="num">0.980</td><td class="num">0.62 → 0.973</td><td class="num">873 / 891 = 0.980</td></tr>
           <tr><td>FEMA MAC — remote sensing</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">2,741</td><td class="num">0.952 ⚠️</td><td class="num">0.907</td><td class="num">0.949</td><td class="num">0.927</td><td class="num">0.9109</td><td class="num">0.984</td><td class="num">0.88 → 0.929</td><td class="num">1,181 / 1,129 = 1.046</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/ics209_check/outside_ca/marshall_{boulder,femamac}_2021/report.md</code>,
-    regenerated 2026-09-12 at bundle <code>damage_sentinel2_v5</code>, cut 0.85, 14,774 points
-    scored; adaptive F1 from <code>outputs/operating_product/report.md</code>, the per-fire
-    table for the <code>Direct</code>-scoped variant that now ships.
-    ⚠️ FEMA MAC's detection recall is <strong>not comparable</strong> with the other two: its
-    geometry <em>is</em> USA Structures footprints, which is also the main source of our
-    inventory, so the two match each other by construction. Boulder County's 0.710 is an
-    address-point list and is the honest detection figure. The two assessments overlap on the
-    same buildings and disagree, which is why the adaptive column helps one and hurts the
-    other.</p>
-    <p><strong>Marshall also answered the winter question.</strong> Its pre-fire window gives a
-    median of 6 clear Sentinel-2 observations per structure and its post-fire window a median
-    of <strong>2</strong>, against 9–17 on a summer California fire — and even so only a handful of
-    its <strong>14,774</strong> scored structures could not be called. Snow does not stop
-    it; the post composite is simply thin.</p>
+    <p class="src"><b>Source:</b> the Marshall scoring reports under <code>outside_ca/</code> on
+    the data share, regenerated 2026-09-12 at a cut-off of 0.85 over 14,774 scored points;
+    count-tuned F1 from <code>operating_product/report.md</code>.
+    ⚠️ The FEMA assessment's detection recall is <strong>not comparable</strong>
+    with the other figures on this page: its geometry <em>is</em> the USA Structures footprint
+    layer, which is also a main source of our building list, so the two agree by construction.
+    Boulder County's 0.710 is an address-point list and is the honest detection figure for this
+    fire. The two assessments cover the same buildings and disagree with each other, which is why
+    the count-tuned column helps against one and hurts against the other.</p>
+    <p class="hint"><strong>Reading it:</strong> against two surveys drawn independently of this
+    project, the estimate scores a destroyed-class F1 of 0.971 against the county's field
+    assessment and 0.927 against the FEMA one, and the number of buildings it calls destroyed
+    lands within a few per cent of the assessed total either way.</p>
+    <div class="note ok">
+      <p><strong>Outside California the count-tuned call is the stronger of the two.</strong>
+      Averaged over the three assessments outside California, F1 per fire is
+      <strong>0.9121</strong> for the count-tuned call against 0.8986 for the fixed one. The
+      split is visible on Marshall &mdash; Boulder County 0.9705 &rarr; <strong>0.9725</strong>,
+      FEMA 0.9273 &rarr; <strong>0.9109</strong> &mdash; and clearest on South Fork, where F1
+      goes <strong>0.8484 &rarr; 0.8825</strong> at a per-fire cut-off of 0.756 against a
+      best-possible ceiling of 0.945 and an AUC of 0.985. Three assessments over two fires is not
+      a distribution, and readers outside California should treat both numbers as indicative
+      rather than settled.</p>
+    </div>
+    <p><strong>A winter fire gives a thinner stack of images, and the estimate still holds
+    up.</strong> Sentinel-2, the pair of free European Space Agency satellites this project reads,
+    photographs every point on Earth every few days at 10&nbsp;m per pixel, but cloud and snow
+    throw many of those views away. Marshall's before-fire window gives a median of 6 clear views
+    per building and its after-fire window a median of <strong>2</strong>, against 9&ndash;17 on
+    a summer California fire. Even so, only a handful of its <strong>14,774</strong> scored
+    buildings could not be called at all.</p>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
     <p class="eyebrow">the per-fire maps</p>
-    <h2>Look at a fire</h2>
+    <h2>Look at a single fire</h2>
   </div>
   <div class="wrap">
-    <p>Each map is one self-contained page: the pre-fire inventory drawn on satellite imagery,
-    coloured by predicted destroyed probability, with the inspection record beside it. Whole
-    fires carry tens of thousands of points and will not fit in one browsable page, so each map
-    draws full detail inside the densest 800 m neighbourhoods plus the cell holding the most
-    model misses outside them — the interesting failure — and covers the rest of the fire with a
-    coarse 250 m rate grid. The sampling is stated on the map itself.</p>
+    <p>Each map is a self-contained page: the pre-fire list of buildings drawn on satellite
+    imagery, coloured by the probability that each was destroyed, with the ground-truth survey
+    beside it. A whole fire carries tens of thousands of buildings and will not fit in one
+    browsable page, so each map draws full detail inside the densest 800&nbsp;m neighbourhoods,
+    plus the one neighbourhood outside them holding the most disagreements with the survey, and
+    covers the rest of the fire with a coarse 250&nbsp;m grid of rates. Each map states its own
+    sampling.</p>
     <div class="tablewrap">
       <table>
+        <caption>Where to open each fire's map</caption>
         <thead><tr><th>Fire</th><th>Map</th><th>Fire</th><th>Map</th></tr></thead>
         <tbody>
           <tr><td>Eaton 2025</td><td><a href="inventory_DINS_2025_EATON.html">inventory map</a></td><td>Palisades 2025</td><td><a href="inventory_DINS_2025_PALISADES.html">inventory map</a></td></tr>
@@ -775,12 +828,12 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>scripts/qa_maps.py</code>, from each fire's
-    <code>outputs/inventory/&lt;unit&gt;/structures_damage.gpkg</code>, regenerated 2026-09-13.
-    The maps recompute nothing: every number they show is read from the file the pipeline stage
-    wrote, or counted off the rows being drawn. The sixteen <em>retrospective</em> fires have
-    maps of their own, linked from
-    <a href="retrospective.html">running the pipeline backwards</a>.</p>
+    <p class="src"><b>Source:</b> each fire's per-building results file under
+    <code>inventory/</code> on the data share, regenerated 2026-09-13. The maps recompute
+    nothing: every number they show is read from the published file or counted off the rows being
+    drawn.</p>
+    <p class="hint"><strong>Reading it:</strong> pick a fire to see where the estimate and the
+    survey agree and, more usefully, the neighbourhoods where they do not.</p>
   </div>
 </section>
 
@@ -788,16 +841,15 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Companion pages: <a href="index.html">the index</a> ·
-      <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="combined-series.html">the combined dataset</a> ·
-      <a href="retrospective.html">running the pipeline backwards</a> ·
-      <a href="uncertainty.html">how wide the numbers are</a> ·
-      <a href="outside-california.html">outside California</a>.</p>
-    <p class="mono">Provenance: detector <code>seg_all_v4</code> on each fire's perimeter frame,
-    damage model <code>damage_sentinel2_v5</code> at the fixed cut 0.85, advisory rule
-    <code>expected_f1_isotonic_direct</code>, release <code>v0.9.0</code>, data date
-    2026-09-12.</p>
+    <p>Companion pages: <a href="index.html">start here</a> &middot;
+      <a href="how-it-works.html">how it works</a> &middot;
+      <a href="pipeline-overview.html">the method in full</a> &middot;
+      <a href="confusion-matrix.html">confusion matrix</a> &middot;
+      <a href="combined-series.html">the dataset</a> &middot;
+      <a href="uncertainty.html">how certain</a> &middot;
+      <a href="outside-california.html">beyond California</a>.</p>
+    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-12. Primary estimate at a
+    fixed cut-off of 0.85; the count-tuned call sets its cut-off per fire.</p>
   </div>
 </footer>
 

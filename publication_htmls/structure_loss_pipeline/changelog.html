@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>What Changed</title>
-<meta name="description" content="The decisions that changed what this dataset contains or what its numbers mean, newest first — for anyone who used an earlier version." />
+<title>Release History</title>
+<meta name="description" content="Every published version of the building-loss dataset, with its date, coverage and schema, so a user can tell which version they have and what it contains." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   /* ============================================================
@@ -359,11 +359,12 @@
     header.masthead { padding-block: 2.2rem 1.4rem; }
     nav.rail .sibs { display: none; }
   }
-  td.when, th.when {
-    white-space: nowrap; font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--t-sm); color: var(--ink-2);
+  td.ver {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+    white-space: nowrap; color: var(--ink);
   }
-  td.what { min-width: 20ch; font-weight: 600; }
+  tr.current td { background: color-mix(in srgb, var(--s3-soft) 55%, transparent); }
+  tr.current td.ver { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -371,213 +372,99 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>What changed</span><span class="of">page 10 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html" aria-current="page">What changed</a></span>
+    <span class="here"><span>Release history</span><span class="of">page 9 of 9</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">Structure Loss Pipeline · history</p>
-    <h1>What changed</h1>
-    <p class="lede">Every other page on this site describes the dataset as it is now. This one is
-    for anyone who read an earlier version, or an earlier number: the decisions that changed what
-    the dataset contains or what its figures mean, newest first, one line each.</p>
+    <p class="kicker">Structure Loss Pipeline · release history</p>
+    <h1>Release history</h1>
+    <p class="lede">This project publishes a building-loss dataset: one row per building per
+    fire, saying whether that building was destroyed. Each published version is frozen and
+    keeps its own version number, so an analysis can name exactly which data it used. This
+    page lists every version, what it covers, and how wide its schema is. <strong>The current
+    version is v0.9.0, released 13 September 2026: 377 fires, 2,069,752 rows, 68
+    columns.</strong></p>
   </div>
 </header>
-
-<div class="wrap">
-  <div class="status">
-    <h3>The short version</h3>
-    <p><strong>If you are holding numbers from before 13 September 2026, replace them.</strong>
-    A defect in how satellite pixels were read moved most damage features; the frame that decides
-    which buildings a fire contains changed; radar left the model; and the dataset went from five
-    fires of the historical record to all 361 of it. Nothing published before that date carries
-    over unchanged.</p>
-  </div>
-</div>
 
 <main id="main">
 
 <section class="part">
-  <div class="wide">
-    <p class="eyebrow">the record</p>
-    <h2>Decisions a data user would notice</h2>
-  </div>
-  <div class="wide">
-    <div class="tablewrap">
-      <table>
-        <caption>Newest first. The full technical entry for each is in the project change log,
-        under the date given.</caption>
-        <thead><tr><th class="when">Date</th><th class="what">What changed</th><th>Why it matters to you</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="when">2026-09-13</td>
-            <td class="what">A second model's call arrives beside the first, and is better on both counts</td>
-            <td>Most scored rows carry a <strong>third loss call</strong>, from a model that
-            reads three things the first cannot: a clean before-and-after pair of annual
-            composites, the per-scene dynamics of the year after ignition, and a second, later
-            post-fire window. None of that exists at 74 days, so the call is <em>later</em> than
-            the primary one and cannot replace it. On the rows that carry both it gains
-            <strong>+2.4 points of precision and +5.1 of recall</strong> — not one bought with
-            the other — <strong>+0.037 pooled F1</strong> and <strong>+0.035 mean per fire</strong>,
-            both on intervals that exclude zero, and <strong>+31 points of F1</strong> on the
-            rows the primary call is least sure about. <strong>The primary call is byte-identical
-            to the previous release.</strong> Where the second call cannot be made the column is
-            null <em>with a stated reason</em> — always a calendar reason, never a failure on
-            the fire — and it is null throughout the hand survey's half.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-13</td>
-            <td class="what">The last big retrospective fire lands, and nothing moves</td>
-            <td>Dixie 2021 — 3,959 km², the largest frame in the cohort — is the seventeenth fire
-            the hand survey covers that this pipeline has now also enumerated. It brings 8,990
-            structures and 1,156 destroyed calls, and its own numbers are among the best in the
-            set. <strong>No published bound moved</strong>: the detection range is still
-            0.588–0.912 and the precision range still 0.831–0.963, while the end-to-end destroyed
-            ratio went 0.764 to <strong>0.769</strong>. One admitted fire is still out, and no
-            amount of compute fixes it — Erskine 2016's county has no footprint dated before the
-            fire.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-13</td>
-            <td class="what">A wrong flag corrected, and the build's own record finally ships</td>
-            <td>The column saying whether a building owns any 60-centimetre raster cells was set
-            from the shape it was given rather than from the cells it ended up with, so it read
-            <strong>39,646</strong> where the truth is <strong>114,659</strong>. It is corrected,
-            and the count behind it now ships as its own column. Separately, the build stage's
-            manifest was being written and then silently overwritten by the package's: both now
-            ship, and the file table in the data descriptor is accurate for the first time. No
-            row, fire or loss call changed.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">Sixteen of the survey's own fires are now described twice</td>
-            <td>The 2016–2022 era stops being "capable, not done": sixteen fires the hand survey
-            already covers have been run through this pipeline as well and are rows in the file
-            beside the survey's own. <strong>The row unit is now (fire, source) and the two
-            descriptions of a dual-source fire must never be summed</strong> — neither is a
-            subset of the other. Group by fire <em>and</em> source; a pooled count over an era
-            picks one. The building identifier is namespaced per source and a test enforces it.
-            In the same release every one of the survey's 1,770,939 rows gained nine geometry
-            columns at 100.0000 % join coverage, and South Fork NM joined the modern half.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">The advisory loss call is scoped to the near-perimeter zone</td>
-            <td>The second, advisory destroyed call now takes each fire's threshold from the
-            perimeter-plus-100 m population instead of the whole inventory. Its per-fire
-            thresholds moved from a 0.158–0.792 range to 0.601–0.792 and it calls 15,951
-            structures destroyed rather than 17,362. The primary call did not move at all.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">The dataset carries the whole historical record</td>
-            <td>361 fires and 1,770,939 rows of the 2002–2022 survey, verbatim, where earlier
-            versions carried only the five fires that happened to be cached. If you joined on a
-            building identifier, note that four fires' identifiers changed: they are now
-            enumerated per fire over the national release.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">Radar left the damage model</td>
-            <td>The model is optical only. Radar had been promoted under a rule written in
-            advance; on corrected feature tables it no longer cleared that rule, so it was
-            removed. Removing it costs nothing measurable and lets the model run on fires from
-            before the radar archive opened.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">Two flag columns on the historical half</td>
-            <td>The survey's own release repeats 20,296 rows exactly, and 18.3 % of its rows sit
-            at a location a second fire also claims. Both are now flagged per row rather than
-            silently cleaned. <strong>De-duplicate on geometry before any pooled count.</strong>
-            This is a separate trap from the dual-source rule above, and both apply.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-12</td>
-            <td class="what">A second loss call ships beside the first</td>
-            <td>Every scored row now carries two calls: one at a fixed threshold and one at a
-            per-fire threshold. Use the fixed one to classify buildings and the advisory one if
-            you are counting them — and say which you used.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-11</td>
-            <td class="what">The licence is settled</td>
-            <td>MIT for the code, CC BY 4.0 for the data. Rows whose geometry came from an
-            ODbL-licensed footprint layer are dropped from the released package — 32,910 rows,
-            1.57 % of the build, unevenly distributed and heaviest on rural fires. None of the
-            survey's own rows is touched. No DOI has been minted yet.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-11</td>
-            <td class="what">An attribution rule for overlapping fires</td>
-            <td>When two fires reach the same building inside each other's observation windows,
-            one rule decides which fire may claim it. Structures called destroyed under two fires
-            went from 271 to 0. Rows ceded to a later fire carry no damage call and say why.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-10</td>
-            <td class="what">The frame became the fire's public perimeter</td>
-            <td>Which buildings a fire contains is now decided by its published perimeter plus a
-            ring, matching the historical survey's own rule. It replaced a buffer drawn around
-            inspection points, which enumerated a different population and could not define a
-            fire at all in a state with no inspection programme. It added roughly a third again
-            as many structures and moved no accuracy figure.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-10</td>
-            <td class="what">A satellite sampling defect was found and fixed</td>
-            <td><strong>The one that invalidates old numbers.</strong> The read window that pulls
-            reflectance for a building could disagree with the coordinates indexing it by one
-            pixel, and the cloud mask was read at a different padding from the bands it masked —
-            so a building's cloud verdict could come from a different pixel than its reflectance.
-            At least one feature changed for <strong>85 % of buildings</strong> in the 10 m
-            tables and <strong>51 %</strong> in the 30 m ones. Every table was rebuilt and every
-            model refitted.</td>
-          </tr>
-          <tr>
-            <td class="when">2026-09-10</td>
-            <td class="what">The building detector was frozen</td>
-            <td>Detector work stopped at one checkpoint so that later comparisons are about the
-            damage model rather than about a moving inventory.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>logs/CHANGELOG.md</code> in the project repository, the
-    dated entry for each row, and <code>docs/release-notes.md</code>. Each entry carries the
-    measurement behind the decision and the commit that applied it; the experiment ledger
-    (<code>docs/experiment-ledger.md</code>) carries one row per idea, experiment and data
-    source, including the ones that failed.</p>
+  <div class="wrap">
+    <p class="eyebrow">how to use this page</p>
+    <h2>Versions are frozen; newer is wider, not different</h2>
+    <p>A published version is never edited. Later versions add fires, add rows, or add
+    columns; they do not silently change the values already published for a building that was
+    already there. If you are starting a new analysis, take the most recent version. If you
+    are reproducing a published result, take the version that result names.</p>
+    <p>Two things are counted in the table below. <strong>Rows</strong> is one building in one
+    fire as described by one source, so a fire covered by two independent sources contributes
+    two sets of rows and you must not add them together. <strong>Columns</strong> is the width
+    of the schema: how many attributes each row carries.</p>
   </div>
 </section>
 
 <section class="part">
-  <div class="wrap">
-    <p class="eyebrow">versions</p>
-    <h2>Which release you are holding</h2>
+  <div class="wide">
+    <p class="eyebrow">the main dataset</p>
+    <h2>Every published version of the building-loss dataset</h2>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Release</th><th class="when">Cut</th><th>What it is</th></tr></thead>
+        <caption>Each row is one frozen, published version. Dates are the time the release was
+        packaged. Two pre-release candidates that preceded the first public version are
+        included for completeness and should not be used.</caption>
+        <thead><tr><th>Version</th><th class="num">Released</th><th class="num">Fires</th>
+          <th class="num">Rows</th><th class="num">Columns</th><th>What a user gets</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong><code>v0.9.0</code></strong></td><td class="when">2026-09-13</td><td><strong>current.</strong> The second model gains two more channels and its call improves on both precision and recall. Same columns, rows and fires as <code>v0.8.0</code>, and the primary call byte-identical again.</td></tr>
-          <tr><td><code>v0.8.0</code></td><td class="when">2026-09-13</td><td>a second model's call on our rows, null with a stated reason elsewhere. 68 columns, up from 58.</td></tr>
-          <tr><td><code>v0.7.0</code></td><td class="when">2026-09-13</td><td>Dixie 2021 joins as the seventeenth dual-source fire: 377 fires, <strong>394</strong> (fire, source) pairs, 2,069,752 released rows.</td></tr>
-          <tr><td><code>v0.6.0</code></td><td class="when">2026-09-13</td><td>same rows and calls as <code>v0.5.0</code>: a corrected no-cell flag, a tenth geometry column, and the build stage's own manifest shipped beside the package's. 58 columns.</td></tr>
-          <tr><td><code>v0.5.0</code></td><td class="when">2026-09-12</td><td>377 fires and 2,062,248 released rows. Sixteen of the survey's fires described twice, South Fork NM added to the modern half, and nine geometry columns on every one of the survey's rows. 57 columns, up from 47.</td></tr>
-          <tr><td><code>v0.4.1</code></td><td class="when">2026-09-12</td><td>a patch on <code>v0.4.0</code>: only the advisory column and its threshold changed.</td></tr>
-          <tr><td><code>v0.4.0</code></td><td class="when">2026-09-12</td><td>the whole historical record, the optical-only damage model, the second loss call, and the licence decision.</td></tr>
-          <tr><td><code>v0.3.0</code></td><td class="when">2026-09-11</td><td>the last release with radar in the model and one loss call.</td></tr>
-          <tr><td><code>v0.2.0</code></td><td class="when">2026-09-10</td><td>the first release to clear all three release gates.</td></tr>
+          <tr><td class="ver">v0.2.0-rc1</td><td class="num">2026-09-10</td><td class="num">20</td><td class="num">364,953</td><td class="num">40</td><td class="no">Pre-release candidate. Not for use.</td></tr>
+          <tr><td class="ver">v0.2.0-rc2</td><td class="num">2026-09-10</td><td class="num">20</td><td class="num">399,682</td><td class="num">40</td><td class="no">Pre-release candidate. Not for use.</td></tr>
+          <tr><td class="ver">v0.2.0</td><td class="num">2026-09-10</td><td class="num">20</td><td class="num">399,682</td><td class="num">40</td><td>First public version: one row per building per fire, carrying the primary destroyed estimate and its probability.</td></tr>
+          <tr><td class="ver">v0.3.0</td><td class="num">2026-09-11</td><td class="num">20</td><td class="num">399,682</td><td class="num">43</td><td>Same fires and rows; three further per-building attributes.</td></tr>
+          <tr><td class="ver">v0.4.0</td><td class="num">2026-09-12</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">47</td><td>The published historical record joined in, so the series runs from 2002 rather than 2016. Licence and citation files settled.</td></tr>
+          <tr><td class="ver">v0.4.1</td><td class="num">2026-09-12</td><td class="num">376</td><td class="num">1,922,889</td><td class="num">47</td><td>Same fires, rows and schema as v0.4.0.</td></tr>
+          <tr><td class="ver">v0.5.0</td><td class="num">2026-09-12</td><td class="num">377</td><td class="num">2,062,248</td><td class="num">57</td><td>One further fire and ten further attributes per building.</td></tr>
+          <tr><td class="ver">v0.6.0</td><td class="num">2026-09-12</td><td class="num">377</td><td class="num">2,062,248</td><td class="num">58</td><td>Same fires and rows; one further attribute.</td></tr>
+          <tr><td class="ver">v0.7.0</td><td class="num">2026-09-12</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">58</td><td>7,504 further building rows, from one fire's buildings being described by a second source.</td></tr>
+          <tr><td class="ver">v0.8.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td>The refined estimate ships, as ten further columns beside the primary one. Same fires and rows.</td></tr>
+          <tr class="current"><td class="ver">v0.9.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td><strong>Current.</strong> Same fires, rows and schema as v0.8.0; the refined estimate is produced by a more accurate model.</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/releases/&lt;version&gt;/manifest.json</code> and
-    <code>docs/release-notes.md</code>. Every release directory carries a checksum file; a
-    version is a prerelease unless three gates clear with no override — no heterogeneity warning,
-    no damage model older than the configured production one, and no modern fire without a loss
-    call.</p>
+    <p class="src"><b>Source:</b> each version's own <code>manifest.json</code> under
+    <code>outputs/releases/</code> on the data share; fires, rows, columns and packaging time
+    are read from the manifest of that version. Read 2026-09-14.</p>
+    <p><b>In one sentence:</b> the dataset grew from 20 fires to 377 and from 40 attributes to
+    68, and the version to use today is v0.9.0.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the companion dataset</p>
+    <h2>The historical companion</h2>
+    <p>A second, smaller dataset is published beside the main one: the hand-assembled
+    historical record of buildings destroyed in United States wildfires between 2002 and 2022,
+    enriched with per-building attributes measured from imagery by this project. It has its
+    own version numbers.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Published versions of the historical companion dataset.</caption>
+        <thead><tr><th>Version</th><th class="num">Fires</th><th>What a user gets</th></tr></thead>
+        <tbody>
+          <tr><td class="ver">v0.1.0</td><td class="num">361</td><td>First published version of the enriched historical record.</td></tr>
+          <tr class="current"><td class="ver">v0.1.1</td><td class="num">361</td><td><strong>Current.</strong> Same fires; the attribute that flags a building with no usable measurement is filled for every fire, including the ones the first version left blank.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> the companion releases' own <code>manifest.json</code> files
+    under <code>outputs/releases/</code> on the data share, read 2026-09-14.</p>
+    <p><b>In one sentence:</b> use v0.1.1, which differs from v0.1.0 only in filling a flag
+    that was blank for some fires.</p>
+    <p><a href="augmented-carlson.html">The historical companion page</a> describes what is in
+    that dataset and how to use it safely.</p>
   </div>
 </section>
 
@@ -585,10 +472,13 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Companion pages: <a href="index.html">the index</a> ·
-      <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="combined-series.html">the combined dataset</a>.</p>
-    <p class="mono">Provenance: release <code>v0.9.0</code>, data date 2026-09-13.</p>
+    <p>Companion pages: <a href="index.html">start here</a> ·
+    <a href="combined-series.html">the dataset</a> ·
+    <a href="how-it-works.html">how it works</a> ·
+    <a href="confusion-matrix.html">confusion matrix</a>.</p>
+    <p class="mono">Provenance: current data release v0.9.0, packaged 2026-09-13; this page
+    read 2026-09-14. Every figure above comes from the named release's own manifest file on
+    the data share.</p>
   </div>
 </footer>
 

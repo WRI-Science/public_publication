@@ -36,6 +36,16 @@ detections_*.html
 # an index of only the fires that run happened to rebuild.
 qa-maps-index.html
 
+# ⚠️ And the LEGACY QA landing page, which is still sitting in the QA output
+# directory under the name `index.html` (written 2026-09-11, before qa_maps.py
+# was changed to write `qa-maps-index.html`). `publish()` globs *.html and that
+# name matched no pattern here, so the next full run would have copied a page
+# titled "Structure Loss Pipeline — QA maps" straight over this site's
+# hand-written landing page. Found 2026-09-14, before it happened.
+# The generator no longer writes this name; the file is a leftover, and this
+# line is the guard in case it or anything like it reappears.
+index.html
+
 # Landsat damage maps from the corrected `damage_landsat_v2` tables. That
 # bundle is the era-check bundle: advisory, not production, and nothing points
 # at it. One fire of its hundred arrived here from an unrelated run on
@@ -54,3 +64,27 @@ damage_*_sentinel2_v4.html
 # (inventory_DINS_2025_EATON.html), and the un-tagged legacy product beside it
 # is skipped rather than published. These are the old tagged filenames.
 inventory_*__perimeter.html
+
+# ---------------------------------------------------------------------------
+# Retired 2026-09-14, when this site was rewritten for a reader arriving fresh
+# rather than for the people who built it. The published set is now: the index,
+# how it works, the method in full, the confusion matrix, results by fire, the
+# dataset, beyond California, how certain, the historical companion, the
+# release history, and the per-fire maps. The pages below were written for a
+# reader who already had the background, and each one's substance now lives on
+# a page in that set.
+#
+# The detector read-out (twenty fires by thirty inventory recipes, with image
+# grids). Its live finding — what the detector adds over the public footprint
+# databases — is on `how-it-works.html` and `pipeline-overview.html`.
+detection_vs_dins.html
+
+# The answer-sheet audit: how the two ground-truth point sets place their
+# points and whether they agree. A newcomer needs the conclusion, which is on
+# `pipeline-overview.html`, not the audit.
+point_dataset_audit.html
+
+# The footprint-database comparison on one 2018 fire. It is the evidence
+# behind excluding the restrictively licensed rows; that decision is stated on
+# `combined-series.html` and on the index's inputs table.
+camp_qa_ms_v2.html

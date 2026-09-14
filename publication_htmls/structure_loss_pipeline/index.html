@@ -419,6 +419,14 @@
     font-size: var(--t-xs); color: var(--ink-3); display: block; margin-top: 0.55rem;
     font-family: "IBM Plex Mono", ui-monospace, monospace;
   }
+  dl.gloss {
+    display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem;
+    font-size: var(--t-ui); margin: 1.3rem 0 0.4rem;
+  }
+  dl.gloss dt { font-weight: 600; color: var(--ink); }
+  dl.gloss dd { margin: 0; color: var(--ink-2); line-height: 1.5; }
+  @media (max-width: 640px) { dl.gloss { grid-template-columns: 1fr; gap: 0.15rem 0; }
+    dl.gloss dd { margin-bottom: 0.65rem; } }
   .groupname {
     font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--s2);
@@ -432,44 +440,46 @@
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
     <span class="here"><span class="of">the index</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
     <p class="kicker">WRI Science · public publication</p>
-    <h1>Structure Loss Pipeline</h1>
-    <p class="lede">Which buildings a wildfire destroyed, worked out from free satellite and
-    aerial imagery instead of from a site visit. The national hand survey of what US wildfires
-    destroyed stops in 2022; this continues it, on the same schema, for fires that happen from
-    now on.</p>
+    <h1>Which buildings did the fire destroy?</h1>
+    <p class="lede">This project answers that question one building at a time, from free
+    satellite and aerial imagery rather than from a site visit. For each wildfire it builds a
+    list of the buildings that stood beforehand, then decides for each of them whether the fire
+    destroyed it, and publishes the result as a dataset: one row per building per fire. It is
+    designed to keep producing that record for fires that happen from now on, anywhere in the
+    continental United States.</p>
   </div>
 </header>
 
 <div class="wide">
   <div class="stats">
     <div>
-      <span class="fig">2,069,752</span>
-      <span class="cap">rows in the released dataset, one per building per fire per source</span>
-      <span class="from">releases/v0.9.0/manifest.json</span>
+      <span class="fig">377 fires</span>
+      <span class="cap">covered by the published dataset, 2002 to 2025, in the continental United States</span>
+      <span class="from">the current release manifest</span>
     </div>
     <div>
-      <span class="fig">377 fires</span>
-      <span class="cap">across 25 years, 2002–2025 — 361 from the hand survey, 33 from this pipeline, 17 described by both</span>
-      <span class="from">combined_series/manifest.json</span>
+      <span class="fig">2,069,752</span>
+      <span class="cap">rows: one building, in one fire, as described by one source</span>
+      <span class="from">the current release manifest</span>
     </div>
     <div>
       <span class="fig">0.873</span>
       <span class="ci">95 % CI [0.821, 0.910]</span>
-      <span class="cap">mean per-fire F1 of the destroyed call against inspectors, 8 incidents, resampling the fire</span>
-      <span class="from">uncertainty/dins_v5/pooled_ci.csv</span>
+      <span class="cap">average per-fire F1 of the destroyed call against fire-service inspections, over eight inspected incidents, resampling whole fires</span>
+      <span class="from">bootstrap tables, outputs/uncertainty/</span>
     </div>
     <div>
       <span class="fig">3.5 %</span>
       <span class="ci">95 % CI [2.5 %, 6.6 %]</span>
-      <span class="cap">of the buildings the public footprint databases miss that our detector recovers</span>
-      <span class="from">uncertainty/detector_marginal/</span>
+      <span class="cap">of buildings are missing from the public footprint databases and are recovered by our own detector</span>
+      <span class="from">bootstrap tables, outputs/uncertainty/</span>
     </div>
   </div>
 </div>
@@ -483,21 +493,21 @@
     <div class="path">
       <a href="how-it-works.html">
         <span class="t">How it works</span>
-        <span class="d">The method with no jargon: why a loss count is only as good as the list
-        of buildings it starts from, how a network learns to see a roof, and what a
-        before-and-after satellite pair can and cannot tell you about a house.</span>
+        <span class="d">The method in plain language: why a loss count is only as good as the
+        list of buildings it starts from, how a network is trained to see a roof from the air,
+        and what a before-and-after satellite pair can and cannot tell you about a house.</span>
       </a>
       <a href="pipeline-overview.html">
-        <span class="t">The full picture</span>
-        <span class="d">The technical read: both halves of the method, and one quantified
-        section for every other dataset that covers the same buildings — footprint databases,
-        fire inspections, the hand survey, national incident counts.</span>
+        <span class="t">The method in full</span>
+        <span class="d">The technical read: every step of both halves of the method, the
+        accuracy of each, and how the results compare with every other dataset that describes
+        the same buildings.</span>
       </a>
-      <a href="forward-fires.html">
-        <span class="t">The results, fire by fire</span>
-        <span class="d">Every fire this pipeline has scored, with both destroyed counts, how
-        many inspected buildings it found, and a browsable map of its predictions on
-        imagery.</span>
+      <a href="confusion-matrix.html">
+        <span class="t">Confusion matrix</span>
+        <span class="d">How often the destroyed call is right, and how it is wrong when it is
+        wrong: all four counts against each independent ground-truth source, as raw numbers
+        and as percentages.</span>
       </a>
     </div>
   </div>
@@ -508,231 +518,200 @@
     <p class="eyebrow">what this is</p>
     <h2>The project in four paragraphs</h2>
 
-    <p>The USGS structure-loss dataset is a per-building census of what wildfires destroyed in
-    the continental United States between 2002 and 2022 — 361 fires, 1,770,939 buildings, hand
-    digitised. It is the reference layer for anyone modelling wildfire exposure, and it stops at
-    2022. This project continues it with a pipeline that uses public data only: aerial imagery
-    and two public footprint databases to enumerate the buildings that stood before a fire, then
-    before-and-after satellite imagery at each building to decide which of them burned.</p>
+    <p>Knowing which buildings a wildfire destroyed matters for insurance, for recovery
+    funding, for building-code research and for any model of wildfire risk. Today that
+    knowledge is assembled by hand. The best existing record — a published dataset compiled by
+    Carlson and colleagues — is a per-building census of destruction in 361 continental
+    United States wildfires between 2002 and 2022, digitised by hand from imagery. It is the
+    reference layer for anyone modelling wildfire exposure, and it ends in 2022.</p>
 
-    <p>The two halves are judged separately, against different answer sheets, because they are
-    different mistakes. The list of buildings is scored against the hand survey's
-    <em>census</em> — which enumerates every major building inside a fire's footprint, so a
-    missing building is measurable. The loss call is scored against fire-service
-    <em>inspections</em> of fires that happened after the survey ends, which is the only truly
-    out-of-sample evidence that exists. The honest summary of the first half is that the public
-    footprint databases <strong>are</strong> the product and our detector is slightly better
-    than them. The honest summary of the second is that the loss call is good, and that the
-    evidence behind it is <strong>eight California fires</strong>, two of which hold most of the
-    buildings.</p>
+    <p>This project produces the same kind of record automatically. The inputs are public and
+    national: two building-footprint databases and federal aerial photography to enumerate the
+    buildings that stood before a fire, and Sentinel-2 — a pair of free European Space Agency
+    satellites that photograph every point on Earth about every five days at 10&nbsp;m per
+    pixel — to compare each building's own patch of ground before and after the fire.</p>
 
-    <p>The output is one file on one schema, one row per building per fire, with the survey's
-    rows and ours side by side and a field only one era can fill left null on the other rather
-    than back-filled. Every row carries a continuous destroyed probability, the threshold behind
-    the call, where the building sat relative to the fire perimeter, and which layer found it
-    and which model scored it. MIT for the code, CC BY 4.0 for the data.</p>
+    <p>The two halves are judged separately, because they fail differently. The list of
+    buildings is scored against the hand-assembled census, which enumerates every major
+    building inside a fire's area, so a missing building can be counted. The destroyed call is
+    scored against fire-service damage inspections of fires that happened <em>after</em> that
+    census ends, which is the strongest out-of-sample evidence available, and against
+    independent assessments by federal and county teams outside California. Every accuracy
+    figure on this site is measured on fires the model never saw during training.</p>
 
-    <p>Two rules shape everything here. <strong>No attribute of the fire itself ever reaches the
-    model</strong> — not size, perimeter, burn severity, region, state or year — so a loss call
-    is never a restatement of the fire's own attributes; perimeters decide where to look and
-    never what to predict. And <strong>every promotion bar is written down before the number
-    that would clear it is measured</strong>, which is why this site publishes results that
-    point away from what shipped: a component of the model that stopped clearing its own rule
-    and was removed because of it, and a threshold rule that cleared a pre-registered bar, was
-    adopted, and then did not transfer to the product — so it ships as a second column with the
-    reason written down rather than quietly replacing the first.</p>
+    <p>The output is one file on one schema: one row per building per fire, carrying a
+    continuous destroyed probability, the threshold behind the call, where the building sat
+    relative to the fire perimeter, and which data source found it. The code is MIT-licensed
+    and the data is CC BY 4.0.</p>
   </div>
 </section>
 
 <section class="part">
   <div class="wrap">
-    <p class="eyebrow">status</p>
-    <h2>Where the project is, 13 September 2026</h2>
+    <p class="eyebrow">before you use it</p>
+    <h2>Four things to know about the data</h2>
     <div class="status">
-      <p><strong>The published dataset is <code>v0.9.0</code>, cut on 2026-09-13 and
-      committed.</strong> The 2016–2022 era has stopped being "capable, not done":
-      <strong>seventeen</strong> fires the hand survey already covers have now been run through
-      this pipeline as well — every fire that was ever admitted except one — and each of the
-      survey's 1,770,939 rows carries a building polygon. Every number on this site is transcribed from a file the pipeline wrote, and the
-      source line under each table names it.</p>
-      <p><strong>Three caveats a first-time reader should carry.</strong></p>
       <ul class="tight">
-        <li><strong>Two loss calls ship on every row, and the second is advisory.</strong> The
-        per-fire threshold rule cleared a pre-registered bar on a table of inspected structures
-        and then failed on the product population, so it is a second column rather than a
-        replacement — <a href="pipeline-overview.html#population">the deep dive</a> tells that
-        story, and it is the most important caveat on this site.</li>
-        <li><strong>A count from this pipeline is not a count from the hand survey.</strong> Run
-        end to end on seventeen of the survey's own fires it reports about 0.77 of its
-        destroyed count, that factor runs 0.48 to 1.80 fire to fire, and it is a net of a large miss and a
-        large addition — <a href="retrospective.html">running the pipeline backwards</a>. Those
-        seventeen fires are now in the file <em>twice</em>, once per method, and
-        <strong>the two descriptions must never be summed</strong>.</li>
-        <li><strong>Most rows now carry a third, later loss call.</strong> A second model
-        reads evidence that only exists once the year after the fire is over, and is better on
-        <em>both</em> precision and recall — and worth <strong>thirty-one points of F1</strong>
-        on the rows the first model is least sure about. It is a separate column, never an edit
-        to the first — <a href="pipeline-overview.html#refined">the deep dive</a> has it.</li>
-        <li><strong>Nothing here is a forward hold-out yet.</strong> Every damage figure is
-        cross-validated or leave-one-fire-out. The fix is time, and it waits on the next
-        inspection archive.</li>
+        <li><strong>There are two estimates per building, with different delivery
+        times.</strong> The <em>primary</em> estimate is available about two and a half months
+        after a fire starts and covers every building in every fire. The <em>refined</em>
+        estimate arrives about a year later, once more imagery exists, and is more accurate:
+        against fire-service inspections, scored on the same buildings, F1 goes from 0.9239 to
+        <strong>0.9607</strong>. It does not exist for every building — see
+        <a href="confusion-matrix.html">the confusion matrix page</a> for the coverage of each
+        ground-truth source.</li>
+        <li><strong>Never add up rows across sources for the same fire.</strong> Seventeen
+        fires are described twice: once by the hand-assembled historical census and once by
+        this pipeline, one row per building per source. Summing both descriptions double-counts
+        those fires. <a href="combined-series.html">The dataset page</a> names the column that
+        tells them apart.</li>
+        <li><strong>The inspection ground truth is Californian.</strong> Structure-by-structure
+        inspection records exist at scale only in California. Outside it the evidence is the
+        historical census plus three independent one-off assessments.
+        <a href="outside-california.html">Beyond California</a> reports what that evidence
+        says.</li>
+        <li><strong>Buildings far from a fire are almost never destroyed, and the model has
+        almost no signal there.</strong> Accuracy figures are worth reading separately for
+        buildings inside the fire perimeter or within 100&nbsp;m of it, and for buildings 100&nbsp;m
+        to 2.4&nbsp;km outside it. <a href="uncertainty.html">How certain</a> splits them.</li>
       </ul>
-      <p><span class="pill flight">in progress · 13 September 2026</span> A literature review
-      feeding an improvement campaign. It has changed no number on this site.</p>
-      <p>Upgrading from an earlier version, or holding an older number?
-      <a href="changelog.html">What changed</a> is the dated list.</p>
     </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">glossary</p>
+    <h2>The terms this site uses</h2>
+    <p>Every page defines its own terms where they appear. This is the short list, in one
+    place, for a reader who wants it up front.</p>
+    <dl class="gloss">
+      <dt>Building footprint</dt><dd>A polygon outlining a building's roof, drawn from overhead imagery. Two public databases supply them nationally: the FEMA / Oak Ridge USA Structures layer and Microsoft's US Building Footprints.</dd>
+      <dt>Building list</dt><dd>The set of buildings we believe stood in a fire's area before it burned: the footprint databases, plus buildings found by our own detector, each tagged with where it came from.</dd>
+      <dt>Our detector</dt><dd>A neural network trained on aerial photography to find buildings the footprint databases miss.</dd>
+      <dt>Primary estimate</dt><dd>The destroyed call available about two and a half months after a fire starts. It exists for every building in every fire covered.</dd>
+      <dt>Refined estimate</dt><dd>A second, more accurate destroyed call available about a year later, once a further post-fire image window and a year-over-year satellite summary exist. It exists for most buildings in most fires, not all.</dd>
+      <dt>Threshold</dt><dd>The model outputs a probability per building; we call a building destroyed above a fixed number — 0.85 for the primary estimate, 0.84 for the refined one. The number is fixed in advance, not tuned to the fire being scored.</dd>
+      <dt>Sentinel-2</dt><dd>Two free European Space Agency satellites that photograph every point on Earth about every five days at 10 m per pixel.</dd>
+      <dt>Aerial photography (NAIP)</dt><dd>The US Department of Agriculture's National Agriculture Imagery Program: aerial photographs of the continental United States at roughly 60 cm per pixel, reflown every two to three years.</dd>
+      <dt>Annual satellite embedding</dt><dd>A freely published yearly summary of what each 10 m patch of ground looked like across a whole year, as 64 numbers per pixel, so one year can be compared with the next.</dd>
+      <dt>Fire-service damage inspections</dt><dd>CAL FIRE's Damage Inspection programme: after a fire, inspectors walk the burn area and record, structure by structure, whether it was destroyed, damaged or untouched. Used here as ground truth.</dd>
+      <dt>The historical census</dt><dd>The published, hand-assembled record of buildings destroyed in 361 United States wildfires between 2002 and 2022, one point per destroyed building, compiled by Carlson and colleagues.</dd>
+      <dt>Study area around a fire</dt><dd>The official fire perimeter plus a 2.4 km margin. Buildings inside the perimeter or within 100 m of it are <em>directly exposed</em>; buildings from 100 m to 2.4 km outside are <em>indirectly exposed</em> and are very rarely destroyed.</dd>
+      <dt>Matched at 10 m</dt><dd>A ground-truth point and one of our building locations count as the same building when they lie within 10 m of one another, matched one-to-one, so no building is counted twice.</dd>
+      <dt>Held-out scoring</dt><dd>The model that scores a fire is trained only on the other fires, so no fire is ever in its own training set. Every accuracy figure on this site is measured this way.</dd>
+      <dt>Precision and recall</dt><dd>Precision is the share of our destroyed calls that were right; recall is the share of the real destruction we found.</dd>
+      <dt>F1</dt><dd>The harmonic mean of precision and recall: one number that punishes both missing real destruction and over-calling it. 1.0 is perfect.</dd>
+      <dt>Pooled vs mean-per-fire</dt><dd>A pooled figure counts every building equally, so the largest fires dominate it; a mean-per-fire figure counts every fire equally. Both are reported because they answer different questions.</dd>
+      <dt>95 % interval over fires</dt><dd>Computed by resampling whole fires 2,000 times. It says how much a number would move if we had happened to cover a different set of fires — the uncertainty that matters here, because buildings within one fire are not independent.</dd>
+      <dt>Why accuracy misleads</dt><dd>In a typical study area only about 6–7 % of buildings are destroyed, so a model that called everything "survived" would score about 93 % accuracy and be useless.</dd>
+    </dl>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">the inventory</p>
-    <h2>Every page published here</h2>
+    <p class="eyebrow">the pages</p>
+    <h2>Everything published here</h2>
   </div>
   <div class="wrap">
-    <p>Four groups. <strong>Explain</strong> is the method and its history;
-    <strong>results</strong> are the measurements; <strong>data</strong> is what you would
-    download and what the answer sheets are worth; <strong>maps</strong> are one self-contained
-    page per fire, drawn on satellite imagery, so a prediction can be judged by eye rather than
-    taken on trust.</p>
+    <p>Four groups. <strong>Explain</strong> is how the method works;
+    <strong>results</strong> are the measurements of how well it works; <strong>data</strong>
+    is what you would download and how to use it safely; <strong>maps</strong> are one
+    self-contained page per fire, drawn on satellite imagery, so a prediction can be judged by
+    eye rather than taken on trust.</p>
 
     <p class="groupname">Explain</p>
     <div class="cards">
       <a href="how-it-works.html">
         <span class="t">How it works</span>
-        <span class="d">The general-audience explainer: the inventory problem, how the detector
-        is trained, what a before-and-after reflectance pair can see, and a glossary.</span>
-        <span class="when">data 2026-09-12</span>
+        <span class="d">The plain-language explainer: why the list of buildings is the hard
+        part, how the detector is trained, what a before-and-after satellite pair can see, and
+        a glossary.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
       <a href="pipeline-overview.html">
-        <span class="t">The full picture</span>
-        <span class="d">The deep dive. Both halves of the method, one quantified section per
-        comparison dataset, what was tried and rejected, known limitations, releases and
-        licence.</span>
-        <span class="when">data 2026-09-12</span>
+        <span class="t">The method in full</span>
+        <span class="d">The technical read. Both halves of the method step by step, the
+        accuracy of each, how the results compare with every other dataset covering the same
+        buildings, and the known limits.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
       <a href="changelog.html">
-        <span class="t">What changed</span>
-        <span class="d">The decisions that changed what the dataset contains or what its figures
-        mean, newest first, one line each.</span>
-        <span class="when">to 2026-09-12</span>
+        <span class="t">Release history</span>
+        <span class="d">Every published version of the dataset with its date, coverage and
+        schema width, so an analysis can name exactly which data it used.</span>
+        <span class="when">to 2026-09-14</span>
       </a>
     </div>
 
     <p class="groupname">Results</p>
     <div class="cards">
-      <a href="forward-fires.html">
-        <span class="t">Fire by fire</span>
-        <span class="d">A sortable table of all seventeen fires with a loss call — both
-        destroyed counts, the per-fire advisory threshold, detection recall, precision, recall,
-        F1, AUC, and a link to each fire's map.</span>
-        <span class="when">data 2026-09-12</span>
+      <a href="confusion-matrix.html">
+        <span class="t">Confusion matrix</span>
+        <span class="d">All four counts — agreed destroyed, missed, false alarm, agreed
+        survived — for both estimates against each independent ground-truth source, as raw
+        numbers, as a share of all buildings and as a share of their own row.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
-      <a href="retrospective.html">
-        <span class="t">Running the pipeline backwards</span>
-        <span class="d">Sixteen fires the hand survey already covers, rebuilt end to end: how
-        many buildings this pipeline finds, how many losses it calls, and whether the answer
-        drifts with the year. It does not.</span>
-        <span class="when">data 2026-09-12</span>
+      <a href="forward-fires.html">
+        <span class="t">Results by fire</span>
+        <span class="d">Every fire this project has scored, with the destroyed count it
+        reports, the count ground truth reports, precision, recall, F1 and a link to that
+        fire's map.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
       <a href="outside-california.html">
-        <span class="t">Outside California</span>
-        <span class="d">Sixty-six fires in eleven states, the region contrast with intervals,
-        thirteen threshold rules against a bar written first, what per-structure truth exists
-        beyond the state line — mostly none — and whether the method reaches back before
-        2016.</span>
-        <span class="when">data 2026-09-12</span>
+        <span class="t">Beyond California</span>
+        <span class="d">Does the method work outside the state where almost all the inspection
+        data is? Sixty-six fires in eleven states, with intervals, and what per-building ground
+        truth exists beyond the state line.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
-      <a href="damage-scorecard.html">
-        <span class="t">Did this structure burn?</span>
-        <span class="d">One confusion matrix per answer sheet at the shipped threshold, because
-        the answer sheets do not count the same buildings; precision-recall and ROC curves with
-        the thresholds marked; and a taxonomy of what the errors actually are.</span>
-        <span class="when">data 2026-09-13</span>
-      </a>
-      <div class="plain">
-        <span class="t">Literature, and where we stand</span>
-        <span class="d">The only directly comparable published result — per-building
-        wildfire damage from the same 10 m satellites, scored with whole events held
-        out — reports a destroyed-class F1 of <strong>0.833</strong>. Ours is
-        <strong>0.873</strong> mean per fire and <strong>0.916</strong> pooled on the same
-        kind of test, and the best per-building damage F1 anyone has published at 0.3–1 m
-        <em>with</em> radar is 0.727. Dietrich et al. (2025), <em>The Potential of
-        Copernicus Satellites for Disaster Response</em>, arXiv:2511.05461. The improvement
-        campaign that review fed ran <strong>six pre-registered rounds</strong> and moved the
-        74-day call not at all; what it did find ships as
-        <a href="pipeline-overview.html#refined">the later refinement call</a>.</span>
-        <span class="when">~90 sources · docs/literature-review-damage.md §d.8</span>
-      </div>
       <a href="uncertainty.html">
-        <span class="t">How wide the numbers are</span>
-        <span class="d">A fire-level bootstrap on every headline, per-incident intervals,
-        reliability diagrams showing the score is over-confident in 19 of 20 bins, and why
-        nothing here is yet a forward hold-out.</span>
-        <span class="when">data 2026-09-12</span>
+        <span class="t">How certain</span>
+        <span class="d">How wide every headline number is, why the uncertainty that matters is
+        over fires rather than buildings, and how well the model's probabilities match observed
+        frequencies.</span>
+        <span class="when">data 2026-09-14</span>
       </a>
     </div>
 
     <p class="groupname">Data</p>
     <div class="cards">
       <a href="combined-series.html">
-        <span class="t">The dataset itself</span>
-        <span class="d">What is inside the release: rows per era and source across 377 fires,
-        every fire's building and destroyed counts, the licence exclusion per fire, our count
-        against the inspectors' and the incident commander's, and the seven ways the two halves
-        are not equivalent.</span>
-        <span class="when">v0.9.0 · 2026-09-13</span>
+        <span class="t">The dataset</span>
+        <span class="d">What is inside the release: what a row is, what the columns mean, which
+        fires come from which source, the rules for using it without double counting, and the
+        licence.</span>
+        <span class="when">current release · 2026-09-14</span>
       </a>
       <a href="augmented-carlson.html">
-        <span class="t">The augmented historical record</span>
-        <span class="d">A polygon and a 60-centimetre raster cell for all 1,770,939 buildings in
-        the 2002–2022 survey, and the measured bias in using a present-day footprint database to
-        supply them. Released separately as a 5.41 GB archive.</span>
-        <span class="when">v0.1.0 · 2026-09-13</span>
-      </a>
-      <a href="point_dataset_audit.html">
-        <span class="t">How good the answer sheets are</span>
-        <span class="d">Audits the truth, not the model: how the two per-building truth sets
-        place their points against footprints, whether either double-counts within a fire, and
-        how well they agree with each other. Reads nothing the pipeline produced.</span>
-        <span class="when">regenerated 2026-09-12</span>
-      </a>
-      <a href="camp_qa_ms_v2.html">
-        <span class="t">Comparing the two footprint databases</span>
-        <span class="d">The two public building-footprint layers against the hand survey's
-        points on one 2018 fire, with capture dates shown. It is the evidence behind excluding
-        the more restrictively licensed rows from the released package.</span>
-        <span class="when">2026-09-03</span>
+        <span class="t">The historical companion</span>
+        <span class="d">The hand-assembled historical census of 2002–2022 destruction, enriched
+        by this project with a polygon and a measured ground-cover cell for every building, and
+        the caveat that comes with using it.</span>
+        <span class="when">companion release · 2026-09-14</span>
       </a>
     </div>
 
     <p class="groupname">Maps</p>
     <div class="cards">
       <div class="plain">
-        <span class="t">Per-fire inventory maps — 35 pages</span>
-        <span class="d">The product itself: the pre-fire building list for one fire on its own
-        perimeter frame, coloured by predicted destroyed probability and checked against the
-        inspection record. Sixteen are the modern fires, seventeen are the retrospective fires
-        the hand survey also covers, and two are reference fires outside the dataset. Linked per fire
-        from <a href="forward-fires.html">fire by fire</a> and
-        <a href="retrospective.html">running the pipeline backwards</a>.</span>
-        <span class="when">v0.9.0 · 2026-09-13</span>
+        <span class="t">Per-fire building maps — 35 pages</span>
+        <span class="d">The product itself for one fire: the pre-fire list of buildings drawn
+        on its own study area, coloured by predicted destroyed probability and checked against
+        ground truth. Linked per fire from
+        <a href="forward-fires.html">results by fire</a>.</span>
+        <span class="when">current release · 2026-09-14</span>
       </div>
       <div class="plain">
         <span class="t">Per-fire damage maps — 66 pages</span>
-        <span class="d">Leave-one-fire-out loss calls on each training fire, coloured true
-        positive / false positive / false negative / true negative. These are the visual behind
-        the era and generalization tables.</span>
-        <span class="when">2026-09-12</span>
+        <span class="d">The destroyed call on each training fire, scored by a model that never
+        saw that fire, coloured by whether each building was agreed destroyed, missed, a false
+        alarm, or agreed survived.</span>
+        <span class="when">data 2026-09-14</span>
       </div>
-      <a href="detection_vs_dins.html">
-        <span class="t">Detector read-out</span>
-        <span class="d">Twenty fires by thirty inventory recipes, led by what the detector adds
-        over the public footprints, with rendered image grids of the misses, the calls and
-        random windows on a fixed seed.</span>
-        <span class="when">regenerated 2026-09-12</span>
-      </a>
     </div>
   </div>
 </section>
@@ -741,30 +720,30 @@
   <div class="wrap">
     <p class="eyebrow">provenance</p>
     <h2>Where the numbers come from</h2>
-    <p>Every figure on this site is transcribed from a file the pipeline wrote — a metrics file,
-    a per-fire table or a release manifest — and the source line under each table names it.
-    Nothing on these pages is recomputed and nothing is recalled from memory. The internal record
-    behind them is a dated change log and an experiment ledger with one row for every idea,
-    experiment, data source and decision, including the ones that failed.</p>
+    <p>Every figure on this site is read from a file this project's own code wrote — a metrics
+    file, a per-fire table or a release manifest — and the source line under each table names
+    it. Nothing on these pages is recomputed by hand.</p>
     <div class="tablewrap">
       <table>
-        <caption>The inputs, all public</caption>
+        <caption>The inputs, all public. What each dataset is used for, and the licence it
+        carries.</caption>
         <thead><tr><th>Role</th><th>Dataset</th><th>Licence</th></tr></thead>
         <tbody>
-          <tr><td>Building labels and inventory source</td><td>FEMA / ORNL <strong>USA Structures</strong></td><td>CC BY 4.0</td></tr>
-          <tr><td>Imagery for detection</td><td><strong>NAIP</strong> 0.6 m 4-band aerial</td><td>public domain</td></tr>
-          <tr><td>Before/after imagery</td><td><strong>Sentinel-2</strong> (2016+), <strong>Landsat</strong> (all years)</td><td>open</td></tr>
-          <tr><td>Training and validation labels</td><td><strong>Carlson et al. 2025</strong>, USGS structure-loss points 2002–2022, doi:10.5066/P1QX6UXD</td><td>CC0</td></tr>
-          <tr><td>Out-of-sample labels</td><td><strong>CAL FIRE DINS</strong> damage inspections</td><td>public</td></tr>
-          <tr><td>Prior band and inventory source — never a training label</td><td><strong>Microsoft US Building Footprints v2</strong></td><td>ODbL — excluded from the released package</td></tr>
-          <tr><td>Count-level validation, never a model input</td><td><strong>ICS-209</strong> structures destroyed, 2007–2026, doi:10.6084/m9.figshare.33406060.v2</td><td>CC BY 4.0</td></tr>
-          <tr><td>Per-building truth outside California — scored against, never re-published</td><td>federal search-and-rescue observations (Ruidoso NM 2024); a county field assessment and a federal remote-sensing assessment (Marshall CO 2021)</td><td>⚠️ none stated</td></tr>
+          <tr><td>Building outlines, and a source of buildings for the list</td><td>FEMA / Oak Ridge <strong>USA Structures</strong></td><td>CC BY 4.0</td></tr>
+          <tr><td>Aerial photography, used to detect buildings the databases miss</td><td><strong>NAIP</strong>, 0.6 m, four bands</td><td>public domain</td></tr>
+          <tr><td>Before-and-after satellite imagery</td><td><strong>Sentinel-2</strong> (2016 onward), <strong>Landsat</strong> (all years)</td><td>open</td></tr>
+          <tr><td>Training and validation ground truth</td><td><strong>Carlson et al. 2025</strong>, per-building destruction points 2002–2022, doi:10.5066/P1QX6UXD</td><td>CC0</td></tr>
+          <tr><td>Out-of-sample ground truth</td><td><strong>CAL FIRE damage inspections</strong></td><td>public</td></tr>
+          <tr><td>A source of buildings for the list, and an input band — never a training label</td><td><strong>Microsoft US Building Footprints</strong></td><td>ODbL — these rows are excluded from the released package</td></tr>
+          <tr><td>Fire-level count check, never a model input</td><td><strong>ICS-209</strong> incident reports of structures destroyed, 2007–2026, doi:10.6084/m9.figshare.33406060.v2</td><td>CC BY 4.0</td></tr>
+          <tr><td>Per-building ground truth outside California — scored against, never re-published</td><td>a federal search-and-rescue assessment (Ruidoso, New Mexico, 2024); a county field assessment and a federal remote assessment (Marshall, Colorado, 2021)</td><td>⚠️ none stated</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>README.md</code> §"Data sources";
-    <code>docs/data-provenance.md</code>; <code>docs/licence-decision.md</code>;
-    <code>docs/outside-ca-truth.md</code> §2.</p>
+    <p class="src"><b>Source:</b> the project's own data-provenance and licence documentation,
+    read 2026-09-14.</p>
+    <p><b>In one sentence:</b> every input is public, and the one input with a restrictive
+    licence is excluded from the data we publish rather than relicensed.</p>
   </div>
 </section>
 
@@ -773,12 +752,9 @@
 <footer class="pagefoot">
   <div class="wrap">
     <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0, copyright
-    Carlo Broderick; no DOI has been minted yet. Analysis follows the NCEAS Coding-Agent Rules
-    for Data Science — literate scripts, one settings block, explicit filters, archive rather
-    than delete, and a dated change record.</p>
-    <p class="mono">Provenance: detector <code>seg_all_v4</code>, damage model
-    <code>damage_sentinel2_v5</code> at the fixed threshold 0.85, release <code>v0.9.0</code>,
-    data date 2026-09-13.</p>
+    Carlo Broderick; no DOI has been minted yet.</p>
+    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-14. Primary estimate at a
+    fixed threshold of 0.85, refined estimate at 0.84.</p>
   </div>
 </footer>
 

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Outside California</title>
-<meta name="description" content="Where the structure-loss model travels and where it does not: eleven states, one national count source, and the two fires outside California with truth sets of their own." />
+<title>Beyond California</title>
+<meta name="description" content="Does the model work outside California? Held-out accuracy on 66 fires in eleven states, an independent inspection set in New Mexico, and what the evidence does and does not cover." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   /* ============================================================
@@ -370,33 +370,41 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Outside California</span><span class="of">page 6 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html" aria-current="page">Outside California</a><a href="uncertainty.html">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+    <span class="here"><span>Beyond California</span><span class="of">page 6 of 9</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html" aria-current="page">Beyond California</a><a href="uncertainty.html">How certain</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">Structure Loss Pipeline · generalization</p>
-    <h1>Outside California</h1>
-    <p class="lede">Every out-of-sample number this project publishes is CAL FIRE DINS, and DINS
-    is California only. The product is not. This page is everything the project knows about what
-    happens beyond the state line — eleven states of leave-one-fire-out evidence, one national
-    count source, and the two fires with per-structure truth sets nobody here drew.</p>
+    <p class="kicker">Structure Loss Pipeline · beyond California</p>
+    <h1>Beyond California</h1>
+    <p class="lede">This project estimates, building by building, which structures a wildfire
+    destroyed, using free satellite imagery and public maps of building outlines. Almost all of
+    the inspection data used to check that estimate comes from one state: after a California
+    fire, CAL FIRE's Damage Inspection programme sends inspectors to every structure in the burn
+    area and records whether it was destroyed, damaged or untouched. Nothing like it runs
+    nationally. So the question this page answers is whether the accuracy measured in California
+    survives the state line.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>The finding, in one sentence</h3>
-    <p><strong>The model still puts the burned buildings at the top of the list outside
-    California; the single threshold that turns that list into a call is what fails.</strong>
-    That is the careful form, and it is supported twice on independent evidence. The stronger
-    version — "the model loses seven F1 points outside California" — is <em>not</em> supported:
-    twenty-five fires cannot resolve it.</p>
-    <p>The obvious fix is a threshold fitted per fire. It works on a table of inspected
-    structures and it does not transfer to the product, which is why it ships as an
-    <a href="#population">advisory second call</a> rather than as the default.</p>
+    <h3>The answer, in one number</h3>
+    <p><strong>Outside California the model scores an F1 of 0.734, against 0.8072 inside
+    it</strong> — in both cases averaged so that every fire counts once, whatever its size. F1
+    is a single score out of 1 that combines precision — what share of the
+    buildings we call destroyed really were — with recall — what share of the real destruction we
+    found; it is their harmonic mean, so it punishes both kinds of error. Every figure on this
+    page is <em>held out</em>: the model that scores a fire is trained only on the other fires,
+    so no fire is ever graded by a model that has already seen its answers.</p>
+    <p>The gap of 0.0726 is smaller than the uncertainty behind it. With only 25 fires outside
+    California to go on, the 95 % interval on that gap runs from −0.0110 to +0.1630 and still
+    includes zero. What can be said with confidence is narrower and more useful: the model
+    <strong>ranks</strong> buildings just as well outside California — it puts the burned ones at
+    the top of the list — and what degrades is the single fixed cut-off that turns that ranked
+    list into a yes-or-no call.</p>
   </div>
 </div>
 
@@ -404,22 +412,43 @@
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">01 · the national evidence</p>
+    <p class="eyebrow">01 · evidence across the country</p>
     <h2>Sixty-six fires in eleven states</h2>
   </div>
   <div class="wrap">
-    <p>The only national evidence the project holds is the Carlson bundle's own
-    leave-one-fire-out table: 66 Sentinel-2 fires, each scored by a model that never saw it.
-    Two columns carry the whole argument — F1 at the bundle's fixed cut, and the F1 each fire
-    would reach at <strong>its own</strong> best cut. The second needs that fire's labels, so it
-    is a <em>ceiling</em> and not a proposal; the difference between them is the loss that
-    belongs to the operating point rather than to the model.</p>
+    <p>Outside California the ground truth is a published, hand-assembled record of buildings
+    destroyed in United States wildfires between 2002 and 2022, compiled by Carlson and
+    colleagues: one point on the map for every building that burned. A ground-truth point and one
+    of our building locations are treated as the same building when they lie within 10 m of one
+    another, matched one to one.</p>
+    <p>Scored that way, 66 fires and 582,554 buildings are available. Forty-one of the fires are
+    Californian; the remaining 25 are spread across the other states in the table below. Each
+    fire is scored by a model trained only on the other fires.</p>
+    <p>Four measures appear. <strong>Precision</strong> is the share of our destroyed calls that
+    were right and <strong>recall</strong> is the share of the real destruction we found;
+    <strong>F1</strong> is their harmonic mean, so a model cannot score well by being timid or by
+    being reckless. The <a href="confusion-matrix.html">confusion matrix</a> page shows the four
+    cells of right and wrong calls these are built from. <strong>AUC</strong> measures ranking
+    alone: the probability that a randomly chosen destroyed building scores higher than a
+    randomly chosen surviving one, where 1 is a perfect ordering and 0.5 is a coin toss.
+    <strong>Average precision</strong> summarises precision across every possible cut-off instead
+    of one.</p>
+    <p>The model gives every building a probability, and a building is called destroyed when that
+    probability is above <strong>0.85</strong> — one number, fixed in advance, used for every
+    fire in every state and never tuned fire by fire. The last columns of the table ask what each
+    fire would have scored at its own best cut-off. Finding that cut-off requires already knowing
+    the answers for that fire, so it is a <em>ceiling</em> rather than something the product can
+    do; the distance to it is the part of the loss that belongs to the cut-off rather than to the
+    model. Numbers marked <em>pooled</em> count every building equally, so the largest fires
+    dominate; <em>mean-per-fire</em> numbers count every fire equally. Both are given because they
+    answer different questions.</p>
     <details class="more">
-      <summary>The per-state table — eleven states, at the fixed threshold and at each fire's own</summary>
+      <summary>The state-by-state table — at the fixed cut-off, and at each fire's own best one</summary>
       <div class="tablewrap">
         <table>
-          <caption>State by state — 66 fires, 582,554 structures, at the fixed threshold
-          0.85. A state row with one fire is one fire, not a state.</caption>
+          <caption>How the model scores in each state, at the one fixed cut-off and at each
+          fire's best possible one — 66 fires, 582,554 structures, cut-off 0.85. A state row with
+          one fire is one fire, not a state.</caption>
           <thead><tr><th>State</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Share destroyed</th><th class="num">AUC</th><th class="num">Average precision</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">At each fire's own threshold</th><th class="num">Gap</th><th class="num">Median own threshold</th></tr></thead>
           <tbody>
             <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.084</td><td class="num">0.9908</td><td class="num">0.9398</td><td class="num">0.8806</td><td class="num">0.8072</td><td class="num">0.8286</td><td class="num">0.0214</td><td class="num">0.870</td></tr>
@@ -436,40 +465,51 @@
           </tbody>
         </table>
       </div>
+      <p><em>Reading it:</em> in Oregon, New Mexico, Kansas, Utah, Washington and Colorado the
+      fixed cut-off costs almost nothing, while in Tennessee, Oklahoma, Texas and Florida it
+      costs a great deal even though the ranking stays good.</p>
     </details>
-    <p class="src"><b>Source:</b> <code>outputs/generalization/v5/by_state.csv</code>, columns
-    <code>mean_fire_f1</code> / <code>mean_fire_own_f1</code> / <code>mean_fire_gap</code> /
-    <code>median_own_cut</code>, at the fixed threshold 0.85, dated 2026-09-12. The own-threshold
-    column needs that fire's labels, so it is a <strong>ceiling</strong> and not a proposal.</p>
+    <p class="src"><b>Source:</b> <code>generalization/by_state.csv</code> on the data share, at
+    the fixed cut-off 0.85, data date 2026-09-12. The own-cut-off column needs that fire's
+    answers, so it is a <strong>ceiling</strong> and not something the product can deliver.</p>
 
+    <h3>How much of the difference is real?</h3>
+    <p>California and everywhere else were compared directly, each difference carrying a 95 %
+    interval computed by resampling whole fires 2,000 times. That interval says how much the
+    number would move if the project happened to cover a different set of fires, which is the
+    uncertainty that matters when the sample is 25 fires.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>How much better the model does in California than everywhere else, and how
+        much of that difference the evidence can actually resolve</caption>
+        <thead><tr><th>California − everywhere else</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+        <tbody>
+          <tr><td>mean-fire F1</td><td class="num">+0.0726</td><td class="ci">[−0.0110, +0.1630]</td><td class="fail">no</td></tr>
+          <tr><td>pooled F1</td><td class="num">+0.1264</td><td class="ci">[−0.0294, +0.2589]</td><td class="fail">no</td></tr>
+          <tr><td>pooled precision</td><td class="num">+0.1919</td><td class="ci">[−0.0467, +0.3823]</td><td class="fail">no</td></tr>
+          <tr><td>mean-fire average precision</td><td class="num">+0.0291</td><td class="ci">[−0.0339, +0.1002]</td><td class="fail">no</td></tr>
+          <tr><td><strong>mean-fire AUC</strong></td><td class="num">+0.0220</td><td class="ci">[+0.0006, +0.0523]</td><td class="pass">yes</td></tr>
+          <tr><td><strong>pooled AUC</strong></td><td class="num">+0.0316</td><td class="ci">[+0.0068, +0.0648]</td><td class="pass">yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><em>Reading it:</em> every difference that depends on the cut-off has an interval
+    straddling zero, so the evidence cannot say those are real; only the two ranking differences
+    are large enough to separate from zero, and both are small.</p>
+    <p class="src"><b>Source:</b> <code>uncertainty/region_contrast_ci.csv</code> on the data
+    share, data date 2026-09-12.</p>
     <div class="note warn">
-      <p><strong>⚠️ Read those two intervals together, not against each other.</strong> The
-      non-California interval <strong>[0.664, 0.803] contains 0.800</strong> — the own-cut
-      ceiling this page calls "the size of the prize". Bootstrapping the <em>difference</em>
-      directly, which is the actual claim, gives:</p>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>California − everywhere else</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
-          <tbody>
-            <tr><td>mean-fire F1</td><td class="num">+0.0726</td><td class="ci">[−0.0110, +0.1630]</td><td class="fail">no</td></tr>
-            <tr><td>pooled F1</td><td class="num">+0.1264</td><td class="ci">[−0.0294, +0.2589]</td><td class="fail">no</td></tr>
-            <tr><td>pooled precision</td><td class="num">+0.1919</td><td class="ci">[−0.0467, +0.3823]</td><td class="fail">no</td></tr>
-            <tr><td>mean-fire average precision</td><td class="num">+0.0291</td><td class="ci">[−0.0339, +0.1002]</td><td class="fail">no</td></tr>
-            <tr><td><strong>mean-fire AUC</strong></td><td class="num">+0.0220</td><td class="ci">[+0.0006, +0.0523]</td><td class="pass">yes</td></tr>
-            <tr><td><strong>pooled AUC</strong></td><td class="num">+0.0316</td><td class="ci">[+0.0068, +0.0648]</td><td class="pass">yes</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/uncertainty/v5/region_contrast_ci.csv</code>,
-      <code>excludes_zero</code> column. <strong>The only comparison that clears zero is the
-      ranking.</strong> Everything that depends on a threshold is inside the noise of
-      twenty-five fires.</p>
+      <p><strong>⚠️ How little 25 fires can resolve.</strong> The mean-per-fire F1 outside
+      California, 0.734, carries a 95 % interval of <strong>[0.664, 0.803]</strong>. That
+      interval contains <strong>0.800</strong> — the score those same fires would reach if each
+      one were given its own perfect cut-off. The evidence outside California is not yet sharp
+      enough to separate today's performance from the best a cut-off rule could ever deliver
+      there.</p>
     </div>
   </div>
 
   <div class="wide">
-    <h3>State by state, and the two shapes of failure</h3>
+    <h3>Two shapes of failure, and only one of them is a cut-off problem</h3>
     <figure class="band">
       <svg viewBox="0 0 860 311" role="img" preserveAspectRatio="xMidYMin meet">
 <line class="grid-line" x1="242.2" y1="26" x2="242.2" y2="265" />
@@ -540,131 +580,46 @@
 <line class="axis" x1="170.0" y1="265" x2="784.0" y2="265" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s1)"></span>at the shipped fixed cut (0.85)</li>
-        <li><span class="swatch" style="background:var(--s2)"></span>at each fire's own best cut — a ceiling, not a proposal</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>at the fixed cut-off (0.85)</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>at each fire's own best cut-off — a ceiling, not something the product can do</li>
       </ul>
-      <figcaption><strong>Two shapes of failure, and only one of them is fixable by a
-      threshold.</strong> The length of each bar is what a single national threshold costs that
-      state. In Texas, Oklahoma, Tennessee and Florida the bar is long while the ranking stays
-      good (AUC 0.91–0.96): the model puts the burned buildings at the top of the list and the
-      threshold then calls almost none of them. Texas is the extreme — F1 <strong>0.172</strong>
-      at the fixed threshold against <strong>0.676</strong> at its own, on an AUC of 0.933.
-      Colorado and Washington are the opposite shape: short bars, low average precision, so what
-      they lose is <em>ranking</em>, and no threshold rule will return it.</figcaption>
+      <figcaption><strong>Where a single national cut-off is the problem, and where the model
+      itself is.</strong> The length of each bar is what one fixed cut-off costs that state. In
+      Texas, Oklahoma, Tennessee and Florida the bar is long while the ranking stays good (AUC
+      0.91–0.96): the model puts the burned buildings at the top of the list and the cut-off then
+      calls almost none of them. Texas is the extreme — F1 <strong>0.172</strong> at the fixed
+      cut-off against <strong>0.676</strong> at its own, on an AUC of 0.933. Colorado and
+      Washington are the opposite shape: short bars and lower average precision, so what they
+      lose is <em>ranking</em>, and no cut-off rule will give it back.</figcaption>
     </figure>
-  </div>
-  <div class="wrap">
-    <div class="note">
-      <p><strong>⚠️ One trap, recorded so it is not repeated.</strong> The out-of-fold file
-      stores a column for every <em>candidate</em> learner alongside the one that shipped.
-      Reading the wrong column gives a non-California mean-fire F1 of 0.662 against the true
-      0.734 — a far more alarming picture than the product has. A <code>by_learner.csv</code>
-      table exists beside it so the mistake is visible rather than repeated.</p>
-    </div>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">02 · the fix, measured against a bar written first</p>
-    <h2>Can a per-fire threshold fix it?</h2>
-    <p class="lede" style="max-width:68ch">On a table of inspected structures, yes. On the
-    product, no — and the gap between those two answers is the most important thing on this
-    page.</p>
+    <p class="eyebrow">02 · the second, advisory call</p>
+    <h2>A cut-off that adapts to each fire</h2>
+    <p class="lede" style="max-width:68ch">Alongside the default call at the fixed cut-off, every
+    fire also carries a second, advisory call whose cut-off is read from that fire's own scores.
+    Here is what it changes, and why it is advisory rather than the default.</p>
   </div>
   <div class="wrap">
-    <p>If the loss belongs to the threshold rather than to the model, the fix is a rule that
-    sets a threshold per fire from the model's own scores. Thirteen such rules were scored on
-    the 66-fire national table with the <strong>fire</strong> as the unit, against a
-    five-criterion promotion bar written into the project change log <em>before the first fold
-    was scored</em>.</p>
-    <div class="note warn">
-      <p><strong>⚠️ No attribute of the fire reaches any of these rules.</strong> Size,
-      perimeter, burn severity, region, state and year are never supplied, at fitting or at
-      application; a test pins it by renaming a fire, moving it to another state and asserting
-      the threshold does not budge. State appears in the table above only to report the
-      result.</p>
-    </div>
+    <p>If the ranking survives the state line and only the cut-off fails, a rule that picks a
+    cut-off for each fire should recover much of the loss. The advisory call does this without
+    using any answers: it reads only the spread of the model's own scores on that fire. No
+    attribute of the fire reaches it — not size, not perimeter, not burn severity, not region,
+    state or year.</p>
+    <p>Reading the score distribution is also what makes it move when the population of buildings
+    changes underneath it. The study area around a fire is the official perimeter plus a 2.4 km
+    margin, and most buildings in it were never inspected and never at much risk: across a whole
+    study area only about 0.09 of buildings are destroyed. On a population that thin the same
+    arithmetic pulls the cut-off below 0.85, and more buildings get called destroyed. The trade
+    is visible, and it is why the fixed cut-off remains the default.</p>
     <div class="tablewrap">
       <table>
-        <caption>The bar, criterion by criterion, for the rule that won it</caption>
-        <thead><tr><th>Criterion</th><th>Bar</th><th class="num">Measured</th><th></th></tr></thead>
-        <tbody>
-          <tr><td>(a) mean-fire F1 gain over the baseline threshold</td><td>≥ +0.010</td><td class="num">+0.0130</td><td class="pass verdict">pass</td></tr>
-          <tr><td>(b) California must not lose more than</td><td>0.005</td><td class="num">−0.0054 (a gain)</td><td class="pass verdict">pass</td></tr>
-          <tr><td>(c) worst state must not lose more than</td><td>0.020</td><td class="num">+0.0172 (a gain)</td><td class="pass verdict">pass</td></tr>
-          <tr><td>(d) cost on the inspection incidents</td><td>≤ 0.005</td><td class="num">+0.0036</td><td class="pass verdict">pass</td></tr>
-          <tr><td>(e) tenth-percentile / worst-fire drop</td><td>≤ 0.020 / 0.050</td><td class="num">both improve</td><td class="pass verdict">pass</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/operating_conus/v4_nested/decision.{md,json}</code> and
-    <code>manifest.json</code> — 2,211 model fits, fully nested, seed 42. The bar was
-    pre-registered in <code>logs/CHANGELOG.md</code> on 2026-09-10 at 17:50 PT. ⚠️ This
-    validation ran on the Carlson-side fold table of the previous model generation and has not
-    been recomputed on the production model.</p>
-
-    <details class="more">
-      <summary>All thirteen rules, worst to best</summary>
-      <div class="tablewrap">
-        <table>
-          <caption>66 fires, 582,554 structures, baseline fixed threshold at 0.7751 mean-fire F1</caption>
-          <thead><tr><th>Rule</th><th class="num">Mean-fire F1</th><th class="num">non-California</th><th class="num">Pooled F1</th><th class="num">Worst fire</th><th>Verdict</th></tr></thead>
-          <tbody>
-            <tr><td>ceiling — each fire at its <em>own</em> best threshold (needs labels)</td><td class="num">0.8171</td><td class="num">0.7976</td><td class="num">—</td><td class="num">—</td><td class="verdict">not a candidate</td></tr>
-            <tr class="total"><td><strong>expected-F1 on calibrated probabilities</strong></td><td class="num">0.7881</td><td class="num">0.7556</td><td class="num">0.8524</td><td class="num">0.2880</td><td class="pass verdict">✅ clears all five</td></tr>
-            <tr><td>expected-F1, other calibration</td><td class="num">0.7870</td><td class="num">0.7535</td><td class="num">0.8500</td><td class="num">0.2873</td><td class="fail verdict">fails (d)</td></tr>
-            <tr><td>the bundle's own saved threshold</td><td class="num">0.7824</td><td class="num">0.7424</td><td class="num">0.8509</td><td class="num">0.2877</td><td class="fail verdict">fails (a), (c)</td></tr>
-            <tr><td>predicted base rate → threshold</td><td class="num">0.7806</td><td class="num">0.7410</td><td class="num">0.8477</td><td class="num">0.2880</td><td class="fail verdict">fails (a), (c)</td></tr>
-            <tr><td>best mean per-fire F1 on the training fires</td><td class="num">0.7804</td><td class="num">0.7400</td><td class="num">0.8519</td><td class="num">0.2391</td><td class="fail verdict">fails (a), (c)</td></tr>
-            <tr><td>median of the training fires' own thresholds</td><td class="num">0.7796</td><td class="num">0.7372</td><td class="num">0.8517</td><td class="num">0.2082</td><td class="fail verdict">fails (a), (c)</td></tr>
-            <tr><td>best pooled F1 on the training fires</td><td class="num">0.7778</td><td class="num">0.7342</td><td class="num">0.8540</td><td class="num">0.1673</td><td class="fail verdict">fails (a)</td></tr>
-            <tr><td>the baseline the bar is measured against</td><td class="num">0.7751</td><td class="num">0.7301</td><td class="num">0.8539</td><td class="num">0.1673</td><td class="verdict">—</td></tr>
-            <tr><td>prior adjustment, expected-F1 form</td><td class="num">0.6978</td><td class="num">0.6660</td><td class="num">0.8047</td><td class="num">0.0000</td><td class="fail verdict">fails all</td></tr>
-            <tr><td>score quantile, fitted</td><td class="num">0.6936</td><td class="num">0.6636</td><td class="num">0.7649</td><td class="num">0.1570</td><td class="fail verdict">fails all</td></tr>
-            <tr><td>prior adjustment, trained form</td><td class="num">0.6835</td><td class="num">0.6414</td><td class="num">0.7925</td><td class="num">0.0000</td><td class="fail verdict">fails all</td></tr>
-            <tr><td>score quantile at the predicted rate</td><td class="num">0.6592</td><td class="num">0.6497</td><td class="num">0.7343</td><td class="num">0.2642</td><td class="fail verdict">fails all</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="src"><b>Source:</b>
-      <code>outputs/operating_conus/v4_nested/carlson_s2/summary.json</code> and
-      <code>per_fire_rules.csv</code>. Prior adjustment — the textbook answer to a shifted base
-      rate — is the <em>worst</em> rule here: it assumes the score distributions are unchanged on
-      the new fire, which between chaparral and grass they are not, so it reads a distribution
-      shift as a prior shift and collapses to calling nothing at all on four of the 66 fires.</p>
-    </details>
-
-    <h3 id="population">And then it was applied to the product</h3>
-    <p>The bar was answered honestly and the rule was adopted. Applying it to the fifteen
-    modern fires showed something the validation table could not:
-    <strong>the rule was validated on one population and applied to another.</strong></p>
-    <div class="tablewrap">
-      <table>
-        <caption>Two populations, one rule</caption>
-        <thead><tr><th></th><th>The validation table</th><th>The product</th></tr></thead>
-        <tbody>
-          <tr><td>what a row is</td><td>an <strong>inspected</strong> structure</td><td>any structure in the inventory — most never inspected, out to 2.4 km from the perimeter</td></tr>
-          <tr><td>rows</td><td class="num">36,272</td><td class="num">168,197</td></tr>
-          <tr><td>share of them destroyed</td><td class="num">~0.49</td><td class="num">~0.09</td></tr>
-          <tr><td>thresholds the rule lands on</td><td class="num">0.79 – 0.88</td><td class="num"><strong>0.601 – 0.792</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> validation thresholds from
-    <code>outputs/forward_damage/per_fire.csv</code> (<code>threshold_fold</code>), realised
-    thresholds from <code>operating_cut_adaptive</code> in the same file.</p>
-    <p>The rule reads the fire's own score distribution and nothing else — that is what makes it
-    label-free, and it is also what makes it move when the population underneath it changes. On
-    a table of inspected structures where roughly half burned, the expected-F1 threshold sits
-    near the fixed one. On a whole inventory where nine in a hundred burned, the same arithmetic
-    pulls the threshold down and the model starts calling structures destroyed that nobody ever
-    looked at.</p>
-    <div class="tablewrap">
-      <table>
-        <caption>Advisory call minus primary call on the fifteen modern fires, paired on
-        identical rows, fire-level bootstrap, B = 2000</caption>
+        <caption>What the advisory call changes across the fifteen most recent fires — advisory
+        call minus default call, compared on identical buildings, with 95 % intervals from
+        resampling whole fires 2,000 times</caption>
         <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
         <tbody>
           <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="ci">[−0.0336, −0.0070]</td><td class="fail">yes — worse</td></tr>
@@ -674,160 +629,161 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/operating_product/paired_delta_ci.csv</code>,
-    comparison <code>V2 − V4</code>. AUC does not appear because it is computed on the score and
-    does not depend on a threshold: the ranking is identical under either call.</p>
-    <div class="note warn">
-      <p><strong>⚠️ The same five criteria were then re-run on the product's own population, and
-      no candidate clears them.</strong> Five variants, three populations, the bar written down
-      again before anything was scored. That is why the per-fire threshold ships as an
-      <em>advisory second column</em> and the fixed threshold stays the default. The best
-      candidate is the one that ships: it takes the threshold from the near-perimeter zone,
-      whose share destroyed is nearer the validation table's, and it is the one place on this
-      page where a per-fire threshold clearly earns its keep — <strong>non-California mean-fire
-      F1 goes 0.8986 → 0.9121</strong>, and the destroyed count goes from 0.810 of the inspected
-      total to <strong>0.891</strong>.</p>
-      <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/operating_product/{decision.md,report.md,by_variant.csv}</code>; the bar
-      pre-registered in <code>logs/CHANGELOG.md</code> before it was scored.</p>
-    </div>
-
-    <h3>Why no single rule can win</h3>
-    <p>The states split into two shapes and the label-free signal that fixes one wrecks the
-    other. A rule that fits <em>nothing</em> at all — call the top of the fire's own score
-    distribution — takes Texas from F1 <strong>0.109</strong> to <strong>0.623</strong> against
-    a labelled ceiling of 0.622. <strong>The signal is genuinely there in the scores, with no
-    labels and nothing about the fire.</strong> The same rule then costs California
-    <strong>13 points</strong>, because California's fires are already at their threshold. And
-    California is 41 of the 66 fires, so a rule that helps eleven fires a lot and hurts forty a
-    little can still post a positive average — which is exactly what the California, per-state
-    and worst-fire criteria exist to catch.</p>
-    <p class="src"><b>Source:</b>
-    <code>outputs/operating_conus/carlson_s2/by_state.csv</code>.</p>
+    <p><em>Reading it:</em> across a whole study area the advisory call finds more of the real
+    destruction and makes more wrong calls doing it, and on balance comes out slightly behind on
+    F1.</p>
+    <p class="src"><b>Source:</b> <code>operating_product/paired_delta_ci.csv</code> on the data
+    share. AUC does not appear because it is computed from the scores and does not depend on a
+    cut-off: the ranking is identical under either call.</p>
+    <p>Buildings inside the perimeter or within 100 m of it are the <em>directly exposed</em>
+    ones, and a far larger share of them burn than in the thin ring from 100 m out to 2.4 km. The
+    advisory call that ships takes its cut-off from that directly exposed zone, and that is the
+    one place where a per-fire cut-off clearly earns its keep: outside California, mean-per-fire
+    F1 goes <strong>0.8986 → 0.9121</strong>, and the count of buildings called destroyed rises
+    from 0.810 of the inspected total to <strong>0.891</strong>.</p>
+    <p class="src"><b>Source:</b> <code>operating_product/report.md</code> and
+    <code>by_variant.csv</code> on the data share; realised cut-offs per fire in
+    <code>operating_product/per_fire.csv</code>.</p>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">03 · truth that is not DINS</p>
-    <h2>What actually exists outside California</h2>
-    <p class="lede" style="max-width:68ch">Verified by live query, not assumed. Most of it does
-    not exist.</p>
+    <p class="eyebrow">03 · independent ground truth</p>
+    <h2>Inspections outside California, where they exist</h2>
+    <p class="lede" style="max-width:68ch">A handful of one-off post-fire surveys record damage
+    building by building outside California. They are the only way to check the model against
+    ground truth that no part of this project assembled.</p>
   </div>
   <div class="wide">
     <div class="tablewrap">
       <table>
-        <caption>Per-structure damage assessments outside California — record counts are what
-        the service returned on 2026-09-10</caption>
+        <caption>Every per-building damage assessment found outside California, and what each one
+        can support — record counts are what the publishing services returned on 2026-09-10</caption>
         <thead><tr><th>Candidate</th><th>Exists</th><th class="num">Records</th><th>Verdict</th></tr></thead>
         <tbody>
-          <tr><td><strong>South Fork / Salt, Ruidoso NM, Jun 2024</strong> — FEMA Urban Search &amp; Rescue, hosted by the Village of Ruidoso</td><td>✅</td><td class="num">2,488</td><td><strong>used.</strong> The only verified post-2022 non-California per-structure set with real negatives</td></tr>
-          <tr><td><strong>Marshall, Boulder County CO, Dec 2021</strong> — county field damage assessment</td><td>✅</td><td class="num">1,473</td><td><strong>used.</strong> An independent check on <em>Carlson's</em> era, not forward truth</td></tr>
-          <tr><td><strong>Marshall CO, Dec 2021</strong> — FEMA MAC final damage assessment</td><td>✅</td><td class="num">2,941</td><td><strong>used.</strong> Carries 1,723 negatives and building geometry. ⚠️ a remote-sensing call, and spatially truncated to the Superior / Louisville core</td></tr>
-          <tr><td>Rowena, Wasco County OR, Jun 2025 — Oregon State Fire Marshal</td><td>✅</td><td class="num">202</td><td>real and post-2022, but <strong>19 surviving structures</strong> cannot support a precision estimate. Cached, not scored</td></tr>
-          <tr><td>Gray Fire + Oregon Road Fire, Spokane County WA, Aug 2023</td><td>❌</td><td class="num">—</td><td><strong>does not exist.</strong> The county catalogue holds 45 datasets and none is a damage assessment; the assessor's list was compiled for tax relief and never published</td></tr>
-          <tr><td>Smokehouse Creek, TX Panhandle, Feb 2024</td><td>❌</td><td class="num">—</td><td><strong>does not exist.</strong> The Panhandle fires received suppression cost-share only, so no federal individual-assistance inspections happened; the public aggregates disagree threefold</td></tr>
-          <tr><td>Lahaina / Maui HI, Aug 2023 — County of Maui</td><td>✅</td><td class="num">7,602</td><td><strong>unusable by this pipeline.</strong> Off-CONUS: a NAIP search over the Lahaina bbox returns <em>zero</em> items, so there is no pre-fire 0.6 m imagery and no inventory can be built at all</td></tr>
+          <tr><td><strong>South Fork / Salt, Ruidoso NM, Jun 2024</strong> — FEMA Urban Search &amp; Rescue teams, published by the Village of Ruidoso</td><td>✅</td><td class="num">2,488</td><td><strong>used.</strong> The only confirmed post-2022 per-building set outside California that records surviving buildings as well as destroyed ones</td></tr>
+          <tr><td><strong>Marshall, Boulder County CO, Dec 2021</strong> — county field damage assessment</td><td>✅</td><td class="num">1,473</td><td><strong>used.</strong> An independent check on the years the historical record covers, not on a recent fire</td></tr>
+          <tr><td><strong>Marshall CO, Dec 2021</strong> — FEMA Modeling and Analysis Center final damage assessment</td><td>✅</td><td class="num">2,941</td><td><strong>used.</strong> Records 1,723 surviving buildings and their outlines. It is a call made from imagery rather than on foot, and covers only the Superior / Louisville core</td></tr>
+          <tr><td>Rowena, Wasco County OR, Jun 2025 — Oregon State Fire Marshal</td><td>✅</td><td class="num">202</td><td>real and recent, but with only <strong>19 surviving structures</strong> it cannot support a precision estimate. Held, not scored</td></tr>
+          <tr><td>Gray Fire and the Spokane County fires, WA, Aug 2023</td><td>❌</td><td class="num">—</td><td><strong>no such dataset.</strong> The county catalogue holds 45 datasets and none is a damage assessment; the assessor's list was compiled for tax relief and never published</td></tr>
+          <tr><td>Smokehouse Creek, TX Panhandle, Feb 2024</td><td>❌</td><td class="num">—</td><td><strong>no such dataset.</strong> These fires drew suppression cost-share only, so no federal individual-assistance inspections took place; the public totals disagree threefold</td></tr>
+          <tr><td>Lahaina / Maui HI, Aug 2023 — County of Maui</td><td>✅</td><td class="num">7,602</td><td><strong>outside what this method can process.</strong> The aerial photography the building detector needs covers the continental United States only: a search over Lahaina returns <em>zero</em> images, so no before-fire aerial view exists and no building inventory can be built</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>docs/outside-ca-truth.md</code> §2 and
-    <code>outputs/ics209_check/outside_ca/candidates.csv</code>; ledger
-    <code>src-dmg-ruidoso-southfork</code>, <code>src-dmg-marshall</code>,
-    <code>src-dmg-spokane-none</code>, <code>src-dmg-lahaina</code>, <code>road-4</code>.
+    <p><em>Reading it:</em> five of these datasets exist and three of them can be scored against;
+    the rest of the country, including two of the most-asked-about recent fires, has no
+    per-building ground truth at all.</p>
+    <p class="src"><b>Source:</b>
+    <code>ics209_check/outside_ca/candidates.csv</code> on the data share, checked 2026-09-10.
     ⚠️ <strong>None of the five that exist carries an open licence</strong> — attribution is
-    mandatory and redistribution is unsettled, so all five are scored against and never
+    required and redistribution is unsettled, so all five are scored against and never
     re-published.</p>
   </div>
 
   <div class="wrap">
-    <h3>South Fork NM 2024, end to end</h3>
-    <p>Frame: the assessment hull, 39.7 km². An assessment is not a census — enumerating over
-    the whole 17,569-acre fire and scoring against 2,488 observations would make every
-    uninspected building a false positive by construction. Imagery: NAIP 2022, the newest year
-    before ignition. Truth recoded by the same &gt;50 % / ≤25 % rule the pipeline applies to CAL
-    FIRE's classes, because both use the NAPSG percentage scale under different words.</p>
+    <h3>One fire end to end: South Fork, New Mexico, June 2024</h3>
+    <p>The area scored is the area the teams actually walked — the hull of their assessment,
+    39.7 km². An assessment is not a census: scoring over the whole 17,569-acre fire against
+    2,488 observations would turn every building nobody inspected into a wrong call by
+    construction. The before-fire imagery is aerial photography from the US Department of
+    Agriculture's National Agriculture Imagery Program, which photographs the continental United
+    States at roughly 60 cm per pixel every two to three years; 2022 is the newest year before
+    this fire. The assessment's damage categories are converted to destroyed or not by the same
+    rule the project applies to California's inspection classes — more than 50 % damage counts as
+    destroyed, 25 % or less as untouched — because both schemes are the same national percentage
+    scale under different words.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th></th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">AUC</th><th class="num">AP</th><th class="num">Predicted / assessed</th></tr></thead>
+        <caption>How the model did on South Fork, at three cut-offs</caption>
+        <thead><tr><th></th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Average precision</th><th class="num">Predicted / assessed</th></tr></thead>
         <tbody>
-          <tr><td>at the fixed threshold <strong>0.85</strong>, on 1,637 pairs</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.848</td><td class="num">0.985</td><td class="num">0.983</td><td class="num">738 destroyed over the whole frame</td></tr>
-          <tr><td>at the <strong>advisory</strong> per-fire threshold, 0.756</td><td class="num">—</td><td class="num">—</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.983</td><td class="num">799</td></tr>
-          <tr><td>at this fire's own best threshold</td><td class="num">0.932</td><td class="num">0.958</td><td class="num">0.945</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>at the fixed cut-off <strong>0.85</strong>, on 1,637 matched buildings</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.848</td><td class="num">0.985</td><td class="num">0.983</td><td class="num">738 destroyed over the whole frame</td></tr>
+          <tr><td>at the <strong>advisory</strong> per-fire cut-off, 0.756</td><td class="num">—</td><td class="num">—</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.983</td><td class="num">799</td></tr>
+          <tr><td>at this fire's own best cut-off</td><td class="num">0.932</td><td class="num">0.958</td><td class="num">0.945</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
         </tbody>
       </table>
     </div>
+    <p><em>Reading it:</em> at the fixed cut-off the model is almost never wrong when it calls a
+    building destroyed (precision 0.982) but misses a quarter of the destruction (recall 0.747),
+    and the ranking is good enough that a better-placed cut-off would have caught most of what
+    was missed.</p>
     <p class="src"><b>Source:</b>
-    <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code> and
-    <code>metrics.json</code>, regenerated 2026-09-12, <strong>9,568</strong> points scored on
-    the fire's own perimeter frame (2,357 in the near-perimeter zone, 7,211 beyond it); the
-    advisory F1 from <code>outputs/operating_product/per_fire.csv</code>. Detection recall
-    0.661 at 10 m and
-    0.760 at 20 m, 4,507 points inside the assessed area; the threshold gap is
-    <strong>+0.096</strong>. ⚠️ The ring beyond 100 m holds <strong>119 pairs and 0 destroyed
-    structures</strong>, so it cannot be scored — which is what that ring usually looks like, and
-    why a threshold taken from the near-perimeter zone is the one that means anything here.</p>
+    <code>ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code> and
+    <code>metrics.json</code> on the data share, 2026-09-12: <strong>9,568</strong> buildings
+    scored over the fire's own study area (2,357 of them inside the perimeter or within 100 m of
+    it, 7,211 beyond); the advisory figure from <code>operating_product/per_fire.csv</code>.</p>
     <div class="note ok">
-      <p><strong>This independently reproduces the generalization finding.</strong> The
-      Carlson-era row measured, on 25 non-California fires none later than 2022, a mean-fire F1
-      of 0.742 at the fixed cut against 0.798 at each fire's own cut — a gap of 0.055, with the
-      ranking intact. On a <strong>2024</strong> fire, in a state the Carlson sample barely
-      contains, against a truth set that did not exist when that row was written, the same shape
-      appears: AUC <strong>0.985</strong>, and <strong>0.848 → 0.945</strong> at the fire's own
-      threshold, a gap of <strong>0.097</strong>. <em>The ranking travels and the fixed threshold
-      does not</em> — measured twice, on independent evidence, two years apart. It is also the
-      one place the per-fire threshold clearly helps: 0.848 → 0.882.</p>
+      <p><strong>The same pattern appears on evidence of a completely different kind.</strong>
+      Across the 25 fires outside California in the historical record, mean-per-fire F1 is 0.734
+      at the fixed cut-off against a ceiling of 0.800 at each fire's own. On South Fork — a fire
+      from 2024, in a state the historical record barely touches, measured against an inspection
+      set collected on the ground by somebody else — the shape repeats: AUC <strong>0.985</strong>
+      and <strong>0.848 → 0.945</strong> at the fire's own cut-off, a gap of
+      <strong>0.097</strong>. The ranking travels; the fixed cut-off does not. It is also the
+      clearest case for the advisory call, which lifts F1 from 0.848 to 0.882.</p>
     </div>
-    <p>Three things this number is <strong>not</strong>. It is <em>not a precision estimate for
-    the inventory</em>: 4,507 inventory points sit inside the assessed area and only 2,488
-    structures were observed, and Urban Search &amp; Rescue teams searched <em>streets</em>, not
-    every building — an unmatched inventory point is far more likely to be a real building
-    nobody walked past than a false detection. It is <em>not the whole fire</em>: there are no
-    Mescalero Apache Reservation records, so the Salt Fire side is absent entirely. And it is
-    <em>not an official assessment</em> — the publisher says so explicitly.</p>
-    <p>Its low detection recall is structural rather than model quality: New Mexico has no
-    cached Microsoft footprint layer, so the detector's prior band is USA Structures alone — a
-    weaker prior than any California run has had — and Lincoln County's USA Structures extract
-    carries a <strong>single <code>IMAGE_DATE</code> of 2017-05-26</strong>, seven years before
-    the fire, so anything built after 2017 is missing from the footprint half of the inventory
+    <p>Three things this result is <strong>not</strong>. It is <em>not a precision estimate for
+    the whole building inventory</em>: 4,507 of our building locations sit inside the assessed
+    area while only 2,488 buildings were observed, and the search teams worked along
+    <em>streets</em> rather than visiting every structure, so an unmatched building of ours is far
+    more likely to be a real building nobody walked past than a false detection. It is <em>not the
+    whole fire</em>: there are no records for the Mescalero Apache Reservation, so the Salt Fire
+    side is absent. And it is <em>not an official assessment</em> — the publisher says so
+    explicitly.</p>
+    <p>One limitation here is about the building list rather than the damage model. Our building
+    detector — a neural network trained on aerial photography that finds buildings the public
+    outline databases miss — found 0.661 of the assessed buildings within 10 m and 0.760 within
+    20 m, lower than a California run would give. New Mexico has no cached copy of the Microsoft
+    building-outline layer, leaving the national USA Structures layer as the only public starting
+    list, and Lincoln County's extract of it carries a single capture date of 2017-05-26, seven
+    years before the fire. Anything built after 2017 is missing from that half of the inventory
     entirely.</p>
-
-    <h3>The count-level check, and why it only earns its keep outside California</h3>
-    <p>ICS-209 structures-destroyed counts are the only per-incident loss figure that exists
-    nationally. The source is the <em>Dataset of United States Incident Management Situation
-    Reports from 2007 to 2026</em> (CC BY 4.0), 21,733 incidents after normalisation. Two
-    alternatives were checked and rejected: ICS-209-PLUS stops at 2020 and cannot answer a 2023+
-    question, and <strong>WFIGS is a verified negative</strong> — its public layer publishes 97
-    fields and <em>none</em> of them names a destroyed, damaged or threatened structure count,
-    which is checkable rather than remembered.</p>
     <div class="note warn">
-      <p><strong>⚠️ In California the ICS-209 count is not independent of DINS.</strong> 12 of
-      the 14 matched forward fires give a ratio of exactly 1.000, because CAL FIRE runs the
-      damage inspection <em>and</em> files the situation report. It is a validity check on the
-      plumbing and it passes; it is not external corroboration. <strong>Outside California,
-      where nothing cross-checks it, the floor is demonstrably soft</strong>: Smokehouse Creek
-      (TX, 2024) reports <strong>0</strong> structures lost against roughly 138 in the state's
-      own investigation, because the fire left the situation report before any assessment
-      landed. Read an ICS-209 count as a floor, and remember it includes sheds and detached
-      garages Carlson never counted — pooled, it is <strong>1.370×</strong> the DINS
-      <em>major</em> count.</p>
+      <p><strong>⚠️ The outer ring of this fire cannot be scored.</strong> Between 100 m and
+      2.4 km from the perimeter there are <strong>119 matched buildings and 0 destroyed
+      ones</strong>. That is what the outer ring normally looks like, and it is why a cut-off
+      taken from the directly exposed zone is the one that means anything here.</p>
+    </div>
+
+    <h3>The one figure that exists nationally: reported counts</h3>
+    <p>Beyond per-building inspections, one loss figure is filed for almost every incident in the
+    country: the number of structures destroyed, reported by incident commanders in their
+    situation reports. The source used here is the <em>Dataset of United States Incident
+    Management Situation Reports from 2007 to 2026</em> (CC BY 4.0), 21,733 incidents after
+    normalisation. It is a count, not a per-building record, so it can only check whether our
+    totals are in the right place.</p>
+    <div class="note warn">
+      <p><strong>⚠️ Treat a reported count as a floor, and never as an independent check inside
+      California.</strong> In California the reported count is not independent of the inspection
+      data: 12 of the 14 fires that match give a ratio of exactly 1.000, because CAL FIRE both
+      runs the damage inspection and files the situation report. That is a check on the plumbing,
+      and it passes. Outside California, where nothing cross-checks it, the figure is
+      demonstrably soft: Smokehouse Creek (TX, 2024) reports <strong>0</strong> structures lost
+      against roughly 138 in the state's own investigation, because the fire left the situation
+      reports before any assessment landed. Reported counts also include sheds and detached
+      garages that the historical record leaves out — pooled, they come to
+      <strong>1.370×</strong> the count of major damage recorded by California's inspectors.</p>
       <p class="src" style="margin-bottom:0"><b>Source:</b>
-      <code>outputs/ics209_check/{forward_fires.csv,summary.json}</code>;
-      <code>docs/outside-ca-truth.md</code> §1.</p>
+      <code>ics209_check/forward_fires.csv</code> and <code>ics209_check/summary.json</code> on
+      the data share.</p>
     </div>
   </div>
 </section>
 
 <section class="part">
   <div class="wrap">
-    <p class="eyebrow">04 · the era question</p>
-    <h2>And does it travel backwards in time?</h2>
-    <p>The Sentinel-2 bundle starts in 2016, so its era table has one row. The
-    30-metre <strong>Landsat</strong> archive reaches back to 2002, and a separate model on it —
-    100 fires — answers the question instead:</p>
+    <p class="eyebrow">04 · older fires</p>
+    <h2>Does it work on fires from before 2016?</h2>
+    <p>The main model reads Sentinel-2, a pair of free European Space Agency satellites that
+    photograph every point on Earth about every five days at 10 m per pixel — and that archive
+    begins in 2016. To ask whether the method also works on older fires, a separate model was
+    built on the Landsat archive, whose 30 m imagery reaches back to 2002, and run over 100
+    fires.</p>
     <div class="tablewrap">
       <table>
-        <caption>Non-California fires, before and after Sentinel-2 existed, on 30 m imagery</caption>
+        <caption>Fires outside California before and after 2016, scored on 30 m imagery</caption>
         <thead><tr><th>Non-California</th><th class="num">Fires</th><th class="num">Structures</th><th class="num">Mean-fire F1</th><th class="num">At each fire's own threshold</th><th class="num">Gap</th></tr></thead>
         <tbody>
           <tr><td>pre-2016</td><td class="num">18</td><td class="num">59,638</td><td class="num"><strong>0.629</strong></td><td class="num">0.686</td><td class="num">0.057</td></tr>
@@ -835,20 +791,19 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/generalization/damage_landsat_v2_cut065/per_fire.csv</code>, the
-    non-California rows grouped by <code>era</code>. ⚠️ Landsat is <strong>not on the production
-    path</strong> for a modern fire and no default points at it; this model exists to answer the
-    era question.</p>
-    <p><strong>Age costs about four points of F1, and it does not change the diagnosis</strong>
-    — the threshold gap is the same size in both eras. This is the project's only pre-2016
-    evidence.</p>
-    <div class="note">
-      <p><strong>⚠️ What none of this evidence is.</strong> Twenty-five fires outside
-      California, none after 2022, several states with one fire each. Every number on this page
-      above the South Fork section is Carlson-era leave-one-fire-out, so <strong>it says nothing
-      about a 2023+ out-of-state fire</strong> — which is exactly the case the product is for,
-      and which exactly one truth set in the world covers.</p>
+    <p><em>Reading it:</em> older fires score about four points of F1 lower, and the cut-off gap
+    is the same size in both eras, so age costs a little accuracy but does not change the
+    diagnosis.</p>
+    <p class="src"><b>Source:</b> the 30 m run under <code>generalization/</code>,
+    <code>per_fire.csv</code> on the data share, non-California rows grouped by era. ⚠️ The 30 m
+    model is not used for any recent fire and nothing on this site defaults to it; it exists to
+    answer the question of age.</p>
+    <div class="note warn">
+      <p><strong>⚠️ What this evidence does not cover.</strong> Twenty-five fires outside
+      California, none of them in the historical record later than 2022, and several states
+      represented by a single fire. One case — South Fork in 2024 — is the only recent
+      out-of-state fire anywhere with per-building ground truth to check against, and a recent
+      out-of-state fire is exactly what the product is for.</p>
     </div>
   </div>
 </section>
@@ -857,17 +812,15 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Companion pages: <a href="index.html">the index</a> ·
-      <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="forward-fires.html">fire by fire</a> ·
-      <a href="combined-series.html">the combined series</a> ·
-      <a href="uncertainty.html">how wide the numbers are</a> ·
-      <a href="retrospective.html">running the pipeline backwards</a>.</p>
-    <p class="mono">Provenance: damage model <code>damage_sentinel2_v5</code> at the fixed
-    threshold 0.85, detector <code>seg_all_v4</code>, release <code>v0.9.0</code>. National
-    tables from <code>outputs/generalization/v5/</code> and
-    <code>outputs/uncertainty/v5/</code>, data date 2026-09-12; the per-fire threshold study is
-    <code>outputs/operating_conus/v4_nested/</code> and <code>outputs/operating_product/</code>.</p>
+    <p>Companion pages: <a href="index.html">start here</a> ·
+      <a href="how-it-works.html">how it works</a> ·
+      <a href="pipeline-overview.html">the method in full</a> ·
+      <a href="confusion-matrix.html">confusion matrix</a> ·
+      <a href="forward-fires.html">results by fire</a> ·
+      <a href="combined-series.html">the dataset</a> ·
+      <a href="uncertainty.html">how certain</a>.</p>
+    <p class="mono">Provenance: release <code>v0.9.0</code>, data date 2026-09-12. Default
+    cut-off 0.85.</p>
   </div>
 </footer>
 

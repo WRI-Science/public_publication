@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How Wide Are These Numbers?</title>
-<meta name="description" content="Fire-level cluster bootstrap intervals and reliability diagrams for every headline the structure-loss pipeline publishes." />
+<title>How Certain Are These Numbers?</title>
+<meta name="description" content="Every published accuracy figure with a 95 % interval built by resampling whole fires, plus how well the model's probabilities match observed frequencies." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
   /* ============================================================
@@ -367,36 +367,41 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>How wide</span><span class="of">page 7 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The full picture</a><a href="forward-fires.html">Fire by fire</a><a href="damage-scorecard.html">Did this structure burn?</a><a href="retrospective.html">Backwards in time</a><a href="outside-california.html">Outside California</a><a href="uncertainty.html" aria-current="page">How wide</a><a href="combined-series.html">The dataset</a><a href="augmented-carlson.html">The old record</a><a href="changelog.html">What changed</a></span>
+    <span class="here"><span>How certain</span><span class="of">page 7 of 9</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html" aria-current="page">How certain</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
 <header class="masthead">
   <div class="wrap">
-    <p class="kicker">Structure Loss Pipeline · uncertainty</p>
-    <h1>How wide are these numbers?</h1>
-    <p class="lede">The unit of evidence in this project is the <strong>fire</strong>, and there
-    are not many fires. Every headline the pipeline publishes carries a 95 % interval from a
-    fire-level cluster bootstrap — resample the fires with replacement, 2,000 replicates — and
-    on the out-of-sample tables that bootstrap runs over <strong>eight incidents, two of which
-    hold 84 % of the structures</strong>. The intervals are wide. That width is the evidence,
-    not the estimator, and nothing on this page narrows it.</p>
+    <p class="kicker">Structure Loss Pipeline · how certain</p>
+    <h1>How certain are these numbers?</h1>
+    <p class="lede">This project estimates, building by building, which structures a wildfire
+    destroyed, using free satellite imagery and public maps of building outlines. Every accuracy
+    figure it publishes is an average taken over a modest number of fires — and it is
+    <strong>fires</strong>, not buildings, that the figure is really uncertain about. This page
+    attaches an interval to every headline, explains in plain terms how that interval is built,
+    and says what it does and does not promise.</p>
   </div>
 </header>
 
 <div class="wrap">
   <div class="status">
-    <h3>Every interval on this page is the shipped model's, 12 September 2026</h3>
-    <p><strong>Both halves are the production damage model at the fixed cut 0.85.</strong>
-    The national half is
-    <code>outputs/uncertainty/v5/</code> over the 66 Carlson fires (582,554 structures); the
-    out-of-sample half is <code>outputs/uncertainty/dins_v5/</code> over the eight CAL FIRE
-    DINS incidents. Both were run on 2026-09-12 from out-of-fold predictions already on
-    disk.</p>
-    <p>Everything here is <code>scripts/13_uncertainty_report.py</code>: CPU only,
-    <strong>nothing refitted</strong>. It resamples predictions already written, and every
-    <code>summary.json</code> beside a table records the model and cut it was computed on.</p>
+    <h3>What this page shows</h3>
+    <p><strong>The single number to take away: against California's door-to-door damage
+    inspections, the model's destroyed calls score an F1 of 0.9158, with a 95 % interval of
+    [0.8591, 0.9190] across fires.</strong> F1 is one number combining precision (what share of
+    the buildings we called destroyed really were) and recall (what share of the real destruction
+    we found); it is their harmonic mean, so a model cannot buy a good score by sacrificing one
+    for the other.</p>
+    <p>That interval is wide, and it is wide for an honest reason: it rests on eight inspected
+    fires, two of which hold 84 % of the buildings between them. The width is a statement about
+    how much evidence exists, not about the arithmetic — no better estimator narrows it.</p>
+    <p>Every interval here is produced by resampling whole fires from per-building predictions
+    already stored on the data share. <strong>No model is retrained anywhere on this page.</strong>
+    All rows use the same fixed decision threshold: the model gives each building a probability
+    of having been destroyed, and we call a building destroyed when that probability is above
+    0.85, a value fixed in advance and never tuned fire by fire.</p>
   </div>
 </div>
 
@@ -404,51 +409,130 @@
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">01 · the headlines</p>
-    <h2>Every headline, with its interval</h2>
-    <p class="eyebrow" style="color:var(--s2)">all rows on the production damage model, cut 0.85</p>
+    <p class="eyebrow">01 · reading the intervals</p>
+    <h2>Why the uncertainty is about fires, not buildings</h2>
   </div>
   <div class="wrap">
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Headline</th><th class="num">Estimate</th><th class="num">95 % CI (fires resampled)</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Carlson leave-one-fire-out, pooled F1 @0.85 (66 fires, 582,554 structures)</strong></td><td class="num">0.8513</td><td class="ci">[0.7626, 0.8967]</td></tr>
-          <tr><td><strong>… mean per-fire F1</strong></td><td class="num">0.7797</td><td class="ci">[0.7388, 0.8151]</td></tr>
-          <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9860</td><td class="ci">[0.9769, 0.9902]</td></tr>
-          <tr><td>… pooled average precision</td><td class="num">0.9111</td><td class="ci">[0.8232, 0.9523]</td></tr>
-          <tr><td><strong>Inspection incidents, pooled F1 @0.85 (8 incidents, 36,272 structures)</strong></td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
-          <tr><td><strong>… mean per-fire F1</strong></td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
-          <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9740</td><td class="ci">[0.9702, 0.9817]</td></tr>
-          <tr><td>Detector marginal — share of database-missed records recovered @10 m (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
-          <tr><td>… as a count of records</td><td class="num">343</td><td class="ci">[125, 590]</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/{v5,dins_v5,detector_marginal}/pooled_ci.csv</code>
-    and <code>summary.json</code>, all dated 2026-09-12. The national table is
-    <code>models/damage_sentinel2_v5/oof_predictions.gpkg</code>, written by
-    <code>outputs/carlson_lofo/v5/</code>. B = 2000, percentile interval, resampling unit = fire; the
-    basic and BCa intervals sit beside each estimate in the same files. Stage 9b's detector
-    numbers do not go through the Sentinel-2 sampler and did not move when it was fixed.</p>
+    <p>582,554 buildings sounds like an enormous sample, and it would be if each building were an
+    independent trial. It is not. Those buildings sit inside 66 fires, and the buildings within a
+    single fire share almost everything: the same weather and wind, the same vegetation and
+    terrain, the same satellite images on the same dates, the same inspection crew recording the
+    outcome. If the model reads one fire well, it tends to read nearly every building in that fire
+    well; if it misreads a fire, it misreads thousands of buildings at once. Counting each
+    building as its own piece of evidence would therefore produce an interval far narrower than
+    the evidence deserves.</p>
+    <p>The question a reader actually has is <em>how would this perform on the next fire</em>. That
+    is a question about the sample of fires we happen to have, so the fire is the unit that gets
+    resampled.</p>
+
+    <h3>How the interval is built: a cluster bootstrap over fires</h3>
+    <p>The recipe is short enough to state in full.</p>
+    <ol>
+      <li>Start from the fires that were scored, each carrying all of its own buildings and their
+      stored predictions.</li>
+      <li>Draw a new set of fires of the same size at random <em>with replacement</em>, so some
+      fires appear twice or more and others not at all.</li>
+      <li>Recompute the headline figure on that set exactly as it was computed on the real one.</li>
+      <li>Repeat 2,000 times, giving 2,000 alternative versions of the headline.</li>
+      <li>Sort those 2,000 values and read off the 2.5th and the 97.5th percentile. That pair is
+      the 95 % interval printed beside the estimate.</li>
+    </ol>
+    <p>Because the thing being drawn is a whole fire — every building it contains, kept together —
+    this is a <strong>cluster bootstrap</strong>, the cluster being the fire. Keeping the cluster
+    intact is what stops the correlation between buildings in the same fire from being mistaken
+    for independent evidence.</p>
+
+    <h3>What the interval says, and what it does not</h3>
+    <p><strong>It says:</strong> had this work happened to cover a different draw of fires from
+    the same pool, the headline would usually have landed somewhere inside this range. It is a
+    measure of how much the number depends on which fires we got.</p>
+    <p><strong>It does not say</strong> anything about a single building, and it is not a range
+    for one fire's own score. It also cannot capture a bias shared by every fire: if the ground
+    truth itself is wrong in a consistent direction, every resample inherits that error and the
+    interval stays silent about it. And it describes the pool of fires sampled here — mostly
+    California, mostly recent — not fires of a kind that pool contains none of.</p>
+
+    <h3>Pooled and mean-per-fire</h3>
+    <p>Two ways of averaging appear throughout, and they answer different questions.
+    <strong>Pooled</strong> tips every building from every fire into one heap and computes the
+    score once, so the largest fires dominate; it answers "across all the buildings covered, how
+    accurate was the result". <strong>Mean per fire</strong> computes the score separately for
+    each fire and then averages those scores, so a fire with three hundred buildings counts as
+    much as one with eighteen thousand; it answers "on a typical fire, how accurate is this".
+    Pooled scores are the higher of the two here, because the very large fires are the ones the
+    model reads best. Both are published, always side by side.</p>
 
     <div class="note warn">
       <p><strong>⚠️ There are two kinds of interval on this site and they are never mixed in one
-      cell.</strong> A <strong>fire-level</strong> interval resamples the fires and answers
-      "what would this be on the next fire" — that is the one a reader generalising needs, and
-      it is what every table above shows. A <strong>within-fire</strong> interval resamples one
-      fire's own structures and says how precisely <em>that</em> fire was measured; it
-      generalises to nothing. Every table on this site says which it is showing.</p>
+      cell.</strong> A <strong>fire-level</strong> interval resamples the fires and answers "what
+      would this be on the next fire"; that is the one a reader generalising from these results
+      needs. A <strong>within-fire</strong> interval resamples one fire's own buildings and says
+      only how precisely <em>that</em> fire was measured; it generalises to nothing. Every table
+      on this site states which of the two it is showing.</p>
     </div>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">02 · per fire</p>
-    <h2>The eight incidents, one at a time</h2>
-    <p class="eyebrow" style="color:var(--s2)">production damage model, cut 0.85</p>
+    <p class="eyebrow">02 · the headlines</p>
+    <h2>Every published figure, with its interval over fires</h2>
+    <p class="eyebrow" style="color:var(--s2)">all rows at the fixed threshold 0.85</p>
+  </div>
+  <div class="wrap">
+    <p>Two independent answer sheets are used. The first is a published, hand-assembled record of
+    buildings destroyed in United States wildfires, one point per destroyed building, compiled by
+    Carlson and colleagues. The second is CAL FIRE's damage inspection programme, in which
+    inspectors visit each structure after a fire and record whether it was destroyed, damaged or
+    untouched. Every accuracy figure below is <strong>held-out</strong>: the model that scores a
+    fire was trained only on the other fires, never on the fire it is being judged against.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>How accurate the per-building destroyed calls are, against each answer sheet,
+        with a 95 % interval from resampling whole fires</caption>
+        <thead><tr><th>What is being measured</th><th class="num">Estimate</th><th class="num">95 % CI (fires resampled)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Against the published historical record — pooled F1 (66 fires, 582,554 buildings)</strong></td><td class="num">0.8513</td><td class="ci">[0.7626, 0.8967]</td></tr>
+          <tr><td><strong>… the same, averaged one fire at a time</strong></td><td class="num">0.7797</td><td class="ci">[0.7388, 0.8151]</td></tr>
+          <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9860</td><td class="ci">[0.9769, 0.9902]</td></tr>
+          <tr><td>… pooled average precision</td><td class="num">0.9111</td><td class="ci">[0.8232, 0.9523]</td></tr>
+          <tr><td><strong>Against the inspection records — pooled F1 (8 fires, 36,272 buildings)</strong></td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
+          <tr><td><strong>… the same, averaged one fire at a time</strong></td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
+          <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9740</td><td class="ci">[0.9702, 0.9817]</td></tr>
+          <tr><td>Buildings the public databases miss: the share of those destroyed-building records our detector recovers (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
+          <tr><td>… the same, expressed as a count of records</td><td class="num">343</td><td class="ci">[125, 590]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><b>Reading it:</b> take the first row as "our best estimate of the balance of precision and
+    recall is 0.8513, and on a different draw of fires it would usually have come out somewhere
+    between 0.7626 and 0.8967".</p>
+    <p class="src"><b>Source:</b> <code>pooled_ci.csv</code> for each run, under
+    <code>outputs/uncertainty/</code> on the data share, written 2026-09-12, alongside the
+    <code>summary.json</code> that records the model and threshold each figure was computed at.
+    The per-building predictions behind them are the held-out prediction file
+    (<code>oof_predictions.gpkg</code>) shipped with the damage model. 2,000 resamples,
+    percentile interval, the unit resampled is the fire; basic and bias-corrected intervals sit
+    beside every estimate in the same files.</p>
+    <p>Three terms in that table, defined once. <strong>AUC</strong> is the probability that a
+    randomly chosen destroyed building is given a higher score than a randomly chosen surviving
+    one, so it measures ordering rather than any particular threshold. <strong>Average
+    precision</strong> summarises how precision falls away as recall is pushed higher, across all
+    thresholds at once. The last two rows concern <strong>our building detector</strong>, a
+    neural network trained on aerial photography that finds buildings the public footprint
+    databases have missed; a ground-truth point and one of our building locations count as the
+    same building when they lie within 10 m of each other, matched one to one.</p>
+    <p>Precision and recall are simply the four cells of a confusion matrix rearranged. The full
+    matrices, in counts and in percentages, are on <a href="confusion-matrix.html">the confusion
+    matrix page</a>.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">03 · one fire at a time</p>
+    <h2>The eight inspected fires, taken separately</h2>
+    <p class="eyebrow" style="color:var(--s2)">fixed threshold 0.85</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -519,21 +603,24 @@
 <line class="axis" x1="176.0" y1="226" x2="710.0" y2="226" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s2)"></span>F1 on the incident</li>
-        <li><span class="swatch" style="background:var(--s1);height:2px;width:1.1em"></span>95 % interval, resampling <em>that fire's own structures</em></li>
+        <li><span class="swatch" style="background:var(--s2)"></span>F1 on that fire</li>
+        <li><span class="swatch" style="background:var(--s1);height:2px;width:1.1em"></span>95 % interval, resampling <em>that fire's own buildings</em></li>
       </ul>
-      <figcaption>These are <strong>within-fire</strong> intervals — how precisely each incident
-      was measured. Note the shape: the two big Los Angeles fires are measured to a thousandth,
-      and Bridge 2024 — 898 structures of which 81 were destroyed — spans thirteen points.
-      Sample size inside a fire is not the project's scarce resource; fires are.</figcaption>
+      <figcaption><strong>Big fires are measured precisely; small ones are not — and neither tells
+      you about the next fire.</strong> These are <strong>within-fire</strong> intervals: how
+      precisely each fire's own score was pinned down. The two large Los Angeles fires are
+      measured to a thousandth, while Bridge 2024 — 898 buildings of which 81 were destroyed —
+      spans thirteen points. Sample size inside a fire is not the scarce resource here; fires
+      are.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <div class="tablewrap">
       <table>
-        <caption>Destroyed-class F1 at the shipped cut <strong>0.85</strong>, scored
-        leave-one-incident-out</caption>
-        <thead><tr><th>Incident</th><th class="num">Structures</th><th class="num">Destroyed</th><th class="num">Base rate</th><th class="num">F1</th><th class="num">95 % CI (within fire)</th></tr></thead>
+        <caption>How well each inspected fire was scored, and how precisely that fire itself was
+        measured — threshold <strong>0.85</strong>, each fire scored by a model trained only on
+        the other fires</caption>
+        <thead><tr><th>Fire</th><th class="num">Buildings</th><th class="num">Destroyed</th><th class="num">Base rate</th><th class="num">F1</th><th class="num">95 % CI (within fire)</th></tr></thead>
         <tbody>
           <tr><td>Eaton 2025</td><td class="num">18,318</td><td class="num">9,419</td><td class="num">0.514</td><td class="num">0.9204</td><td class="ci">[0.9162, 0.9243]</td></tr>
           <tr><td>Palisades 2025</td><td class="num">12,009</td><td class="num">6,845</td><td class="num">0.570</td><td class="num">0.9184</td><td class="ci">[0.9134, 0.9229]</td></tr>
@@ -546,16 +633,20 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/per_fire_ci.csv</code>,
-    <code>scope = within_fire</code>, <code>metric = f1</code>, cut 0.85, seed 42, B = 2000.
-    The base rate is the share of that incident's inspected structures the inspectors recorded
-    as destroyed, and it is what the bottom two rows are about.</p>
+    <p><b>Reading it:</b> the model does best where destruction was widespread and worst where it
+    was rare — the base rate is the share of that fire's inspected buildings the inspectors
+    recorded as destroyed, and the two weakest rows are the two fires with the lowest base
+    rates.</p>
+    <p class="src"><b>Source:</b> <code>per_fire_ci.csv</code> under
+    <code>outputs/uncertainty/</code> on the data share, rows scoped to within-fire resampling of
+    the F1 measure, threshold 0.85, random seed 42, 2,000 resamples.</p>
 
-    <h3>And the same eight, resampled as fires</h3>
+    <h3>The same eight fires, resampled as fires</h3>
     <div class="tablewrap">
       <table>
-        <caption>8 incidents, 36,272 structures, cut 0.85 — the interval a reader
-        generalising to a ninth fire needs</caption>
+        <caption>Accuracy against the inspection records pooled across 8 fires and 36,272
+        buildings, then averaged one fire at a time — the interval a reader generalising to a
+        ninth fire needs</caption>
         <thead><tr><th>Scope</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Average precision</th></tr></thead>
         <tbody>
           <tr><td>pooled</td><td class="num">0.9272</td><td class="num">0.9047</td><td class="num">0.9158</td><td class="num">0.9740</td><td class="num">0.9729</td></tr>
@@ -565,29 +656,44 @@
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/dins_v5/pooled_ci.csv</code>,
-    seed 42, cut 0.85. Seeds 43–45 sit in
-    <code>outputs/uncertainty/dins_v5_seed{43,44,45}/</code> and move pooled F1 by less than
-    0.001 (0.9158 / 0.9154 / 0.9152 / 0.9158).</p>
+    <p><b>Reading it:</b> counting every building equally gives a higher score than counting every
+    fire equally, because the two largest fires are also among the best read — and both versions
+    carry intervals several times wider than the within-fire intervals above.</p>
+    <p class="src"><b>Source:</b> <code>pooled_ci.csv</code> under
+    <code>outputs/uncertainty/</code> on the data share, threshold 0.85, random seed 42.</p>
     <div class="note warn">
       <p><strong>⚠️ Look at the pooled F1 interval: [0.859, 0.919] against an estimate of
-      0.9158.</strong> It barely reaches above the estimate. That is not a bug — Eaton and
-      Palisades are 84 % of the rows and both score high, so a resample that draws either of
-      them less often falls, and one that draws them more often has nowhere to go. The interval
-      is skewed because the evidence is.</p>
-      <p><strong>And four seeds move the number by a thousandth while one fire moves it by five
-      hundredths.</strong> The seed-to-seed spread that a promotion rule is usually checked
-      against is about fifteen times narrower than the fire-to-fire spread of the same quantity
-      — and it is the fire-to-fire one a ninth incident lives in.</p>
+      0.9158.</strong> It barely reaches above the estimate. That asymmetry is real, not an error:
+      Eaton and Palisades are 84 % of the buildings and both score high, so a resample that
+      happens to draw either of them less often falls, while one that draws them more often has
+      almost nowhere left to rise. The interval is skewed because the evidence is.</p>
+      <p><strong>The randomness of the procedure is negligible next to the randomness of which
+      fires exist.</strong> Repeating the whole resampling with different random seeds moves
+      pooled F1 by less than 0.001 — 0.9158 / 0.9154 / 0.9152 / 0.9158 — while dropping or
+      duplicating a single fire moves it by around five hundredths. A ninth fire lives in the
+      second kind of variation, not the first.</p>
     </div>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">03 · calibration</p>
-    <h2>The destroyed probability is a ranking, not a frequency</h2>
-    <p class="eyebrow" style="color:var(--s2)">both halves of the production damage model</p>
+    <p class="eyebrow">04 · calibration</p>
+    <h2>The probability is a ranking, not a frequency</h2>
+    <p class="eyebrow" style="color:var(--s2)">against both answer sheets</p>
+  </div>
+  <div class="wrap">
+    <p>The model gives each building a number between zero and one. A separate question from "does
+    it rank the burned buildings above the surviving ones" is "does that number behave like a
+    frequency" — if you gather every building the model scored around one in five, did about one
+    in five of them really burn?</p>
+    <p>A <strong>reliability diagram</strong>, also called a calibration curve, answers exactly
+    that. Sort every building by the score it was given, cut the sorted list into ten groups
+    holding equal numbers of buildings, and for each group plot the average score on the
+    horizontal axis against the share that were really destroyed on the vertical axis. Perfect
+    agreement puts the points on the diagonal. A point <strong>below</strong> the diagonal means
+    the model claimed more confidence than the outcomes justified — over-confident. A point above
+    it means the opposite.</p>
   </div>
   <div class="wide">
     <figure class="band">
@@ -646,90 +752,90 @@
 <rect x="384" y="68" width="11" height="11" rx="2" fill="var(--s2)" />
 <text x="402" y="78">CAL FIRE DINS, 8 incidents · cut 0.85</text>
 <text class="tick" x="402" y="91">ECE 0.0651 → 0.0071 calibrated</text>
-<text class="tick" x="384" y="130">both on the shipped bundle</text>
-<text class="tick" x="384" y="144">damage_sentinel2_v5</text>
+<text class="tick" x="384" y="130">both curves are the same</text>
+<text class="tick" x="384" y="144">published model</text>
 </svg>
-      <figcaption>Pooled reliability in 10 equal-count bins, both halves of the production
-      damage model. Both curves sit <strong>below</strong> the
-      diagonal: the model is over-confident nearly everywhere. Across the two the observed
-      frequency is below the predicted probability in <strong>19 of the 20 bins</strong>; the
-      single exception is the DINS curve's top bin, under-confident by +0.0001 on 3,628 rows,
-      which is a rounding artefact and not a change of direction.</figcaption>
+      <figcaption><strong>Both curves sit below the diagonal: the scores are over-confident nearly
+      everywhere.</strong> Ten equal-count groups, computed against each answer sheet. Across the
+      two curves the observed frequency is below the predicted probability in <strong>19 of the
+      20 groups</strong>; the single exception is the top group of the inspection curve,
+      under-confident by +0.0001 on 3,628 buildings, which is a rounding artefact rather than a
+      change of direction.</figcaption>
     </figure>
   </div>
   <div class="wrap">
-    <p class="src"><b>Source:</b>
-    <code>outputs/uncertainty/{v5,dins_v5}/calibration_pooled.csv</code>, rows with
-    <code>n_bins_requested = 10</code>, <code>scope = pooled</code>. Twenty-bin versions and
-    per-fire curves are in the same directories.</p>
+    <p class="src"><b>Source:</b> <code>calibration_pooled.csv</code> for each run, under
+    <code>outputs/uncertainty/</code> on the data share, rows for ten equal-count groups pooled
+    across fires. Twenty-group versions and per-fire curves sit in the same folders.</p>
 
     <div class="tablewrap">
       <table>
-        <caption>Calibration error, and what a leave-one-fire-out isotonic map does to it</caption>
-        <thead><tr><th>Table</th><th class="num">Expected calibration error</th><th class="num">95 % CI</th><th class="num">Maximum calibration error</th><th class="num">Brier</th><th class="num">ECE after isotonic</th></tr></thead>
+        <caption>How far the scores are from true frequencies, and how much a fitted correction
+        curve closes that gap</caption>
+        <thead><tr><th>Answer sheet</th><th class="num">Expected calibration error</th><th class="num">95 % CI</th><th class="num">Maximum calibration error</th><th class="num">Brier</th><th class="num">Expected error after correction</th></tr></thead>
         <tbody>
-          <tr><td><strong>the 66 national fires</strong></td><td class="num">0.0514</td><td class="ci">[0.0365, 0.0737]</td><td class="num">0.2400</td><td class="num">0.0328</td><td class="num">0.0005</td></tr>
-          <tr><td><strong>the 8 inspection incidents</strong></td><td class="num">0.0651</td><td class="ci">[0.0514, 0.1032]</td><td class="num">0.2297</td><td class="num">0.0729</td><td class="num">0.0071</td></tr>
+          <tr><td><strong>the 66 fires of the published historical record</strong></td><td class="num">0.0514</td><td class="ci">[0.0365, 0.0737]</td><td class="num">0.2400</td><td class="num">0.0328</td><td class="num">0.0005</td></tr>
+          <tr><td><strong>the 8 inspected fires</strong></td><td class="num">0.0651</td><td class="ci">[0.0514, 0.1032]</td><td class="num">0.2297</td><td class="num">0.0729</td><td class="num">0.0071</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/&lt;tag&gt;/calibration_ci.csv</code>
-    (B = 2000, 10 bins) and <code>summary.json</code>; maximum calibration error is the largest
-    absolute bin gap in <code>calibration_pooled.csv</code>. The isotonic map takes expected
-    calibration error <strong>0.0514 → 0.0005</strong> on the national table and
-    <strong>0.0651 → 0.0071</strong> on the inspection incidents, with Brier 0.0328 → 0.0208 and
+    <p><b>Reading it:</b> a raw score is off by about five to seven points on average as a
+    statement of frequency, by as much as a quarter in the worst group, and a fitted correction
+    curve removes nearly all of that.</p>
+    <p class="src"><b>Source:</b> <code>calibration_ci.csv</code> for each run, under
+    <code>outputs/uncertainty/</code> on the data share (2,000 resamples, ten groups), with the
+    accompanying <code>summary.json</code>; the maximum calibration error is the largest absolute
+    group gap in <code>calibration_pooled.csv</code>. <em>Expected calibration error</em> is the
+    average gap between predicted probability and observed frequency, weighted by how many
+    buildings fall in each group; <em>maximum calibration error</em> is the largest single such
+    gap; the <em>Brier</em> score is the mean squared difference between the probability given and
+    what actually happened, so lower is better. The correction takes expected calibration error
+    <strong>0.0514 → 0.0005</strong> against the historical record and
+    <strong>0.0651 → 0.0071</strong> against the inspections, with Brier 0.0328 → 0.0208 and
     0.0729 → 0.0616.</p>
 
-    <p><strong>The national table is the better-calibrated half and the better-ranked one is
-    not</strong> — which is the clearest sign that the score is an ordering rather than a
-    frequency: the DINS incidents rank at AUC 0.974 and calibrate at ECE 0.065, the 66 Carlson
-    fires rank at 0.986 and calibrate at 0.051. The calibrated column
-    ships as <code>destroyed_prob_calibrated</code> <em>beside</em> <code>destroyed_prob</code>,
-    not instead of it, and <strong>the operating cut stays on the raw score</strong>: isotonic
-    regression is monotone, so it cannot re-rank anything, and moving the cut onto the
-    calibrated axis would change the product without changing the evidence. It costs 0.0017
-    pooled F1 at the matched operating point.</p>
+    <p><strong>The better-calibrated answer sheet is not the better-ranked one</strong> — which is
+    the clearest sign that the score is an ordering rather than a frequency. The inspected fires
+    rank at AUC 0.974 while calibrating at an expected error of 0.065; the 66 fires of the
+    historical record rank at 0.986 and calibrate at 0.051. The correction used is
+    <strong>isotonic regression</strong>: a curve fitted to map raw scores onto observed
+    frequencies, constrained to never go downhill, so it can rescale scores but can never reorder
+    them. A corrected column, <code>destroyed_prob_calibrated</code>, ships <em>beside</em> the
+    raw <code>destroyed_prob</code> rather than in place of it, and <strong>the decision threshold
+    stays on the raw score</strong>: moving it onto the corrected axis would change the published
+    product without adding any evidence, and costs 0.0017 of pooled F1 at the matched operating
+    point.</p>
 
     <div class="note">
-      <p><strong>Calibration is not a per-fire cut rule, and it does not recover the
-      out-of-state threshold loss.</strong> Because the map is fitted leave-one-fire-out on 65
-      of 66 fires it is nearly the same map every time: the raw score at which the calibrated
-      column reaches 0.5 spans only <strong>0.875–0.894</strong> across the Carlson fires,
-      against per-fire best cuts that run <strong>0.20–0.93</strong>. A rule that <em>does</em>
-      move with the fire is on the <a href="outside-california.html">outside-California
-      page</a>.</p>
+      <p><strong>A correction curve is not a per-fire threshold rule.</strong> The curve is fitted
+      each time on the other 65 of the 66 fires, so it comes out nearly identical every
+      time: the raw score
+      at which the corrected column reaches 0.5 spans only <strong>0.875–0.894</strong> across the
+      66 fires of the historical record, while the best threshold chosen with hindsight for an
+      individual fire ranges from <strong>0.20 to 0.93</strong>. A rule that <em>does</em> adapt to
+      the fire is described on <a href="outside-california.html">the beyond-California page</a>.</p>
     </div>
   </div>
 </section>
 
 <section class="part">
   <div class="wide">
-    <p class="eyebrow">04 · the honest limit</p>
-    <h2>Nothing here is a forward hold-out</h2>
+    <p class="eyebrow">05 · limits</p>
+    <h2>What these intervals cannot tell you</h2>
   </div>
   <div class="wrap">
-    <p>Every damage interval on this page is cross-validated or leave-one-fire-out. The
-    production bundle has seen all eight DINS incidents, so the leave-one-incident-out table is
-    its only honest score — and the fix is <strong>time</strong>, not a better estimator.</p>
-    <p>On 2026-09-10 the production bundles were frozen and hashed — seven files, 295,298,842
-    bytes — along with the operating cut, the composite windows and the code commit. Nothing has
-    been predicted, because <strong>there is nothing yet to predict on</strong>: a complete
-    snapshot of the public CAL FIRE DINS archive taken the same day holds
-    <strong>132,522 records covering 2013–2025 and zero incidents of 2026</strong>; the latest
-    ignition anywhere in it is 2025-11-23 and the layer's own <code>dataLastEditDate</code> is
-    2026-01-06. The same selection rule applied to 2025 picks exactly the five 2025 fires
-    already in the forward set, so <strong>the empty result is the archive, not the
-    query</strong>. This project uses public data only, so the hold-out waits on CAL FIRE.</p>
-    <p>When a qualifying incident appears it is scored with the frozen bundles at the frozen cut
-    against these fixed reference numbers: detection <em>n</em>-weighted recall
-    <strong>0.786</strong> all / <strong>0.878</strong> major over the 15 forward fires; damage
-    leave-one-fire-out pooled F1 <strong>0.9122</strong> and mean-fire F1
-    <strong>0.8690</strong>; and, end to end on Nixon 2024, P / R / F1 <strong>0.733</strong>
-    with AUC 0.965. A later score under a changed operating rule or a different bundle is
-    reported as a separate labelled row, never as a replacement.</p>
-    <p class="src"><b>Source:</b> <code>docs/preregistration-2026.md</code>;
-    <code>outputs/preregistration/2026/frozen_bundles.json</code>; ledger
-    <code>prereg-2026-freeze</code>, <code>prereg-2026-no-incident</code>.</p>
+    <p>Every accuracy figure on this site is held-out: the model scoring a fire was trained only
+    on the other fires, so no fire is marking its own homework. What that does not amount to is a
+    forecast tested after the fact — each of these fires had already burned and been inspected
+    when the model was built, so the numbers describe performance on unseen fires of a kind
+    already represented here, not on a fire nobody had seen at all.</p>
+    <p>Three further limits follow directly from the method described at the top of this page. An
+    interval built by resampling fires can only reflect the fires in the pool, so it does not
+    extend to landscapes, building stocks or fire behaviour absent from it. It cannot widen to
+    account for an error the ground truth makes consistently in every fire. And with eight
+    inspected fires, two of them holding 84 % of the buildings, any interval computed over them
+    is coarse by construction — which is why both the pooled and the one-fire-at-a-time versions
+    are always published together rather than a single figure standing alone.</p>
   </div>
 </section>
 
@@ -737,17 +843,17 @@
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p>Companion pages: <a href="index.html">the index</a> ·
-      <a href="pipeline-overview.html">the deep dive</a> ·
-      <a href="forward-fires.html">fire by fire</a> ·
-      <a href="combined-series.html">the combined series</a> ·
-      <a href="outside-california.html">outside California</a> ·
-      <a href="changelog.html">what changed</a>.</p>
-    <p class="mono">Provenance: damage model <code>damage_sentinel2_v5</code> at the fixed cut
-    0.85, detector <code>seg_all_v4</code>, release <code>v0.9.0</code>. Intervals from
-    <code>outputs/uncertainty/v5/</code> (66 national fires) and
-    <code>outputs/uncertainty/dins_v5/</code> (8 inspection incidents), data date
-    2026-09-12.</p>
+    <p>Companion pages: <a href="index.html">start here</a> ·
+      <a href="how-it-works.html">how it works</a> ·
+      <a href="pipeline-overview.html">the method in full</a> ·
+      <a href="confusion-matrix.html">the confusion matrices</a> ·
+      <a href="forward-fires.html">results by fire</a> ·
+      <a href="combined-series.html">the dataset</a> ·
+      <a href="outside-california.html">beyond California</a> ·
+      <a href="changelog.html">release history</a>.</p>
+    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-12. Destroyed call at a
+    fixed threshold of 0.85. Intervals read from <code>outputs/uncertainty/</code> on the data
+    share — the 66-fire national run and the 8-fire inspection run.</p>
   </div>
 </footer>
 
