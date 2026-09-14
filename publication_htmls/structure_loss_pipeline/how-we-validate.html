@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How We Validate</title>
+<meta name="description" content="How the accuracy figures on this site are produced: what the model learns from, how whole fires are held out, where the threshold comes from, and what the design does not guarantee." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  /* ============================================================
+     Structure Loss Pipeline — one design system, dark by default.
+     Tokens are declared in full on bare :root (the DARK palette,
+     which is this site's primary theme). Light is redefined in two
+     places so it wins whether the viewer chose it or their OS did.
+     Series colours validated with the dataviz palette checker on
+     each mode's own chart surface: all six checks pass in both.
+     ============================================================ */
+  :root {
+    /* ground and ink — near-black with a faint warm bias: ash, not slate */
+    --paper:   #0B0C0E;
+    --paper-2: #14161A;
+    --paper-3: #1E2127;
+    --ink:     #EFEBE3;
+    --ink-2:   #B6B0A6;
+    --ink-3:   #85837E;
+    --rule:    #262A2F;
+    --rule-2:  #3A4047;
+    /* four series, one job each — validated on surface #14161A */
+    --s1: #5B8AD2;   /* the footprint baseline */
+    --s2: #DB6026;   /* destroyed · this pipeline */
+    --s3: #17A188;   /* surviving · the hand survey */
+    --s4: #B38A20;   /* the detector */
+    --s1-soft: #182334;
+    --s2-soft: #32190F;
+    --s3-soft: #0C2A25;
+    --s4-soft: #2C2410;
+    /* status — reserved, never reused as a fifth series */
+    --good: #35B15E;
+    --warn: #D6A02A;
+    --crit: #E0705E;
+    /* type scale */
+    --t-xs: 0.72rem;
+    --t-sm: 0.82rem;
+    --t-ui: 0.9rem;
+    --t-md: 1.12rem;
+    --t-lg: 1.34rem;
+    --t-xl: 1.72rem;
+    --measure: 66ch;
+    --shell: 1140px;
+    --gutter: 20px;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+      --rule: #DDD8CC; --rule-2: #C3BCAB;
+      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+      --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+      --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+    --rule: #DDD8CC; --rule-2: #C3BCAB;
+    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+    --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+    --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.14; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 2.9rem); font-variation-settings: "opsz" 144; letter-spacing: -0.012em; }
+  h2 { font-size: clamp(1.45rem, 2.8vw, var(--t-xl)); letter-spacing: -0.008em; }
+  h3 { font-size: var(--t-lg); margin-top: 2.4rem; margin-bottom: 0.45rem; }
+  h4 {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 1rem; margin: 1.7rem 0 0.3rem; line-height: 1.3;
+  }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--s2); }
+  :focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; border-radius: 2px; }
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+    font-size: 0.87em;
+  }
+  code { background: var(--paper-2); padding: 0.08em 0.36em; border-radius: 3px; color: var(--ink-2); }
+  strong { font-weight: 600; color: var(--ink); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+  /* ---- shell ---- */
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: var(--gutter); }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
+  .skip {
+    position: absolute; left: -9999px; top: 0; background: var(--paper-2); color: var(--ink);
+    padding: 0.6rem 1rem; z-index: 20; border: 1px solid var(--rule-2); border-radius: 0 0 4px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---- the nav rail: where this page sits in the set of ten ---- */
+  nav.rail {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, blue)) {
+    nav.rail { background: var(--paper); }
+  }
+  nav.rail .inner {
+    max-width: var(--shell); margin: 0 auto; padding: 0.55rem var(--gutter);
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+  }
+  nav.rail a.home {
+    color: var(--ink); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500; white-space: nowrap;
+  }
+  nav.rail a.home:hover { color: var(--s2); }
+  nav.rail .here {
+    color: var(--ink-2); letter-spacing: 0.04em; display: flex; gap: 0.6em;
+    align-items: baseline; white-space: nowrap; flex: none;
+  }
+  nav.rail .here .of { color: var(--ink-3); }
+  nav.rail .sibs {
+    display: flex; gap: 0.95rem; flex-wrap: nowrap; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    padding-bottom: 1px;
+  }
+  nav.rail .sibs::-webkit-scrollbar { display: none; }
+  nav.rail .sibs a { color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+  nav.rail .sibs a:hover { color: var(--s2); }
+  nav.rail .sibs a[aria-current="page"] { color: var(--s2); }
+
+  /* ---- masthead ---- */
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.6rem;
+  }
+  .lede { font-size: var(--t-md); color: var(--ink-2); max-width: var(--measure); }
+  header.masthead {
+    border-bottom: 1px solid var(--rule-2);
+    padding-block: 3.2rem 1.8rem;
+    background:
+      radial-gradient(120% 140% at 12% -10%, var(--s2-soft) 0%, transparent 62%);
+  }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 0.9rem;
+  }
+  header.masthead h1 { margin-bottom: 0.9rem; }
+
+  section.part { padding-block: 2.8rem 0.8rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+
+  /* the eyebrow's counter is the reading order of the deep dive, which is a real
+     sequence; nothing else on the site is numbered. */
+  .against { border-top: 2px solid var(--s2); padding-top: 0.55rem; margin-top: 2.6rem; }
+  .against .who {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--s2);
+  }
+
+  /* ---- tables ---- */
+  .tablewrap {
+    overflow-x: auto; margin: 1.1rem 0 0.2rem;
+    border: 1px solid var(--rule); border-radius: 5px; background: var(--paper-2);
+  }
+  /* A wide table or chart in the prose column breaks out to the page shell, so it
+     is read rather than scrolled: as wide as the shell (or the viewport less its
+     gutters), re-centred on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap details.more,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 2 * var(--gutter)));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table {
+    border-collapse: collapse; width: 100%; font-size: var(--t-ui);
+    font-variant-numeric: tabular-nums;
+  }
+  caption {
+    caption-side: top; text-align: left; font-size: var(--t-ui); color: var(--ink-2);
+    padding: 0.7rem 0.75rem 0.55rem; max-width: 92ch;
+  }
+  th, td {
+    text-align: left; padding: 0.46rem 0.75rem;
+    border-bottom: 1px solid var(--rule); vertical-align: top;
+  }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-xs); letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-2); border-bottom: 1px solid var(--rule-2);
+    position: sticky; top: 0; background: var(--paper-3);
+    white-space: nowrap; vertical-align: bottom;
+  }
+  tbody tr:hover td { background: color-mix(in srgb, var(--paper-3) 55%, transparent); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num {
+    text-align: right;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+  }
+  td.ci, .ci {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+    color: var(--ink-2); white-space: nowrap; text-align: right;
+  }
+  tr.total td {
+    font-weight: 600;
+    border-top: 1px solid var(--rule-2);
+    background: color-mix(in srgb, var(--s2-soft) 60%, transparent);
+  }
+  .pass, .verdict.pass { color: var(--good); font-weight: 600; }
+  .fail, .verdict.fail { color: var(--crit); font-weight: 600; }
+  .no { color: var(--ink-3); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin: 0.5rem 0 1.7rem; line-height: 1.55;
+    overflow-wrap: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  .src code { background: none; padding: 0; }
+
+  /* ---- long tables fold away so the page reads top-down ---- */
+  details.more { margin: 1.2rem 0 1.7rem; }
+  details.more > summary {
+    cursor: pointer; list-style: none;
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-ui); color: var(--ink);
+    padding: 0.6rem 0.9rem; border: 1px solid var(--rule-2); border-radius: 5px;
+    background: var(--paper-2); display: flex; align-items: center; gap: 0.6em;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before {
+    content: "+"; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--s2); font-size: 1.05em; line-height: 1; width: 1ch; flex: none;
+  }
+  details.more[open] > summary::before { content: "\2212"; }
+  details.more > summary:hover { border-color: var(--s2); }
+  details.more[open] > summary { border-radius: 5px 5px 0 0; border-bottom-color: var(--rule); }
+  details.more[open] > summary + * { margin-top: 0; }
+  details.more .tablewrap { border-radius: 0 0 5px 5px; border-top: 0; margin-top: 0; }
+  details.more .src { margin-bottom: 0; }
+
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule-2); border-radius: 0 5px 5px 0;
+    padding: 0.95rem 1.15rem; margin: 1.4rem 0; font-size: var(--t-ui);
+  }
+  .note > :last-child, .status > :last-child { margin-bottom: 0; }
+  .note.warn { border-left-color: var(--s2); background: color-mix(in srgb, var(--s2-soft) 70%, var(--paper-2)); }
+  .note.ok { border-left-color: var(--s3); background: color-mix(in srgb, var(--s3-soft) 70%, var(--paper-2)); }
+  .status { border-left-color: var(--s4); background: color-mix(in srgb, var(--s4-soft) 60%, var(--paper-2)); }
+  .status h3 { margin-top: 0; font-size: var(--t-md); }
+  .note .src, .status .src { margin-bottom: 0; }
+
+  /* ---- figures ---- */
+  figure { margin: 1.7rem 0; }
+  figure.band {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    padding: 1.15rem 1.1rem 1rem; border-radius: 5px;
+  }
+  figcaption {
+    font-size: var(--t-ui); color: var(--ink-2); margin-top: 0.75rem;
+    max-width: 78ch; line-height: 1.55;
+  }
+  figcaption strong:first-child { color: var(--ink); }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px;
+  }
+  /* a halo in the panel colour so a label never has a grid or reference line
+     running through it */
+  figure.band svg text {
+    paint-order: stroke fill; stroke: var(--paper-2); stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--t-sm);
+    color: var(--ink-2); margin: 0.7rem 0 0; padding: 0; list-style: none;
+  }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.35rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.5rem; }
+  ul.tight li::marker, ol.tight li::marker { color: var(--ink-3); }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--t-xs); letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.14em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  nav.toc { margin: 1.9rem 0 0.4rem; }
+  nav.toc ol {
+    list-style: none; margin: 0; padding: 0; counter-reset: toc;
+    display: grid; gap: 0.35rem 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  nav.toc li {
+    counter-increment: toc; font-size: var(--t-ui);
+    border-bottom: 1px solid var(--rule); padding-bottom: 0.32rem;
+  }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin-right: 0.6em;
+  }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  footer.pagefoot {
+    border-top: 1px solid var(--rule-2); margin-top: 3.4rem;
+    padding-block: 1.8rem 3.4rem; color: var(--ink-2); font-size: var(--t-ui);
+  }
+  footer.pagefoot .mono { font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    :root { --gutter: 16px; }
+    th, td { padding: 0.42rem 0.5rem; }
+    header.masthead { padding-block: 2.2rem 1.4rem; }
+    nav.rail .sibs { display: none; }
+  }
+  ol.walk { list-style: none; counter-reset: walk; padding: 0; margin: 1.3rem 0 0.5rem; display: grid; gap: 0.85rem; }
+  ol.walk li { counter-increment: walk; display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; align-items: start; }
+  ol.walk li::before {
+    content: counter(walk); font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--t-xs); color: var(--s2); padding-top: 0.28rem;
+  }
+  ol.walk b { color: var(--ink); }
+  .twoup { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin: 1.3rem 0 0.4rem; }
+  .twoup > div { border: 1px solid var(--rule); border-radius: 5px; background: var(--paper-2); padding: 0.95rem 1.05rem; }
+  .twoup h4 { margin-top: 0; }
+  .twoup p { margin-bottom: 0; font-size: var(--t-ui); color: var(--ink-2); }
+  @media (max-width: 560px) { ol.walk li { grid-template-columns: 1.6rem 1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="rail" aria-label="Site sections">
+  <div class="inner">
+    <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
+    <span class="here"><span>How we validate</span><span class="of">page 8 of 10</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html" aria-current="page">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · how we validate</p>
+    <h1>How we validate</h1>
+    <p class="lede">This project estimates, building by building, which structures a wildfire
+    destroyed. Every accuracy figure on this site is measured on <strong>fires the model had
+    never seen</strong>: to score a fire, we refit the model with that entire fire removed from
+    its training data, and use the result. This page explains why the whole fire is the right
+    thing to remove, where the decision threshold comes from, how the published data records
+    which model made each call, and — at the end, without softening — the four things this
+    design does <em>not</em> establish.</p>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">the short version</p>
+    <h2>Three rules, and one number to carry</h2>
+    <div class="status">
+      <ul class="tight">
+        <li><strong>No published score came from a model that had seen the fire it
+        scored.</strong> Not that building, not its neighbour, not any building in the same
+        fire.</li>
+        <li><strong>The decision threshold is held out too.</strong> It is chosen from scores
+        that were themselves produced by models that had not seen the fires they scored, so it
+        is not fitted on anything a model had memorised.</li>
+        <li><strong>Nothing enters the model on the strength of evidence that has already been
+        looked at.</strong> A candidate is measured on a larger set of fires, named in advance,
+        before it is adopted.</li>
+      </ul>
+      <p>Measured that way, against fire-service damage inspections, the destroyed call reaches
+      an F1 of <strong>0.9158</strong> counting every building equally and <strong>0.8729</strong>
+      counting every fire equally. Both are real; quoting one without the other is not. F1 is the
+      harmonic mean of precision (what share of our destroyed calls were right) and recall (what
+      share of the real destruction we found), so it punishes both errors.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the training pool</p>
+    <h2>What the model learns from</h2>
+    <p>Two sources of ground truth, each covering a different set of fires. The
+    <strong>historical record</strong> is a published, hand-assembled census of buildings
+    destroyed in United States wildfires, compiled by Carlson and colleagues from before-and-after
+    imagery; <strong>fire-service damage inspections</strong> are CAL FIRE's programme of sending
+    inspectors to each structure in a burn area to record its condition.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Every fire and building the damage model is fitted on</caption>
+        <thead><tr><th>Source</th><th class="num">Fires</th><th class="num">Buildings</th><th class="num">Of which destroyed</th></tr></thead>
+        <tbody>
+          <tr><td>Historical record, hand-assembled, 2016–2022</td><td class="num">66</td><td class="num">582,554</td><td class="num">51,628</td></tr>
+          <tr><td>Fire-service damage inspections, 2024–2025</td><td class="num">8</td><td class="num">36,272</td><td class="num">17,779</td></tr>
+          <tr class="total"><td>Total</td><td class="num">74</td><td class="num">618,826</td><td class="num">69,407</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/metrics.json</code> on the data
+    share, read 2026-09-14.</p>
+    <p><b>Reading it:</b> the model has seen about six hundred thousand buildings, but only
+    seventy-four fires — and the number of fires is what limits how much can be claimed.</p>
+
+    <p>The 66 historical fires span <strong>eleven states</strong> — 41 in California, 9 in
+    Oregon, 4 in Colorado, 3 in Washington, 2 each in Oklahoma and Tennessee, and one each in
+    Florida, Kansas, New Mexico, Texas and Utah — across seven fire years from 2016 to 2022. The
+    eight inspected incidents are the Airport, Borel, Bridge, Mountain and Park fires of 2024 and
+    the Eaton, Palisades and TCU Complex fires of 2025.</p>
+
+    <div class="note warn">
+      <p>⚠️ <strong>Both halves are dominated by a few fires.</strong> The three largest
+      historical fires hold 29&nbsp;% of that half's buildings, and Eaton and Palisades alone hold
+      <strong>84&nbsp;%</strong> of the inspected half. That single fact is why every headline
+      here is reported twice, and why the two versions differ by four to seven points.</p>
+    </div>
+
+    <h3>The two sources do not count the same buildings</h3>
+    <p>The historical record marks a <em>major building</em> that someone drew a point on from an
+    image pair. An inspection marks <em>a structure an inspector stood next to</em>, including
+    mobile homes, accessory dwellings and outbuildings, and grades it on six levels rather than
+    two. We treat a structure as destroyed when the inspector graded it above 50&nbsp;% damage,
+    as surviving at 25&nbsp;% or below, and we <strong>drop</strong> the 25–50&nbsp;% band and the
+    "inaccessible" grade rather than force them to one side: half-burned is neither, and
+    inaccessible was never actually inspected. Over the fires the product publishes, that choice
+    sets aside 352 inspection records.</p>
+    <p>On the same ground, over seventeen fires, the inspectors' destroyed count divided by the
+    historical record's runs <strong>0.82 to 1.84, median 1.24</strong>. That is a difference in
+    what counts as a building, not in the model, and it is why no figure on this site ever pools
+    the two truths into one number.</p>
+    <p class="src"><b>Source:</b> the label-recode rule in the project's configuration, and the
+    same-ground count table under <code>outputs/combined_retrospective/</code> on the data share.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the method</p>
+    <h2>Holding out a whole fire, and why nothing smaller will do</h2>
+    <p>The rule is simple to state. For each of the 74 fires in turn: fit a model on
+    <strong>all the other 73</strong>, and use it to score every building in the fire that was
+    left out. Run it 74 times and every building in the pool carries a score from a model that
+    never saw its fire.</p>
+    <p>The unit is the <em>fire</em>, not the building, and that is the whole point. Buildings
+    inside one fire share a satellite scene, a season, a fuel type, a wind event, a smoke layer
+    and a single survey crew. A model that has seen half a fire has effectively seen the other
+    half, so holding out a random sample of buildings measures memorisation rather than skill.
+    Removing the fire is the smallest hold-out that cuts every one of those shared threads at
+    once.</p>
+    <p>The size of the difference is not hypothetical. The same model scored with blocks held out
+    <em>inside</em> each fire reaches an AUC of 0.990; scored with whole fires held out it reaches
+    0.985. The gap is small here and much larger elsewhere: a published study of more than
+    100,000 of the same inspections reports 88.0&nbsp;% under random cross-validation falling to
+    <strong>68.0&nbsp;%</strong> once space is blocked, and the closest comparable per-building
+    benchmark reports F1 0.800 on a random split against <strong>0.655</strong> with whole events
+    held out. AUC is the probability that a randomly chosen destroyed building scores higher than
+    a randomly chosen surviving one, so 0.5 is a coin flip and 1.0 is perfect ranking.</p>
+    <p class="src"><b>Source:</b> the held-out scoring tables written beside the model on the
+    data share; published comparisons as cited in the project's literature review.</p>
+
+    <h3>One fire, end to end</h3>
+    <p>The Eaton Fire of January 2025 is the largest fire in the pool by inspected structures.
+    Here is exactly what happens to it.</p>
+    <ol class="walk">
+      <li><div><b>It is a training fire.</b> 18,318 of its inspected structures pass the feature
+      and label filters — 9,419 destroyed, 8,899 surviving — and they are training rows for every
+      fold except their own.</div></li>
+      <li><div><b>Its own model is fitted without it.</b> A model is trained on the other 73
+      fires, 600,508 buildings, and nothing from Eaton is in it.</div></li>
+      <li><div><b>That model scores all 18,318 Eaton rows.</b> A structure on Altadena Drive gets
+      a probability from a model that has never seen a building in this fire.</div></li>
+      <li><div><b>The threshold is read off the held-out scores.</b> Eaton's scores, together
+      with the other seven incidents' held-out scores, are what the threshold rule reads. It picks
+      the value that maximises the average of the eight per-fire F1 scores: <b>0.85</b>.</div></li>
+      <li><div><b>What it scores.</b> At 0.85, Eaton's held-out model reaches precision 0.944,
+      recall 0.898, F1 <b>0.920</b>, AUC 0.975. Eaton's own best possible threshold would have
+      been 0.67 for an F1 of 0.924 — four thousandths, which is the price of shipping one number
+      that works for every fire.</div></li>
+      <li><div><b>The published product uses that same held-out model</b>, not one fitted on all
+      74 fires. 64,319 inventory points are scored and 7,637 called destroyed.</div></li>
+      <li><div><b>The check.</b> Those points are matched one-to-one within 10&nbsp;m to the field
+      inspections: 14,955 pairs, precision 0.949, recall 0.905, F1 <b>0.926</b>, AUC 0.978 — plus
+      a detection recall of 0.816, which is the part a confusion matrix cannot see, because it
+      only counts buildings we found in the first place.</div></li>
+    </ol>
+    <p class="src"><b>Source:</b> the model's own summary and per-fold files, and
+    <code>outputs/forward_damage/per_fire.csv</code> on the data share.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">two ways to average</p>
+    <h2>Counting every building, and counting every fire</h2>
+    <p>Every result here is given twice, because the two answers a user might want are different
+    questions.</p>
+    <div class="twoup">
+      <div>
+        <h4>Pooled</h4>
+        <p>Throw every held-out building into one confusion matrix. This answers <em>"across all
+        these buildings, how often are we right?"</em> — and it is dominated by the biggest fires,
+        two of which hold 84&nbsp;% of the inspected half.</p>
+      </div>
+      <div>
+        <h4>Mean per fire</h4>
+        <p>Score each fire separately, then average the fires, one vote each. This answers
+        <em>"what should I expect on the next fire?"</em>, which is usually the real question. A
+        fire joins the average only if it has at least 100 scored buildings and 10 destroyed ones;
+        below that its score is a statement about a handful of buildings. Those fires are still
+        pooled and still counted.</p>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <caption>The same held-out results, weighted two ways</caption>
+        <thead><tr><th>Ground truth</th><th class="num">Fires</th><th class="num">Pooled F1</th><th class="num">Mean per-fire F1</th><th class="num">Gap</th></tr></thead>
+        <tbody>
+          <tr><td>Fire-service damage inspections</td><td class="num">8</td><td class="num">0.9158</td><td class="num">0.8729</td><td class="num">4 points</td></tr>
+          <tr><td>The historical record</td><td class="num">66</td><td class="num">0.8513</td><td class="num">0.7797</td><td class="num">7 points</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> the bootstrap and held-out summary tables under
+    <code>outputs/uncertainty/</code> and beside the model on the data share, read 2026-09-14.</p>
+    <p><b>Reading it:</b> the gap is entirely the weighting — the historical half has more small
+    fires, so weighting fires equally costs it more.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the threshold</p>
+    <h2>Where the cut-off comes from, and why it is held out as well</h2>
+    <p>The model returns a probability; a threshold turns it into a call. Choosing that threshold
+    is itself a fitted decision, so it gets the same treatment as the model. The rule is: try
+    every value from 0.01 to 0.99, compute each <em>held-out</em> fire's F1 at that value, average
+    the fires, and keep the best. On the eight inspected incidents that rule picks
+    <strong>0.85</strong>, and 0.85 is what the product applies to every fire.</p>
+    <p>It maximises the average <em>of the fires</em> rather than the pooled score, deliberately.
+    Two fires hold 84&nbsp;% of the buildings, so a threshold tuned on the pooled score is
+    whatever those two fires want, and every small fire pays for it. A new fire is one case, not
+    eighteen thousand cases. Because every score the rule reads came from a model that had not
+    seen the fire it scored, the threshold is not fitted on anything a model had memorised.</p>
+
+    <h3>Is the threshold holding the numbers back?</h3>
+    <p>It can be checked, and it is. Beside every score at the shipped threshold, the pipeline
+    also reports what that population would have reached at <em>the best threshold fitted on its
+    own answers</em> — a number that can never be shipped, because it needs the answers. The gap
+    between the two separates "the ranking is wrong" from "the threshold landed badly".</p>
+    <div class="tablewrap">
+      <table>
+        <caption>What a perfect threshold would have been worth, where it can be measured</caption>
+        <thead><tr><th>Population</th><th class="num">At the shipped threshold</th><th class="num">At its own best threshold</th><th class="num">Difference</th></tr></thead>
+        <tbody>
+          <tr><td>The historical record, pooled F1</td><td class="num">0.8915</td><td class="num">0.8921</td><td class="num">0.0006</td></tr>
+          <tr><td>Inside California, mean per-fire F1</td><td class="num">0.807</td><td class="num">0.829</td><td class="num">0.021</td></tr>
+          <tr><td>Outside California, mean per-fire F1</td><td class="num">0.7345</td><td class="num">0.8002</td><td class="num"><strong>0.066</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> the by-region held-out tables under
+    <code>outputs/generalization/</code> on the data share, read 2026-09-14.</p>
+    <p><b>Reading it:</b> where the model has plenty of training fires the single fixed threshold
+    costs almost nothing; outside California it costs about 6.6 points of F1, which says the
+    ranking travels across the country and the threshold does not.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">in the published data</p>
+    <h2>Every row says which model called it</h2>
+    <p>The model above is an evaluation device. The thing that ships is a per-fire product: our
+    own list of buildings, each carrying a probability and a call. Some of those fires are in the
+    training pool and some are not, so every published row records which model made its call.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Which model scores which fire, in the released data</caption>
+        <thead><tr><th>If the fire is…</th><th>it is scored by…</th><th>and the row says</th></tr></thead>
+        <tbody>
+          <tr><td><strong>not</strong> in the training pool</td><td>the model fitted on all 74 fires</td><td>the production model</td></tr>
+          <tr><td><strong>in</strong> the training pool</td><td>that fire's own held-out model, fitted on the other 73</td><td>held out</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> the per-fold index written beside the model, and
+    <code>outputs/forward_damage/per_fire.csv</code> on the data share.</p>
+    <p><b>Reading it:</b> the held-out models are refitted and kept for exactly this purpose —
+    same recipe, same seed, same threshold rule, the only difference being which rows the model
+    never saw.</p>
+    <div class="note ok">
+      <p><strong>The consequence is the sentence that matters: no damage call in the published
+      data was made by a model that had seen that fire.</strong> Of the fifteen recent fires the
+      product covers, eight are training fires scored by their own held-out model and seven are
+      outside the pool entirely. On the historical fires the same check was run explicitly: every
+      scored row carries a held-out call, and the only rows that do not are 476 of 159,754
+      (0.30&nbsp;%) that carry no probability at all.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">keeping ourselves honest</p>
+    <h2>Deciding what gets into the model in the first place</h2>
+    <p>Holding fires out tells you how good a model is. It does not stop you from choosing a model
+    by looking at the answer twenty times. Two further devices do that.</p>
+
+    <h3>A larger set of fires, named before it is looked at</h3>
+    <p>Every candidate addition to the model is first measured on the eight inspected incidents —
+    which is eight fires, one region, two seasons. A second, larger set is therefore named in
+    advance: <strong>48 of the 66 historical fires</strong>, spanning eleven states and five
+    years, and the candidate is scored on it once, against criteria written down beforehand.</p>
+    <p>It earns its keep. Across roughly 1,900 model fits, twelve candidate feature families have
+    been measured. Three looked like real gains of one to three points on the eight incidents; on
+    the 48-fire set the picture changed for every one of them, and changed in the same direction
+    each time — California and the Pacific Northwest gain, Texas and New Mexico lose. The apparent
+    headroom was an artefact of judging a method on eight fires from one state in two seasons.</p>
+
+    <h3>Intervals that resample fires, not buildings</h3>
+    <p>Every interval on this site is computed by resampling whole <strong>fires</strong> 2,000
+    times with replacement, recomputing the figure each time, and taking the 2.5th and 97.5th
+    percentiles. Buildings inside a fire are not independent draws, so resampling buildings would
+    give an interval far too narrow to be useful. When two models are compared on the same rows,
+    the same fire multiplicities are applied to both sides, so the fire-to-fire spread cancels out
+    of a quantity that never sees it.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>The two headline figures against the fire-service inspections, with their intervals</caption>
+        <thead><tr><th>Figure</th><th class="num">Value</th><th class="ci">95 % interval over fires</th></tr></thead>
+        <tbody>
+          <tr><td>Pooled F1</td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
+          <tr><td>Mean per-fire F1</td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> the bootstrap tables under <code>outputs/uncertainty/</code> on
+    the data share, 2,000 replicates resampling whole fires, read 2026-09-14.</p>
+    <p><b>Reading it:</b> these intervals are wide, and the width is honest — with eight fires, a
+    resample that happens to miss the two largest is a different experiment.</p>
+    <p>Nothing is adopted on a single random seed or a single number: the standing requirement is
+    a minimum gain on the pooled score <em>and</em> a cap on how much any individual fire may
+    lose, measured as the mean over four random seeds.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">outside the pool entirely</p>
+    <h2>Three assessments nobody here had a hand in</h2>
+    <p>Three independent per-structure damage assessments, none from either training source, on
+    fires the pool either does not contain at all or does not contain as ground truth.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Independent ground truth, scored at the shipped threshold</caption>
+        <thead><tr><th>Assessment</th><th>Fire</th><th class="num">Pairs</th><th class="num">Destroyed rate</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th></tr></thead>
+        <tbody>
+          <tr><td>Federal urban search &amp; rescue</td><td>South Fork, New Mexico, 2024</td><td class="num">1,637</td><td class="num">0.453</td><td class="num">0.982</td><td class="num">0.747</td><td class="num"><strong>0.848</strong></td><td class="num">0.985</td></tr>
+          <tr><td>County field damage assessment</td><td>Marshall, Colorado, 2021</td><td class="num">1,023</td><td class="num">0.871</td><td class="num">0.981</td><td class="num">0.961</td><td class="num"><strong>0.971</strong></td><td class="num">0.980</td></tr>
+          <tr><td>Federal remote assessment</td><td>Marshall, Colorado, 2021</td><td class="num">2,741</td><td class="num">0.412</td><td class="num">0.907</td><td class="num">0.949</td><td class="num"><strong>0.927</strong></td><td class="num">0.984</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/external.csv</code> on the data share,
+    read 2026-09-14. South Fork is not in the training pool at all; the Marshall fire is, but
+    neither of these two surveys was ever used to fit anything.</p>
+    <p><b>Reading it:</b> the model ranks buildings well on all three, and on South Fork the
+    fixed threshold — not the ranking — is what costs it recall.</p>
+    <p><strong>South Fork is the clearest demonstration in the project that what fails outside
+    California is the threshold, not the model.</strong> Its AUC of 0.985 says the ranking is
+    excellent, yet at the shipped threshold the model finds only 747 of every 1,000 destroyed
+    structures while being almost never wrong when it does fire.</p>
+    <div class="note warn">
+      <p>⚠️ <strong>The two Marshall rows are the same fire, the same product and the same
+      pixels, and they differ by 4.4 points of F1</strong> — because the two surveys enumerate
+      different buildings: 1,473 records at an 87&nbsp;% destroyed rate against 2,941 at
+      41&nbsp;%. Which ground truth you choose is worth about as much as a year of model work.
+      <a href="confusion-matrix.html">The confusion matrix page</a> shows all four counts for each
+      of these assessments.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="transfer">
+  <div class="wide">
+    <p class="eyebrow">the transfer test</p>
+    <h2>Why we train on everything, and still report the transfer number</h2>
+    <p>A reasonable reader will ask: if the fire-service inspections are in the training pool, how
+    do we know the method transfers to data it has never met? The answer is that both models are
+    built and both numbers are published, because they answer two different questions.</p>
+    <div class="twoup">
+      <div>
+        <h4>The transfer model</h4>
+        <p>Trained on the <strong>66 historical fires only</strong>, and then applied to the eight
+        inspected incidents — fires it has never met, in a labelling scheme it has never met. Not
+        one inspected building, in any fire, in any year, was ever shown to it. This is the
+        cleanest transfer claim this data can support.</p>
+      </div>
+      <div>
+        <h4>The shipped model</h4>
+        <p>Trained on <strong>all 74 fires</strong>, and used for the published product, because
+        the thing being delivered is a call on a real building and withholding half the evidence
+        would make it worse. Its honesty comes from elsewhere: every fire in it is scored by a
+        model that excluded that fire.</p>
+      </div>
+    </div>
+    <p>Both were run with everything else held identical — the same 62 features, the same learner,
+    the same four random seeds, the same threshold rule, the same rows — over 308 model fits.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Both models on the same 36,272 inspected buildings, averaged over four random seeds</caption>
+        <thead><tr><th>Measure</th><th class="num">Transfer model</th><th class="num">Shipped model</th><th class="num">Difference</th></tr></thead>
+        <tbody>
+          <tr><td>Pooled precision</td><td class="num">0.9353 ± 0.0026</td><td class="num">0.9263 ± 0.0029</td><td class="num">−0.0090</td></tr>
+          <tr><td>Pooled recall</td><td class="num">0.8181 ± 0.0082</td><td class="num">0.9052 ± 0.0033</td><td class="num"><strong>+0.0871</strong></td></tr>
+          <tr><td>Pooled F1</td><td class="num">0.8727 ± 0.0036</td><td class="num">0.9156 ± 0.0004</td><td class="num"><strong>+0.0429</strong></td></tr>
+          <tr><td>Pooled AUC</td><td class="num">0.9598 ± 0.0006</td><td class="num">0.9741 ± 0.0001</td><td class="num">+0.0143</td></tr>
+          <tr><td>Mean per-fire F1</td><td class="num">0.8583 ± 0.0011</td><td class="num">0.8750 ± 0.0014</td><td class="num"><strong>+0.0166</strong></td></tr>
+          <tr><td>Mean per-fire AUC</td><td class="num">0.9705 ± 0.0003</td><td class="num">0.9739 ± 0.0002</td><td class="num">+0.0034</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/metrics.json</code> on the data
+    share, read 2026-09-14; ± is the spread across the four seeds. Each model uses the threshold
+    its own held-out scores chose.</p>
+    <p><b>Reading it:</b> what the extra training data buys is <em>recall</em> — precision is a
+    point worse, recall is nearly nine points better — which is what you would expect, because the
+    inspectors enumerate small and minor structures the historical record leaves out and call more
+    of them destroyed.</p>
+
+    <div class="note ok">
+      <p><strong>Read the transfer number on its own terms.</strong> A pooled F1 of
+      <strong>0.873</strong> and an AUC of <strong>0.960</strong> on eight fires it has never met,
+      in a labelling scheme it has never met, is a successful transfer result in its own right.
+      That is the number a reader asking <em>"does this generalise?"</em> should be shown, and it
+      is why it is published here rather than only the shipped model's 0.916.</p>
+    </div>
+
+    <details class="more">
+      <summary>Every inspected incident, both models</summary>
+      <div class="tablewrap">
+        <table>
+          <caption>F1 on each incident, averaged over four random seeds, each model at its own threshold</caption>
+          <thead><tr><th>Incident</th><th class="num">Transfer model</th><th class="num">Shipped model</th><th class="num">Difference</th></tr></thead>
+          <tbody>
+            <tr><td>Airport 2024</td><td class="num">0.8710</td><td class="num">0.8788</td><td class="num">+0.0078</td></tr>
+            <tr><td>Borel 2024</td><td class="num">0.9038</td><td class="num">0.9068</td><td class="num">+0.0029</td></tr>
+            <tr><td>Bridge 2024</td><td class="num">0.7365</td><td class="num">0.7450</td><td class="num">+0.0085</td></tr>
+            <tr><td>Mountain 2024</td><td class="num">0.7978</td><td class="num">0.8033</td><td class="num">+0.0056</td></tr>
+            <tr><td>Park 2024</td><td class="num">0.9095</td><td class="num">0.9145</td><td class="num">+0.0050</td></tr>
+            <tr><td>Eaton 2025</td><td class="num">0.8732</td><td class="num"><strong>0.9192</strong></td><td class="num"><strong>+0.0460</strong></td></tr>
+            <tr><td>Palisades 2025</td><td class="num">0.8713</td><td class="num"><strong>0.9186</strong></td><td class="num"><strong>+0.0473</strong></td></tr>
+            <tr><td>TCU Complex 2025</td><td class="num">0.9035</td><td class="num">0.9134</td><td class="num">+0.0099</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/per_incident.csv</code> on the
+      data share, read 2026-09-14.</p>
+    </details>
+    <p><b>Reading it:</b> six of the eight gain between 0.003 and 0.010; the two large January-2025
+    fires gain 0.046 and 0.047.</p>
+    <div class="note warn">
+      <p>⚠️ <strong>Two fires carry most of the difference, and they are not independent of each
+      other.</strong> Eaton and Palisades burned a week apart in the same wind event in
+      neighbouring suburbs, and each one's held-out model has the other in its training half.
+      Some of the shipped model's advantage on those two is a model that has seen a fire very like
+      the one it is scoring. That is a real advantage for the product and it is not a national
+      accuracy claim.</p>
+    </div>
+
+    <h3>On ground neither model has seen, the two are a wash</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>The three independent assessments, where both models are out of sample</caption>
+        <thead><tr><th>Assessment</th><th class="num">Pairs</th><th class="num">Transfer model</th><th class="num">Shipped model</th><th class="num">Difference</th></tr></thead>
+        <tbody>
+          <tr><td>South Fork, New Mexico, 2024</td><td class="num">1,637</td><td class="num">0.8422 ± 0.0114</td><td class="num">0.8443 ± 0.0105</td><td class="num">+0.0021 ± 0.0191</td></tr>
+          <tr><td>Marshall, Colorado, county field survey</td><td class="num">1,023</td><td class="num">0.9686 ± 0.0009</td><td class="num">0.9702 ± 0.0007</td><td class="num">+0.0017 ± 0.0012</td></tr>
+          <tr><td>Marshall, Colorado, federal remote assessment</td><td class="num">2,741</td><td class="num">0.9212 ± 0.0020</td><td class="num">0.9291 ± 0.0017</td><td class="num">+0.0079 ± 0.0022</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/external.csv</code> on the data
+    share, read 2026-09-14; F1 averaged over four seeds, each model at its own threshold.</p>
+    <p><b>Reading it:</b> training on both sources costs nothing on ground neither model has seen,
+    and helps slightly on two of the three.</p>
+    <div class="note warn">
+      <p>⚠️ <strong>South Fork is a tie, not a win.</strong> Its seed-to-seed spread (± 0.019) is
+      nine times the difference between the two models, and two of the four seeds put the transfer
+      model ahead. The honest statement is that the extra training data costs nothing there — not
+      that it helps.</p>
+    </div>
+
+    <p>Averaging the per-fire differences across seeds and then resampling whole fires 2,000
+    times, the shipped model's advantage on the eight incidents is <strong>+0.0166 of mean
+    per-fire F1, 95&nbsp;% interval [+0.0060, +0.0307]</strong> — an interval that excludes zero,
+    as do all four of the single-seed intervals computed separately.</p>
+    <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/paired_intervals.csv</code> and
+    the summary block of <code>outputs/design_a_vs_b/v1/metrics.json</code> on the data share,
+    read 2026-09-14.</p>
+    <p>One more check runs in the opposite direction. Scored on the same 582,554 historical
+    buildings under both recipes, training on the historical record alone gives a pooled F1 of
+    <strong>0.8509</strong> and a mean per-fire F1 of <strong>0.7824</strong>; training on both
+    sources gives <strong>0.8513</strong> and <strong>0.7797</strong>. Each pair lands inside the
+    other's interval: adding the inspections neither helps nor hurts the historical half.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">the limits</p>
+    <h2>Four things this design does not establish</h2>
+    <p>Each of these is measured rather than assumed, and each is a reason to be careful with a
+    number from this site rather than a reason to discard it.</p>
+
+    <h3>1. Fires near each other are not independent</h3>
+    <p>Holding out a fire removes the fire, not the region. Two fires 30&nbsp;km apart in the same
+    fuel type in the same year are not independent draws, and the model that scores one has
+    trained on the other. Sliced by state, the held-out results say the ranking travels and the
+    threshold does not: AUC 0.991 in California against <strong>0.959</strong> everywhere else,
+    and mean per-fire F1 0.807 against <strong>0.735</strong>, closing to 0.829 and 0.800 if each
+    fire were allowed its own threshold.</p>
+    <p class="src"><b>Source:</b> the by-region held-out tables under
+    <code>outputs/generalization/</code> on the data share, read 2026-09-14.</p>
+
+    <h3>2. There is no forward test in time yet</h3>
+    <p>The historical half ends in 2022 and the inspected half is 2024–2025. Sensors, building
+    stock and inspection practice all move over time, and holding out fires does nothing about
+    that. A genuine forward test — score a season the model has never met, at a threshold fixed
+    before that season existed — is registered and frozen, and it has not paid out, because the
+    public inspection archive holds no records from the season in question. Until it does,
+    holding out whole fires is the strongest claim available, and this site says so rather than
+    implying the two are the same thing.</p>
+    <p>Inspection practice in particular is visibly unstable: the surviving share of inspection
+    records runs 6–20&nbsp;% for 2017–2018 against 46–87&nbsp;% from 2019 onwards, because before
+    2019 the programme mainly recorded damaged structures.</p>
+
+    <h3>3. The ground truth itself is not perfectly true</h3>
+    <p>Both label sets are made by people, and they disagree. On <strong>43,929 buildings that
+    both of them describe</strong>, they disagree on <strong>2.15&nbsp;%</strong> — stable whether
+    buildings are matched within 5&nbsp;m or 20&nbsp;m. Scored against each other, that is an F1
+    of <strong>0.9838</strong>, which is the ceiling any model can reach against both at once. The
+    disagreement is lopsided (663 buildings the inspectors call destroyed and the historical
+    record calls surviving, against 280 the other way) and concentrated in exactly the class the
+    model is worst on: minor outbuildings disagree 4.3&nbsp;% of the time against single
+    residences' 1.6&nbsp;%.</p>
+    <p>On the buildings where the two sources disagree, <strong>the model is at chance</strong> —
+    AUC 0.46 to 0.51. It fails precisely where people cannot agree. But removing those rows lifts
+    F1 only from 0.9185 to 0.9252, so label noise explains a fraction of a point and not the
+    rest.</p>
+    <p class="src"><b>Source:</b> the truth-agreement tables written by the project's own
+    point-comparison run on the data share, read 2026-09-14.</p>
+
+    <h3>4. It is not yet a national claim</h3>
+    <p>41 of the 66 historical fires and all eight inspected incidents are in California. Texas,
+    Kansas, Florida, New Mexico and Utah are one fire each, and no out-of-state fire is later than
+    2022. One fire is not a state. <a href="outside-california.html">Beyond California</a> reports
+    what the out-of-state evidence does and does not support.</p>
+
+    <div class="note warn">
+      <p>⚠️ <strong>One more thing to hold on to: every accuracy figure here counts only
+      buildings we matched to a ground-truth record.</strong> The product does not. Against the
+      inspections, 4,496 destroyed records are never matched and appear in no confusion matrix;
+      against the historical record, 3,057. If you want a count rather than a classification
+      score, you have to multiply the detection step back in — never read one and quote the
+      other.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Companion pages: <a href="index.html">start here</a> ·
+      <a href="how-it-works.html">how it works</a> ·
+      <a href="pipeline-overview.html">the method in full</a> ·
+      <a href="confusion-matrix.html">confusion matrix</a> ·
+      <a href="uncertainty.html">how certain</a> ·
+      <a href="outside-california.html">beyond California</a>.</p>
+    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-14. Destroyed call at a
+    fixed threshold of 0.85. The two-model comparison is read from
+    <code>outputs/design_a_vs_b/v1/</code> on the data share, 308 model fits over four random
+    seeds.</p>
+  </div>
+</footer>
+
+</body>
+</html>
