@@ -88,3 +88,13 @@ point_dataset_audit.html
 # behind excluding the restrictively licensed rows; that decision is stated on
 # `combined-series.html` and on the index's inputs table.
 camp_qa_ms_v2.html
+
+# The model-tagged damage-map file names, retired 2026-09-14. A published URL
+# is read by people who have never heard of this project, and `_sentinel2_v5`
+# in a file name tells them nothing while implying there is a choice to make.
+# The production bundle's maps are now published under the bare fire id,
+# `damage_<Fire_ID>.html`, the same convention the inventory maps already use.
+# The old names are listed here because `publish()` copies and never removes:
+# without this line the next run of anything that publishes would put all 66
+# back beside their replacements.
+damage_*_sentinel2_v5.html

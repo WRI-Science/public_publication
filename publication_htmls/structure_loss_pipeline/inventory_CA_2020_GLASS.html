@@ -187,7 +187,7 @@
   <div class="map-info-body">
     <h3 id="info-what">What you are looking at</h3>
     <p>This is the pipeline's <strong>product</strong>, run end to end on the
-    <strong>Glass Fire (CA, 2020)</strong> — a fire the damage bundle was fitted on, so it is scored here by its own leave-one-fire-out fold (<code>prob_source=lofo</code>) rather than by the shipped model.</p>
+    <strong>Glass Fire (CA, 2020)</strong> — a fire the damage model was fitted on, so it is scored here by a copy of that model refitted with this fire removed, rather than by the model that scores an unseen fire.</p>
     <p>Two independent steps produced it. First, the <strong>pre-fire
     inventory</strong>: every USA Structures footprint standing before
     2020-09-27, plus every building the
@@ -296,16 +296,15 @@
     green→yellow→red probability ramp, so the ring tells you <em>which model</em>
     and the fill tells you <em>how sure</em>. The layer is <strong>off by
     default</strong>: the primary call is what this product ships.</p>
-    <p><strong>⚠️ These are two calls, not one call and its correction.</strong>
-    The primary call (damage_sentinel2_v5
-    at 0.85) is made at ignition <strong>+74 days</strong>. The
-    refined call
-    (<code>damage_sentinel2_refined_v2</code>
-    at <strong>0.84</strong>) needs the post-fire AlphaEarth
-    annual raster, which is published roughly <strong>12–15 months</strong>
-    after the fire burns — so it does not exist when a fire is current, and it
-    is better where it does exist. The two cuts are cuts on two different
-    models' score axes and are not comparable with each other.</p>
+    <p><strong>⚠️ These are two estimates, not one estimate and its
+    correction.</strong> The primary estimate (threshold 0.85) is made
+    about <strong>two and a half months</strong> after the fire starts. The refined
+    estimate (threshold <strong>0.84</strong>) needs a yearly
+    satellite summary of the landscape that is published roughly
+    <strong>a year</strong> after the fire burns — so it does not exist while a
+    fire is current, and it is more accurate where it does exist. The two
+    thresholds sit on two different models' score axes and are not comparable
+    with each other.</p>
     <p><strong>In the released series</strong> these are the
     <code>damage_class</code> and <code>damage_class_refined</code> columns.
     Classify with the primary one, and say which you used; never build a single
@@ -342,10 +341,10 @@
 
     <h3>The numbers on this map</h3>
     <p><strong>Called destroyed</strong> — 1,160 of 26,309
-    inventory points at a probability cut of 0.85. The per-structure scores
-    against this answer sheet, including the operating-point comparison, are
-    Stage 17's, not this page's: see
-    <code>outputs/ics209_check/outside_ca/</code>.</p>
+    inventory points at a probability threshold of 0.85. The per-structure
+    scores against this answer sheet, including the threshold comparison, are
+    computed elsewhere in the pipeline rather than on this page, and are written
+    to <code>outputs/ics209_check/outside_ca/</code> on the data share.</p>
     
     
 
@@ -386,7 +385,7 @@
       <h1>Glass Fire (CA, 2020)<button type="button" class="info-circle info-circle-sm about-info-btn" data-tip="what" aria-label="What is this map?">i</button></h1>
       <div>Structure inventory + damage calls · checked against
       Carlson</div>
-      <div>Generated 2026-09-14 09:03:47 PDT</div>
+      <div>Generated 2026-09-14 09:36:47 PDT</div>
       <h2>Jump</h2>
       <button id="btnOverview">Fire-wide grid</button>
       <div id="nbhdButtons"></div>
