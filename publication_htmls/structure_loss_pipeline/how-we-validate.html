@@ -853,6 +853,114 @@
   </div>
 </section>
 
+<section class="part" id="neighbours">
+  <div class="wide">
+    <p class="eyebrow">how much a fire owes to its neighbours</p>
+    <h2>What the score would be if the fire were genuinely new</h2>
+    <p>Holding a fire out cuts the threads that tie a building to its neighbours. It does
+    <em>not</em> cut the threads that tie a fire to the rest of the dataset. The model that
+    scores the Eaton fire has still seen the Palisades fire, which burned a week later and
+    42&nbsp;km away in the same wind event; it has still seen every other California fire and
+    every other fire of the same year. So there is a fair question behind the whole design:
+    <strong>is seventy-three fires enough to memorise the dataset, so that the seventy-fourth is
+    not really new?</strong></p>
+    <p>That question has a direct experimental answer. Take more away — a second fire, a whole
+    state, a whole year — and see how far the score moves.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>What each published per-fire score would have been if more had been held out.
+        Every row is the same 0–1 F1 scale, averaged so that each fire counts once, at the
+        threshold the product ships.</caption>
+        <thead><tr><th>What is held out</th><th class="num">Fires scored</th>
+          <th class="num">Mean per-fire F1</th><th class="num">One fire out, same fires</th>
+          <th class="num">Difference</th><th class="ci">95 % interval</th></tr></thead>
+        <tbody>
+          <tr><td><strong>One fire</strong> — the published design</td><td class="num">74</td><td class="num"><strong>0.7914</strong></td><td class="num">—</td><td class="num">—</td><td class="ci">—</td></tr>
+          <tr><td>A <strong>second fire</strong> as well, every possible pair</td><td class="num">74</td><td class="num">0.7921</td><td class="num">0.7914</td><td class="num">+0.0007</td><td class="ci">[−0.0006, +0.0021]</td></tr>
+          <tr><td>A whole <strong>calendar year</strong></td><td class="num">74</td><td class="num">0.7865</td><td class="num">0.7914</td><td class="num">−0.0049</td><td class="ci">[−0.0092, −0.0007]</td></tr>
+          <tr><td>Everything from that year <strong>onwards</strong> — training on earlier years only</td><td class="num">49</td><td class="num">0.8017</td><td class="num">0.8155</td><td class="num">−0.0137</td><td class="ci">[−0.0279, −0.0034]</td></tr>
+          <tr><td>A California <strong>sub-region</strong>, groups averaging under 150 km across</td><td class="num">49</td><td class="num">0.8132</td><td class="num">0.8199</td><td class="num">−0.0067</td><td class="ci">[−0.0133, −0.0007]</td></tr>
+          <tr><td>A whole <strong>state</strong></td><td class="num">74</td><td class="num">0.7694</td><td class="num">0.7914</td><td class="num"><strong>−0.0220</strong></td><td class="ci">[−0.0304, −0.0148]</td></tr>
+          <tr><td><strong>Eaton and Palisades together</strong> — a week and 42 km apart</td><td class="num">2</td><td class="num">0.8709</td><td class="num">0.9189</td><td class="num"><strong>−0.0480</strong></td><td class="ci">[−0.0488, −0.0473]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/validation_l2/</code> on the data share — the
+    pairs-and-regions run (<code>metrics.json</code>, <code>lro_per_fire.csv</code>) and the
+    whole-years run (<code>metrics.json</code>, <code>year_per_fire.csv</code>), read
+    2026-09-14. 2,488 model fits for the pairs and regions, 356 for the years, each at four
+    random seeds. Intervals resample whole fires, 2,000 replicates.</p>
+    <p><b>Reading it:</b> <strong>a published per-fire score is honest for a fire like the ones
+    we already have, and optimistic by about two points of F1 for a fire in genuinely new
+    country.</strong></p>
+
+    <h3>Taking a second fire away changes nothing</h3>
+    <p>There are 8 inspected incidents and 66 historical fires, so there are <strong>528
+    pairs</strong>. For every pair, a model was fitted on the other 72 fires and used to score
+    both of the two that were left out — every combination, not a sample. Each inspected
+    incident therefore ends up with 66 held-out scores instead of one, and each historical fire
+    with 8.</p>
+    <p>The yardstick is the fire's own measurement noise. Each fire already carries a 95&nbsp;%
+    interval on its own score, produced by resampling that fire's buildings 2,000 times. If the
+    spread of a fire's score across all its partners sits inside that interval, then removing a
+    second fire moved the number by <em>less than the precision with which the number is known in
+    the first place</em>.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>Per fire: how far the score moves when a second fire is removed, against how
+        precisely that score is known</caption>
+        <thead><tr><th>Measure</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Median spread of a fire's F1 across its partners</td><td class="num">0.0148</td></tr>
+          <tr><td>Median width of that fire's own 95 % interval</td><td class="num">0.0654</td></tr>
+          <tr><td>Fires whose spread is narrower than their own interval</td><td class="num"><strong>74 of 74</strong></td></tr>
+          <tr><td>Fires whose spread sits entirely inside that interval</td><td class="num"><strong>71 of 74</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>Source:</b> <code>outputs/validation_l2/v1/metrics.json</code> and
+    <code>per_fire_l2.csv</code> on the data share, read 2026-09-14.</p>
+    <p><b>Reading it:</b> no fire in the pool moves further than its own noise, so the published
+    design is not a fiction produced by seventy-three near-copies.</p>
+    <p>Three fires are the exceptions to the stricter test, and they are worth naming rather than
+    rounding away: Marshall (Colorado, 2021), Rhea (Oklahoma, 2018) and Kidd (Texas, 2022). All
+    three are small fires with few destroyed buildings, whose score is poorly determined to begin
+    with — Kidd's interval is 0.12 wide on a score of 0.20 — and in two of the three the score
+    moved <em>up</em>, not down, when a second fire was removed.</p>
+
+    <h3>Taking a region away costs about two points</h3>
+    <p>Removing one extra fire is a small perturbation; removing an entire region is not. Holding
+    out every fire in a state at once costs <strong>0.0220</strong> of mean per-fire F1 — the two
+    points in the reading above. Splitting California instead into eight groups whose members
+    average under 150&nbsp;km apart costs only <strong>0.0067</strong>, which says that most of
+    what a Californian fire gains from the pool is <em>local</em> rather than statewide.</p>
+    <p>And the two fires that dominate the inspected half lose <strong>0.0480</strong> when they
+    are removed together — by far the largest effect measured here, and a direct confirmation of
+    the caution beside the transfer test above: part of each one's strength is that the other is
+    in its training data.</p>
+
+    <h3>Time costs less than geography</h3>
+    <p>The same worry pointed at the calendar. Removing every fire of one year at once costs
+    <strong>0.0049</strong>. Training only on years <em>before</em> the one being scored — which
+    is exactly what the product does in production, with no future data at all — costs
+    <strong>0.0137</strong>.</p>
+    <p>More useful than either number is the trend, and the trend is flat. Across the four
+    consecutive steps that share one source of ground truth, the fitted slope is
+    <strong>+0.005 F1 per year</strong> — upward, not downward. A model trained only on the past
+    does not decay as the clock runs.</p>
+    <div class="note warn">
+      <p>⚠️ <strong>The apparent jump in 2024–2025 is the ground truth changing, not the model
+      improving.</strong> Everything up to 2022 is scored against the hand-assembled historical
+      record and everything from 2024 against fire-service inspections, so a step across that
+      boundary changes the definition of a destroyed building as well as the year. The late steps
+      average <strong>0.0779</strong> above the earlier ones — which is <em>smaller</em> than the
+      <strong>0.0933</strong> gap between the two ground truths measured on the same design. The
+      honest reading of the forward test is the flat slope, not the step at the boundary.</p>
+    </div>
+  </div>
+</section>
+
 <section class="part">
   <div class="wide">
     <p class="eyebrow">the limits</p>
@@ -869,6 +977,10 @@
     fire were allowed its own threshold.</p>
     <p class="src"><b>Source:</b> the by-region held-out tables under
     <code>outputs/generalization/</code> on the data share, read 2026-09-14.</p>
+    <p>How much that is worth has been measured directly rather than left as a caution: holding
+    out a whole state at once costs <strong>0.0220</strong> of mean per-fire F1, and the two
+    fires that burned a week apart in January 2025 lose <strong>0.0480</strong> when they are
+    removed together. <a href="#neighbours">The section above</a> has the full table.</p>
 
     <h3>2. There is no forward test in time yet</h3>
     <p>The historical half ends in 2022 and the inspected half is 2024–2025. Sensors, building
@@ -878,6 +990,11 @@
     public inspection archive holds no records from the season in question. Until it does,
     holding out whole fires is the strongest claim available, and this site says so rather than
     implying the two are the same thing.</p>
+    <p>What <em>can</em> be measured is what happens when the model is given only the past:
+    training on years before the one being scored costs <strong>0.0137</strong> of mean per-fire
+    F1, and across the four consecutive steps that share one source of ground truth the trend is
+    <strong>upward</strong>, at about +0.005 F1 per year. That is reassuring, and it is not the
+    same thing as a genuine forward test.</p>
     <p>Inspection practice in particular is visibly unstable: the surviving share of inspection
     records runs 6–20&nbsp;% for 2017–2018 against 46–87&nbsp;% from 2019 onwards, because before
     2019 the programme mainly recorded damaged structures.</p>
