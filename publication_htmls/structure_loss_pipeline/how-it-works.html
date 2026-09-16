@@ -410,8 +410,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>How it works</span><span class="of">page 1 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html" aria-current="page">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>How it works</span><span class="of">page 2 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html" aria-current="page">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -617,7 +617,7 @@
     inspections, which are the judgements it is meant to reproduce. Every accuracy figure on
     this site is measured on held-out fires: the model that scores a fire was trained only on
     the <em>other</em> fires, so no fire is ever in its own training set.</p>
-    <p>The destroyed call is made at a single fixed probability, 0.85. That number is chosen
+    <p>The destroyed call is made at a single fixed probability, 0.88. That number is chosen
     to maximise the average F1 <em>across fires</em> rather than the pooled F1, which the two
     very large Los Angeles fires would otherwise dominate; it is fixed in advance and is not
     tuned to the fire being scored. A second, advisory call ships beside it, using a threshold
@@ -630,14 +630,14 @@
       <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the damage model across eight inspected fires, each held out of training">
         <text x="20" y="26" font-size="13" class="mono muted">F1 OF THE DESTROYED CALL, EACH FIRE HELD OUT OF TRAINING</text>
         <g font-size="13">
-          <text x="20" y="68">Eaton 2025</text>       <rect x="180" y="56" width="552" height="14" rx="2" fill="var(--ember)"/> <text x="742" y="68" class="mono" font-size="12">0.920</text>
-          <text x="20" y="98">Palisades 2025</text>   <rect x="180" y="86" width="551" height="14" rx="2" fill="var(--ember)"/> <text x="741" y="98" class="mono" font-size="12">0.918</text>
-          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="116" width="548" height="14" rx="2" fill="var(--ember)"/> <text x="738" y="128" class="mono" font-size="12">0.914</text>
-          <text x="20" y="158">Park 2024</text>       <rect x="180" y="146" width="546" height="14" rx="2" fill="var(--ember)"/> <text x="736" y="158" class="mono" font-size="12">0.910</text>
-          <text x="20" y="188">Borel 2024</text>      <rect x="180" y="176" width="542" height="14" rx="2" fill="var(--ember)"/> <text x="732" y="188" class="mono" font-size="12">0.904</text>
-          <text x="20" y="218">Airport 2024</text>    <rect x="180" y="206" width="525" height="14" rx="2" fill="var(--ember)"/> <text x="715" y="218" class="mono" font-size="12">0.875</text>
-          <text x="20" y="248">Mountain 2024</text>   <rect x="180" y="236" width="486" height="14" rx="2" fill="var(--ember)"/> <text x="676" y="248" class="mono" font-size="12">0.809</text>
-          <text x="20" y="278">Bridge 2024</text>     <rect x="180" y="266" width="440" height="14" rx="2" fill="var(--ember)"/> <text x="630" y="278" class="mono" font-size="12">0.733</text>
+          <text x="20" y="68">Eaton 2025</text><rect x="180" y="56" width="550" height="14" rx="2" fill="var(--ember)"/> <text x="740" y="68" class="mono" font-size="12">0.917</text>
+          <text x="20" y="98">Palisades 2025</text><rect x="180" y="86" width="550" height="14" rx="2" fill="var(--ember)"/> <text x="740" y="98" class="mono" font-size="12">0.916</text>
+          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="116" width="547" height="14" rx="2" fill="var(--ember)"/> <text x="737" y="128" class="mono" font-size="12">0.912</text>
+          <text x="20" y="158">Park 2024</text><rect x="180" y="146" width="545" height="14" rx="2" fill="var(--ember)"/> <text x="735" y="158" class="mono" font-size="12">0.908</text>
+          <text x="20" y="188">Borel 2024</text><rect x="180" y="176" width="543" height="14" rx="2" fill="var(--ember)"/> <text x="733" y="188" class="mono" font-size="12">0.905</text>
+          <text x="20" y="218">Airport 2024</text><rect x="180" y="206" width="527" height="14" rx="2" fill="var(--ember)"/> <text x="717" y="218" class="mono" font-size="12">0.878</text>
+          <text x="20" y="248">Mountain 2024</text><rect x="180" y="236" width="473" height="14" rx="2" fill="var(--ember)"/> <text x="663" y="248" class="mono" font-size="12">0.789</text>
+          <text x="20" y="278">Bridge 2024</text><rect x="180" y="266" width="452" height="14" rx="2" fill="var(--ember)"/> <text x="642" y="278" class="mono" font-size="12">0.754</text>
         </g>
         <line x1="180" y1="44" x2="180" y2="292" stroke="var(--rule)"/>
         <line x1="780" y1="44" x2="780" y2="292" stroke="var(--rule)" stroke-dasharray="3 3"/>
@@ -646,7 +646,7 @@
         <text x="780" y="312" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
       </svg>
       <div class="legend"><span style="--sw: var(--ember)">F1 of the destroyed call, each fire held out of training</span></div>
-      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.916, area under the curve 0.974. Bridge is hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
+      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.913, area under the curve 0.973. Bridge is hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
     </figure>
 
     <h3>A second, more accurate estimate arrives about a year later</h3>
@@ -660,13 +660,13 @@
     is a compact and unusually stable way to see a place change.</p>
     <p>The refined estimate uses 242 numbers per building instead of 62 and calls a building
     destroyed above a probability of 0.84. Against fire-service inspections, scored on the same
-    28,314 buildings, its F1 is <strong>0.9607</strong> where the primary estimate scores
-    0.9239. It is better wherever it exists, but it does not exist everywhere: fires that
+    28,316 buildings, its F1 is <strong>0.9606</strong> where the primary estimate scores
+    0.9208. It is better wherever it exists, but it does not exist everywhere: fires that
     predate the clean annual summaries, and a small number of buildings with no second post-fire
     window, have no refined estimate at all.</p>
     <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> and
     <code>outputs/scorecard/refined_coverage.csv</code> on the data share, data date
-    2026-09-14. Both figures are computed on the buildings that carry both estimates, so they
+    2026-09-15. Both figures are computed on the buildings that carry both estimates, so they
     are directly comparable. <a href="confusion-matrix.html">The confusion matrix page</a>
     shows all four counts for both estimates against every ground-truth source.</p>
 
@@ -744,9 +744,11 @@
     <a href="confusion-matrix.html">confusion matrix</a> ·
     <a href="forward-fires.html">results by fire</a> ·
     <a href="uncertainty.html">how certain</a>.</p>
-    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-14. Every number on this
-    page is read from the project's own output files on the data share. Primary estimate at a
-    fixed threshold of 0.85, refined estimate at 0.84.</p>
+    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>. The model
+    figures on this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on
+    199 fires and 818,838 buildings, data date 2026-09-15. Every number here is read from the
+    project's own output files on the data share. Primary estimate at a fixed threshold of 0.88,
+    refined estimate at 0.84.</p>
   </div>
 </footer>
 

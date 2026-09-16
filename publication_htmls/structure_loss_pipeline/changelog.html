@@ -372,8 +372,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Release history</span><span class="of">page 10 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
+    <span class="here"><span>Release history</span><span class="of">page 11 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
   </div>
 </nav>
 
@@ -435,9 +435,19 @@
     </div>
     <p class="src"><b>Source:</b> each version's own <code>manifest.json</code> under
     <code>outputs/releases/</code> on the data share; fires, rows, columns and packaging time
-    are read from the manifest of that version. Read 2026-09-14.</p>
+    are read from the manifest of that version. Read 2026-09-15.</p>
     <p><b>In one sentence:</b> the dataset grew from 20 fires to 377 and from 40 attributes to
     68, and the version to use today is v0.9.0.</p>
+    <div class="note warn">
+      <p style="margin-bottom:0">⚠️ <strong>The model moved on 15 September 2026 and no release
+      carries it yet.</strong> The damage model was refitted on <strong>199 fires</strong> instead
+      of 74, and its fixed threshold moved from <strong>0.85 to 0.88</strong>. Every accuracy
+      figure published on this site is that newer model's. <strong>v0.9.0 is still the newest
+      packaged release</strong> and its destroyed calls were made by the previous model at the
+      previous threshold, so a count taken from the download will not reproduce a count quoted
+      elsewhere on this site. A release carrying the newer model has not been cut. When it is, it
+      will appear as a new row in the table above and this note will go.</p>
+    </div>
   </div>
 </section>
 

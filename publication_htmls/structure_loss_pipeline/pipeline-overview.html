@@ -380,8 +380,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>The method in full</span><span class="of">page 2 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html" aria-current="page">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>The method in full</span><span class="of">page 3 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html" aria-current="page">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -396,16 +396,16 @@
     is assembled, how the destroyed call is made, and how accurate each half is when measured
     against every independent record of the same buildings. The number to carry away is the
     first one below — on fires the model was never trained on, the destroyed call reaches a
-    mean per-fire F1 of 0.783 against on-the-ground fire-service inspections.</p>
+    mean per-fire F1 of 0.788 against on-the-ground fire-service inspections.</p>
   </div>
 </header>
 
 <div class="wide">
   <div class="headline-grid">
-    <div><span class="fig">0.783</span><span class="cap">mean per-fire F1 of the destroyed call against fire-service inspections, on 15 fires; F1 combines precision and recall in one number</span></div>
+    <div><span class="fig">0.788</span><span class="cap">mean per-fire F1 of the destroyed call against fire-service inspections, on 15 fires; F1 combines precision and recall in one number</span></div>
     <div><span class="fig">2,069,752</span><span class="cap">per-building rows published, across 377 fires and 25 years — one row per building, per fire, per source</span></div>
-    <div><span class="fig">0.769</span><span class="cap">our destroyed count as a fraction of the published historical record's, running this method end to end on 17 fires that record already covers</span></div>
-    <div><span class="fig">&kappa; 0.882</span><span class="cap">agreement between our destroyed call and the historical record's own hand classification, on 394,429 buildings, corrected for chance</span></div>
+    <div><span class="fig">0.747</span><span class="cap">our destroyed count as a fraction of the published historical record's, running this method end to end on 17 fires that record already covers</span></div>
+    <div><span class="fig">0.888</span><span class="cap">destroyed-class F1 of our call against the historical record's own hand classification, on 408,611 of that record's own building points across 24 fires</span></div>
   </div>
 </div>
 
@@ -539,12 +539,13 @@
     between destroyed and surviving buildings on the Camp fire — together with the fall in
     near-infrared reflectance and the rise in short-wave infrared.</p>
     <p>The learner is histogram gradient boosting, fitted on the historical record's own
-    destroyed and surviving labels over 66 fires plus eight fire-service inspection incidents —
-    74 fires, 618,826 rows. It is scored with <strong>held-out scoring</strong>: the model that
-    scores a fire is fitted on every other fire, predicts the fire it never saw, and the
-    predictions are pooled. The <strong>cut-off</strong> is a single fixed
-    <strong>0.85</strong>: the model outputs a probability for each building, and a building is
-    called destroyed when that probability is above 0.85. The number is fixed in advance rather
+    destroyed and surviving labels over 191 fires plus eight fire-service inspection incidents —
+    <strong>199 fires, 818,838 buildings, 73,443 of them destroyed</strong>, on 62 features. It is
+    scored with <strong>held-out scoring</strong>: the model that scores a fire is fitted on every
+    other fire, predicts the fire it never saw, and the predictions are pooled. The
+    <strong>cut-off</strong> is a single fixed <strong>0.88</strong>: the model outputs a
+    probability for each building, and a building is called destroyed when that probability is
+    above 0.88. The number is fixed in advance rather
     than tuned per fire, and it is chosen to maximise the average F1 across fires rather than
     the pooled F1, which two large Los Angeles fires would otherwise dominate.</p>
 
@@ -921,121 +922,91 @@
   <div class="wide">
     <figure class="band">
       <svg viewBox="0 0 860 272" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="220.5" y1="26" x2="220.5" y2="226" />
-<text class="tick" x="220.5" y="20" text-anchor="middle">0.65</text>
-<line class="grid-line" x1="294.7" y1="26" x2="294.7" y2="226" />
-<text class="tick" x="294.7" y="20" text-anchor="middle">0.7</text>
-<line class="grid-line" x1="368.8" y1="26" x2="368.8" y2="226" />
-<text class="tick" x="368.8" y="20" text-anchor="middle">0.75</text>
-<line class="grid-line" x1="443.0" y1="26" x2="443.0" y2="226" />
-<text class="tick" x="443.0" y="20" text-anchor="middle">0.8</text>
-<line class="grid-line" x1="517.2" y1="26" x2="517.2" y2="226" />
-<text class="tick" x="517.2" y="20" text-anchor="middle">0.85</text>
-<line class="grid-line" x1="591.3" y1="26" x2="591.3" y2="226" />
-<text class="tick" x="591.3" y="20" text-anchor="middle">0.9</text>
-<line class="grid-line" x1="665.5" y1="26" x2="665.5" y2="226" />
-<text class="tick" x="665.5" y="20" text-anchor="middle">0.95</text>
-<text class="tick" x="710.0" y="252" text-anchor="end">destroyed-class F1 at the shipped cut 0.85</text>
+<line class="grid-line" x1="294.7" y1="26" x2="294.7" y2="232" />
+<text class="tick" x="294.7" y="20" text-anchor="middle">0.70</text>
+<line class="grid-line" x1="368.9" y1="26" x2="368.9" y2="232" />
+<text class="tick" x="368.9" y="20" text-anchor="middle">0.75</text>
+<line class="grid-line" x1="443.1" y1="26" x2="443.1" y2="232" />
+<text class="tick" x="443.1" y="20" text-anchor="middle">0.80</text>
+<line class="grid-line" x1="517.3" y1="26" x2="517.3" y2="232" />
+<text class="tick" x="517.3" y="20" text-anchor="middle">0.85</text>
+<line class="grid-line" x1="591.5" y1="26" x2="591.5" y2="232" />
+<text class="tick" x="591.5" y="20" text-anchor="middle">0.90</text>
+<text class="tick" x="700" y="258" text-anchor="end">F1 on that fire, at the fixed cut-off 0.88</text>
 <text x="166" y="51.9" text-anchor="end">Eaton 2025</text>
-<line x1="615.4" y1="48.4" x2="627.4" y2="48.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="615.4" y1="44.4" x2="615.4" y2="52.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="627.4" y1="44.4" x2="627.4" y2="52.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="621.6" cy="48.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="51.9" text-anchor="end">18,318 · 9,419 destroyed</text>
+<circle cx="616.6" cy="48.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="51.9" text-anchor="end">18,318 &middot; 9,419 destroyed</text>
 <text x="166" y="75.9" text-anchor="end">Palisades 2025</text>
-<line x1="611.2" y1="72.4" x2="625.3" y2="72.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="611.2" y1="68.4" x2="611.2" y2="76.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="625.3" y1="68.4" x2="625.3" y2="76.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="618.6" cy="72.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="75.9" text-anchor="end">12,009 · 6,845</text>
+<circle cx="615.2" cy="72.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="75.9" text-anchor="end">12,009 &middot; 6,845</text>
 <text x="166" y="99.9" text-anchor="end">TCU Complex 2025</text>
-<line x1="544.0" y1="96.4" x2="669.1" y2="96.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="544.0" y1="92.4" x2="544.0" y2="100.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="669.1" y1="92.4" x2="669.1" y2="100.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="612.1" cy="96.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="99.9" text-anchor="end">277 · 95</text>
+<circle cx="609.2" cy="96.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="99.9" text-anchor="end">277 &middot; 95</text>
 <text x="166" y="123.9" text-anchor="end">Park 2024</text>
-<line x1="582.9" y1="120.4" x2="628.9" y2="120.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="582.9" y1="116.4" x2="582.9" y2="124.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="628.9" y1="116.4" x2="628.9" y2="124.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="606.5" cy="120.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="123.9" text-anchor="end">2,082 · 713</text>
+<circle cx="603.5" cy="120.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="123.9" text-anchor="end">2,082 &middot; 713</text>
 <text x="166" y="147.9" text-anchor="end">Borel 2024</text>
-<line x1="554.2" y1="144.4" x2="635.2" y2="144.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="554.2" y1="140.4" x2="554.2" y2="148.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="635.2" y1="140.4" x2="635.2" y2="148.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="596.5" cy="144.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="147.9" text-anchor="end">502 · 223</text>
+<circle cx="599.7" cy="144.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="147.9" text-anchor="end">502 &middot; 223</text>
 <text x="166" y="171.9" text-anchor="end">Airport 2024</text>
-<line x1="498.8" y1="168.4" x2="604.1" y2="168.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="498.8" y1="164.4" x2="498.8" y2="172.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="604.1" y1="164.4" x2="604.1" y2="172.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="553.8" cy="168.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="171.9" text-anchor="end">371 · 160</text>
+<circle cx="559.1" cy="168.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="171.9" text-anchor="end">371 &middot; 160</text>
 <text x="166" y="195.9" text-anchor="end">Mountain 2024</text>
-<line x1="396.9" y1="192.4" x2="509.3" y2="192.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="396.9" y1="188.4" x2="396.9" y2="196.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="509.3" y1="188.4" x2="509.3" y2="196.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="456.6" cy="192.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="195.9" text-anchor="end">1,815 · 243</text>
+<circle cx="426.6" cy="192.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="195.9" text-anchor="end">1,815 &middot; 243</text>
 <text x="166" y="219.9" text-anchor="end">Bridge 2024</text>
-<line x1="234.1" y1="216.4" x2="439.7" y2="216.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="234.1" y1="212.4" x2="234.1" y2="220.4" stroke="var(--s1)" stroke-width="2" />
-<line x1="439.7" y1="212.4" x2="439.7" y2="220.4" stroke="var(--s1)" stroke-width="2" />
-<circle cx="343.2" cy="216.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="219.9" text-anchor="end">898 · 81</text>
-<line class="axis" x1="176.0" y1="226" x2="710.0" y2="226" />
+<circle cx="374.5" cy="216.0" r="5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="219.9" text-anchor="end">898 &middot; 81</text>
+<line class="axis" x1="170.0" y1="232" x2="700.0" y2="232" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s2)"></span>F1 on the fire</li>
-        <li><span class="swatch" style="background:var(--s1);height:2px;width:1.1em"></span>95 % interval, resampling <em>that fire's own buildings</em></li>
+        <li><span class="swatch" style="background:var(--s2)"></span>F1 on the incident, at the fixed cut-off</li>
       </ul>
-      <figcaption><strong>Each fire is measured precisely; what is scarce is fires, not
-      buildings.</strong> Destroyed-class F1 at the fixed cut-off of 0.85. Two fires are
-      measured to a thousandth and even the widest interval spans thirteen points, because
-      these intervals resample buildings within a fire (2,000 times). They say how precisely
-      each fire was measured; they are <strong>not</strong> the interval for a ninth fire, which
-      resamples whole fires and is much wider.</figcaption>
+      <figcaption><strong>The destroyed call is strongest where destruction was widespread.</strong>
+      Destroyed-class F1 at the fixed cut-off of 0.88, each incident scored by a copy of the model
+      refitted with that incident removed. The right-hand figures are the number of inspected
+      buildings and how many the inspectors recorded as destroyed. The two weakest incidents,
+      Mountain and Bridge, are the two where the least burned — 13&nbsp;% and 9&nbsp;% of those
+      inspected. &#9888;&#65039; The within-fire intervals this figure used to carry have not been
+      recomputed since the model changed and are not drawn.</figcaption>
     </figure>
   </div>
   <div class="wrap">
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/per_fire_ci.csv</code> on the data
-    share (within-fire scope, F1, cut-off 0.85, 2,000 resamples), dated 2026-09-12. Every
-    interval this project publishes is explained on
+    <p class="src"><b>Source:</b> the damage model's own held-out block, one entry per inspected
+    incident, in its <code>summary.json</code> beside the model on the data share, cut-off 0.88,
+    dated 2026-09-15. Every interval this project publishes is explained on
     <a href="uncertainty.html">the uncertainty page</a>.</p>
 
     <div class="note warn">
       <p><strong>⚠️ The unit of evidence is the fire, and there are eight of them.</strong>
-      Resampling whole fires rather than individual buildings gives a pooled F1 of
-      <strong>0.9158 [0.8591, 0.9190]</strong> — an interval that barely reaches above the
-      estimate, because two fires hold 84 % of the buildings and both score high, so a resample
-      that draws either of them less often falls and one that draws them more often has nowhere
-      to go. <strong>That width is the evidence, not a quirk of the estimator</strong>, and it
-      is not narrowed anywhere on this page.</p>
+      Two of the eight — Eaton and Palisades — hold 84 % of the buildings between them and both
+      score high, so a pooled figure over this set is mostly a statement about two fires in Los
+      Angeles in January 2025. <strong>That is the evidence, not a quirk of the estimator.</strong>
+      The interval that used to sit beside the pooled F1 here was measured against the previous
+      version of the damage model and has not been repeated since it changed; the widest evidence
+      with an interval on it is the 191-fire comparison against the historical record, on
+      <a href="uncertainty.html">the uncertainty page</a>.</p>
     </div>
 
     <div class="tablewrap">
       <table>
-        <caption>Accuracy of the destroyed call against fire-service inspections, counting
-        buildings equally and counting fires equally — 8 fires, 36,272 buildings, at the fixed
-        cut-off of 0.85</caption>
+        <caption>Accuracy of the destroyed call against fire-service inspections — 8 incidents,
+        36,272 buildings, at the fixed cut-off of 0.88, each incident scored by a model refitted
+        without it</caption>
         <thead><tr><th>Scope</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th><th class="num">Avg. precision</th></tr></thead>
         <tbody>
-          <tr><td>pooled</td><td class="num">0.9272</td><td class="num">0.9047</td><td class="num">0.9158</td><td class="num">0.9740</td><td class="num">0.9729</td></tr>
-          <tr><td>pooled, 95 % CI</td><td class="num">[0.818, 0.939]</td><td class="num">[0.894, 0.937]</td><td class="num">[0.859, 0.919]</td><td class="num">[0.970, 0.982]</td><td class="num">[0.915, 0.975]</td></tr>
-          <tr><td>mean per fire</td><td class="num">0.8482</td><td class="num">0.9086</td><td class="num">0.8729</td><td class="num">0.9741</td><td class="num">0.9364</td></tr>
-          <tr><td>mean per fire, 95 % CI</td><td class="num">[0.767, 0.908]</td><td class="num">[0.872, 0.940]</td><td class="num">[0.821, 0.910]</td><td class="num">[0.970, 0.979]</td><td class="num">[0.893, 0.967]</td></tr>
+          <tr><td>pooled over 36,272 buildings</td><td class="num">0.9244</td><td class="num">0.9019</td><td class="num">0.9130</td><td class="num">0.9732</td><td class="num">0.9724</td></tr>
+          <tr><td>the counts behind it</td><td class="num" colspan="5">16,034 agreed destroyed · 1,312 false alarms · 1,745 missed · 17,181 agreed surviving</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/uncertainty/pooled_ci.csv</code> on the data
-    share, 2,000 resamples of whole fires, percentile interval, dated 2026-09-12.</p>
-    <p>Reading it in one sentence: pooled counts every building equally, so the largest fires
-    dominate and the score is higher; counting every fire equally is the harder test, and the
-    destroyed call still reaches an F1 of 0.8729 there. Both are reported because they answer
-    different questions. AUC, in the fourth column, is the probability that the model gives a
-    randomly chosen destroyed building a higher score than a randomly chosen surviving one, so
-    it measures the ranking rather than the cut-off.</p>
+    <p class="src"><b>Source:</b> the damage model's own held-out block in its
+    <code>summary.json</code> beside the model on the data share, dated 2026-09-15.</p>
+    <p>Reading it in one sentence: pooling counts every building equally, so the two largest
+    incidents dominate and the score is higher than the average of the per-incident figures in the
+    chart above; both belong beside each other. AUC, in the fourth column, is the probability that
+    the model gives a randomly chosen destroyed building a higher score than a randomly chosen
+    surviving one, so it measures the ranking rather than the cut-off.</p>
 
     <h3>The shipped product: fifteen fires, scored end to end</h3>
     <p>Everything above measures the destroyed call alone. This is the whole product — 168,197
@@ -1048,22 +1019,21 @@
         2024–2025</caption>
         <thead><tr><th>Quantity</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>buildings found / buildings scored</td><td class="num">168,197 / 167,318 — the 879 difference is one fire's rows assigned to a later fire, below</td></tr>
-          <tr><td>called destroyed at the fixed cut-off (directly exposed / indirectly exposed)</td><td class="num">14,504 (14,396 / 108)</td></tr>
-          <tr><td>called destroyed at the per-fire cut-off</td><td class="num">15,951</td></tr>
+          <tr><td>buildings found / buildings scored</td><td class="num">168,197 / 167,321 — the 876 difference is one fire's rows assigned to a later fire, below</td></tr>
+          <tr><td>called destroyed at the fixed cut-off (directly exposed / indirectly exposed)</td><td class="num">14,466 (14,382 / 84)</td></tr>
+          <tr><td>called destroyed at the per-fire cut-off</td><td class="num">16,370</td></tr>
           <tr><td>inspection records / inspected as destroyed</td><td class="num">38,497 / 17,902</td></tr>
-          <tr class="total"><td>mean per-fire F1 at 10 m — fixed cut-off / per-fire cut-off</td><td class="num"><strong>0.7829</strong> / 0.7559</td></tr>
-          <tr><td>mean per-fire F1 at 20 m — fixed cut-off</td><td class="num">0.7733</td></tr>
+          <tr class="total"><td>mean per-fire F1 at 10 m — fixed cut-off / per-fire cut-off</td><td class="num"><strong>0.7880</strong> / 0.7417</td></tr>
+          <tr><td>mean per-fire F1 at 20 m — fixed cut-off</td><td class="num">0.7756</td></tr>
           <tr><td>fires scored by a model refitted without them / by the standard model</td><td class="num">8 / 7</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/forward_damage/metrics.json</code> on the data
-    share, generated 2026-09-12; the per-fire cut-off count is the sum of the shipped column in
-    <code>outputs/combined_series/per_fire_summary.csv</code>. The fire-by-fire breakdown is on
+    share, generated 2026-09-15. The fire-by-fire breakdown is on
     <a href="forward-fires.html">the results-by-fire page</a>.</p>
     <p>Reading it in one sentence: run end to end on fires it has never seen, the method reaches
-    a mean per-fire F1 of 0.7829, lower than the destroyed call alone because a building the
+    a mean per-fire F1 of 0.7880, lower than the destroyed call alone because a building the
     list never found cannot be called destroyed. The second cut-off named in the table is
     explained below.</p>
 
@@ -1086,128 +1056,109 @@
   </div>
   <div class="wide">
     <figure class="band">
-      <svg viewBox="0 0 860 362" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="58" y1="318.0" x2="358" y2="318.0" />
-<line class="grid-line" x1="58.0" y1="18" x2="58.0" y2="318" />
-<text class="tick" x="50" y="321.5" text-anchor="end">0</text>
-<text class="tick" x="58.0" y="334" text-anchor="middle">0</text>
-<line class="grid-line" x1="58" y1="243.0" x2="358" y2="243.0" />
-<line class="grid-line" x1="133.0" y1="18" x2="133.0" y2="318" />
-<text class="tick" x="50" y="246.5" text-anchor="end">0.25</text>
-<text class="tick" x="133.0" y="334" text-anchor="middle">0.25</text>
-<line class="grid-line" x1="58" y1="168.0" x2="358" y2="168.0" />
-<line class="grid-line" x1="208.0" y1="18" x2="208.0" y2="318" />
-<text class="tick" x="50" y="171.5" text-anchor="end">0.5</text>
-<text class="tick" x="208.0" y="334" text-anchor="middle">0.5</text>
-<line class="grid-line" x1="58" y1="93.0" x2="358" y2="93.0" />
-<line class="grid-line" x1="283.0" y1="18" x2="283.0" y2="318" />
-<text class="tick" x="50" y="96.5" text-anchor="end">0.75</text>
-<text class="tick" x="283.0" y="334" text-anchor="middle">0.75</text>
-<line class="grid-line" x1="58" y1="18.0" x2="358" y2="18.0" />
-<line class="grid-line" x1="358.0" y1="18" x2="358.0" y2="318" />
-<text class="tick" x="50" y="21.5" text-anchor="end">1</text>
-<text class="tick" x="358.0" y="334" text-anchor="middle">1</text>
-<line x1="58" y1="318" x2="358" y2="18" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3" />
-<text class="tick" x="354" y="44" text-anchor="end">perfectly calibrated</text>
-<path d="M58.3,317.9 L58.8,317.9 L59.3,317.9 L60.0,317.7 L61.0,317.6 L62.9,317.2 L66.5,316.7 L76.9,315.1 L150.9,297.1 L345.6,79.2" fill="none" stroke="var(--s1)" stroke-width="2" />
-<circle cx="58.3" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="58.8" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="59.3" cy="317.9" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="60.0" cy="317.7" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="61.0" cy="317.6" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="62.9" cy="317.2" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="66.5" cy="316.7" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="76.9" cy="315.1" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="150.9" cy="297.1" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="345.6" cy="79.2" r="4" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="1.5" />
-<path d="M59.3,317.4 L62.5,315.4 L70.3,311.4 L97.6,298.7 L205.7,237.8 L327.6,117.3 L352.0,45.1 L355.9,26.7 L357.1,21.3 L357.6,18.3" fill="none" stroke="var(--s2)" stroke-width="2" />
-<circle cx="59.3" cy="317.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="62.5" cy="315.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="70.3" cy="311.4" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="97.6" cy="298.7" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="205.7" cy="237.8" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="327.6" cy="117.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="352.0" cy="45.1" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="355.9" cy="26.7" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.1" cy="21.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<circle cx="357.6" cy="18.3" r="4" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="1.5" />
-<line class="axis" x1="58" y1="318" x2="358" y2="318" />
-<line class="axis" x1="58" y1="18" x2="58" y2="318" />
-<text class="tick" x="208" y="352" text-anchor="middle">mean predicted destroyed_prob in the bin</text>
-<text class="tick" x="16" y="168" transform="rotate(-90 16 168)" text-anchor="middle">observed share destroyed</text>
-<rect x="384" y="28" width="11" height="11" rx="2" fill="var(--s1)" />
-<text x="402" y="38">Carlson, 66 fires · cut 0.85</text>
-<text class="tick" x="402" y="51">ECE 0.0514 → 0.0005 calibrated</text>
-<rect x="384" y="68" width="11" height="11" rx="2" fill="var(--s2)" />
-<text x="402" y="78">CAL FIRE DINS, 8 incidents · cut 0.85</text>
-<text class="tick" x="402" y="91">ECE 0.0651 → 0.0071 calibrated</text>
-<text class="tick" x="384" y="130">both curves are the same</text>
-<text class="tick" x="384" y="144">published model</text>
+      <svg viewBox="0 0 860 410" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="230.0" y1="360.0" x2="550.0" y2="360.0" />
+<line class="grid-line" x1="230.0" y1="360.0" x2="230.0" y2="40.0" />
+<text class="tick" x="222.0" y="363.5" text-anchor="end">0</text>
+<text class="tick" x="230.0" y="376.0" text-anchor="middle">0</text>
+<line class="grid-line" x1="230.0" y1="280.0" x2="550.0" y2="280.0" />
+<line class="grid-line" x1="310.0" y1="360.0" x2="310.0" y2="40.0" />
+<text class="tick" x="222.0" y="283.5" text-anchor="end">0.25</text>
+<text class="tick" x="310.0" y="376.0" text-anchor="middle">0.25</text>
+<line class="grid-line" x1="230.0" y1="200.0" x2="550.0" y2="200.0" />
+<line class="grid-line" x1="390.0" y1="360.0" x2="390.0" y2="40.0" />
+<text class="tick" x="222.0" y="203.5" text-anchor="end">0.5</text>
+<text class="tick" x="390.0" y="376.0" text-anchor="middle">0.5</text>
+<line class="grid-line" x1="230.0" y1="120.0" x2="550.0" y2="120.0" />
+<line class="grid-line" x1="470.0" y1="360.0" x2="470.0" y2="40.0" />
+<text class="tick" x="222.0" y="123.5" text-anchor="end">0.75</text>
+<text class="tick" x="470.0" y="376.0" text-anchor="middle">0.75</text>
+<line class="grid-line" x1="230.0" y1="40.0" x2="550.0" y2="40.0" />
+<line class="grid-line" x1="550.0" y1="360.0" x2="550.0" y2="40.0" />
+<text class="tick" x="222.0" y="43.5" text-anchor="end">1</text>
+<text class="tick" x="550.0" y="376.0" text-anchor="middle">1</text>
+<line x1="230.0" y1="360.0" x2="550.0" y2="40.0" stroke="var(--rule-2)" stroke-width="1.5" stroke-dasharray="5 4" />
+<text class="tick" x="422.0" y="142.4" text-anchor="start">perfect agreement</text>
+<polyline fill="none" stroke="var(--s2)" stroke-width="2.5" points="230.4,360.0 231.0,359.9 231.5,359.9 232.3,359.7 233.4,359.6 235.2,359.4 238.7,359.1 247.1,358.0 290.6,351.4 512.1,145.5" />
+<circle cx="230.4" cy="360.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="231.0" cy="359.9" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="231.5" cy="359.9" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="232.3" cy="359.7" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="233.4" cy="359.6" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="235.2" cy="359.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="238.7" cy="359.1" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="247.1" cy="358.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="290.6" cy="351.4" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="512.1" cy="145.5" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="tick" x="390.0" y="396.0" text-anchor="middle">average score given to the group</text>
+<text class="tick" x="188.0" y="200.0" text-anchor="middle" transform="rotate(-90 188.0 200.0)">share really destroyed</text>
 </svg>
-      <figcaption><strong>The raw score is over-confident nearly everywhere.</strong> Both
-      halves of the training pool, in 10 equal-count bins: the observed frequency is below the
-      predicted probability in <strong>19 of the 20 bins</strong>. The one exception is the top
-      bin of the inspection curve, under-confident by +0.0001 on 3,628 buildings, which is a
-      rounding artefact rather than a change of direction.</figcaption>
+      <figcaption><strong>The curve sits below the diagonal everywhere: the scores are
+      over-confident.</strong> Ten equal-count groups of 78,256 buildings each, over 191 fires. In
+      all ten the share really destroyed is below the average score the group was given. The gap
+      is negligible in the nine low-scoring groups and large in the top one, which is given an
+      average score of 0.88 and burned 67 % of the time — while the ranking stays excellent, at an
+      AUC of 0.988. ⚠️ The second curve this figure used to carry, against the inspection records,
+      has not been recomputed since the model changed and is not drawn.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> <code>outputs/uncertainty/calibration_pooled.csv</code> and
-    <code>calibration_ci.csv</code> on the data share (ten bins), dated 2026-09-12.</p>
+    <code>calibration_ci.csv</code> on the data share (ten bins), dated 2026-09-15; the
+    inspection figures are the damage model's own calibration block in its
+    <code>summary.json</code>.</p>
     <p>Expected calibration error — the average gap between predicted probability and observed
-    frequency — is <strong>0.0514</strong> [0.0365, 0.0737] on the 66-fire national table and
-    <strong>0.0651</strong> [0.0514, 0.1032] on the eight inspection incidents. A monotone
+    frequency — is <strong>0.0484</strong> [0.0393, 0.0594] on the 191-fire national table and
+    <strong>0.0775</strong> on the eight inspection incidents. A monotone
     (isotonic) correction fitted with held-out scoring takes those to <strong>0.0005</strong>
-    and <strong>0.0071</strong>, and the Brier score from 0.0328 to 0.0208 and from 0.0729 to
-    0.0616. The corrected probability ships in a column of its own <em>beside</em> the raw
+    and <strong>0.0073</strong>, and the Brier score from 0.0268 to 0.0154 and from 0.0788 to
+    0.0629. The corrected probability ships in a column of its own <em>beside</em> the raw
     score rather than replacing it: the correction is monotone, so it cannot re-rank anything,
     and the operating cut-off stays on the raw score. Calibration is not a per-fire cut-off
     rule, and it does not recover the accuracy the fixed cut-off loses outside California.</p>
 
     <h3>Two cut-offs ship on every scored building</h3>
     <p>Each scored building carries two destroyed/survived calls from the same probability. One
-    uses the <strong>fixed cut-off of 0.85</strong>, the same number for every fire; that is the
+    uses the <strong>fixed cut-off of 0.88</strong>, the same number for every fire; that is the
     headline call, and every accuracy figure on this site reports it. The other uses a
     <strong>per-fire cut-off</strong> read from the spread of that fire's own model scores and
     nothing else — never any attribute of the fire — which on whole building lists lands between
-    <strong>0.601 and 0.792</strong>. It ships labelled as advisory. The difference between them
+    <strong>0.605 and 0.994</strong>. It ships labelled as advisory. The difference between them
     is small and it goes in a consistent direction.</p>
     <div class="tablewrap">
       <table>
         <caption>What the per-fire cut-off changes, compared with the fixed one, on the same
-        buildings — 15 fires, 2,000 resamples of whole fires</caption>
-        <thead><tr><th>Scope · metric</th><th class="num">Δ</th><th class="num">95 % CI</th><th>Excludes zero?</th></tr></thead>
+        buildings — 15 fires</caption>
+        <thead><tr><th>Measure</th><th class="num">Fixed cut-off 0.88</th><th class="num">Per-fire cut-off</th></tr></thead>
         <tbody>
-          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td>yes — worse</td></tr>
-          <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td>yes — worse</td></tr>
-          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0265</strong></td><td class="num">[+0.0103, +0.0458]</td><td>yes — better</td></tr>
-          <tr><td>pooled F1</td><td class="num">−0.0046</td><td class="num">[−0.0370, +0.0003]</td><td>no</td></tr>
-          <tr><td>pooled precision</td><td class="num">−0.0396</td><td class="num">[−0.0987, −0.0251]</td><td>yes — worse</td></tr>
-          <tr><td>pooled recall</td><td class="num">+0.0316</td><td class="num">[+0.0233, +0.0485]</td><td>yes — better</td></tr>
+          <tr><td>mean-fire F1, matched at 10 m</td><td class="num"><strong>0.7880</strong></td><td class="num">0.7417</td></tr>
+          <tr><td>mean-fire F1, matched at 20 m</td><td class="num"><strong>0.7756</strong></td><td class="num">0.7330</td></tr>
+          <tr><td>buildings called destroyed, whole study areas</td><td class="num">14,466</td><td class="num"><strong>16,370</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/operating_product/paired_delta_ci.csv</code> on
-    the data share, paired on identical buildings. AUC is computed on the score and does not
-    depend on a cut-off, which is why it does not appear: the ranking is identical either
-    way.</p>
+    <p class="src"><b>Source:</b> <code>outputs/forward_damage/metrics.json</code> and
+    <code>per_fire.csv</code> on the data share, dated 2026-09-15. AUC is computed on the score
+    and does not depend on a cut-off, which is why it does not appear: the ranking is identical
+    either way. ⚠️ The paired 95 % intervals this table used to carry were measured against the
+    previous version of the damage model and have not been repeated since it changed.</p>
     <p>Reading it in one sentence: the per-fire cut-off finds more of the destroyed buildings
     and raises more false alarms, and on balance the fixed cut-off classifies individual
     buildings slightly better.</p>
     <div class="note">
       <p><strong>What the per-fire cut-off buys is the total.</strong> Over the fifteen fires'
-      whole building lists, buildings called destroyed go from <strong>14,504 to
-      15,951</strong> against 17,902 inspected as destroyed — a ratio of <strong>0.810 to
-      0.891</strong>. The two columns therefore disagree in a legible way: the fixed cut-off is
+      whole building lists, buildings called destroyed go from <strong>14,466 to
+      16,370</strong> against 17,902 inspected as destroyed — a ratio of <strong>0.808 to
+      0.914</strong>. The two columns therefore disagree in a legible way: the fixed cut-off is
       the better per-building classifier, and the per-fire one gets the fire total closer. In
       one line: use the fixed call to classify buildings, use the per-fire call if you are
       counting them, and state which you used.</p>
-      <p><strong>Outside California the per-fire cut-off is the better call outright.</strong>
-      On the 66-fire national table, mean-fire F1 outside California goes from 0.8986 to
-      <strong>0.9121</strong>, and on the one post-2022 assessment outside California that
-      exists, F1 goes from 0.8484 to <strong>0.8825</strong>. On the one fire with two
-      independent assessments it splits — 0.9705 to 0.9725 on one, 0.9273 to 0.9109 on the
-      other. Three assessments over two fires is not a distribution.</p>
+      <p><strong>On the independent assessments outside California it is the better call on two
+      of three.</strong> South Fork goes from 0.8431 to <strong>0.8740</strong> and Marshall's
+      county field survey from 0.9622 to <strong>0.9719</strong>, while the federal remote
+      assessment of the same fire goes from 0.9278 down to 0.9196. Three assessments over two
+      fires is not a distribution, and the wider evidence is on
+      <a href="outside-california.html">beyond California</a>.</p>
     </div>
   </div>
 </section>
@@ -1234,33 +1185,33 @@
     the first.</p>
     <div class="tablewrap">
       <table>
-        <caption>How much more accurate the refined estimate is — 142,112 buildings that carry
-        both estimates, across 28 fires, each fire against its own ground truth</caption>
-        <thead><tr><th>Pooled</th><th class="num">Primary</th><th class="num">Refined</th><th class="num">Δ</th><th class="num">95 % CI, paired over fires</th></tr></thead>
+        <caption>The two estimates against fire-service inspections, on the 28,316 buildings that
+        carry both — the largest like-for-like comparison available</caption>
+        <thead><tr><th>Pooled</th><th class="num">Primary, cut-off 0.88</th><th class="num">Refined, cut-off 0.84</th><th class="num">Δ</th></tr></thead>
         <tbody>
-          <tr class="total"><td><strong>F1</strong></td><td class="num">0.9038</td><td class="num"><strong>0.9407</strong></td><td class="num">+0.0370</td><td class="ci">[+0.0286, +0.0453]</td></tr>
-          <tr><td>precision</td><td class="num">0.9038</td><td class="num"><strong>0.9274</strong></td><td class="num">+0.0236</td><td class="ci">—</td></tr>
-          <tr><td>recall</td><td class="num">0.9037</td><td class="num"><strong>0.9544</strong></td><td class="num">+0.0507</td><td class="ci">—</td></tr>
-          <tr class="total"><td><strong>mean per fire, F1</strong></td><td class="num">0.8263</td><td class="num"><strong>0.8610</strong></td><td class="num">+0.0347</td><td class="ci">[+0.0097, +0.0615]</td></tr>
+          <tr class="total"><td><strong>F1</strong></td><td class="num">0.9208</td><td class="num"><strong>0.9606</strong></td><td class="num">+0.0398</td></tr>
+          <tr><td>precision</td><td class="num">0.9320</td><td class="num"><strong>0.9546</strong></td><td class="num">+0.0226</td></tr>
+          <tr><td>recall</td><td class="num">0.9099</td><td class="num"><strong>0.9667</strong></td><td class="num">+0.0568</td></tr>
+          <tr><td>AUC</td><td class="num">0.9780</td><td class="num"><strong>0.9936</strong></td><td class="num">+0.0156</td></tr>
+          <tr class="total"><td><strong>mean per fire, F1</strong></td><td class="num">0.7957</td><td class="num"><strong>0.8243</strong></td><td class="num">+0.0286</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/refined_vs_primary/report.md</code>,
-    <code>metrics.json</code> and <code>per_fire.csv</code> on the data share. Every paired
-    figure is computed on buildings that carry <em>both</em> estimates, matched one-to-one at
-    10 m; historical fires are scored inside the same 250 m double disc the building-count
-    comparison uses.</p>
-    <p>Reading it in one sentence: on the same buildings, waiting a year raises F1 by about
-    0.037, and the gain holds whether fires are weighted by size or counted equally.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/dins_pooled__primary_matched.json</code>
+    and <code>dins_pooled__refined.json</code> on the data share, dated 2026-09-15. Both columns
+    are computed on the same buildings, matched one-to-one at 10 m. ⚠️ The paired 95 % intervals
+    this table used to carry compared the refined estimate with the <em>previous</em> version of
+    the primary model and have not been recomputed since the primary model changed on 2026-09-15;
+    the refined model itself did not change.</p>
+    <p>Reading it in one sentence: on the same buildings, waiting a year raises F1 by about 0.04,
+    and it raises precision and recall at the same time rather than trading one for the other.</p>
 
     <div class="note ok">
-      <p><strong>Both intervals exclude zero, and that is the thing to notice.</strong> The
-      refined estimate gains <strong>+2.4 points of precision and +5.1 of recall</strong> — not
-      one bought with the other — and it gains about the same amount whether fires are weighted
-      by size (pooled, <strong>+0.037</strong>) or counted equally (mean per fire,
-      <strong>+0.035</strong>). <strong>Twenty-three of the twenty-eight fires gain</strong>,
-      five lose, with a median of <strong>+0.028</strong>; on the eighteen fires with at least a
-      thousand buildings carrying both estimates, sixteen gain, at a mean of +0.039.</p>
+      <p><strong>Precision and recall both rise, and that is the thing to notice.</strong> The
+      refined estimate gains <strong>+2.3 points of precision and +5.7 of recall</strong> against
+      the fire-service inspections — not one bought with the other — and the same pattern holds
+      against the hand-built historical record below. What it costs is time: the refined estimate
+      cannot exist until roughly a year after the fire.</p>
     </div>
 
     <h3>The same comparison, one source of ground truth at a time</h3>
@@ -1272,48 +1223,26 @@
         on identical buildings</caption>
         <thead><tr><th>Ground truth</th><th class="num">Buildings with both</th><th class="num">Primary</th><th class="num">Refined</th><th class="num">Coverage</th></tr></thead>
         <tbody>
-          <tr class="total"><td>fire-service inspections, 12 fires</td><td class="num">28,314</td><td class="num">0.9239</td><td class="num"><strong>0.9607</strong></td><td class="num">98.6 %</td></tr>
-          <tr class="total"><td>the hand-built historical record, end to end, 15 fires</td><td class="num">112,097</td><td class="num">0.8753</td><td class="num"><strong>0.9058</strong></td><td class="num">78.0 %</td></tr>
-          <tr><td>South Fork NM — federal urban search-and-rescue survey</td><td class="num">1,637</td><td class="num">0.8484</td><td class="num"><strong>0.9588</strong></td><td class="num">100 %</td></tr>
-          <tr><td>Marshall CO — county field assessment</td><td class="num">1,023</td><td class="num">0.9705</td><td class="num"><strong>0.9850</strong></td><td class="num">100 %</td></tr>
-          <tr><td>Marshall CO — federal remote-sensing assessment</td><td class="num">2,741</td><td class="num">0.9273</td><td class="num"><strong>0.9464</strong></td><td class="num">100 %</td></tr>
+          <tr class="total"><td>fire-service inspections, 12 fires</td><td class="num">28,316</td><td class="num">0.9208</td><td class="num"><strong>0.9606</strong></td><td class="num">98.6 %</td></tr>
+          <tr class="total"><td>the hand-built historical record, end to end, 15 fires</td><td class="num">112,097</td><td class="num">0.8759</td><td class="num"><strong>0.9058</strong></td><td class="num">78.0 %</td></tr>
+          <tr><td>South Fork NM — federal urban search-and-rescue survey</td><td class="num">1,637</td><td class="num">0.8431</td><td class="num"><strong>0.9588</strong></td><td class="num">100 %</td></tr>
+          <tr><td>Marshall CO — county field assessment</td><td class="num">1,023</td><td class="num">0.9622</td><td class="num"><strong>0.9850</strong></td><td class="num">100 %</td></tr>
+          <tr><td>Marshall CO — federal remote-sensing assessment</td><td class="num">2,741</td><td class="num">0.9278</td><td class="num"><strong>0.9464</strong></td><td class="num">100 %</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> and
-    <code>refined_coverage.csv</code> on the data share, generated 2026-09-14; the full
+    <code>refined_coverage.csv</code> on the data share, generated 2026-09-15; the full
     confusion matrices behind these figures are on
     <a href="confusion-matrix.html">the confusion-matrix page</a>. Coverage is the share of
     scorable buildings that carry a refined estimate, and what is missing is always a fire whose
     composite years do not exist yet. ⚠️ The historical-record row is necessarily end to end, so
     it carries the building list's errors as well as the model's; the primary estimate can also
     be scored on the historical record's own points alone, where it reaches an F1 of
-    <strong>0.8685</strong> over 18 fires and 143,754 buildings.</p>
+    <strong>0.8679</strong> over 18 fires and 143,754 buildings.</p>
     <p>Reading it in one sentence: whichever independent source is used, the refined estimate
     scores higher than the primary one on the same buildings.</p>
 
-    <h3>Where the gain actually is</h3>
-    <p>Split by type of building and type of case, the refined estimate turns out to be aimed
-    squarely at the cases the primary one is worst at:</p>
-    <div class="tablewrap">
-      <table>
-        <caption>Which buildings the refined estimate helps most — the same 142,112 buildings,
-        split three ways</caption>
-        <thead><tr><th>Group</th><th class="num">Buildings</th><th class="num">Primary F1</th><th class="num">Refined F1</th><th class="num">Δ</th></tr></thead>
-        <tbody>
-          <tr class="total"><td><strong>buildings the primary estimate is least sure about</strong> — its probability between 0.70 and 0.90</td><td class="num">3,586</td><td class="num">0.4807</td><td class="num"><strong>0.7930</strong></td><td class="num"><strong>+0.3123</strong></td></tr>
-          <tr><td>everywhere else</td><td class="num">138,526</td><td class="num">0.9298</td><td class="num">0.9511</td><td class="num">+0.0213</td></tr>
-          <tr class="total"><td><strong>buildings that stood on bare ground</strong> — least vegetation to lose, so least signal for the first model</td><td class="num">35,539</td><td class="num">0.8558</td><td class="num"><strong>0.9257</strong></td><td class="num"><strong>+0.0699</strong></td></tr>
-          <tr><td>the other three quarters</td><td class="num">106,573</td><td class="num">0.9157</td><td class="num">0.9446</td><td class="num">+0.0288</td></tr>
-          <tr><td>minor buildings</td><td class="num">6,279</td><td class="num">0.8811</td><td class="num">0.9113</td><td class="num">+0.0302</td></tr>
-          <tr><td>major buildings</td><td class="num">135,833</td><td class="num">0.9055</td><td class="num">0.9430</td><td class="num">+0.0375</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> <code>outputs/refined_vs_primary/per_fire.csv</code> on the
-    data share, computed on the same 142,112 buildings. "Bare ground" means the driest quarter
-    of each fire's own pre-fire greenness, measured within the fire so that it is not standing
-    in for a region.</p>
     <p>Reading it in one sentence: the refined estimate is worth about two points of F1 on easy
     buildings and thirty-one points on the hard ones.</p>
     <p><strong>Thirty-one points of F1 on the buildings the first model is least sure
@@ -1368,38 +1297,36 @@
   <div class="wrap">
     <p>The only way to answer it is to run this method on older fires the hand-built record
     already covers, and compare on the same ground. Seventeen fires were built end to end that
-    way, and twenty-three carry a destroyed call on the record's own building points.</p>
+    way, and twenty-four carry a destroyed call on the record's own building points.</p>
     <div class="tablewrap">
       <table>
         <caption>This method against the hand-built historical record, on the record's own
         fires</caption>
         <thead><tr><th>What was measured</th><th class="num">Fires</th><th class="num">Result</th></tr></thead>
         <tbody>
-          <tr><td>the destroyed call alone, on the record's own building points, so the building list is taken out of the question</td><td class="num">23<br>2016–2022<br>394,429 buildings</td><td class="num">agreement <strong>0.980</strong> · κ <strong>0.882</strong> · destroyed P/R/F1 <strong>0.882 / 0.904 / 0.893</strong> · AUC <strong>0.992</strong> · count ratio <strong>1.02</strong></td></tr>
-          <tr class="total"><td><strong>the whole method end to end</strong> — find the buildings, then call the losses</td><td class="num">17<br>30,879 buildings</td><td class="num">destroyed count <strong>0.769</strong> of the record's, per fire 0.48 – 1.80; mean detection recall <strong>0.765</strong></td></tr>
+          <tr><td>the destroyed call alone, on the record's own building points, so the building list is taken out of the question</td><td class="num">24<br>2016–2022<br>408,611 buildings</td><td class="num">agreement <strong>0.980</strong> · destroyed P/R/F1 <strong>0.905 / 0.872 / 0.888</strong> · AUC <strong>0.991</strong></td></tr>
+          <tr class="total"><td><strong>the whole method end to end</strong> — find the buildings, then call the losses</td><td class="num">17<br>30,879 buildings</td><td class="num">destroyed count <strong>0.747</strong> of the record's, per fire 0.49 – 1.81; mean detection recall <strong>0.765</strong></td></tr>
           <tr><td>how many of the record's buildings our list finds</td><td class="num">17</td><td class="num">recall <strong>0.588 – 0.912</strong>, median 0.768, at precision 0.831 – 0.963</td></tr>
           <tr><td>does the difference drift with the year?</td><td class="num">17</td><td class="num"><strong>no</strong> — Spearman <strong>+0.105</strong>, p = 0.69</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/combined_retrospective/damage_pooled.json</code>,
-    <code>end_to_end.csv</code> and <code>counts_on_the_same_ground.json</code> on the data
-    share, 2026-09-12.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/carlson_points_pooled.json</code> for
+    the first row and <code>outputs/combined_retrospective/end_to_end.csv</code> and
+    <code>counts_on_the_same_ground.json</code> for the rest, on the data share, 2026-09-15.</p>
     <p>Reading it in one sentence: given the same list of buildings, our destroyed call agrees
     with the hand-built record almost exactly; run end to end, it finds about three quarters of
-    the buildings and therefore about three quarters of the losses. The Greek letter κ in the
-    first row is Cohen's kappa, which is agreement after subtracting the agreement chance alone
-    would produce, so 1 is perfect and 0 is no better than guessing.</p>
+    the buildings and therefore about three quarters of the losses.</p>
 
     <div class="note warn">
       <p><strong>⚠️ Do not compare a destroyed count from this method with a count from the
-      hand-built record without a factor of about 0.77 — and do not treat that factor as
-      stable.</strong> It runs from 0.48 to 1.80 across seventeen fires, it tracks how well the
+      hand-built record without a factor of about 0.75 — and do not treat that factor as
+      stable.</strong> It runs from 0.49 to 1.81 across seventeen fires, it tracks how well the
       buildings were <em>found</em> rather than anything about the damage model, and it is the
-      net of two large opposite errors: we recover <strong>6,451 of the record's 10,808</strong>
-      destroyed buildings in the region compared, and we add <strong>1,862</strong> destroyed
-      calls on buildings the record did not record as destroyed, 970 of them on buildings it
-      never enumerated at all.</p>
+      net of two large opposite errors: we recover <strong>6,354 of the record's 10,808</strong>
+      destroyed buildings in the region compared, and we add <strong>1,723</strong> destroyed
+      calls on buildings the record did not record as destroyed. Those two figures are the sums
+      of the per-fire cells in <code>end_to_end.csv</code>.</p>
       <p><strong>The threat to a trend across the join is composition, not time.</strong> The
       difference between the two methods does not drift with the year; it drifts with the fire,
       and it tracks how much of a fire's building stock burned.</p>
@@ -1497,13 +1424,16 @@
         <tbody>
           <tr><td>national incident reports, destroyed</td><td class="num">17,879</td><td>incident reports ÷ inspections, all categories</td><td class="num">0.9992</td></tr>
           <tr><td>inspections, destroyed, all categories</td><td class="num">17,893</td><td>incident reports ÷ inspections, <strong>major only</strong></td><td class="num"><strong>1.3696</strong></td></tr>
-          <tr><td>inspections, destroyed, major buildings only</td><td class="num">13,054</td><td>ours (fixed cut-off) ÷ inspections, all</td><td class="num">0.810</td></tr>
-          <tr class="total"><td>our destroyed calls — fixed cut-off / per-fire cut-off</td><td class="num">14,504 / 15,951</td><td>ours (fixed cut-off) ÷ incident reports</td><td class="num">0.811</td></tr>
+          <tr><td>inspections, destroyed, major buildings only</td><td class="num">13,054</td><td>ours (fixed cut-off) ÷ inspections, all</td><td class="num">0.808</td></tr>
+          <tr class="total"><td>our destroyed calls — fixed cut-off / per-fire cut-off</td><td class="num">14,466 / 16,370</td><td>ours (fixed cut-off) ÷ incident reports</td><td class="num">0.809</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> <code>outputs/ics209_check/summary.json</code> on the data
-    share, generated 2026-09-12 over the fifteen inspected California fires; the per-fire
+    share for the two ground-truth counts and the ratios between them, generated 2026-09-12; our
+    own destroyed counts and the ratios that use them are taken from
+    <code>outputs/forward_damage/metrics.json</code>, generated 2026-09-15 on the current model.
+    The per-fire
     cut-off count comes from <code>outputs/combined_series/per_fire_summary.csv</code>. 14 of
     the 15 fires matched a national incident report — Coches 2, with 9 destroyed, never reached
     the national report. ⚠️ Two files record the pooled inspected-destroyed count slightly
@@ -1626,137 +1556,170 @@
 
   <div class="wrap">
     <h3>The national evidence</h3>
-    <p>The national evidence is the historical record's own held-out table — 66 Sentinel-2-era
-    fires in eleven states, each one scored by a model trained only on the other fires. Two
+    <p>The national evidence is the historical record's own held-out table — 191 Sentinel-2-era
+    fires in eighteen states, each one scored by a model trained only on the other fires. Two
     columns carry the argument: F1 at the fixed cut-off, and the F1 each fire would reach at
     <strong>its own</strong> best cut-off, which requires that fire's answers and is therefore a
     ceiling rather than a proposal. The difference between them is the accuracy lost to the
     <em>operating point</em> rather than to the model.</p>
     <div class="tablewrap">
       <table>
-        <caption>California against everywhere else — 66 fires, 582,554 buildings, at the fixed
-        cut-off of 0.85</caption>
-        <thead><tr><th></th><th class="num">Fires</th><th class="num">Buildings</th><th class="num">AUC</th><th class="num">Avg. precision</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">95 % CI (fires resampled)</th><th class="num">At own cut-off</th><th class="num">Gap</th></tr></thead>
+        <caption>California against everywhere else — 191 fires, 782,566 buildings, at the fixed
+        cut-off of 0.88</caption>
+        <thead><tr><th></th><th class="num">Fires</th><th class="num">Buildings</th><th class="num">AUC</th><th class="num">Avg. precision</th><th class="num">Pooled F1</th><th class="num">Mean-fire F1</th><th class="num">At own cut-off</th><th class="num">Gap</th></tr></thead>
         <tbody>
-          <tr><td>California</td><td class="num">41</td><td class="num">482,881</td><td class="num">0.9908</td><td class="num">0.9398</td><td class="num">0.8806</td><td class="num">0.8072</td><td class="ci">[0.7707, 0.8452]</td><td class="num">0.8286</td><td class="num">0.021</td></tr>
-          <tr><td>everywhere else</td><td class="num">25</td><td class="num">99,673</td><td class="num">0.9592</td><td class="num">0.8238</td><td class="num">0.7542</td><td class="num">0.7345</td><td class="ci">[0.6640, 0.8027]</td><td class="num">0.8002</td><td class="num">0.066</td></tr>
+          <tr><td>California</td><td class="num">82</td><td class="num">601,853</td><td class="num">0.9909</td><td class="num">0.9341</td><td class="num">0.8738</td><td class="num">0.7785</td><td class="num">0.8081</td><td class="num">0.030</td></tr>
+          <tr><td>everywhere else</td><td class="num">109</td><td class="num">180,713</td><td class="num">0.9733</td><td class="num">0.8705</td><td class="num">0.8150</td><td class="num">0.6886</td><td class="num">0.7654</td><td class="num">0.077</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/generalization/by_group.csv</code> and
-    <code>outputs/uncertainty/by_state_ci.csv</code> on the data share (2,000 resamples of whole
-    fires, cut-off 0.85), dated 2026-09-12.</p>
-    <p>Reading it in one sentence: outside California the model ranks buildings nearly as well
-    but loses more accuracy to the fixed cut-off, and the two intervals overlap widely.</p>
+    <p class="src"><b>Source:</b> <code>outputs/generalization/by_group.csv</code> on the data
+    share, cut-off 0.88, dated 2026-09-15.</p>
+    <p>Reading it in one sentence: outside California the model ranks buildings nearly as well but
+    loses more than twice as much accuracy to the fixed cut-off.</p>
 
     <div class="note warn">
-      <p><strong>⚠️ Read those two intervals together, not against each other.</strong> The
-      non-California interval [0.664, 0.803] <em>contains</em> 0.800, the own-cut-off ceiling.
-      Resampling the <em>difference</em> directly — which is the actual claim — gives California
-      minus everywhere else = <strong>+0.073 mean-fire F1, 95 % CI [−0.011, +0.163]</strong>,
-      and pooled +0.126 [−0.029, +0.259]: <strong>neither excludes zero</strong>. The one
-      comparison that does exclude zero is the ranking — mean-fire AUC <strong>+0.022 [+0.0006,
-      +0.052]</strong>, pooled +0.032 [+0.007, +0.065]. So the careful sentence survives — the
-      ranking travels and is measurably a little worse outside California, while the fixed
-      cut-off fails badly on specific fires — and a claim that the model loses seven points of
-      F1 outside California does not. Twenty-five fires cannot resolve that.
-      <span class="mono">(<code>outputs/uncertainty/region_contrast_ci.csv</code>.)</span></p>
+      <p><strong>⚠️ This conclusion changed on 2026-09-15, and a reader may have relied on the
+      old one.</strong> On the previous evidence — 66 fires, 25 of them outside California — the
+      California-minus-everywhere-else difference in mean-fire F1 was <strong>+0.073 with a 95 %
+      interval of [−0.011, +0.163]</strong>, which included zero, and this page concluded the gap
+      could not be told from noise. On 191 fires, 109 of them outside California, the difference is
+      <strong>+0.0899 [+0.0417, +0.1402]</strong> and <strong>excludes zero</strong>. The gap is
+      real; the earlier sample was too small to see it. Most of it is recall: outside California
+      the model misses more of the destruction rather than inventing more of it. The full
+      contrast table is on <a href="outside-california.html">the beyond-California page</a>.</p>
     </div>
   </div>
   <div class="wide">
     <figure class="band">
-      <svg viewBox="0 0 860 311" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="242.2" y1="26" x2="242.2" y2="265" />
+      <svg viewBox="0 0 860 460" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="242.2" y1="26" x2="242.2" y2="412" />
 <text class="tick" x="242.2" y="20" text-anchor="middle">0.2</text>
-<line class="grid-line" x1="386.7" y1="26" x2="386.7" y2="265" />
+<line class="grid-line" x1="386.7" y1="26" x2="386.7" y2="412" />
 <text class="tick" x="386.7" y="20" text-anchor="middle">0.4</text>
-<line class="grid-line" x1="531.2" y1="26" x2="531.2" y2="265" />
-<text class="tick" x="531.2" y="20" text-anchor="middle">0.6</text>
-<line class="grid-line" x1="675.6" y1="26" x2="675.6" y2="265" />
+<line class="grid-line" x1="531.1" y1="26" x2="531.1" y2="412" />
+<text class="tick" x="531.1" y="20" text-anchor="middle">0.6</text>
+<line class="grid-line" x1="675.6" y1="26" x2="675.6" y2="412" />
 <text class="tick" x="675.6" y="20" text-anchor="middle">0.8</text>
-<text class="tick" x="784.0" y="291" text-anchor="end">mean per-fire F1</text>
+<text class="tick" x="784.0" y="438" text-anchor="end">mean per-fire F1</text>
 <text class="tick" x="854" y="20" text-anchor="end">gap</text>
-<text x="160" y="50.5" text-anchor="end">Oregon (9)</text>
-<line x1="722.9" y1="47.0" x2="727.8" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="722.9" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="727.8" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="50.5" text-anchor="end">0.007</text>
-<text x="160" y="71.5" text-anchor="end">Utah (1)</text>
-<line x1="714.1" y1="68.0" x2="718.0" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="714.1" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="718.0" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="71.5" text-anchor="end">0.005</text>
-<text x="160" y="92.5" text-anchor="end">New Mexico (1)</text>
-<line x1="713.3" y1="89.0" x2="725.9" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="713.3" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="725.9" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="92.5" text-anchor="end">0.018</text>
-<text x="160" y="113.5" text-anchor="end">California (41)</text>
-<line x1="680.8" y1="110.0" x2="696.3" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="680.8" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="696.3" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="113.5" text-anchor="end">0.021</text>
-<text x="160" y="134.5" text-anchor="end">Washington (3)</text>
-<line x1="668.9" y1="131.0" x2="677.2" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="668.9" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="677.2" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="134.5" text-anchor="end">0.012</text>
-<text x="160" y="155.5" text-anchor="end">Kansas (1)</text>
-<line x1="640.1" y1="152.0" x2="646.0" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="640.1" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="646.0" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="155.5" text-anchor="end">0.008</text>
-<text x="160" y="176.5" text-anchor="end">Colorado (4)</text>
-<line x1="625.9" y1="173.0" x2="642.1" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="625.9" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="642.1" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="176.5" text-anchor="end">0.022</text>
-<text x="160" y="197.5" text-anchor="end">Florida (1)</text>
-<line x1="543.8" y1="194.0" x2="637.3" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="543.8" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="637.3" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="197.5" text-anchor="end">0.129</text>
-<text x="160" y="218.5" text-anchor="end">Tennessee (2)</text>
-<line x1="525.2" y1="215.0" x2="663.7" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="525.2" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="663.7" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="218.5" text-anchor="end">0.192</text>
-<text x="160" y="239.5" text-anchor="end">Oklahoma (2)</text>
-<line x1="404.3" y1="236.0" x2="551.9" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="404.3" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="551.9" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="239.5" text-anchor="end">0.204</text>
-<text x="160" y="260.5" text-anchor="end">Texas (1)</text>
-<line x1="222.2" y1="257.0" x2="586.0" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="222.2" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="586.0" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="260.5" text-anchor="end">0.504</text>
-<line class="axis" x1="170.0" y1="265" x2="784.0" y2="265" />
+<text x="160" y="50.5" text-anchor="end">New Mexico (2)</text>
+<line x1="744.5" y1="47.0" x2="758.1" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="744.5" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="758.1" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="50.5" text-anchor="end">0.019</text>
+<text x="160" y="71.5" text-anchor="end">Nevada (6)</text>
+<line x1="709.1" y1="68.0" x2="727.2" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="709.1" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="727.2" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="71.5" text-anchor="end">0.025</text>
+<text x="160" y="92.5" text-anchor="end">Oregon (17)</text>
+<line x1="670.9" y1="89.0" x2="701.7" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="670.9" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="701.7" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="92.5" text-anchor="end">0.043</text>
+<text x="160" y="113.5" text-anchor="end">California (82)</text>
+<line x1="660.1" y1="110.0" x2="681.5" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="660.1" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="681.5" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="113.5" text-anchor="end">0.030</text>
+<text x="160" y="134.5" text-anchor="end">Tennessee (3)</text>
+<line x1="659.9" y1="131.0" x2="699.4" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="659.9" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="699.4" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="134.5" text-anchor="end">0.055</text>
+<text x="160" y="155.5" text-anchor="end">Washington (16)</text>
+<line x1="655.1" y1="152.0" x2="677.9" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="655.1" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="677.9" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="155.5" text-anchor="end">0.032</text>
+<text x="160" y="176.5" text-anchor="end">Minnesota (1)</text>
+<line x1="639.5" y1="173.0" x2="769.7" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="639.5" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="769.7" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="176.5" text-anchor="end">0.180</text>
+<text x="160" y="197.5" text-anchor="end">Utah (2)</text>
+<line x1="630.2" y1="194.0" x2="674.9" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="630.2" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="674.9" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="197.5" text-anchor="end">0.062</text>
+<text x="160" y="218.5" text-anchor="end">Idaho (3)</text>
+<line x1="616.1" y1="215.0" x2="655.2" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="616.1" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="655.2" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="218.5" text-anchor="end">0.054</text>
+<text x="160" y="239.5" text-anchor="end">Nebraska (3)</text>
+<line x1="612.4" y1="236.0" x2="702.3" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="612.4" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="702.3" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="239.5" text-anchor="end">0.125</text>
+<text x="160" y="260.5" text-anchor="end">Arizona (5)</text>
+<line x1="599.9" y1="257.0" x2="654.4" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="599.9" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="654.4" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="260.5" text-anchor="end">0.075</text>
+<text x="160" y="281.5" text-anchor="end">Wyoming (3)</text>
+<line x1="576.3" y1="278.0" x2="649.9" y2="278.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="576.3" cy="278.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="649.9" cy="278.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="281.5" text-anchor="end">0.102</text>
+<text x="160" y="302.5" text-anchor="end">Colorado (11)</text>
+<line x1="561.7" y1="299.0" x2="642.9" y2="299.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="561.7" cy="299.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="642.9" cy="299.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="302.5" text-anchor="end">0.112</text>
+<text x="160" y="323.5" text-anchor="end">Texas (7)</text>
+<line x1="532.8" y1="320.0" x2="611.9" y2="320.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="532.8" cy="320.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="611.9" cy="320.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="323.5" text-anchor="end">0.109</text>
+<text x="160" y="344.5" text-anchor="end">Kansas (4)</text>
+<line x1="528.2" y1="341.0" x2="561.0" y2="341.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="528.2" cy="341.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="561.0" cy="341.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="344.5" text-anchor="end">0.045</text>
+<text x="160" y="365.5" text-anchor="end">Montana (14)</text>
+<line x1="517.3" y1="362.0" x2="592.8" y2="362.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="517.3" cy="362.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="592.8" cy="362.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="365.5" text-anchor="end">0.104</text>
+<text x="160" y="386.5" text-anchor="end">Oklahoma (8)</text>
+<line x1="494.5" y1="383.0" x2="576.0" y2="383.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="494.5" cy="383.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="576.0" cy="383.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="386.5" text-anchor="end">0.113</text>
+<text x="160" y="407.5" text-anchor="end">Florida (4)</text>
+<line x1="399.7" y1="404.0" x2="544.2" y2="404.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="399.7" cy="404.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="544.2" cy="404.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="407.5" text-anchor="end">0.200</text>
+<line class="axis" x1="170.0" y1="412" x2="784.0" y2="412" />
 </svg>
       <ul class="legend">
-        <li><span class="swatch" style="background:var(--s1)"></span>at the fixed cut-off (0.85)</li>
+        <li><span class="swatch" style="background:var(--s1)"></span>at the fixed cut-off (0.88)</li>
         <li><span class="swatch" style="background:var(--s2)"></span>at each fire's own best cut-off — a ceiling, not a proposal</li>
       </ul>
-      <figcaption><strong>Where the model travels badly, it is the cut-off that fails, not the
-      ranking.</strong> The operating point fails in the grass-and-shrub Plains and in the
-      Southeast: Texas (Kidd 2022) scores 0.172 at the fixed cut-off and 0.676 at its own
-      cut-off of 0.20, and Oklahoma's two fires go from 0.424 to 0.629 at 0.42. Their AUCs are
-      0.91–0.96, meaning the model puts the destroyed buildings at the top of the list and the
-      fixed cut-off then calls almost none of them. Colorado and Washington are the opposite
-      shape — small gaps and low average precision, so what they lose is <em>ranking</em>, and
-      no cut-off rule will return it.</figcaption>
+      <figcaption><strong>Where the model travels badly, it is usually the cut-off that fails
+      rather than the ranking.</strong> The operating point fails in the grass-and-shrub Plains
+      and in the Southeast: Florida's four fires score 0.418 at the fixed cut-off and 0.618 at
+      their own, whose median is 0.395, and Oklahoma's eight go from 0.549 to 0.662 at 0.725.
+      Their AUCs are 0.93–0.95, meaning the model puts the destroyed buildings at the top of the
+      list and a cut-off of 0.88 then calls too few of them. Colorado and Montana are a different
+      shape — their own-cut-off ceilings are lower too, so part of what they lose is
+      <em>ranking</em>, and no cut-off rule will return it.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> <code>outputs/generalization/by_state.csv</code> on the data
-    share, at the fixed cut-off of 0.85. The full state-by-state table is on
+    share, at the fixed cut-off of 0.88, dated 2026-09-15. The full state-by-state table is on
     <a href="outside-california.html">the beyond-California page</a>.</p>
     <div class="note">
-      <p><strong>⚠️ What this evidence is not.</strong> Twenty-five fires outside California,
-      none later than 2022, and Texas, Kansas, Florida, New Mexico and Utah are one fire each —
-      a state row with one fire is one fire, not a state. Every figure here comes from the
-      historical period, so it says nothing directly about a post-2022 fire outside California,
-      which no ground truth in this project covers.</p>
+      <p><strong>⚠️ What this evidence is not.</strong> A hundred and nine fires outside
+      California, none of them later than 2022, and Minnesota, New Mexico and Utah are one, two
+      and two fires — a state row with one fire is one fire, not a state. Every figure here comes
+      from the historical period. What it says about a recent fire outside California is
+      indirect; the direct evidence is nine independent damage assessments in six states, on
+      <a href="outside-california.html">the beyond-California page</a>.</p>
     </div>
 
     <h3>Two fires with ground truth of their own</h3>
@@ -1773,9 +1736,9 @@
         per-fire cut-off beside it</caption>
         <thead><tr><th>Fire / ground truth</th><th class="num">Truth records</th><th class="num">Destroyed</th><th class="num">Detection recall at 10 m</th><th class="num">Buildings scored</th><th class="num">P</th><th class="num">R</th><th class="num">F1, fixed</th><th class="num">F1, per-fire</th><th class="num">AUC</th><th class="num">Own cut-off → F1</th></tr></thead>
         <tbody>
-          <tr><td>South Fork NM 2024 — federal urban search-and-rescue survey</td><td class="num">2,488</td><td class="num">1,144</td><td class="num">0.661</td><td class="num">1,637</td><td class="num">0.982</td><td class="num">0.747</td><td class="num">0.8484</td><td class="num"><strong>0.8825</strong></td><td class="num">0.985</td><td class="num">0.07 → 0.945</td></tr>
-          <tr><td>Marshall CO 2021 — county field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">0.710</td><td class="num">1,023</td><td class="num">0.981</td><td class="num">0.961</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">0.980</td><td class="num">0.62 → 0.973</td></tr>
-          <tr><td>Marshall CO 2021 — federal remote-sensing assessment</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">0.952</td><td class="num">2,741</td><td class="num">0.907</td><td class="num">0.949</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">0.984</td><td class="num">0.88 → 0.929</td></tr>
+          <tr><td>South Fork NM 2024 — federal urban search-and-rescue survey</td><td class="num">2,488</td><td class="num">1,144</td><td class="num">0.711</td><td class="num">1,637</td><td class="num">0.982</td><td class="num">0.739</td><td class="num">0.8431</td><td class="num"><strong>0.8740</strong></td><td class="num">0.986</td><td class="num">0.18 → 0.946</td></tr>
+          <tr><td>Marshall CO 2021 — county field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">0.740</td><td class="num">1,023</td><td class="num">0.983</td><td class="num">0.943</td><td class="num">0.9622</td><td class="num">0.9719</td><td class="num">0.978</td><td class="num">0.61 → 0.974</td></tr>
+          <tr><td>Marshall CO 2021 — federal remote-sensing assessment</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">0.963</td><td class="num">2,741</td><td class="num">0.927</td><td class="num">0.928</td><td class="num">0.9278</td><td class="num">0.9196</td><td class="num">0.983</td><td class="num">0.84 → 0.929</td></tr>
         </tbody>
       </table>
     </div>
@@ -1783,15 +1746,14 @@
     <code>outputs/ics209_check/outside_ca/ruidoso_southfork_2024/report.md</code>,
     <code>marshall_boulder_2021/report.md</code> and
     <code>marshall_femamac_2021/report.md</code> with their <code>metrics.json</code> files on
-    the data share, regenerated 2026-09-12; the per-fire cut-off figures from
-    <code>outputs/operating_product/per_fire.csv</code>. South Fork is processed on its own
+    the data share, regenerated 2026-09-15. South Fork is processed on its own
     perimeter-based area — 9,568 buildings, 2,357 within 100 m of the perimeter and 7,211 beyond
-    it, 738 called destroyed at the fixed cut-off and 799 at the per-fire one, all of them close
+    it, 732 called destroyed at the fixed cut-off and 785 at the per-fire one, all of them close
     to the perimeter. It is scored on the assessment's own 39.7 km² hull rather than the whole
     fire, and its outer ring holds 119 scorable buildings and 0 destroyed ones, so that half
     cannot be scored.</p>
     <p>Reading it in one sentence: on the three independent assessments that exist outside
-    California, the destroyed call scores F1 between 0.8484 and 0.9705, with AUC of 0.980,
+    California, the destroyed call scores F1 between 0.8431 and 0.9622, with AUC of 0.978,
     0.984 and 0.985.</p>
     <p><strong>South Fork reproduces the national finding independently, on a fire two years
     later than anything in the historical sample and in a state that sample barely covers: the
@@ -1828,8 +1790,9 @@
       it.</strong> Every inspection interval on this page is a resample over those eight
       fires.</li>
       <li><strong>The ring beyond 100 m from the perimeter cannot be scored and carries nothing.</strong>
-      On the national table it is 438,704 of 582,554 rows at a destroyed rate of 0.0009, and the
-      model scores an F1 of 0.10 on them. Every headline in this project is carried by the
+      On the national table it is 613,219 of 782,566 rows at a destroyed rate of 0.0010 — and
+      those rows hold <strong>1.0 %</strong> of all the destruction — and the model scores an F1
+      of 0.253 on them. Every headline in this project is carried by the
       buildings close to the perimeter. On both fires outside California that ring holds no
       destroyed buildings at all.</li>
       <li><strong>A list of building <em>footprints</em> undercounts inspected
@@ -1882,7 +1845,7 @@
           <tr><td>columns / coordinate reference system</td><td class="num">68 / EPSG:5070</td></tr>
           <tr><td>files / size / checksums</td><td class="num">20 / 2,771.0 MB / SHA-256, verified 19 of 19</td></tr>
           <tr><td>rows carrying a refined estimate</td><td class="num">250,002 — <a href="#refined">the refined estimate</a>, empty elsewhere with a stated reason</td></tr>
-          <tr><td>cut-off for the destroyed call</td><td class="num">0.85 fixed, with a per-fire cut-off beside it</td></tr>
+          <tr><td>cut-off for the destroyed call</td><td class="num">0.88 fixed, with a per-fire cut-off beside it</td></tr>
         </tbody>
       </table>
     </div>
@@ -1949,8 +1912,11 @@
       <a href="augmented-carlson.html">historical companion</a> ·
       <a href="changelog.html">release history</a>.
     </p>
-    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-13. Primary estimate at
-    a fixed threshold of 0.85; refined estimate at 0.84.</p>
+    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>, data date
+    2026-09-13; no newer release has been cut. Every model figure on this page is the current
+    damage model, <code>damage_sentinel2_v6</code>, fitted on 199 fires and 818,838 buildings,
+    data date 2026-09-15 — one generation ahead of the calls packaged in the release. Primary
+    estimate at a fixed threshold of 0.88; refined estimate at 0.84.</p>
   </div>
 </footer>
 

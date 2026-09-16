@@ -456,8 +456,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Confusion matrix</span><span class="of">page 3 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html" aria-current="page">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>Confusion matrix</span><span class="of">page 4 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html" aria-current="page">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -538,13 +538,13 @@
 <caption>Every truth source on this page, on the pairs that carry <em>both</em> calls — so the two columns are the same buildings, not two different populations. Coverage is how much of that truth source's scorable pairs the refined call reaches.</caption>
 <thead><tr><th>Truth source</th><th class="num">Fires</th><th class="num">Pairs</th><th class="num">Destroyed</th><th class="num">Primary F1</th><th class="num">Refined F1</th><th class="num">Refined coverage</th></tr></thead>
 <tbody>
-<tr><td><a href="#dins">Fire-service damage inspections</a></td><td class="num">12</td><td class="num">28,314</td><td class="num">13,322</td><td class="num">0.9239</td><td class="num"><strong>0.9607</strong></td><td class="num">98.6&nbsp;%</td></tr>
-<tr><td><a href="#carlson">The hand survey, end to end</a></td><td class="num">15</td><td class="num">112,097</td><td class="num">7,780</td><td class="num">0.8753</td><td class="num"><strong>0.9058</strong></td><td class="num">78.0&nbsp;%</td></tr>
-<tr><td><a href="#southfork">South Fork, New Mexico — FEMA US&amp;R</a></td><td class="num">1</td><td class="num">1,637</td><td class="num">742</td><td class="num">0.8484</td><td class="num"><strong>0.9588</strong></td><td class="num">100.0&nbsp;%</td></tr>
-<tr><td><a href="#boulder">Marshall, Colorado — Boulder County field survey</a></td><td class="num">1</td><td class="num">1,023</td><td class="num">891</td><td class="num">0.9705</td><td class="num"><strong>0.9850</strong></td><td class="num">100.0&nbsp;%</td></tr>
-<tr><td><a href="#femamac">Marshall, Colorado — FEMA MAC remote sensing</a></td><td class="num">1</td><td class="num">2,741</td><td class="num">1,129</td><td class="num">0.9273</td><td class="num"><strong>0.9464</strong></td><td class="num">100.0&nbsp;%</td></tr>
+<tr><td><a href="#dins">Fire-service damage inspections</a></td><td class="num">12</td><td class="num">28,316</td><td class="num">13,323</td><td class="num">0.9208</td><td class="num"><strong>0.9606</strong></td><td class="num">98.6&nbsp;%</td></tr>
+<tr><td><a href="#carlson">The hand survey, end to end</a></td><td class="num">15</td><td class="num">112,097</td><td class="num">7,780</td><td class="num">0.8759</td><td class="num"><strong>0.9058</strong></td><td class="num">78.0&nbsp;%</td></tr>
+<tr><td><a href="#southfork">South Fork, New Mexico — FEMA US&amp;R</a></td><td class="num">1</td><td class="num">1,637</td><td class="num">742</td><td class="num">0.8431</td><td class="num"><strong>0.9588</strong></td><td class="num">100.0&nbsp;%</td></tr>
+<tr><td><a href="#boulder">Marshall, Colorado — Boulder County field survey</a></td><td class="num">1</td><td class="num">1,023</td><td class="num">891</td><td class="num">0.9622</td><td class="num"><strong>0.9850</strong></td><td class="num">100.0&nbsp;%</td></tr>
+<tr><td><a href="#femamac">Marshall, Colorado — FEMA MAC remote sensing</a></td><td class="num">1</td><td class="num">2,741</td><td class="num">1,129</td><td class="num">0.9278</td><td class="num"><strong>0.9464</strong></td><td class="num">100.0&nbsp;%</td></tr>
 </tbody></table></div>
-<p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> and <code>refined_coverage.csv</code> on the data share, data date 2026-09-14. Both estimates are read from the rows restricted to the pairs that carry both.</p>
+<p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> and <code>refined_coverage.csv</code> on the data share, data date 2026-09-15, and the pooled matrices beside them in the same folder. Both estimates are read from the rows restricted to the pairs that carry both.</p>
 
     <div class="note warn">
       <p>⚠️ <strong>The hand-survey row is necessarily end to end.</strong> There is
@@ -559,56 +559,56 @@
   <div class="wide">
     <p class="eyebrow">fire-service inspections</p>
     <h2>Fire-service damage inspections</h2>
-    <p>The answer sheet is CAL FIRE's Damage Inspection programme, in which inspectors walk the burn area after a fire is out and record, structure by structure, whether it was destroyed, damaged or untouched. Both matrices below are on the same <strong>28,314</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>13,322</strong> are destroyed in the truth (47.1&nbsp;% of the rows).</p>
+    <p>The answer sheet is CAL FIRE's Damage Inspection programme, in which inspectors walk the burn area after a fire is out and record, structure by structure, whether it was destroyed, damaged or untouched. Both matrices below are on the same <strong>28,316</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>13,323</strong> are destroyed in the truth (47.1&nbsp;% of the rows).</p>
     <div class="cm-pair">
   <div class="cm-panel">
-    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.85 · about two and a half months after the fire starts</span></p>
+    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.88 · about two and a half months after the fire starts</span></p>
     <table class="cm">
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">12,172</span>
-        <span class="sub">43.0&nbsp;% of pairs</span>
-        <span class="sub row">91.4&nbsp;% of this row</span>
+        <span class="count">12,122</span>
+        <span class="sub">42.8&nbsp;% of pairs</span>
+        <span class="sub row">91.0&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">1,150</span>
-        <span class="sub">4.1&nbsp;% of pairs</span>
-        <span class="sub row">8.6&nbsp;% of this row</span>
+        <span class="count">1,201</span>
+        <span class="sub">4.2&nbsp;% of pairs</span>
+        <span class="sub row">9.0&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
-      <td class="num rowtot">13,322</td></tr>
+      <td class="num rowtot">13,323</td></tr>
     <tr><th scope="row">Truth says survived</th>
       <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
-        <span class="count">854</span>
-        <span class="sub">3.0&nbsp;% of pairs</span>
-        <span class="sub row">5.7&nbsp;% of this row</span>
+        <span class="count">885</span>
+        <span class="sub">3.1&nbsp;% of pairs</span>
+        <span class="sub row">5.9&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">14,138</span>
-        <span class="sub">49.9&nbsp;% of pairs</span>
-        <span class="sub row">94.3&nbsp;% of this row</span>
+        <span class="count">14,108</span>
+        <span class="sub">49.8&nbsp;% of pairs</span>
+        <span class="sub row">94.1&nbsp;% of this row</span>
         <span class="plain">we agreed it stood</span>
       </td>
-      <td class="num rowtot">14,992</td></tr>
+      <td class="num rowtot">14,993</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">13,026</td><td class="num">15,288</td><td class="num">28,314</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">13,007</td><td class="num">15,309</td><td class="num">28,316</td></tr></tfoot>
     </table>
     <ul class="metstrip">
-      <li><span class="k">Precision</span><span class="v">0.9344</span></li>
-      <li><span class="k">Recall</span><span class="v">0.9137</span></li>
-      <li><span class="k">F1</span><span class="v">0.9239</span></li>
-      <li><span class="k">AUC</span><span class="v">0.9791</span></li>
+      <li><span class="k">Precision</span><span class="v">0.9320</span></li>
+      <li><span class="k">Recall</span><span class="v">0.9099</span></li>
+      <li><span class="k">F1</span><span class="v">0.9208</span></li>
+      <li><span class="k">AUC</span><span class="v">0.9780</span></li>
     </ul>
-    <p class="ciline">Fire-level F1 <strong>0.8842</strong>, 95&nbsp;% CI [0.8257, 0.9240] — mean over the 12 fires, resampling the <em>fire</em>, 2,000 replicates, percentile.</p>
-    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>91.4&nbsp;%</strong>; <strong>6.6&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
+    <p class="ciline">Fire-level F1 <strong>0.8833</strong>, 95&nbsp;% CI [0.8279, 0.9218] — mean over the 12 fires, resampling the <em>fire</em>, 2,000 replicates, percentile.</p>
+    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>91.0&nbsp;%</strong>; <strong>6.8&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
   <div class="cm-panel">
     <p class="cm-head"><strong>The refined call</strong><span>threshold 0.84 · about a year after the fire</span></p>
@@ -616,7 +616,7 @@
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">12,879</span>
         <span class="sub">45.5&nbsp;% of pairs</span>
@@ -625,12 +625,12 @@
       </td>
       <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">443</span>
+        <span class="count">444</span>
         <span class="sub">1.6&nbsp;% of pairs</span>
         <span class="sub row">3.3&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
-      <td class="num rowtot">13,322</td></tr>
+      <td class="num rowtot">13,323</td></tr>
     <tr><th scope="row">Truth says survived</th>
       <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
@@ -639,28 +639,28 @@
         <span class="sub row">4.1&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">14,380</span>
+        <span class="count">14,381</span>
         <span class="sub">50.8&nbsp;% of pairs</span>
         <span class="sub row">95.9&nbsp;% of this row</span>
         <span class="plain">we agreed it stood</span>
       </td>
-      <td class="num rowtot">14,992</td></tr>
+      <td class="num rowtot">14,993</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">13,491</td><td class="num">14,823</td><td class="num">28,314</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">13,491</td><td class="num">14,825</td><td class="num">28,316</td></tr></tfoot>
     </table>
     <ul class="metstrip">
       <li><span class="k">Precision</span><span class="v">0.9546</span></li>
       <li><span class="k">Recall</span><span class="v">0.9667</span></li>
-      <li><span class="k">F1</span><span class="v">0.9607</span></li>
+      <li><span class="k">F1</span><span class="v">0.9606</span></li>
       <li><span class="k">AUC</span><span class="v">0.9936</span></li>
     </ul>
     <p class="ciline">Fire-level F1 <strong>0.9095</strong>, 95&nbsp;% CI [0.8672, 0.9410] — mean over the 12 fires, resampling the <em>fire</em>, 2,000 replicates, percentile.</p>
     <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>96.7&nbsp;%</strong>; <strong>4.5&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>dins_forward</code> × <code>primary_matched</code> and <code>refined</code>; intervals from <code>outputs/scorecard/ci_*.csv</code>, 2,000 fire-level replicates. Written 2026-09-14.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, the pooled matrices <code>dins_pooled__primary_matched.json</code> and <code>dins_pooled__refined.json</code> beside it; intervals from <code>outputs/scorecard/ci_dins__primary_matched.csv</code> and <code>ci_dins__refined.csv</code>, 2,000 fire-level replicates. Written 2026-09-15.</p>
   </div>
 </section>
 
@@ -671,53 +671,53 @@
     <p>The answer sheet is the published hand-built survey of destroyed buildings, 2002–2022. Both matrices below are on the same <strong>112,097</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>7,780</strong> are destroyed in the truth (6.9&nbsp;% of the rows).</p>
     <div class="cm-pair">
   <div class="cm-panel">
-    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.85 · about two and a half months after the fire starts</span></p>
+    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.88 · about two and a half months after the fire starts</span></p>
     <table class="cm">
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 28%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">7,017</span>
-        <span class="sub">6.3&nbsp;% of pairs</span>
-        <span class="sub row">90.2&nbsp;% of this row</span>
+        <span class="count">6,900</span>
+        <span class="sub">6.2&nbsp;% of pairs</span>
+        <span class="sub row">88.7&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 9%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">763</span>
-        <span class="sub">0.7&nbsp;% of pairs</span>
-        <span class="sub row">9.8&nbsp;% of this row</span>
+        <span class="count">880</span>
+        <span class="sub">0.8&nbsp;% of pairs</span>
+        <span class="sub row">11.3&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
       <td class="num rowtot">7,780</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
-        <span class="count">1,237</span>
-        <span class="sub">1.1&nbsp;% of pairs</span>
-        <span class="sub row">1.2&nbsp;% of this row</span>
+        <span class="count">1,076</span>
+        <span class="sub">1.0&nbsp;% of pairs</span>
+        <span class="sub row">1.0&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">103,080</span>
-        <span class="sub">92.0&nbsp;% of pairs</span>
-        <span class="sub row">98.8&nbsp;% of this row</span>
+        <span class="count">103,241</span>
+        <span class="sub">92.1&nbsp;% of pairs</span>
+        <span class="sub row">99.0&nbsp;% of this row</span>
         <span class="plain">we agreed it stood</span>
       </td>
       <td class="num rowtot">104,317</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">8,254</td><td class="num">103,843</td><td class="num">112,097</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">7,976</td><td class="num">104,121</td><td class="num">112,097</td></tr></tfoot>
     </table>
     <ul class="metstrip">
-      <li><span class="k">Precision</span><span class="v">0.8501</span></li>
-      <li><span class="k">Recall</span><span class="v">0.9019</span></li>
-      <li><span class="k">F1</span><span class="v">0.8753</span></li>
+      <li><span class="k">Precision</span><span class="v">0.8651</span></li>
+      <li><span class="k">Recall</span><span class="v">0.8869</span></li>
+      <li><span class="k">F1</span><span class="v">0.8759</span></li>
       <li><span class="k">AUC</span><span class="v">0.9908</span></li>
     </ul>
-    <p class="ciline">Fire-level F1 <strong>0.8519</strong>, 95&nbsp;% CI [0.8013, 0.8948] — mean over the 15 fires, resampling the <em>fire</em>, 2,000 replicates, percentile.</p>
-    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>90.2&nbsp;%</strong>; <strong>15.0&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
+    <p class="ciline">Fire-level F1 <strong>0.8518</strong>, 95&nbsp;% CI [0.7957, 0.8986] — mean over the 15 fires, resampling the <em>fire</em>, 2,000 replicates, percentile.</p>
+    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>88.7&nbsp;%</strong>; <strong>13.5&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
   <div class="cm-panel">
     <p class="cm-head"><strong>The refined call</strong><span>threshold 0.84 · about a year after the fire</span></p>
@@ -725,14 +725,14 @@
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">7,272</span>
         <span class="sub">6.5&nbsp;% of pairs</span>
         <span class="sub row">93.5&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
         <span class="count">508</span>
         <span class="sub">0.5&nbsp;% of pairs</span>
@@ -741,14 +741,14 @@
       </td>
       <td class="num rowtot">7,780</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
         <span class="count">1,004</span>
         <span class="sub">0.9&nbsp;% of pairs</span>
         <span class="sub row">1.0&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">103,313</span>
         <span class="sub">92.2&nbsp;% of pairs</span>
@@ -769,7 +769,7 @@
     <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>93.5&nbsp;%</strong>; <strong>12.1&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>carlson_endtoend</code> × <code>primary_matched</code> and <code>refined</code>; intervals from <code>outputs/scorecard/ci_*.csv</code>, 2,000 fire-level replicates. Written 2026-09-14.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, the pooled matrices <code>carlson_endtoend_pooled__primary_matched.json</code> and <code>carlson_endtoend_pooled__refined.json</code> beside it; intervals from the matching <code>ci_*.csv</code> files, 2,000 fire-level replicates. Written 2026-09-15.</p>
   </div>
 </section>
 
@@ -780,35 +780,35 @@
     <p>The answer sheet is a FEMA Urban Search &amp; Rescue damage assessment, hosted by the Village of Ruidoso. Both matrices below are on the same <strong>1,637</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>742</strong> are destroyed in the truth (45.3&nbsp;% of the rows).</p>
     <div class="cm-pair">
   <div class="cm-panel">
-    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.85 · about two and a half months after the fire starts</span></p>
+    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.88 · about two and a half months after the fire starts</span></p>
     <table class="cm">
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
       <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 25%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">554</span>
-        <span class="sub">33.8&nbsp;% of pairs</span>
-        <span class="sub row">74.7&nbsp;% of this row</span>
+        <span class="count">548</span>
+        <span class="sub">33.5&nbsp;% of pairs</span>
+        <span class="sub row">73.9&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 13%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">188</span>
-        <span class="sub">11.5&nbsp;% of pairs</span>
-        <span class="sub row">25.3&nbsp;% of this row</span>
+        <span class="count">194</span>
+        <span class="sub">11.9&nbsp;% of pairs</span>
+        <span class="sub row">26.1&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
       <td class="num rowtot">742</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
         <span class="count">10</span>
         <span class="sub">0.6&nbsp;% of pairs</span>
         <span class="sub row">1.1&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">885</span>
         <span class="sub">54.1&nbsp;% of pairs</span>
@@ -817,16 +817,16 @@
       </td>
       <td class="num rowtot">895</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">564</td><td class="num">1,073</td><td class="num">1,637</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">558</td><td class="num">1,079</td><td class="num">1,637</td></tr></tfoot>
     </table>
     <ul class="metstrip">
-      <li><span class="k">Precision</span><span class="v">0.9823</span></li>
-      <li><span class="k">Recall</span><span class="v">0.7466</span></li>
-      <li><span class="k">F1</span><span class="v">0.8484</span></li>
-      <li><span class="k">AUC</span><span class="v">0.9847</span></li>
+      <li><span class="k">Precision</span><span class="v">0.9821</span></li>
+      <li><span class="k">Recall</span><span class="v">0.7385</span></li>
+      <li><span class="k">F1</span><span class="v">0.8431</span></li>
+      <li><span class="k">AUC</span><span class="v">0.9855</span></li>
     </ul>
     <p class="ciline">One incident, so there is no fire-level interval to quote: every pair here comes from the same fire.</p>
-    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>74.7&nbsp;%</strong>; <strong>1.8&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
+    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>73.9&nbsp;%</strong>; <strong>1.8&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
   <div class="cm-panel">
     <p class="cm-head"><strong>The refined call</strong><span>threshold 0.84 · about a year after the fire</span></p>
@@ -841,7 +841,7 @@
         <span class="sub row">94.1&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
         <span class="count">44</span>
         <span class="sub">2.7&nbsp;% of pairs</span>
@@ -850,14 +850,14 @@
       </td>
       <td class="num rowtot">742</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
         <span class="count">16</span>
         <span class="sub">1.0&nbsp;% of pairs</span>
         <span class="sub row">1.8&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">879</span>
         <span class="sub">53.7&nbsp;% of pairs</span>
@@ -878,7 +878,7 @@
     <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>94.1&nbsp;%</strong>; <strong>2.2&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__ruidoso_southfork_2024</code> × <code>primary_matched</code> and <code>refined</code>; intervals from <code>outputs/scorecard/ci_*.csv</code>, 2,000 fire-level replicates. Written 2026-09-14.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__ruidoso_southfork_2024</code> × <code>primary_matched</code> and <code>refined</code>. Written 2026-09-15.</p>
   </div>
 </section>
 
@@ -889,53 +889,53 @@
     <p>The answer sheet is Boulder County assessors, in the field. Both matrices below are on the same <strong>1,023</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>891</strong> are destroyed in the truth (87.1&nbsp;% of the rows).</p>
     <div class="cm-pair">
   <div class="cm-panel">
-    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.85 · about two and a half months after the fire starts</span></p>
+    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.88 · about two and a half months after the fire starts</span></p>
     <table class="cm">
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">856</span>
-        <span class="sub">83.7&nbsp;% of pairs</span>
-        <span class="sub row">96.1&nbsp;% of this row</span>
+        <span class="count">840</span>
+        <span class="sub">82.1&nbsp;% of pairs</span>
+        <span class="sub row">94.3&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
       <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">35</span>
-        <span class="sub">3.4&nbsp;% of pairs</span>
-        <span class="sub row">3.9&nbsp;% of this row</span>
+        <span class="count">51</span>
+        <span class="sub">5.0&nbsp;% of pairs</span>
+        <span class="sub row">5.7&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
       <td class="num rowtot">891</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 9%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
-        <span class="count">17</span>
-        <span class="sub">1.7&nbsp;% of pairs</span>
-        <span class="sub row">12.9&nbsp;% of this row</span>
+        <span class="count">15</span>
+        <span class="sub">1.5&nbsp;% of pairs</span>
+        <span class="sub row">11.4&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 28%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">115</span>
-        <span class="sub">11.2&nbsp;% of pairs</span>
-        <span class="sub row">87.1&nbsp;% of this row</span>
+        <span class="count">117</span>
+        <span class="sub">11.4&nbsp;% of pairs</span>
+        <span class="sub row">88.6&nbsp;% of this row</span>
         <span class="plain">we agreed it stood</span>
       </td>
       <td class="num rowtot">132</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">873</td><td class="num">150</td><td class="num">1,023</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">855</td><td class="num">168</td><td class="num">1,023</td></tr></tfoot>
     </table>
     <ul class="metstrip">
-      <li><span class="k">Precision</span><span class="v">0.9805</span></li>
-      <li><span class="k">Recall</span><span class="v">0.9607</span></li>
-      <li><span class="k">F1</span><span class="v">0.9705</span></li>
-      <li><span class="k">AUC</span><span class="v">0.9801</span></li>
+      <li><span class="k">Precision</span><span class="v">0.9825</span></li>
+      <li><span class="k">Recall</span><span class="v">0.9428</span></li>
+      <li><span class="k">F1</span><span class="v">0.9622</span></li>
+      <li><span class="k">AUC</span><span class="v">0.9781</span></li>
     </ul>
     <p class="ciline">One incident, so there is no fire-level interval to quote: every pair here comes from the same fire.</p>
-    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>96.1&nbsp;%</strong>; <strong>1.9&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
+    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>94.3&nbsp;%</strong>; <strong>1.8&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
   <div class="cm-panel">
     <p class="cm-head"><strong>The refined call</strong><span>threshold 0.84 · about a year after the fire</span></p>
@@ -943,14 +943,14 @@
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">886</span>
         <span class="sub">86.6&nbsp;% of pairs</span>
         <span class="sub row">99.4&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
         <span class="count">5</span>
         <span class="sub">0.5&nbsp;% of pairs</span>
@@ -959,14 +959,14 @@
       </td>
       <td class="num rowtot">891</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 10%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
         <span class="corner">false alarm</span>
         <span class="count">22</span>
         <span class="sub">2.2&nbsp;% of pairs</span>
         <span class="sub row">16.7&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 28%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 27%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">110</span>
         <span class="sub">10.8&nbsp;% of pairs</span>
@@ -987,7 +987,7 @@
     <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>99.4&nbsp;%</strong>; <strong>2.4&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__marshall_boulder_2021</code> × <code>primary_matched</code> and <code>refined</code>; intervals from <code>outputs/scorecard/ci_*.csv</code>, 2,000 fire-level replicates. Written 2026-09-14.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__marshall_boulder_2021</code> × <code>primary_matched</code> and <code>refined</code>. Written 2026-09-15.</p>
   </div>
 </section>
 
@@ -998,53 +998,53 @@
     <p>The answer sheet is the FEMA Modeling and Analysis Center, reading imagery rather than walking the street. Both matrices below are on the same <strong>2,741</strong> building–fire pairs — the pairs that carry a primary call <em>and</em> a refined one — of which <strong>1,129</strong> are destroyed in the truth (41.2&nbsp;% of the rows).</p>
     <div class="cm-pair">
   <div class="cm-panel">
-    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.85 · about two and a half months after the fire starts</span></p>
+    <p class="cm-head"><strong>The primary call</strong><span>threshold 0.88 · about two and a half months after the fire starts</span></p>
     <table class="cm">
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">1,071</span>
-        <span class="sub">39.1&nbsp;% of pairs</span>
-        <span class="sub row">94.9&nbsp;% of this row</span>
+        <span class="count">1,048</span>
+        <span class="sub">38.2&nbsp;% of pairs</span>
+        <span class="sub row">92.8&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
       <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
-        <span class="count">58</span>
-        <span class="sub">2.1&nbsp;% of pairs</span>
-        <span class="sub row">5.1&nbsp;% of this row</span>
+        <span class="count">81</span>
+        <span class="sub">3.0&nbsp;% of pairs</span>
+        <span class="sub row">7.2&nbsp;% of this row</span>
         <span class="plain">it burned and we said it stood</span>
       </td>
       <td class="num rowtot">1,129</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
-        <span class="count">110</span>
-        <span class="sub">4.0&nbsp;% of pairs</span>
-        <span class="sub row">6.8&nbsp;% of this row</span>
+        <span class="count">82</span>
+        <span class="sub">3.0&nbsp;% of pairs</span>
+        <span class="sub row">5.1&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
       <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
         <span class="corner">hit</span>
-        <span class="count">1,502</span>
-        <span class="sub">54.8&nbsp;% of pairs</span>
-        <span class="sub row">93.2&nbsp;% of this row</span>
+        <span class="count">1,530</span>
+        <span class="sub">55.8&nbsp;% of pairs</span>
+        <span class="sub row">94.9&nbsp;% of this row</span>
         <span class="plain">we agreed it stood</span>
       </td>
       <td class="num rowtot">1,612</td></tr>
       </tbody>
-      <tfoot><tr><th scope="row">Column total</th><td class="num">1,181</td><td class="num">1,560</td><td class="num">2,741</td></tr></tfoot>
+      <tfoot><tr><th scope="row">Column total</th><td class="num">1,130</td><td class="num">1,611</td><td class="num">2,741</td></tr></tfoot>
     </table>
     <ul class="metstrip">
-      <li><span class="k">Precision</span><span class="v">0.9069</span></li>
-      <li><span class="k">Recall</span><span class="v">0.9486</span></li>
-      <li><span class="k">F1</span><span class="v">0.9273</span></li>
-      <li><span class="k">AUC</span><span class="v">0.9836</span></li>
+      <li><span class="k">Precision</span><span class="v">0.9274</span></li>
+      <li><span class="k">Recall</span><span class="v">0.9283</span></li>
+      <li><span class="k">F1</span><span class="v">0.9278</span></li>
+      <li><span class="k">AUC</span><span class="v">0.9831</span></li>
     </ul>
     <p class="ciline">One incident, so there is no fire-level interval to quote: every pair here comes from the same fire.</p>
-    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>94.9&nbsp;%</strong>; <strong>9.3&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
+    <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>92.8&nbsp;%</strong>; <strong>7.3&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
   <div class="cm-panel">
     <p class="cm-head"><strong>The refined call</strong><span>threshold 0.84 · about a year after the fire</span></p>
@@ -1052,14 +1052,14 @@
       <thead><tr><th></th><th class="num">We call destroyed</th><th class="num">We call survived</th><th class="num">Row total</th></tr></thead>
       <tbody>
     <tr><th scope="row">Truth says destroyed</th>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 32%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 31%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">1,129</span>
         <span class="sub">41.2&nbsp;% of pairs</span>
         <span class="sub row">100.0&nbsp;% of this row</span>
         <span class="plain">we agreed it burned</span>
       </td>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 6%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">miss</span>
         <span class="count">0</span>
         <span class="sub">0.0&nbsp;% of pairs</span>
@@ -1068,14 +1068,14 @@
       </td>
       <td class="num rowtot">1,129</td></tr>
     <tr><th scope="row">Truth says survived</th>
-      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 8%, var(--paper-2));">
+      <td class="cm-cell miss" style="background: color-mix(in srgb, var(--s2) 7%, var(--paper-2));">
         <span class="corner">false alarm</span>
         <span class="count">128</span>
         <span class="sub">4.7&nbsp;% of pairs</span>
         <span class="sub row">7.9&nbsp;% of this row</span>
         <span class="plain">it stood and we said it burned</span>
       </td>
-      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 30%, var(--paper-2));">
+      <td class="cm-cell hit" style="background: color-mix(in srgb, var(--s3) 29%, var(--paper-2));">
         <span class="corner">hit</span>
         <span class="count">1,484</span>
         <span class="sub">54.1&nbsp;% of pairs</span>
@@ -1096,7 +1096,7 @@
     <p class="reading">Of the buildings the truth marks destroyed we flagged <strong>100.0&nbsp;%</strong>; <strong>10.2&nbsp;%</strong> of our destroyed calls were on buildings it does not.</p>
   </div>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__marshall_femamac_2021</code> × <code>primary_matched</code> and <code>refined</code>; intervals from <code>outputs/scorecard/ci_*.csv</code>, 2,000 fire-level replicates. Written 2026-09-14.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the data share, rows <code>external__marshall_femamac_2021</code> × <code>primary_matched</code> and <code>refined</code>. Written 2026-09-15.</p>
   </div>
 </section>
 
@@ -1112,57 +1112,17 @@
 <caption>Why the refined call does not reach every pair. A pair with no refined call is <em>not</em> counted as an error — it is left out of the refined matrix, which is why both matrices on this page are computed on the pairs that carry both.</caption>
 <thead><tr><th>Truth source</th><th class="num">Scorable pairs</th><th class="num">With a refined call</th><th class="num">Without</th><th class="num">Coverage</th><th>Why not</th></tr></thead>
 <tbody>
-<tr><td>Fire-service damage inspections</td><td class="num">28,715</td><td class="num">28,314</td><td class="num">401</td><td class="num">98.6&nbsp;%</td><td>398 no clean annual embedding year yet; 3 no second post-fire window</td></tr>
-<tr><td>The hand survey, end to end</td><td class="num">143,754</td><td class="num">112,097</td><td class="num">31,657</td><td class="num">78.0&nbsp;%</td><td>31,643 fire predates the clean pre/post pair; 14 no second post-fire window</td></tr>
+<tr><td>Fire-service damage inspections</td><td class="num">28,717</td><td class="num">28,316</td><td class="num">401</td><td class="num">98.6&nbsp;%</td><td>the clean annual summary of the landscape for that year is not published yet, or the second post-fire window has not closed</td></tr>
+<tr><td>The hand survey, end to end</td><td class="num">143,754</td><td class="num">112,097</td><td class="num">31,657</td><td class="num">78.0&nbsp;%</td><td>almost all of them are fires that burned before the annual landscape summary existed at all</td></tr>
 <tr><td>South Fork, New Mexico — FEMA US&amp;R</td><td class="num">1,637</td><td class="num">1,637</td><td class="num">0</td><td class="num">100.0&nbsp;%</td><td>—</td></tr>
 <tr><td>Marshall, Colorado — Boulder County field survey</td><td class="num">1,023</td><td class="num">1,023</td><td class="num">0</td><td class="num">100.0&nbsp;%</td><td>—</td></tr>
 <tr><td>Marshall, Colorado — FEMA MAC remote sensing</td><td class="num">2,741</td><td class="num">2,741</td><td class="num">0</td><td class="num">100.0&nbsp;%</td><td>—</td></tr>
 </tbody></table></div>
-<p class="src"><b>Source:</b> <code>outputs/scorecard/refined_coverage.csv</code> on the data share, the all-fires row for each truth source, data date 2026-09-14.</p>
+<p class="src"><b>Source:</b> <code>outputs/scorecard/refined_coverage.csv</code> on the data share for the three one-off assessments, and the scorable-pair counts in the pooled matrices beside it for the first two rows, data date 2026-09-15. Coverage is the second column over the first.</p>
 
   </div>
 </section>
 
-<section class="part">
-  <div class="wide">
-    <p class="eyebrow">where the gain came from</p>
-    <h2>Which buildings the refined call fixed</h2>
-    <p>Every scored pair is tagged with the conditions that make it hard — bare ground
-    under the building, canopy over the pixel, a small outbuilding, a score sitting inside the
-    cut band, and so on — and the same tags are applied to both calls. Two buckets carry
-    most of the improvement against both answer sheets.</p>
-<div class="tablewrap"><table>
-<caption>Against the fire-service inspections. Buckets are built on the primary call's frame and applied to both, so <strong>they overlap</strong> — one error removed can sit in two buckets, and the shares do not add to 100&nbsp;%. ⚠️ Never read this column as a decomposition.</caption>
-<thead><tr><th>Bucket</th><th class="num">Pairs</th><th class="num">Primary errors</th><th class="num">Refined errors</th><th class="num">Change</th><th class="num">Share of the drop</th></tr></thead>
-<tbody>
-<tr><td>(i) score inside the cut band (calibration reach)</td><td class="num">1,470</td><td class="num">602</td><td class="num">226</td><td class="num">-376</td><td class="num">39.6&nbsp;%</td></tr>
-<tr><td>(b) bare ground / low pre-fire NDVI</td><td class="num">7,085</td><td class="num">637</td><td class="num">278</td><td class="num">-359</td><td class="num">37.8&nbsp;%</td></tr>
-<tr><td>(c) small structure (minor / outbuilding)</td><td class="num">5,053</td><td class="num">503</td><td class="num">347</td><td class="num">-156</td><td class="num">16.4&nbsp;%</td></tr>
-<tr><td>(e) vegetation over the pixel (canopy proxy)</td><td class="num">7,073</td><td class="num">415</td><td class="num">260</td><td class="num">-155</td><td class="num">16.3&nbsp;%</td></tr>
-<tr><td>(f) point placement / matching</td><td class="num">2,834</td><td class="num">203</td><td class="num">106</td><td class="num">-97</td><td class="num">10.2&nbsp;%</td></tr>
-<tr><td>(d) partial-damage class recoded to one side</td><td class="num">1,757</td><td class="num">396</td><td class="num">315</td><td class="num">-81</td><td class="num">8.5&nbsp;%</td></tr>
-<tr><td>(g) overlapping fire frames (attribution)</td><td class="num">462</td><td class="num">15</td><td class="num">11</td><td class="num">-4</td><td class="num">0.4&nbsp;%</td></tr>
-<tr><td>(a) few clear post-fire observations</td><td class="num">37</td><td class="num">4</td><td class="num">0</td><td class="num">-4</td><td class="num">0.4&nbsp;%</td></tr>
-<tr class="total"><td>every scored pair with a refined call</td><td class="num">28,314</td><td class="num">2,004</td><td class="num">1,055</td><td class="num">-949</td><td class="num">100.0&nbsp;%</td></tr>
-</tbody></table></div>
-<p class="src"><b>Source:</b> <code>outputs/scorecard/taxonomy_before_after_dins.csv</code> on the data share, written 2026-09-14. An error is a false negative or a false positive; <em>change</em> is refined minus primary.</p>
-
-<div class="tablewrap"><table>
-<caption>Against the hand survey, end to end. Buckets are built on the primary call's frame and applied to both, so <strong>they overlap</strong> — one error removed can sit in two buckets, and the shares do not add to 100&nbsp;%. ⚠️ Never read this column as a decomposition.</caption>
-<thead><tr><th>Bucket</th><th class="num">Pairs</th><th class="num">Primary errors</th><th class="num">Refined errors</th><th class="num">Change</th><th class="num">Share of the drop</th></tr></thead>
-<tbody>
-<tr><td>(i) score inside the cut band (calibration reach)</td><td class="num">1,990</td><td class="num">647</td><td class="num">366</td><td class="num">-281</td><td class="num">57.6&nbsp;%</td></tr>
-<tr><td>(b) bare ground / low pre-fire NDVI</td><td class="num">28,027</td><td class="num">539</td><td class="num">368</td><td class="num">-171</td><td class="num">35.0&nbsp;%</td></tr>
-<tr><td>(e) vegetation over the pixel (canopy proxy)</td><td class="num">28,029</td><td class="num">519</td><td class="num">376</td><td class="num">-143</td><td class="num">29.3&nbsp;%</td></tr>
-<tr><td>(c) small structure (minor / outbuilding)</td><td class="num">4,243</td><td class="num">155</td><td class="num">138</td><td class="num">-17</td><td class="num">3.5&nbsp;%</td></tr>
-<tr><td>(f) point placement / matching</td><td class="num">11,173</td><td class="num">163</td><td class="num">148</td><td class="num">-15</td><td class="num">3.1&nbsp;%</td></tr>
-<tr><td>(a) few clear post-fire observations</td><td class="num">12,836</td><td class="num">239</td><td class="num">238</td><td class="num">-1</td><td class="num">0.2&nbsp;%</td></tr>
-<tr class="total"><td>every scored pair with a refined call</td><td class="num">112,097</td><td class="num">2,000</td><td class="num">1,512</td><td class="num">-488</td><td class="num">100.0&nbsp;%</td></tr>
-</tbody></table></div>
-<p class="src"><b>Source:</b> <code>outputs/scorecard/taxonomy_before_after_carlson.csv</code> on the data share, written 2026-09-14. An error is a false negative or a false positive; <em>change</em> is refined minus primary.</p>
-
-  </div>
-</section>
 
 </main>
 
@@ -1173,9 +1133,12 @@
       <a href="pipeline-overview.html">the deep dive</a> ·
       <a href="uncertainty.html">how wide the numbers are</a> ·
       <a href="forward-fires.html">fire by fire</a>.</p>
-    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-14. Every number on
-    this page is read from the scorecard tables in <code>outputs/scorecard/</code> on the
-    data share. Primary estimate at a fixed threshold of 0.85, refined estimate at 0.84.</p>
+    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>; the model
+    figures on this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on
+    199 fires and 818,838 buildings, data date 2026-09-15. Every number here is read from the
+    scorecard tables in <code>outputs/scorecard/</code> on the data share. Primary estimate at a
+    fixed threshold of 0.88, refined estimate at 0.84 — the refined model,
+    <code>damage_sentinel2_refined_v2</code>, did not change on 2026-09-15.</p>
   </div>
 </footer>
 

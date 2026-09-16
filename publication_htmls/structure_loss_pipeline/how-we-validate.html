@@ -378,8 +378,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>How we validate</span><span class="of">page 8 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html" aria-current="page">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>How we validate</span><span class="of">page 9 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html" aria-current="page">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -416,10 +416,13 @@
         before it is adopted.</li>
       </ul>
       <p>Measured that way, against fire-service damage inspections, the destroyed call reaches
-      an F1 of <strong>0.9158</strong> counting every building equally and <strong>0.8729</strong>
-      counting every fire equally. Both are real; quoting one without the other is not. F1 is the
-      harmonic mean of precision (what share of our destroyed calls were right) and recall (what
-      share of the real destruction we found), so it punishes both errors.</p>
+      an F1 of <strong>0.9130</strong> counting every building equally, on 36,272 buildings in
+      eight inspected incidents. Against the published historical record — 191 fires and 782,566
+      buildings — it reaches <strong>0.859</strong> counting every building equally and
+      <strong>0.728</strong> counting every fire equally. All three are real; quoting one without
+      the others is not. F1 is the harmonic mean of precision (what share of our destroyed calls
+      were right) and recall (what share of the real destruction we found), so it punishes both
+      errors.</p>
     </div>
   </div>
 </section>
@@ -438,28 +441,32 @@
         <caption>Every fire and building the damage model is fitted on</caption>
         <thead><tr><th>Source</th><th class="num">Fires</th><th class="num">Buildings</th><th class="num">Of which destroyed</th></tr></thead>
         <tbody>
-          <tr><td>Historical record, hand-assembled, 2016–2022</td><td class="num">66</td><td class="num">582,554</td><td class="num">51,628</td></tr>
+          <tr><td>Historical record, hand-assembled, 2016–2022</td><td class="num">191</td><td class="num">782,566</td><td class="num">55,664</td></tr>
           <tr><td>Fire-service damage inspections, 2024–2025</td><td class="num">8</td><td class="num">36,272</td><td class="num">17,779</td></tr>
-          <tr class="total"><td>Total</td><td class="num">74</td><td class="num">618,826</td><td class="num">69,407</td></tr>
+          <tr class="total"><td>Total</td><td class="num">199</td><td class="num">818,838</td><td class="num">73,443</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/design_a_vs_b/v1/metrics.json</code> on the data
-    share, read 2026-09-14.</p>
-    <p><b>Reading it:</b> the model has seen about six hundred thousand buildings, but only
-    seventy-four fires — and the number of fires is what limits how much can be claimed.</p>
+    <p class="src"><b>Source:</b> the damage model's own <code>summary.json</code> beside the
+    model on the data share, read 2026-09-15.</p>
+    <p><b>Reading it:</b> the model has seen more than eight hundred thousand buildings, but only
+    a hundred and ninety-nine fires — and the number of fires is what limits how much can be
+    claimed. The pool was widened on 15 September 2026, from 74 fires to 199; two of the
+    experiments further down this page were run before that and say so where they appear.</p>
 
-    <p>The 66 historical fires span <strong>eleven states</strong> — 41 in California, 9 in
-    Oregon, 4 in Colorado, 3 in Washington, 2 each in Oklahoma and Tennessee, and one each in
-    Florida, Kansas, New Mexico, Texas and Utah — across seven fire years from 2016 to 2022. The
-    eight inspected incidents are the Airport, Borel, Bridge, Mountain and Park fires of 2024 and
-    the Eaton, Palisades and TCU Complex fires of 2025.</p>
+    <p>The 191 historical fires span <strong>eighteen states</strong> — 82 in California, 17 in
+    Oregon, 16 in Washington, 14 in Montana, 11 in Colorado, 8 in Oklahoma, 7 in Texas, 6 in
+    Nevada, 5 in Arizona, 4 each in Kansas and Florida, 3 each in Tennessee, Idaho, Nebraska and
+    Wyoming, 2 each in New Mexico and Utah, and 1 in Minnesota — across seven fire years from 2016
+    to 2022. The eight inspected incidents are the Airport, Borel, Bridge, Mountain and Park fires
+    of 2024 and the Eaton, Palisades and TCU Complex fires of 2025.</p>
 
     <div class="note warn">
-      <p>⚠️ <strong>Both halves are dominated by a few fires.</strong> The three largest
-      historical fires hold 29&nbsp;% of that half's buildings, and Eaton and Palisades alone hold
-      <strong>84&nbsp;%</strong> of the inspected half. That single fact is why every headline
-      here is reported twice, and why the two versions differ by four to seven points.</p>
+      <p>⚠️ <strong>Both halves are dominated by a few fires.</strong> The largest quarter of the
+      historical fires holds <strong>79&nbsp;%</strong> of that half's buildings, and Eaton and
+      Palisades alone hold <strong>84&nbsp;%</strong> of the inspected half. That single fact is
+      why every headline here is reported twice, counting buildings equally and counting fires
+      equally, and why the two versions differ by thirteen points on the historical half.</p>
     </div>
 
     <h3>The two sources do not count the same buildings</h3>
@@ -484,9 +491,9 @@
   <div class="wide">
     <p class="eyebrow">the method</p>
     <h2>Holding out a whole fire, and why nothing smaller will do</h2>
-    <p>The rule is simple to state. For each of the 74 fires in turn: fit a model on
-    <strong>all the other 73</strong>, and use it to score every building in the fire that was
-    left out. Run it 74 times and every building in the pool carries a score from a model that
+    <p>The rule is simple to state. For each of the 199 fires in turn: fit a model on
+    <strong>all the other 198</strong>, and use it to score every building in the fire that was
+    left out. Run it 199 times and every building in the pool carries a score from a model that
     never saw its fire.</p>
     <p>The unit is the <em>fire</em>, not the building, and that is the whole point. Buildings
     inside one fire share a satellite scene, a season, a fuel type, a wind event, a smoke layer
@@ -494,9 +501,7 @@
     half, so holding out a random sample of buildings measures memorisation rather than skill.
     Removing the fire is the smallest hold-out that cuts every one of those shared threads at
     once.</p>
-    <p>The size of the difference is not hypothetical. The same model scored with blocks held out
-    <em>inside</em> each fire reaches an AUC of 0.990; scored with whole fires held out it reaches
-    0.985. The gap is small here and much larger elsewhere: a published study of more than
+    <p>The size of the difference is not hypothetical elsewhere: a published study of more than
     100,000 of the same inspections reports 88.0&nbsp;% under random cross-validation falling to
     <strong>68.0&nbsp;%</strong> once space is blocked, and the closest comparable per-building
     benchmark reports F1 0.800 on a random split against <strong>0.655</strong> with whole events
@@ -512,21 +517,22 @@
       <li><div><b>It is a training fire.</b> 18,318 of its inspected structures pass the feature
       and label filters — 9,419 destroyed, 8,899 surviving — and they are training rows for every
       fold except their own.</div></li>
-      <li><div><b>Its own model is fitted without it.</b> A model is trained on the other 73
-      fires, 600,508 buildings, and nothing from Eaton is in it.</div></li>
+      <li><div><b>Its own model is fitted without it.</b> A model is trained on the other 198
+      fires, 800,520 buildings, and nothing from Eaton is in it.</div></li>
       <li><div><b>That model scores all 18,318 Eaton rows.</b> A structure on Altadena Drive gets
       a probability from a model that has never seen a building in this fire.</div></li>
       <li><div><b>The threshold is read off the held-out scores.</b> Eaton's scores, together
       with the other seven incidents' held-out scores, are what the threshold rule reads. It picks
-      the value that maximises the average of the eight per-fire F1 scores: <b>0.85</b>.</div></li>
-      <li><div><b>What it scores.</b> At 0.85, Eaton's held-out model reaches precision 0.944,
-      recall 0.898, F1 <b>0.920</b>, AUC 0.975. Eaton's own best possible threshold would have
-      been 0.67 for an F1 of 0.924 — four thousandths, which is the price of shipping one number
-      that works for every fire.</div></li>
+      the value that maximises the average of the eight per-fire F1 scores: <b>0.88</b>.</div></li>
+      <li><div><b>What it scores.</b> At 0.88, Eaton's held-out model reaches precision 0.941,
+      recall 0.894, F1 <b>0.917</b>, AUC 0.973. The threshold rule run on the other seven
+      incidents alone — so that Eaton cannot influence even the number applied to it — would have
+      picked <b>0.91</b> rather than the shipped 0.88, which is the size of the wobble in a
+      threshold chosen from eight fires.</div></li>
       <li><div><b>The published product uses that same held-out model</b>, not one fitted on all
-      74 fires. 64,319 inventory points are scored and 7,637 called destroyed.</div></li>
+      199 fires. 64,319 inventory points are scored and 7,603 called destroyed.</div></li>
       <li><div><b>The check.</b> Those points are matched one-to-one within 10&nbsp;m to the field
-      inspections: 14,955 pairs, precision 0.949, recall 0.905, F1 <b>0.926</b>, AUC 0.978 — plus
+      inspections: 14,955 pairs, precision 0.946, recall 0.900, F1 <b>0.923</b>, AUC 0.977 — plus
       a detection recall of 0.816, which is the part a confusion matrix cannot see, because it
       only counts buildings we found in the first place.</div></li>
     </ol>
@@ -562,15 +568,20 @@
         <caption>The same held-out results, weighted two ways</caption>
         <thead><tr><th>Ground truth</th><th class="num">Fires</th><th class="num">Pooled F1</th><th class="num">Mean per-fire F1</th><th class="num">Gap</th></tr></thead>
         <tbody>
-          <tr><td>Fire-service damage inspections</td><td class="num">8</td><td class="num">0.9158</td><td class="num">0.8729</td><td class="num">4 points</td></tr>
-          <tr><td>The historical record</td><td class="num">66</td><td class="num">0.8513</td><td class="num">0.7797</td><td class="num">7 points</td></tr>
+          <tr><td>Fire-service damage inspections</td><td class="num">8</td><td class="num">0.9130</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>The historical record</td><td class="num">191</td><td class="num">0.859</td><td class="num">0.728</td><td class="num">13 points</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the bootstrap and held-out summary tables under
-    <code>outputs/uncertainty/</code> and beside the model on the data share, read 2026-09-14.</p>
-    <p><b>Reading it:</b> the gap is entirely the weighting — the historical half has more small
-    fires, so weighting fires equally costs it more.</p>
+    <code>outputs/uncertainty/</code> and beside the model on the data share, read 2026-09-15. The
+    mean-per-fire figure for the eight inspected incidents is left blank because the run that
+    computes it has not been repeated since the model changed; the eight per-incident scores are
+    published individually on <a href="uncertainty.html">how certain</a>.</p>
+    <p><b>Reading it:</b> the gap is entirely the weighting — the historical half is mostly small
+    fires, so weighting fires equally costs it a great deal. Thirteen points is the price of
+    treating a fire with two hundred buildings as the equal of one with sixty thousand, and it is
+    the right price to pay when the question is "what should I expect on the next fire?".</p>
   </div>
 </section>
 
@@ -582,7 +593,7 @@
     is itself a fitted decision, so it gets the same treatment as the model. The rule is: try
     every value from 0.01 to 0.99, compute each <em>held-out</em> fire's F1 at that value, average
     the fires, and keep the best. On the eight inspected incidents that rule picks
-    <strong>0.85</strong>, and 0.85 is what the product applies to every fire.</p>
+    <strong>0.88</strong>, and 0.88 is what the product applies to every fire.</p>
     <p>It maximises the average <em>of the fires</em> rather than the pooled score, deliberately.
     Two fires hold 84&nbsp;% of the buildings, so a threshold tuned on the pooled score is
     whatever those two fires want, and every small fire pays for it. A new fire is one case, not
@@ -599,17 +610,17 @@
         <caption>What a perfect threshold would have been worth, where it can be measured</caption>
         <thead><tr><th>Population</th><th class="num">At the shipped threshold</th><th class="num">At its own best threshold</th><th class="num">Difference</th></tr></thead>
         <tbody>
-          <tr><td>The historical record, pooled F1</td><td class="num">0.8915</td><td class="num">0.8921</td><td class="num">0.0006</td></tr>
-          <tr><td>Inside California, mean per-fire F1</td><td class="num">0.807</td><td class="num">0.829</td><td class="num">0.021</td></tr>
-          <tr><td>Outside California, mean per-fire F1</td><td class="num">0.7345</td><td class="num">0.8002</td><td class="num"><strong>0.066</strong></td></tr>
+          <tr><td>The historical record, pooled F1</td><td class="num">0.8593</td><td class="num">0.8595</td><td class="num">0.0002</td></tr>
+          <tr><td>Inside California, mean per-fire F1</td><td class="num">0.779</td><td class="num">0.808</td><td class="num">0.030</td></tr>
+          <tr><td>Outside California, mean per-fire F1</td><td class="num">0.689</td><td class="num">0.765</td><td class="num"><strong>0.077</strong></td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the by-region held-out tables under
-    <code>outputs/generalization/</code> on the data share, read 2026-09-14.</p>
+    <code>outputs/generalization/</code> on the data share, read 2026-09-15.</p>
     <p><b>Reading it:</b> where the model has plenty of training fires the single fixed threshold
-    costs almost nothing; outside California it costs about 6.6 points of F1, which says the
-    ranking travels across the country and the threshold does not.</p>
+    costs almost nothing; outside California it costs about 7.7 points of F1, which says the
+    ranking travels across the country better than the threshold does.</p>
   </div>
 </section>
 
@@ -625,8 +636,8 @@
         <caption>Which model scores which fire, in the released data</caption>
         <thead><tr><th>If the fire is…</th><th>it is scored by…</th><th>and the row says</th></tr></thead>
         <tbody>
-          <tr><td><strong>not</strong> in the training pool</td><td>the model fitted on all 74 fires</td><td>the production model</td></tr>
-          <tr><td><strong>in</strong> the training pool</td><td>that fire's own held-out model, fitted on the other 73</td><td>held out</td></tr>
+          <tr><td><strong>not</strong> in the training pool</td><td>the model fitted on all 199 fires</td><td>the production model</td></tr>
+          <tr><td><strong>in</strong> the training pool</td><td>that fire's own held-out model, fitted on the other 198</td><td>held out</td></tr>
         </tbody>
       </table>
     </div>
@@ -656,8 +667,8 @@
     <h3>A larger set of fires, named before it is looked at</h3>
     <p>Every candidate addition to the model is first measured on the eight inspected incidents —
     which is eight fires, one region, two seasons. A second, larger set is therefore named in
-    advance: <strong>48 of the 66 historical fires</strong>, spanning eleven states and five
-    years, and the candidate is scored on it once, against criteria written down beforehand.</p>
+    advance — <strong>48 historical fires</strong> spanning eleven states and five years — and the
+    candidate is scored on it once, against criteria written down beforehand.</p>
     <p>It earns its keep. Across roughly 1,900 model fits, twelve candidate feature families have
     been measured. Three looked like real gains of one to three points on the eight incidents; on
     the 48-fire set the picture changed for every one of them, and changed in the same direction
@@ -673,16 +684,19 @@
     of a quantity that never sees it.</p>
     <div class="tablewrap">
       <table>
-        <caption>The two headline figures against the fire-service inspections, with their intervals</caption>
+        <caption>The two headline figures with an interval on them, on the current model</caption>
         <thead><tr><th>Figure</th><th class="num">Value</th><th class="ci">95 % interval over fires</th></tr></thead>
         <tbody>
-          <tr><td>Pooled F1</td><td class="num">0.9158</td><td class="ci">[0.8591, 0.9190]</td></tr>
-          <tr><td>Mean per-fire F1</td><td class="num">0.8729</td><td class="ci">[0.8212, 0.9098]</td></tr>
+          <tr><td>Pooled F1, the historical record, 191 fires</td><td class="num">0.859</td><td class="ci">[0.797, 0.890]</td></tr>
+          <tr><td>Mean per-fire F1, the same 191 fires</td><td class="num">0.728</td><td class="ci">[0.700, 0.755]</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the bootstrap tables under <code>outputs/uncertainty/</code> on
-    the data share, 2,000 replicates resampling whole fires, read 2026-09-14.</p>
+    the data share, 2,000 replicates resampling whole fires, read 2026-09-15. ⚠️ The equivalent
+    run against the fire-service inspections has not been repeated since the model changed on
+    2026-09-15, so those figures have no current interval and are not quoted with one anywhere on
+    this site.</p>
     <p><b>Reading it:</b> these intervals are wide, and the width is honest — with eight fires, a
     resample that happens to miss the two largest is a different experiment.</p>
     <p>Nothing is adopted on a single random seed or a single number: the standing requirement is
@@ -694,32 +708,34 @@
 <section class="part">
   <div class="wide">
     <p class="eyebrow">outside the pool entirely</p>
-    <h2>Three assessments nobody here had a hand in</h2>
-    <p>Three independent per-structure damage assessments, none from either training source, on
-    fires the pool either does not contain at all or does not contain as ground truth.</p>
+    <h2>Assessments nobody here had a hand in</h2>
+    <p>Independent per-structure damage assessments, none from either training source, on fires
+    the pool either does not contain at all or does not contain as ground truth. Three of them are
+    large enough to carry a precision estimate on their own; six more, smaller and recovered from
+    an archive, are reported on <a href="outside-california.html">beyond California</a>.</p>
     <div class="tablewrap">
       <table>
         <caption>Independent ground truth, scored at the shipped threshold</caption>
         <thead><tr><th>Assessment</th><th>Fire</th><th class="num">Pairs</th><th class="num">Destroyed rate</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">AUC</th></tr></thead>
         <tbody>
-          <tr><td>Federal urban search &amp; rescue</td><td>South Fork, New Mexico, 2024</td><td class="num">1,637</td><td class="num">0.453</td><td class="num">0.982</td><td class="num">0.747</td><td class="num"><strong>0.848</strong></td><td class="num">0.985</td></tr>
-          <tr><td>County field damage assessment</td><td>Marshall, Colorado, 2021</td><td class="num">1,023</td><td class="num">0.871</td><td class="num">0.981</td><td class="num">0.961</td><td class="num"><strong>0.971</strong></td><td class="num">0.980</td></tr>
-          <tr><td>Federal remote assessment</td><td>Marshall, Colorado, 2021</td><td class="num">2,741</td><td class="num">0.412</td><td class="num">0.907</td><td class="num">0.949</td><td class="num"><strong>0.927</strong></td><td class="num">0.984</td></tr>
+          <tr><td>Federal urban search &amp; rescue</td><td>South Fork, New Mexico, 2024</td><td class="num">1,637</td><td class="num">0.453</td><td class="num">0.982</td><td class="num">0.739</td><td class="num"><strong>0.843</strong></td><td class="num">0.986</td></tr>
+          <tr><td>County field damage assessment</td><td>Marshall, Colorado, 2021</td><td class="num">1,023</td><td class="num">0.871</td><td class="num">0.983</td><td class="num">0.943</td><td class="num"><strong>0.962</strong></td><td class="num">0.978</td></tr>
+          <tr><td>Federal remote assessment</td><td>Marshall, Colorado, 2021</td><td class="num">2,741</td><td class="num">0.412</td><td class="num">0.927</td><td class="num">0.928</td><td class="num"><strong>0.928</strong></td><td class="num">0.983</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/external.csv</code> on the data share,
-    read 2026-09-14. South Fork is not in the training pool at all; the Marshall fire is, but
-    neither of these two surveys was ever used to fit anything.</p>
+    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> on the
+    data share, read 2026-09-15. South Fork is not in the training pool at all; the Marshall fire
+    is, but neither of these two surveys was ever used to fit anything.</p>
     <p><b>Reading it:</b> the model ranks buildings well on all three, and on South Fork the
     fixed threshold — not the ranking — is what costs it recall.</p>
     <p><strong>South Fork is the clearest demonstration in the project that what fails outside
-    California is the threshold, not the model.</strong> Its AUC of 0.985 says the ranking is
-    excellent, yet at the shipped threshold the model finds only 747 of every 1,000 destroyed
+    California is the threshold, not the model.</strong> Its AUC of 0.986 says the ranking is
+    excellent, yet at the shipped threshold the model finds only 739 of every 1,000 destroyed
     structures while being almost never wrong when it does fire.</p>
     <div class="note warn">
       <p>⚠️ <strong>The two Marshall rows are the same fire, the same product and the same
-      pixels, and they differ by 4.4 points of F1</strong> — because the two surveys enumerate
+      pixels, and they differ by 3.4 points of F1</strong> — because the two surveys enumerate
       different buildings: 1,473 records at an 87&nbsp;% destroyed rate against 2,941 at
       41&nbsp;%. Which ground truth you choose is worth about as much as a year of model work.
       <a href="confusion-matrix.html">The confusion matrix page</a> shows all four counts for each
@@ -735,6 +751,16 @@
     <p>A reasonable reader will ask: if the fire-service inspections are in the training pool, how
     do we know the method transfers to data it has never met? The answer is that both models are
     built and both numbers are published, because they answer two different questions.</p>
+    <div class="note warn">
+      <p style="margin-bottom:0">⚠️ <strong>This experiment and the one after it were run on the
+      training pool as it stood before 15 September 2026 — 66 historical fires plus the eight
+      inspected incidents, 74 in all.</strong> The pool has since been widened to 199 fires and
+      neither experiment has been repeated on it. Both answer a question about the <em>design</em>
+      — is one fire out enough, and does the method transfer to a labelling scheme it has never
+      met — and the answers are the best evidence the project has for those questions. They are
+      not statements about the accuracy of the shipped model, which is measured everywhere else on
+      this page.</p>
+    </div>
     <div class="twoup">
       <div>
         <h4>The transfer model</h4>
@@ -1016,9 +1042,9 @@
     point-comparison run on the data share, read 2026-09-14.</p>
 
     <h3>4. It is not yet a national claim</h3>
-    <p>41 of the 66 historical fires and all eight inspected incidents are in California. Texas,
-    Kansas, Florida, New Mexico and Utah are one fire each, and no out-of-state fire is later than
-    2022. One fire is not a state. <a href="outside-california.html">Beyond California</a> reports
+    <p>82 of the 191 historical fires, and all eight inspected incidents, are in California —
+    and those 82 hold 77&nbsp;% of the buildings. Minnesota is one fire, New Mexico and Utah are
+    two each, and no out-of-state fire in the training pool is later than 2022. One fire is not a state. <a href="outside-california.html">Beyond California</a> reports
     what the out-of-state evidence does and does not support.</p>
 
     <div class="note warn">
@@ -1042,10 +1068,12 @@
       <a href="confusion-matrix.html">confusion matrix</a> ·
       <a href="uncertainty.html">how certain</a> ·
       <a href="outside-california.html">beyond California</a>.</p>
-    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-14. Destroyed call at a
-    fixed threshold of 0.85. The two-model comparison is read from
-    <code>outputs/design_a_vs_b/v1/</code> on the data share, 308 model fits over four random
-    seeds.</p>
+    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>. The model
+    figures on this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on
+    199 fires and 818,838 buildings, data date 2026-09-15; the destroyed call is at a fixed
+    threshold of 0.88. The two-model comparison and the hold-out variants are read from
+    <code>outputs/design_a_vs_b/v1/</code> and <code>outputs/lro/</code> on the data share and
+    were run on the previous 74-fire pool, which is stated where they appear.</p>
   </div>
 </footer>
 

@@ -379,8 +379,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Results by fire</span><span class="of">page 4 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html" aria-current="page">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>Results by fire</span><span class="of">page 5 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html" aria-current="page">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -393,7 +393,7 @@
     table below is one fire: how many buildings stood in the area around it, how many the model
     calls destroyed, and how many a ground survey recorded as destroyed. Across the fifteen
     California fires with a full inspection record, the estimate scores a mean F1 per fire of
-    <strong>0.783</strong> on the destroyed class &mdash; F1 being the combined measure of how
+    <strong>0.788</strong> on the destroyed class &mdash; F1 being the combined measure of how
     often our destroyed calls are right and how much of the real destruction we find.</p>
   </div>
 </header>
@@ -437,104 +437,99 @@
   </div>
   <div class="wide">
     <figure class="band">
-      <svg viewBox="0 0 860 416" role="img" preserveAspectRatio="xMidYMin meet">
-<line class="grid-line" x1="180.0" y1="26" x2="180.0" y2="370" />
+      <svg viewBox="0 0 860 395" role="img" preserveAspectRatio="xMidYMin meet">
+<line class="grid-line" x1="180.0" y1="26" x2="180.0" y2="349" />
 <text class="tick" x="180.0" y="20" text-anchor="middle">0.2</text>
-<line class="grid-line" x1="327.3" y1="26" x2="327.3" y2="370" />
+<line class="grid-line" x1="327.3" y1="26" x2="327.3" y2="349" />
 <text class="tick" x="327.3" y="20" text-anchor="middle">0.4</text>
-<line class="grid-line" x1="474.6" y1="26" x2="474.6" y2="370" />
+<line class="grid-line" x1="474.6" y1="26" x2="474.6" y2="349" />
 <text class="tick" x="474.6" y="20" text-anchor="middle">0.6</text>
-<line class="grid-line" x1="622.0" y1="26" x2="622.0" y2="370" />
-<text class="tick" x="622.0" y="20" text-anchor="middle">0.8</text>
-<line class="grid-line" x1="769.3" y1="26" x2="769.3" y2="370" />
-<text class="tick" x="769.3" y="20" text-anchor="middle">1.0</text>
-<text class="tick" x="784.0" y="396" text-anchor="end">destroyed-class F1 on the matched pairs, 10 m</text>
-<text class="tick" x="854" y="20" text-anchor="end">adaptive cut</text>
+<line class="grid-line" x1="621.9" y1="26" x2="621.9" y2="349" />
+<text class="tick" x="621.9" y="20" text-anchor="middle">0.8</text>
+<line class="grid-line" x1="769.2" y1="26" x2="769.2" y2="349" />
+<text class="tick" x="769.2" y="20" text-anchor="middle">1.0</text>
+<text class="tick" x="784.0" y="375" text-anchor="end">destroyed-class F1 on the matched pairs, 10 m</text>
+<text class="tick" x="854" y="20" text-anchor="end">per-fire cut</text>
 <text x="170" y="50.5" text-anchor="end">Canyon 2025</text>
-<line x1="739.8" y1="47.0" x2="769.3" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="739.8" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="769.3" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="50.5" text-anchor="end">0.77</text>
+<line x1="769.2" y1="47.0" x2="769.2" y2="47.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="769.2" cy="47.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="769.2" cy="47.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="50.5" text-anchor="end">0.86</text>
 <text x="170" y="71.5" text-anchor="end">TCU Complex 2025</text>
-<line x1="728.8" y1="68.0" x2="730.2" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="728.8" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="730.2" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="71.5" text-anchor="end">0.75</text>
-<text x="170" y="92.5" text-anchor="end">Airport 2024</text>
-<line x1="704.4" y1="89.0" x2="719.2" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="719.2" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="704.4" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="92.5" text-anchor="end">0.78</text>
+<line x1="723.9" y1="68.0" x2="726.5" y2="68.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="723.9" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="726.5" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="71.5" text-anchor="end">0.79</text>
+<text x="170" y="92.5" text-anchor="end">Thompson 2024</text>
+<line x1="693.0" y1="89.0" x2="716.6" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="716.6" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="693.0" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="92.5" text-anchor="end">0.79</text>
 <text x="170" y="113.5" text-anchor="end">Palisades 2025</text>
-<line x1="710.3" y1="110.0" x2="717.0" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="717.0" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="710.3" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<line x1="704.9" y1="110.0" x2="714.6" y2="110.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="714.6" cy="110.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="704.9" cy="110.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="113.5" text-anchor="end">0.60</text>
-<text x="170" y="134.5" text-anchor="end">Thompson 2024</text>
-<line x1="671.3" y1="131.0" x2="717.0" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="717.0" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="671.3" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text x="170" y="134.5" text-anchor="end">Eaton 2025</text>
+<line x1="712.2" y1="131.0" x2="713.2" y2="131.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="712.2" cy="131.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="713.2" cy="131.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="134.5" text-anchor="end">0.71</text>
-<text x="170" y="155.5" text-anchor="end">Eaton 2025</text>
-<line x1="714.8" y1="152.0" x2="716.2" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="714.8" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="716.2" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="155.5" text-anchor="end">0.73</text>
+<text x="170" y="155.5" text-anchor="end">Airport 2024</text>
+<line x1="700.0" y1="152.0" x2="710.6" y2="152.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="710.6" cy="152.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="700.0" cy="152.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="155.5" text-anchor="end">0.80</text>
 <text x="170" y="176.5" text-anchor="end">Park 2024</text>
-<line x1="696.3" y1="173.0" x2="704.4" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="704.4" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="696.3" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="176.5" text-anchor="end">0.79</text>
+<line x1="703.4" y1="173.0" x2="710.0" y2="173.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="710.0" cy="173.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="703.4" cy="173.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="176.5" text-anchor="end">0.85</text>
 <text x="170" y="197.5" text-anchor="end">Borel 2024</text>
-<line x1="693.4" y1="194.0" x2="695.6" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="695.6" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="693.4" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="197.5" text-anchor="end">0.76</text>
-<text x="170" y="218.5" text-anchor="end">French 2024</text>
-<line x1="401.0" y1="215.0" x2="687.5" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="687.5" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="401.0" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="218.5" text-anchor="end">0.65</text>
+<line x1="693.3" y1="194.0" x2="697.6" y2="194.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="697.6" cy="194.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="693.3" cy="194.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="197.5" text-anchor="end">0.81</text>
+<text x="170" y="218.5" text-anchor="end">Mountain 2024</text>
+<line x1="614.1" y1="215.0" x2="633.9" y2="215.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="633.9" cy="215.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="614.1" cy="215.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="218.5" text-anchor="end">0.67</text>
 <text x="170" y="239.5" text-anchor="end">Nixon 2024</text>
-<line x1="650.7" y1="236.0" x2="663.9" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="663.9" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="650.7" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="239.5" text-anchor="end">0.73</text>
-<text x="170" y="260.5" text-anchor="end">Mountain 2024</text>
-<line x1="616.8" y1="257.0" x2="642.6" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="642.6" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="616.8" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="260.5" text-anchor="end">0.66</text>
+<line x1="632.8" y1="236.0" x2="642.2" y2="236.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="632.8" cy="236.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="642.2" cy="236.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="239.5" text-anchor="end">0.84</text>
+<text x="170" y="260.5" text-anchor="end">French 2024</text>
+<line x1="400.9" y1="257.0" x2="621.9" y2="257.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="621.9" cy="257.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="400.9" cy="257.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="260.5" text-anchor="end">0.70</text>
 <text x="170" y="281.5" text-anchor="end">Bridge 2024</text>
-<line x1="538.7" y1="278.0" x2="562.3" y2="278.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="562.3" cy="278.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="538.7" cy="278.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="281.5" text-anchor="end">0.75</text>
+<line x1="546.0" y1="278.0" x2="570.5" y2="278.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="570.5" cy="278.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="546.0" cy="278.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="281.5" text-anchor="end">0.82</text>
 <text x="170" y="302.5" text-anchor="end">Line 2024</text>
-<line x1="278.0" y1="299.0" x2="327.3" y2="299.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="327.3" cy="299.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="278.0" cy="299.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="302.5" text-anchor="end">0.64</text>
+<line x1="278.2" y1="299.0" x2="523.7" y2="299.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="523.7" cy="299.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="278.2" cy="299.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="302.5" text-anchor="end">0.77</text>
 <text x="170" y="323.5" text-anchor="end">Coches 2 2025</text>
-<line x1="278.0" y1="320.0" x2="453.3" y2="320.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="278.0" cy="320.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="453.3" cy="320.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="323.5" text-anchor="end">0.67</text>
+<line x1="278.2" y1="320.0" x2="278.2" y2="320.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="278.2" cy="320.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="278.2" cy="320.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="323.5" text-anchor="end">0.99</text>
 <text x="170" y="344.5" text-anchor="end">Franklin 2024</text>
-<line x1="212.4" y1="341.0" x2="243.3" y2="341.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="243.3" cy="341.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="212.4" cy="341.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="344.5" text-anchor="end">0.62</text>
-<text x="170" y="365.5" text-anchor="end">Mean of the 15</text>
-<line x1="589.5" y1="362.0" x2="609.4" y2="362.0" stroke="var(--rule-2)" stroke-width="2" />
-<circle cx="609.4" cy="362.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
-<circle cx="589.5" cy="362.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
-<text class="val" x="854" y="365.5" text-anchor="end">—</text>
-<line class="axis" x1="180.0" y1="370" x2="784.0" y2="370" />
+<line x1="180.0" y1="341.0" x2="220.7" y2="341.0" stroke="var(--rule-2)" stroke-width="2" />
+<circle cx="180.0" cy="341.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
+<circle cx="220.7" cy="341.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
+<text class="val" x="854" y="344.5" text-anchor="end">0.63</text>
+<line class="axis" x1="170.0" y1="349" x2="784.0" y2="349" />
 </svg>
       <ul class="legend">
         <li><span class="swatch" style="background:var(--s1)"></span>the published call: one
-        fixed probability cut-off, 0.85, for every fire</li>
+        fixed probability cut-off, 0.88, for every fire</li>
         <li><span class="swatch" style="background:var(--s2)"></span>the count-tuned call: a
         cut-off set separately for each fire</li>
       </ul>
@@ -542,18 +537,18 @@
       majority of destroyed buildings.</strong> Each bar is one fire's F1 on the destroyed class,
       counting only buildings that both the survey and this project know about; the right-hand
       column is the cut-off the per-fire rule settled on. Averaged over fires, the published call
-      scores <strong>0.783</strong> and the count-tuned call <strong>0.756</strong>, with the
-      count-tuned call ahead on three fires (Canyon, Coches 2 and Eaton). The two fires at the
-      bottom are the ones with almost nothing to find: Franklin, where the survey records
-      <strong>20</strong> destroyed buildings, and Coches 2, where it records <strong>9</strong>
-      and the estimate calls <strong>1</strong>. With denominators that small, a handful of
-      buildings moves F1 a long way.</figcaption>
+      scores <strong>0.788</strong> and the count-tuned call <strong>0.742</strong>, with the
+      count-tuned call ahead on four fires (Eaton, Franklin, Nixon and the TCU Complex). The two
+      fires at the bottom are the ones with almost nothing to find: Franklin, where the survey
+      records <strong>20</strong> destroyed buildings, and Coches 2, where it records
+      <strong>9</strong> and the estimate calls <strong>1</strong>. With denominators that small,
+      a handful of buildings moves F1 a long way.</figcaption>
     </figure>
   </div>
   <div class="wrap">
     <p class="src"><b>Source:</b> destroyed-class F1 per fire, with the realised per-fire
     cut-off, from <code>forward_damage/per_fire.csv</code> on the data share (15 fires,
-    generated 2026-09-12); the summary row from the matching <code>metrics.json</code>.</p>
+    generated 2026-09-15); the summary row from the matching <code>metrics.json</code>.</p>
 
     <div class="note">
       <p><strong>What precision, recall and F1 mean here.</strong> Precision is the share of the
@@ -584,7 +579,7 @@
       inventory but are very rarely destroyed.</p>
       <p><strong>What the cut-off is.</strong> The model gives every building a probability of
       having been destroyed. The published call treats a building as destroyed when that
-      probability exceeds <strong>0.85</strong>, a number fixed in advance and identical for
+      probability exceeds <strong>0.88</strong>, a number fixed in advance and identical for
       every fire. AUC, in the last numeric column, measures how well the probabilities rank
       destroyed buildings above surviving ones whatever cut-off you choose.</p>
     </div>
@@ -633,43 +628,41 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="fire">Eaton 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">64,319</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">9,419</td><td class="num">18,428</td><td class="num">0.8163</td><td class="num">14,955</td><td class="num">0.9486</td><td class="num">0.9048</td><td class="num">0.9262</td><td class="num">0.9276</td><td class="num">0.9255</td><td class="num">0.9782</td><td class="map"><a href="inventory_DINS_2025_EATON.html">map</a></td></tr>
-            <tr><td class="fire">Palisades 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">28,837</td><td class="num">5,522</td><td class="num">6,235</td><td class="num">0.601</td><td class="num">6,845</td><td class="num">12,137</td><td class="num">0.7452</td><td class="num">8,949</td><td class="num">0.9310</td><td class="num">0.9267</td><td class="num">0.9288</td><td class="num">0.9201</td><td class="num">0.9264</td><td class="num">0.9756</td><td class="map"><a href="inventory_DINS_2025_PALISADES.html">map</a></td></tr>
-            <tr><td class="fire">Mountain 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">23,241</td><td class="num">262</td><td class="num">379</td><td class="num">0.661</td><td class="num">243</td><td class="num">1,840</td><td class="num">0.7967</td><td class="num">1,444</td><td class="num">0.8259</td><td class="num">0.8300</td><td class="num">0.8279</td><td class="num">0.7930</td><td class="num">0.8284</td><td class="num">0.9817</td><td class="map"><a href="inventory_DINS_2024_MOUNTAIN.html">map</a></td></tr>
-            <tr><td class="fire">Line 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">11,892</td><td class="num">15</td><td class="num">22</td><td class="num">0.637</td><td class="num">2</td><td class="num">340</td><td class="num">0.4529</td><td class="num">154</td><td class="num">0.2500</td><td class="num">1.0000</td><td class="num">0.4000</td><td class="num">0.3333</td><td class="num">0.2857</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2024_LINE.html">map</a></td></tr>
-            <tr><td class="fire">Coches 2 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">7,463</td><td class="num">1</td><td class="num">4</td><td class="num">0.671</td><td class="num">9</td><td class="num">143</td><td class="num">0.8252</td><td class="num">118</td><td class="num">1.0000</td><td class="num">0.2000</td><td class="num">0.3333</td><td class="num">0.5714</td><td class="num">0.3333</td><td class="num">0.8920</td><td class="map"><a href="inventory_DINS_2025_COCHES.html">map</a></td></tr>
-            <tr><td class="fire">Thompson 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">5,969</td><td class="num">28</td><td class="num">33</td><td class="num">0.708</td><td class="num">26</td><td class="num">185</td><td class="num">0.7676</td><td class="num">141</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.8667</td><td class="num">0.9286</td><td class="num">0.9983</td><td class="map"><a href="inventory_DINS_2024_THOMPSON.html">map</a></td></tr>
-            <tr><td class="fire">Airport 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">5,937</td><td class="num">127</td><td class="num">135</td><td class="num">0.782</td><td class="num">160</td><td class="num">379</td><td class="num">0.4934</td><td class="num">185</td><td class="num">0.8817</td><td class="num">0.9880</td><td class="num">0.9318</td><td class="num">0.9121</td><td class="num">0.9318</td><td class="num">0.9549</td><td class="map"><a href="inventory_DINS_2024_AIRPORT.html">map</a></td></tr>
-            <tr><td class="fire">Bridge 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,567</td><td class="num">78</td><td class="num">85</td><td class="num">0.753</td><td class="num">81</td><td class="num">925</td><td class="num">0.4941</td><td class="num">447</td><td class="num">0.5750</td><td class="num">0.9583</td><td class="num">0.7188</td><td class="num">0.6866</td><td class="num">0.7200</td><td class="num">0.9879</td><td class="map"><a href="inventory_DINS_2024_BRIDGE.html">map</a></td></tr>
-            <tr><td class="fire">Park 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,097</td><td class="num">453</td><td class="num">467</td><td class="num">0.792</td><td class="num">713</td><td class="num">2,102</td><td class="num">0.4757</td><td class="num">992</td><td class="num">0.8540</td><td class="num">0.9782</td><td class="num">0.9119</td><td class="num">0.9012</td><td class="num">0.9170</td><td class="num">0.9878</td><td class="map"><a href="inventory_DINS_2024_PARK.html">map</a></td></tr>
-            <tr><td class="fire">Franklin 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">3,004</td><td class="num">35</td><td class="num">68</td><td class="num">0.620</td><td class="num">20</td><td class="num">738</td><td class="num">0.6626</td><td class="num">462</td><td class="num">0.2308</td><td class="num">0.3750</td><td class="num">0.2857</td><td class="num">0.2439</td><td class="num">0.2609</td><td class="num">0.9111</td><td class="map"><a href="inventory_DINS_2024_FRANKLIN.html">map</a></td></tr>
-            <tr><td class="fire">Canyon 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">2,247</td><td class="num">17</td><td class="num">20</td><td class="num">0.771</td><td class="num">15</td><td class="num">142</td><td class="num">0.6056</td><td class="num">82</td><td class="num">1.0000</td><td class="num">0.9231</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="num">0.9600</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2025_CANYON.html">map</a></td></tr>
-            <tr><td class="fire">Borel 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,132</td><td class="num">206</td><td class="num">226</td><td class="num">0.756</td><td class="num">223</td><td class="num">507</td><td class="num">0.6864</td><td class="num">345</td><td class="num">0.8966</td><td class="num">0.9028</td><td class="num">0.8997</td><td class="num">0.8970</td><td class="num">0.8980</td><td class="num">0.9750</td><td class="map"><a href="inventory_DINS_2024_BOREL.html">map</a></td></tr>
-            <tr><td class="fire">TCU Complex 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,070</td><td class="num">87</td><td class="num">98</td><td class="num">0.750</td><td class="num">95</td><td class="num">278</td><td class="num">0.7158</td><td class="num">198</td><td class="num">0.9677</td><td class="num">0.9231</td><td class="num">0.9449</td><td class="num">0.9474</td><td class="num">0.9375</td><td class="num">0.9951</td><td class="map"><a href="inventory_DINS_2025_TCU.html">map</a></td></tr>
-            <tr><td class="fire">French 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">1,609</td><td class="num">5</td><td class="num">14</td><td class="num">0.655</td><td class="num">11</td><td class="num">234</td><td class="num">0.7436</td><td class="num">174</td><td class="num">0.8000</td><td class="num">1.0000</td><td class="num">0.8889</td><td class="num">0.5000</td><td class="num">0.8889</td><td class="num">0.9941</td><td class="map"><a href="inventory_DINS_2024_FRENCH.html">map</a></td></tr>
-            <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">813</td><td class="num">31</td><td class="num">35</td><td class="num">0.728</td><td class="num">40</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9231</td><td class="num">0.8000</td><td class="num">0.8571</td><td class="num">0.8387</td><td class="num">0.8571</td><td class="num">0.9827</td><td class="map"><a href="inventory_DINS_2024_NIXON.html">map</a></td></tr>
-            <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">9,568</td><td class="num">738</td><td class="num">799</td><td class="num">0.756</td><td class="num">1,144</td><td class="num">2,488</td><td class="num">0.6610</td><td class="num">1,637</td><td class="num">0.9820</td><td class="num">0.7466</td><td class="num">0.8484</td><td class="num">0.8825</td><td class="num">—</td><td class="num">0.9847</td><td class="map"><a href="inventory_NM_2024_SOUTH_FORK.html">map</a></td></tr>
-            <tr><td class="fire">Marshall CO 2021 · county</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">873</td><td class="num">1,455</td><td class="num">0.776</td><td class="num">1,101</td><td class="num">1,473</td><td class="num">0.7100</td><td class="num">1,023</td><td class="num">0.9805</td><td class="num">0.9607</td><td class="num">0.9705</td><td class="num">0.9725</td><td class="num">—</td><td class="num">0.9800</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
-            <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">1,181</td><td class="num">1,468</td><td class="num">0.776</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9520</td><td class="num">2,741</td><td class="num">0.9069</td><td class="num">0.9486</td><td class="num">0.9273</td><td class="num">0.9109</td><td class="num">—</td><td class="num">0.9840</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+            <tr><td class="fire">Eaton 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">64,319</td><td class="num">7,603</td><td class="num">8,334</td><td class="num">0.708</td><td class="num">9,419</td><td class="num">18,428</td><td class="num">0.8163</td><td class="num">14,955</td><td class="num">0.9461</td><td class="num">0.9002</td><td class="num">0.9226</td><td class="num">0.9239</td><td class="num">0.9219</td><td class="num">0.9766</td><td class="map"><a href="inventory_DINS_2025_EATON.html">map</a></td></tr>
+            <tr><td class="fire">Palisades 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">28,837</td><td class="num">5,535</td><td class="num">6,442</td><td class="num">0.605</td><td class="num">6,845</td><td class="num">12,137</td><td class="num">0.7452</td><td class="num">8,949</td><td class="num">0.9263</td><td class="num">0.9255</td><td class="num">0.9259</td><td class="num">0.9127</td><td class="num">0.9236</td><td class="num">0.9747</td><td class="map"><a href="inventory_DINS_2025_PALISADES.html">map</a></td></tr>
+            <tr><td class="fire">Mountain 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">23,241</td><td class="num">257</td><td class="num">391</td><td class="num">0.670</td><td class="num">243</td><td class="num">1,840</td><td class="num">0.7967</td><td class="num">1,444</td><td class="num">0.8333</td><td class="num">0.8000</td><td class="num">0.8163</td><td class="num">0.7895</td><td class="num">0.8170</td><td class="num">0.9800</td><td class="map"><a href="inventory_DINS_2024_MOUNTAIN.html">map</a></td></tr>
+            <tr><td class="fire">Line 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">11,892</td><td class="num">10</td><td class="num">20</td><td class="num">0.772</td><td class="num">2</td><td class="num">340</td><td class="num">0.4529</td><td class="num">154</td><td class="num">0.5000</td><td class="num">1.0000</td><td class="num">0.6667</td><td class="num">0.3333</td><td class="num">0.5000</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2024_LINE.html">map</a></td></tr>
+            <tr><td class="fire">Coches 2 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">7,463</td><td class="num">1</td><td class="num">1</td><td class="num">0.994</td><td class="num">9</td><td class="num">143</td><td class="num">0.8252</td><td class="num">118</td><td class="num">1.0000</td><td class="num">0.2000</td><td class="num">0.3333</td><td class="num">0.3333</td><td class="num">0.3333</td><td class="num">0.9363</td><td class="map"><a href="inventory_DINS_2025_COCHES.html">map</a></td></tr>
+            <tr><td class="fire">Thompson 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">5,969</td><td class="num">26</td><td class="num">31</td><td class="num">0.785</td><td class="num">26</td><td class="num">185</td><td class="num">0.7676</td><td class="num">141</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.9286</td><td class="num">0.8966</td><td class="num">0.9286</td><td class="num">0.9978</td><td class="map"><a href="inventory_DINS_2024_THOMPSON.html">map</a></td></tr>
+            <tr><td class="fire">Airport 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">5,937</td><td class="num">126</td><td class="num">134</td><td class="num">0.804</td><td class="num">160</td><td class="num">379</td><td class="num">0.4934</td><td class="num">185</td><td class="num">0.8710</td><td class="num">0.9759</td><td class="num">0.9205</td><td class="num">0.9061</td><td class="num">0.9205</td><td class="num">0.9569</td><td class="map"><a href="inventory_DINS_2024_AIRPORT.html">map</a></td></tr>
+            <tr><td class="fire">Bridge 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,567</td><td class="num">74</td><td class="num">81</td><td class="num">0.815</td><td class="num">81</td><td class="num">925</td><td class="num">0.4941</td><td class="num">447</td><td class="num">0.5897</td><td class="num">0.9583</td><td class="num">0.7302</td><td class="num">0.6970</td><td class="num">0.7397</td><td class="num">0.9884</td><td class="map"><a href="inventory_DINS_2024_BRIDGE.html">map</a></td></tr>
+            <tr><td class="fire">Park 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">4,097</td><td class="num">450</td><td class="num">462</td><td class="num">0.852</td><td class="num">713</td><td class="num">2,102</td><td class="num">0.4757</td><td class="num">992</td><td class="num">0.8677</td><td class="num">0.9782</td><td class="num">0.9197</td><td class="num">0.9106</td><td class="num">0.9210</td><td class="num">0.9882</td><td class="map"><a href="inventory_DINS_2024_PARK.html">map</a></td></tr>
+            <tr><td class="fire">Franklin 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">3,004</td><td class="num">32</td><td class="num">77</td><td class="num">0.628</td><td class="num">20</td><td class="num">738</td><td class="num">0.6626</td><td class="num">464</td><td class="num">0.1818</td><td class="num">0.2222</td><td class="num">0.2000</td><td class="num">0.2553</td><td class="num">0.1818</td><td class="num">0.9138</td><td class="map"><a href="inventory_DINS_2024_FRANKLIN.html">map</a></td></tr>
+            <tr><td class="fire">Canyon 2025</td><td><span class="src-tag prod">never trained on</span></td><td class="num">2,247</td><td class="num">18</td><td class="num">20</td><td class="num">0.864</td><td class="num">15</td><td class="num">142</td><td class="num">0.6056</td><td class="num">82</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="map"><a href="inventory_DINS_2025_CANYON.html">map</a></td></tr>
+            <tr><td class="fire">Borel 2024</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,132</td><td class="num">206</td><td class="num">223</td><td class="num">0.812</td><td class="num">223</td><td class="num">507</td><td class="num">0.6864</td><td class="num">345</td><td class="num">0.9028</td><td class="num">0.9028</td><td class="num">0.9028</td><td class="num">0.8970</td><td class="num">0.9010</td><td class="num">0.9750</td><td class="map"><a href="inventory_DINS_2024_BOREL.html">map</a></td></tr>
+            <tr><td class="fire">TCU Complex 2025</td><td><span class="src-tag lofo">held out</span></td><td class="num">2,070</td><td class="num">92</td><td class="num">108</td><td class="num">0.794</td><td class="num">95</td><td class="num">278</td><td class="num">0.7158</td><td class="num">198</td><td class="num">0.9385</td><td class="num">0.9385</td><td class="num">0.9385</td><td class="num">0.9420</td><td class="num">0.9313</td><td class="num">0.9972</td><td class="map"><a href="inventory_DINS_2025_TCU.html">map</a></td></tr>
+            <tr><td class="fire">French 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">1,609</td><td class="num">6</td><td class="num">13</td><td class="num">0.699</td><td class="num">11</td><td class="num">234</td><td class="num">0.7436</td><td class="num">174</td><td class="num">0.6667</td><td class="num">1.0000</td><td class="num">0.8000</td><td class="num">0.5000</td><td class="num">0.8000</td><td class="num">0.9941</td><td class="map"><a href="inventory_DINS_2024_FRENCH.html">map</a></td></tr>
+            <tr><td class="fire">Nixon 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">813</td><td class="num">30</td><td class="num">33</td><td class="num">0.837</td><td class="num">40</td><td class="num">119</td><td class="num">0.6134</td><td class="num">69</td><td class="num">0.9167</td><td class="num">0.7333</td><td class="num">0.8148</td><td class="num">0.8276</td><td class="num">0.8148</td><td class="num">0.9753</td><td class="map"><a href="inventory_DINS_2024_NIXON.html">map</a></td></tr>
+            <tr><td class="fire">South Fork NM 2024</td><td><span class="src-tag prod">never trained on</span></td><td class="num">9,568</td><td class="num">732</td><td class="num">785</td><td class="num">0.827</td><td class="num">1,144</td><td class="num">2,488</td><td class="num">0.7106</td><td class="num">1,637</td><td class="num">0.9821</td><td class="num">0.7385</td><td class="num">0.8431</td><td class="num">0.8740</td><td class="num">—</td><td class="num">0.9855</td><td class="map"><a href="inventory_NM_2024_SOUTH_FORK.html">map</a></td></tr>
+            <tr><td class="fire">Marshall CO 2021 · county</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">1,363</td><td class="num">1,706</td><td class="num">0.786</td><td class="num">1,101</td><td class="num">1,473</td><td class="num">0.7400</td><td class="num">1,023</td><td class="num">0.9825</td><td class="num">0.9428</td><td class="num">0.9622</td><td class="num">0.9719</td><td class="num">—</td><td class="num">0.9781</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
+            <tr><td class="fire">Marshall CO 2021 · FEMA MAC</td><td><span class="src-tag lofo">held out</span></td><td class="num">14,774</td><td class="num">1,363</td><td class="num">1,706</td><td class="num">0.786</td><td class="num">1,157</td><td class="num">2,941</td><td class="num">0.9626</td><td class="num">2,741</td><td class="num">0.9274</td><td class="num">0.9283</td><td class="num">0.9278</td><td class="num">0.9196</td><td class="num">—</td><td class="num">0.9831</td><td class="map"><a href="inventory_CO_2021_MARSHALL.html">map</a></td></tr>
           </tbody>
           <tfoot>
-            <tr class="total"><td class="fire">Fifteen California fires together</td><td>—</td><td class="num">168,197</td><td class="num">14,504</td><td class="num">15,951</td><td class="num">0.601–0.792</td><td class="num">17,902</td><td class="num">38,497</td><td class="num">0.7528</td><td class="num">28,716</td><td class="num">—</td><td class="num">—</td><td class="num">0.7829</td><td class="num">0.7559</td><td class="num">0.7733</td><td class="num">—</td><td class="map">—</td></tr>
+            <tr class="total"><td class="fire">Fifteen California fires together</td><td>—</td><td class="num">168,197</td><td class="num">14,466</td><td class="num">16,370</td><td class="num">0.605–0.994</td><td class="num">17,902</td><td class="num">38,497</td><td class="num">0.7532</td><td class="num">28,717</td><td class="num">—</td><td class="num">—</td><td class="num">0.7880</td><td class="num">0.7417</td><td class="num">0.7756</td><td class="num">—</td><td class="map">—</td></tr>
           </tfoot>
         </table>
       </div>
     </details>
     <p class="src"><b>Source:</b> per-fire metrics from <code>forward_damage/per_fire.csv</code>
-    and the summary row from the matching <code>metrics.json</code>; the two destroyed-count
-    columns from <code>combined_series/per_fire_summary.csv</code>, which is the published
-    per-building product. The two fires outside California come from their own scoring reports
-    under <code>outside_ca/</code>, with their count-tuned F1 from
-    <code>operating_product/per_fire.csv</code>. All dated 2026-09-12. In the summary row the F1
+    and the summary row from the matching <code>metrics.json</code>. The two fires outside
+    California come from their own scoring reports under <code>outside_ca/</code>. All dated
+    2026-09-15. In the summary row the F1
     cells are means over fires rather than a pooled recomputation, and the two fires outside
     California are in no summary figure. Precision, recall and F1 are read from the product's
     published call rather than re-derived, because the count-tuned cut-off differs by fire.</p>
     <p class="hint"><strong>Reading it:</strong> on the large, well-inspected fires the two
     destroyed counts land within a few per cent of one another and the destroyed-class F1 runs
-    around 0.9262 on Eaton and 0.9288 on Palisades, while the small fires lower down the table
+    around 0.9226 on Eaton and 0.9259 on Palisades, while the small fires lower down the table
     swing widely because only a handful of buildings burned in them at all.</p>
   </div>
 </section>
@@ -679,7 +672,7 @@
     <p class="eyebrow">a second column</p>
     <h2>One call for classifying buildings, one for counting them</h2>
     <p>The published per-building file carries two destroyed calls, and the table above shows
-    both. The <strong>primary</strong> one applies the same fixed cut-off of 0.85 to every fire.
+    both. The <strong>primary</strong> one applies the same fixed cut-off of 0.88 to every fire.
     The <strong>count-tuned</strong> one sets its cut-off separately for each fire, reading only
     the spread of that fire's own model scores and nothing about the fire itself. The two are
     built for different questions: the fixed cut-off is the better per-building classifier, and
@@ -687,33 +680,33 @@
     <div class="tablewrap">
       <table>
         <caption>What the count-tuned call gains and loses against the published call, measured
-        on exactly the same buildings</caption>
-        <thead><tr><th>Scope &middot; measure</th><th class="num">Difference</th><th class="num">95&nbsp;% interval</th><th>Clear of zero?</th></tr></thead>
+        on exactly the same buildings, over the fifteen inspected fires</caption>
+        <thead><tr><th>Measure</th><th class="num">Published call, fixed 0.88</th><th class="num">Count-tuned call</th></tr></thead>
         <tbody>
-          <tr><td>mean-fire F1</td><td class="num"><strong>−0.0186</strong></td><td class="num">[−0.0336, −0.0070]</td><td class="fail">yes — worse</td></tr>
-          <tr><td>mean-fire precision</td><td class="num">−0.0552</td><td class="num">[−0.0820, −0.0333]</td><td class="fail">yes — worse</td></tr>
-          <tr><td>mean-fire recall</td><td class="num"><strong>+0.0265</strong></td><td class="num">[+0.0103, +0.0458]</td><td class="pass">yes — better</td></tr>
-          <tr><td>pooled F1</td><td class="num">−0.0046</td><td class="num">[−0.0370, +0.0003]</td><td class="no">no</td></tr>
-          <tr><td>pooled precision</td><td class="num">−0.0396</td><td class="num">[−0.0987, −0.0251]</td><td class="fail">yes — worse</td></tr>
-          <tr><td>pooled recall</td><td class="num">+0.0316</td><td class="num">[+0.0233, +0.0485]</td><td class="pass">yes — better</td></tr>
+          <tr><td>mean-fire F1, matched at 10 m</td><td class="num"><strong>0.7880</strong></td><td class="num">0.7417</td></tr>
+          <tr><td>mean-fire F1, matched at 20 m</td><td class="num"><strong>0.7756</strong></td><td class="num">0.7330</td></tr>
+          <tr><td>buildings called destroyed, whole study areas</td><td class="num">14,466</td><td class="num"><strong>16,370</strong></td></tr>
+          <tr><td>… as a share of the 17,902 the inspectors recorded</td><td class="num">0.808</td><td class="num"><strong>0.914</strong></td></tr>
+          <tr><td>realised cut-off</td><td class="num">0.88 everywhere</td><td class="num">0.605–0.994</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src"><b>Source:</b> <code>operating_product/paired_delta_ci.csv</code> on the data
-    share, over the fifteen inspected fires with the fire as the unit of resampling. The
-    intervals come from resampling whole fires 2000 times, which says how much each number
-    would move if the project happened to cover a different set of fires. AUC does not appear
+    <p class="src"><b>Source:</b> <code>forward_damage/metrics.json</code> and
+    <code>per_fire.csv</code> on the data share, data date 2026-09-15. AUC does not appear
     because it is computed on the probability itself and does not depend on a cut-off: the
-    ranking is identical under either call.</p>
-    <p class="hint"><strong>Reading it:</strong> the count-tuned call reliably finds more of the
-    destroyed buildings (recall up) and is reliably wrong more often when it does (precision
-    down), which nets out slightly against it on F1.</p>
+    ranking is identical under either call. &#9888;&#65039; The paired 95&nbsp;% intervals this
+    table used to carry were measured against the previous version of the damage model and have
+    not been repeated since it changed, so they are not quoted; both columns above are the
+    current model's, on the same buildings on the same day.</p>
+    <p class="hint"><strong>Reading it:</strong> the count-tuned call finds more of the destroyed
+    buildings and is wrong more often when it does, which nets out against it on F1 while
+    bringing the fire total much closer.</p>
     <div class="note warn">
       <p><strong>⚠️ What the count-tuned call buys is the total.</strong> Across the
-      fifteen fires' whole building inventories it calls <strong>15,951</strong> buildings
-      destroyed, against the fixed cut-off's <strong>14,504</strong> and the inspectors'
+      fifteen fires' whole building inventories it calls <strong>16,370</strong> buildings
+      destroyed, against the fixed cut-off's <strong>14,466</strong> and the inspectors'
       <strong>17,902</strong> &mdash; so the share of the inspected loss that the published count
-      reproduces rises from <strong>0.810</strong> to <strong>0.891</strong>. The two columns
+      reproduces rises from <strong>0.808</strong> to <strong>0.914</strong>. The two columns
       therefore disagree in a legible way: the fixed cut-off is the better classifier of an
       individual building, and the count-tuned one gets the fire total much closer. Which one a
       reader wants depends on whether the question is about a building or about a fire, which is
@@ -734,15 +727,15 @@
     burned. It is scored on the area the assessment actually covered (39.691&nbsp;km&sup2;)
     rather than the whole 17,569-acre fire, because an assessment is not a census and scoring
     beyond its edge would turn every uninspected building into a false alarm by construction. At
-    the fixed cut-off it scores precision 0.982, recall 0.747 and <strong>F1 0.848</strong> on
-    1,637 matched pairs, with an AUC of 0.985; the count-tuned call reaches
-    <strong>F1 0.883</strong>, and the best cut-off this fire could possibly have been given
-    would reach 0.945 &mdash; a gap of <strong>+0.097</strong> between the fixed cut-off and a
+    the fixed cut-off it scores precision 0.982, recall 0.739 and <strong>F1 0.843</strong> on
+    1,637 matched pairs, with an AUC of 0.986; the count-tuned call reaches
+    <strong>F1 0.874</strong>, and the best cut-off this fire could possibly have been given
+    would reach 0.946 &mdash; a gap of <strong>+0.103</strong> between the fixed cut-off and a
     perfectly chosen one. The fire's study area holds 9,568 buildings, 2,357 of them directly
-    exposed (inside the perimeter or just outside it) and 7,211 further out; 738 are called
-    destroyed at the fixed cut-off and 799 under the count-tuned one, all of them among the
+    exposed (inside the perimeter or just outside it) and 7,211 further out; 732 are called
+    destroyed at the fixed cut-off and 785 under the count-tuned one, all of them among the
     directly exposed.</p>
-    <p>Its detection recall (0.661) is lower than the California fires for a reason a user should
+    <p>Its detection recall (0.711) is lower than most of the California fires for a reason a user should
     know: Microsoft's building-footprint layer is not available for New Mexico here, so the
     starting list of buildings is the FEMA / Oak Ridge USA Structures layer alone, and the
     Lincoln County extract of that layer carries a single image date of 2017-05-26 &mdash; seven
@@ -757,16 +750,17 @@
     <div class="tablewrap">
       <table>
         <caption>One fire, one inventory, two independent damage assessments</caption>
-        <thead><tr><th>Assessment</th><th class="num">Records</th><th class="num">Destroyed</th><th class="num">Matched pairs @10 m</th><th class="num">Detection recall</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1 (fixed 0.85)</th><th class="num">F1 (count-tuned)</th><th class="num">AUC</th><th class="num">Best possible cut-off &rarr; F1</th><th class="num">Called / assessed</th></tr></thead>
+        <thead><tr><th>Assessment</th><th class="num">Records</th><th class="num">Destroyed</th><th class="num">Matched pairs @10 m</th><th class="num">Detection recall</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1 (fixed 0.88)</th><th class="num">F1 (count-tuned)</th><th class="num">AUC</th><th class="num">Best possible cut-off &rarr; F1</th><th class="num">Called / assessed</th></tr></thead>
         <tbody>
-          <tr><td>Boulder County — field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">1,023</td><td class="num">0.710</td><td class="num">0.981</td><td class="num">0.961</td><td class="num">0.971</td><td class="num">0.9725</td><td class="num">0.980</td><td class="num">0.62 → 0.973</td><td class="num">873 / 891 = 0.980</td></tr>
-          <tr><td>FEMA MAC — remote sensing</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">2,741</td><td class="num">0.952 ⚠️</td><td class="num">0.907</td><td class="num">0.949</td><td class="num">0.927</td><td class="num">0.9109</td><td class="num">0.984</td><td class="num">0.88 → 0.929</td><td class="num">1,181 / 1,129 = 1.046</td></tr>
+          <tr><td>Boulder County — field assessment</td><td class="num">1,473</td><td class="num">1,101</td><td class="num">1,023</td><td class="num">0.740</td><td class="num">0.983</td><td class="num">0.943</td><td class="num">0.962</td><td class="num">0.9719</td><td class="num">0.978</td><td class="num">0.61 → 0.974</td><td class="num">855 / 891 = 0.960</td></tr>
+          <tr><td>FEMA MAC — remote sensing</td><td class="num">2,941</td><td class="num">1,157</td><td class="num">2,741</td><td class="num">0.963 ⚠️</td><td class="num">0.927</td><td class="num">0.928</td><td class="num">0.928</td><td class="num">0.9196</td><td class="num">0.983</td><td class="num">0.84 → 0.929</td><td class="num">1,130 / 1,129 = 1.001</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> the Marshall scoring reports under <code>outside_ca/</code> on
-    the data share, regenerated 2026-09-12 at a cut-off of 0.85 over 14,774 scored points;
-    count-tuned F1 from <code>operating_product/report.md</code>.
+    the data share, regenerated 2026-09-15 at a cut-off of 0.88 over 14,774 scored points; the
+    called / assessed column is the destroyed calls and the assessed destroyed buildings on the
+    matched pairs only.
     ⚠️ The FEMA assessment's detection recall is <strong>not comparable</strong>
     with the other figures on this page: its geometry <em>is</em> the USA Structures footprint
     layer, which is also a main source of our building list, so the two agree by construction.
@@ -774,19 +768,20 @@
     fire. The two assessments cover the same buildings and disagree with each other, which is why
     the count-tuned column helps against one and hurts against the other.</p>
     <p class="hint"><strong>Reading it:</strong> against two surveys drawn independently of this
-    project, the estimate scores a destroyed-class F1 of 0.971 against the county's field
-    assessment and 0.927 against the FEMA one, and the number of buildings it calls destroyed
+    project, the estimate scores a destroyed-class F1 of 0.962 against the county's field
+    assessment and 0.928 against the FEMA one, and the number of buildings it calls destroyed
     lands within a few per cent of the assessed total either way.</p>
     <div class="note ok">
-      <p><strong>Outside California the count-tuned call is the stronger of the two.</strong>
-      Averaged over the three assessments outside California, F1 per fire is
-      <strong>0.9121</strong> for the count-tuned call against 0.8986 for the fixed one. The
-      split is visible on Marshall &mdash; Boulder County 0.9705 &rarr; <strong>0.9725</strong>,
-      FEMA 0.9273 &rarr; <strong>0.9109</strong> &mdash; and clearest on South Fork, where F1
-      goes <strong>0.8484 &rarr; 0.8825</strong> at a per-fire cut-off of 0.756 against a
-      best-possible ceiling of 0.945 and an AUC of 0.985. Three assessments over two fires is not
-      a distribution, and readers outside California should treat both numbers as indicative
-      rather than settled.</p>
+      <p><strong>On these three assessments the count-tuned call is the stronger of the
+      two.</strong> It is ahead on two of the three &mdash; Boulder County 0.9622 &rarr;
+      <strong>0.9719</strong> and South Fork <strong>0.8431 &rarr; 0.8740</strong> at a per-fire
+      cut-off of 0.827 &mdash; and behind on the third, FEMA 0.9278 &rarr; 0.9196. South Fork is
+      the clearest case: the best cut-off that fire could have been given would reach 0.946, on an
+      AUC of 0.986, so most of what the fixed cut-off costs there is recoverable in principle.
+      Three assessments over two fires is not a distribution, and readers outside California
+      should treat both numbers as indicative rather than settled. The wider evidence — nine
+      independent assessments in six states — is on
+      <a href="outside-california.html">beyond California</a>.</p>
     </div>
     <p><strong>A winter fire gives a thinner stack of images, and the estimate still holds
     up.</strong> Sentinel-2, the pair of free European Space Agency satellites this project reads,
@@ -848,8 +843,10 @@
       <a href="combined-series.html">the dataset</a> &middot;
       <a href="uncertainty.html">how certain</a> &middot;
       <a href="outside-california.html">beyond California</a>.</p>
-    <p class="mono">Provenance: data release v0.9.0, data date 2026-09-12. Primary estimate at a
-    fixed cut-off of 0.85; the count-tuned call sets its cut-off per fire.</p>
+    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>. The figures on
+    this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on 199 fires
+    and 818,838 buildings, data date 2026-09-15. Primary estimate at a fixed cut-off of 0.88; the
+    count-tuned call sets its cut-off per fire.</p>
   </div>
 </footer>
 

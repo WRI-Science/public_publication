@@ -371,8 +371,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>The dataset</span><span class="of">page 5 of 10</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html" aria-current="page">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>The dataset</span><span class="of">page 6 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html" aria-current="page">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -403,6 +403,17 @@
     <p>The full internal build is 2,102,662 rows. 32,910 of them (1.57 %) are left out of the
     released package for the licence reason set out at the bottom of this page.</p>
     <div class="note warn">
+      <p style="margin-bottom:0"><strong>&#9888;&#65039; Read this before comparing a count here
+      with an accuracy figure elsewhere on the site.</strong> Every count on this page is a
+      property of the <em>published file</em>, and the published file's destroyed calls were made
+      by the damage model as it stood on 13 September 2026, at a fixed threshold of 0.85. On 15
+      September the model was refitted on 199 fires instead of 74 and its threshold moved to 0.88,
+      and every accuracy figure on the rest of this site is that newer model's. <strong>No release
+      carrying the newer model has been cut yet</strong>, so the counts below will not reproduce
+      from the newer model, and the two must not be mixed in one sentence. The release the counts
+      belong to is named in the provenance line at the foot of this page.</p>
+    </div>
+    <div class="note warn">
       <p><strong>⚠️ Never add up rows across sources for the same fire.</strong> Every row
       carries a column called <code>series_source</code>, whose value is either
       <code>carlson</code> (the published historical record) or <code>slp</code> (this project's
@@ -429,6 +440,43 @@
 </div>
 
 <main id="main">
+
+<section class="part">
+  <div class="wide">
+    <p class="eyebrow">00 &middot; what the record covers</p>
+    <h2>One continuous record, 2002 to present</h2>
+  </div>
+  <div class="wrap">
+    <p>The file is one series covering every year from 2002 onward, but it is not one method. Its
+    first two decades are a hand-assembled census somebody else built, which stops in 2022; its
+    recent years are produced automatically by this project. The middle stretch is described
+    <em>both</em> ways. Three eras, one schema, and a column on every row saying which era and
+    which source it came from.</p>
+    <div class="tablewrap">
+      <table>
+        <caption>The three eras of the published series, and who describes each one</caption>
+        <thead><tr><th>Era</th><th>Fire years</th><th>Who describes it</th><th class="num">Fires</th><th class="num">Rows</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Before 2016</strong></td><td>2002–2015</td><td>the hand-assembled historical census only — Sentinel-2 is not in orbit, so no before-and-after satellite pair exists and this method could not produce these years even in principle</td><td class="num">160</td><td class="num">973,491</td></tr>
+          <tr><td rowspan="2"><strong>2016–2022</strong></td><td rowspan="2">2016–2022</td><td>the historical census</td><td class="num">201</td><td class="num">797,448</td></tr>
+          <tr><td>this pipeline, run backwards over fires the census also holds — the only ground on which the two methods can be compared at all</td><td class="num">17</td><td class="num">153,958</td></tr>
+          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline only — the census ends in 2022, so there is nothing to compare against</td><td class="num">16</td><td class="num">177,765</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn">
+      <p style="margin-bottom:0"><strong>&#9888;&#65039; The two halves of the middle era describe
+      the same fires and must never be summed.</strong> Seventeen fires appear twice — once as the
+      census enumerated their buildings, once as this pipeline did. Neither description is a
+      subset of the other and neither is wrong; they are two surveys of one fire. Adding them
+      double-counts those seventeen. Group by fire <em>and</em> source, and when you want one
+      number for an era, pick one source. The rest of this page says how.</p>
+    </div>
+    <p class="src"><b>Source:</b> the release directory's <code>manifest.json</code> on the data
+    share, its rows-by-era-and-source breakdown and its dual-source rule; the era boundaries are
+    defined in the crosswalk document shipped inside every release.</p>
+  </div>
+</section>
 
 <section class="part">
   <div class="wide">
@@ -463,8 +511,8 @@
     <p>Two other terms in that table. The <strong>primary call</strong> is this project's
     estimate made about two and a half months after a fire starts, from before-and-after satellite
     images: the model gives each building a probability of having been destroyed, and we call it
-    destroyed when that probability is above a fixed threshold of 0.85, chosen in advance and
-    never tuned fire by fire. The <strong>advisory call</strong> is an alternative offered in the
+    destroyed when that probability is above a fixed threshold — <strong>0.85 in this release</strong>,
+    chosen in advance and never tuned fire by fire. The <strong>advisory call</strong> is an alternative offered in the
     same file for users who want it, made at a threshold chosen separately for each fire rather
     than fixed; it is never mixed into a headline number. The rows with <strong>no call</strong>
     have neither, with a stated reason.</p>
@@ -513,44 +561,22 @@
 <text class="tick" x="118" y="127">Carlson; our method could run retrospectively</text>
 <text x="106" y="163" text-anchor="end" style="font-weight:600">2023 onward</text>
 <rect x="118" y="150" width="88.8" height="22" rx="3" fill="var(--s2)" />
-<text class="val" x="658" y="165">15 fires · 168,197 points</text>
+<text class="val" x="658" y="165">16 fires · 177,765 points</text>
 <text class="tick" x="118" y="189">this pipeline; Carlson stops at 2022</text>
 <line class="axis" x1="118" y1="20" x2="118" y2="198" />
 </svg>
       <figcaption>The two sources do not overlap in time, so the middle period is the only ground
       on which they can be compared at all. All three periods sit in one layer: the two historical
       ones carry 1,770,939 hand-digitised rows and the modern one carries this project's
-      168,197.</figcaption>
+      177,765.</figcaption>
     </figure>
   </div>
   <div class="wrap">
-    <div class="tablewrap">
-      <table>
-        <caption>Which source covers which years, and why</caption>
-        <thead><tr><th>Era</th><th>Years</th><th>Who holds it</th><th>Could this project's method produce it?</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Pre-2016</strong></td><td>2002–2015</td><td>the historical record</td>
-            <td><strong>No, not even in principle.</strong> The method needs before-and-after
-            images from Sentinel-2, a pair of free European Space Agency satellites that
-            photograph every point on Earth about every five days at 10 m per pixel; before 2016
-            they are not in orbit, so there is no matched pair to compare. 160 fires, 973,491
-            points, all of them in the layer.</td></tr>
-          <tr><td><strong>2016–2022</strong></td><td>2016–2022</td><td>the historical record</td>
-            <td><strong>Yes, and seventeen of them are.</strong> 201 fires and 797,448 points as
-            the record published them, plus this project's own inventory of seventeen of those
-            fires — 153,958 rows — so each of those seventeen is described twice. This is the only
-            ground on which the two can be compared directly.</td></tr>
-          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this project</td>
-            <td>The historical record stops at 2022. 16 fires, 177,765 points. 2023 itself is
-            empty: no fire that year had an official damage inspection clearing 100
-            inspections.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="src"><b>Source:</b> the crosswalk document <code>docs/combined-series-spec.md</code>
-    shipped inside every release.</p>
     <p><strong>Reading it:</strong> the split between sources is set by what data existed at the
-    time, not by a judgement about which source is better.</p>
+    time, not by a judgement about which source is better. The era table at the top of this page
+    gives the three periods and their counts; the bar above is the same three periods drawn to
+    scale. 2023 itself is empty — no fire that year had an official damage inspection clearing the
+    hundred-inspection floor this project requires.</p>
   </div>
 </section>
 
@@ -588,9 +614,9 @@
       <summary>Every one of the sixteen modern fires, with both destroyed counts</summary>
       <div class="tablewrap">
         <table>
-          <caption>This project's sixteen modern fires, fire by fire: primary call at the fixed
-          threshold 0.85, advisory call at each fire's own threshold, inventory taken on each
-          fire's own published perimeter</caption>
+          <caption>This project's sixteen modern fires, fire by fire, as the release packages
+          them: primary call at the release's fixed threshold 0.85, advisory call at each fire's
+          own threshold, inventory taken on each fire's own published perimeter</caption>
           <thead><tr><th>Fire</th><th class="num">Ignition</th><th class="num">Structures</th><th class="num">Major</th><th class="num">Minor</th><th class="num">Destroyed, primary</th><th class="num">Destroyed, advisory</th><th class="num">Advisory threshold</th><th class="num">Licence-excluded</th><th class="num">Released</th><th>Scored by</th></tr></thead>
           <tbody>
             <tr><td>Eaton 2025</td><td class="num">2025-01-07</td><td class="num">64,319</td><td class="num">56,992</td><td class="num">7,327</td><td class="num">7,637</td><td class="num">8,130</td><td class="num">0.726</td><td class="num">6,336</td><td class="num">57,983</td><td>model refitted with this fire held out</td></tr>
@@ -747,7 +773,8 @@
       <figcaption>The model finds about four in five of the buildings inspectors recorded as
       destroyed, and it is furthest out on the smallest fires. Per fire, on a log scale because
       the fires span one destroyed structure to nine thousand. Pooled, the fixed threshold calls
-      <strong>14,504</strong> destroyed against inspectors' <strong>17,902</strong> — a ratio of
+      <strong>14,504</strong> destroyed, as the release packages them, against inspectors'
+      <strong>17,902</strong> — a ratio of
       <strong>0.810</strong> — and the advisory call gives <strong>15,951</strong>, a ratio of
       <strong>0.891</strong>. The worst ratios are on small fires where a handful of structures is
       the whole score: on Coches 2 the model calls one where nine burned.</figcaption>
@@ -1112,7 +1139,10 @@
       <a href="uncertainty.html">how certain</a> ·
       <a href="augmented-carlson.html">historical companion</a> ·
       <a href="changelog.html">release history</a>.</p>
-    <p class="mono">Provenance: release <code>v0.9.0</code>, data date 2026-09-13. The full
+    <p class="mono">Provenance: every count on this page is release <code>v0.9.0</code>, data
+    date 2026-09-13, which is the newest published release — no newer one has been cut. Its
+    destroyed calls were made by <code>damage_sentinel2_v5</code> at a fixed threshold of 0.85;
+    the model the rest of this site reports is <code>damage_sentinel2_v6</code> at 0.88. The full
     column-by-column crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing
     description of the file is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

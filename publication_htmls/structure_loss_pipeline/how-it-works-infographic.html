@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The process, in pictures · Structure Loss Pipeline</title>
+<meta name="description" content="Five diagrams: where the data comes from, what the two models do, when each answer arrives, how the accuracy numbers are produced, and what a user receives." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  /* ============================================================
+     Structure Loss Pipeline — one design system, dark by default.
+     Tokens are declared in full on bare :root (the DARK palette,
+     which is this site's primary theme). Light is redefined in two
+     places so it wins whether the viewer chose it or their OS did.
+     Series colours validated with the dataviz palette checker on
+     each mode's own chart surface: all six checks pass in both.
+     ============================================================ */
+  :root {
+    /* ground and ink — near-black with a faint warm bias: ash, not slate */
+    --paper:   #0B0C0E;
+    --paper-2: #14161A;
+    --paper-3: #1E2127;
+    --ink:     #EFEBE3;
+    --ink-2:   #B6B0A6;
+    --ink-3:   #85837E;
+    --rule:    #262A2F;
+    --rule-2:  #3A4047;
+    /* four series, one job each — validated on surface #14161A */
+    --s1: #5B8AD2;   /* the footprint baseline */
+    --s2: #DB6026;   /* destroyed · this pipeline */
+    --s3: #17A188;   /* surviving · the hand survey */
+    --s4: #B38A20;   /* the detector */
+    --s1-soft: #182334;
+    --s2-soft: #32190F;
+    --s3-soft: #0C2A25;
+    --s4-soft: #2C2410;
+    /* status — reserved, never reused as a fifth series */
+    --good: #35B15E;
+    --warn: #D6A02A;
+    --crit: #E0705E;
+    /* type scale */
+    --t-xs: 0.72rem;
+    --t-sm: 0.82rem;
+    --t-ui: 0.9rem;
+    --t-md: 1.12rem;
+    --t-lg: 1.34rem;
+    --t-xl: 1.72rem;
+    --measure: 66ch;
+    --shell: 1140px;
+    --gutter: 20px;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+      --rule: #DDD8CC; --rule-2: #C3BCAB;
+      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+      --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+      --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+    --rule: #DDD8CC; --rule-2: #C3BCAB;
+    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+    --s1-soft: #DCE4EF; --s2-soft: #F5DFD5; --s3-soft: #D3ECE6; --s4-soft: #F1E7CA;
+    --good: #17803A; --warn: #96650A; --crit: #B23A2B;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600; line-height: 1.14; text-wrap: balance; margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 4.4vw, 2.9rem); font-variation-settings: "opsz" 144; letter-spacing: -0.012em; }
+  h2 { font-size: clamp(1.45rem, 2.8vw, var(--t-xl)); letter-spacing: -0.008em; }
+  h3 { font-size: var(--t-lg); margin-top: 2.4rem; margin-bottom: 0.45rem; }
+  h4 {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: 1rem; margin: 1.7rem 0 0.3rem; line-height: 1.3;
+  }
+  p { margin: 0 0 1.05rem; }
+  a { color: var(--s1); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--s2); }
+  :focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; border-radius: 2px; }
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+    font-size: 0.87em;
+  }
+  code { background: var(--paper-2); padding: 0.08em 0.36em; border-radius: 3px; color: var(--ink-2); }
+  strong { font-weight: 600; color: var(--ink); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+  /* ---- shell ---- */
+  .wrap { max-width: var(--measure); margin: 0 auto; padding-inline: var(--gutter); }
+  .wide { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
+  .skip {
+    position: absolute; left: -9999px; top: 0; background: var(--paper-2); color: var(--ink);
+    padding: 0.6rem 1rem; z-index: 20; border: 1px solid var(--rule-2); border-radius: 0 0 4px 0;
+  }
+  .skip:focus { left: 0; }
+
+  /* ---- the nav rail: where this page sits in the set of ten ---- */
+  nav.rail {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  @supports not (background: color-mix(in srgb, red 50%, blue)) {
+    nav.rail { background: var(--paper); }
+  }
+  nav.rail .inner {
+    max-width: var(--shell); margin: 0 auto; padding: 0.55rem var(--gutter);
+    display: flex; align-items: baseline; gap: 1rem; flex-wrap: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+  }
+  nav.rail a.home {
+    color: var(--ink); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500; white-space: nowrap;
+  }
+  nav.rail a.home:hover { color: var(--s2); }
+  nav.rail .here {
+    color: var(--ink-2); letter-spacing: 0.04em; display: flex; gap: 0.6em;
+    align-items: baseline; white-space: nowrap; flex: none;
+  }
+  nav.rail .here .of { color: var(--ink-3); }
+  nav.rail .sibs {
+    display: flex; gap: 0.95rem; flex-wrap: nowrap; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    padding-bottom: 1px;
+  }
+  nav.rail .sibs::-webkit-scrollbar { display: none; }
+  nav.rail .sibs a { color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+  nav.rail .sibs a:hover { color: var(--s2); }
+  nav.rail .sibs a[aria-current="page"] { color: var(--s2); }
+
+  /* ---- masthead ---- */
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 0.6rem;
+  }
+  .lede { font-size: var(--t-md); color: var(--ink-2); max-width: var(--measure); }
+  header.masthead {
+    border-bottom: 1px solid var(--rule-2);
+    padding-block: 3.2rem 1.8rem;
+    background:
+      radial-gradient(120% 140% at 12% -10%, var(--s2-soft) 0%, transparent 62%);
+  }
+  header.masthead .kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--s2);
+    margin: 0 0 0.9rem;
+  }
+  header.masthead h1 { margin-bottom: 0.9rem; }
+
+  section.part { padding-block: 2.8rem 0.8rem; }
+  section.part + section.part { border-top: 1px solid var(--rule); }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .grid { display: grid; gap: 1rem; }
+
+  /* the eyebrow's counter is the reading order of the deep dive, which is a real
+     sequence; nothing else on the site is numbered. */
+  .against { border-top: 2px solid var(--s2); padding-top: 0.55rem; margin-top: 2.6rem; }
+  .against .who {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--s2);
+  }
+
+  /* ---- tables ---- */
+  .tablewrap {
+    overflow-x: auto; margin: 1.1rem 0 0.2rem;
+    border: 1px solid var(--rule); border-radius: 5px; background: var(--paper-2);
+  }
+  /* A wide table or chart in the prose column breaks out to the page shell, so it
+     is read rather than scrolled: as wide as the shell (or the viewport less its
+     gutters), re-centred on the narrower parent. */
+  .wrap .tablewrap,
+  .wrap figure.band,
+  .wrap details.more,
+  .wrap .tablewrap + .src {
+    --breakout: min(var(--shell), calc(100vw - 2 * var(--gutter)));
+    width: var(--breakout);
+    margin-inline: calc(50% - var(--breakout) / 2);
+  }
+  table {
+    border-collapse: collapse; width: 100%; font-size: var(--t-ui);
+    font-variant-numeric: tabular-nums;
+  }
+  caption {
+    caption-side: top; text-align: left; font-size: var(--t-ui); color: var(--ink-2);
+    padding: 0.7rem 0.75rem 0.55rem; max-width: 92ch;
+  }
+  th, td {
+    text-align: left; padding: 0.46rem 0.75rem;
+    border-bottom: 1px solid var(--rule); vertical-align: top;
+  }
+  thead th {
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-xs); letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-2); border-bottom: 1px solid var(--rule-2);
+    position: sticky; top: 0; background: var(--paper-3);
+    white-space: nowrap; vertical-align: bottom;
+  }
+  tbody tr:hover td { background: color-mix(in srgb, var(--paper-3) 55%, transparent); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num {
+    text-align: right;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+  }
+  td.ci, .ci {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-sm);
+    color: var(--ink-2); white-space: nowrap; text-align: right;
+  }
+  tr.total td {
+    font-weight: 600;
+    border-top: 1px solid var(--rule-2);
+    background: color-mix(in srgb, var(--s2-soft) 60%, transparent);
+  }
+  .pass, .verdict.pass { color: var(--good); font-weight: 600; }
+  .fail, .verdict.fail { color: var(--crit); font-weight: 600; }
+  .no { color: var(--ink-3); }
+  .src {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin: 0.5rem 0 1.7rem; line-height: 1.55;
+    overflow-wrap: break-word;
+  }
+  .src b { font-weight: 500; color: var(--ink-2); }
+  .src code { background: none; padding: 0; }
+
+  /* ---- long tables fold away so the page reads top-down ---- */
+  details.more { margin: 1.2rem 0 1.7rem; }
+  details.more > summary {
+    cursor: pointer; list-style: none;
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600;
+    font-size: var(--t-ui); color: var(--ink);
+    padding: 0.6rem 0.9rem; border: 1px solid var(--rule-2); border-radius: 5px;
+    background: var(--paper-2); display: flex; align-items: center; gap: 0.6em;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before {
+    content: "+"; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--s2); font-size: 1.05em; line-height: 1; width: 1ch; flex: none;
+  }
+  details.more[open] > summary::before { content: "\2212"; }
+  details.more > summary:hover { border-color: var(--s2); }
+  details.more[open] > summary { border-radius: 5px 5px 0 0; border-bottom-color: var(--rule); }
+  details.more[open] > summary + * { margin-top: 0; }
+  details.more .tablewrap { border-radius: 0 0 5px 5px; border-top: 0; margin-top: 0; }
+  details.more .src { margin-bottom: 0; }
+
+  /* ---- callouts ---- */
+  .note, .status {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule-2); border-radius: 0 5px 5px 0;
+    padding: 0.95rem 1.15rem; margin: 1.4rem 0; font-size: var(--t-ui);
+  }
+  .note > :last-child, .status > :last-child { margin-bottom: 0; }
+  .note.warn { border-left-color: var(--s2); background: color-mix(in srgb, var(--s2-soft) 70%, var(--paper-2)); }
+  .note.ok { border-left-color: var(--s3); background: color-mix(in srgb, var(--s3-soft) 70%, var(--paper-2)); }
+  .status { border-left-color: var(--s4); background: color-mix(in srgb, var(--s4-soft) 60%, var(--paper-2)); }
+  .status h3 { margin-top: 0; font-size: var(--t-md); }
+  .note .src, .status .src { margin-bottom: 0; }
+
+  /* ---- figures ---- */
+  figure { margin: 1.7rem 0; }
+  figure.band {
+    background: var(--paper-2); border: 1px solid var(--rule);
+    padding: 1.15rem 1.1rem 1rem; border-radius: 5px;
+  }
+  figcaption {
+    font-size: var(--t-ui); color: var(--ink-2); margin-top: 0.75rem;
+    max-width: 78ch; line-height: 1.55;
+  }
+  figcaption strong:first-child { color: var(--ink); }
+  svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: "IBM Plex Sans", system-ui, sans-serif; fill: var(--ink-2); font-size: 11px; }
+  svg text.tick { fill: var(--ink-3); font-size: 10px; }
+  svg text.val {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums; fill: var(--ink); font-size: 10.5px;
+  }
+  /* a halo in the panel colour so a label never has a grid or reference line
+     running through it */
+  figure.band svg text {
+    paint-order: stroke fill; stroke: var(--paper-2); stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+  svg .grid-line { stroke: var(--rule); stroke-width: 1; }
+  svg .axis { stroke: var(--rule-2); stroke-width: 1; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--t-sm);
+    color: var(--ink-2); margin: 0.7rem 0 0; padding: 0; list-style: none;
+  }
+  .legend li { display: flex; align-items: center; gap: 0.45em; }
+  .swatch { width: 0.8em; height: 0.8em; border-radius: 2px; flex: none; }
+  img { max-width: 100%; height: auto; }
+
+  /* ---- misc ---- */
+  ul.tight, ol.tight { margin: 0 0 1.05rem; padding-left: 1.35rem; }
+  ul.tight li, ol.tight li { margin-bottom: 0.5rem; }
+  ul.tight li::marker, ol.tight li::marker { color: var(--ink-3); }
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--t-xs); letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.14em 0.5em; border-radius: 2px; border: 1px solid currentColor;
+    vertical-align: 0.08em;
+  }
+  .pill.live { color: var(--good); }
+  .pill.flight { color: var(--warn); }
+  .pill.hist { color: var(--ink-3); }
+  nav.toc { margin: 1.9rem 0 0.4rem; }
+  nav.toc ol {
+    list-style: none; margin: 0; padding: 0; counter-reset: toc;
+    display: grid; gap: 0.35rem 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  nav.toc li {
+    counter-increment: toc; font-size: var(--t-ui);
+    border-bottom: 1px solid var(--rule); padding-bottom: 0.32rem;
+  }
+  nav.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-3); margin-right: 0.6em;
+  }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  footer.pagefoot {
+    border-top: 1px solid var(--rule-2); margin-top: 3.4rem;
+    padding-block: 1.8rem 3.4rem; color: var(--ink-2); font-size: var(--t-ui);
+  }
+  footer.pagefoot .mono { font-size: var(--t-xs); color: var(--ink-3); }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    :root { --gutter: 16px; }
+    th, td { padding: 0.42rem 0.5rem; }
+    header.masthead { padding-block: 2.2rem 1.4rem; }
+    nav.rail .sibs { display: none; }
+  }
+  .stats {
+    display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    margin: 2rem 0 0.6rem;
+  }
+  .stats div { border-top: 2px solid var(--s2); padding-top: 0.65rem; }
+  .stats .fig {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.65rem;
+    line-height: 1.02; display: block; font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .stats .ci {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--ink-2); display: block; margin-top: 0.25rem; text-align: left;
+  }
+  .stats .cap {
+    font-size: var(--t-sm); color: var(--ink-2); display: block; margin-top: 0.45rem;
+    line-height: 1.45;
+  }
+  .stats .from {
+    font-size: var(--t-xs); color: var(--ink-3); display: block; margin-top: 0.5rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; overflow-wrap: break-word;
+  }
+  /* "start here" is a real sequence, so its cards are numbered; nothing else is. */
+  .path {
+    display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin: 1.5rem 0 0.4rem; counter-reset: step;
+  }
+  .path a {
+    display: block; text-decoration: none; color: inherit; padding: 1.1rem 1.15rem;
+    border: 1px solid var(--rule-2); border-radius: 5px; background: var(--paper-2);
+  }
+  .path a:hover { border-color: var(--s2); }
+  .path a::before {
+    counter-increment: step; content: counter(step);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    color: var(--s2); display: block; margin-bottom: 0.5rem; letter-spacing: 0.08em;
+  }
+  .path .t {
+    font-family: "Fraunces", Georgia, serif; font-size: var(--t-md); font-weight: 600;
+    display: block; margin-bottom: 0.35rem; color: var(--ink);
+  }
+  .path a:hover .t { color: var(--s2); }
+  .path .d { font-size: var(--t-ui); color: var(--ink-2); line-height: 1.5; }
+  .cards {
+    display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    margin: 1.1rem 0 0.4rem;
+  }
+  .cards a, .cards div.plain {
+    display: block; text-decoration: none; color: inherit;
+    padding: 0.95rem 1.05rem; border: 1px solid var(--rule); border-radius: 5px;
+  }
+  .cards a:hover { border-color: var(--s2); background: var(--paper-2); }
+  .cards div.plain { background: var(--paper-2); }
+  .cards .t { font-weight: 600; display: block; margin-bottom: 0.3rem; color: var(--ink); }
+  .cards a:hover .t { color: var(--s2); }
+  .cards .d { font-size: var(--t-ui); color: var(--ink-2); display: block; line-height: 1.5; }
+  .cards .when {
+    font-size: var(--t-xs); color: var(--ink-3); display: block; margin-top: 0.55rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  dl.gloss {
+    display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem;
+    font-size: var(--t-ui); margin: 1.3rem 0 0.4rem;
+  }
+  dl.gloss dt { font-weight: 600; color: var(--ink); }
+  dl.gloss dd { margin: 0; color: var(--ink-2); line-height: 1.5; }
+  @media (max-width: 640px) { dl.gloss { grid-template-columns: 1fr; gap: 0.15rem 0; }
+    dl.gloss dd { margin-bottom: 0.65rem; } }
+  .groupname {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: var(--t-xs);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--s2);
+    border-top: 2px solid var(--s2); padding-top: 0.45rem; margin: 2.2rem 0 0.2rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="rail" aria-label="Site sections">
+  <div class="inner">
+    <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
+    <span class="here"><span>The process, in pictures</span><span class="of">page 1 of 11</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html" aria-current="page">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">Structure Loss Pipeline · the whole process on one page</p>
+    <h1>The process, in pictures</h1>
+    <p class="lede">After a wildfire, somebody has to answer a very concrete question for every
+    building in the burn area: <strong>is it still there?</strong> Today that answer comes from
+    inspectors walking the ground, which is slow, expensive, and only happens in some places.
+    This project estimates the same answer from free satellite pictures and public maps. Five
+    diagrams below show where the data comes from, what the computer actually does with it, when
+    each answer becomes available, how we check whether the answer is any good, and what you get
+    at the end.</p>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">Figure 1</p>
+    <h2>Where the information comes from</h2>
+    <p>Nothing here is bought, and nothing is private. Five public sources do five different
+    jobs, and it matters which is which — three of them tell the computer <em>what to look
+    at</em>, and two of them are the answer sheets we grade ourselves against. An answer sheet
+    is never allowed to become an input.</p>
+  </div>
+
+  <div class="wrap">
+  <figure class="band">
+    <svg viewBox="0 0 980 470" role="img"
+         aria-label="Five public data sources feed two jobs. Aerial photography, building
+         footprint maps and fire perimeters go into building the list of structures that stood
+         before the fire. Before-and-after satellite imagery goes into the destroyed-or-not
+         decision. Two ground-truth sources sit apart and are only used to grade the result.">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+                orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+        <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+                orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--s3)"/>
+        </marker>
+      </defs>
+
+      <text x="14" y="20" class="tick" style="letter-spacing:.08em">WHAT THE COMPUTER LOOKS AT</text>
+
+      <!-- source boxes -->
+      <g>
+        <rect x="14" y="34" width="208" height="56" rx="5" fill="var(--s1-soft)" stroke="var(--s1)"/>
+        <text x="28" y="56" style="fill:var(--ink);font-weight:600">Aerial photographs</text>
+        <text x="28" y="74" class="tick">NAIP · 0.6 m · flown every 2–3 years</text>
+
+        <rect x="14" y="102" width="208" height="56" rx="5" fill="var(--s1-soft)" stroke="var(--s1)"/>
+        <text x="28" y="124" style="fill:var(--ink);font-weight:600">Building outline maps</text>
+        <text x="28" y="142" class="tick">USA Structures · Microsoft</text>
+
+        <rect x="14" y="170" width="208" height="56" rx="5" fill="var(--s1-soft)" stroke="var(--s1)"/>
+        <text x="28" y="192" style="fill:var(--ink);font-weight:600">Fire perimeters</text>
+        <text x="28" y="210" class="tick">WFIGS · MTBS · where to look</text>
+
+        <rect x="14" y="252" width="208" height="56" rx="5" fill="var(--s2-soft)" stroke="var(--s2)"/>
+        <text x="28" y="274" style="fill:var(--ink);font-weight:600">Satellite imagery</text>
+        <text x="28" y="292" class="tick">Sentinel-2 · 10 m · every few days</text>
+      </g>
+
+      <!-- job boxes -->
+      <g>
+        <rect x="360" y="70" width="228" height="90" rx="5" fill="var(--paper-3)" stroke="var(--s1)" stroke-width="1.5"/>
+        <text x="374" y="98" style="fill:var(--ink);font-weight:600">Job 1 — the building list</text>
+        <text x="374" y="118" class="tick">what stood here before the fire</text>
+        <text x="374" y="136" class="tick">public maps, plus a model that</text>
+        <text x="374" y="150" class="tick">spots buildings the maps missed</text>
+
+        <rect x="360" y="232" width="228" height="90" rx="5" fill="var(--paper-3)" stroke="var(--s2)" stroke-width="1.5"/>
+        <text x="374" y="260" style="fill:var(--ink);font-weight:600">Job 2 — the loss call</text>
+        <text x="374" y="280" class="tick">for each building on that list,</text>
+        <text x="374" y="298" class="tick">did the fire destroy it?</text>
+        <text x="374" y="312" class="tick">before-and-after change at 10 m</text>
+      </g>
+
+      <!-- arrows in -->
+      <g stroke="currentColor" fill="none" marker-end="url(#ar)" opacity="0.75">
+        <path d="M 222 62 H 300 V 106 H 356"/>
+        <path d="M 222 130 H 300 V 112 H 356"/>
+        <path d="M 222 198 H 300 V 124 H 356"/>
+        <path d="M 222 280 H 356"/>
+      </g>
+      <text x="246" y="56" class="tick">where + what</text>
+      <text x="246" y="274" class="tick">change</text>
+
+      <!-- list feeds the call -->
+      <g stroke="var(--s1)" fill="none" marker-end="url(#ar)" color="var(--s1)">
+        <path d="M 474 160 V 228"/>
+      </g>
+      <text x="484" y="198" class="tick" style="fill:var(--s1)">the list decides which
+        <tspan x="484" dy="13">buildings get a call</tspan></text>
+
+      <!-- output -->
+      <rect x="712" y="146" width="254" height="100" rx="5" fill="var(--s2-soft)" stroke="var(--s2)" stroke-width="1.5"/>
+      <text x="726" y="174" style="fill:var(--ink);font-weight:600">One row per building</text>
+      <text x="726" y="194" class="tick">where it was, whether it burned,</text>
+      <text x="726" y="212" class="tick">how confident we are, and which</text>
+      <text x="726" y="230" class="tick">pictures the answer came from</text>
+      <g stroke="currentColor" fill="none" marker-end="url(#ar)" opacity="0.75">
+        <path d="M 588 277 H 650 V 196 H 708"/>
+      </g>
+
+      <!-- ground truth lane -->
+      <line x1="14" y1="352" x2="966" y2="352" class="grid-line"/>
+      <text x="14" y="376" class="tick" style="letter-spacing:.08em">THE ANSWER SHEETS — USED ONLY TO GRADE, NEVER AS AN INPUT</text>
+      <g>
+        <rect x="14" y="390" width="300" height="62" rx="5" fill="var(--s3-soft)" stroke="var(--s3)"/>
+        <text x="28" y="412" style="fill:var(--ink);font-weight:600">The historical record, 2002–2022</text>
+        <text x="28" y="430" class="tick">1,770,939 buildings hand-coded by the</text>
+        <text x="28" y="444" class="tick">US Geological Survey · 361 fires</text>
+
+        <rect x="338" y="390" width="300" height="62" rx="5" fill="var(--s3-soft)" stroke="var(--s3)"/>
+        <text x="352" y="412" style="fill:var(--ink);font-weight:600">Fire-service inspections</text>
+        <text x="352" y="430" class="tick">CAL FIRE inspectors, California only,</text>
+        <text x="352" y="444" class="tick">one record per building they visited</text>
+      </g>
+      <g stroke="var(--s3)" fill="none" marker-end="url(#ar2)" stroke-dasharray="4 3">
+        <path d="M 638 420 H 839 V 250"/>
+      </g>
+      <text x="654" y="412" class="tick" style="fill:var(--s3)">graded against</text>
+    </svg>
+    <figcaption><strong>Five sources, two jobs, one output row per building.</strong> The left
+    column is what the computer is allowed to see. The bottom lane is what we compare its answers
+    to afterwards. Keeping those two apart is the whole reason the accuracy numbers on this site
+    mean anything: a model graded on buildings it was trained on would look far better than it
+    is.</figcaption>
+  </figure>
+  </div>
+
+  <div class="wrap">
+    <p class="src"><b>Source:</b> the project's data-provenance and licence documentation;
+    building counts from the published historical record's own release.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">Figure 2</p>
+    <h2>What the computer actually does</h2>
+    <p>Two steps, in order, and each can fail on its own. If step one never finds a building,
+    step two never gets to have an opinion about it — which is why we report both numbers rather
+    than one combined score.</p>
+  </div>
+
+  <div class="wrap">
+  <figure class="band">
+    <svg viewBox="0 0 980 300" role="img"
+         aria-label="A two-step pipeline. Step one takes 0.6 metre aerial photography from before
+         the fire and public building outlines and produces a list of buildings. Step two takes a
+         before composite and an after composite of 10 metre satellite imagery, measures the
+         change at each building, and produces a destroyed-or-survived call with a probability.">
+      <defs>
+        <marker id="b-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+                orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+
+      <!-- step 1 -->
+      <rect x="14" y="30" width="446" height="240" rx="6" fill="none" stroke="var(--rule-2)" stroke-dasharray="3 3"/>
+      <text x="30" y="54" style="fill:var(--s1);font-weight:600;letter-spacing:.06em">STEP 1 · FIND THE BUILDINGS</text>
+
+      <rect x="30" y="72" width="128" height="52" rx="4" fill="var(--s1-soft)" stroke="var(--s1)"/>
+      <text x="44" y="94" class="tick" style="fill:var(--ink)">Aerial photo,</text>
+      <text x="44" y="110" class="tick" style="fill:var(--ink)">before the fire</text>
+
+      <rect x="30" y="144" width="128" height="52" rx="4" fill="var(--s1-soft)" stroke="var(--s1)"/>
+      <text x="44" y="166" class="tick" style="fill:var(--ink)">Public building</text>
+      <text x="44" y="182" class="tick" style="fill:var(--ink)">outline maps</text>
+
+      <rect x="198" y="106" width="124" height="60" rx="4" fill="var(--paper-3)" stroke="var(--s4)"/>
+      <text x="212" y="130" class="tick" style="fill:var(--ink)">A vision model</text>
+      <text x="212" y="146" class="tick" style="fill:var(--ink)">looks for roofs</text>
+
+      <rect x="356" y="106" width="92" height="60" rx="4" fill="var(--paper-2)" stroke="var(--rule-2)"/>
+      <text x="370" y="130" class="tick" style="fill:var(--ink)">A list of</text>
+      <text x="370" y="146" class="tick" style="fill:var(--ink)">buildings</text>
+
+      <g stroke="currentColor" fill="none" marker-end="url(#b-ar)" opacity="0.75">
+        <path d="M 158 98 H 178 V 132 H 194"/>
+        <path d="M 158 170 H 178 V 140 H 194"/>
+        <path d="M 322 136 H 352"/>
+      </g>
+      <text x="200" y="192" class="tick">the maps are the baseline; the model
+        <tspan x="200" dy="13">adds what they missed</tspan></text>
+
+      <!-- step 2 -->
+      <rect x="500" y="30" width="466" height="240" rx="6" fill="none" stroke="var(--rule-2)" stroke-dasharray="3 3"/>
+      <text x="516" y="54" style="fill:var(--s2);font-weight:600;letter-spacing:.06em">STEP 2 · DECIDE WHAT BURNED</text>
+
+      <rect x="516" y="72" width="140" height="52" rx="4" fill="var(--s2-soft)" stroke="var(--s2)"/>
+      <text x="530" y="94" class="tick" style="fill:var(--ink)">Satellite view</text>
+      <text x="530" y="110" class="tick" style="fill:var(--ink)">BEFORE the fire</text>
+
+      <rect x="516" y="144" width="140" height="52" rx="4" fill="var(--s2-soft)" stroke="var(--s2)"/>
+      <text x="530" y="166" class="tick" style="fill:var(--ink)">Satellite view</text>
+      <text x="530" y="182" class="tick" style="fill:var(--ink)">AFTER the fire</text>
+
+      <rect x="700" y="106" width="130" height="60" rx="4" fill="var(--paper-3)" stroke="var(--s4)"/>
+      <text x="714" y="126" class="tick" style="fill:var(--ink)">How much did</text>
+      <text x="714" y="142" class="tick" style="fill:var(--ink)">this one patch</text>
+      <text x="714" y="158" class="tick" style="fill:var(--ink)">of ground change?</text>
+
+      <rect x="864" y="106" width="98" height="60" rx="4" fill="var(--paper-2)" stroke="var(--rule-2)"/>
+      <text x="878" y="126" class="tick" style="fill:var(--ink)">Destroyed</text>
+      <text x="878" y="142" class="tick" style="fill:var(--ink)">or survived,</text>
+      <text x="878" y="158" class="tick" style="fill:var(--ink)">with odds</text>
+
+      <g stroke="currentColor" fill="none" marker-end="url(#b-ar)" opacity="0.75">
+        <path d="M 656 98 H 676 V 132 H 696"/>
+        <path d="M 656 170 H 676 V 140 H 696"/>
+        <path d="M 830 136 H 860"/>
+      </g>
+      <text x="700" y="192" class="tick">62 measurements per building —
+        <tspan x="700" dy="13">colour, greenness, burn signature</tspan></text>
+
+      <!-- the join -->
+      <g stroke="var(--s1)" fill="none" marker-end="url(#b-ar)" color="var(--s1)">
+        <path d="M 448 136 H 496"/>
+      </g>
+      <text x="386" y="238" class="tick" style="fill:var(--s1)">every building on the list from step 1 gets exactly one call from step 2</text>
+    </svg>
+    <figcaption><strong>Two steps that fail differently.</strong> Step 1 can miss a building that
+    was hidden under a tree canopy in the last aerial photograph. Step 2 can be wrong about a
+    building it can see. These are separate problems with separate fixes, so this project measures
+    and publishes them separately rather than as one accuracy figure.</figcaption>
+  </figure>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">Figure 3</p>
+    <h2>When each answer arrives</h2>
+    <p>This is the part most people are surprised by. A satellite cannot tell you anything useful
+    the day after a fire — there is still smoke, the fire may still be burning, and the ground has
+    not settled. So the answer is built from a <em>window</em> of pictures, not a single one, and
+    the window has to close before the answer exists.</p>
+  </div>
+
+  <div class="wrap">
+  <figure class="band">
+    <svg viewBox="0 0 980 300" role="img"
+         aria-label="A timeline centred on the day the fire starts. A before window runs from 45
+         days to 1 day before ignition. An after window runs from 14 days to 74 days after
+         ignition. The first estimate is published once that window closes, about two and a half
+         months after the fire. A second, more accurate estimate becomes possible about twelve to
+         fifteen months later, once a full clean year of imagery exists.">
+      <defs>
+        <marker id="c-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+                orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+
+      <!-- axis -->
+      <line x1="40" y1="150" x2="948" y2="150" class="axis" marker-end="url(#c-ar)"/>
+      <text x="906" y="172" class="tick">time →</text>
+
+      <!-- ignition -->
+      <line x1="270" y1="60" x2="270" y2="196" stroke="var(--s2)" stroke-width="2"/>
+      <text x="270" y="50" text-anchor="middle" style="fill:var(--s2);font-weight:600">the fire starts</text>
+      <text x="270" y="214" text-anchor="middle" class="tick">day 0</text>
+
+      <!-- before window -->
+      <rect x="112" y="108" width="152" height="36" rx="4" fill="var(--s1-soft)" stroke="var(--s1)"/>
+      <text x="188" y="131" text-anchor="middle" class="tick" style="fill:var(--ink)">BEFORE · 45 days of pictures</text>
+      <text x="112" y="100" class="tick">−45 d</text>
+      <text x="264" y="100" text-anchor="end" class="tick">−1 d</text>
+
+      <!-- gap -->
+      <rect x="270" y="108" width="52" height="36" rx="4" fill="none" stroke="var(--rule-2)" stroke-dasharray="3 3"/>
+      <text x="296" y="131" text-anchor="middle" class="tick">wait</text>
+      <text x="296" y="238" text-anchor="middle" class="tick">the first two weeks are
+        <tspan x="296" dy="13">smoke and active fire</tspan></text>
+
+      <!-- after window -->
+      <rect x="322" y="108" width="234" height="36" rx="4" fill="var(--s2-soft)" stroke="var(--s2)"/>
+      <text x="439" y="131" text-anchor="middle" class="tick" style="fill:var(--ink)">AFTER · 60 days of pictures</text>
+      <text x="322" y="100" class="tick">+14 d</text>
+      <text x="556" y="100" text-anchor="end" class="tick">+74 d</text>
+
+      <!-- first answer -->
+      <line x1="556" y1="86" x2="556" y2="150" stroke="var(--s2)" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <circle cx="556" cy="150" r="5" fill="var(--s2)"/>
+      <text x="566" y="82" style="fill:var(--ink);font-weight:600">First answer</text>
+      <text x="566" y="99" class="tick">about 2½ months after the fire —</text>
+      <text x="566" y="113" class="tick">this is the number the dataset ships</text>
+
+      <!-- second answer -->
+      <line x1="838" y1="150" x2="838" y2="196" stroke="var(--s3)" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <circle cx="838" cy="150" r="5" fill="var(--s3)"/>
+      <text x="828" y="216" text-anchor="end" style="fill:var(--ink);font-weight:600">Second answer, when it exists</text>
+      <text x="828" y="233" text-anchor="end" class="tick">roughly 12–15 months later, once a full clean year of</text>
+      <text x="828" y="247" text-anchor="end" class="tick">imagery has been published. More accurate, and late.</text>
+      <text x="828" y="266" text-anchor="end" class="tick">It is a separate column, never a correction —
+        <tspan x="828" dy="13">the first answer is never quietly overwritten.</tspan></text>
+    </svg>
+    <figcaption><strong>Two answers, deliberately.</strong> The fast one is available while the
+    information still matters for recovery. The slow one is better but arrives a year late. A
+    dataset that silently replaced one with the other would be untrustworthy for anyone comparing
+    fires, so both are published side by side and every row says which it has.</figcaption>
+  </figure>
+  </div>
+
+  <div class="wrap">
+    <p class="src"><b>Source:</b> the pipeline's own window settings — before window 45 days
+    ending the day before ignition, after window days 14 to 74. Those windows were re-tested
+    against 41 alternatives in September 2026 and kept.</p>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">Figure 4</p>
+    <h2>How we check whether any of this is true</h2>
+    <p>The easy mistake in this kind of work is to grade a model on the same fires it learned
+    from. It then scores beautifully and tells you nothing about the next fire. So every accuracy
+    number on this site is produced the hard way: <strong>the fire being scored was removed from
+    the model that scored it.</strong></p>
+  </div>
+
+  <div class="wrap">
+  <figure class="band">
+    <svg viewBox="0 0 980 260" role="img"
+         aria-label="Leave-one-fire-out validation. From a pool of 199 fires, one fire is set
+         aside, a model is trained on the other 198, and that model is used to score the held-out
+         fire. The process repeats so that every fire is scored by a model that never saw it.">
+      <defs>
+        <marker id="d-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+                orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+
+      <text x="14" y="26" class="tick" style="letter-spacing:.08em">199 FIRES WE HAVE ANSWER SHEETS FOR, ACROSS 18 STATES</text>
+
+      <!-- the pool of dots -->
+      <g fill="var(--s1)" opacity="0.8">
+        <circle cx="26" cy="52" r="5"/><circle cx="48" cy="52" r="5"/><circle cx="70" cy="52" r="5"/>
+        <circle cx="92" cy="52" r="5"/><circle cx="114" cy="52" r="5"/><circle cx="136" cy="52" r="5"/>
+        <circle cx="158" cy="52" r="5"/><circle cx="180" cy="52" r="5"/><circle cx="202" cy="52" r="5"/>
+        <circle cx="224" cy="52" r="5"/><circle cx="246" cy="52" r="5"/><circle cx="268" cy="52" r="5"/>
+        <circle cx="290" cy="52" r="5"/><circle cx="312" cy="52" r="5"/><circle cx="334" cy="52" r="5"/>
+        <circle cx="356" cy="52" r="5"/><circle cx="378" cy="52" r="5"/><circle cx="400" cy="52" r="5"/>
+      </g>
+      <circle cx="422" cy="52" r="7" fill="var(--s2)"/>
+      <g fill="var(--s1)" opacity="0.8">
+        <circle cx="446" cy="52" r="5"/><circle cx="468" cy="52" r="5"/><circle cx="490" cy="52" r="5"/>
+        <circle cx="512" cy="52" r="5"/><circle cx="534" cy="52" r="5"/><circle cx="556" cy="52" r="5"/>
+        <circle cx="578" cy="52" r="5"/><circle cx="600" cy="52" r="5"/><circle cx="622" cy="52" r="5"/>
+      </g>
+      <text x="646" y="57" class="tick">… and 171 more</text>
+
+      <!-- split -->
+      <g stroke="currentColor" fill="none" marker-end="url(#d-ar)" opacity="0.75">
+        <path d="M 300 64 V 96 H 208"/>
+      </g>
+      <g stroke="var(--s2)" fill="none" marker-end="url(#d-ar)" color="var(--s2)">
+        <path d="M 422 64 V 96 H 660"/>
+      </g>
+
+      <rect x="40" y="104" width="300" height="58" rx="5" fill="var(--s1-soft)" stroke="var(--s1)"/>
+      <text x="56" y="128" style="fill:var(--ink);font-weight:600">Train on the other 198 fires</text>
+      <text x="56" y="148" class="tick">the model never sees the held-out fire at all</text>
+
+      <rect x="560" y="104" width="300" height="58" rx="5" fill="var(--s2-soft)" stroke="var(--s2)"/>
+      <text x="576" y="128" style="fill:var(--ink);font-weight:600">Hold one fire out</text>
+      <text x="576" y="148" class="tick">every building in it, kept back as a fresh test</text>
+
+      <g stroke="currentColor" fill="none" marker-end="url(#d-ar)" opacity="0.75">
+        <path d="M 190 162 V 196 H 430"/>
+        <path d="M 710 162 V 196 H 470"/>
+      </g>
+
+      <rect x="300" y="196" width="300" height="50" rx="5" fill="var(--paper-3)" stroke="var(--s4)" stroke-width="1.5"/>
+      <text x="316" y="218" style="fill:var(--ink);font-weight:600">Score it. Then repeat, 199 times.</text>
+      <text x="316" y="236" class="tick">every fire graded by a model that never met it</text>
+    </svg>
+    <figcaption><strong>Leave one fire out, then do it again.</strong> This is stricter than the
+    usual test, which shuffles individual buildings and lets the same fire appear on both sides.
+    We go further still and hold out whole <em>regions</em> and whole <em>years</em>, because a
+    model that has seen a fire's neighbours has seen something about that fire. Those harder
+    numbers are published too, and they are lower — which is the point of measuring them.</figcaption>
+  </figure>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <p class="eyebrow">Figure 5</p>
+    <h2>What you actually get</h2>
+    <p>One continuous record from 2002 to the present, with a row for every building in every
+    qualifying fire. Its two halves were made in completely different ways, so the record says
+    which half every row comes from rather than blending them into a single number.</p>
+  </div>
+
+  <div class="wrap">
+  <figure class="band">
+    <svg viewBox="0 0 980 230" role="img"
+         aria-label="One continuous record from 2002 to the present in three eras. From 2002 to
+         2015, hand-coded by the US Geological Survey only. From 2016 to 2022, both the hand
+         survey and this pipeline cover the same fires. From 2023 onward, this pipeline only,
+         because the hand survey ends in 2022.">
+      <!-- era band -->
+      <rect x="20" y="70" width="330" height="54" rx="4" fill="var(--s3-soft)" stroke="var(--s3)"/>
+      <rect x="350" y="70" width="270" height="54" fill="var(--s4-soft)" stroke="var(--s4)"/>
+      <rect x="620" y="70" width="340" height="54" rx="4" fill="var(--s2-soft)" stroke="var(--s2)"/>
+
+      <text x="185" y="96" text-anchor="middle" style="fill:var(--ink);font-weight:600">2002 – 2015</text>
+      <text x="185" y="114" text-anchor="middle" class="tick">hand survey only</text>
+
+      <text x="485" y="96" text-anchor="middle" style="fill:var(--ink);font-weight:600">2016 – 2022</text>
+      <text x="485" y="114" text-anchor="middle" class="tick">both, on the same fires</text>
+
+      <text x="790" y="96" text-anchor="middle" style="fill:var(--ink);font-weight:600">2023 – today</text>
+      <text x="790" y="114" text-anchor="middle" class="tick">this pipeline only</text>
+
+      <!-- who made it -->
+      <line x1="20" y1="150" x2="620" y2="150" stroke="var(--s3)" stroke-width="3"/>
+      <text x="26" y="168" class="tick" style="fill:var(--s3)">US Geological Survey, building by building, by hand — ends 2022</text>
+      <line x1="350" y1="186" x2="960" y2="186" stroke="var(--s2)" stroke-width="3"/>
+      <text x="954" y="204" text-anchor="end" class="tick" style="fill:var(--s2)">this project, from satellites — starts 2016, when the satellite exists</text>
+
+      <text x="20" y="46" class="tick" style="letter-spacing:.08em">ONE CONTINUOUS RECORD, 2002 TO PRESENT</text>
+      <text x="485" y="46" text-anchor="middle" class="tick">↑ the overlap is the point: it is where the two methods can be compared</text>
+    </svg>
+    <figcaption><strong>The overlap is not redundancy — it is the evidence.</strong> Seven years
+    where a hand survey and this pipeline describe the same fires is what lets anyone check
+    whether the satellite half is comparable with the hand-coded half before relying on the years
+    where only the satellite half exists. Rows from the two halves describe the same fires and
+    <strong>must never be added together</strong>; every row carries a column saying which it
+    is.</figcaption>
+  </figure>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <h2>The honest limitations, in one place</h2>
+    <p>Everything below is measured and published elsewhere on this site. It is collected here
+    because an infographic that only shows what works is an advertisement.</p>
+
+    <ul class="tight">
+      <li><strong>A building we never found gets no answer.</strong> If the last aerial photo
+      before the fire had a tree over the roof, the building is not on the list, and nothing
+      downstream can rescue it.</li>
+      <li><strong>Grass fires are harder than forest fires.</strong> The strongest signal in the
+      satellite data is vegetation that burned. Where there was little vegetation at the building
+      to begin with, the signal is faint — and that is exactly the kind of fire that is growing
+      most quickly across the United States.</li>
+      <li><strong>Almost all the fresh ground truth is Californian.</strong> The inspection
+      records that grade recent fires come from one state's fire service. Every check we can run
+      outside California is published, and there are not many.</li>
+      <li><strong>The answer sheets disagree with each other.</strong> Where two expert surveys
+      cover the same buildings they differ on about 2 % of them — and the model is no better than
+      a coin flip on exactly those buildings. That is a floor on how good any model can look
+      here.</li>
+      <li><strong>This is an estimate, not an inspection.</strong> It is for looking at patterns
+      across many fires and many years. It is not a basis for a decision about any one
+      property.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="part">
+  <div class="wrap">
+    <h2>Where to go next</h2>
+    <div class="path">
+      <a href="how-it-works.html">
+        <span class="t">How it works, in words</span>
+        <span class="d">The same story as these five pictures, with the numbers attached and the
+        reasoning spelled out.</span>
+      </a>
+      <a href="confusion-matrix.html">
+        <span class="t">What the accuracy number means</span>
+        <span class="d">Out of every hundred buildings, how many does it get right — and what do
+        the mistakes look like?</span>
+      </a>
+      <a href="how-we-validate.html">
+        <span class="t">How we validate</span>
+        <span class="d">Hold out a fire, a region, a whole year. What each of those costs, and
+        why we report the lower number.</span>
+      </a>
+      <a href="combined-series.html">
+        <span class="t">The dataset itself</span>
+        <span class="d">What is in it, how many rows, which columns, what licence, and the rules
+        for using the two halves together.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0, copyright
+    Carlo Broderick; no DOI has been minted yet.</p>
+    <p class="mono">Provenance: data release v0.9.0, 2,069,752 rows over 377 fires. The loss call is made by a model trained on 199 fires and 818,838 buildings, at a fixed threshold of 0.88. Every fire is scored by a version of that model that was not trained on it.</p>
+  </div>
+</footer>
+
+</body>
+</html>
