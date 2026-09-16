@@ -776,8 +776,9 @@
   <figure class="band">
     <svg viewBox="0 0 980 260" role="img"
          aria-label="Leave-one-fire-out validation. From a pool of 199 fires, one fire is set
-         aside, a model is trained on the other 198, and that model is used to score the held-out
-         fire. The process repeats so that every fire is scored by a model that never saw it.">
+         aside, a model is trained on all the others, and that model is used to score the
+         held-out fire. The process repeats so that every fire is scored by a model that never
+         saw it.">
       <defs>
         <marker id="d-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
                 orient="auto-start-reverse">
@@ -813,7 +814,7 @@
       </g>
 
       <rect x="40" y="104" width="300" height="58" rx="5" fill="var(--s1-soft)" stroke="var(--s1)"/>
-      <text x="56" y="128" style="fill:var(--ink);font-weight:600">Train on the other 198 fires</text>
+      <text x="56" y="128" style="fill:var(--ink);font-weight:600">Train on all the other fires</text>
       <text x="56" y="148" class="tick">the model never sees the held-out fire at all</text>
 
       <rect x="560" y="104" width="300" height="58" rx="5" fill="var(--s2-soft)" stroke="var(--s2)"/>
@@ -826,7 +827,7 @@
       </g>
 
       <rect x="300" y="196" width="300" height="50" rx="5" fill="var(--paper-3)" stroke="var(--s4)" stroke-width="1.5"/>
-      <text x="316" y="218" style="fill:var(--ink);font-weight:600">Score it. Then repeat, 199 times.</text>
+      <text x="316" y="218" style="fill:var(--ink);font-weight:600">Score it. Then repeat, fire by fire.</text>
       <text x="316" y="236" class="tick">every fire graded by a model that never met it</text>
     </svg>
     <figcaption><strong>Leave one fire out, then do it again.</strong> This is stricter than the
