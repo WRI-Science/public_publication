@@ -890,6 +890,16 @@
     every other fire of the same year. So there is a fair question behind the whole design:
     <strong>is seventy-three fires enough to memorise the dataset, so that the seventy-fourth is
     not really new?</strong></p>
+    <div class="note warn">
+      <p style="margin-bottom:0">&#9888;&#65039; <strong>This section measures an earlier
+      model.</strong> Every figure in it was measured on the earlier 74-fire model, which had no
+      neural column. The production first call model, tested the same way with its neural
+      column retrained for each hold-out, loses <strong>0.0592</strong> of mean per-fire F1 when
+      a whole region is held out, <strong>0.0300</strong> for a whole state and
+      <strong>0.0162</strong> for a whole year — several points, not fractions of one. Those
+      figures, and their caveats, are on <a href="models.html">the production models</a>
+      page.</p>
+    </div>
     <p>That question has a direct experimental answer. Take more away — a second fire, a whole
     state, a whole year — and see how far the score moves.</p>
 
@@ -918,8 +928,9 @@
     2026-09-14. 2,488 model fits for the pairs and regions, 356 for the years, each at four
     random seeds. Intervals resample whole fires, 2,000 replicates.</p>
     <p><b>Reading it:</b> <strong>a published per-fire score is honest for a fire like the ones
-    we already have, and optimistic by about two points of F1 for a fire in genuinely new
-    country.</strong></p>
+    we already have, and optimistic for a fire in genuinely new country</strong> — by about two
+    points of F1 on this earlier model, and by about six points for a new region on the
+    production first call model.</p>
 
     <h3>Taking a second fire away changes nothing</h3>
     <p>There are 8 inspected incidents and 66 historical fires, so there are <strong>528
@@ -955,18 +966,18 @@
     with — Kidd's interval is 0.12 wide on a score of 0.20 — and in two of the three the score
     moved <em>up</em>, not down, when a second fire was removed.</p>
 
-    <h3>Taking a region away costs about two points</h3>
+    <h3>Taking a region away, on this earlier model</h3>
     <p>Removing one extra fire is a small perturbation; removing an entire region is not. Holding
     out every fire in a state at once costs <strong>0.0220</strong> of mean per-fire F1 — the two
     points in the reading above. Splitting California instead into eight groups whose members
-    average under 150&nbsp;km apart costs only <strong>0.0067</strong>, which says that most of
+    average under 150&nbsp;km apart costs <strong>0.0067</strong> on this model, which says that most of
     what a Californian fire gains from the pool is <em>local</em> rather than statewide.</p>
     <p>And the two fires that dominate the inspected half lose <strong>0.0480</strong> when they
     are removed together — by far the largest effect measured here, and a direct confirmation of
     the caution beside the transfer test above: part of each one's strength is that the other is
     in its training data.</p>
 
-    <h3>Time costs less than geography</h3>
+    <h3>Time, on this earlier model</h3>
     <p>The same worry pointed at the calendar. Removing every fire of one year at once costs
     <strong>0.0049</strong>. Training only on years <em>before</em> the one being scored — which
     is exactly what the product does in production, with no future data at all — costs
@@ -1003,10 +1014,14 @@
     fire were allowed its own threshold.</p>
     <p class="src"><b>Source:</b> the by-region held-out tables under
     <code>outputs/generalization/</code> on the data share, read 2026-09-14.</p>
-    <p>How much that is worth has been measured directly rather than left as a caution: holding
-    out a whole state at once costs <strong>0.0220</strong> of mean per-fire F1, and the two
-    fires that burned a week apart in January 2025 lose <strong>0.0480</strong> when they are
-    removed together. <a href="#neighbours">The section above</a> has the full table.</p>
+    <p>How much that is worth has been measured directly rather than left as a caution. On the
+    earlier model, holding out a whole state at once cost <strong>0.0220</strong> of mean
+    per-fire F1, and the two fires that burned a week apart in January 2025 lost
+    <strong>0.0480</strong> when removed together; <a href="#neighbours">the section above</a>
+    has the full table. On the production first call model a whole state costs
+    <strong>0.0300</strong> and a whole region <strong>0.0592</strong>, with the neural column
+    retrained for each hold-out; <a href="models.html">the production models</a> page has those
+    figures.</p>
 
     <h3>2. There is no forward test in time yet</h3>
     <p>The historical half ends in 2022 and the inspected half is 2024–2025. Sensors, building
