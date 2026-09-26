@@ -367,8 +367,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>How certain</span><span class="of">page 8 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html" aria-current="page">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>How certain</span><span class="of">page 9 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html" aria-current="page">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -518,7 +518,7 @@
       model — that is where every interval above comes from. The equivalent run against the
       inspection records was not: the eight inspected incidents are scored by their own held-out
       folds, and the pooled prediction table those folds would be resampled from has not been
-      assembled for this version of the model. The two point estimates are the current model's,
+      assembled for this version of the model. The two point estimates are the refitted model's,
       read from its own held-out table; the interval that used to sit beside them,
       <strong>[0.8591, 0.9190]</strong> on a pooled F1 of 0.9158, belonged to the previous version
       and is not carried forward.</p>
@@ -853,8 +853,9 @@
       <a href="combined-series.html">the dataset</a> ·
       <a href="outside-california.html">beyond California</a> ·
       <a href="changelog.html">release history</a>.</p>
-    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>. Model figures
-    on this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on 199
+    <p class="mono">Provenance: the current data release is <b>v0.11.0</b>, packaged 2026-09-25: the v0.10.0 record unchanged plus the two production models, whose evaluation is on the production models page. Model figures
+    on this page are the previous first call model, <code>damage_sentinel2_v6</code>, which made
+    the primary calls in the download, fitted on 199
     fires and 818,838 buildings, data date 2026-09-15. Destroyed call at a fixed threshold of
     0.88. Intervals read from <code>outputs/uncertainty/</code> on the data share — the 191-fire
     national run and the detector's marginal run; the eight-incident figures are the model's own

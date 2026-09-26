@@ -379,8 +379,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Results by fire</span><span class="of">page 5 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html" aria-current="page">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>Results by fire</span><span class="of">page 6 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html" aria-current="page">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -697,7 +697,7 @@
     ranking is identical under either call. &#9888;&#65039; The paired 95&nbsp;% intervals this
     table used to carry were measured against the previous version of the damage model and have
     not been repeated since it changed, so they are not quoted; both columns above are the
-    current model's, on the same buildings on the same day.</p>
+    refitted model's, on the same buildings on the same day.</p>
     <p class="hint"><strong>Reading it:</strong> the count-tuned call finds more of the destroyed
     buildings and is wrong more often when it does, which nets out against it on F1 while
     bringing the fire total much closer.</p>
@@ -843,8 +843,9 @@
       <a href="combined-series.html">the dataset</a> &middot;
       <a href="uncertainty.html">how certain</a> &middot;
       <a href="outside-california.html">beyond California</a>.</p>
-    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>. The figures on
-    this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on 199 fires
+    <p class="mono">Provenance: the current data release is <b>v0.11.0</b>, packaged 2026-09-25: the v0.10.0 record unchanged plus the two production models, whose evaluation is on the production models page. The figures on
+    this page are the previous first call model, <code>damage_sentinel2_v6</code>, which made the
+    primary calls in the download, fitted on 199 fires
     and 818,838 buildings, data date 2026-09-15. Primary estimate at a fixed cut-off of 0.88; the
     count-tuned call sets its cut-off per fire.</p>
   </div>

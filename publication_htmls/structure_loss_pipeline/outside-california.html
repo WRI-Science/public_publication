@@ -370,8 +370,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Beyond California</span><span class="of">page 7 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html" aria-current="page">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>Beyond California</span><span class="of">page 8 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html" aria-current="page">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -695,7 +695,7 @@
       <p><strong>&#9888;&#65039; The paired intervals on this comparison are not current.</strong>
       The bootstrap that put a 95&nbsp;% interval on the advisory call's cost was run against the
       previous version of the damage model and has not been repeated since the model changed, so
-      it is not quoted here. The two columns above are both the current model's, measured on the
+      it is not quoted here. The two columns above are both the previous first call model's, measured on the
       same buildings on the same day.</p>
     </div>
   </div>
@@ -806,7 +806,7 @@
     normalisation. It is a count, not a per-building record, so it can only check whether our
     totals are in the right place.</p>
     <p>The widest version of that check now runs over <strong>75 fires in 21 states</strong>, all
-    scored on the current model: <strong>97,884 buildings enumerated, 3,179 called
+    scored on the previous first call model: <strong>97,884 buildings enumerated, 3,179 called
     destroyed</strong> against <strong>4,243</strong> reported, a pooled ratio of
     <strong>0.749</strong>. Dropping California — where the two figures are not independent —
     leaves 70 fires in 20 states and a ratio of <strong>0.738</strong>. Forty-six of the 75 fires
@@ -1078,8 +1078,9 @@
       <a href="forward-fires.html">results by fire</a> ·
       <a href="combined-series.html">the dataset</a> ·
       <a href="uncertainty.html">how certain</a>.</p>
-    <p class="mono">Provenance: newest published data release <code>v0.9.0</code>. Model
-    figures on this page are the current damage model, <code>damage_sentinel2_v6</code>, fitted on
+    <p class="mono">Provenance: the current data release is <b>v0.11.0</b>, packaged 2026-09-25: the v0.10.0 record unchanged plus the two production models, whose evaluation is on the production models page. Model
+    figures on this page are the previous first call model, <code>damage_sentinel2_v6</code>, which
+    made the primary calls in the download, fitted on
     199 fires and 818,838 buildings, data date 2026-09-15. Default cut-off 0.88.</p>
   </div>
 </footer>

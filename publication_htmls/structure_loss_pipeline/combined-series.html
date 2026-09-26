@@ -371,8 +371,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>The dataset</span><span class="of">page 6 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html" aria-current="page">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>The dataset</span><span class="of">page 7 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html" aria-current="page">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -403,15 +403,16 @@
     <p>The full internal build is 2,102,662 rows. 32,910 of them (1.57 %) are left out of the
     released package for the licence reason set out at the bottom of this page.</p>
     <div class="note warn">
-      <p style="margin-bottom:0"><strong>&#9888;&#65039; Read this before comparing a count here
-      with an accuracy figure elsewhere on the site.</strong> Every count on this page is a
-      property of the <em>published file</em>, and the published file's destroyed calls were made
-      by the damage model as it stood on 13 September 2026, at a fixed threshold of 0.85. On 15
-      September the model was refitted on 199 fires instead of 74 and its threshold moved to 0.88,
-      and every accuracy figure on the rest of this site is that newer model's. <strong>No release
-      carrying the newer model has been cut yet</strong>, so the counts below will not reproduce
-      from the newer model, and the two must not be mixed in one sentence. The release the counts
-      belong to is named in the provenance line at the foot of this page.</p>
+      <p style="margin-bottom:0"><strong>&#9888;&#65039; The counts on this page describe an earlier
+      release than the current one.</strong> They are a property of the file as published on 13
+      September 2026: 377 fires, destroyed calls made at a fixed threshold of 0.85. The current
+      release covers <strong>452 fires and 2,154,625 rows</strong>, its primary calls made by a
+      model refitted on 199 fires at a threshold of 0.88; <a href="index.html">the index</a> and
+      <a href="changelog.html">release history</a> carry its counts, and
+      <a href="models.html">the production models</a> page describes the two models it promotes.
+      A refresh of this page's counts to the current release is pending, so do not mix a count
+      from here with one from those pages in one sentence. Both releases are named in the
+      provenance line at the foot of this page.</p>
     </div>
     <div class="note warn">
       <p><strong>⚠️ Never add up rows across sources for the same fire.</strong> Every row
@@ -1140,9 +1141,10 @@
       <a href="augmented-carlson.html">historical companion</a> ·
       <a href="changelog.html">release history</a>.</p>
     <p class="mono">Provenance: every count on this page is release <code>v0.9.0</code>, data
-    date 2026-09-13, which is the newest published release — no newer one has been cut. Its
-    destroyed calls were made by <code>damage_sentinel2_v5</code> at a fixed threshold of 0.85;
-    the model the rest of this site reports is <code>damage_sentinel2_v6</code> at 0.88. The full
+    date 2026-09-13, whose destroyed calls were made by <code>damage_sentinel2_v5</code> at a fixed
+    threshold of 0.85. The current release is <code>v0.11.0</code>, packaged 2026-09-25: the
+    <code>v0.10.0</code> record unchanged (452 fires, 2,154,625 rows, primary calls by
+    <code>damage_sentinel2_v6</code> at 0.88) plus the two production models. The full
     column-by-column crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing
     description of the file is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

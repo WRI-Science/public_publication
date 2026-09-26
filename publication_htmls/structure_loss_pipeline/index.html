@@ -440,7 +440,7 @@
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
     <span class="here"><span class="of">the index</span></span>
-    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -460,19 +460,26 @@
 <div class="wide">
   <div class="stats">
     <div>
-      <span class="fig">377 fires</span>
+      <span class="fig">452 fires</span>
       <span class="cap">covered by the published dataset, 2002 to 2025, in the continental United States</span>
       <span class="from">the current release manifest</span>
     </div>
     <div>
-      <span class="fig">2,069,752</span>
+      <span class="fig">2,154,625</span>
       <span class="cap">rows: one building, in one fire, as described by one source</span>
       <span class="from">the current release manifest</span>
     </div>
     <div>
-      <span class="fig">0.913</span>
-      <span class="cap">F1 of the destroyed call against fire-service inspections, on 36,272 buildings in eight inspected incidents, each scored by a model trained without it</span>
-      <span class="from">the damage model's own held-out table</span>
+      <span class="fig">0.904</span>
+      <span class="ci">0.957 on fire-service inspections</span>
+      <span class="cap">F1 of the <strong>first call model</strong>, about 74 days after ignition, on 782,566 buildings in 191 historical fires, each fire scored by a model trained without it</span>
+      <span class="from">the release's model evaluation</span>
+    </div>
+    <div>
+      <span class="fig">0.925</span>
+      <span class="ci">0.969 on fire-service inspections</span>
+      <span class="cap">F1 of the <strong>second call model</strong>, about a year after ignition, on the same buildings and the same held-out design</span>
+      <span class="from">the release's model evaluation</span>
     </div>
     <div>
       <span class="fig">3.5 %</span>
@@ -504,7 +511,7 @@
           <tr><td><strong>Before 2016</strong></td><td>2002–2015</td><td>the hand-assembled historical census only — no before-and-after satellite pair exists, so this method could not produce these years even in principle</td><td class="num">160</td><td class="num">973,491</td></tr>
           <tr><td rowspan="2"><strong>2016–2022</strong></td><td rowspan="2">2016–2022</td><td>the historical census</td><td class="num">201</td><td class="num">797,448</td></tr>
           <tr><td>this pipeline, run backwards over fires the census also holds</td><td class="num">17</td><td class="num">153,958</td></tr>
-          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline only — the census ends in 2022, so there is nothing to compare against</td><td class="num">16</td><td class="num">177,765</td></tr>
+          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline only — the census ends in 2022, so there is nothing to compare against</td><td class="num">91</td><td class="num">278,844</td></tr>
         </tbody>
       </table>
     </div>
@@ -596,14 +603,15 @@
     <h2>Four things to know about the data</h2>
     <div class="status">
       <ul class="tight">
-        <li><strong>There are two estimates per building, with different delivery
-        times.</strong> The <em>primary</em> estimate is available about two and a half months
-        after a fire starts and covers every building in every fire. The <em>refined</em>
-        estimate arrives about a year later, once more imagery exists, and is more accurate:
-        against fire-service inspections, scored on the same buildings, F1 goes from 0.9208 to
-        <strong>0.9606</strong>. It does not exist for every building — see
-        <a href="confusion-matrix.html">the confusion matrix page</a> for the coverage of each
-        ground-truth source.</li>
+        <li><strong>There are two models, with different delivery times.</strong> The
+        <strong>first call model</strong> answers about 74 days after a fire starts. The
+        <strong>second call model</strong> answers about a year later, once more imagery exists,
+        and is more accurate: on the same 199 held-out fires, pooled F1 against the historical
+        census goes from 0.904 to <strong>0.925</strong>, and against fire-service inspections
+        from 0.957 to <strong>0.969</strong>. Each includes a neural column that reads the
+        whole series of satellite scenes around a building. <a href="models.html">The
+        production models</a> page has the full evaluation, by structure type, fire size,
+        region, state and year.</li>
         <li><strong>Never add up rows across sources for the same fire.</strong> Seventeen
         fires are described twice: once by the hand-assembled historical census and once by
         this pipeline, one row per building per source. Summing both descriptions double-counts
@@ -618,13 +626,16 @@
         almost no signal there.</strong> Accuracy figures are worth reading separately for
         buildings inside the fire perimeter or within 100&nbsp;m of it, and for buildings 100&nbsp;m
         to 2.4&nbsp;km outside it. <a href="uncertainty.html">How certain</a> splits them.</li>
-        <li><strong>The accuracy figures on this site are ahead of the file you can
-        download.</strong> The damage model was refitted on 15 September 2026 — 199 fires instead
-        of 74 — and every accuracy figure here is that model's. The newest packaged release,
-        named in the provenance line at the foot of this page and on
-        <a href="changelog.html">release history</a>, still carries the previous model's destroyed
-        calls at the previous threshold. A release carrying the current model has not been cut
-        yet, so a count taken from the download will not match a count quoted here.</li>
+        <li><strong>The calls in the download were made by the previous models.</strong> The
+        current release, named at the foot of this page and on
+        <a href="changelog.html">release history</a>, promotes the two production models and
+        publishes their evaluation, but its per-building calls are unchanged from the release
+        before: the previous first call at a threshold of 0.88 and the previous second call at
+        0.84. A new fire can be scored by the production models only once their neural column
+        can be computed outside the training fires, which is in progress; the next release
+        rescores the dataset and adds the fires of 2023–2026. The written pages other than
+        this one and <a href="models.html">the production models</a> describe the previous
+        model, the one that made the calls you download.</li>
       </ul>
     </div>
   </div>
@@ -640,9 +651,10 @@
       <dt>Building footprint</dt><dd>A polygon outlining a building's roof, drawn from overhead imagery. Two public databases supply them nationally: the FEMA / Oak Ridge USA Structures layer and Microsoft's US Building Footprints.</dd>
       <dt>Building list</dt><dd>The set of buildings we believe stood in a fire's area before it burned: the footprint databases, plus buildings found by our own detector, each tagged with where it came from.</dd>
       <dt>Our detector</dt><dd>A neural network trained on aerial photography to find buildings the footprint databases miss.</dd>
-      <dt>Primary estimate</dt><dd>The destroyed call available about two and a half months after a fire starts. It exists for every building in every fire covered.</dd>
-      <dt>Refined estimate</dt><dd>A second, more accurate destroyed call available about a year later, once a further post-fire image window and a year-over-year satellite summary exist. It exists for most buildings in most fires, not all.</dd>
-      <dt>Threshold</dt><dd>The model outputs a probability per building; we call a building destroyed above a fixed number — 0.88 for the primary estimate, 0.84 for the refined one. The number is fixed in advance, not tuned to the fire being scored.</dd>
+      <dt>First call model</dt><dd>The model that makes the destroyed call available about 74 days after a fire starts. In the dataset, the first call is the <em>primary</em> estimate column, which exists for every building in every fire covered.</dd>
+      <dt>Second call model</dt><dd>The model that makes a second, more accurate destroyed call about a year later, once a further post-fire image window, a year-over-year satellite summary and a year of satellite scenes exist. In the dataset, the second call is the <em>refined</em> estimate column, which exists for most buildings in most fires, not all.</dd>
+      <dt>Neural column</dt><dd>One input to each model: the output of a small neural network that reads the whole series of satellite scenes around a building.</dd>
+      <dt>Threshold</dt><dd>The model outputs a probability per building; we call a building destroyed above a fixed number — 0.88 for both production models. In the current download the refined call was made at 0.84 by the previous second call model. The number is fixed in advance, not tuned to the fire being scored.</dd>
       <dt>Sentinel-2</dt><dd>Two free European Space Agency satellites that photograph every point on Earth about every five days at 10 m per pixel.</dd>
       <dt>Aerial photography (NAIP)</dt><dd>The US Department of Agriculture's National Agriculture Imagery Program: aerial photographs of the continental United States at roughly 60 cm per pixel, reflown every two to three years.</dd>
       <dt>Annual satellite embedding</dt><dd>A freely published yearly summary of what each 10 m patch of ground looked like across a whole year, as 64 numbers per pixel, so one year can be compared with the next.</dd>
@@ -692,12 +704,20 @@
         <span class="t">Release history</span>
         <span class="d">Every published version of the dataset with its date, coverage and
         schema width, so an analysis can name exactly which data it used.</span>
-        <span class="when">to 2026-09-15</span>
+        <span class="when">to 2026-09-25</span>
       </a>
     </div>
 
     <p class="groupname">Results</p>
     <div class="cards">
+      <a href="models.html">
+        <span class="t">The production models</span>
+        <span class="d">The first call and second call models: what each reads, including
+        its neural column, how accurate each is on 199 fires it never saw, by structure type,
+        fire size, region, state and year, what happens when a whole region is held out, and
+        where they are weakest.</span>
+        <span class="when">data 2026-09-25</span>
+      </a>
       <a href="confusion-matrix.html">
         <span class="t">Confusion matrix</span>
         <span class="d">All four counts — agreed destroyed, missed, false alarm, agreed
@@ -812,11 +832,13 @@
   <div class="wrap">
     <p>Structure Loss Pipeline · published by WRI Science. Code MIT, data CC BY 4.0, copyright
     Carlo Broderick; no DOI has been minted yet.</p>
-    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>; no newer
-    release has been cut. Model figures on this site are the current damage model,
-    <code>damage_sentinel2_v6</code>, fitted on 199 fires and 818,838 buildings, data date
-    2026-09-15 — one generation ahead of the calls packaged in v0.9.0. Primary estimate at a fixed
-    threshold of 0.88, refined estimate at 0.84.</p>
+    <p class="mono">Provenance: the current data release is <b>v0.11.0</b>, packaged 2026-09-25:
+    the v0.10.0 record (452 fires, 2,154,625 rows, calls by the previous first call model at 0.88
+    and the previous second call model at 0.84) plus the two production models,
+    <code>damage_sentinel2_final_v1</code> (first call) and
+    <code>damage_sentinel2_refined_final_v1</code> (second call), each fitted on 199 fires and
+    818,838 buildings and evaluated leave-one-fire-out at a fixed threshold of 0.88 over four
+    training runs. Headline figures on this page are the production models'.</p>
   </div>
 </footer>
 

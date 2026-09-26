@@ -372,8 +372,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Release history</span><span class="of">page 11 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
+    <span class="here"><span>Release history</span><span class="of">page 12 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
   </div>
 </nav>
 
@@ -385,8 +385,8 @@
     fire, saying whether that building was destroyed. Each published version is frozen and
     keeps its own version number, so an analysis can name exactly which data it used. This
     page lists every version, what it covers, and how wide its schema is. <strong>The current
-    version is v0.9.0, released 13 September 2026: 377 fires, 2,069,752 rows, 68
-    columns.</strong></p>
+    version is v0.11.0, released 25 September 2026: 452 fires, 2,154,625 rows, 68
+    columns, and the two production models.</strong></p>
   </div>
 </header>
 
@@ -429,24 +429,39 @@
           <tr><td class="ver">v0.6.0</td><td class="num">2026-09-12</td><td class="num">377</td><td class="num">2,062,248</td><td class="num">58</td><td>Same fires and rows; one further attribute.</td></tr>
           <tr><td class="ver">v0.7.0</td><td class="num">2026-09-12</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">58</td><td>7,504 further building rows, from one fire's buildings being described by a second source.</td></tr>
           <tr><td class="ver">v0.8.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td>The refined estimate ships, as ten further columns beside the primary one. Same fires and rows.</td></tr>
-          <tr class="current"><td class="ver">v0.9.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td><strong>Current.</strong> Same fires, rows and schema as v0.8.0; the refined estimate is produced by a more accurate model.</td></tr>
+          <tr><td class="ver">v0.9.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td>Same fires, rows and schema as v0.8.0; the refined estimate is produced by a more accurate model.</td></tr>
+          <tr><td class="ver">v0.10.0</td><td class="num">2026-09-17</td><td class="num">452</td><td class="num">2,154,625</td><td class="num">68</td><td>75 further fires from 2023 onward, most without inspection records. The primary estimate is made by a model refitted on 199 fires, at a threshold of 0.88.</td></tr>
+          <tr class="current"><td class="ver">v0.11.0</td><td class="num">2026-09-25</td><td class="num">452</td><td class="num">2,154,625</td><td class="num">68</td><td><strong>Current.</strong> Same fires, rows, schema and per-building calls as v0.10.0 — the data files are byte-identical. Promotes the <a href="models.html">first call and second call models</a>, each with a neural column, and publishes their evaluation on 199 fires they never saw, with model cards.</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> each version's own <code>manifest.json</code> under
     <code>outputs/releases/</code> on the data share; fires, rows, columns and packaging time
-    are read from the manifest of that version. Read 2026-09-15.</p>
-    <p><b>In one sentence:</b> the dataset grew from 20 fires to 377 and from 40 attributes to
-    68, and the version to use today is v0.9.0.</p>
-    <div class="note warn">
-      <p style="margin-bottom:0">⚠️ <strong>The model moved on 15 September 2026 and no release
-      carries it yet.</strong> The damage model was refitted on <strong>199 fires</strong> instead
-      of 74, and its fixed threshold moved from <strong>0.85 to 0.88</strong>. Every accuracy
-      figure published on this site is that newer model's. <strong>v0.9.0 is still the newest
-      packaged release</strong> and its destroyed calls were made by the previous model at the
-      previous threshold, so a count taken from the download will not reproduce a count quoted
-      elsewhere on this site. A release carrying the newer model has not been cut. When it is, it
-      will appear as a new row in the table above and this note will go.</p>
+    are read from the manifest of that version. Read 2026-09-25.</p>
+    <p><b>In one sentence:</b> the dataset grew from 20 fires to 452 and from 40 attributes to
+    68, and the version to use today is v0.11.0.</p>
+    <div class="note">
+      <p><strong>v0.11.0 — the two production models.</strong> This release promotes the
+      <strong>first call model</strong> (about 74 days after ignition) and the <strong>second
+      call model</strong> (about a year after) to production. Each is a gradient-boosted model
+      that includes a neural column reading the whole series of satellite scenes around each
+      building. Both are evaluated on the 199 fires they were trained on, each fire scored by a
+      copy of the model that never saw it, at a threshold of 0.88 over four training runs:</p>
+      <ul class="tight">
+        <li><strong>First call model:</strong> pooled F1 0.9037 and mean F1 per fire 0.8025 on
+        191 historical fires; 0.9570 and 0.9110 on eight fire-service-inspected incidents.
+        Mean F1 per historical fire +0.0757 [+0.0617, +0.0910] over the previous model.</li>
+        <li><strong>Second call model:</strong> 0.9255 and 0.8282 on the historical fires; 0.9692
+        and 0.9327 on the inspected incidents; +0.1024 [+0.0873, +0.1188] over the previous
+        model.</li>
+      </ul>
+      <p style="margin-bottom:0">⚠️ <strong>The per-building calls in v0.11.0 are v0.10.0's</strong>,
+      made by the previous models. The production models can score a new fire once their neural
+      column can be computed outside the training fires, which is in progress. <strong>The next
+      release</strong> rescores the dataset with them and adds the fires scored since, from
+      2023 to 2026. The full evaluation — by structure type, fire size, region, state and year,
+      and with whole regions, states and years held out — is on
+      <a href="models.html">the production models</a> page.</p>
     </div>
   </div>
 </section>
@@ -486,8 +501,8 @@
     <a href="combined-series.html">the dataset</a> ·
     <a href="how-it-works.html">how it works</a> ·
     <a href="confusion-matrix.html">confusion matrix</a>.</p>
-    <p class="mono">Provenance: current data release v0.9.0, packaged 2026-09-13; this page
-    read 2026-09-14. Every figure above comes from the named release's own manifest file on
+    <p class="mono">Provenance: current data release v0.11.0, packaged 2026-09-25; this page
+    read 2026-09-25. Every figure above comes from the named release's own manifest file on
     the data share.</p>
   </div>
 </footer>

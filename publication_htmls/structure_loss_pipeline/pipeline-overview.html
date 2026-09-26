@@ -380,8 +380,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>The method in full</span><span class="of">page 3 of 11</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="pipeline-overview.html" aria-current="page">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>The method in full</span><span class="of">page 4 of 12</span></span>
+    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html" aria-current="page">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
   </div>
 </nav>
 
@@ -1432,7 +1432,7 @@
     <p class="src"><b>Source:</b> <code>outputs/ics209_check/summary.json</code> on the data
     share for the two ground-truth counts and the ratios between them, generated 2026-09-12; our
     own destroyed counts and the ratios that use them are taken from
-    <code>outputs/forward_damage/metrics.json</code>, generated 2026-09-15 on the current model.
+    <code>outputs/forward_damage/metrics.json</code>, generated 2026-09-15 on the previous first call model.
     The per-fire
     cut-off count comes from <code>outputs/combined_series/per_fire_summary.csv</code>. 14 of
     the 15 fires matched a national incident report — Coches 2, with 9 destroyed, never reached
@@ -1912,10 +1912,9 @@
       <a href="augmented-carlson.html">historical companion</a> ·
       <a href="changelog.html">release history</a>.
     </p>
-    <p class="mono">Provenance: the newest published data release is <b>v0.9.0</b>, data date
-    2026-09-13; no newer release has been cut. Every model figure on this page is the current
-    damage model, <code>damage_sentinel2_v6</code>, fitted on 199 fires and 818,838 buildings,
-    data date 2026-09-15 — one generation ahead of the calls packaged in the release. Primary
+    <p class="mono">Provenance: the current data release is <b>v0.11.0</b>, packaged 2026-09-25: the v0.10.0 record unchanged plus the two production models, whose evaluation is on the production models page. Every model figure on this page is the previous first call
+    model, <code>damage_sentinel2_v6</code>, which made the primary calls in the download, fitted
+    on 199 fires and 818,838 buildings, data date 2026-09-15. Primary
     estimate at a fixed threshold of 0.88; refined estimate at 0.84.</p>
   </div>
 </footer>
