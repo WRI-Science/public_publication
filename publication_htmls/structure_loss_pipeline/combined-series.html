@@ -403,15 +403,14 @@
     <p>The full internal build is 2,102,662 rows. 32,910 of them (1.57 %) are left out of the
     released package for the licence reason set out at the bottom of this page.</p>
     <div class="note warn">
-      <p style="margin-bottom:0"><strong>&#9888;&#65039; The counts on this page describe an earlier
-      release than the current one.</strong> They are a property of the file as published on 13
-      September 2026: 377 fires, destroyed calls made at a fixed threshold of 0.85. The current
-      release covers <strong>452 fires and 2,154,625 rows</strong>, its primary calls made by a
-      model refitted on 199 fires at a threshold of 0.88; <a href="index.html">the index</a> and
-      <a href="changelog.html">release history</a> carry its counts, and
-      <a href="models.html">the production models</a> page describes the two models it promotes.
-      A refresh of this page's counts to the current release is pending, so do not mix a count
-      from here with one from those pages in one sentence. Both releases are named in the
+      <p style="margin-bottom:0"><strong>&#9888;&#65039; Most counts on this page describe an earlier
+      release than the current one.</strong> The era table at the top of this page and the
+      download table near its foot are the current release's: <strong>653 fires in 35 states and
+      2,258,471 rows</strong>, every row this project describes called by
+      <a href="models.html">the production models</a> at a threshold of 0.88. Every other count
+      on this page is a property of the file as published on 13 September 2026 — 377 fires,
+      destroyed calls made at a threshold of 0.85 — and a refresh of those counts is pending, so
+      do not mix one of them with a current figure in one sentence. Both releases are named in the
       provenance line at the foot of this page.</p>
     </div>
     <div class="note warn">
@@ -456,12 +455,12 @@
     <div class="tablewrap">
       <table>
         <caption>The three eras of the published series, and who describes each one</caption>
-        <thead><tr><th>Era</th><th>Fire years</th><th>Who describes it</th><th class="num">Fires</th><th class="num">Rows</th></tr></thead>
+        <thead><tr><th>Era</th><th>Fire years</th><th>Who describes it</th><th class="num">Fires</th><th class="num">Rows released</th></tr></thead>
         <tbody>
           <tr><td><strong>Before 2016</strong></td><td>2002–2015</td><td>the hand-assembled historical census only — Sentinel-2 is not in orbit, so no before-and-after satellite pair exists and this method could not produce these years even in principle</td><td class="num">160</td><td class="num">973,491</td></tr>
           <tr><td rowspan="2"><strong>2016–2022</strong></td><td rowspan="2">2016–2022</td><td>the historical census</td><td class="num">201</td><td class="num">797,448</td></tr>
-          <tr><td>this pipeline, run backwards over fires the census also holds — the only ground on which the two methods can be compared at all</td><td class="num">17</td><td class="num">153,958</td></tr>
-          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline only — the census ends in 2022, so there is nothing to compare against</td><td class="num">16</td><td class="num">177,765</td></tr>
+          <tr><td>this pipeline, run backwards over fires the census also holds — the only ground on which the two methods can be compared at all</td><td class="num">17</td><td class="num">140,010</td></tr>
+          <tr><td><strong>2023 onward</strong></td><td>2023–</td><td>this pipeline only — the census ends in 2022, so there is nothing to compare against</td><td class="num">292</td><td class="num">347,522</td></tr>
         </tbody>
       </table>
     </div>
@@ -473,8 +472,9 @@
       double-counts those seventeen. Group by fire <em>and</em> source, and when you want one
       number for an era, pick one source. The rest of this page says how.</p>
     </div>
-    <p class="src"><b>Source:</b> the release directory's <code>manifest.json</code> on the data
-    share, its rows-by-era-and-source breakdown and its dual-source rule; the era boundaries are
+    <p class="src"><b>Source:</b> the current release's per-fire summary on the data share, summed
+    by era and source (rows as released, after the licence exclusion, so the four rows add up to
+    2,258,471), and the manifest's dual-source rule; the era boundaries are
     defined in the crosswalk document shipped inside every release.</p>
   </div>
 </section>
@@ -1082,14 +1082,14 @@
         <caption>The download at a glance</caption>
         <thead><tr><th>Property</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>rows — internal build / released package</td><td class="num">2,102,662 / <strong>2,069,752</strong></td></tr>
-          <tr><td>fires / (fire, source) pairs</td><td class="num">377 / <strong>394</strong> — 361 from the historical record, 33 from this project, 17 described by both</td></tr>
+          <tr><td>rows — internal build / released package</td><td class="num">2,324,736 / <strong>2,258,471</strong></td></tr>
+          <tr><td>fires / (fire, source) pairs</td><td class="num">653 / <strong>670</strong> — 361 from the historical record, 309 from this project, 17 described by both</td></tr>
           <tr><td>schema / coordinate system</td><td class="num">68 columns / EPSG:5070</td></tr>
-          <tr><td>files / size</td><td class="num">20 / 2,771.0 MB</td></tr>
-          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 19 of 19</td></tr>
+          <tr><td>files / size</td><td class="num">39 / 3,033.2 MB</td></tr>
+          <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 38 of 38</td></tr>
           <tr><td>geometry on the historical record's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>what documents the build</td><td class="num"><code>build-manifest.json</code> beside <code>manifest.json</code></td></tr>
-          <tr><td>models behind the calls</td><td class="num">one building detector and one damage model throughout; primary call at the fixed threshold 0.85</td></tr>
+          <tr><td>models behind the calls</td><td class="num">one building detector throughout; the first call model on every row this project describes and the second call model on 62 fires, both at the fixed threshold 0.88, with the neural column on all 318 scoring units</td></tr>
           <tr><td>release checks</td><td class="num">all three pass, with no override: one detector and one damage model across every fire, a current damage model, and no fire without a damage call</td></tr>
           <tr><td>citation identifier</td><td class="num">⚠️ no DOI minted yet; the citation file holds the slot</td></tr>
         </tbody>
@@ -1140,11 +1140,12 @@
       <a href="uncertainty.html">how certain</a> ·
       <a href="augmented-carlson.html">historical companion</a> ·
       <a href="changelog.html">release history</a>.</p>
-    <p class="mono">Provenance: every count on this page is release <code>v0.9.0</code>, data
-    date 2026-09-13, whose destroyed calls were made by <code>damage_sentinel2_v5</code> at a fixed
-    threshold of 0.85. The current release is <code>v0.11.0</code>, packaged 2026-09-25: the
-    <code>v0.10.0</code> record unchanged (452 fires, 2,154,625 rows, primary calls by
-    <code>damage_sentinel2_v6</code> at 0.88) plus the two production models. The full
+    <p class="mono">Provenance: the era table and the download table are release
+    <code>v0.12.0</code>, packaged 2026-09-27 (653 fires, 2,258,471 rows, first call by
+    <code>damage_sentinel2_final_v1</code> and second call by
+    <code>damage_sentinel2_refined_final_v1</code>, both at 0.88). Every other count on this page
+    is release <code>v0.9.0</code>, data date 2026-09-13, whose destroyed calls were made by
+    <code>damage_sentinel2_v5</code> at a fixed threshold of 0.85. The full
     column-by-column crosswalk is <code>docs/combined-series-spec.md</code> and the user-facing
     description of the file is <code>docs/data-descriptor.md</code>, both shipped inside every
     release.</p>

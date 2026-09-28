@@ -385,8 +385,8 @@
     fire, saying whether that building was destroyed. Each published version is frozen and
     keeps its own version number, so an analysis can name exactly which data it used. This
     page lists every version, what it covers, and how wide its schema is. <strong>The current
-    version is v0.11.0, released 25 September 2026: 452 fires, 2,154,625 rows, 68
-    columns, and the two production models.</strong></p>
+    version is v0.12.0, released 27 September 2026: 653 fires in 35 states, 2,258,471 rows, 68
+    columns, every row this project describes scored by the two production models.</strong></p>
   </div>
 </header>
 
@@ -431,15 +431,31 @@
           <tr><td class="ver">v0.8.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td>The refined estimate ships, as ten further columns beside the primary one. Same fires and rows.</td></tr>
           <tr><td class="ver">v0.9.0</td><td class="num">2026-09-13</td><td class="num">377</td><td class="num">2,069,752</td><td class="num">68</td><td>Same fires, rows and schema as v0.8.0; the refined estimate is produced by a more accurate model.</td></tr>
           <tr><td class="ver">v0.10.0</td><td class="num">2026-09-17</td><td class="num">452</td><td class="num">2,154,625</td><td class="num">68</td><td>75 further fires from 2023 onward, most without inspection records. The primary estimate is made by a model refitted on 199 fires, at a threshold of 0.88.</td></tr>
-          <tr class="current"><td class="ver">v0.11.0</td><td class="num">2026-09-25</td><td class="num">452</td><td class="num">2,154,625</td><td class="num">68</td><td><strong>Current.</strong> Same fires, rows, schema and per-building calls as v0.10.0 — the data files are byte-identical. Promotes the <a href="models.html">first call and second call models</a>, each with a neural column, and publishes their evaluation on 199 fires they never saw, with model cards.</td></tr>
+          <tr><td class="ver">v0.11.0</td><td class="num">2026-09-25</td><td class="num">452</td><td class="num">2,154,625</td><td class="num">68</td><td>Same fires, rows, schema and per-building calls as v0.10.0 — the data files are byte-identical. Promotes the <a href="models.html">first call and second call models</a>, each with a neural column, and publishes their evaluation on 199 fires they never saw, with model cards.</td></tr>
+          <tr class="current"><td class="ver">v0.12.0</td><td class="num">2026-09-27</td><td class="num">653</td><td class="num">2,258,471</td><td class="num">68</td><td><strong>Current.</strong> 201 further fires from 2023 to 2026, with overlapping fire areas resolved. Every building this project describes is now scored by the <a href="models.html">first call model</a>, neural column included on all 318 scoring units, and by the second call model wherever its year of imagery exists.</td></tr>
         </tbody>
       </table>
     </div>
     <p class="src"><b>Source:</b> each version's own <code>manifest.json</code> under
     <code>outputs/releases/</code> on the data share; fires, rows, columns and packaging time
-    are read from the manifest of that version. Read 2026-09-25.</p>
-    <p><b>In one sentence:</b> the dataset grew from 20 fires to 452 and from 40 attributes to
-    68, and the version to use today is v0.11.0.</p>
+    are read from the manifest of that version (for v0.12.0, fires are those shipped: the
+    manifest's 654 counts one fire whose every row is excluded under the licence rule). Read
+    2026-09-28.</p>
+    <p><b>In one sentence:</b> the dataset grew from 20 fires to 653 and from 40 attributes to
+    68, and the version to use today is v0.12.0.</p>
+    <div class="note">
+      <p><strong>v0.12.0 — the fires of 2023 to 2026, scored by the production models.</strong>
+      This release adds 201 fires from 2023 to 2026 — 292 fires in all now come after the
+      historical census ends, in 32 states — taking the dataset to 653 fires in 35 states and
+      2,258,471 rows. Where a newly scored fire's area overlapped another's, the overlap was
+      resolved rather than left in: two fires that were parts of a larger complex already in the
+      dataset were withdrawn in favour of the complex, and one that re-burned an earlier fire's
+      scar is held back pending a ruling. Every building this project describes now carries the
+      <strong>first call model's</strong> call, computed with its neural column on all 318
+      scoring units, except 642 whose imagery was incomplete; the <strong>second call
+      model</strong> adds its call on the 62 fires whose year of imagery exists. The models and
+      their evaluation are unchanged from v0.11.0.</p>
+    </div>
     <div class="note">
       <p><strong>v0.11.0 — the two production models.</strong> This release promotes the
       <strong>first call model</strong> (about 74 days after ignition) and the <strong>second
@@ -456,10 +472,8 @@
         model.</li>
       </ul>
       <p style="margin-bottom:0">⚠️ <strong>The per-building calls in v0.11.0 are v0.10.0's</strong>,
-      made by the previous models. The production models can score a new fire once their neural
-      column can be computed outside the training fires, which is in progress. <strong>The next
-      release</strong> rescores the dataset with them and adds the fires scored since, from
-      2023 to 2026. The full evaluation — by structure type, fire size, region, state and year,
+      made by the previous models; v0.12.0 is the release that rescored the dataset with the
+      production models and added the fires of 2023 to 2026. The full evaluation — by structure type, fire size, region, state and year,
       and with whole regions, states and years held out — is on
       <a href="models.html">the production models</a> page.</p>
     </div>
@@ -501,8 +515,8 @@
     <a href="combined-series.html">the dataset</a> ·
     <a href="how-it-works.html">how it works</a> ·
     <a href="confusion-matrix.html">confusion matrix</a>.</p>
-    <p class="mono">Provenance: current data release v0.11.0, packaged 2026-09-25; this page
-    read 2026-09-25. Every figure above comes from the named release's own manifest file on
+    <p class="mono">Provenance: current data release v0.12.0, packaged 2026-09-27; this page
+    read 2026-09-28. Every figure above comes from the named release's own manifest file on
     the data share.</p>
   </div>
 </footer>

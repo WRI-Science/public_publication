@@ -456,8 +456,8 @@
     call model</strong> answers about 74 days after a fire starts; the <strong>second call
     model</strong> answers about a year later, once more satellite imagery exists, and is more
     accurate. Both are evaluated on 199 fires, each fire scored by a copy of the model that never
-    saw it. This page describes what each model reads, how accurate it is and where it is
-    weakest.</p>
+    saw it. Both now make the per-building calls in the published dataset, with the neural column computed for every fire. This page describes what each model reads, how accurate it is and
+    where it is weakest.</p>
   </div>
 </header>
 
@@ -625,11 +625,7 @@
     <p class="eyebrow">before you use them</p>
     <h2>Limitations</h2>
     <ul class="tight">
-      <li><strong>The calls in the current download are not yet these models'.</strong> The
-      neural column can only be computed for a new fire once its network is saved for reuse,
-      which is in progress. Until then these models are evaluated on the 199 fires above, and
-      the per-building calls in the published dataset are the ones made by the previous models.
-      The next release rescores the dataset with these models and adds the fires of 2023–2026.</li>
+      <li><strong>The calls in the current download are these models'.</strong> Every building this project describes in the published dataset carries the first call model's call, computed with its neural column, unless its satellite imagery was incomplete, in which case the row says so; the second call model's call is present wherever its year of imagery exists, and null with a stated reason elsewhere. The accuracy figures on this page are measured on the 199 fires the models were trained on, each held out in turn — most of the fires scored since 2023 have no per-building ground truth to measure against.</li>
       <li><strong>A fire in new country scores lower than the headline.</strong> The headline
       is measured on fires like the ones in the pool; a whole new region costs the first call
       model −0.0592 of mean F1 per fire, a new state −0.0300.</li>
@@ -651,9 +647,9 @@
     <p>Companion pages: <a href="index.html">start here</a> ·
     <a href="how-we-validate.html">how we validate</a> ·
     <a href="changelog.html">release history</a>.</p>
-    <p class="mono">Provenance: data release v0.11.0, packaged
-    2026-09-25. The two models are promoted in that release and
-    documented in its model cards; every figure on this page is read from the release's own
+    <p class="mono">Provenance: data release v0.12.0, packaged
+    2026-09-27. The two models are documented in that release's
+    model cards and make every per-building call it carries; every figure on this page is read from the release's own
     model evaluation, four training runs, threshold 0.88.</p>
   </div>
 </footer>
