@@ -410,8 +410,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>How it works</span><span class="of">page 2 of 12</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html" aria-current="page">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html">Release history</a></span>
+    <span class="here"><span>How it works</span><span class="of">page 1 of 12</span></span>
+    <span class="sibs"><a href="how-it-works.html" aria-current="page">How it works</a><a href="how-it-works-infographic.html">The process, in pictures</a><a href="models.html">The production models</a><a href="changelog.html">Release history</a><a href="augmented-carlson.html">Historical companion</a><a href="pipeline-overview.html">Archive: the method in full</a><a href="how-we-validate.html">Archive: how we validate</a><a href="confusion-matrix.html">Archive: confusion matrix</a><a href="forward-fires.html">Archive: results by fire</a><a href="combined-series.html">Archive: the dataset</a><a href="outside-california.html">Archive: beyond California</a><a href="uncertainty.html">Archive: how certain</a></span>
   </div>
 </nav>
 
@@ -424,9 +424,10 @@
     is two jobs, not one: first build a list of the buildings that stood before the fire,
     then decide for each of them whether the fire destroyed it. This page explains both in
     plain language, says how accurate each is, and shows how the same process runs on a fire
-    nobody has looked at, anywhere in the lower 48 states. <strong>The headline: against
-    fire-service inspections, the destroyed call scores an F1 of 0.916 across 36,272 inspected
-    structures, with every fire held out of the model that scored it.</strong></p>
+    nobody has looked at, anywhere in the lower 48 states. <strong>The headline: the first
+    destroyed call, about 74 days after ignition, scores an F1 of 0.904 on 782,566 buildings in
+    191 historical fires and 0.957 on 36,272 structures inspected by CAL FIRE, with every fire
+    held out of the model that scored it.</strong></p>
   </div>
 </header>
 
@@ -478,7 +479,7 @@
 
     <h3>Add what the databases miss, with an imagery detector</h3>
     <p>A segmentation network reads the most recent pre-fire aerial imagery at 60 centimetre resolution, four bands, with the footprints supplied as a fifth input band so it learns to fill gaps rather than redraw what is already known. Its output is a probability map of where a roof is. We cut that map at a threshold, keep connected patches of at least 20 square metres, and turn each into a point. Any patch that already overlaps a footprint is discarded as redundant. What survives is the detector's genuine addition.</p>
-    <p>Because the aerial program flies each state only every two or three years, we also run the detector on the previous two flights and keep any structure seen in any of them. On the forested rural fires this multi-year union is the single largest improvement we found.</p>
+    <p>The aerial programme flies each state only every two or three years, so the detector reads the latest flight before the fire. A union over the latest flight and the two before it was tested; it is used only in validation and is not part of the released inventory.</p>
 
     <figure class="band">
       <svg viewBox="0 0 960 300" role="img" aria-label="Flow: footprint databases and aerial imagery feed a detector; redundant detections are dropped; the union becomes the tagged inventory">
@@ -490,7 +491,7 @@
         <text x="120" y="167" font-size="12" text-anchor="middle" fill="var(--ink-2)">dated before ignition</text>
         <rect x="20" y="200" width="200" height="70" rx="5" fill="var(--detector-soft)"/>
         <text x="120" y="230" font-size="14" font-weight="600" text-anchor="middle">Aerial imagery, 0.6 m</text>
-        <text x="120" y="252" font-size="12" text-anchor="middle" fill="var(--ink-2)">latest flight + two earlier</text>
+        <text x="120" y="252" font-size="12" text-anchor="middle" fill="var(--ink-2)">latest flight before the fire</text>
         <path d="M 225 65 L 300 150" stroke="var(--footprint)" stroke-width="2" fill="none"/>
         <path d="M 225 150 L 300 150" stroke="var(--footprint)" stroke-width="2" fill="none"/>
         <path d="M 225 235 L 300 235" stroke="var(--detector)" stroke-width="2" fill="none"/>
@@ -508,24 +509,27 @@
         <path d="M 773 112 L 780 102 L 787 112" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
         <rect x="690" y="30" width="250" height="70" rx="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
         <text x="815" y="58" font-size="15" font-weight="600" text-anchor="middle">Tagged inventory</text>
-        <text x="815" y="80" font-size="12" text-anchor="middle" fill="var(--ink-2)">source · size class · triage score</text>
+        <text x="815" y="80" font-size="12" text-anchor="middle" fill="var(--ink-2)">source · size class</text>
       </svg>
       <figcaption>The inventory is a union, and every point remembers where it came from. A user who wants only the footprints, or only major buildings, filters by tag.</figcaption>
     </figure>
 
     <h3>Tag rather than delete</h3>
-    <p>Every point carries three tags. Its source: which database, or the detector and which year's imagery. Its size class: major above 50 square metres, matching the USGS definition of a building, or minor for sheds and outbuildings. And a triage score for the footprints themselves, explained next.</p>
+    <p>Every point carries two tags. Its source: which footprint database, or the detector. Its size class: major at 50 square metres or more, matching the USGS definition of a building, or minor for sheds and outbuildings. Footprints that may not be real buildings are kept, not deleted, as explained next.</p>
 
-    <h3>Auditing the footprints: triage, not deletion</h3>
-    <p>About one footprint in seven inside a burned area has no corresponding building in the
-    hand-assembled historical record. Some are artefacts at the edge of the digitised area,
+    <h3>Possible phantom footprints: kept, not deleted</h3>
+    <p>Some footprints inside a burned area have no building from the hand-assembled
+    historical record within 10&nbsp;m. We call these possible phantom footprints. They are
+    at most about 1 in 11 footprints (major-sized footprints in the core of the digitised
+    area; 1 in 7 counting every footprint), and both figures are upper bounds, because some
+    of them are real buildings the record left out. Others are artefacts at the edge of the digitised area,
     some are buildings that were demolished before the fire, some were never real. Removing
     them automatically is not currently defensible: a detector run without the footprint input
     ranks the suspect polygons reasonably well, but no cut-off exceeds 36&nbsp;% precision,
     which means roughly two real buildings would be deleted for every spurious one removed.</p>
-    <p>So the method triages instead of deleting. Each footprint carries a detector score
-    computed without the footprint input, and its distance to the nearest independent
-    detection. Suspect footprints stay in the list, ranked, flagged for a person to check.</p>
+    <p>So the method keeps them. A ranking of how suspect each footprint is (a detector score
+    computed without the footprint input) was tested as an aid for a person reviewing the
+    list, but it is not part of the released dataset.</p>
 
     <h3>What the numbers say</h3>
     <p>Two independent datasets score this list, and they answer different questions.
@@ -540,8 +544,10 @@
 
     <figure class="band">
       <svg viewBox="0 0 960 250" role="img" aria-label="Bar chart: recall of major buildings against the USGS record, footprints alone versus footprints plus detector, and the same against inspections">
-        <text x="20" y="26" font-size="13" class="mono muted">RECALL OF BUILDINGS, HELD-OUT GROUND · MATCH WITHIN 10 M</text>
+        <text x="20" y="26" font-size="13" class="mono muted">RECALL OF MAJOR BUILDINGS · MATCH WITHIN 10 M</text>
         <text x="20" y="70" font-size="14" font-weight="600">vs USGS record (complete)</text>
+        <text x="20" y="90" font-size="12" fill="var(--ink-2)">(held-out blocks of 5</text>
+        <text x="20" y="106" font-size="12" fill="var(--ink-2)">California fires 2017–18)</text>
         <rect x="260" y="52" width="461" height="22" fill="var(--footprint)"/>
         <text x="728" y="68" font-size="13" class="mono">0.768 footprints alone</text>
         <rect x="260" y="80" width="485" height="22" fill="var(--detector)"/>
@@ -558,7 +564,7 @@
         <text x="860" y="222" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
         <text x="560" y="222" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
       </svg>
-      <figcaption>Against the complete record the detector is worth about four recall points at a cost of two points of precision. Against inspections it looks worth one point, because most of what it adds was never inspected. Precision of the footprint baseline against the USGS record is 0.86 overall and 0.90 away from the edge of the digitised area.</figcaption>
+      <figcaption>On held-out blocks of 5 California fires 2017–18 (Creek, Thomas and Tubbs 2017; Camp and Woolsey 2018), recall is 0.768 with footprints alone and 0.809 with the detector, and precision is 0.832: the detector is worth about four recall points at a cost of about two points of precision. Against inspections it looks worth one point, because most of what it adds was never inspected. Precision of the footprint baseline against the USGS record is 0.86 overall and 0.90 away from the edge of the digitised area.</figcaption>
     </figure>
 
     <div class="callout">
@@ -569,7 +575,7 @@
     </div>
 
     <h3>What the inventory cannot do</h3>
-    <p>It cannot see a house under a closed tree canopy, and neither can the footprint databases, which were drawn from the same kind of imagery. The one place those structures become visible is after the fire, when the canopy is gone and a concrete pad or a debris field remains. A separate post-fire pass looks for exactly that in the next aerial flight. Its ceiling is set by timing: the next flight is often a year later, and debris removal has usually cleared the lot by then. It adds a few points where the imagery is timely and is kept as an optional step, not a dependency.</p>
+    <p>It cannot see a house under a closed tree canopy, and neither can the footprint databases, which were drawn from the same kind of imagery. The one place those structures become visible is after the fire, when the canopy is gone and a concrete pad or a debris field remains. A post-fire pass that looks for exactly that in the next aerial flight was tested. Its ceiling is set by timing: the next flight is often a year later, and debris removal has usually cleared the lot by then. It adds a few points where the imagery is timely, and it is not part of the released inventory.</p>
   </div>
 </section>
 
@@ -581,63 +587,58 @@
     spot before and after the fire, was the structure destroyed? This is the part of the
     method that performs best, and it is where the published accuracy figures come from.</p>
 
-    <h3>One window each side of the fire</h3>
-    <p>Sentinel-2 photographs the ground in visible, near-infrared and shortwave-infrared light at 10 to 20 metre resolution, every five days, and has imaged every fire in the country since 2016.</p>
-    <p>For each structure we build a "before" picture from the 45 days ending the day before ignition, and an "after" picture from a 60 day window that opens two weeks after ignition, once the smoke has cleared. Within each window we take the median of all clear observations, so a single cloudy or smoky pass does not corrupt it.</p>
+    <h3>Two calls on every building</h3>
+    <p>Each building gets two separate calls from two separately trained models. The
+    <strong>first call</strong> is made about ten weeks after ignition, from satellite imagery
+    up to 74 days after the fire starts. The <strong>second call</strong> waits about a year for
+    more evidence and is more certain. Both ship side by side; the second does not overwrite the
+    first.</p>
+
+    <h3>What the first call model sees</h3>
+    <p>Sentinel-2 photographs the ground in visible, near-infrared and shortwave-infrared light
+    at 10 to 20 metre resolution, about every five days, and has imaged every fire in the
+    country since 2016. For each building we take the median of the clear scenes before the
+    fire and of the clear scenes 14 to 74 days after ignition, at the building's own pixel and
+    averaged over the 30&nbsp;m block around it: six bands, four burn and vegetation indices,
+    and the change in each. That is 62 base signals.</p>
+    <p>Three families of context add 173 more: how changed the building is compared with its
+    50 nearest neighbours and with its whole fire; how burned the surrounding kilometre is; and
+    the same measurements from the same season a year earlier, so that seasonal green-up is not
+    read as damage. A small neural network adds one more signal: it reads every clear scene in
+    the building's image history and gives its own probability. A gradient-boosted tree model
+    takes all of these and outputs a probability of destruction.</p>
+
+    <h3>What the second call model adds</h3>
+    <p>About a year after the fire, more evidence exists: a yearly satellite embedding (64
+    numbers summarising each 10&nbsp;m patch of ground over a whole year, compared for the year
+    before and the year after), every clear look out to 12 months (does the site recover, stay
+    bare, or get rebuilt?), a later post-fire image once smoke and ash have cleared, and a
+    one-year version of the neural network. The embeddings start in 2017, so the second call
+    covers fewer fires.</p>
+
+    <h3>Trained on the right labels, tested on fires it never saw</h3>
+    <p>Both models train on 199 fires: 191 from the hand-assembled historical record
+    (2016&ndash;2022) and 8 inspected by CAL FIRE (2024&ndash;25), about 819,000 buildings. Every
+    accuracy figure on this site is measured leave-one-fire-out: the model that scores a fire
+    was trained only on the <em>other</em> fires, and the neural network behind its extra signal
+    never saw that fire either.</p>
+    <p>A building is called destroyed at a single fixed probability, 0.88, chosen in advance and
+    never tuned to the fire being scored. The dataset also carries the probability itself, and
+    an advisory call with a threshold fitted to each fire's own distribution of scores, so a
+    user can choose a different balance of misses and false alarms.</p>
 
     <figure class="band">
-      <svg viewBox="0 0 960 190" role="img" aria-label="Timeline: a 45-day pre-fire window ending the day before ignition, the ignition day, then a 60-day post-fire window opening 14 days after ignition">
-        <line x1="40" y1="100" x2="920" y2="100" stroke="var(--rule)" stroke-width="2"/>
-        <rect x="80" y="70" width="330" height="60" rx="4" fill="var(--survivor-soft)"/>
-        <text x="245" y="96" font-size="14" font-weight="600" text-anchor="middle">Before: 45 days</text>
-        <text x="245" y="116" font-size="12" text-anchor="middle" fill="var(--ink-2)">median of clear passes, both satellites</text>
-        <line x1="420" y1="50" x2="420" y2="150" stroke="var(--ember)" stroke-width="3"/>
-        <text x="420" y="40" font-size="13" font-weight="600" text-anchor="middle" fill="var(--ember)">Ignition</text>
-        <rect x="523" y="70" width="380" height="60" rx="4" fill="var(--ember-soft)"/>
-        <text x="713" y="96" font-size="14" font-weight="600" text-anchor="middle">After: 60 days</text>
-        <text x="713" y="116" font-size="12" text-anchor="middle" fill="var(--ink-2)">opens 14 days after ignition, once smoke has cleared</text>
-        <text x="470" y="168" font-size="11" class="mono muted" text-anchor="middle">14 d gap</text>
-        <text x="80" y="168" font-size="11" class="mono muted">−45 d</text>
-        <text x="410" y="168" font-size="11" class="mono muted" text-anchor="end">−1 d</text>
-        <text x="523" y="168" font-size="11" class="mono muted">+14 d</text>
-        <text x="903" y="168" font-size="11" class="mono muted" text-anchor="end">+74 d</text>
-      </svg>
-      <figcaption>Taking the median of every clear pass inside a window, rather than one scene either side, is what makes the comparison survive smoke, haze and a single bad day.</figcaption>
-    </figure>
-
-    <h3>What the model actually sees</h3>
-    <p>At each structure's own 10 metre pixel, and averaged over the 3 by 3 block around it, we record six bands of light, four vegetation and burn indices built from them, and the before-to-after change in each. That is 62 numbers per structure. A gradient-boosted tree ensemble maps them to a probability of destruction. It is a tabular model, not an image model, and it trains in minutes.</p>
-    <p>The signal is the familiar one: a burned lot loses near-infrared brightness and gains
-    shortwave-infrared reflectance. The single most informative number is the change in the
-    normalised burn ratio averaged over the 3&nbsp;&times;&nbsp;3 block. The model uses optical
-    imagery only.</p>
-
-    <h3>Training on the right labels, and a fixed threshold</h3>
-    <p>The model trains on the hand-assembled historical record and on fire-service damage
-    inspections, which are the judgements it is meant to reproduce. Every accuracy figure on
-    this site is measured on held-out fires: the model that scores a fire was trained only on
-    the <em>other</em> fires, so no fire is ever in its own training set.</p>
-    <p>The destroyed call is made at a single fixed probability, 0.88. That number is chosen
-    to maximise the average F1 <em>across fires</em> rather than the pooled F1, which the two
-    very large Los Angeles fires would otherwise dominate; it is fixed in advance and is not
-    tuned to the fire being scored. A second, advisory call ships beside it, using a threshold
-    fitted to each fire's own distribution of scores: it gets a fire's destroyed <em>total</em>
-    closer while classifying individual buildings slightly worse, and both are published so a
-    user can choose. <a href="pipeline-overview.html">The method in full</a> gives the
-    numbers for each.</p>
-
-    <figure class="band">
-      <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the damage model across eight inspected fires, each held out of training">
-        <text x="20" y="26" font-size="13" class="mono muted">F1 OF THE DESTROYED CALL, EACH FIRE HELD OUT OF TRAINING</text>
+      <svg viewBox="0 0 960 330" role="img" aria-label="Per-fire F1 of the first call model across eight inspected fires, each held out of training">
+        <text x="20" y="26" font-size="13" class="mono muted">F1 OF THE FIRST CALL, EACH FIRE HELD OUT OF TRAINING</text>
         <g font-size="13">
-          <text x="20" y="68">Eaton 2025</text><rect x="180" y="56" width="550" height="14" rx="2" fill="var(--ember)"/> <text x="740" y="68" class="mono" font-size="12">0.917</text>
-          <text x="20" y="98">Palisades 2025</text><rect x="180" y="86" width="550" height="14" rx="2" fill="var(--ember)"/> <text x="740" y="98" class="mono" font-size="12">0.916</text>
-          <text x="20" y="128">TCU Complex 2025</text><rect x="180" y="116" width="547" height="14" rx="2" fill="var(--ember)"/> <text x="737" y="128" class="mono" font-size="12">0.912</text>
-          <text x="20" y="158">Park 2024</text><rect x="180" y="146" width="545" height="14" rx="2" fill="var(--ember)"/> <text x="735" y="158" class="mono" font-size="12">0.908</text>
-          <text x="20" y="188">Borel 2024</text><rect x="180" y="176" width="543" height="14" rx="2" fill="var(--ember)"/> <text x="733" y="188" class="mono" font-size="12">0.905</text>
-          <text x="20" y="218">Airport 2024</text><rect x="180" y="206" width="527" height="14" rx="2" fill="var(--ember)"/> <text x="717" y="218" class="mono" font-size="12">0.878</text>
-          <text x="20" y="248">Mountain 2024</text><rect x="180" y="236" width="473" height="14" rx="2" fill="var(--ember)"/> <text x="663" y="248" class="mono" font-size="12">0.789</text>
-          <text x="20" y="278">Bridge 2024</text><rect x="180" y="266" width="452" height="14" rx="2" fill="var(--ember)"/> <text x="642" y="278" class="mono" font-size="12">0.754</text>
+          <text x="20" y="68">Palisades 2025</text><rect x="180" y="56" width="581" height="14" rx="2" fill="var(--ember)"/> <text x="771" y="68" class="mono" font-size="12">0.968</text>
+          <text x="20" y="98">Eaton 2025</text><rect x="180" y="86" width="574" height="14" rx="2" fill="var(--ember)"/> <text x="764" y="98" class="mono" font-size="12">0.956</text>
+          <text x="20" y="128">Park 2024</text><rect x="180" y="116" width="559" height="14" rx="2" fill="var(--ember)"/> <text x="749" y="128" class="mono" font-size="12">0.931</text>
+          <text x="20" y="158">Borel 2024</text><rect x="180" y="146" width="555" height="14" rx="2" fill="var(--ember)"/> <text x="745" y="158" class="mono" font-size="12">0.925</text>
+          <text x="20" y="188">Airport 2024</text><rect x="180" y="176" width="549" height="14" rx="2" fill="var(--ember)"/> <text x="739" y="188" class="mono" font-size="12">0.915</text>
+          <text x="20" y="218">TCU Complex 2025</text><rect x="180" y="206" width="544" height="14" rx="2" fill="var(--ember)"/> <text x="734" y="218" class="mono" font-size="12">0.906</text>
+          <text x="20" y="248">Mountain 2024</text><rect x="180" y="236" width="535" height="14" rx="2" fill="var(--ember)"/> <text x="725" y="248" class="mono" font-size="12">0.891</text>
+          <text x="20" y="278">Bridge 2024</text><rect x="180" y="266" width="477" height="14" rx="2" fill="var(--ember)"/> <text x="667" y="278" class="mono" font-size="12">0.795</text>
         </g>
         <line x1="180" y1="44" x2="180" y2="292" stroke="var(--rule)"/>
         <line x1="780" y1="44" x2="780" y2="292" stroke="var(--rule)" stroke-dasharray="3 3"/>
@@ -645,33 +646,20 @@
         <text x="480" y="312" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
         <text x="780" y="312" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
       </svg>
-      <div class="legend"><span style="--sw: var(--ember)">F1 of the destroyed call, each fire held out of training</span></div>
-      <figcaption>Pooled across the eight fires, 36,272 inspected structures: F1 0.913, area under the curve 0.973. Bridge is hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
+      <div class="legend"><span style="--sw: var(--ember)">F1 of the first call, each fire held out of training (mean of four training runs)</span></div>
+      <figcaption>Pooled across the eight CAL FIRE incidents, 36,272 inspected structures: F1 0.957, area under the curve 0.991. Bridge is hardest: only 9 percent of its structures burned, and with 81 destroyed buildings a handful of false alarms costs a lot of precision.</figcaption>
     </figure>
 
-    <h3>A second, more accurate estimate arrives about a year later</h3>
-    <p>The estimate above is the <strong>primary</strong> one. It is available about two and a
-    half months after a fire starts, which is as soon as a clean post-fire image window exists,
-    and it covers every building on the list for every fire. Roughly a year later a second,
-    <strong>refined</strong> estimate becomes possible, because two further pieces of evidence
-    have appeared: a second post-fire image window, and an annual satellite embedding — a
-    freely published yearly summary of what each 10&nbsp;m patch of ground looked like across a
-    whole year, as 64 numbers per pixel. Comparing the year before the fire with the year after
-    is a compact and unusually stable way to see a place change.</p>
-    <p>The refined estimate uses 242 numbers per building instead of 62 and calls a building
-    destroyed above a probability of 0.84. Against fire-service inspections, scored on the same
-    28,316 buildings, its F1 is <strong>0.9606</strong> where the primary estimate scores
-    0.9208. It is better wherever it exists, but it does not exist everywhere: fires that
-    predate the clean annual summaries, and a small number of buildings with no second post-fire
-    window, have no refined estimate at all.</p>
-    <p class="src"><b>Source:</b> <code>outputs/scorecard/matrices_side_by_side.csv</code> and
-    <code>outputs/scorecard/refined_coverage.csv</code> on the data share, data date
-    2026-09-15. Both figures are computed on the buildings that carry both estimates, so they
-    are directly comparable. <a href="confusion-matrix.html">The confusion matrix page</a>
-    shows all four counts for both estimates against every ground-truth source.</p>
+    <h3>How close to perfect it can get</h3>
+    <p>On the 191 historical fires the first call scores F1 0.904 counted over all buildings
+    and 0.802 averaged fire by fire; the second call scores 0.925 and 0.828. No model can
+    score 1.0, because the reference labels themselves disagree on about 2 percent of the
+    buildings both sources assessed: the best achievable is about 0.934 over all buildings and
+    0.859 per fire. On CAL FIRE's eight incidents the second call scores 0.969.
+    <a href="models.html">The production models</a> page has the full evaluation.</p>
 
     <h3>What the damage model cannot do</h3>
-    <p>A 10 metre pixel cannot cleanly separate a destroyed house from an intact neighbour 12 metres away, so the model is weakest where destruction is scattered rather than block by block. It also reads as a severity index rather than a switch: structures inspectors rated lightly damaged score around 0.5, between the intact and the destroyed, and about one in five of them crosses the destroyed threshold. The published dataset carries the probability, so a user who needs a different balance of misses and false alarms can move the cut.</p>
+    <p>A 10 metre pixel cannot cleanly separate a destroyed house from an intact neighbour 12 metres away, so the model is weakest where destruction is scattered rather than block by block. It also reads partly as a severity index rather than a switch: structures inspectors rated as damaged but not destroyed tend to score between the intact and the destroyed. The published dataset carries the probability, so a user who needs a different balance of misses and false alarms can move the cut.</p>
     <p>Higher-resolution post-fire imagery would resolve individual buildings, but it exists only for some fires. Because the product must run the same way everywhere, it is an upgrade path, not part of the standard process.</p>
   </div>
 </section>
@@ -683,15 +671,17 @@
     <p>Nothing in the standard process is specific to California except the inspection labels it was validated against. Every input is national or global.</p>
     <ol class="steps">
       <li><span class="n">1</span><div><b>Define the fire.</b> An ignition date and an area. For most fires the perimeter from the national incident database is enough; the area is buffered so structures at the edge are included.</div></li>
-      <li><span class="n">2</span><div><b>Build the inventory.</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run the roof detector on the latest and two earlier aerial flights, union and tag. Output: a probability map and a point layer.</div></li>
-      <li><span class="n">3</span><div><b>Sample the satellite.</b> For every point, the before and after windows from Sentinel-2, medians and changes, 62 numbers.</div></li>
+      <li><span class="n">2</span><div><b>Build the inventory.</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run the roof detector on the latest aerial flight before the fire, union and tag. Output: a point layer.</div></li>
+      <li><span class="n">3</span><div><b>Sample the satellite.</b> For every point, the before and after Sentinel-2 signals, their context, and the neural network's reading of the image history.</div></li>
       <li><span class="n">4</span><div><b>Score.</b> The trained model gives each structure a destroyed probability; the fixed cut gives the call. Output: the point layer with probability, call, source and size tags, and summary tables by fire.</div></li>
       <li><span class="n">5</span><div><b>Check against independent truth.</b> Each new
       California incident is scored before it is ever used for training, so it is a genuine
-      forward test. Outside California, the hand-assembled historical record covers about a
-      hundred fires in other states through 2022; scored with each fire held out of its own
-      model, the area under the curve across them is 0.986. That is the evidence that the
-      method is not California-specific.</div></li>
+      forward test. Outside California, the hand-assembled historical record covers fires in 25 other
+      states through 2022, each scored with that fire held out of its own model, and seven
+      fires never used in training were checked against American Red Cross and FEMA damage
+      assessments (F1 0.92 over 2,515 buildings). Retraining without a whole state or region
+      costs about 3 to 6 points of per-fire F1, which is the honest price of an unfamiliar
+      landscape.</div></li>
     </ol>
 
     <h3>What gets published, and how much to trust it</h3>
@@ -699,18 +689,19 @@
       <table>
         <thead><tr><th>Product</th><th>What it is</th><th>How it is checked</th></tr></thead>
         <tbody>
-          <tr><td>Structure probability map</td><td>Raster, one value per 0.6 m pixel, per fire</td><td>Pixel overlap with footprints in unburned areas: intersection over union 0.77</td></tr>
-          <tr><td>Structure points</td><td>One point per building with source, size class, triage score</td><td>Recall 0.81 and precision 0.83 against the USGS record on held-out ground</td></tr>
-          <tr><td>Destroyed probability and call</td><td>Per point, from before-and-after change in reflectance</td><td>F1 0.916 on 36,272 inspected structures, each fire held out</td></tr>
+          <tr><td>Structure points</td><td>One point per building with source and size class</td><td>Recall 0.809 and precision 0.832 against the USGS record, on held-out blocks of 5 California fires 2017&ndash;18</td></tr>
+          <tr><td>Destroyed probability and two calls</td><td>Per point: first call at about 74 days, second call at about a year where the imagery exists</td><td>First call F1 0.904 on 191 historical fires and 0.957 on 36,272 inspected structures; second call 0.925 and 0.969; each fire held out</td></tr>
           <tr><td>Summary tables</td><td>Counts by fire, by size class, by source</td><td>Derived from the above; carry the same uncertainty</td></tr>
         </tbody>
       </table>
     </div>
     <p>Three limits travel with the dataset, and a user should plan around them. The list of
-    buildings misses roughly a fifth of major buildings on held-out ground, and it misses
+    buildings misses roughly a fifth of major buildings (it found 0.809 on held-out blocks of 5
+    California fires 2017&ndash;18), and it misses
     destroyed buildings more often than surviving ones wherever footprints were drawn from
-    imagery flown after the fire. About one footprint in seven is a candidate that may not
-    correspond to a real pre-fire building; those are flagged rather than removed. And the
+    imagery flown after the fire. Possible phantom footprints, which may not correspond to a real pre-fire building, are at
+    most about 1 in 11 (major-sized, core areas; 1 in 7 raw); they are kept rather than
+    removed. And the
     destroyed call blurs at the scale of a single house among survivors, because the satellite
     pixel is 10&nbsp;m across. All three are measured, and the measurements are published on
     this site.</p>
@@ -723,9 +714,9 @@
       <dt>F1</dt><dd>A single score balancing precision and recall; 1.0 is perfect.</dd>
       <dt>Held out</dt><dd>Data the model never saw during training, used to measure it honestly.</dd>
       <dt>Major structure</dt><dd>At least 50 square metres of roof, the USGS definition of a building.</dd>
-      <dt>Triage score</dt><dd>A ranking of how suspect a footprint is, for a person to review; never an automatic deletion.</dd>
-      <dt>Primary estimate</dt><dd>The destroyed call available about two and a half months after a fire starts, for every building in every fire covered.</dd>
-      <dt>Refined estimate</dt><dd>A more accurate destroyed call available about a year later, for most buildings in most fires, once more imagery exists.</dd>
+      <dt>Possible phantom footprint</dt><dd>A footprint with no building from the historical record within 10 m. Kept in the list, not deleted.</dd>
+      <dt>First call</dt><dd>The destroyed call made about ten weeks after a fire starts, from imagery up to 74 days after ignition, for every building covered.</dd>
+      <dt>Second call</dt><dd>A more accurate destroyed call made about a year later by a separately trained model, where a year of imagery exists.</dd>
       <dt>Sentinel-2</dt><dd>Two free European Space Agency satellites imaging every point on Earth about every five days at 10 m per pixel.</dd>
       <dt>NAIP</dt><dd>The US Department of Agriculture's aerial photography programme: roughly 60 cm per pixel, reflown every two to three years.</dd>
       <dt>Annual satellite embedding</dt><dd>A published yearly summary of each 10 m patch of ground as 64 numbers, so one year can be compared with the next.</dd>
@@ -744,12 +735,13 @@
     <a href="confusion-matrix.html">confusion matrix</a> ·
     <a href="forward-fires.html">results by fire</a> ·
     <a href="uncertainty.html">how certain</a>.</p>
-    <p class="mono">Provenance: the current data release is <b>v0.12.0</b>, packaged 2026-09-27: 653 fires, every row this project describes scored by the two production models, whose evaluation is on the production models page. The figures and counts on this page are older than that release. The model
-    figures on this page are the previous first call model, <code>damage_sentinel2_v6</code>, which
-    made the primary calls up to v0.11.0, fitted on
-    199 fires and 818,838 buildings, data date 2026-09-15. Every number here is read from the
-    project's own output files on the data share. Primary estimate at a fixed threshold of 0.88,
-    refined estimate at 0.84.</p>
+    <p class="mono">Provenance: the current data release is <b>v0.12.0</b>, packaged 2026-09-27
+    and published 2026-09-28: 653 fires, every row scored by the production first call model
+    (<code>damage_sentinel2_final_v1</code>) and, where a year of imagery exists, the second call
+    model (<code>damage_sentinel2_refined_final_v1</code>). Damage figures on this page are those
+    models' release evaluation: leave-one-fire-out, four training runs, threshold 0.88. Inventory
+    figures are the canonical detector on held-out blocks of 5 California fires 2017&ndash;18 (match
+    within 10 m, major buildings). Revised 2026-09-28.</p>
   </div>
 </footer>
 

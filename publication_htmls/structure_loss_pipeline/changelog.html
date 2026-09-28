@@ -372,8 +372,8 @@
 <nav class="rail" aria-label="Site sections">
   <div class="inner">
     <a class="home" href="index.html">Structure&nbsp;Loss&nbsp;Pipeline</a>
-    <span class="here"><span>Release history</span><span class="of">page 12 of 12</span></span>
-    <span class="sibs"><a href="how-it-works-infographic.html">The process, in pictures</a><a href="how-it-works.html">How it works</a><a href="models.html">The production models</a><a href="pipeline-overview.html">The method in full</a><a href="confusion-matrix.html">Confusion matrix</a><a href="forward-fires.html">Results by fire</a><a href="combined-series.html">The dataset</a><a href="outside-california.html">Beyond California</a><a href="uncertainty.html">How certain</a><a href="how-we-validate.html">How we validate</a><a href="augmented-carlson.html">Historical companion</a><a href="changelog.html" aria-current="page">Release history</a></span>
+    <span class="here"><span>Release history</span><span class="of">page 4 of 12</span></span>
+    <span class="sibs"><a href="how-it-works.html">How it works</a><a href="how-it-works-infographic.html">The process, in pictures</a><a href="models.html">The production models</a><a href="changelog.html" aria-current="page">Release history</a><a href="augmented-carlson.html">Historical companion</a><a href="pipeline-overview.html">Archive: the method in full</a><a href="how-we-validate.html">Archive: how we validate</a><a href="confusion-matrix.html">Archive: confusion matrix</a><a href="forward-fires.html">Archive: results by fire</a><a href="combined-series.html">Archive: the dataset</a><a href="outside-california.html">Archive: beyond California</a><a href="uncertainty.html">Archive: how certain</a></span>
   </div>
 </nav>
 
@@ -385,7 +385,7 @@
     fire, saying whether that building was destroyed. Each published version is frozen and
     keeps its own version number, so an analysis can name exactly which data it used. This
     page lists every version, what it covers, and how wide its schema is. <strong>The current
-    version is v0.12.0, released 27 September 2026: 653 fires in 35 states, 2,258,471 rows, 68
+    version is v0.12.0, packaged 27 September and published 28 September 2026: 653 fires in 35 states, 2,258,471 rows, 68
     columns, every row this project describes scored by the two production models.</strong></p>
   </div>
 </header>
@@ -455,6 +455,16 @@
       scoring units, except 642 whose imagery was incomplete; the <strong>second call
       model</strong> adds its call on the 62 fires whose year of imagery exists. The models and
       their evaluation are unchanged from v0.11.0.</p>
+    </div>
+    <div class="note" id="errata-v0-12-0">
+      <p><strong>Correction to v0.12.0, 28 September 2026 &mdash; metadata only, no data
+      changed.</strong> A few hours after publication, three metadata files in the release were
+      found still describing an earlier version: the citation file gave its version as v0.10.0
+      (released 15 September), the FGDC metadata gave its edition as v0.10.0, and the release notes
+      said it was not yet published. All three were corrected in place, the checksum file was
+      regenerated, and an <code>ERRATA.md</code> note was added to the release. Every data file
+      (the building file, the per-fire summary, the data dictionary and the model tables) is
+      byte-identical to what was published; their checksums are unchanged.</p>
     </div>
     <div class="note">
       <p><strong>v0.11.0 — the two production models.</strong> This release promotes the
