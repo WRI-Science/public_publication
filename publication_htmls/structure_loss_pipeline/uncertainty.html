@@ -505,7 +505,7 @@
           <tr><td>… pooled recall</td><td class="num">0.846</td><td class="ci">[0.778, 0.882]</td></tr>
           <tr><td><strong>Against the inspection records — pooled F1 (8 incidents, 36,272 buildings)</strong></td><td class="num">0.9130</td><td class="ci">not recomputed — see below</td></tr>
           <tr><td><strong>… pooled AUC</strong></td><td class="num">0.9732</td><td class="ci">not recomputed — see below</td></tr>
-          <tr><td>Buildings the public databases miss: the share of those destroyed-building records our detector recovers (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
+          <tr><td>Buildings the public databases miss: the share of those destroyed-building records the Structure Inventory Model's roof detector recovers (15 fires)</td><td class="num">0.0348</td><td class="ci">[0.025, 0.066]</td></tr>
           <tr><td>… the same, expressed as a count of records</td><td class="num">343</td><td class="ci">[125, 590]</td></tr>
         </tbody>
       </table>
@@ -526,8 +526,7 @@
       and is not carried forward.</p>
     </div>
     <p class="src"><b>Source:</b> <code>pooled_ci.csv</code> for each run, under
-    <code>outputs/uncertainty/</code> on the data share, written 2026-09-15 for the historical
-    record and the detector; the two inspection rows are the damage model's own held-out block in
+    <code>outputs/uncertainty/</code> on the data share, written 2026-09-15 for the historical record and the Structure Inventory Model; the two inspection rows are the damage model's own held-out block in
     its <code>summary.json</code>, alongside the
     <code>summary.json</code> that records the model and threshold each figure was computed at.
     The per-building predictions behind them are the held-out prediction file
@@ -538,8 +537,7 @@
     randomly chosen destroyed building is given a higher score than a randomly chosen surviving
     one, so it measures ordering rather than any particular threshold. <strong>Average
     precision</strong> summarises how precision falls away as recall is pushed higher, across all
-    thresholds at once. The last two rows concern <strong>our building detector</strong>, a
-    neural network trained on aerial photography that finds buildings the public footprint
+    thresholds at once. The last two rows concern the <strong>Structure Inventory Model's roof detector</strong>, a neural network trained on aerial photography that finds buildings the public footprint
     databases have missed; a ground-truth point and one of our building locations count as the
     same building when they lie within 10 m of each other, matched one to one.</p>
     <p>Precision and recall are simply the four cells of a confusion matrix rearranged. The full
@@ -860,7 +858,7 @@
     the primary calls up to v0.11.0, fitted on 199
     fires and 818,838 buildings, data date 2026-09-15. Destroyed call at a fixed threshold of
     0.88. Intervals read from <code>outputs/uncertainty/</code> on the data share — the 191-fire
-    national run and the detector's marginal run; the eight-incident figures are the model's own
+    national run and the roof detector's marginal run; the eight-incident figures are the model's own
     held-out block, which carries no interval.</p>
   </div>
 </footer>

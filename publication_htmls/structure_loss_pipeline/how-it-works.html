@@ -451,7 +451,7 @@
       <svg viewBox="0 0 960 200" role="img" aria-label="Two-part pipeline: build the pre-fire inventory, then classify each structure as destroyed or surviving">
         <rect x="20" y="40" width="400" height="120" rx="6" fill="var(--footprint-soft)"/>
         <text x="40" y="72" font-size="13" class="mono muted">PART 1 · BEFORE THE FIRE</text>
-        <text x="40" y="104" font-size="22" font-weight="600">Pre-fire structure inventory</text>
+        <text x="40" y="104" font-size="22" font-weight="600">Structure Inventory Model</text>
         <text x="40" y="132" font-size="14" fill="var(--ink-2)">One point and one probability map per building, with tags</text>
         <path d="M 425 100 L 530 100" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
         <path d="M 522 93 L 532 100 L 522 107" stroke="var(--ink-3)" stroke-width="2" fill="none"/>
@@ -468,21 +468,20 @@
 <section class="part">
   <div class="wrap">
     <div class="partlabel">Part 1</div>
-    <h2>Finding the structures</h2>
+    <h2>Finding the structures: the Structure Inventory Model</h2>
     <p>Public building-footprint databases already outline most buildings in the country, and
-    they are hard to beat outright. The method is therefore built around them: start from the
-    footprints, add what they miss with a purpose-trained detector, and keep a record of where
+    they are hard to beat outright. The <strong>Structure Inventory Model</strong> is therefore built around them: start from the footprints, add what they miss with a purpose-trained roof detector, and keep a record of where
     every building in the list came from.</p>
 
     <h3>Start from the footprints, because they are the product</h3>
     <p>Two public databases already outline nearly every building in the country: FEMA's USA Structures, and Microsoft's machine-generated footprints. Each polygon carries the date of the imagery it was drawn from, and we admit a footprint only if that date falls before the fire. That rule matters more than it sounds: a footprint traced from post-fire imagery cannot contain a house that burned, so a database used naively undercounts losses in exactly the places that matter.</p>
 
-    <h3>Add what the databases miss, with an imagery detector</h3>
-    <p>A segmentation network reads the most recent pre-fire aerial imagery at 60 centimetre resolution, four bands, with the footprints supplied as a fifth input band so it learns to fill gaps rather than redraw what is already known. Its output is a probability map of where a roof is. We cut that map at a threshold, keep connected patches of at least 20 square metres, and turn each into a point. Any patch that already overlaps a footprint is discarded as redundant. What survives is the detector's genuine addition.</p>
-    <p>The aerial programme flies each state only every two or three years, so the detector reads the latest flight before the fire. A union over the latest flight and the two before it was tested; it is used only in validation and is not part of the released inventory.</p>
+    <h3>Add what the databases miss, with the Structure Inventory Model's roof detector</h3>
+    <p>A segmentation network reads the most recent pre-fire aerial imagery at 60 centimetre resolution, four bands, with the footprints supplied as a fifth input band so it learns to fill gaps rather than redraw what is already known. Its output is a probability map of where a roof is. We cut that map at a threshold, keep connected patches of at least 20 square metres, and turn each into a point. Any patch that already overlaps a footprint is discarded as redundant. What survives is the roof detector's genuine addition.</p>
+    <p>The aerial programme flies each state only every two or three years, so the roof detector reads the latest flight before the fire. A union over the latest flight and the two before it was tested; it is used only in validation and is not part of the released inventory.</p>
 
     <figure class="band">
-      <svg viewBox="0 0 960 300" role="img" aria-label="Flow: footprint databases and aerial imagery feed a detector; redundant detections are dropped; the union becomes the tagged inventory">
+      <svg viewBox="0 0 960 300" role="img" aria-label="Flow: footprint databases and aerial imagery feed the Structure Inventory Model's roof detector; redundant detections are dropped; the union becomes the tagged inventory">
         <rect x="20" y="30" width="200" height="70" rx="5" fill="var(--footprint-soft)"/>
         <text x="120" y="60" font-size="14" font-weight="600" text-anchor="middle">USA Structures</text>
         <text x="120" y="82" font-size="12" text-anchor="middle" fill="var(--ink-2)">dated before ignition</text>
@@ -515,7 +514,7 @@
     </figure>
 
     <h3>Tag rather than delete</h3>
-    <p>Every point carries two tags. Its source: which footprint database, or the detector. Its size class: major at 50 square metres or more, matching the USGS definition of a building, or minor for sheds and outbuildings. Footprints that may not be real buildings are kept, not deleted, as explained next.</p>
+    <p>Every point carries two tags. Its source: which footprint database, or the Structure Inventory Model's roof detector. Its size class: major at 50 square metres or more, matching the USGS definition of a building, or minor for sheds and outbuildings. Footprints that may not be real buildings are kept, not deleted, as explained next.</p>
 
     <h3>Possible phantom footprints: kept, not deleted</h3>
     <p>Some footprints inside a burned area have no building from the hand-assembled
@@ -524,11 +523,10 @@
     area; 1 in 7 counting every footprint), and both figures are upper bounds, because some
     of them are real buildings the record left out. Others are artefacts at the edge of the digitised area,
     some are buildings that were demolished before the fire, some were never real. Removing
-    them automatically is not currently defensible: a detector run without the footprint input
+    them automatically is not currently defensible: the roof detector run without the footprint input
     ranks the suspect polygons reasonably well, but no cut-off exceeds 36&nbsp;% precision,
     which means roughly two real buildings would be deleted for every spurious one removed.</p>
-    <p>So the method keeps them. A ranking of how suspect each footprint is (a detector score
-    computed without the footprint input) was tested as an aid for a person reviewing the
+    <p>So the method keeps them. A ranking of how suspect each footprint is (a roof-detector score computed without the footprint input) was tested as an aid for a person reviewing the
     list, but it is not part of the released dataset.</p>
 
     <h3>What the numbers say</h3>
@@ -543,7 +541,7 @@
     the same building when they lie within 10&nbsp;m of each other, matched one-to-one.</p>
 
     <figure class="band">
-      <svg viewBox="0 0 960 250" role="img" aria-label="Bar chart: recall of major buildings against the USGS record, footprints alone versus footprints plus detector, and the same against inspections">
+      <svg viewBox="0 0 960 250" role="img" aria-label="Bar chart: recall of major buildings against the USGS record, footprints alone versus the full Structure Inventory Model (footprints plus roof detector), and the same against inspections">
         <text x="20" y="26" font-size="13" class="mono muted">RECALL OF MAJOR BUILDINGS · MATCH WITHIN 10 M</text>
         <text x="20" y="70" font-size="14" font-weight="600">vs USGS record (complete)</text>
         <text x="20" y="90" font-size="12" fill="var(--ink-2)">(held-out blocks of 5</text>
@@ -551,24 +549,24 @@
         <rect x="260" y="52" width="461" height="22" fill="var(--footprint)"/>
         <text x="728" y="68" font-size="13" class="mono">0.768 footprints alone</text>
         <rect x="260" y="80" width="485" height="22" fill="var(--detector)"/>
-        <text x="752" y="96" font-size="13" class="mono">0.809 with detector</text>
+        <text x="752" y="96" font-size="13" class="mono">0.809 with roof detector</text>
         <text x="20" y="150" font-size="14" font-weight="600">vs CAL FIRE inspections</text>
         <text x="20" y="170" font-size="12" fill="var(--ink-2)">(15 fires, 2023–2025)</text>
         <rect x="260" y="132" width="446" height="22" fill="var(--footprint)"/>
         <text x="713" y="148" font-size="13" class="mono">0.744 footprints alone</text>
         <rect x="260" y="160" width="452" height="22" fill="var(--detector)"/>
-        <text x="719" y="176" font-size="13" class="mono">0.753 with detector</text>
+        <text x="719" y="176" font-size="13" class="mono">0.753 with roof detector</text>
         <line x1="260" y1="40" x2="260" y2="200" stroke="var(--rule)"/>
         <line x1="860" y1="40" x2="860" y2="200" stroke="var(--rule)" stroke-dasharray="3 3"/>
         <text x="260" y="222" font-size="11" class="mono muted">0</text>
         <text x="860" y="222" font-size="11" class="mono muted" text-anchor="middle">1.0</text>
         <text x="560" y="222" font-size="11" class="mono muted" text-anchor="middle">0.5</text>
       </svg>
-      <figcaption>On held-out blocks of 5 California fires 2017–18 (Creek, Thomas and Tubbs 2017; Camp and Woolsey 2018), recall is 0.768 with footprints alone and 0.809 with the detector, and precision is 0.832: the detector is worth about four recall points at a cost of about two points of precision. Against inspections it looks worth one point, because most of what it adds was never inspected. Precision of the footprint baseline against the USGS record is 0.86 overall and 0.90 away from the edge of the digitised area.</figcaption>
+      <figcaption>On held-out blocks of 5 California fires 2017–18 (Creek, Thomas and Tubbs 2017; Camp and Woolsey 2018), recall is 0.768 with footprints alone and 0.809 with the full Structure Inventory Model, and precision is 0.832: the roof detector is worth about four recall points at a cost of about two points of precision. Against inspections it looks worth one point, because most of what it adds was never inspected. Precision of the footprint baseline against the USGS record is 0.86 overall and 0.90 away from the edge of the digitised area.</figcaption>
     </figure>
 
     <div class="callout">
-      <p><b>The noise floor.</b> Retraining the detector with nothing changed but the random
+      <p><b>The noise floor.</b> Retraining the roof detector with nothing changed but the random
       seed moves a single rural fire by up to two recall points, and the overall score by a
       tenth of a point. Differences smaller than that are not real, and this site does not
       report them as results.</p>
@@ -671,7 +669,7 @@
     <p>Nothing in the standard process is specific to California except the inspection labels it was validated against. Every input is national or global.</p>
     <ol class="steps">
       <li><span class="n">1</span><div><b>Define the fire.</b> An ignition date and an area. For most fires the perimeter from the national incident database is enough; the area is buffered so structures at the edge are included.</div></li>
-      <li><span class="n">2</span><div><b>Build the inventory.</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run the roof detector on the latest aerial flight before the fire, union and tag. Output: a point layer.</div></li>
+      <li><span class="n">2</span><div><b>Build the inventory (the Structure Inventory Model).</b> Fetch the two footprint databases for the counties involved, keep polygons dated before ignition, run its roof detector on the latest aerial flight before the fire, union and tag. Output: a point layer.</div></li>
       <li><span class="n">3</span><div><b>Sample the satellite.</b> For every point, the before and after Sentinel-2 signals, their context, and the neural network's reading of the image history.</div></li>
       <li><span class="n">4</span><div><b>Score.</b> The trained model gives each structure a destroyed probability; the fixed cut gives the call. Output: the point layer with probability, call, source and size tags, and summary tables by fire.</div></li>
       <li><span class="n">5</span><div><b>Check against independent truth.</b> Each new
@@ -739,8 +737,7 @@
     and published 2026-09-28: 653 fires, every row scored by the production first call model
     (<code>damage_sentinel2_final_v1</code>) and, where a year of imagery exists, the second call
     model (<code>damage_sentinel2_refined_final_v1</code>). Damage figures on this page are those
-    models' release evaluation: leave-one-fire-out, four training runs, threshold 0.88. Inventory
-    figures are the canonical detector on held-out blocks of 5 California fires 2017&ndash;18 (match
+    models' release evaluation: leave-one-fire-out, four training runs, threshold 0.88. Structure Inventory Model figures are the canonical roof detector on held-out blocks of 5 California fires 2017&ndash;18 (match
     within 10 m, major buildings). Revised 2026-09-28.</p>
   </div>
 </footer>

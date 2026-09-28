@@ -530,8 +530,7 @@
     number.</strong> A field only one source can fill is null on the other side and is never
     back-filled.</p>
 
-    <p>On this project's side, every fire is treated identically: <strong>one building detector,
-    one study-area definition and one damage model throughout</strong>. Accuracy here is always
+    <p>On this project's side, every fire is treated identically: <strong>one Structure Inventory Model, one study-area definition and one damage model throughout</strong>. Accuracy here is always
     measured out of sample — the model that scores a fire is trained only on other fires, so it
     has never seen the fire it is scoring. A provenance column records on every row whether the
     call came from the production model, which had never seen that fire, or from a model refitted
@@ -540,8 +539,7 @@
 
     <p><strong>Every one of the historical record's 1,770,939 rows also carries ten geometry
     columns</strong> — which source produced the building's analysis polygon, how confident that
-    is, what kind of image cell it owns, <strong>how many cells it owns</strong>, and whether this
-    project's building detector found it. Those columns join onto
+    is, what kind of image cell it owns, <strong>how many cells it owns</strong>, and whether the Structure Inventory Model's roof detector found it. Those columns join onto
     <strong>100.0000 %</strong> of rows on all 361 fires, with a maximum coordinate displacement
     of <strong>1.3 × 10⁻⁸ m</strong>. How they were made is on
     <a href="augmented-carlson.html">the historical companion</a>.</p>
@@ -1091,8 +1089,8 @@
           <tr><td>checksums</td><td class="num">SHA-256 on every file; <code>sha256sum -c</code> verifies 38 of 38</td></tr>
           <tr><td>geometry on the historical record's rows</td><td class="num">10 columns, joined on <strong>100.0000 %</strong> of 1,770,939 rows over 361 fires</td></tr>
           <tr><td>what documents the build</td><td class="num"><code>build-manifest.json</code> beside <code>manifest.json</code></td></tr>
-          <tr><td>models behind the calls</td><td class="num">one building detector throughout; the first call model on every row this project describes and the second call model on 62 fires, both at the fixed threshold 0.88, with the neural column on all 318 scoring units</td></tr>
-          <tr><td>release checks</td><td class="num">all three pass, with no override: one detector and one damage model across every fire, a current damage model, and no fire without a damage call</td></tr>
+          <tr><td>models behind the calls</td><td class="num">one Structure Inventory Model throughout; the first call model on every row this project describes and the second call model on 62 fires, both at the fixed threshold 0.88, with the neural column on all 318 scoring units</td></tr>
+          <tr><td>release checks</td><td class="num">all three pass, with no override: one Structure Inventory Model and one damage model across every fire, a current damage model, and no fire without a damage call</td></tr>
           <tr><td>citation identifier</td><td class="num">⚠️ no DOI minted yet; the citation file holds the slot</td></tr>
         </tbody>
       </table>
@@ -1119,10 +1117,9 @@
       at 16.5 %. If you count buildings from the package on a rural fire, you are counting a
       filtered inventory. The internal build keeps those rows, and every accuracy number this
       project publishes is computed on the unfiltered version.</p>
-      <p>That database was also used as a <strong>training aid</strong> for this project's
-      building detector, which is a different act from redistribution: the network reads an extra
+      <p>That database was also used as a <strong>training aid</strong> for the Structure Inventory Model's roof detector, which is a different act from redistribution: the network reads an extra
       image band saying a building database has an outline here, and the resulting weights and
-      every building the detector outputs are this project's own work. No polygon, attribute or
+      every building the Structure Inventory Model outputs are this project's own work. No polygon, attribute or
       identifier from that database is redistributed in any form.</p>
     </div>
     <p>Each data release is listed, one line per release, on

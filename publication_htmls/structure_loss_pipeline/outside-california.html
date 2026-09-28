@@ -791,8 +791,7 @@
     whole fire</em>: there are no records for the Mescalero Apache Reservation, so the Salt Fire
     side is absent. And it is <em>not an official assessment</em> — the publisher says so
     explicitly.</p>
-    <p>One limitation here is about the building list rather than the damage model. Our building
-    detector — a neural network trained on aerial photography that finds buildings the public
+    <p>One limitation here is about the building list rather than the damage model. The Structure Inventory Model's roof detector — a neural network trained on aerial photography that finds buildings the public
     outline databases miss — found <strong>0.711</strong> of the assessed buildings within 10 m,
     lower than a California run would give. New Mexico has no cached copy of the Microsoft
     building-outline layer, leaving the national USA Structures layer as the only public starting
@@ -906,9 +905,7 @@
   </div>
   <div class="wrap">
     <p>The building list is the union of two public databases — the FEMA / Oak Ridge USA
-    Structures layer and Microsoft's US Building Footprints — plus buildings found by this
-    project's own detector. The public databases are the <em>baseline</em>, and the detector is
-    judged on what it adds to them. The denominator is the buildings somebody chose to inspect,
+    Structures layer and Microsoft's US Building Footprints — plus buildings found by the Structure Inventory Model's roof detector. The public databases are the <em>baseline</em>, and the roof detector is judged on what it adds to them. The denominator is the buildings somebody chose to inspect,
     inside the area they inspected, because over a whole fire every uninspected building would
     count as a false alarm by construction.</p>
     <div class="tablewrap">
@@ -922,7 +919,7 @@
         </tbody>
       </table>
     </div>
-    <p>The detector rescues <strong>306</strong> inspected buildings the public databases miss,
+    <p>The roof detector rescues <strong>306</strong> inspected buildings the public databases miss,
     out of <strong>3,301</strong> they miss in total — <strong>9.3 %</strong> of the job that was
     actually left to do, and 2.3 % of every inspected building. Pooling all fifteen assessments,
     including the four with poor coordinates, the same pair of numbers is 68.2 % against
@@ -938,7 +935,7 @@
       <table>
         <caption>The same 15,043 inspected buildings, split by the size of the public footprint
         that covers them</caption>
-        <thead><tr><th>Public footprint</th><th class="num">Inspected</th><th class="num">Databases alone</th><th class="num">Shipped list</th><th class="num">Rescued by the detector</th></tr></thead>
+        <thead><tr><th>Public footprint</th><th class="num">Inspected</th><th class="num">Databases alone</th><th class="num">Shipped list</th><th class="num">Rescued by the roof detector</th></tr></thead>
         <tbody>
           <tr><td>under 50 m&sup2;</td><td class="num">265</td><td class="num">83.4 %</td><td class="num">84.2 %</td><td class="num">2 of 44</td></tr>
           <tr><td>50–100 m&sup2;</td><td class="num">1,658</td><td class="num">83.4 %</td><td class="num">84.7 %</td><td class="num">23 of 276</td></tr>
@@ -952,7 +949,7 @@
     cannot be matched to one at 10 m. The column that means something on that row is the shipped
     one.</p>
     <p><em>Reading it:</em> <strong>3,224 of 15,043 inspected buildings — 21 % — have no public
-    building footprint near them at all</strong>, and the detector recovers <strong>309</strong>
+    building footprint near them at all</strong>, and the roof detector recovers <strong>309</strong>
     of them, <strong>9.6 %</strong>. Recall on the buildings the databases do hold is 83–92 %;
     recall on the buildings they do not is 9.6 %. The headline 77.3 % is a weighted average of the
     two, and anyone using this dataset outside California should read the second number as the
@@ -964,7 +961,7 @@
     <h3>&#9888;&#65039; A recall number can be about the truth set rather than about us</h3>
     <p>An assessment records a <em>place</em> as well as a damage class, and some record it badly:
     a parcel centroid, a mailing address, a row on a neighbouring fire. If the published
-    coordinate is 60 m from the building, no detector can match it at 10 m, and the resulting
+    coordinate is 60 m from the building, no Structure Inventory Model can match it at 10 m, and the resulting
     figure measures the assessment rather than the building list. Every assessment therefore
     carries the median distance from its points to the nearest building this project holds, and
     the headline pool above keeps only those whose median falls inside the 10 m match radius. Four
@@ -976,7 +973,7 @@
       <em>same</em> building list on the same day. The Red Cross points sit a median
       <strong>4.9 m</strong> from one of our buildings and recall <strong>72.6 %</strong>; the
       Oregon State Fire Marshal's points sit a median <strong>11.5 m</strong> away and recall
-      <strong>35.6 %</strong>. Same detector, same fire, same day — a <strong>37-point
+      <strong>35.6 %</strong>. Same Structure Inventory Model, same fire, same day — a <strong>37-point
       swing that is entirely the truth set's coordinates</strong>.</p>
     </div>
     <p>That is why no recall figure taken from an outside assessment is quoted anywhere on this

@@ -402,9 +402,8 @@
     the building burned.</strong> A present-day database of building outlines matches only
     <strong>49 %</strong> of the points the record calls destroyed against <strong>82 %</strong>
     of the points it calls surviving, because a building that burned in 2014 is often simply
-    absent from a database compiled in 2022. Finding buildings instead with this project's own
-    detector, run on aerial photography taken <em>before</em> the fire, cuts that gap by
-    <strong>61.9 %</strong> — and does not close it: the detector still misses
+    absent from a database compiled in 2022. Finding buildings instead with the Structure Inventory Model's roof detector, run on aerial photography taken <em>before</em> the fire, cuts that gap by
+    <strong>61.9 %</strong> — and does not close it: the roof detector still misses
     <strong>33.9 %</strong> of destroyed buildings against <strong>21.0 %</strong> of surviving
     ones.</p>
   </div>
@@ -423,10 +422,10 @@
     <p>Two things come from outside the record. <strong>Building footprint databases</strong> are
     public maps of building outlines — Microsoft's US Building Footprints and the FEMA / Oak Ridge
     USA Structures layer — and they supply a ready-made polygon whenever the record's point falls
-    inside one. <strong>This project's building detector</strong> is a neural network trained on
+    inside one. <strong>The Structure Inventory Model's roof detector</strong> is a neural network trained on
     <strong>aerial photography</strong>: the US Department of Agriculture's National Agriculture
     Imagery Program, which photographs the continental United States at roughly 60 cm per pixel
-    and reflies every two to three years. The detector finds buildings the databases miss, and it
+    and reflies every two to three years. The roof detector finds buildings the databases miss, and it
     is run only on photography flown before the fire, so nothing it sees is contaminated by the
     fire's aftermath.</p>
     <p>Each row therefore gains a polygon, a count of the 60-centimetre image cells that belong to
@@ -473,7 +472,7 @@
 <circle cx="285.4" cy="68.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="475.0" cy="68.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
 <text class="val" x="854" y="71.5" text-anchor="end">0.179</text>
-<text x="190" y="92.5" text-anchor="end">pre-fire detector</text>
+<text x="190" y="92.5" text-anchor="end">pre-fire roof detector</text>
 <line x1="477.7" y1="89.0" x2="613.9" y2="89.0" stroke="var(--rule-2)" stroke-width="2" />
 <circle cx="477.7" cy="89.0" r="4.5" fill="var(--s1)" stroke="var(--paper-2)" stroke-width="2" />
 <circle cx="613.9" cy="89.0" r="4.5" fill="var(--s2)" stroke="var(--paper-2)" stroke-width="2" />
@@ -493,7 +492,7 @@
       destroyed and surviving buildings.</strong> Measured on the 152 fires with genuine
       60-centimetre photography from before the fire — 720,612 buildings, 51,539 of them
       destroyed. A present-day footprint database matches destroyed buildings 34 points less often
-      than surviving ones; the detector run on pre-fire photography narrows that to 13.
+      than surviving ones; the roof detector run on pre-fire photography narrows that to 13.
       <span class="mono">Source: <code>outputs/carlson_augmented/confound.json</code>,
       <code>by_era.detector</code>.</span></figcaption>
     </figure>
@@ -508,14 +507,13 @@
         <tbody>
           <tr><td>present-day footprint database</td><td class="num">0.485</td><td class="num">0.822</td><td class="num"><strong>0.337</strong></td><td class="num">0.798</td></tr>
           <tr><td>the same database, filtered to strictly pre-fire</td><td class="num">0.480</td><td class="num">0.659</td><td class="num">0.179</td><td class="num">0.646</td></tr>
-          <tr class="total"><td><strong>our detector on pre-fire imagery</strong></td><td class="num">0.662</td><td class="num">0.790</td><td class="num"><strong>0.128</strong></td><td class="num">0.781</td></tr>
+          <tr class="total"><td><strong>Structure Inventory Model's roof detector on pre-fire imagery</strong></td><td class="num">0.662</td><td class="num">0.790</td><td class="num"><strong>0.128</strong></td><td class="num">0.781</td></tr>
           <tr><td>either source, whichever matches</td><td class="num">0.704</td><td class="num">0.912</td><td class="num">0.207</td><td class="num">0.897</td></tr>
         </tbody>
       </table>
     </div>
     <p>Reading it: a present-day footprint database finds a shape for 0.485 of the buildings the
-    record calls destroyed but 0.822 of those it calls surviving, a gap of 0.337; the detector run
-    on pre-fire photography finds 0.662 against 0.790, a gap of 0.128.</p>
+    record calls destroyed but 0.822 of those it calls surviving, a gap of 0.337; the roof detector run on pre-fire photography finds 0.662 against 0.790, a gap of 0.128.</p>
     <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/confound.json</code> on the data
     share, <code>by_era.detector</code>; counts 51,539 destroyed and 669,073 surviving. The
     per-fire equivalents are the four <code>match_*</code> and <code>gap_*</code> column families
@@ -524,13 +522,11 @@
     <div class="note warn">
       <p><strong>⚠️ Never show a figure pooled across imagery eras.</strong> The photography
       available before a fire is not the same in every decade, and a fire with no pre-fire aerial
-      photography at all has a detector match of <em>zero</em> by construction. A combined figure
-      would therefore report the absence of a photograph as a failure of the detector. Each
-      imagery stratum is measured and reported on its own; the table above is the stratum in which
-      the detector runs at its full native resolution.</p>
-      <p>On the 106 fires whose pre-fire photography is 1-metre imagery upsampled to the
-      detector's working resolution — 234,294 buildings, 12,289 destroyed — the same comparison
-      gives a footprint gap of <strong>0.482</strong> against a detector gap of
+      photography at all has a roof-detector match of <em>zero</em> by construction. A combined figure
+      would therefore report the absence of a photograph as a failure of the roof detector. Each
+      imagery stratum is measured and reported on its own; the table above is the stratum in which the roof detector runs at its full native resolution.</p>
+      <p>On the 106 fires whose pre-fire photography is 1-metre imagery upsampled to the roof detector's working resolution — 234,294 buildings, 12,289 destroyed — the same comparison
+      gives a footprint gap of <strong>0.482</strong> against a roof-detector gap of
       <strong>0.068</strong>, an <strong>86.0 %</strong> reduction, but on a coarser image and a
       much smaller destroyed count. The 103 fires with no pre-fire photography have footprints and
       circles only.</p>
@@ -551,7 +547,7 @@
 
     <div class="note warn">
       <p><strong>⚠️ The residual gap is real and it is yours to carry.</strong> Thirteen points of
-      gap remain after the detector: it misses <strong>33.9 %</strong> of destroyed buildings
+      gap remain after the roof detector: it misses <strong>33.9 %</strong> of destroyed buildings
       against <strong>21.0 %</strong> of surviving ones. Some of that is buildings genuinely
       invisible at 60 cm — small, under canopy, shaded — and some is that the buildings which burn
       are, on average, the ones a machine finds hardest. <strong>Any analysis that uses these
@@ -576,14 +572,13 @@
         <thead><tr><th class="rank">rank</th><th>Source</th><th>What it is</th><th class="num">Buildings</th><th class="num">Share</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td>matched footprint</td><td>a public footprint polygon the point falls inside, or within 1 m of</td><td class="num">1,440,236</td><td class="num">81.3 %</td></tr>
-          <tr><td class="rank">2</td><td>detector instance</td><td>a connected blob of our detector's output on pre-fire photography, matched one-to-one within 10 m, at least 20 m²</td><td class="num">104,873</td><td class="num">5.9 %</td></tr>
+          <tr><td class="rank">2</td><td>roof-detector instance</td><td>a connected blob of the roof detector's output on pre-fire photography, matched one-to-one within 10 m, at least 20 m²</td><td class="num">104,873</td><td class="num">5.9 %</td></tr>
           <tr><td class="rank">3</td><td>fallback circle</td><td>a circle of the mean diameter of the ten nearest observed matches in the same fire</td><td class="num">225,830</td><td class="num">12.8 %</td></tr>
           <tr><td class="rank">4</td><td>median-diameter circle</td><td>the fallback for a fire with fewer than ten observed matches of any kind — ⚠️ <strong>it never fired on any fire, so it is untested on real data</strong></td><td class="num">0</td><td class="num">0.0 %</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Reading it: 81.3 % of buildings take a real footprint polygon and 5.9 % an outline the
-    detector drew, while 12.8 % get a circle standing in for a shape nobody ever observed.</p>
+    <p>Reading it: 81.3 % of buildings take a real footprint polygon and 5.9 % an outline the roof detector drew, while 12.8 % get a circle standing in for a shape nobody ever observed.</p>
     <p class="src"><b>Source:</b> the four <code>geometry_source__*</code> columns of
     <code>outputs/carlson_augmented/summary.csv</code> on the data share, summed over 361 fires
     (1,770,939 rows).</p>
@@ -595,16 +590,16 @@
     date and a flag saying whether that date precedes the fire, so a user who needs strictly
     pre-fire shapes can keep only those — on almost every fire, that is none of them.</p>
     <div class="note">
-      <p><strong>The detector's own inputs are strictly pre-fire.</strong> The reference band the
+      <p><strong>The inputs to the Structure Inventory Model's roof detector are strictly pre-fire.</strong> The reference band the
       network reads is built only from footprints dated before ignition; a county with no pre-fire
       footprint at all is logged and skipped. <strong>No post-fire polygon ever enters what the
       model sees.</strong></p>
     </div>
     <p><strong>Where ranks 1 and 2 both exist, they agree.</strong> The median
     intersection-over-union — the shared area of two outlines divided by their combined area, so 1
-    is a perfect overlap — between the footprint polygon and the detector's outline for the same
+    is a perfect overlap — between the footprint polygon and the roof detector's outline for the same
     building is <strong>0.81</strong>, and <strong>96 %</strong> of pairs are within a factor of
-    two on area. That is the check that the detector is finding the building and not its driveway.
+    two on area. That is the check that the roof detector is finding the building and not its driveway.
     <span class="mono">(<code>summary.csv</code> columns <code>agree_iou_median</code>,
     <code>agree_area_within_2x</code>, median over fires.)</span></p>
     <div class="note warn">
@@ -620,30 +615,30 @@
   <div class="wrap">
     <p class="eyebrow">04 · coverage</p>
     <h2>What the photography supports, era by era</h2>
-    <p>Whether a fire can have the detector run on it at all is <em>measured</em> rather than
+    <p>Whether a fire can have the Structure Inventory Model's roof detector run on it at all is <em>measured</em> rather than
     assumed: the imagery catalogue is checked for every state and year, and the answer is written
     down and published alongside the buildings.</p>
     <div class="tablewrap">
       <table>
         <caption>The three imagery eras, and what each supports — <strong>these rows must never be
         added together</strong></caption>
-        <thead><tr><th>Stratum</th><th class="num">Fires</th><th class="num">Years</th><th class="num">States</th><th class="num">Buildings</th><th class="num">Destroyed</th><th class="num">Footprint gap → detector gap</th><th>Detector</th></tr></thead>
+        <thead><tr><th>Stratum</th><th class="num">Fires</th><th class="num">Years</th><th class="num">States</th><th class="num">Buildings</th><th class="num">Destroyed</th><th class="num">Footprint gap → roof-detector gap</th><th>Roof detector</th></tr></thead>
         <tbody>
           <tr class="total"><td><strong>native 0.6 m before the fire</strong></td><td class="num">152</td><td class="num">2013–2022</td><td class="num">17</td><td class="num">720,612</td><td class="num">51,539</td><td class="num"><strong>0.337 → 0.128</strong><br>−61.9 %</td><td>runs at full resolution — this is the stratum the headline is from</td></tr>
           <tr><td>1 m before the fire, upsampled</td><td class="num">106</td><td class="num">2011–2018</td><td class="num">16</td><td class="num">234,294</td><td class="num">12,289</td><td class="num">0.482 → 0.068<br>−86.0 %</td><td>runs on a coarser image; reported separately</td></tr>
-          <tr><td>no pre-fire aerial imagery</td><td class="num">103</td><td class="num">2002–2011</td><td class="num">18</td><td class="num">816,033</td><td class="num">9,706</td><td class="num">—</td><td>not run; shape comes from ranks 1, 3 and 4 only, so its detector match is zero by construction</td></tr>
+          <tr><td>no pre-fire aerial imagery</td><td class="num">103</td><td class="num">2002–2011</td><td class="num">18</td><td class="num">816,033</td><td class="num">9,706</td><td class="num">—</td><td>not run; shape comes from ranks 1, 3 and 4 only, so its roof-detector match is zero by construction</td></tr>
         </tbody>
       </table>
     </div>
     <p>Reading it: the newest 152 fires have real 60-centimetre photography from before the fire
     and carry the headline numbers, while the oldest 103 have no pre-fire photography at all, so
-    their detector match is zero for want of an image rather than for want of a building — which
+    their roof-detector match is zero for want of an image rather than for want of a building — which
     is exactly why a row pooled across these three strata would mislead.</p>
     <p class="src"><b>Source:</b> <code>outputs/carlson_augmented/summary.csv</code> on the data
     share, grouped by <code>era</code>, and <code>naip_coverage.csv</code> (the catalogue check);
     destroyed counts and gaps from <code>confound.json</code>. 26 states in total; 134 of the 361
     fires are in California and carry 1,360,437 of the buildings.</p>
-    <p>The detector ran on <strong>256 of the 361 fires</strong> and matched a building on
+    <p>The roof detector ran on <strong>256 of the 361 fires</strong> and matched a building on
     <strong>691,535</strong> of the record's points. On a further 246,913 points it ran and found
     nothing where the record says a building stood, and that outcome is counted and published
     rather than left silent. <strong>832,491</strong> buildings had no pre-fire image for it to
@@ -676,8 +671,7 @@
     directory measured on the data share; the vector total is the <code>gpkg_bytes</code> column
     of <code>summary.csv</code>.</p>
     <p><strong>The probability surface is the one product a user rebuilds rather than
-    downloads.</strong> A probability raster stores, for each 60-centimetre cell, how confident
-    the detector is that a building is there; points can be re-cut from it at any confidence
+    downloads.</strong> A probability raster stores, for each 60-centimetre cell, how confident the roof detector is that a building is there; points can be re-cut from it at any confidence
     threshold with no graphics hardware at all. So 5.41 GB ships and the rest stays regenerable.
     Every building still resolves to its own 60-centimetre cells in the smaller archive, because
     it is the instance raster — not the probability raster — that carries the identifier.</p>
@@ -693,12 +687,12 @@
       </table>
     </div>
     <p>Reading it: a positive cell value is the identity of a building in the record, a negative
-    one is a building the detector found that the record does not list, and zero is ground with
+    one is a building the roof detector found that the record does not list, and zero is ground with
     nothing on it.</p>
     <p class="src"><b>Source:</b> the <code>raster_cell_kind__*</code> columns of
     <code>summary.csv</code> on the data share, and the column dictionary
     <code>carlson-augmented-schema.md</code> shipped with the release. Cell kinds over all 361
-    fires: 691,535 detector cells, 743,759 footprint cells and 220,986 circle cells, and
+    fires: 691,535 roof-detector cells, 743,759 footprint cells and 220,986 circle cells, and
     <strong>114,659</strong> buildings with no cell of their own. That count ships as a column,
     <code>raster_n_cells</code>, so a reader can filter on it rather than infer it.</p>
     <div class="note warn">

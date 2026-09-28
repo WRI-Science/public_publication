@@ -431,8 +431,7 @@
       <li><strong>Every accuracy figure is measured out of sample.</strong> The model that
       scores a fire is trained only on the other fires, so no fire is ever graded by a model
       that saw its answers.</li>
-      <li><strong>Our building detector is an addition to the public footprint databases, not
-      a replacement.</strong> Measured against fire-service inspections it recovers 3.5 % of
+      <li><strong>The Structure Inventory Model's roof detector is an addition to the public footprint databases, not a replacement.</strong> Measured against fire-service inspections it recovers 3.5 % of
       the buildings the public databases miss; measured against a complete building census it
       is worth about four times that, and most on fires whose footprint data is too recent to
       describe the pre-fire landscape.</li>
@@ -495,12 +494,11 @@
     <h2>The two halves of the method, and why they are scored separately</h2>
 
     <h3>Half one — the list of buildings that stood before the fire</h3>
-    <p>The building list for a fire is the union of three sources. Two are <strong>public
+    <p>The building list for a fire &mdash; what we call the <strong>Structure Inventory Model</strong> &mdash; is the union of three sources. Two are <strong>public
     building-footprint databases</strong> — maps of building outlines that anyone can
     download: the FEMA / Oak Ridge USA Structures layer, filtered to outlines whose source
     imagery predates ignition, and Microsoft's US Building Footprints, filtered on its own
-    published capture dates. The third is <strong>our building detector</strong>: a neural
-    network of the U-Net family, with a 34-layer residual image encoder, run over
+    published capture dates. The third is <strong>the Structure Inventory Model's roof detector</strong>: a neural network of the U-Net family, with a 34-layer residual image encoder, run over
     <strong>aerial photography</strong> — the US Department of Agriculture's National
     Agriculture Imagery Program, which photographs the continental United States at roughly
     60 cm per pixel and is reflown every two to three years. It finds buildings the databases
@@ -508,7 +506,7 @@
     trained on 24k–43k image tiles of 512 pixels a side, with public footprints burned in as
     training masks, split into spatial blocks that no tile crosses so that training and
     testing never share ground.</p>
-    <p>Two design choices carry most of the detector's value. The network takes the
+    <p>Two design choices carry most of the roof detector's value. The network takes the
     <strong>footprint database itself as an input band</strong> — a prior that says "a public
     map already shows a building here" — and it uses an <strong>ignore mask</strong> around
     truth points that no footprint covers, so the training loss is not penalised for finding a
@@ -659,11 +657,11 @@
     <h2>How complete the building list is</h2>
     <p class="lede" style="max-width:68ch">The public footprint databases are not a competitor.
     They are the <strong>baseline</strong>, and they supply most of every building list this
-    project publishes. The only honest question is what our detector adds to them.</p>
+    project publishes. The only honest question is what the Structure Inventory Model's roof detector adds to them.</p>
   </div>
 
   <div class="wrap">
-    <h3>What the detector adds, measured against inspections</h3>
+    <h3>What the roof detector adds, measured against inspections</h3>
     <p>Taking the two public databases together as the baseline, this comparison counts only
     the inspection records that the full building list matches and the baseline does not. A
     ground-truth point and one of our building locations are treated as the same building when
@@ -770,14 +768,12 @@
 </svg>
       <ul class="legend">
         <li><span class="swatch" style="background:var(--s1)"></span>footprint databases alone</li>
-        <li><span class="swatch" style="background:var(--s2)"></span>full list (databases plus our detector)</li>
-        <li><span class="swatch" style="background:var(--rule-2);height:2px;width:1.1em"></span>what the detector adds</li>
+        <li><span class="swatch" style="background:var(--s2)"></span>full Structure Inventory Model (databases plus roof detector)</li>
+        <li><span class="swatch" style="background:var(--rule-2);height:2px;width:1.1em"></span>what the roof detector adds</li>
       </ul>
-      <figcaption><strong>The detector is worth most where the public databases are
+      <figcaption><strong>The roof detector is worth most where the public databases are
       worst.</strong> Recall of fire-service inspection records, matched one-to-one at 10 m, on
-      the 15 fires of 2024–2025; the right-hand column is the number of inspected buildings the
-      detector rescued. Park, the fire with the lowest baseline recall (0.432), is where the
-      detector rescues 94 records; Coches 2, where the databases are best (0.825), gains
+      the 15 fires of 2024–2025; the right-hand column is the number of inspected buildings the roof detector rescued. Park, the fire with the lowest baseline recall (0.432), is where the roof detector rescues 94 records; Coches 2, where the databases are best (0.825), gains
       nothing at all.</figcaption>
     </figure>
   </div>
@@ -801,7 +797,7 @@
     The misses are small buildings — 5,279 of the 9,845 are inspected as minor structures — and
     buildings the original digitiser simply did not draw.</p>
 
-    <h3>What the detector adds, measured against a complete census</h3>
+    <h3>What the roof detector adds, measured against a complete census</h3>
     <p>Inspections cannot say whether a building we hold is real, because they only record
     buildings somebody visited. A census can: inside its covered area, the published historical
     record is a complete enumeration of major buildings, destroyed and surviving alike. The
@@ -829,22 +825,18 @@
     contain — 0.858 of what they place inside the census area is a real census building — but
     they hold only 0.571 of the buildings that were there.</p>
 
-    <p><strong>Where the databases are incomplete, it is a matter of county coverage rather
-    than of the detector.</strong> Ventura and Sonoma counties' pre-fire footprint vintages
+    <p><strong>Where the databases are incomplete, it is a matter of county coverage rather than of the roof detector.</strong> Ventura and Sonoma counties' pre-fire footprint vintages
     leave Thomas and Tubbs at 0.25–0.28 recall, while Woolsey and Creek sit at 0.84–0.87. And
     the databases miss <strong>destroyed</strong> buildings harder than surviving ones (0.407
     against 0.590 pooled), which is exactly the direction that would bias a burn-probability
     model, so every published figure stays split by whether the building survived.</p>
 
-    <p>On <strong>held-out spatial blocks only</strong> — the tiles the detector never trained
-    on, 38,821 census buildings — adding the detector to the baseline is worth <strong>+4.1
+    <p>On <strong>held-out spatial blocks only</strong> — the tiles the roof detector never trained on, 38,821 census buildings — adding the roof detector to the baseline is worth <strong>+4.1
     points of recall for 1.9 points of precision</strong> (0.768 to 0.809 recall, 0.851 to
-    0.832 precision at 10 m; 0.785 to 0.828 recall at 20 m). That is four times what the same
-    detector appears to add when it is measured against inspections, and the reason is what the
+    0.832 precision at 10 m; 0.785 to 0.828 recall at 20 m). That is four times what the same roof detector appears to add when it is measured against inspections, and the reason is what the
     two kinds of truth are: a census enumerates every major building, while inspections cover
-    only the buildings somebody visited, so most of what the detector adds is invisible to an
-    inspection record by construction. It is the strongest evidence that the detector's
-    additions are mostly real buildings.</p>
+    only the buildings somebody visited, so most of what the roof detector adds is invisible to an
+    inspection record by construction. It is the strongest evidence that the roof detector's additions are mostly real buildings.</p>
 
     <h3>The other direction — footprints with no building under them</h3>
     <p>A baseline footprint inside the census area with no census building within 10 m is a
@@ -908,8 +900,7 @@
     0.432 on rural Park, in the Sierra Nevada. Restricted to <strong>major</strong> buildings,
     the population the historical census counts, suburban fires reach 0.85–0.95.</p>
     <p><strong>Precision cannot be measured from inspections, and this page says so rather than
-    printing a number that looks like one.</strong> Of 2,267 points that only the detector
-    found, 347 are confirmed by an inspection record, 409 sit inside an inspected area and
+    printing a number that looks like one.</strong> Of 2,267 points that only the roof detector found, 347 are confirmed by an inspection record, 409 sit inside an inspected area and
     match nothing, and 1,511 sit where nobody inspected. So <em>at most</em> 54 % of our
     additions inside an inspected area are wrong, and an inspection record cannot narrow that
     further, because it records damaged and threatened structures rather than every
@@ -1764,7 +1755,7 @@
     twice, on independent evidence.</p>
     <p>Three caveats belong with these numbers. South Fork's detection recall of 0.661 is well
     below California for structural reasons rather than model quality: New Mexico has no cached
-    Microsoft footprint layer, so the detector's prior band comes from the USA Structures layer
+    Microsoft footprint layer, so the roof detector's prior band comes from the USA Structures layer
     alone, and that county's extract carries a single image date seven years before the fire.
     The remote-sensing assessment's detection recall of 0.952 is <em>not</em> comparable with the
     other two, because its geometry <strong>is</strong> the USA Structures footprints, which are
@@ -1813,8 +1804,8 @@
       1,770,939 rows sit at a location a second fire also claims, and it carries no building
       identifier. <strong>De-duplicate on geometry before any pooled count across historical
       fires.</strong></li>
-      <li><strong>The detector's additions cannot be proven right from inspections.</strong> At
-      most 54 % of the detector-only points inside an inspected area are wrong, and the
+      <li><strong>Additions from the Structure Inventory Model's roof detector cannot be proven right from inspections.</strong> At
+      most 54 % of the roof-detector-only points inside an inspected area are wrong, and the
       inspection record cannot narrow that, because it does not record every structure.</li>
       <li><strong>Nothing before 2016 can be produced by this method at all</strong>, and
       nothing after 2022 has a hand-built census to be checked against. The comparison between
@@ -1889,10 +1880,9 @@
     weakest</strong> — 0.03 % of Atlas 2017's rows against 36.1 % of CZU 2020's, with South Fork
     NM at 28.4 % and Dixie 2021 at 16.5 % — so a user counting buildings from the package on a
     rural fire is counting a filtered list.</p>
-    <p>Microsoft footprints are also used as a <em>training prior</em> for the detector, which
+    <p>Microsoft footprints are also used as a <em>training prior</em> for the Structure Inventory Model's roof detector, which
     is a different question from redistribution: the network reads a raster band saying "a
-    footprint database has a building here", and the weights and every building the detector
-    outputs are this project's own work. No Microsoft polygon, attribute or identifier is
+    footprint database has a building here", and the weights and every building the Structure Inventory Model outputs are this project's own work. No Microsoft polygon, attribute or identifier is
     redistributed in any form.</p>
   </div>
 </section>

@@ -552,7 +552,7 @@
         major buildings, matched to a USGS building within 10&nbsp;m</caption>
         <tbody>
           <tr><td>Major buildings found, footprints alone</td><td class="num">0.768</td></tr>
-          <tr><td>Major buildings found, with our detector</td><td class="num">0.809</td></tr>
+          <tr><td>Major buildings found, full Structure Inventory Model (footprints plus roof detector)</td><td class="num">0.809</td></tr>
           <tr><td>Our points that are real USGS buildings (precision)</td><td class="num">0.832</td></tr>
           <tr><td>Possible phantom footprints (no USGS building within 10&nbsp;m)</td><td class="num">&le; about 1 in 11</td></tr>
         </tbody>
@@ -560,8 +560,7 @@
     </div>
     <p class="src">Phantom rate: at most about 1 in 11 for major-sized footprints in core
     areas; 1 in 7 raw. Both are upper bounds. The public release omits Microsoft footprints.</p>
-    <p><a href="maps/footprints.html">See it on a map</a>: CAL FIRE inspections, the two
-    footprint databases and our detector's additions on one 2024&ndash;25 fire.</p>
+    <p><a href="maps/footprints.html">See it on a map</a>: CAL FIRE inspections, the two footprint databases and the additions from the Structure Inventory Model's roof detector on one 2024&ndash;25 fire.</p>
 
     <h3>Two calls, from two different models</h3>
     <p>The <strong>first call</strong> is made about 74 days after ignition. It compares
@@ -850,8 +849,8 @@
         <thead><tr><th>Role</th><th>Dataset</th><th>Licence</th></tr></thead>
         <tbody>
           <tr><td>Building outlines for the list</td><td>FEMA / Oak Ridge <strong>USA Structures</strong></td><td>CC BY 4.0</td></tr>
-          <tr><td>Building outlines for the list and a detector input; never a training label</td><td><strong>Microsoft US Building Footprints</strong></td><td>ODbL; these rows are excluded from the released file</td></tr>
-          <tr><td>Aerial photos for the roof detector</td><td>USDA <strong>NAIP</strong>, 0.6 m, four bands</td><td>public domain</td></tr>
+          <tr><td>Building outlines for the Structure Inventory Model and an input to its roof detector; never a training label</td><td><strong>Microsoft US Building Footprints</strong></td><td>ODbL; these rows are excluded from the released file</td></tr>
+          <tr><td>Aerial photos for the Structure Inventory Model's roof detector</td><td>USDA <strong>NAIP</strong>, 0.6 m, four bands</td><td>public domain</td></tr>
           <tr><td>Before-and-after satellite imagery</td><td>ESA <strong>Sentinel-2</strong>, 2016 onward</td><td>open</td></tr>
           <tr><td>Yearly satellite embeddings (second call only)</td><td>Google DeepMind <strong>AlphaEarth Foundations</strong>, 2017 onward</td><td>CC BY 4.0</td></tr>
           <tr><td>Training truth and the 2002&ndash;2022 record</td><td><strong>Carlson et al. 2025</strong>, USGS, doi:10.5066/P1QX6UXD</td><td>CC0</td></tr>
@@ -876,7 +875,7 @@
     licence rule). First call by <code>damage_sentinel2_final_v1</code>, second call by
     <code>damage_sentinel2_refined_final_v1</code>, both fitted on 199 fires and 818,838 buildings
     and evaluated leave-one-fire-out at 0.88 over four training runs (release model cards).
-    Inventory figures: canonical detector on held-out blocks of 5 California fires 2017&ndash;18.
+    Structure Inventory Model figures: canonical roof detector on held-out blocks of 5 California fires 2017&ndash;18.
     Held-out-group, external-check, strata and next-step figures follow the presentation of 28
     September 2026. This page was rewritten on 2026-09-28 to mirror the presentation.</p>
   </div>

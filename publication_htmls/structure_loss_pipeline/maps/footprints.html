@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Which buildings each source finds</title>
-<meta name="description" content="One neighbourhood of the 2024 Park Fire, with CAL FIRE's damage inspections, two building-footprint datasets and our roof detector drawn on the same satellite picture." />
+<meta name="description" content="One neighbourhood of the 2024 Park Fire, with CAL FIRE's damage inspections, two building-footprint datasets and the Structure Inventory Model's roof detector drawn on the same satellite picture." />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
@@ -89,7 +89,7 @@
 <header class="top wrap">
   <nav class="crumbs" aria-label="Site"><a href="../index.html">Home</a><a href="../presentation.html">View the presentation</a><a href="calls.html">Right and wrong calls map</a></nav>
   <h1>Which buildings each source finds</h1>
-  <p class="lede">This is one wooded neighbourhood in the 2024 Park Fire (Tehama County, California). After the fire, CAL FIRE inspectors recorded the buildings here and graded their damage; the coloured dots are their records. Drawn over the same picture are two public building-footprint maps and the extra buildings our roof detector found, so you can see which buildings each source knows about. Zoom out or press &ldquo;Whole fire&rdquo; to see the rest of the fire.</p>
+  <p class="lede">This is one wooded neighbourhood in the 2024 Park Fire (Tehama County, California). After the fire, CAL FIRE inspectors recorded the buildings here and graded their damage; the coloured dots are their records. Drawn over the same picture are two public building-footprint maps and the extra buildings the Structure Inventory Model's roof detector found, so you can see which buildings each source knows about. Zoom out or press &ldquo;Whole fire&rdquo; to see the rest of the fire.</p>
 </header>
 
 <main class="wrap">
@@ -101,7 +101,7 @@
       <ul class="grades" id="grade-legend"></ul>
       <label><input type="checkbox" id="t-uss" checked> <span class="sw sq" style="background:rgba(91,138,210,.35);border-color:#5B8AD2"></span> USA Structures footprints</label>
       <label><input type="checkbox" id="t-ms" checked> <span class="sw sq" style="background:rgba(198,120,221,.25);border-color:#C678DD;border-style:dashed"></span> Microsoft footprints</label>
-      <label><input type="checkbox" id="t-det" checked> <span class="sw sq" style="background:#E0B43A;transform:rotate(45deg);width:11px;height:11px"></span> Our roof detector (added buildings)</label>
+      <label><input type="checkbox" id="t-det" checked> <span class="sw sq" style="background:#E0B43A;transform:rotate(45deg);width:11px;height:11px"></span> Structure Inventory Model roof detector (added buildings)</label>
       <label><input type="checkbox" id="t-per" checked> <span class="sw line"></span> Fire perimeter</label>
       <div class="btns">
         <button type="button" id="b-focus">Focus area</button>
@@ -120,20 +120,20 @@
   <div class="prose">
     <h2>What to look for</h2>
     <ul class="look">
-      <li><strong>Buildings no footprint map has.</strong> In the opening view, three buildings the inspectors recorded have no footprint in either USA Structures or the Microsoft map, but our roof detector found them (gold diamonds): two of them were destroyed and one was undamaged. Across the whole fire, 94 inspection points have a detector point within 10 m and no footprint within 10 m.</li>
-      <li><strong>Buildings nobody mapped.</strong> Four inspection points in the opening view have no footprint and no detector point within 10 m. Three are small outbuildings, which are hard to see under trees in a 60 cm aerial photo. Across the whole fire (within 300 m of the perimeter), 854 of 2,064 inspection points have nothing from any of the three sources within 10 m; 456 of those are minor structures such as sheds, and 373 are homes.</li>
+      <li><strong>Buildings no footprint map has.</strong> In the opening view, three buildings the inspectors recorded have no footprint in either USA Structures or the Microsoft map, but the Structure Inventory Model's roof detector found them (gold diamonds): two of them were destroyed and one was undamaged. Across the whole fire, 94 inspection points have a roof-detector point within 10 m and no footprint within 10 m.</li>
+      <li><strong>Buildings nobody mapped.</strong> Four inspection points in the opening view have no footprint and no roof-detector point within 10 m. Three are small outbuildings, which are hard to see under trees in a 60 cm aerial photo. Across the whole fire (within 300 m of the perimeter), 854 of 2,064 inspection points have nothing from any of the three sources within 10 m; 456 of those are minor structures such as sheds, and 373 are homes.</li>
       <li><strong>The two footprint maps disagree.</strong> Some roofs have a blue USA Structures outline only, some a purple Microsoft outline only, and some both, offset by a few metres. The two maps were traced from different photos taken in different years.</li>
-      <li><strong>Destroyed buildings still have footprints.</strong> Footprints and the detector are drawn from photos taken <em>before</em> the fire, so they show what stood there, not what survived. Damage comes from the inspection grade (the dot colour).</li>
+      <li><strong>Destroyed buildings still have footprints.</strong> Footprints and the roof detector are drawn from photos taken <em>before</em> the fire, so they show what stood there, not what survived. Damage comes from the inspection grade (the dot colour).</li>
       <li><strong>An outline with no inspection dot is not proof of a phantom.</strong> Inspectors record buildings inside the damage area; an outline without a dot may be a real building they did not visit, or one that was already gone. We did not find a clear phantom footprint in the opening view.</li>
     </ul>
-    <p>Distances such as &ldquo;within 10 m&rdquo; are measured from the inspection point to the nearest footprint edge or detector point; inspection points are sometimes placed a few metres off the roof, so these counts are approximate.</p>
+    <p>Distances such as &ldquo;within 10 m&rdquo; are measured from the inspection point to the nearest footprint edge or roof-detector point; inspection points are sometimes placed a few metres off the roof, so these counts are approximate.</p>
     <p>The Microsoft outlines are shown here for comparison under their open licence (below). Our released data table leaves Microsoft-derived rows out; this map only displays them.</p>
   </div>
 </main>
 
 <footer class="pagefoot">
   <div class="wrap">
-    <p><strong>Sources.</strong> Damage inspections: CAL FIRE Damage Inspection (DINS) points for the Park Fire (started 24 July 2024), public layer, retrieved September 2026; only the damage grade, structure category, structure type and year built are kept. Building footprints: USA Structures, FEMA and Oak Ridge National Laboratory, CC BY 4.0 (footprints imaged before the fire). Microsoft US Building Footprints (release 2): &copy; Microsoft, Open Database License (ODbL 1.0); the extract in <a href="data/footprints_microsoft.geojson">data/footprints_microsoft.geojson</a> is a derivative database and is available under ODbL 1.0. Roof detector points: this project's U-Net roof detector run on pre-fire NAIP aerial photos, kept where no footprint lies within 20 m. Fire perimeter: the interagency (NIFC WFIGS) perimeter for the Park Fire, simplified to about 15 m.</p>
+    <p><strong>Sources.</strong> Damage inspections: CAL FIRE Damage Inspection (DINS) points for the Park Fire (started 24 July 2024), public layer, retrieved September 2026; only the damage grade, structure category, structure type and year built are kept. Building footprints: USA Structures, FEMA and Oak Ridge National Laboratory, CC BY 4.0 (footprints imaged before the fire). Microsoft US Building Footprints (release 2): &copy; Microsoft, Open Database License (ODbL 1.0); the extract in <a href="data/footprints_microsoft.geojson">data/footprints_microsoft.geojson</a> is a derivative database and is available under ODbL 1.0. Roof detector points: the Structure Inventory Model's roof detector (a U-Net) run on pre-fire NAIP aerial photos, kept where no footprint lies within 20 m. Fire perimeter: the interagency (NIFC WFIGS) perimeter for the Park Fire, simplified to about 15 m.</p>
     <p><strong>Backgrounds.</strong> Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community (Esri terms of use). USGS NAIP Plus aerial imagery from The National Map (public domain). Light street map &copy; OpenStreetMap contributors &copy; CARTO.</p>
     <p>Structure Loss Pipeline &middot; map built 28 September 2026. The layers are GeoJSON files in the <code>data</code> folder next to this page; coordinates are rounded to 6 decimal places and carry no addresses, parcel numbers or names.</p>
   </div>
@@ -239,8 +239,8 @@
       },
       onEachFeature: function (f, l) {
         var p = f.properties || {};
-        l.bindPopup("<b>Our roof detector</b><br>A roof found in the pre-fire aerial photo with no footprint within 20 m." +
-          (p.score != null ? "<br>Detector confidence: " + Number(p.score).toFixed(2) : ""));
+        l.bindPopup("<b>Structure Inventory Model roof detector</b><br>A roof found in the pre-fire aerial photo with no footprint within 20 m." +
+          (p.score != null ? "<br>Roof-detector confidence: " + Number(p.score).toFixed(2) : ""));
       } });
     addIfChecked("t-det", "det");
   }).catch(console.error);
