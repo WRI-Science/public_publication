@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Right and wrong calls</title>
+<meta name="description" content="Five fires with every building our first damage call scored, coloured by whether the call matched the inspection or reference record, from a model that never saw that fire." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+  :root {
+    --paper: #0B0C0E; --paper-2: #14161A; --paper-3: #1E2127;
+    --ink: #EFEBE3; --ink-2: #B6B0A6; --ink-3: #85837E;
+    --rule: #262A2F; --rule-2: #3A4047;
+    --s1: #5B8AD2; --s2: #DB6026; --s3: #17A188; --s4: #B38A20;
+    --t-xs: 0.72rem; --t-sm: 0.82rem; --t-ui: 0.9rem; --t-md: 1.12rem;
+    --measure: 72ch; --shell: 1280px; --gutter: 16px;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+      --rule: #DDD8CC; --rule-2: #C3BCAB;
+      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
+    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
+    --rule: #DDD8CC; --rule-2: #C3BCAB;
+    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper); color: var(--ink); margin: 0;
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+  h1, h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
+  h1 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.25rem, 2.4vw, 1.5rem); margin: 2rem 0 0.6rem; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--s1); text-underline-offset: 2px; }
+  a:hover { color: var(--s2); }
+  :focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; }
+  .wrap { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
+  .prose { max-width: var(--measure); }
+  header.top { padding-block: 1.4rem 0.6rem; }
+  .crumbs { font-size: var(--t-ui); margin-bottom: 0.8rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .lede { color: var(--ink-2); font-size: var(--t-md); max-width: var(--measure); margin-top: 0.7rem; }
+  .firebar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0.4rem 0 12px; }
+  #fire-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+  .firebar label { font-size: var(--t-ui); color: var(--ink-2); }
+  .mapshell { display: grid; grid-template-columns: 270px minmax(0, 1fr) 320px; gap: 14px; align-items: start; }
+  #map { height: 74vh; min-height: 440px; border: 1px solid var(--rule-2); border-radius: 6px; background: var(--paper-2); }
+  .panel { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; font-size: var(--t-ui); }
+  .panel h3 { font-family: "IBM Plex Sans", sans-serif; font-size: var(--t-ui); font-weight: 600; margin: 0.2rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); }
+  .panel label { display: flex; gap: 8px; align-items: center; margin: 4px 0; cursor: pointer; }
+  .panel .cnt { margin-left: auto; color: var(--ink-3); font-size: var(--t-sm); }
+  .sw { display: inline-block; width: 14px; height: 14px; flex: none; border-radius: 50%; border: 1.5px solid #111; }
+  .sw.ring { border: 2.5px solid #fff; box-shadow: 0 0 0 1px #111; }
+  .sw.sq { border-radius: 2px; }
+  .sw.line { border-radius: 0; height: 0; border: 0; border-top: 2.5px dashed #F5F5F5; width: 18px; }
+  button, select {
+    font: inherit; font-size: var(--t-sm); color: var(--ink); background: var(--paper-3);
+    border: 1px solid var(--rule-2); border-radius: 4px; padding: 5px 10px; cursor: pointer;
+  }
+  button:hover { border-color: var(--s1); }
+  button[aria-pressed="true"] { border-color: var(--s2); color: var(--ink); background: var(--paper); }
+  .note { font-size: var(--t-sm); color: var(--ink-3); margin-top: 10px; }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  #wrong-list { list-style: none; margin: 0; padding: 0; max-height: 58vh; overflow-y: auto; border-top: 1px solid var(--rule); }
+  #wrong-list li { border-bottom: 1px solid var(--rule); }
+  #wrong-list a { display: block; padding: 7px 4px; text-decoration: none; color: var(--ink); font-size: var(--t-sm); line-height: 1.4; }
+  #wrong-list a:hover, #wrong-list a:focus { background: var(--paper-3); }
+  #wrong-list .kind { font-weight: 600; }
+  #wrong-list .why { display: block; color: var(--ink-2); }
+  .summary { font-size: var(--t-sm); color: var(--ink-2); margin: 6px 0 0; }
+  .leaflet-popup-content { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 13px; line-height: 1.45; }
+  footer.pagefoot { border-top: 1px solid var(--rule-2); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: var(--t-ui); }
+  footer.pagefoot p { max-width: var(--measure); }
+  @media (max-width: 1100px) {
+    .mapshell { grid-template-columns: minmax(0, 1fr) 300px; }
+    .mapshell .legendpanel { grid-column: 1 / -1; order: 3; }
+  }
+  @media (max-width: 760px) {
+    .mapshell { grid-template-columns: 1fr; }
+    #map { order: 1; }
+    .mapshell .legendpanel { order: 2; }
+    .mapshell .listpanel { order: 3; }
+    #fire-buttons { display: none; }
+    #map { height: 60vh; min-height: 340px; }
+    #wrong-list { max-height: 40vh; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <nav class="crumbs" aria-label="Site"><a href="../index.html">Home</a><a href="../presentation.html">View the presentation</a><a href="footprints.html">Which buildings each source finds</a></nav>
+  <h1>Right and wrong calls</h1>
+  <p class="lede">Each dot is a building in the damage record for that fire, coloured by whether our first damage call agreed with it. The call reads Sentinel-2 satellite images from before and after the fire and says &ldquo;destroyed&rdquo; when its probability is 0.88 or higher. Every call here was made leave-one-fire-out: by a model trained without that fire, so it is a fair test.</p>
+</header>
+
+<main class="wrap">
+  <div class="firebar">
+    <label for="fire-select">Fire:</label>
+    <select id="fire-select" aria-label="Choose a fire"></select>
+    <span id="fire-buttons"></span>
+  </div>
+  <div class="mapshell">
+    <aside class="panel legendpanel" aria-label="Layers and legend">
+      <h3>Calls</h3>
+      <label><input type="checkbox" id="t-0" checked> <span class="sw" style="background:#D7263D"></span> Correct: destroyed <span class="cnt" id="n-0"></span></label>
+      <label><input type="checkbox" id="t-1" checked> <span class="sw" style="background:#35B15E"></span> Correct: standing <span class="cnt" id="n-1"></span></label>
+      <label><input type="checkbox" id="t-2" checked> <span class="sw ring" style="background:#F2A33A"></span> False alarm <span class="cnt" id="n-2"></span></label>
+      <label><input type="checkbox" id="t-3" checked> <span class="sw ring" style="background:#3FA7F5"></span> Miss <span class="cnt" id="n-3"></span></label>
+      <p class="note" style="margin-top:4px">False alarm: we said destroyed, the record says it was not. Miss: the record says destroyed, we did not.</p>
+      <h3 style="margin-top:12px">Context</h3>
+      <label><input type="checkbox" id="t-per" checked> <span class="sw line"></span> Fire perimeter</label>
+      <label><input type="checkbox" id="t-fp" checked> <span class="sw sq" style="background:rgba(91,138,210,.3);border-color:#5B8AD2"></span> Building footprints</label>
+      <p class="note" style="margin-top:2px">Footprints (USA Structures) are drawn for one 1.5 km square per fire, where wrong calls cluster; <button type="button" id="b-fp">go there</button></p>
+      <h3 style="margin-top:12px">Background</h3>
+      <select id="basemap" aria-label="Background map">
+        <option value="esri">Esri satellite imagery</option>
+        <option value="naip">USGS NAIP aerial photo (latest year)</option>
+        <option value="light">Light street map</option>
+      </select>
+      <p class="summary" id="fire-summary"></p>
+    </aside>
+    <div id="map" role="region" aria-label="Map of right and wrong damage calls"></div>
+    <aside class="panel listpanel" aria-label="Wrong calls">
+      <h3>Wrong calls <span id="n-wrong" style="text-transform:none;font-weight:400"></span></h3>
+      <div class="filters" role="group" aria-label="Filter wrong calls">
+        <button type="button" data-f="all" aria-pressed="true">Both</button>
+        <button type="button" data-f="3" aria-pressed="false">Misses</button>
+        <button type="button" data-f="2" aria-pressed="false">False alarms</button>
+      </div>
+      <ul id="wrong-list"></ul>
+      <p class="note">Click an entry to zoom to it. Misses are listed from the highest probability down (the near misses first); false alarms from the lowest up (the ones just over the cut first).</p>
+    </aside>
+  </div>
+
+  <div class="prose">
+    <h2>How to read this map</h2>
+    <p><strong>What is being compared.</strong> For the three CAL FIRE fires (Park, Eaton and Bridge), the record is the door-to-door damage inspection: a building counts as destroyed if inspectors graded it &ldquo;Destroyed (&gt;50%)&rdquo;; every lower grade counts as not destroyed. For the Marshall and Carr fires, the record is the reference dataset of Carlson et al. (2025), which marks each building destroyed or not.</p>
+    <p><strong>What the probability is.</strong> The number on each dot is the average of four training runs of the same model, each trained on all the other fires in our 199-fire training set with this fire left out. That average is how our published accuracy figures are computed; a building is called destroyed when it reaches 0.88.</p>
+    <p><strong>Where the reasons come from.</strong> The short notes beside each wrong call are read off the data, not guessed: the probability and how close it is to the 0.88 cut; the inspector&rsquo;s grade when it was damaged but not destroyed; whether the inspection lists it as a minor structure such as a shed; how many of its neighbours within 50 m were destroyed (our satellite pixels are 10 m across, so a surviving house among burned ones can look burned, and the reverse); how green the ground around it was before the fire (NDVI of 0.5 or more suggests tree or shrub cover that can hide a roof); and whether few cloud-free satellite images were available (two or fewer before or after). When none of these applies, only the probability is given. These are clues, not proven causes.</p>
+    <p><strong>What is not shown.</strong> Buildings outside the damage record for each fire are not drawn; this map is only for checking calls against the record.</p>
+  </div>
+</main>
+
+<footer class="pagefoot">
+  <div class="wrap">
+    <p><strong>Sources.</strong> Damage records: CAL FIRE Damage Inspection (DINS) points for the Park (July 2024), Bridge (September 2024) and Eaton (January 2025) fires, public layer, retrieved September 2026, with only the damage grade and structure category kept; Carlson et al. (2025), U.S. Geological Survey, structure loss reference data for the Marshall (2021, Colorado) and Carr (2018, California) fires, CC0. Satellite input: Copernicus Sentinel-2 imagery. Building footprints: USA Structures, FEMA and Oak Ridge National Laboratory, CC BY 4.0. Fire perimeters: interagency NIFC WFIGS perimeters (Park, Bridge, Eaton, Marshall) and CAL FIRE FRAP (Carr), simplified to about 15 m.</p>
+    <p><strong>Backgrounds.</strong> Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community (Esri terms of use). USGS NAIP Plus aerial imagery from The National Map (public domain). Light street map &copy; OpenStreetMap contributors &copy; CARTO.</p>
+    <p>Structure Loss Pipeline &middot; map built 28 September 2026 from the first-call model&rsquo;s leave-one-fire-out results (four training runs, cut 0.88). The layers are GeoJSON files in the <code>data</code> folder next to this page; coordinates are rounded to 6 decimal places and carry no addresses, parcel numbers or names.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  "use strict";
+  var COLORS = ["#D7263D", "#35B15E", "#F2A33A", "#3FA7F5"];
+  var NAMES = ["Correct: destroyed", "Correct: standing", "False alarm", "Miss"];
+  var META = null, current = null, filter = "all";
+  var groups = [null, null, null, null], perLayer = null, fpLayer = null, wrong = [];
+
+  var map = L.map("map", { preferCanvas: true, maxZoom: 21, zoomSnap: 1 });
+  var ESRI = "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
+  var bases = {
+    esri: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 21, maxNativeZoom: 19, attribution: ESRI }),
+    naip: L.tileLayer.wms("https://imagery.nationalmap.gov/arcgis/services/USGSNAIPPlus/ImageServer/WMSServer", { layers: "USGSNAIPPlus:NaturalColor", format: "image/jpeg", maxZoom: 21, attribution: "USGS NAIP Plus, The National Map" }),
+    light: L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom: 21, maxNativeZoom: 20, subdomains: "abcd", attribution: "&copy; OpenStreetMap contributors &copy; CARTO" })
+  };
+  bases.esri.addTo(map);
+  map.attributionControl.addAttribution("Records: CAL FIRE DINS; USGS Carlson et al. 2025 (CC0); footprints USA Structures (FEMA/ORNL, CC BY 4.0)");
+  map.setView([37.5, -119.5], 5);
+  L.control.scale({ imperial: false }).addTo(map);
+  document.getElementById("basemap").addEventListener("change", function (e) {
+    Object.keys(bases).forEach(function (k) { if (map.hasLayer(bases[k])) map.removeLayer(bases[k]); });
+    bases[e.target.value].addTo(map);
+  });
+  map.createPane("polys"); map.getPane("polys").style.zIndex = 410;
+  map.createPane("pts"); map.getPane("pts").style.zIndex = 620;
+  map.createPane("wrongpts"); map.getPane("wrongpts").style.zIndex = 630;
+  var rOk = L.canvas({ pane: "pts", padding: 0.3 });
+  var rBad = L.canvas({ pane: "wrongpts", padding: 0.3 });
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+  }
+  function load(url) {
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + " " + r.status); return r.json(); });
+  }
+  function popupHtml(p) {
+    var truth = META.truth_labels[p.t];
+    var kind = (p.k != null) ? META.kinds[p.k] : null;
+    var h = "<b style='color:" + COLORS[p.c] + "'>" + NAMES[p.c] + "</b>" +
+      "<br>Probability destroyed: <b>" + Number(p.p).toFixed(3) + "</b> (called destroyed at 0.88 or more)" +
+      "<br>" + esc(current.truth) + ": " + esc(truth);
+    if (kind) h += "<br>Category: " + esc(kind);
+    if (p.w) h += "<br><i>Clues: " + esc(p.w) + "</i>";
+    return h;
+  }
+  function clearFire() {
+    groups.forEach(function (g) { if (g) map.removeLayer(g); });
+    groups = [null, null, null, null];
+    if (perLayer) map.removeLayer(perLayer);
+    if (fpLayer) map.removeLayer(fpLayer);
+    perLayer = fpLayer = null; wrong = [];
+    document.getElementById("wrong-list").innerHTML = "<li style='padding:8px 4px;color:var(--ink-3)'>Loading&hellip;</li>";
+  }
+  function syncToggles() {
+    for (var c = 0; c < 4; c++) {
+      var on = document.getElementById("t-" + c).checked;
+      if (groups[c]) { if (on) groups[c].addTo(map); else map.removeLayer(groups[c]); }
+    }
+    if (perLayer) { if (document.getElementById("t-per").checked) perLayer.addTo(map); else map.removeLayer(perLayer); }
+    if (fpLayer) { if (document.getElementById("t-fp").checked) fpLayer.addTo(map); else map.removeLayer(fpLayer); }
+  }
+  ["t-0", "t-1", "t-2", "t-3", "t-per", "t-fp"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", syncToggles);
+  });
+
+  function renderList() {
+    var ul = document.getElementById("wrong-list");
+    ul.innerHTML = "";
+    var items = wrong.filter(function (w) { return filter === "all" || String(w.p.c) === filter; });
+    items.sort(function (a, b) {
+      if (a.p.c !== b.p.c) return b.p.c - a.p.c;              // misses first
+      return a.p.c === 3 ? b.p.p - a.p.p : a.p.p - b.p.p;
+    });
+    var frag = document.createDocumentFragment();
+    items.forEach(function (w) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#map";
+      a.innerHTML = "<span class='kind' style='color:" + COLORS[w.p.c] + "'>" + NAMES[w.p.c] + "</span> &middot; " +
+        Number(w.p.p).toFixed(3) + " &middot; " + esc(META.truth_labels[w.p.t]) +
+        "<span class='why'>" + esc(w.p.w || "") + "</span>";
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        map.setView(w.ll, 19);
+        w.layer.openPopup();
+        if (window.matchMedia("(max-width: 760px)").matches) document.getElementById("map").scrollIntoView({ behavior: "smooth" });
+      });
+      li.appendChild(a); frag.appendChild(li);
+    });
+    ul.appendChild(frag);
+    document.getElementById("n-wrong").textContent = "(" + items.length + ")";
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".filters button"), function (b) {
+    b.addEventListener("click", function () {
+      filter = b.getAttribute("data-f");
+      Array.prototype.forEach.call(document.querySelectorAll(".filters button"), function (x) {
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+      renderList();
+    });
+  });
+
+  function showFire(slug) {
+    var f = META.fires.filter(function (x) { return x.slug === slug; })[0];
+    if (!f) return;
+    current = f; clearFire();
+    document.getElementById("fire-select").value = slug;
+    Array.prototype.forEach.call(document.querySelectorAll("#fire-buttons button"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-slug") === slug ? "true" : "false");
+    });
+    map.fitBounds(f.bounds);
+    for (var c = 0; c < 4; c++) document.getElementById("n-" + c).textContent = f.counts[NAMES[c]].toLocaleString("en-US");
+    var nd = f.counts[NAMES[0]] + f.counts[NAMES[3]];
+    document.getElementById("fire-summary").innerHTML = "<b>" + esc(f.name) + "</b>, " + esc(f.state) + ". " +
+      f.n.toLocaleString("en-US") + " buildings in the record (" + esc(f.truth) + "), " + nd.toLocaleString("en-US") +
+      " of them destroyed. We called " + f.counts[NAMES[0]].toLocaleString("en-US") + " of those correctly, missed " +
+      f.counts[NAMES[3]].toLocaleString("en-US") + ", and raised " + f.counts[NAMES[2]].toLocaleString("en-US") + " false alarms.";
+    var mine = f;
+    load("data/calls_" + slug + "_perimeter.geojson").then(function (fc) {
+      if (current !== mine) return;
+      perLayer = L.geoJSON(fc, { pane: "polys", interactive: false, style: { color: "#F5F5F5", weight: 2.5, dashArray: "8 6", fill: false } });
+      syncToggles();
+    }).catch(console.error);
+    load("data/calls_" + slug + "_footprints.geojson").then(function (fc) {
+      if (current !== mine) return;
+      fpLayer = L.geoJSON(fc, { pane: "polys", style: { color: "#5B8AD2", weight: 1.5, fillColor: "#5B8AD2", fillOpacity: 0.2 },
+        onEachFeature: function (ft, l) { l.bindPopup("<b>USA Structures footprint</b><br>Use: " + esc((ft.properties || {}).occupancy || "not given")); } });
+      syncToggles();
+    }).catch(console.error);
+    load("data/calls_" + slug + ".geojson").then(function (fc) {
+      if (current !== mine) return;
+      var buckets = [[], [], [], []];
+      fc.features.forEach(function (ft) {
+        var p = ft.properties, c = p.c;
+        var ll = [ft.geometry.coordinates[1], ft.geometry.coordinates[0]];
+        var bad = c >= 2;
+        var m = L.circleMarker(ll, { renderer: bad ? rBad : rOk, radius: bad ? 6.5 : 4.5,
+          color: bad ? "#FFFFFF" : "#111111", weight: bad ? 2 : 0.8, fillColor: COLORS[c], fillOpacity: 0.95 });
+        m.bindPopup(function () { return popupHtml(p); });
+        buckets[c].push(m);
+        if (bad) wrong.push({ p: p, ll: ll, layer: m });
+      });
+      for (var i = 0; i < 4; i++) groups[i] = L.layerGroup(buckets[i]);
+      syncToggles();
+      renderList();
+    }).catch(function (e) {
+      console.error(e);
+      document.getElementById("wrong-list").innerHTML = "<li style='padding:8px 4px'>Could not load this fire's data.</li>";
+    });
+  }
+  document.getElementById("b-fp").addEventListener("click", function () { if (current) map.fitBounds(current.footprint_bounds); });
+  document.getElementById("fire-select").addEventListener("change", function (e) { showFire(e.target.value); });
+
+  load("data/calls_fires.json").then(function (meta) {
+    META = meta;
+    var sel = document.getElementById("fire-select"), bar = document.getElementById("fire-buttons");
+    meta.fires.forEach(function (f) {
+      var o = document.createElement("option"); o.value = f.slug; o.textContent = f.name + " — " + f.truth; sel.appendChild(o);
+      var b = document.createElement("button"); b.type = "button"; b.textContent = f.name; b.setAttribute("data-slug", f.slug);
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { showFire(f.slug); }); bar.appendChild(b);
+    });
+    var start = (location.hash || "").replace("#", "");
+    showFire(meta.fires.some(function (f) { return f.slug === start; }) ? start : meta.fires[0].slug);
+  }).catch(function (e) { console.error(e); });
+})();
+</script>
+</body>
+</html>

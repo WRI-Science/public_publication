@@ -1,0 +1,192 @@
+{
+ "fires": [
+  {
+   "slug": "park",
+   "name": "Park Fire (2024)",
+   "truth": "CAL FIRE damage inspections",
+   "state": "California",
+   "bounds": [
+    [
+     39.80046,
+     -122.02449
+    ],
+    [
+     40.39073,
+     -121.51968
+    ]
+   ],
+   "footprint_bounds": [
+    [
+     39.90057,
+     -121.74246
+    ],
+    [
+     39.91428,
+     -121.72467
+    ]
+   ],
+   "counts": {
+    "Correct: destroyed": 681,
+    "Correct: standing": 1297,
+    "False alarm": 72,
+    "Miss": 32
+   },
+   "n": 2082
+  },
+  {
+   "slug": "eaton",
+   "name": "Eaton Fire (2025)",
+   "truth": "CAL FIRE damage inspections",
+   "state": "California",
+   "bounds": [
+    [
+     34.16098,
+     -118.1636
+    ],
+    [
+     34.23217,
+     -118.01833
+    ]
+   ],
+   "footprint_bounds": [
+    [
+     34.18249,
+     -118.16131
+    ],
+    [
+     34.19617,
+     -118.14485
+    ]
+   ],
+   "counts": {
+    "Correct: destroyed": 9025,
+    "Correct: standing": 8459,
+    "False alarm": 440,
+    "Miss": 394
+   },
+   "n": 18318
+  },
+  {
+   "slug": "bridge",
+   "name": "Bridge Fire (2024)",
+   "truth": "CAL FIRE damage inspections",
+   "state": "California",
+   "bounds": [
+    [
+     34.20371,
+     -117.76574
+    ],
+    [
+     34.41321,
+     -117.63782
+    ]
+   ],
+   "footprint_bounds": [
+    [
+     34.37543,
+     -117.69078
+    ],
+    [
+     34.38905,
+     -117.67435
+    ]
+   ],
+   "counts": {
+    "Correct: destroyed": 73,
+    "Correct: standing": 788,
+    "False alarm": 29,
+    "Miss": 8
+   },
+   "n": 898
+  },
+  {
+   "slug": "marshall",
+   "name": "Marshall Fire (2021)",
+   "truth": "Carlson et al. (2025)",
+   "state": "Colorado",
+   "bounds": [
+    [
+     39.90783,
+     -105.26032
+    ],
+    [
+     40.00733,
+     -105.1076
+    ]
+   ],
+   "footprint_bounds": [
+    [
+     39.94799,
+     -105.18148
+    ],
+    [
+     39.96153,
+     -105.16389
+    ]
+   ],
+   "counts": {
+    "Correct: destroyed": 1019,
+    "Correct: standing": 12934,
+    "False alarm": 59,
+    "Miss": 170
+   },
+   "n": 14182
+  },
+  {
+   "slug": "carr",
+   "name": "Carr Fire (2018)",
+   "truth": "Carlson et al. (2025)",
+   "state": "California",
+   "bounds": [
+    [
+     40.48351,
+     -122.81199
+    ],
+    [
+     40.8609,
+     -122.37352
+    ]
+   ],
+   "footprint_bounds": [
+    [
+     40.59535,
+     -122.43863
+    ],
+    [
+     40.60895,
+     -122.42078
+    ]
+   ],
+   "counts": {
+    "Correct: destroyed": 1548,
+    "Correct: standing": 12734,
+    "False alarm": 127,
+    "Miss": 132
+   },
+   "n": 14541
+  }
+ ],
+ "truth_labels": [
+  "No damage",
+  "Destroyed (>50%)",
+  "Affected (1-10%)",
+  "Minor (10-25%)",
+  "Not destroyed",
+  "Destroyed"
+ ],
+ "kinds": [
+  "Single Residence",
+  "Nonresidential Commercial",
+  "Other Minor Structure",
+  "Multiple Residence",
+  "Infrastructure",
+  "Mixed Commercial/Residential"
+ ],
+ "categories": [
+  "Correct: destroyed",
+  "Correct: standing",
+  "False alarm",
+  "Miss"
+ ],
+ "cut": 0.88
+}
