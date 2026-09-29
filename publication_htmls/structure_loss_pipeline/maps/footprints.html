@@ -1,270 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Which buildings each source finds</title>
-<meta name="description" content="One neighbourhood of the 2024 Park Fire, with CAL FIRE's damage inspections, two building-footprint datasets and the Structure Inventory Model's roof detector drawn on the same satellite picture." />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<!DOCTYPE html><!-- pin-gated -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet"><meta name="googlebot" content="noindex,nofollow,noarchive">
+<title>Protected page</title>
 <style>
-  :root {
-    --paper: #0B0C0E; --paper-2: #14161A; --paper-3: #1E2127;
-    --ink: #EFEBE3; --ink-2: #B6B0A6; --ink-3: #85837E;
-    --rule: #262A2F; --rule-2: #3A4047;
-    --s1: #5B8AD2; --s2: #DB6026; --s3: #17A188; --s4: #B38A20;
-    --ms: #C678DD;
-    --t-xs: 0.72rem; --t-sm: 0.82rem; --t-ui: 0.9rem; --t-md: 1.12rem;
-    --measure: 72ch; --shell: 1240px; --gutter: 16px;
-    color-scheme: dark;
-  }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) {
-      --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
-      --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
-      --rule: #DDD8CC; --rule-2: #C3BCAB;
-      --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900; --ms: #8E3FA8;
-      color-scheme: light;
-    }
-  }
-  :root[data-theme="light"] {
-    --paper: #FAF8F3; --paper-2: #F1EEE6; --paper-3: #E9E4D8;
-    --ink: #22262B; --ink-2: #4C535A; --ink-3: #757C84;
-    --rule: #DDD8CC; --rule-2: #C3BCAB;
-    --s1: #2A62B0; --s2: #BF4415; --s3: #0A8F7B; --s4: #9E7900; --ms: #8E3FA8;
-    color-scheme: light;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--paper); color: var(--ink); margin: 0;
-    font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-    font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased;
-  }
-  h1, h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
-  h1 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); letter-spacing: -0.01em; }
-  h2 { font-size: clamp(1.25rem, 2.4vw, 1.5rem); margin: 2rem 0 0.6rem; }
-  p { margin: 0 0 1rem; }
-  a { color: var(--s1); text-underline-offset: 2px; }
-  a:hover { color: var(--s2); }
-  :focus-visible { outline: 2px solid var(--s2); outline-offset: 2px; }
-  .wrap { max-width: var(--shell); margin: 0 auto; padding-inline: var(--gutter); }
-  .prose { max-width: var(--measure); }
-  header.top { padding-block: 1.4rem 0.6rem; }
-  .crumbs { font-size: var(--t-ui); margin-bottom: 0.8rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  .lede { color: var(--ink-2); font-size: var(--t-md); max-width: var(--measure); margin-top: 0.7rem; }
-  .mapshell { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 14px; align-items: start; }
-  #map { height: 72vh; min-height: 420px; border: 1px solid var(--rule-2); border-radius: 6px; background: var(--paper-2); }
-  .panel { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; font-size: var(--t-ui); }
-  .panel h3 { font-family: "IBM Plex Sans", sans-serif; font-size: var(--t-ui); font-weight: 600; margin: 0.2rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); }
-  .panel label { display: flex; gap: 8px; align-items: center; margin: 4px 0; cursor: pointer; }
-  .panel .sub { margin-left: 26px; font-size: var(--t-sm); color: var(--ink-2); }
-  .sw { display: inline-block; width: 14px; height: 14px; flex: none; border-radius: 50%; border: 1.5px solid #111; }
-  .sw.sq { border-radius: 2px; }
-  .sw.line { border-radius: 0; height: 0; border: 0; border-top: 2.5px dashed #F5F5F5; width: 18px; }
-  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 4px; }
-  button, select {
-    font: inherit; font-size: var(--t-sm); color: var(--ink); background: var(--paper-3);
-    border: 1px solid var(--rule-2); border-radius: 4px; padding: 5px 10px; cursor: pointer;
-  }
-  button:hover { border-color: var(--s1); }
-  .grades { list-style: none; padding: 0; margin: 2px 0 0 26px; font-size: var(--t-sm); color: var(--ink-2); }
-  .grades li { display: flex; gap: 7px; align-items: center; margin: 2px 0; }
-  .grades .sw { width: 11px; height: 11px; }
-  .note { font-size: var(--t-sm); color: var(--ink-3); margin-top: 10px; }
-  .leaflet-popup-content { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 13px; line-height: 1.45; }
-  .leaflet-container { font-family: "IBM Plex Sans", system-ui, sans-serif; }
-  ul.look { padding-left: 1.2rem; max-width: var(--measure); }
-  ul.look li { margin-bottom: 0.5rem; }
-  footer.pagefoot { border-top: 1px solid var(--rule-2); margin-top: 3rem; padding-block: 1.6rem 3rem; color: var(--ink-2); font-size: var(--t-ui); }
-  footer.pagefoot p { max-width: var(--measure); }
-  @media (max-width: 860px) {
-    .mapshell { grid-template-columns: 1fr; }
-    #map { height: 62vh; min-height: 360px; }
-    body { font-size: 16px; }
-  }
-</style>
-</head>
-<body>
-<header class="top wrap">
-  <nav class="crumbs" aria-label="Site"><a href="../index.html">Home</a><a href="../presentation.html">View the presentation</a><a href="calls.html">Right and wrong calls map</a></nav>
-  <h1>Which buildings each source finds</h1>
-  <p class="lede">This is one wooded neighbourhood in the 2024 Park Fire (Tehama County, California). After the fire, CAL FIRE inspectors recorded the buildings here and graded their damage; the coloured dots are their records. Drawn over the same picture are two public building-footprint maps and the extra buildings the Structure Inventory Model's roof detector found, so you can see which buildings each source knows about. Zoom out or press &ldquo;Whole fire&rdquo; to see the rest of the fire.</p>
-</header>
-
-<main class="wrap">
-  <div class="mapshell">
-    <div id="map" role="region" aria-label="Map of one Park Fire neighbourhood with toggleable layers"></div>
-    <aside class="panel" aria-label="Layers and legend">
-      <h3>Layers</h3>
-      <label><input type="checkbox" id="t-dins" checked> <span class="sw" style="background:#D7263D"></span> CAL FIRE inspection points</label>
-      <ul class="grades" id="grade-legend"></ul>
-      <label><input type="checkbox" id="t-uss" checked> <span class="sw sq" style="background:rgba(91,138,210,.35);border-color:#5B8AD2"></span> USA Structures footprints</label>
-      <label><input type="checkbox" id="t-ms" checked> <span class="sw sq" style="background:rgba(198,120,221,.25);border-color:#C678DD;border-style:dashed"></span> Microsoft footprints</label>
-      <label><input type="checkbox" id="t-det" checked> <span class="sw sq" style="background:#E0B43A;transform:rotate(45deg);width:11px;height:11px"></span> Structure Inventory Model roof detector (added buildings)</label>
-      <label><input type="checkbox" id="t-per" checked> <span class="sw line"></span> Fire perimeter</label>
-      <div class="btns">
-        <button type="button" id="b-focus">Focus area</button>
-        <button type="button" id="b-fire">Whole fire</button>
-      </div>
-      <h3 style="margin-top:12px">Background</h3>
-      <select id="basemap" aria-label="Background map">
-        <option value="esri">Esri satellite imagery</option>
-        <option value="naip">USGS NAIP aerial photo (latest year)</option>
-        <option value="light">Light street map</option>
-      </select>
-      <p class="note">Click any dot or outline for its details. The satellite background is whatever the provider has now; it may show the area before or after the fire.</p>
-    </aside>
-  </div>
-
-  <div class="prose">
-    <h2>What to look for</h2>
-    <ul class="look">
-      <li><strong>Buildings no footprint map has.</strong> In the opening view, three buildings the inspectors recorded have no footprint in either USA Structures or the Microsoft map, but the Structure Inventory Model's roof detector found them (gold diamonds): two of them were destroyed and one was undamaged. Across the whole fire, 94 inspection points have a roof-detector point within 10 m and no footprint within 10 m.</li>
-      <li><strong>Buildings nobody mapped.</strong> Four inspection points in the opening view have no footprint and no roof-detector point within 10 m. Three are small outbuildings, which are hard to see under trees in a 60 cm aerial photo. Across the whole fire (within 300 m of the perimeter), 854 of 2,064 inspection points have nothing from any of the three sources within 10 m; 456 of those are minor structures such as sheds, and 373 are homes.</li>
-      <li><strong>The two footprint maps disagree.</strong> Some roofs have a blue USA Structures outline only, some a purple Microsoft outline only, and some both, offset by a few metres. The two maps were traced from different photos taken in different years.</li>
-      <li><strong>Destroyed buildings still have footprints.</strong> Footprints and the roof detector are drawn from photos taken <em>before</em> the fire, so they show what stood there, not what survived. Damage comes from the inspection grade (the dot colour).</li>
-      <li><strong>An outline with no inspection dot is not proof of a phantom.</strong> Inspectors record buildings inside the damage area; an outline without a dot may be a real building they did not visit, or one that was already gone. We did not find a clear phantom footprint in the opening view.</li>
-    </ul>
-    <p>Distances such as &ldquo;within 10 m&rdquo; are measured from the inspection point to the nearest footprint edge or roof-detector point; inspection points are sometimes placed a few metres off the roof, so these counts are approximate.</p>
-    <p>The Microsoft outlines are shown here for comparison under their open licence (below). Our released data table leaves Microsoft-derived rows out; this map only displays them.</p>
-  </div>
-</main>
-
-<footer class="pagefoot">
-  <div class="wrap">
-    <p><strong>Sources.</strong> Damage inspections: CAL FIRE Damage Inspection (DINS) points for the Park Fire (started 24 July 2024), public layer, retrieved September 2026; only the damage grade, structure category, structure type and year built are kept. Building footprints: USA Structures, FEMA and Oak Ridge National Laboratory, CC BY 4.0 (footprints imaged before the fire). Microsoft US Building Footprints (release 2): &copy; Microsoft, Open Database License (ODbL 1.0); the extract in <a href="data/footprints_microsoft.geojson">data/footprints_microsoft.geojson</a> is a derivative database and is available under ODbL 1.0. Roof detector points: the Structure Inventory Model's roof detector (a U-Net) run on pre-fire NAIP aerial photos, kept where no footprint lies within 20 m. Fire perimeter: the interagency (NIFC WFIGS) perimeter for the Park Fire, simplified to about 15 m.</p>
-    <p><strong>Backgrounds.</strong> Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community (Esri terms of use). USGS NAIP Plus aerial imagery from The National Map (public domain). Light street map &copy; OpenStreetMap contributors &copy; CARTO.</p>
-    <p>Structure Loss Pipeline &middot; map built 28 September 2026. The layers are GeoJSON files in the <code>data</code> folder next to this page; coordinates are rounded to 6 decimal places and carry no addresses, parcel numbers or names.</p>
-  </div>
-</footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+:root { --bg:#F4F2EC; --ink:#172026; --muted:#5A6570; --line:#D9D6CC; --acc:#2E6A8A; --bad:#C4502B; }
+@media (prefers-color-scheme: dark) { :root { --bg:#141715; --ink:#E7EAE6; --muted:#9AA29D; --line:#323834; --acc:#6FB0CF; --bad:#EF7D74; } }
+html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+.wrap { min-height:100%; display:flex; align-items:center; justify-content:center; padding:16px; box-sizing:border-box; }
+.box { width:100%; max-width:340px; border:1px solid var(--line); border-radius:14px; padding:28px 24px; text-align:center; }
+h1 { font-size:20px; margin:0 0 6px; } p { color:var(--muted); font-size:14px; margin:0 0 18px; }
+input { width:100%; box-sizing:border-box; font-size:28px; letter-spacing:10px; text-align:center; padding:10px; border-radius:10px;
+        border:1px solid var(--line); background:transparent; color:var(--ink); }
+button { margin-top:14px; width:100%; font-size:16px; padding:10px; border-radius:10px; border:0; background:var(--acc); color:#fff; font-weight:600; }
+.err { color:var(--bad); min-height:20px; margin-top:10px; font-size:14px; }
+.shake { animation:sh .35s; } @keyframes sh { 25% { transform:translateX(-8px); } 75% { transform:translateX(8px); } }
+</style></head><body><div class="wrap"><form class="box" id="f" autocomplete="off">
+<h1>Enter PIN</h1><p>This page is shared privately.</p>
+<input id="pin" inputmode="numeric" type="password" maxlength="12" aria-label="PIN" autofocus>
+<button type="submit">Open</button><div class="err" id="err" role="alert"></div></form></div>
 <script>
-(function () {
-  "use strict";
-  var FOCUS = [[40.309554, -121.815731], [40.310716, -121.813076]];
-  var FOCUS_CENTER = [40.310135, -121.814404];
-  function goFocus() { map.setView(FOCUS_CENTER, 19); }
-  var GRADES = [
-    ["No damage", "#35B15E"], ["Affected (1-10%)", "#E8D44D"], ["Minor (10-25%)", "#F2A33A"],
-    ["Major (25-50%)", "#E0705E"], ["Destroyed (>50%)", "#D7263D"], ["Inaccessible", "#9AA0A6"]
-  ];
-  var GRADE_COL = {};
-  GRADES.forEach(function (g) { GRADE_COL[g[0]] = g[1]; });
-
-  var legend = document.getElementById("grade-legend");
-  GRADES.forEach(function (g) {
-    var li = document.createElement("li");
-    li.innerHTML = '<span class="sw" style="background:' + g[1] + '"></span>' + g[0];
-    legend.appendChild(li);
-  });
-
-  var map = L.map("map", { preferCanvas: true, maxZoom: 21, zoomSnap: 1 });
-  var ESRI = "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
-  var bases = {
-    esri: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 21, maxNativeZoom: 19, attribution: ESRI }),
-    naip: L.tileLayer.wms("https://imagery.nationalmap.gov/arcgis/services/USGSNAIPPlus/ImageServer/WMSServer", { layers: "USGSNAIPPlus:NaturalColor", format: "image/jpeg", maxZoom: 21, attribution: "USGS NAIP Plus, The National Map" }),
-    light: L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom: 21, maxNativeZoom: 20, subdomains: "abcd", attribution: "&copy; OpenStreetMap contributors &copy; CARTO" })
-  };
-  bases.esri.addTo(map);
-  map.attributionControl.addAttribution("Buildings: CAL FIRE DINS; USA Structures (FEMA/ORNL, CC BY 4.0); &copy; Microsoft, Open Database License");
-  document.getElementById("basemap").addEventListener("change", function (e) {
-    Object.keys(bases).forEach(function (k) { if (map.hasLayer(bases[k])) map.removeLayer(bases[k]); });
-    bases[e.target.value].addTo(map);
-  });
-  goFocus();
-
-  map.createPane("polys"); map.getPane("polys").style.zIndex = 410;
-  map.createPane("pts"); map.getPane("pts").style.zIndex = 620;
-  var canvasPts = L.canvas({ pane: "pts", padding: 0.3 });
-
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+var S="lMyzrJhCjoH1ffRRgVveWw==", I="hVJjoUUEJWPRZ1Ie", C="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", N=100000;
+function u8(s) { return Uint8Array.from(atob(s), function(c) { return c.charCodeAt(0); }); }
+async function open_(pin, quiet) {
+  try {
+    var km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pin), "PBKDF2", false, ["deriveKey"]);
+    var key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:u8(S), iterations:N, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+    var pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:u8(I)}, key, u8(C));
+    try { sessionStorage.setItem("slp_pin", pin); } catch (e) {}
+    var html = new TextDecoder().decode(pt);
+    document.open(); document.write(html); document.close();
+    return true;
+  } catch (e) {
+    if (!quiet) { var f = document.getElementById("f"); f.classList.remove("shake"); void f.offsetWidth; f.classList.add("shake");
+      document.getElementById("err").textContent = "That PIN did not work."; }
+    return false;
   }
-  function load(url) {
-    return fetch(url).then(function (r) {
-      if (!r.ok) throw new Error(url + " " + r.status);
-      return r.json();
-    });
-  }
-  var layers = {};
-  function bind(id, key) {
-    var box = document.getElementById(id);
-    box.addEventListener("change", function () {
-      if (!layers[key]) return;
-      if (box.checked) layers[key].addTo(map); else map.removeLayer(layers[key]);
-    });
-  }
-  function addIfChecked(id, key) {
-    if (document.getElementById(id).checked) layers[key].addTo(map);
-  }
-  var fireBounds = null;
-
-  load("data/footprints_perimeter.geojson").then(function (fc) {
-    layers.per = L.geoJSON(fc, { pane: "polys", interactive: false,
-      style: { color: "#F5F5F5", weight: 2.5, dashArray: "8 6", fill: false } });
-    fireBounds = layers.per.getBounds();
-    addIfChecked("t-per", "per");
-  }).catch(console.error);
-
-  load("data/footprints_usa_structures.geojson").then(function (fc) {
-    layers.uss = L.geoJSON(fc, { pane: "polys",
-      style: { color: "#5B8AD2", weight: 2, fillColor: "#5B8AD2", fillOpacity: 0.25 },
-      onEachFeature: function (f, l) {
-        var p = f.properties || {};
-        l.bindPopup("<b>USA Structures footprint</b><br>Use: " + esc(p.occupancy || "not given") +
-          "<br>Traced from a photo dated " + esc(p.image_date || "unknown"));
-      } });
-    addIfChecked("t-uss", "uss");
-  }).catch(console.error);
-
-  load("data/footprints_microsoft.geojson").then(function (fc) {
-    layers.ms = L.geoJSON(fc, { pane: "polys",
-      style: { color: "#C678DD", weight: 2, dashArray: "5 4", fillColor: "#C678DD", fillOpacity: 0.15 },
-      onEachFeature: function (f, l) {
-        var p = f.properties || {};
-        l.bindPopup("<b>Microsoft footprint</b><br>Photo dates: " + esc(p.capture_dates || "not given") +
-          "<br><span style='color:#777'>&copy; Microsoft, ODbL 1.0</span>");
-      } });
-    addIfChecked("t-ms", "ms");
-  }).catch(console.error);
-
-  load("data/footprints_detector.geojson").then(function (fc) {
-    layers.det = L.geoJSON(fc, {
-      pointToLayer: function (f, ll) {
-        return L.marker(ll, { pane: "pts", keyboard: false, icon: L.divIcon({ className: "",
-          html: '<div style="width:12px;height:12px;background:#E0B43A;border:1.5px solid #1a1a1a;transform:rotate(45deg)"></div>',
-          iconSize: [12, 12], iconAnchor: [6, 6] }) });
-      },
-      onEachFeature: function (f, l) {
-        var p = f.properties || {};
-        l.bindPopup("<b>Structure Inventory Model roof detector</b><br>A roof found in the pre-fire aerial photo with no footprint within 20 m." +
-          (p.score != null ? "<br>Roof-detector confidence: " + Number(p.score).toFixed(2) : ""));
-      } });
-    addIfChecked("t-det", "det");
-  }).catch(console.error);
-
-  load("data/footprints_dins.geojson").then(function (fc) {
-    layers.dins = L.geoJSON(fc, {
-      pointToLayer: function (f, ll) {
-        return L.circleMarker(ll, { renderer: canvasPts, radius: 6, color: "#111", weight: 1.2,
-          fillColor: GRADE_COL[f.properties.grade] || "#9AA0A6", fillOpacity: 0.95 });
-      },
-      onEachFeature: function (f, l) {
-        var p = f.properties || {};
-        l.bindPopup("<b>CAL FIRE inspection</b><br>Damage: " + esc(p.grade || "?") +
-          "<br>Category: " + esc(p.category || "?") + "<br>Type: " + esc(p.type || "?") +
-          (p.year_built ? "<br>Year built: " + esc(p.year_built) : ""));
-      } });
-    addIfChecked("t-dins", "dins");
-  }).catch(console.error);
-
-  bind("t-dins", "dins"); bind("t-uss", "uss"); bind("t-ms", "ms"); bind("t-det", "det"); bind("t-per", "per");
-  document.getElementById("b-focus").addEventListener("click", goFocus);
-  document.getElementById("b-fire").addEventListener("click", function () { if (fireBounds) map.fitBounds(fireBounds); });
-  L.control.scale({ imperial: false }).addTo(map);
-})();
-</script>
-</body>
-</html>
+}
+document.getElementById("f").addEventListener("submit", function(e) { e.preventDefault(); open_(document.getElementById("pin").value, false); });
+(function() { var p = null; try { p = sessionStorage.getItem("slp_pin"); } catch (e) {} if (p) open_(p, true); })();
+</script></body></html>
