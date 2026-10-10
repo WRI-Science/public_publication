@@ -1159,6 +1159,578 @@ v1 is off by -10.1 pts" tabindex="0"><b>-10</b><span class="tv">65% vs 75%</span
 <p>To test whether the misses change the paper's conclusions, Cat's model was re-run <b>unchanged</b> on the same 192,754 homes and 242 fires, swapping only the canopy column (95% intervals from a fire-cluster bootstrap):</p>
 <div class="scroll"><table class="rr"><thead><tr><th>Paper result (Cat's model, unchanged)</th><th>Original v1</th><th>v1 corrected to lidar</th><th>CHMv2 on the same images</th></tr></thead><tbody><tr><th>Vegetation raises destruction risk (log-odds per 1 SD of canopy)</th><td>0.20<span class="ci">[0.06, 0.37]</span></td><td>0.25<span class="ci">[0.09, 0.42]</span></td><td>0.39<span class="ci">[0.26, 0.51]</span></td></tr><tr><th>Average added destruction risk from vegetation (pts)</th><td>12.9<span class="ci">[5.7, 19.3]</span></td><td>20.5<span class="ci">[10.1, 31.3]</span></td><td>18.0<span class="ci">[8.0, 27.2]</span></td></tr><tr><th>Homes where clearing vegetation helps</th><td>48%<span class="ci">[33%, 62%]</span></td><td>77%<span class="ci">[61%, 84%]</span></td><td>68%<span class="ci">[49%, 77%]</span></td></tr><tr><th>— Mediterranean</th><td>53%<span class="ci">[31%, 72%]</span></td><td>81%<span class="ci">[54%, 91%]</span></td><td>76%<span class="ci">[46%, 86%]</span></td></tr><tr><th>— Forest</th><td>51%<span class="ci">[36%, 67%]</span></td><td>76%<span class="ci">[62%, 92%]</span></td><td>66%<span class="ci">[48%, 81%]</span></td></tr><tr><th>— Grass / shrub / desert</th><td>21%<span class="ci">[2%, 36%]</span></td><td>62%<span class="ci">[6%, 73%]</span></td><td>41%<span class="ci">[10%, 53%]</span></td></tr><tr><th>Vegetation × density interaction, p</th><td>&lt;0.001</td><td>&lt;0.001</td><td>0.004</td></tr><tr><th>Forest three-way term, p</th><td>&lt;0.001</td><td>&lt;0.001</td><td>&lt;0.001</td></tr><tr><th>Grass/shrub/desert three-way term, p</th><td>&lt;0.001</td><td>0.003</td><td>0.122</td></tr><tr><th>Forest: vegetation hurts above 40 structures</th><td>20%<span class="ci">[0%, 62%]</span></td><td>58%<span class="ci">[0%, 100%]</span></td><td>51%<span class="ci">[0%, 97%]</span></td></tr></tbody></table></div>
 <p>Every vegetation term keeps its direction and the vegetation effect gets stronger when canopy is measured more accurately, so v1's under-read makes the paper conservative rather than wrong. The one claim that depends on it is the grass/shrub/desert density interaction, which is no longer significant with CHMv2. The forest “hurts above 40 structures” result was unresolved before and still is. The share of homes where clearing helps also rises partly because, on the lidar scale, removing canopy is a larger change, so fewer homes fall in the “no meaningful effect” band.</p>
+<h2>C. If the paper switched to CHMv2: CHMv2 versus lidar</h2>
+<p class="sub">Same homes, same lidar and same rows as grid A, but the cells now show how far <b>CHMv2</b> is off (CHMv2's reading vs lidar), using CHMv2 exactly as it would run in the paper's pipeline: the same NAIP scenes, 0–100 ft ring, footprint cut-outs and NDVI rule, with no calibration to lidar. Overall it is off by -6 pts on average (v1: -12) and tracks lidar at r = 0.96, R² = 0.92 (v1: r = 0.89, R² = 0.79).</p>
+<div class="scroll"><table class="hm" id="c"><caption>Columns: canopy according to lidar (10% bands)</caption><thead><tr><th></th><th>0–10%</th><th>10–20%</th><th>20–30%</th><th>30–40%</th><th>40–50%</th><th>50–60%</th><th>60–70%</th><th>70–80%</th><th>80–90%</th><th>90–100%</th><th class="n">homes</th><th>avg miss<br>(pts)</th><th>r</th><th>R²</th></tr></thead><tbody><tr class="sec"><th colspan="15">All</th></tr><tr class="all"><th class="lab">All homes</th><td class="c dark" style="background:#6cbe5f" title="All homes · lidar canopy 0–10%
+3,213 homes
+CHMv2 reports 1.8% on average
+lidar average 5.4%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#b0da6e" title="All homes · lidar canopy 10–20%
+3,210 homes
+CHMv2 reports 8.0% on average
+lidar average 14.7%
+CHMv2 is off by -6.7 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#c1db74" title="All homes · lidar canopy 20–30%
+2,551 homes
+CHMv2 reports 16.9% on average
+lidar average 24.7%
+CHMv2 is off by -7.8 pts" tabindex="0"><b>-8</b><span class="tv">17% vs 25%</span></td><td class="c dark" style="background:#c8dc77" title="All homes · lidar canopy 30–40%
+2,033 homes
+CHMv2 reports 26.5% on average
+lidar average 34.9%
+CHMv2 is off by -8.3 pts" tabindex="0"><b>-8</b><span class="tv">27% vs 35%</span></td><td class="c dark" style="background:#bddb73" title="All homes · lidar canopy 40–50%
+1,752 homes
+CHMv2 reports 37.3% on average
+lidar average 44.8%
+CHMv2 is off by -7.6 pts" tabindex="0"><b>-8</b><span class="tv">37% vs 45%</span></td><td class="c dark" style="background:#a3d869" title="All homes · lidar canopy 50–60%
+1,500 homes
+CHMv2 reports 49.0% on average
+lidar average 54.9%
+CHMv2 is off by -5.9 pts" tabindex="0"><b>-6</b><span class="tv">49% vs 55%</span></td><td class="c dark" style="background:#77c361" title="All homes · lidar canopy 60–70%
+1,135 homes
+CHMv2 reports 60.7% on average
+lidar average 64.7%
+CHMv2 is off by -4.0 pts" tabindex="0"><b>-4</b><span class="tv">61% vs 65%</span></td><td class="c dark" style="background:#6fbf60" title="All homes · lidar canopy 70–80%
+885 homes
+CHMv2 reports 71.2% on average
+lidar average 74.9%
+CHMv2 is off by -3.6 pts" tabindex="0"><b>-4</b><span class="tv">71% vs 75%</span></td><td class="c dark" style="background:#4fb05a" title="All homes · lidar canopy 80–90%
+557 homes
+CHMv2 reports 82.2% on average
+lidar average 84.4%
+CHMv2 is off by -2.3 pts" tabindex="0"><b>-2</b><span class="tv">82% vs 84%</span></td><td class="c dark" style="background:#4baf59" title="All homes · lidar canopy 90–100%
+172 homes
+CHMv2 reports 90.8% on average
+lidar average 92.9%
+CHMv2 is off by -2.1 pts" tabindex="0"><b>-2</b><span class="tv">91% vs 93%</span></td><td class="n">17,008</td><td class="st"><b>-6</b></td><td class="st">0.96</td><td class="st">0.92</td></tr><tr class="sec"><th colspan="15">Ecoregion</th></tr><tr><th class="lab">Mediterranean California</th><td class="c dark" style="background:#84c964" title="Mediterranean California · lidar canopy 0–10%
+104 homes
+CHMv2 reports 1.6% on average
+lidar average 6.2%
+CHMv2 is off by -4.5 pts" tabindex="0"><b>-5</b><span class="tv">2% vs 6%</span></td><td class="c dark" style="background:#bbdb72" title="Mediterranean California · lidar canopy 10–20%
+267 homes
+CHMv2 reports 8.2% on average
+lidar average 15.6%
+CHMv2 is off by -7.4 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 16%</span></td><td class="c dark" style="background:#cedc79" title="Mediterranean California · lidar canopy 20–30%
+343 homes
+CHMv2 reports 16.1% on average
+lidar average 24.8%
+CHMv2 is off by -8.7 pts" tabindex="0"><b>-9</b><span class="tv">16% vs 25%</span></td><td class="c dark" style="background:#c2db74" title="Mediterranean California · lidar canopy 30–40%
+369 homes
+CHMv2 reports 27.2% on average
+lidar average 35.1%
+CHMv2 is off by -7.9 pts" tabindex="0"><b>-8</b><span class="tv">27% vs 35%</span></td><td class="c dark" style="background:#cfdc79" title="Mediterranean California · lidar canopy 40–50%
+409 homes
+CHMv2 reports 36.2% on average
+lidar average 45.0%
+CHMv2 is off by -8.8 pts" tabindex="0"><b>-9</b><span class="tv">36% vs 45%</span></td><td class="c dark" style="background:#cadc77" title="Mediterranean California · lidar canopy 50–60%
+376 homes
+CHMv2 reports 46.5% on average
+lidar average 55.0%
+CHMv2 is off by -8.4 pts" tabindex="0"><b>-8</b><span class="tv">47% vs 55%</span></td><td class="c dark" style="background:#acd96c" title="Mediterranean California · lidar canopy 60–70%
+246 homes
+CHMv2 reports 58.0% on average
+lidar average 64.5%
+CHMv2 is off by -6.4 pts" tabindex="0"><b>-6</b><span class="tv">58% vs 64%</span></td><td class="c dark" style="background:#8ccd65" title="Mediterranean California · lidar canopy 70–80%
+136 homes
+CHMv2 reports 69.9% on average
+lidar average 74.8%
+CHMv2 is off by -4.9 pts" tabindex="0"><b>-5</b><span class="tv">70% vs 75%</span></td><td class="c dark" style="background:#60b85d" title="Mediterranean California · lidar canopy 80–90%
+68 homes
+CHMv2 reports 80.9% on average
+lidar average 83.9%
+CHMv2 is off by -3.0 pts" tabindex="0"><b>-3</b><span class="tv">81% vs 84%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">2,328</td><td class="st"><b>-8</b></td><td class="st">0.96</td><td class="st">0.93</td></tr><tr><th class="lab">Marine west coast forest</th><td class="c empty" title="fewer than 15 homes">·</td><td class="c dark" style="background:#cadc78" title="Marine west coast forest · lidar canopy 10–20%
+48 homes
+CHMv2 reports 6.2% on average
+lidar average 14.7%
+CHMv2 is off by -8.5 pts" tabindex="0"><b>-8</b><span class="tv">6% vs 15%</span></td><td class="c dark" style="background:#e3de81" title="Marine west coast forest · lidar canopy 20–30%
+69 homes
+CHMv2 reports 15.3% on average
+lidar average 25.5%
+CHMv2 is off by -10.2 pts" tabindex="0"><b>-10</b><span class="tv">15% vs 25%</span></td><td class="c dark" style="background:#eade84" title="Marine west coast forest · lidar canopy 30–40%
+99 homes
+CHMv2 reports 24.6% on average
+lidar average 35.2%
+CHMv2 is off by -10.6 pts" tabindex="0"><b>-11</b><span class="tv">25% vs 35%</span></td><td class="c dark" style="background:#eddf85" title="Marine west coast forest · lidar canopy 40–50%
+129 homes
+CHMv2 reports 34.2% on average
+lidar average 45.0%
+CHMv2 is off by -10.8 pts" tabindex="0"><b>-11</b><span class="tv">34% vs 45%</span></td><td class="c dark" style="background:#eade83" title="Marine west coast forest · lidar canopy 50–60%
+149 homes
+CHMv2 reports 44.6% on average
+lidar average 55.2%
+CHMv2 is off by -10.6 pts" tabindex="0"><b>-11</b><span class="tv">45% vs 55%</span></td><td class="c dark" style="background:#bcdb72" title="Marine west coast forest · lidar canopy 60–70%
+126 homes
+CHMv2 reports 57.3% on average
+lidar average 64.9%
+CHMv2 is off by -7.5 pts" tabindex="0"><b>-8</b><span class="tv">57% vs 65%</span></td><td class="c dark" style="background:#90cf66" title="Marine west coast forest · lidar canopy 70–80%
+166 homes
+CHMv2 reports 70.0% on average
+lidar average 75.1%
+CHMv2 is off by -5.1 pts" tabindex="0"><b>-5</b><span class="tv">70% vs 75%</span></td><td class="c dark" style="background:#4baf59" title="Marine west coast forest · lidar canopy 80–90%
+185 homes
+CHMv2 reports 82.9% on average
+lidar average 85.0%
+CHMv2 is off by -2.1 pts" tabindex="0"><b>-2</b><span class="tv">83% vs 85%</span></td><td class="c dark" style="background:#56b45b" title="Marine west coast forest · lidar canopy 90–100%
+112 homes
+CHMv2 reports 90.9% on average
+lidar average 93.4%
+CHMv2 is off by -2.6 pts" tabindex="0"><b>-3</b><span class="tv">91% vs 93%</span></td><td class="n">1,094</td><td class="st"><b>-7</b></td><td class="st">0.95</td><td class="st">0.90</td></tr><tr><th class="lab">Deserts</th><td class="c dark" style="background:#6cbe5f" title="Deserts · lidar canopy 0–10%
+2,075 homes
+CHMv2 reports 1.8% on average
+lidar average 5.3%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#b2da6f" title="Deserts · lidar canopy 10–20%
+1,922 homes
+CHMv2 reports 7.7% on average
+lidar average 14.6%
+CHMv2 is off by -6.8 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#c6dc76" title="Deserts · lidar canopy 20–30%
+1,243 homes
+CHMv2 reports 16.4% on average
+lidar average 24.6%
+CHMv2 is off by -8.2 pts" tabindex="0"><b>-8</b><span class="tv">16% vs 25%</span></td><td class="c dark" style="background:#cfdc79" title="Deserts · lidar canopy 30–40%
+755 homes
+CHMv2 reports 25.8% on average
+lidar average 34.6%
+CHMv2 is off by -8.8 pts" tabindex="0"><b>-9</b><span class="tv">26% vs 35%</span></td><td class="c dark" style="background:#cedc79" title="Deserts · lidar canopy 40–50%
+394 homes
+CHMv2 reports 35.6% on average
+lidar average 44.3%
+CHMv2 is off by -8.7 pts" tabindex="0"><b>-9</b><span class="tv">36% vs 44%</span></td><td class="c dark" style="background:#a7d96a" title="Deserts · lidar canopy 50–60%
+204 homes
+CHMv2 reports 48.1% on average
+lidar average 54.1%
+CHMv2 is off by -6.1 pts" tabindex="0"><b>-6</b><span class="tv">48% vs 54%</span></td><td class="c dark" style="background:#53b25b" title="Deserts · lidar canopy 60–70%
+96 homes
+CHMv2 reports 62.2% on average
+lidar average 64.7%
+CHMv2 is off by -2.4 pts" tabindex="0"><b>-2</b><span class="tv">62% vs 65%</span></td><td class="c dark" style="background:#6cbe5f" title="Deserts · lidar canopy 70–80%
+41 homes
+CHMv2 reports 70.1% on average
+lidar average 73.6%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-4</b><span class="tv">70% vs 74%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">6,742</td><td class="st"><b>-6</b></td><td class="st">0.92</td><td class="st">0.85</td></tr><tr><th class="lab">NW forested mountains</th><td class="c dark" style="background:#6abd5f" title="NW forested mountains · lidar canopy 0–10%
+494 homes
+CHMv2 reports 2.0% on average
+lidar average 5.5%
+CHMv2 is off by -3.4 pts" tabindex="0"><b>-3</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#a9d96b" title="NW forested mountains · lidar canopy 10–20%
+580 homes
+CHMv2 reports 8.8% on average
+lidar average 15.0%
+CHMv2 is off by -6.2 pts" tabindex="0"><b>-6</b><span class="tv">9% vs 15%</span></td><td class="c dark" style="background:#b1da6e" title="NW forested mountains · lidar canopy 20–30%
+618 homes
+CHMv2 reports 18.1% on average
+lidar average 24.9%
+CHMv2 is off by -6.8 pts" tabindex="0"><b>-7</b><span class="tv">18% vs 25%</span></td><td class="c dark" style="background:#c5db76" title="NW forested mountains · lidar canopy 30–40%
+635 homes
+CHMv2 reports 26.9% on average
+lidar average 35.0%
+CHMv2 is off by -8.1 pts" tabindex="0"><b>-8</b><span class="tv">27% vs 35%</span></td><td class="c dark" style="background:#a8d96b" title="NW forested mountains · lidar canopy 40–50%
+694 homes
+CHMv2 reports 38.9% on average
+lidar average 45.0%
+CHMv2 is off by -6.1 pts" tabindex="0"><b>-6</b><span class="tv">39% vs 45%</span></td><td class="c dark" style="background:#77c361" title="NW forested mountains · lidar canopy 50–60%
+649 homes
+CHMv2 reports 51.0% on average
+lidar average 55.0%
+CHMv2 is off by -4.0 pts" tabindex="0"><b>-4</b><span class="tv">51% vs 55%</span></td><td class="c dark" style="background:#67bc5e" title="NW forested mountains · lidar canopy 60–70%
+577 homes
+CHMv2 reports 61.5% on average
+lidar average 64.7%
+CHMv2 is off by -3.3 pts" tabindex="0"><b>-3</b><span class="tv">61% vs 65%</span></td><td class="c dark" style="background:#63ba5e" title="NW forested mountains · lidar canopy 70–80%
+509 homes
+CHMv2 reports 71.8% on average
+lidar average 75.0%
+CHMv2 is off by -3.1 pts" tabindex="0"><b>-3</b><span class="tv">72% vs 75%</span></td><td class="c dark" style="background:#4fb05a" title="NW forested mountains · lidar canopy 80–90%
+289 homes
+CHMv2 reports 81.9% on average
+lidar average 84.2%
+CHMv2 is off by -2.3 pts" tabindex="0"><b>-2</b><span class="tv">82% vs 84%</span></td><td class="c dark" style="background:#2ea154" title="NW forested mountains · lidar canopy 90–100%
+44 homes
+CHMv2 reports 90.9% on average
+lidar average 91.8%
+CHMv2 is off by -0.9 pts" tabindex="0"><b>-1</b><span class="tv">91% vs 92%</span></td><td class="n">5,089</td><td class="st"><b>-5</b></td><td class="st">0.95</td><td class="st">0.91</td></tr><tr><th class="lab">Great Plains</th><td class="c dark" style="background:#67bc5e" title="Great Plains · lidar canopy 0–10%
+485 homes
+CHMv2 reports 1.8% on average
+lidar average 5.1%
+CHMv2 is off by -3.3 pts" tabindex="0"><b>-3</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#9dd568" title="Great Plains · lidar canopy 10–20%
+313 homes
+CHMv2 reports 8.9% on average
+lidar average 14.5%
+CHMv2 is off by -5.6 pts" tabindex="0"><b>-6</b><span class="tv">9% vs 14%</span></td><td class="c dark" style="background:#a9d96b" title="Great Plains · lidar canopy 20–30%
+194 homes
+CHMv2 reports 18.0% on average
+lidar average 24.2%
+CHMv2 is off by -6.2 pts" tabindex="0"><b>-6</b><span class="tv">18% vs 24%</span></td><td class="c dark" style="background:#95d167" title="Great Plains · lidar canopy 30–40%
+77 homes
+CHMv2 reports 29.1% on average
+lidar average 34.4%
+CHMv2 is off by -5.3 pts" tabindex="0"><b>-5</b><span class="tv">29% vs 34%</span></td><td class="c dark" style="background:#c4db75" title="Great Plains · lidar canopy 40–50%
+34 homes
+CHMv2 reports 36.5% on average
+lidar average 44.5%
+CHMv2 is off by -8.0 pts" tabindex="0"><b>-8</b><span class="tv">36% vs 45%</span></td><td class="c dark" style="background:#a7d96b" title="Great Plains · lidar canopy 50–60%
+21 homes
+CHMv2 reports 48.2% on average
+lidar average 54.3%
+CHMv2 is off by -6.1 pts" tabindex="0"><b>-6</b><span class="tv">48% vs 54%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,139</td><td class="st"><b>-5</b></td><td class="st">0.93</td><td class="st">0.86</td></tr><tr><th class="lab">Temperate Sierras (AZ/NM mtns)</th><td class="c dark" style="background:#8dcd65" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 0–10%
+44 homes
+CHMv2 reports 1.9% on average
+lidar average 6.8%
+CHMv2 is off by -4.9 pts" tabindex="0"><b>-5</b><span class="tv">2% vs 7%</span></td><td class="c dark" style="background:#bddb73" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 10–20%
+80 homes
+CHMv2 reports 7.7% on average
+lidar average 15.3%
+CHMv2 is off by -7.6 pts" tabindex="0"><b>-8</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#c3db75" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 20–30%
+84 homes
+CHMv2 reports 16.9% on average
+lidar average 24.8%
+CHMv2 is off by -8.0 pts" tabindex="0"><b>-8</b><span class="tv">17% vs 25%</span></td><td class="c dark" style="background:#c7dc76" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 30–40%
+98 homes
+CHMv2 reports 26.7% on average
+lidar average 34.9%
+CHMv2 is off by -8.2 pts" tabindex="0"><b>-8</b><span class="tv">27% vs 35%</span></td><td class="c dark" style="background:#65bb5e" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 40–50%
+92 homes
+CHMv2 reports 41.9% on average
+lidar average 45.1%
+CHMv2 is off by -3.2 pts" tabindex="0"><b>-3</b><span class="tv">42% vs 45%</span></td><td class="c dark" style="background:#36a555" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 50–60%
+101 homes
+CHMv2 reports 54.3% on average
+lidar average 55.5%
+CHMv2 is off by -1.2 pts" tabindex="0"><b>-1</b><span class="tv">54% vs 56%</span></td><td class="c dark" style="background:#4aae59" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 60–70%
+78 homes
+CHMv2 reports 66.4% on average
+lidar average 64.4%
+CHMv2 is off by +2.1 pts" tabindex="0"><b>+2</b><span class="tv">66% vs 64%</span></td><td class="c dark" style="background:#39a656" title="Temperate Sierras (AZ/NM mtns) · lidar canopy 70–80%
+32 homes
+CHMv2 reports 74.8% on average
+lidar average 73.5%
+CHMv2 is off by +1.3 pts" tabindex="0"><b>+1</b><span class="tv">75% vs 74%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">616</td><td class="st"><b>-4</b></td><td class="st">0.97</td><td class="st">0.94</td></tr><tr class="sec"><th colspan="15">State</th></tr><tr><th class="lab">AZ</th><td class="c dark" style="background:#7bc562" title="AZ · lidar canopy 0–10%
+369 homes
+CHMv2 reports 1.8% on average
+lidar average 6.0%
+CHMv2 is off by -4.2 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 6%</span></td><td class="c dark" style="background:#c8dc77" title="AZ · lidar canopy 10–20%
+466 homes
+CHMv2 reports 6.5% on average
+lidar average 14.8%
+CHMv2 is off by -8.3 pts" tabindex="0"><b>-8</b><span class="tv">6% vs 15%</span></td><td class="c dark" style="background:#e0de80" title="AZ · lidar canopy 20–30%
+353 homes
+CHMv2 reports 14.6% on average
+lidar average 24.5%
+CHMv2 is off by -10.0 pts" tabindex="0"><b>-10</b><span class="tv">15% vs 25%</span></td><td class="c dark" style="background:#f7df89" title="AZ · lidar canopy 30–40%
+259 homes
+CHMv2 reports 23.2% on average
+lidar average 34.8%
+CHMv2 is off by -11.6 pts" tabindex="0"><b>-12</b><span class="tv">23% vs 35%</span></td><td class="c dark" style="background:#e4de81" title="AZ · lidar canopy 40–50%
+150 homes
+CHMv2 reports 34.2% on average
+lidar average 44.4%
+CHMv2 is off by -10.2 pts" tabindex="0"><b>-10</b><span class="tv">34% vs 44%</span></td><td class="c dark" style="background:#95d167" title="AZ · lidar canopy 50–60%
+92 homes
+CHMv2 reports 49.6% on average
+lidar average 54.9%
+CHMv2 is off by -5.3 pts" tabindex="0"><b>-5</b><span class="tv">50% vs 55%</span></td><td class="c dark" style="background:#2a9f53" title="AZ · lidar canopy 60–70%
+61 homes
+CHMv2 reports 65.2% on average
+lidar average 64.5%
+CHMv2 is off by +0.7 pts" tabindex="0"><b>+1</b><span class="tv">65% vs 64%</span></td><td class="c dark" style="background:#249d52" title="AZ · lidar canopy 70–80%
+23 homes
+CHMv2 reports 73.8% on average
+lidar average 73.4%
+CHMv2 is off by +0.4 pts" tabindex="0"><b>0</b><span class="tv">74% vs 73%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,778</td><td class="st"><b>-8</b></td><td class="st">0.93</td><td class="st">0.86</td></tr><tr><th class="lab">CA</th><td class="c dark" style="background:#74c261" title="CA · lidar canopy 0–10%
+591 homes
+CHMv2 reports 1.9% on average
+lidar average 5.8%
+CHMv2 is off by -3.9 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 6%</span></td><td class="c dark" style="background:#b1da6e" title="CA · lidar canopy 10–20%
+965 homes
+CHMv2 reports 8.3% on average
+lidar average 15.0%
+CHMv2 is off by -6.8 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#ccdc78" title="CA · lidar canopy 20–30%
+1,051 homes
+CHMv2 reports 16.4% on average
+lidar average 24.9%
+CHMv2 is off by -8.6 pts" tabindex="0"><b>-9</b><span class="tv">16% vs 25%</span></td><td class="c dark" style="background:#d6dd7c" title="CA · lidar canopy 30–40%
+1,055 homes
+CHMv2 reports 25.6% on average
+lidar average 34.9%
+CHMv2 is off by -9.3 pts" tabindex="0"><b>-9</b><span class="tv">26% vs 35%</span></td><td class="c dark" style="background:#cedc79" title="CA · lidar canopy 40–50%
+1,066 homes
+CHMv2 reports 36.2% on average
+lidar average 44.9%
+CHMv2 is off by -8.7 pts" tabindex="0"><b>-9</b><span class="tv">36% vs 45%</span></td><td class="c dark" style="background:#b6da70" title="CA · lidar canopy 50–60%
+1,040 homes
+CHMv2 reports 48.0% on average
+lidar average 55.1%
+CHMv2 is off by -7.1 pts" tabindex="0"><b>-7</b><span class="tv">48% vs 55%</span></td><td class="c dark" style="background:#92d066" title="CA · lidar canopy 60–70%
+819 homes
+CHMv2 reports 59.6% on average
+lidar average 64.8%
+CHMv2 is off by -5.1 pts" tabindex="0"><b>-5</b><span class="tv">60% vs 65%</span></td><td class="c dark" style="background:#7cc662" title="CA · lidar canopy 70–80%
+731 homes
+CHMv2 reports 70.7% on average
+lidar average 74.9%
+CHMv2 is off by -4.2 pts" tabindex="0"><b>-4</b><span class="tv">71% vs 75%</span></td><td class="c dark" style="background:#49ae59" title="CA · lidar canopy 80–90%
+503 homes
+CHMv2 reports 82.4% on average
+lidar average 84.4%
+CHMv2 is off by -2.0 pts" tabindex="0"><b>-2</b><span class="tv">82% vs 84%</span></td><td class="c dark" style="background:#48ad59" title="CA · lidar canopy 90–100%
+162 homes
+CHMv2 reports 90.9% on average
+lidar average 92.9%
+CHMv2 is off by -2.0 pts" tabindex="0"><b>-2</b><span class="tv">91% vs 93%</span></td><td class="n">7,983</td><td class="st"><b>-7</b></td><td class="st">0.96</td><td class="st">0.92</td></tr><tr><th class="lab">MT</th><td class="c dark" style="background:#75c261" title="MT · lidar canopy 0–10%
+267 homes
+CHMv2 reports 1.5% on average
+lidar average 5.4%
+CHMv2 is off by -3.9 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#b2da6f" title="MT · lidar canopy 10–20%
+208 homes
+CHMv2 reports 7.8% on average
+lidar average 14.6%
+CHMv2 is off by -6.8 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#c2db74" title="MT · lidar canopy 20–30%
+105 homes
+CHMv2 reports 16.3% on average
+lidar average 24.2%
+CHMv2 is off by -7.9 pts" tabindex="0"><b>-8</b><span class="tv">16% vs 24%</span></td><td class="c dark" style="background:#99d368" title="MT · lidar canopy 30–40%
+55 homes
+CHMv2 reports 29.4% on average
+lidar average 34.9%
+CHMv2 is off by -5.5 pts" tabindex="0"><b>-5</b><span class="tv">29% vs 35%</span></td><td class="c dark" style="background:#9ed569" title="MT · lidar canopy 40–50%
+50 homes
+CHMv2 reports 39.9% on average
+lidar average 45.5%
+CHMv2 is off by -5.7 pts" tabindex="0"><b>-6</b><span class="tv">40% vs 46%</span></td><td class="c dark" style="background:#99d368" title="MT · lidar canopy 50–60%
+22 homes
+CHMv2 reports 47.8% on average
+lidar average 53.3%
+CHMv2 is off by -5.5 pts" tabindex="0"><b>-5</b><span class="tv">48% vs 53%</span></td><td class="c dark" style="background:#c7dc76" title="MT · lidar canopy 60–70%
+17 homes
+CHMv2 reports 55.5% on average
+lidar average 63.8%
+CHMv2 is off by -8.3 pts" tabindex="0"><b>-8</b><span class="tv">56% vs 64%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">724</td><td class="st"><b>-6</b></td><td class="st">0.90</td><td class="st">0.81</td></tr><tr><th class="lab">NV</th><td class="c dark" style="background:#72c160" title="NV · lidar canopy 0–10%
+250 homes
+CHMv2 reports 1.7% on average
+lidar average 5.5%
+CHMv2 is off by -3.8 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#adda6c" title="NV · lidar canopy 10–20%
+255 homes
+CHMv2 reports 8.0% on average
+lidar average 14.5%
+CHMv2 is off by -6.4 pts" tabindex="0"><b>-6</b><span class="tv">8% vs 14%</span></td><td class="c dark" style="background:#c0db74" title="NV · lidar canopy 20–30%
+118 homes
+CHMv2 reports 16.4% on average
+lidar average 24.2%
+CHMv2 is off by -7.8 pts" tabindex="0"><b>-8</b><span class="tv">16% vs 24%</span></td><td class="c dark" style="background:#b0da6e" title="NV · lidar canopy 30–40%
+54 homes
+CHMv2 reports 27.3% on average
+lidar average 34.0%
+CHMv2 is off by -6.7 pts" tabindex="0"><b>-7</b><span class="tv">27% vs 34%</span></td><td class="c dark" style="background:#85ca64" title="NV · lidar canopy 40–50%
+24 homes
+CHMv2 reports 40.1% on average
+lidar average 44.7%
+CHMv2 is off by -4.6 pts" tabindex="0"><b>-5</b><span class="tv">40% vs 45%</span></td><td class="c dark" style="background:#5db75c" title="NV · lidar canopy 50–60%
+16 homes
+CHMv2 reports 49.6% on average
+lidar average 52.5%
+CHMv2 is off by -2.9 pts" tabindex="0"><b>-3</b><span class="tv">50% vs 53%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">720</td><td class="st"><b>-6</b></td><td class="st">0.93</td><td class="st">0.86</td></tr><tr><th class="lab">ID</th><td class="c dark" style="background:#6cbe5f" title="ID · lidar canopy 0–10%
+314 homes
+CHMv2 reports 1.6% on average
+lidar average 5.1%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#b4da6f" title="ID · lidar canopy 10–20%
+320 homes
+CHMv2 reports 8.0% on average
+lidar average 14.9%
+CHMv2 is off by -6.9 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#bcdb72" title="ID · lidar canopy 20–30%
+291 homes
+CHMv2 reports 17.3% on average
+lidar average 24.9%
+CHMv2 is off by -7.5 pts" tabindex="0"><b>-8</b><span class="tv">17% vs 25%</span></td><td class="c dark" style="background:#b1da6e" title="ID · lidar canopy 30–40%
+239 homes
+CHMv2 reports 28.5% on average
+lidar average 35.2%
+CHMv2 is off by -6.7 pts" tabindex="0"><b>-7</b><span class="tv">28% vs 35%</span></td><td class="c dark" style="background:#9ed568" title="ID · lidar canopy 40–50%
+177 homes
+CHMv2 reports 39.1% on average
+lidar average 44.8%
+CHMv2 is off by -5.6 pts" tabindex="0"><b>-6</b><span class="tv">39% vs 45%</span></td><td class="c dark" style="background:#70c060" title="ID · lidar canopy 50–60%
+153 homes
+CHMv2 reports 51.1% on average
+lidar average 54.8%
+CHMv2 is off by -3.7 pts" tabindex="0"><b>-4</b><span class="tv">51% vs 55%</span></td><td class="c dark" style="background:#61b95d" title="ID · lidar canopy 60–70%
+99 homes
+CHMv2 reports 61.2% on average
+lidar average 64.2%
+CHMv2 is off by -3.0 pts" tabindex="0"><b>-3</b><span class="tv">61% vs 64%</span></td><td class="c dark" style="background:#40aa57" title="ID · lidar canopy 70–80%
+56 homes
+CHMv2 reports 73.6% on average
+lidar average 75.2%
+CHMv2 is off by -1.6 pts" tabindex="0"><b>-2</b><span class="tv">74% vs 75%</span></td><td class="c dark" style="background:#c0db74" title="ID · lidar canopy 80–90%
+31 homes
+CHMv2 reports 76.9% on average
+lidar average 84.7%
+CHMv2 is off by -7.7 pts" tabindex="0"><b>-8</b><span class="tv">77% vs 85%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,686</td><td class="st"><b>-6</b></td><td class="st">0.96</td><td class="st">0.93</td></tr><tr><th class="lab">WA</th><td class="c dark" style="background:#6ebf60" title="WA · lidar canopy 0–10%
+19 homes
+CHMv2 reports 2.0% on average
+lidar average 5.6%
+CHMv2 is off by -3.6 pts" tabindex="0"><b>-4</b><span class="tv">2% vs 6%</span></td><td class="c dark" style="background:#afda6d" title="WA · lidar canopy 10–20%
+35 homes
+CHMv2 reports 8.5% on average
+lidar average 15.1%
+CHMv2 is off by -6.6 pts" tabindex="0"><b>-7</b><span class="tv">8% vs 15%</span></td><td class="c dark" style="background:#c4db75" title="WA · lidar canopy 20–30%
+27 homes
+CHMv2 reports 17.5% on average
+lidar average 25.6%
+CHMv2 is off by -8.0 pts" tabindex="0"><b>-8</b><span class="tv">18% vs 26%</span></td><td class="c dark" style="background:#d7dd7c" title="WA · lidar canopy 30–40%
+28 homes
+CHMv2 reports 26.3% on average
+lidar average 35.7%
+CHMv2 is off by -9.3 pts" tabindex="0"><b>-9</b><span class="tv">26% vs 36%</span></td><td class="c dark" style="background:#74c261" title="WA · lidar canopy 40–50%
+26 homes
+CHMv2 reports 40.3% on average
+lidar average 44.1%
+CHMv2 is off by -3.8 pts" tabindex="0"><b>-4</b><span class="tv">40% vs 44%</span></td><td class="c dark" style="background:#1a9850" title="WA · lidar canopy 50–60%
+15 homes
+CHMv2 reports 54.2% on average
+lidar average 54.2%
+CHMv2 is off by -0.0 pts" tabindex="0"><b>0</b><span class="tv">54% vs 54%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">163</td><td class="st"><b>-5</b></td><td class="st">0.94</td><td class="st">0.88</td></tr><tr><th class="lab">NM</th><td class="c dark" style="background:#6bbe5f" title="NM · lidar canopy 0–10%
+374 homes
+CHMv2 reports 2.2% on average
+lidar average 5.7%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-3</b><span class="tv">2% vs 6%</span></td><td class="c dark" style="background:#abd96c" title="NM · lidar canopy 10–20%
+291 homes
+CHMv2 reports 7.6% on average
+lidar average 14.0%
+CHMv2 is off by -6.3 pts" tabindex="0"><b>-6</b><span class="tv">8% vs 14%</span></td><td class="c dark" style="background:#b1da6e" title="NM · lidar canopy 20–30%
+131 homes
+CHMv2 reports 17.5% on average
+lidar average 24.3%
+CHMv2 is off by -6.8 pts" tabindex="0"><b>-7</b><span class="tv">18% vs 24%</span></td><td class="c dark" style="background:#b8da71" title="NM · lidar canopy 30–40%
+51 homes
+CHMv2 reports 27.2% on average
+lidar average 34.4%
+CHMv2 is off by -7.2 pts" tabindex="0"><b>-7</b><span class="tv">27% vs 34%</span></td><td class="c dark" style="background:#78c462" title="NM · lidar canopy 40–50%
+35 homes
+CHMv2 reports 40.3% on average
+lidar average 44.4%
+CHMv2 is off by -4.0 pts" tabindex="0"><b>-4</b><span class="tv">40% vs 44%</span></td><td class="c dark" style="background:#50b15a" title="NM · lidar canopy 50–60%
+31 homes
+CHMv2 reports 57.9% on average
+lidar average 55.6%
+CHMv2 is off by +2.3 pts" tabindex="0"><b>+2</b><span class="tv">58% vs 56%</span></td><td class="c dark" style="background:#66bb5e" title="NM · lidar canopy 60–70%
+20 homes
+CHMv2 reports 67.1% on average
+lidar average 63.9%
+CHMv2 is off by +3.3 pts" tabindex="0"><b>+3</b><span class="tv">67% vs 64%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">946</td><td class="st"><b>-5</b></td><td class="st">0.96</td><td class="st">0.91</td></tr><tr><th class="lab">WY</th><td class="c dark" style="background:#61b95d" title="WY · lidar canopy 0–10%
+397 homes
+CHMv2 reports 1.0% on average
+lidar average 4.1%
+CHMv2 is off by -3.1 pts" tabindex="0"><b>-3</b><span class="tv">1% vs 4%</span></td><td class="c dark" style="background:#a7d96a" title="WY · lidar canopy 10–20%
+144 homes
+CHMv2 reports 8.1% on average
+lidar average 14.2%
+CHMv2 is off by -6.1 pts" tabindex="0"><b>-6</b><span class="tv">8% vs 14%</span></td><td class="c dark" style="background:#abd96c" title="WY · lidar canopy 20–30%
+90 homes
+CHMv2 reports 18.8% on average
+lidar average 25.1%
+CHMv2 is off by -6.3 pts" tabindex="0"><b>-6</b><span class="tv">19% vs 25%</span></td><td class="c dark" style="background:#89cb65" title="WY · lidar canopy 30–40%
+36 homes
+CHMv2 reports 30.1% on average
+lidar average 34.8%
+CHMv2 is off by -4.7 pts" tabindex="0"><b>-5</b><span class="tv">30% vs 35%</span></td><td class="c dark" style="background:#b9da71" title="WY · lidar canopy 40–50%
+27 homes
+CHMv2 reports 36.9% on average
+lidar average 44.2%
+CHMv2 is off by -7.3 pts" tabindex="0"><b>-7</b><span class="tv">37% vs 44%</span></td><td class="c dark" style="background:#6bbe5f" title="WY · lidar canopy 50–60%
+20 homes
+CHMv2 reports 49.9% on average
+lidar average 53.4%
+CHMv2 is off by -3.5 pts" tabindex="0"><b>-3</b><span class="tv">50% vs 53%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">724</td><td class="st"><b>-4</b></td><td class="st">0.95</td><td class="st">0.90</td></tr><tr><th class="lab">OR</th><td class="c dark" style="background:#63ba5d" title="OR · lidar canopy 0–10%
+85 homes
+CHMv2 reports 1.7% on average
+lidar average 4.8%
+CHMv2 is off by -3.1 pts" tabindex="0"><b>-3</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#a1d769" title="OR · lidar canopy 10–20%
+96 homes
+CHMv2 reports 9.6% on average
+lidar average 15.3%
+CHMv2 is off by -5.8 pts" tabindex="0"><b>-6</b><span class="tv">10% vs 15%</span></td><td class="c dark" style="background:#a4d86a" title="OR · lidar canopy 20–30%
+97 homes
+CHMv2 reports 18.6% on average
+lidar average 24.5%
+CHMv2 is off by -5.9 pts" tabindex="0"><b>-6</b><span class="tv">19% vs 24%</span></td><td class="c dark" style="background:#81c863" title="OR · lidar canopy 30–40%
+51 homes
+CHMv2 reports 30.1% on average
+lidar average 34.5%
+CHMv2 is off by -4.4 pts" tabindex="0"><b>-4</b><span class="tv">30% vs 35%</span></td><td class="c dark" style="background:#7ac462" title="OR · lidar canopy 40–50%
+65 homes
+CHMv2 reports 40.6% on average
+lidar average 44.7%
+CHMv2 is off by -4.1 pts" tabindex="0"><b>-4</b><span class="tv">41% vs 45%</span></td><td class="c dark" style="background:#4baf59" title="OR · lidar canopy 50–60%
+38 homes
+CHMv2 reports 52.4% on average
+lidar average 54.5%
+CHMv2 is off by -2.1 pts" tabindex="0"><b>-2</b><span class="tv">52% vs 55%</span></td><td class="c dark" style="background:#3ea857" title="OR · lidar canopy 60–70%
+32 homes
+CHMv2 reports 63.3% on average
+lidar average 64.8%
+CHMv2 is off by -1.5 pts" tabindex="0"><b>-2</b><span class="tv">63% vs 65%</span></td><td class="c dark" style="background:#5cb75c" title="OR · lidar canopy 70–80%
+27 homes
+CHMv2 reports 72.3% on average
+lidar average 75.2%
+CHMv2 is off by -2.8 pts" tabindex="0"><b>-3</b><span class="tv">72% vs 75%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">507</td><td class="st"><b>-4</b></td><td class="st">0.98</td><td class="st">0.95</td></tr><tr><th class="lab">UT</th><td class="c dark" style="background:#5eb85d" title="UT · lidar canopy 0–10%
+275 homes
+CHMv2 reports 2.1% on average
+lidar average 5.0%
+CHMv2 is off by -2.9 pts" tabindex="0"><b>-3</b><span class="tv">2% vs 5%</span></td><td class="c dark" style="background:#a0d669" title="UT · lidar canopy 10–20%
+207 homes
+CHMv2 reports 8.8% on average
+lidar average 14.6%
+CHMv2 is off by -5.8 pts" tabindex="0"><b>-6</b><span class="tv">9% vs 15%</span></td><td class="c dark" style="background:#9ed568" title="UT · lidar canopy 20–30%
+111 homes
+CHMv2 reports 19.1% on average
+lidar average 24.7%
+CHMv2 is off by -5.7 pts" tabindex="0"><b>-6</b><span class="tv">19% vs 25%</span></td><td class="c dark" style="background:#9cd568" title="UT · lidar canopy 30–40%
+81 homes
+CHMv2 reports 28.6% on average
+lidar average 34.2%
+CHMv2 is off by -5.6 pts" tabindex="0"><b>-6</b><span class="tv">29% vs 34%</span></td><td class="c dark" style="background:#78c461" title="UT · lidar canopy 40–50%
+46 homes
+CHMv2 reports 40.9% on average
+lidar average 44.9%
+CHMv2 is off by -4.0 pts" tabindex="0"><b>-4</b><span class="tv">41% vs 45%</span></td><td class="c dark" style="background:#40aa57" title="UT · lidar canopy 50–60%
+38 homes
+CHMv2 reports 53.6% on average
+lidar average 55.3%
+CHMv2 is off by -1.6 pts" tabindex="0"><b>-2</b><span class="tv">54% vs 55%</span></td><td class="c dark" style="background:#209b51" title="UT · lidar canopy 60–70%
+39 homes
+CHMv2 reports 64.2% on average
+lidar average 63.9%
+CHMv2 is off by +0.3 pts" tabindex="0"><b>0</b><span class="tv">64% vs 64%</span></td><td class="c dark" style="background:#59b55c" title="UT · lidar canopy 70–80%
+18 homes
+CHMv2 reports 77.9% on average
+lidar average 75.2%
+CHMv2 is off by +2.7 pts" tabindex="0"><b>+3</b><span class="tv">78% vs 75%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">815</td><td class="st"><b>-4</b></td><td class="st">0.98</td><td class="st">0.96</td></tr><tr><th class="lab">CO</th><td class="c dark" style="background:#5db75c" title="CO · lidar canopy 0–10%
+272 homes
+CHMv2 reports 2.7% on average
+lidar average 5.6%
+CHMv2 is off by -2.9 pts" tabindex="0"><b>-3</b><span class="tv">3% vs 6%</span></td><td class="c dark" style="background:#8acc65" title="CO · lidar canopy 10–20%
+223 homes
+CHMv2 reports 9.8% on average
+lidar average 14.6%
+CHMv2 is off by -4.8 pts" tabindex="0"><b>-5</b><span class="tv">10% vs 15%</span></td><td class="c dark" style="background:#68bc5f" title="CO · lidar canopy 20–30%
+177 homes
+CHMv2 reports 20.9% on average
+lidar average 24.3%
+CHMv2 is off by -3.3 pts" tabindex="0"><b>-3</b><span class="tv">21% vs 24%</span></td><td class="c dark" style="background:#61b95d" title="CO · lidar canopy 30–40%
+124 homes
+CHMv2 reports 31.6% on average
+lidar average 34.6%
+CHMv2 is off by -3.0 pts" tabindex="0"><b>-3</b><span class="tv">32% vs 35%</span></td><td class="c dark" style="background:#46ad58" title="CO · lidar canopy 40–50%
+86 homes
+CHMv2 reports 42.9% on average
+lidar average 44.8%
+CHMv2 is off by -1.9 pts" tabindex="0"><b>-2</b><span class="tv">43% vs 45%</span></td><td class="c dark" style="background:#4eb05a" title="CO · lidar canopy 50–60%
+35 homes
+CHMv2 reports 51.3% on average
+lidar average 53.6%
+CHMv2 is off by -2.2 pts" tabindex="0"><b>-2</b><span class="tv">51% vs 54%</span></td><td class="c dark" style="background:#2ea254" title="CO · lidar canopy 60–70%
+29 homes
+CHMv2 reports 63.9% on average
+lidar average 64.8%
+CHMv2 is off by -0.9 pts" tabindex="0"><b>-1</b><span class="tv">64% vs 65%</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">962</td><td class="st"><b>-3</b></td><td class="st">0.94</td><td class="st">0.89</td></tr></tbody></table></div>
+<p>CHMv2 still reads a little low because it also misses part of the 1–5 m shrub layer, but the misses shrink from about 20 pts to about 8 pts in the 20–60% bands, the Southwest (Arizona, New Mexico and their mountains), where v1 was 30–40 pts off, comes within about 10 pts, and every ecoregion and state now looks much the same: no region stands out the way the deserts and Southwest do for v1. That consistency matters most for the paper, because the regional comparisons in its model would no longer carry a region-specific measurement bias. Caveat: CHMv2 was trained partly on NAIP paired with USGS lidar, so some of these validation areas may overlap its training data and its scores here may be somewhat optimistic.</p>
 <p class="sub">Built with DINOv3 (CHMv2). Lidar: USGS 3DEP. Imagery: USDA NAIP via Microsoft Planetary Computer.</p>
 </main><div id="tip" role="tooltip"></div>
 <script>
