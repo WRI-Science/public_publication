@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canopy Measure Validation</title>
+<style>
+:root { --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --rule:#c3c2b7; --empty:#efeeea; --card:#ffffff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --rule:#4a4945; --empty:#2a2a28; --card:#222220; } }
+:root[data-theme="dark"] { --bg:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --rule:#4a4945; --empty:#2a2a28; --card:#222220; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+main { max-width:1180px; margin:0 auto; padding:28px 16px 64px; }
+h1 { font-size:26px; line-height:1.25; margin:0 0 6px; }
+h2 { font-size:19px; margin:40px 0 4px; }
+p { margin:8px 0; max-width:80ch; }
+.sub { color:var(--ink2); }
+.key { display:flex; flex-wrap:wrap; gap:18px; align-items:center; color:var(--ink2); font-size:13px; margin:14px 0 4px; }
+.ramp { display:inline-flex; vertical-align:middle; margin:0 6px; } .ramp span { width:16px; height:14px; }
+.scroll { overflow-x:auto; margin-top:10px; }
+table.hm { border-collapse:separate; border-spacing:2px; font-variant-numeric:tabular-nums; }
+table.hm thead th { font-size:12px; font-weight:500; color:var(--ink2); padding:2px 4px; white-space:nowrap; }
+table.hm th.lab { text-align:right; font-weight:400; padding-right:8px; white-space:nowrap; font-size:13.5px; }
+tr.all th.lab { font-weight:700; }
+tr.sec th { text-align:left; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink2); padding:14px 0 2px; border-bottom:1px solid var(--rule); }
+td.c { width:68px; min-width:68px; height:56px; text-align:center; border-radius:4px; line-height:1.15; cursor:default; }
+td.c b { display:block; font-size:15px; } td.c .tv { display:block; font-size:11px; } td.c .ms { display:block; font-size:11px; opacity:.85; }
+td.c.dark { color:#0b0b0b; } td.c.light { color:#ffffff; }
+td.c.empty { background:var(--empty); color:var(--ink2); }
+td.c:focus { outline:2px solid var(--ink); outline-offset:1px; }
+td.n { color:var(--ink2); font-size:12px; padding:0 8px; text-align:right; }
+td.st { font-size:13px; padding:0 8px; text-align:right; }
+.note { background:var(--card); border:1px solid var(--rule); border-radius:8px; padding:14px 18px; margin:18px 0; }
+table.rr { border-collapse:collapse; font-variant-numeric:tabular-nums; min-width:720px; }
+table.rr th, table.rr td { padding:8px 12px; border-bottom:1px solid var(--rule); text-align:right; vertical-align:top; }
+table.rr th:first-child { text-align:left; font-weight:400; } table.rr thead th { font-size:13px; color:var(--ink2); font-weight:600; }
+.ci { display:block; font-size:11px; color:var(--ink2); }
+#tip { position:fixed; pointer-events:none; background:var(--card); color:var(--ink); border:1px solid var(--rule); border-radius:6px; padding:8px 10px; font-size:12.5px; white-space:pre; box-shadow:0 4px 14px rgba(0,0,0,.18); display:none; z-index:10; }
+</style></head><body><main>
+<h1>How far off is the paper's canopy measure?</h1>
+<p class="sub">Meta HighResCanopyHeight v1 run on NAIP aerial imagery — the share of the 0–100 ft ring around each home with vegetation at least 1 m tall — checked against the best available truth.</p>
+
+<div class="note"><p><b>How to read the grids.</b> Each column is a 10% band of <i>true</i> canopy. Each cell is the homes whose true canopy falls in that band: the big number is what v1 reports for them on average, “vs” is their true average, and the small number is the miss (v1 minus truth, percentage points). A perfect measure would read inside its column's band, and every cell would be green. Hover or tap a cell for its numbers. Rows also give the average miss and how well v1 orders homes (r, and R² = share of the variation in true canopy that v1 explains).</p>
+<div class="key">Size of the miss: <span>0<span class="ramp"><span style="background:#1a9850"></span><span style="background:#60b85d"></span><span style="background:#a6d96a"></span><span style="background:#d2dc7a"></span><span style="background:#fee08b"></span><span style="background:#fec776"></span><span style="background:#fdae61"></span><span style="background:#f88e52"></span><span style="background:#f46d43"></span><span style="background:#e64e35"></span><span style="background:#d73027"></span></span>30+ pts</span><span><span class="ramp"><span style="background:var(--empty)"></span></span>fewer than 15 homes</span></div></div>
+
+<h2>A. Homes with airborne lidar — truth measured directly</h2>
+<p class="sub">16,880 homes in 11 western states. Truth: USGS 3DEP lidar flown within ±1 year of the NAIP imagery, measured on the identical ring with the same footprint cut-outs as the paper.</p>
+<div class="scroll"><table class="hm" id="a"><thead><tr><th></th><th>0–10%</th><th>10–20%</th><th>20–30%</th><th>30–40%</th><th>40–50%</th><th>50–60%</th><th>60–70%</th><th>70–80%</th><th>80–90%</th><th>90–100%</th><th class="n">homes</th><th>avg miss<br>(pts)</th><th>r</th><th>R²</th></tr></thead><tbody><tr class="sec"><th colspan="15">All</th></tr><tr class="all"><th class="lab">All homes</th><td class="c dark" style="background:#92d066" title="All homes · true canopy 0–10%
+3,138 homes
+v1 reports 0.2% on average
+true average 5.4%
+miss -5.1 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fed985" title="All homes · true canopy 10–20%
+3,181 homes
+v1 reports 1.9% on average
+true average 14.7%
+miss -12.8 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fca95f" title="All homes · true canopy 20–30%
+2,539 homes
+v1 reports 6.3% on average
+true average 24.7%
+miss -18.4 pts" tabindex="0"><b>6%</b><span class="tv">vs 25%</span><span class="ms">-18</span></td><td class="c dark" style="background:#f88b51" title="All homes · true canopy 30–40%
+2,029 homes
+v1 reports 13.6% on average
+true average 34.9%
+miss -21.3 pts" tabindex="0"><b>14%</b><span class="tv">vs 35%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fba25c" title="All homes · true canopy 40–50%
+1,747 homes
+v1 reports 25.7% on average
+true average 44.8%
+miss -19.1 pts" tabindex="0"><b>26%</b><span class="tv">vs 45%</span><span class="ms">-19</span></td><td class="c dark" style="background:#fecb7a" title="All homes · true canopy 50–60%
+1,498 homes
+v1 reports 40.4% on average
+true average 54.9%
+miss -14.5 pts" tabindex="0"><b>40%</b><span class="tv">vs 55%</span><span class="ms">-14</span></td><td class="c dark" style="background:#c4db75" title="All homes · true canopy 60–70%
+1,134 homes
+v1 reports 56.6% on average
+true average 64.7%
+miss -8.0 pts" tabindex="0"><b>57%</b><span class="tv">vs 65%</span><span class="ms">-8</span></td><td class="c dark" style="background:#269d52" title="All homes · true canopy 70–80%
+885 homes
+v1 reports 74.4% on average
+true average 74.9%
+miss -0.5 pts" tabindex="0"><b>74%</b><span class="tv">vs 75%</span><span class="ms">+0</span></td><td class="c dark" style="background:#70c060" title="All homes · true canopy 80–90%
+557 homes
+v1 reports 88.1% on average
+true average 84.4%
+miss +3.7 pts" tabindex="0"><b>88%</b><span class="tv">vs 84%</span><span class="ms">+4</span></td><td class="c dark" style="background:#55b45b" title="All homes · true canopy 90–100%
+172 homes
+v1 reports 95.4% on average
+true average 92.9%
+miss +2.5 pts" tabindex="0"><b>95%</b><span class="tv">vs 93%</span><span class="ms">+3</span></td><td class="n">16,880</td><td class="st"><b>-12</b></td><td class="st">0.89</td><td class="st">0.79</td></tr><tr class="sec"><th colspan="15">Ecoregion</th></tr><tr><th class="lab">Temperate Sierras (AZ/NM mtns)</th><td class="c dark" style="background:#b0da6e" title="Temperate Sierras (AZ/NM mtns) · true canopy 0–10%
+44 homes
+v1 reports 0.1% on average
+true average 6.8%
+miss -6.7 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fed17e" title="Temperate Sierras (AZ/NM mtns) · true canopy 10–20%
+80 homes
+v1 reports 1.4% on average
+true average 15.3%
+miss -13.8 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#f7844e" title="Temperate Sierras (AZ/NM mtns) · true canopy 20–30%
+84 homes
+v1 reports 2.9% on average
+true average 24.8%
+miss -21.9 pts" tabindex="0"><b>3%</b><span class="tv">vs 25%</span><span class="ms">-22</span></td><td class="c light" style="background:#de402e" title="Temperate Sierras (AZ/NM mtns) · true canopy 30–40%
+98 homes
+v1 reports 6.5% on average
+true average 34.9%
+miss -28.5 pts" tabindex="0"><b>6%</b><span class="tv">vs 35%</span><span class="ms">-28</span></td><td class="c light" style="background:#e24832" title="Temperate Sierras (AZ/NM mtns) · true canopy 40–50%
+92 homes
+v1 reports 17.5% on average
+true average 45.1%
+miss -27.6 pts" tabindex="0"><b>17%</b><span class="tv">vs 45%</span><span class="ms">-28</span></td><td class="c light" style="background:#d73027" title="Temperate Sierras (AZ/NM mtns) · true canopy 50–60%
+101 homes
+v1 reports 24.5% on average
+true average 55.5%
+miss -31.1 pts" tabindex="0"><b>24%</b><span class="tv">vs 56%</span><span class="ms">-31</span></td><td class="c dark" style="background:#f88950" title="Temperate Sierras (AZ/NM mtns) · true canopy 60–70%
+78 homes
+v1 reports 42.9% on average
+true average 64.4%
+miss -21.4 pts" tabindex="0"><b>43%</b><span class="tv">vs 64%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fecd7b" title="Temperate Sierras (AZ/NM mtns) · true canopy 70–80%
+32 homes
+v1 reports 59.2% on average
+true average 73.5%
+miss -14.3 pts" tabindex="0"><b>59%</b><span class="tv">vs 74%</span><span class="ms">-14</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">616</td><td class="st"><b>-22</b></td><td class="st">0.73</td><td class="st">0.53</td></tr><tr><th class="lab">Deserts</th><td class="c dark" style="background:#93d066" title="Deserts · true canopy 0–10%
+2,035 homes
+v1 reports 0.1% on average
+true average 5.3%
+miss -5.2 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fed784" title="Deserts · true canopy 10–20%
+1,910 homes
+v1 reports 1.5% on average
+true average 14.6%
+miss -13.1 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fa9a58" title="Deserts · true canopy 20–30%
+1,241 homes
+v1 reports 4.8% on average
+true average 24.6%
+miss -19.9 pts" tabindex="0"><b>5%</b><span class="tv">vs 25%</span><span class="ms">-20</span></td><td class="c light" style="background:#f36b42" title="Deserts · true canopy 30–40%
+753 homes
+v1 reports 10.4% on average
+true average 34.6%
+miss -24.2 pts" tabindex="0"><b>10%</b><span class="tv">vs 35%</span><span class="ms">-24</span></td><td class="c light" style="background:#ed5e3c" title="Deserts · true canopy 40–50%
+393 homes
+v1 reports 18.8% on average
+true average 44.3%
+miss -25.5 pts" tabindex="0"><b>19%</b><span class="tv">vs 44%</span><span class="ms">-26</span></td><td class="c dark" style="background:#fb9d59" title="Deserts · true canopy 50–60%
+204 homes
+v1 reports 34.6% on average
+true average 54.1%
+miss -19.6 pts" tabindex="0"><b>35%</b><span class="tv">vs 54%</span><span class="ms">-20</span></td><td class="c dark" style="background:#fed17f" title="Deserts · true canopy 60–70%
+96 homes
+v1 reports 50.9% on average
+true average 64.7%
+miss -13.7 pts" tabindex="0"><b>51%</b><span class="tv">vs 65%</span><span class="ms">-14</span></td><td class="c dark" style="background:#bddb73" title="Deserts · true canopy 70–80%
+41 homes
+v1 reports 66.0% on average
+true average 73.6%
+miss -7.6 pts" tabindex="0"><b>66%</b><span class="tv">vs 74%</span><span class="ms">-8</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">6,685</td><td class="st"><b>-14</b></td><td class="st">0.74</td><td class="st">0.55</td></tr><tr><th class="lab">Mediterranean California</th><td class="c dark" style="background:#a2d769" title="Mediterranean California · true canopy 0–10%
+104 homes
+v1 reports 0.3% on average
+true average 6.2%
+miss -5.8 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-6</span></td><td class="c dark" style="background:#fed884" title="Mediterranean California · true canopy 10–20%
+267 homes
+v1 reports 2.7% on average
+true average 15.6%
+miss -13.0 pts" tabindex="0"><b>3%</b><span class="tv">vs 16%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fdb466" title="Mediterranean California · true canopy 20–30%
+343 homes
+v1 reports 7.5% on average
+true average 24.8%
+miss -17.2 pts" tabindex="0"><b>8%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fdb668" title="Mediterranean California · true canopy 30–40%
+369 homes
+v1 reports 18.1% on average
+true average 35.1%
+miss -17.0 pts" tabindex="0"><b>18%</b><span class="tv">vs 35%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fec978" title="Mediterranean California · true canopy 40–50%
+409 homes
+v1 reports 30.2% on average
+true average 45.0%
+miss -14.8 pts" tabindex="0"><b>30%</b><span class="tv">vs 45%</span><span class="ms">-15</span></td><td class="c dark" style="background:#e7de82" title="Mediterranean California · true canopy 50–60%
+376 homes
+v1 reports 44.5% on average
+true average 55.0%
+miss -10.4 pts" tabindex="0"><b>45%</b><span class="tv">vs 55%</span><span class="ms">-10</span></td><td class="c dark" style="background:#73c161" title="Mediterranean California · true canopy 60–70%
+246 homes
+v1 reports 60.6% on average
+true average 64.5%
+miss -3.8 pts" tabindex="0"><b>61%</b><span class="tv">vs 64%</span><span class="ms">-4</span></td><td class="c dark" style="background:#4eb05a" title="Mediterranean California · true canopy 70–80%
+136 homes
+v1 reports 72.6% on average
+true average 74.8%
+miss -2.2 pts" tabindex="0"><b>73%</b><span class="tv">vs 75%</span><span class="ms">-2</span></td><td class="c dark" style="background:#51b25a" title="Mediterranean California · true canopy 80–90%
+68 homes
+v1 reports 86.2% on average
+true average 83.9%
+miss +2.4 pts" tabindex="0"><b>86%</b><span class="tv">vs 84%</span><span class="ms">+2</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">2,328</td><td class="st"><b>-12</b></td><td class="st">0.91</td><td class="st">0.82</td></tr><tr><th class="lab">NW forested mountains</th><td class="c dark" style="background:#92d066" title="NW forested mountains · true canopy 0–10%
+490 homes
+v1 reports 0.4% on average
+true average 5.5%
+miss -5.1 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#feda86" title="NW forested mountains · true canopy 10–20%
+579 homes
+v1 reports 2.2% on average
+true average 15.0%
+miss -12.7 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fdb365" title="NW forested mountains · true canopy 20–30%
+616 homes
+v1 reports 7.5% on average
+true average 24.9%
+miss -17.4 pts" tabindex="0"><b>8%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#f98f53" title="NW forested mountains · true canopy 30–40%
+635 homes
+v1 reports 14.2% on average
+true average 35.0%
+miss -20.9 pts" tabindex="0"><b>14%</b><span class="tv">vs 35%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fdae61" title="NW forested mountains · true canopy 40–50%
+691 homes
+v1 reports 27.0% on average
+true average 45.0%
+miss -18.0 pts" tabindex="0"><b>27%</b><span class="tv">vs 45%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fed380" title="NW forested mountains · true canopy 50–60%
+647 homes
+v1 reports 41.4% on average
+true average 55.0%
+miss -13.6 pts" tabindex="0"><b>41%</b><span class="tv">vs 55%</span><span class="ms">-14</span></td><td class="c dark" style="background:#c3db75" title="NW forested mountains · true canopy 60–70%
+576 homes
+v1 reports 56.8% on average
+true average 64.7%
+miss -8.0 pts" tabindex="0"><b>57%</b><span class="tv">vs 65%</span><span class="ms">-8</span></td><td class="c dark" style="background:#2a9f53" title="NW forested mountains · true canopy 70–80%
+509 homes
+v1 reports 75.6% on average
+true average 75.0%
+miss +0.7 pts" tabindex="0"><b>76%</b><span class="tv">vs 75%</span><span class="ms">+1</span></td><td class="c dark" style="background:#63ba5d" title="NW forested mountains · true canopy 80–90%
+289 homes
+v1 reports 87.3% on average
+true average 84.2%
+miss +3.1 pts" tabindex="0"><b>87%</b><span class="tv">vs 84%</span><span class="ms">+3</span></td><td class="c dark" style="background:#3ea957" title="NW forested mountains · true canopy 90–100%
+44 homes
+v1 reports 93.3% on average
+true average 91.8%
+miss +1.6 pts" tabindex="0"><b>93%</b><span class="tv">vs 92%</span><span class="ms">+2</span></td><td class="n">5,076</td><td class="st"><b>-11</b></td><td class="st">0.88</td><td class="st">0.77</td></tr><tr><th class="lab">Great Plains</th><td class="c dark" style="background:#86ca64" title="Great Plains · true canopy 0–10%
+454 homes
+v1 reports 0.4% on average
+true average 5.0%
+miss -4.6 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#f5df88" title="Great Plains · true canopy 10–20%
+297 homes
+v1 reports 3.0% on average
+true average 14.5%
+miss -11.4 pts" tabindex="0"><b>3%</b><span class="tv">vs 14%</span><span class="ms">-11</span></td><td class="c dark" style="background:#fec977" title="Great Plains · true canopy 20–30%
+186 homes
+v1 reports 9.5% on average
+true average 24.3%
+miss -14.8 pts" tabindex="0"><b>9%</b><span class="tv">vs 24%</span><span class="ms">-15</span></td><td class="c dark" style="background:#fed380" title="Great Plains · true canopy 30–40%
+75 homes
+v1 reports 20.7% on average
+true average 34.3%
+miss -13.6 pts" tabindex="0"><b>21%</b><span class="tv">vs 34%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fdc373" title="Great Plains · true canopy 40–50%
+33 homes
+v1 reports 29.1% on average
+true average 44.5%
+miss -15.4 pts" tabindex="0"><b>29%</b><span class="tv">vs 45%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f9e089" title="Great Plains · true canopy 50–60%
+21 homes
+v1 reports 42.6% on average
+true average 54.3%
+miss -11.7 pts" tabindex="0"><b>43%</b><span class="tv">vs 54%</span><span class="ms">-12</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,081</td><td class="st"><b>-9</b></td><td class="st">0.85</td><td class="st">0.72</td></tr><tr><th class="lab">Marine west coast forest</th><td class="c empty" title="fewer than 15 homes">·</td><td class="c dark" style="background:#f0df86" title="Marine west coast forest · true canopy 10–20%
+48 homes
+v1 reports 3.6% on average
+true average 14.7%
+miss -11.1 pts" tabindex="0"><b>4%</b><span class="tv">vs 15%</span><span class="ms">-11</span></td><td class="c dark" style="background:#fed17e" title="Marine west coast forest · true canopy 20–30%
+69 homes
+v1 reports 11.6% on average
+true average 25.5%
+miss -13.9 pts" tabindex="0"><b>12%</b><span class="tv">vs 25%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fdbb6c" title="Marine west coast forest · true canopy 30–40%
+99 homes
+v1 reports 18.8% on average
+true average 35.2%
+miss -16.4 pts" tabindex="0"><b>19%</b><span class="tv">vs 35%</span><span class="ms">-16</span></td><td class="c dark" style="background:#fed17e" title="Marine west coast forest · true canopy 40–50%
+129 homes
+v1 reports 31.2% on average
+true average 45.0%
+miss -13.8 pts" tabindex="0"><b>31%</b><span class="tv">vs 45%</span><span class="ms">-14</span></td><td class="c dark" style="background:#ebdf84" title="Marine west coast forest · true canopy 50–60%
+149 homes
+v1 reports 44.5% on average
+true average 55.2%
+miss -10.7 pts" tabindex="0"><b>45%</b><span class="tv">vs 55%</span><span class="ms">-11</span></td><td class="c dark" style="background:#7fc763" title="Marine west coast forest · true canopy 60–70%
+126 homes
+v1 reports 60.5% on average
+true average 64.9%
+miss -4.3 pts" tabindex="0"><b>61%</b><span class="tv">vs 65%</span><span class="ms">-4</span></td><td class="c dark" style="background:#45ac58" title="Marine west coast forest · true canopy 70–80%
+166 homes
+v1 reports 76.9% on average
+true average 75.1%
+miss +1.8 pts" tabindex="0"><b>77%</b><span class="tv">vs 75%</span><span class="ms">+2</span></td><td class="c dark" style="background:#a5d86a" title="Marine west coast forest · true canopy 80–90%
+185 homes
+v1 reports 91.0% on average
+true average 85.0%
+miss +5.9 pts" tabindex="0"><b>91%</b><span class="tv">vs 85%</span><span class="ms">+6</span></td><td class="c dark" style="background:#65bb5e" title="Marine west coast forest · true canopy 90–100%
+112 homes
+v1 reports 96.7% on average
+true average 93.4%
+miss +3.2 pts" tabindex="0"><b>97%</b><span class="tv">vs 93%</span><span class="ms">+3</span></td><td class="n">1,094</td><td class="st"><b>-5</b></td><td class="st">0.92</td><td class="st">0.84</td></tr><tr class="sec"><th colspan="15">State</th></tr><tr><th class="lab">AZ</th><td class="c dark" style="background:#a3d869" title="AZ · true canopy 0–10%
+369 homes
+v1 reports 0.1% on average
+true average 6.0%
+miss -5.9 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-6</span></td><td class="c dark" style="background:#fecf7c" title="AZ · true canopy 10–20%
+466 homes
+v1 reports 0.7% on average
+true average 14.8%
+miss -14.1 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#f67e4b" title="AZ · true canopy 20–30%
+353 homes
+v1 reports 2.1% on average
+true average 24.5%
+miss -22.5 pts" tabindex="0"><b>2%</b><span class="tv">vs 25%</span><span class="ms">-22</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 30–40%
+259 homes
+v1 reports 4.3% on average
+true average 34.8%
+miss -30.4 pts" tabindex="0"><b>4%</b><span class="tv">vs 35%</span><span class="ms">-30</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 40–50%
+150 homes
+v1 reports 11.7% on average
+true average 44.4%
+miss -32.7 pts" tabindex="0"><b>12%</b><span class="tv">vs 44%</span><span class="ms">-33</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 50–60%
+92 homes
+v1 reports 24.7% on average
+true average 54.9%
+miss -30.2 pts" tabindex="0"><b>25%</b><span class="tv">vs 55%</span><span class="ms">-30</span></td><td class="c dark" style="background:#fdbe6e" title="AZ · true canopy 60–70%
+61 homes
+v1 reports 48.4% on average
+true average 64.5%
+miss -16.1 pts" tabindex="0"><b>48%</b><span class="tv">vs 64%</span><span class="ms">-16</span></td><td class="c dark" style="background:#c5db76" title="AZ · true canopy 70–80%
+23 homes
+v1 reports 65.2% on average
+true average 73.4%
+miss -8.1 pts" tabindex="0"><b>65%</b><span class="tv">vs 73%</span><span class="ms">-8</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,778</td><td class="st"><b>-19</b></td><td class="st">0.71</td><td class="st">0.50</td></tr><tr><th class="lab">NM</th><td class="c dark" style="background:#9bd468" title="NM · true canopy 0–10%
+342 homes
+v1 reports 0.1% on average
+true average 5.6%
+miss -5.5 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-6</span></td><td class="c dark" style="background:#fed784" title="NM · true canopy 10–20%
+280 homes
+v1 reports 0.9% on average
+true average 14.0%
+miss -13.0 pts" tabindex="0"><b>1%</b><span class="tv">vs 14%</span><span class="ms">-13</span></td><td class="c dark" style="background:#f99154" title="NM · true canopy 20–30%
+129 homes
+v1 reports 3.6% on average
+true average 24.3%
+miss -20.7 pts" tabindex="0"><b>4%</b><span class="tv">vs 24%</span><span class="ms">-21</span></td><td class="c light" style="background:#e34832" title="NM · true canopy 30–40%
+49 homes
+v1 reports 6.8% on average
+true average 34.4%
+miss -27.6 pts" tabindex="0"><b>7%</b><span class="tv">vs 34%</span><span class="ms">-28</span></td><td class="c light" style="background:#da362a" title="NM · true canopy 40–50%
+34 homes
+v1 reports 15.0% on average
+true average 44.4%
+miss -29.4 pts" tabindex="0"><b>15%</b><span class="tv">vs 44%</span><span class="ms">-29</span></td><td class="c light" style="background:#d73027" title="NM · true canopy 50–60%
+31 homes
+v1 reports 17.0% on average
+true average 55.6%
+miss -38.6 pts" tabindex="0"><b>17%</b><span class="tv">vs 56%</span><span class="ms">-39</span></td><td class="c light" style="background:#d73027" title="NM · true canopy 60–70%
+20 homes
+v1 reports 22.6% on average
+true average 63.9%
+miss -41.3 pts" tabindex="0"><b>23%</b><span class="tv">vs 64%</span><span class="ms">-41</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">898</td><td class="st"><b>-14</b></td><td class="st">0.61</td><td class="st">0.37</td></tr><tr><th class="lab">CO</th><td class="c dark" style="background:#92d066" title="CO · true canopy 0–10%
+272 homes
+v1 reports 0.5% on average
+true average 5.6%
+miss -5.1 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fedd88" title="CO · true canopy 10–20%
+223 homes
+v1 reports 2.2% on average
+true average 14.6%
+miss -12.4 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdb769" title="CO · true canopy 20–30%
+177 homes
+v1 reports 7.4% on average
+true average 24.3%
+miss -16.9 pts" tabindex="0"><b>7%</b><span class="tv">vs 24%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fb9e5a" title="CO · true canopy 30–40%
+124 homes
+v1 reports 15.2% on average
+true average 34.6%
+miss -19.4 pts" tabindex="0"><b>15%</b><span class="tv">vs 35%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f47044" title="CO · true canopy 40–50%
+86 homes
+v1 reports 21.0% on average
+true average 44.8%
+miss -23.8 pts" tabindex="0"><b>21%</b><span class="tv">vs 45%</span><span class="ms">-24</span></td><td class="c dark" style="background:#f98f53" title="CO · true canopy 50–60%
+35 homes
+v1 reports 32.8% on average
+true average 53.6%
+miss -20.8 pts" tabindex="0"><b>33%</b><span class="tv">vs 54%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fed985" title="CO · true canopy 60–70%
+29 homes
+v1 reports 52.0% on average
+true average 64.8%
+miss -12.9 pts" tabindex="0"><b>52%</b><span class="tv">vs 65%</span><span class="ms">-13</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">962</td><td class="st"><b>-13</b></td><td class="st">0.78</td><td class="st">0.61</td></tr><tr><th class="lab">UT</th><td class="c dark" style="background:#8acc65" title="UT · true canopy 0–10%
+275 homes
+v1 reports 0.2% on average
+true average 5.0%
+miss -4.8 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fde08b" title="UT · true canopy 10–20%
+207 homes
+v1 reports 2.6% on average
+true average 14.6%
+miss -11.9 pts" tabindex="0"><b>3%</b><span class="tv">vs 15%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdb96b" title="UT · true canopy 20–30%
+111 homes
+v1 reports 8.1% on average
+true average 24.7%
+miss -16.6 pts" tabindex="0"><b>8%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fb9e5a" title="UT · true canopy 30–40%
+81 homes
+v1 reports 14.7% on average
+true average 34.2%
+miss -19.5 pts" tabindex="0"><b>15%</b><span class="tv">vs 34%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f7834d" title="UT · true canopy 40–50%
+46 homes
+v1 reports 22.9% on average
+true average 44.9%
+miss -22.0 pts" tabindex="0"><b>23%</b><span class="tv">vs 45%</span><span class="ms">-22</span></td><td class="c light" style="background:#e14531" title="UT · true canopy 50–60%
+38 homes
+v1 reports 27.3% on average
+true average 55.3%
+miss -27.9 pts" tabindex="0"><b>27%</b><span class="tv">vs 55%</span><span class="ms">-28</span></td><td class="c light" style="background:#ea583a" title="UT · true canopy 60–70%
+39 homes
+v1 reports 37.9% on average
+true average 63.9%
+miss -26.0 pts" tabindex="0"><b>38%</b><span class="tv">vs 64%</span><span class="ms">-26</span></td><td class="c dark" style="background:#c4db75" title="UT · true canopy 70–80%
+18 homes
+v1 reports 67.1% on average
+true average 75.2%
+miss -8.0 pts" tabindex="0"><b>67%</b><span class="tv">vs 75%</span><span class="ms">-8</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">815</td><td class="st"><b>-13</b></td><td class="st">0.84</td><td class="st">0.71</td></tr><tr><th class="lab">OR</th><td class="c dark" style="background:#82c863" title="OR · true canopy 0–10%
+84 homes
+v1 reports 0.4% on average
+true average 4.8%
+miss -4.5 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-4</span></td><td class="c dark" style="background:#fee08b" title="OR · true canopy 10–20%
+96 homes
+v1 reports 3.3% on average
+true average 15.3%
+miss -12.0 pts" tabindex="0"><b>3%</b><span class="tv">vs 15%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdc574" title="OR · true canopy 20–30%
+97 homes
+v1 reports 9.2% on average
+true average 24.5%
+miss -15.3 pts" tabindex="0"><b>9%</b><span class="tv">vs 24%</span><span class="ms">-15</span></td><td class="c dark" style="background:#fca95e" title="OR · true canopy 30–40%
+51 homes
+v1 reports 16.0% on average
+true average 34.5%
+miss -18.5 pts" tabindex="0"><b>16%</b><span class="tv">vs 35%</span><span class="ms">-19</span></td><td class="c dark" style="background:#fdc372" title="OR · true canopy 40–50%
+65 homes
+v1 reports 29.1% on average
+true average 44.7%
+miss -15.5 pts" tabindex="0"><b>29%</b><span class="tv">vs 45%</span><span class="ms">-16</span></td><td class="c dark" style="background:#fecc7a" title="OR · true canopy 50–60%
+38 homes
+v1 reports 40.1% on average
+true average 54.5%
+miss -14.4 pts" tabindex="0"><b>40%</b><span class="tv">vs 55%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fed884" title="OR · true canopy 60–70%
+32 homes
+v1 reports 51.8% on average
+true average 64.8%
+miss -13.0 pts" tabindex="0"><b>52%</b><span class="tv">vs 65%</span><span class="ms">-13</span></td><td class="c dark" style="background:#c7dc77" title="OR · true canopy 70–80%
+27 homes
+v1 reports 66.9% on average
+true average 75.2%
+miss -8.3 pts" tabindex="0"><b>67%</b><span class="tv">vs 75%</span><span class="ms">-8</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">506</td><td class="st"><b>-12</b></td><td class="st">0.90</td><td class="st">0.80</td></tr><tr><th class="lab">NV</th><td class="c dark" style="background:#95d167" title="NV · true canopy 0–10%
+250 homes
+v1 reports 0.2% on average
+true average 5.5%
+miss -5.3 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fed884" title="NV · true canopy 10–20%
+255 homes
+v1 reports 1.5% on average
+true average 14.5%
+miss -13.0 pts" tabindex="0"><b>1%</b><span class="tv">vs 14%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fca65e" title="NV · true canopy 20–30%
+118 homes
+v1 reports 5.5% on average
+true average 24.2%
+miss -18.7 pts" tabindex="0"><b>6%</b><span class="tv">vs 24%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f99153" title="NV · true canopy 30–40%
+54 homes
+v1 reports 13.3% on average
+true average 34.0%
+miss -20.7 pts" tabindex="0"><b>13%</b><span class="tv">vs 34%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fca95f" title="NV · true canopy 40–50%
+24 homes
+v1 reports 26.2% on average
+true average 44.7%
+miss -18.5 pts" tabindex="0"><b>26%</b><span class="tv">vs 45%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fed380" title="NV · true canopy 50–60%
+16 homes
+v1 reports 38.9% on average
+true average 52.5%
+miss -13.6 pts" tabindex="0"><b>39%</b><span class="tv">vs 53%</span><span class="ms">-14</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">720</td><td class="st"><b>-12</b></td><td class="st">0.74</td><td class="st">0.54</td></tr><tr><th class="lab">ID</th><td class="c dark" style="background:#8ccd65" title="ID · true canopy 0–10%
+308 homes
+v1 reports 0.3% on average
+true average 5.2%
+miss -4.9 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fedb87" title="ID · true canopy 10–20%
+320 homes
+v1 reports 2.3% on average
+true average 14.9%
+miss -12.6 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fdba6b" title="ID · true canopy 20–30%
+291 homes
+v1 reports 8.3% on average
+true average 24.9%
+miss -16.5 pts" tabindex="0"><b>8%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fdb668" title="ID · true canopy 30–40%
+239 homes
+v1 reports 18.2% on average
+true average 35.2%
+miss -17.0 pts" tabindex="0"><b>18%</b><span class="tv">vs 35%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fecb7a" title="ID · true canopy 40–50%
+177 homes
+v1 reports 30.3% on average
+true average 44.8%
+miss -14.5 pts" tabindex="0"><b>30%</b><span class="tv">vs 45%</span><span class="ms">-14</span></td><td class="c dark" style="background:#cedc79" title="ID · true canopy 50–60%
+153 homes
+v1 reports 46.0% on average
+true average 54.8%
+miss -8.7 pts" tabindex="0"><b>46%</b><span class="tv">vs 55%</span><span class="ms">-9</span></td><td class="c dark" style="background:#bddb72" title="ID · true canopy 60–70%
+99 homes
+v1 reports 56.7% on average
+true average 64.2%
+miss -7.5 pts" tabindex="0"><b>57%</b><span class="tv">vs 64%</span><span class="ms">-8</span></td><td class="c dark" style="background:#2da153" title="ID · true canopy 70–80%
+56 homes
+v1 reports 74.4% on average
+true average 75.2%
+miss -0.8 pts" tabindex="0"><b>74%</b><span class="tv">vs 75%</span><span class="ms">-1</span></td><td class="c dark" style="background:#e6de82" title="ID · true canopy 80–90%
+31 homes
+v1 reports 74.3% on average
+true average 84.7%
+miss -10.4 pts" tabindex="0"><b>74%</b><span class="tv">vs 85%</span><span class="ms">-10</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,680</td><td class="st"><b>-12</b></td><td class="st">0.89</td><td class="st">0.80</td></tr><tr><th class="lab">WA</th><td class="c dark" style="background:#94d167" title="WA · true canopy 0–10%
+19 homes
+v1 reports 0.4% on average
+true average 5.6%
+miss -5.2 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-5</span></td><td class="c dark" style="background:#f7df88" title="WA · true canopy 10–20%
+35 homes
+v1 reports 3.6% on average
+true average 15.1%
+miss -11.5 pts" tabindex="0"><b>4%</b><span class="tv">vs 15%</span><span class="ms">-11</span></td><td class="c dark" style="background:#fdb668" title="WA · true canopy 20–30%
+27 homes
+v1 reports 8.5% on average
+true average 25.6%
+miss -17.1 pts" tabindex="0"><b>9%</b><span class="tv">vs 26%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fca75e" title="WA · true canopy 30–40%
+28 homes
+v1 reports 17.0% on average
+true average 35.7%
+miss -18.6 pts" tabindex="0"><b>17%</b><span class="tv">vs 36%</span><span class="ms">-19</span></td><td class="c dark" style="background:#efdf85" title="WA · true canopy 40–50%
+26 homes
+v1 reports 33.2% on average
+true average 44.1%
+miss -11.0 pts" tabindex="0"><b>33%</b><span class="tv">vs 44%</span><span class="ms">-11</span></td><td class="c dark" style="background:#61b95d" title="WA · true canopy 50–60%
+15 homes
+v1 reports 51.2% on average
+true average 54.2%
+miss -3.1 pts" tabindex="0"><b>51%</b><span class="tv">vs 54%</span><span class="ms">-3</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">163</td><td class="st"><b>-11</b></td><td class="st">0.86</td><td class="st">0.74</td></tr><tr><th class="lab">CA</th><td class="c dark" style="background:#9cd468" title="CA · true canopy 0–10%
+591 homes
+v1 reports 0.2% on average
+true average 5.8%
+miss -5.6 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-6</span></td><td class="c dark" style="background:#fed884" title="CA · true canopy 10–20%
+965 homes
+v1 reports 2.1% on average
+true average 15.0%
+miss -12.9 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fca95e" title="CA · true canopy 20–30%
+1,051 homes
+v1 reports 6.4% on average
+true average 24.9%
+miss -18.5 pts" tabindex="0"><b>6%</b><span class="tv">vs 25%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f99053" title="CA · true canopy 30–40%
+1,055 homes
+v1 reports 14.2% on average
+true average 34.9%
+miss -20.7 pts" tabindex="0"><b>14%</b><span class="tv">vs 35%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fdb063" title="CA · true canopy 40–50%
+1,066 homes
+v1 reports 27.2% on average
+true average 44.9%
+miss -17.8 pts" tabindex="0"><b>27%</b><span class="tv">vs 45%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fedb86" title="CA · true canopy 50–60%
+1,040 homes
+v1 reports 42.4% on average
+true average 55.1%
+miss -12.6 pts" tabindex="0"><b>42%</b><span class="tv">vs 55%</span><span class="ms">-13</span></td><td class="c dark" style="background:#9bd468" title="CA · true canopy 60–70%
+819 homes
+v1 reports 59.2% on average
+true average 64.8%
+miss -5.5 pts" tabindex="0"><b>59%</b><span class="tv">vs 65%</span><span class="ms">-6</span></td><td class="c dark" style="background:#2ea254" title="CA · true canopy 70–80%
+731 homes
+v1 reports 75.8% on average
+true average 74.9%
+miss +0.9 pts" tabindex="0"><b>76%</b><span class="tv">vs 75%</span><span class="ms">+1</span></td><td class="c dark" style="background:#8dcd65" title="CA · true canopy 80–90%
+503 homes
+v1 reports 89.3% on average
+true average 84.4%
+miss +4.9 pts" tabindex="0"><b>89%</b><span class="tv">vs 84%</span><span class="ms">+5</span></td><td class="c dark" style="background:#5eb85d" title="CA · true canopy 90–100%
+162 homes
+v1 reports 95.8% on average
+true average 92.9%
+miss +2.9 pts" tabindex="0"><b>96%</b><span class="tv">vs 93%</span><span class="ms">+3</span></td><td class="n">7,983</td><td class="st"><b>-11</b></td><td class="st">0.90</td><td class="st">0.81</td></tr><tr><th class="lab">MT</th><td class="c dark" style="background:#8ece66" title="MT · true canopy 0–10%
+236 homes
+v1 reports 0.4% on average
+true average 5.4%
+miss -5.0 pts" tabindex="0"><b>0%</b><span class="tv">vs 5%</span><span class="ms">-5</span></td><td class="c dark" style="background:#fae089" title="MT · true canopy 10–20%
+191 homes
+v1 reports 2.9% on average
+true average 14.6%
+miss -11.7 pts" tabindex="0"><b>3%</b><span class="tv">vs 15%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdc272" title="MT · true canopy 20–30%
+95 homes
+v1 reports 8.7% on average
+true average 24.3%
+miss -15.6 pts" tabindex="0"><b>9%</b><span class="tv">vs 24%</span><span class="ms">-16</span></td><td class="c dark" style="background:#fdc373" title="MT · true canopy 30–40%
+53 homes
+v1 reports 19.4% on average
+true average 34.8%
+miss -15.4 pts" tabindex="0"><b>19%</b><span class="tv">vs 35%</span><span class="ms">-15</span></td><td class="c dark" style="background:#fed07d" title="MT · true canopy 40–50%
+46 homes
+v1 reports 31.5% on average
+true average 45.5%
+miss -13.9 pts" tabindex="0"><b>32%</b><span class="tv">vs 45%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fed985" title="MT · true canopy 50–60%
+20 homes
+v1 reports 40.3% on average
+true average 53.2%
+miss -12.9 pts" tabindex="0"><b>40%</b><span class="tv">vs 53%</span><span class="ms">-13</span></td><td class="c dark" style="background:#7bc562" title="MT · true canopy 60–70%
+16 homes
+v1 reports 59.5% on average
+true average 63.7%
+miss -4.2 pts" tabindex="0"><b>60%</b><span class="tv">vs 64%</span><span class="ms">-4</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">657</td><td class="st"><b>-10</b></td><td class="st">0.84</td><td class="st">0.71</td></tr><tr><th class="lab">WY</th><td class="c dark" style="background:#77c361" title="WY · true canopy 0–10%
+392 homes
+v1 reports 0.1% on average
+true average 4.1%
+miss -4.0 pts" tabindex="0"><b>0%</b><span class="tv">vs 4%</span><span class="ms">-4</span></td><td class="c dark" style="background:#fedf8a" title="WY · true canopy 10–20%
+143 homes
+v1 reports 2.0% on average
+true average 14.2%
+miss -12.1 pts" tabindex="0"><b>2%</b><span class="tv">vs 14%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdba6b" title="WY · true canopy 20–30%
+90 homes
+v1 reports 8.5% on average
+true average 25.1%
+miss -16.6 pts" tabindex="0"><b>9%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fdbc6d" title="WY · true canopy 30–40%
+36 homes
+v1 reports 18.5% on average
+true average 34.8%
+miss -16.3 pts" tabindex="0"><b>19%</b><span class="tv">vs 35%</span><span class="ms">-16</span></td><td class="c dark" style="background:#fba05a" title="WY · true canopy 40–50%
+27 homes
+v1 reports 24.8% on average
+true average 44.2%
+miss -19.3 pts" tabindex="0"><b>25%</b><span class="tv">vs 44%</span><span class="ms">-19</span></td><td class="c dark" style="background:#fdb365" title="WY · true canopy 50–60%
+20 homes
+v1 reports 36.0% on average
+true average 53.4%
+miss -17.4 pts" tabindex="0"><b>36%</b><span class="tv">vs 53%</span><span class="ms">-17</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">718</td><td class="st"><b>-9</b></td><td class="st">0.86</td><td class="st">0.73</td></tr></tbody></table></div>
+
+<h2>B. The paper's fire-exposed homes — best estimate of truth</h2>
+<p class="sub">192,853 homes on the paper's Carlson fires (11 western states shown). There is no lidar here, so truth is Meta's newer CHMv2 model run on the paper's own pre-fire NAIP scenes, grid, cut-outs and NDVI rule, then calibrated to the lidar homes within each ecoregion. CHMv2 tracks lidar at r = 0.96 (v1: 0.89).</p>
+<div class="scroll"><table class="hm" id="b"><thead><tr><th></th><th>0–10%</th><th>10–20%</th><th>20–30%</th><th>30–40%</th><th>40–50%</th><th>50–60%</th><th>60–70%</th><th>70–80%</th><th>80–90%</th><th>90–100%</th><th class="n">homes</th><th>avg miss<br>(pts)</th><th>r</th><th>R²</th></tr></thead><tbody><tr class="sec"><th colspan="15">All</th></tr><tr class="all"><th class="lab">All homes</th><td class="c dark" style="background:#b8da71" title="All homes · true canopy 0–10%
+9,157 homes
+v1 reports 0.1% on average
+true average 7.3%
+miss -7.2 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fed27f" title="All homes · true canopy 10–20%
+22,950 homes
+v1 reports 1.6% on average
+true average 15.2%
+miss -13.7 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fa9b58" title="All homes · true canopy 20–30%
+28,729 homes
+v1 reports 5.3% on average
+true average 25.1%
+miss -19.8 pts" tabindex="0"><b>5%</b><span class="tv">vs 25%</span><span class="ms">-20</span></td><td class="c dark" style="background:#f57547" title="All homes · true canopy 30–40%
+33,619 homes
+v1 reports 12.0% on average
+true average 35.2%
+miss -23.2 pts" tabindex="0"><b>12%</b><span class="tv">vs 35%</span><span class="ms">-23</span></td><td class="c dark" style="background:#f67848" title="All homes · true canopy 40–50%
+24,094 homes
+v1 reports 22.3% on average
+true average 45.2%
+miss -23.0 pts" tabindex="0"><b>22%</b><span class="tv">vs 45%</span><span class="ms">-23</span></td><td class="c dark" style="background:#fa9957" title="All homes · true canopy 50–60%
+23,351 homes
+v1 reports 34.7% on average
+true average 54.6%
+miss -19.9 pts" tabindex="0"><b>35%</b><span class="tv">vs 55%</span><span class="ms">-20</span></td><td class="c dark" style="background:#fdc575" title="All homes · true canopy 60–70%
+21,210 homes
+v1 reports 49.5% on average
+true average 64.7%
+miss -15.2 pts" tabindex="0"><b>50%</b><span class="tv">vs 65%</span><span class="ms">-15</span></td><td class="c dark" style="background:#e0de80" title="All homes · true canopy 70–80%
+18,000 homes
+v1 reports 65.1% on average
+true average 75.0%
+miss -9.9 pts" tabindex="0"><b>65%</b><span class="tv">vs 75%</span><span class="ms">-10</span></td><td class="c dark" style="background:#79c462" title="All homes · true canopy 80–90%
+9,551 homes
+v1 reports 80.0% on average
+true average 84.1%
+miss -4.1 pts" tabindex="0"><b>80%</b><span class="tv">vs 84%</span><span class="ms">-4</span></td><td class="c dark" style="background:#56b45b" title="All homes · true canopy 90–100%
+2,192 homes
+v1 reports 90.9% on average
+true average 93.5%
+miss -2.6 pts" tabindex="0"><b>91%</b><span class="tv">vs 94%</span><span class="ms">-3</span></td><td class="n">192,853</td><td class="st"><b>-17</b></td><td class="st">0.90</td><td class="st">0.81</td></tr><tr class="sec"><th colspan="15">Paper ecoregion</th></tr><tr><th class="lab">Mixed/Mediterranean</th><td class="c dark" style="background:#d0dc7a" title="Mixed/Mediterranean · true canopy 0–10%
+1,193 homes
+v1 reports 0.0% on average
+true average 8.9%
+miss -8.8 pts" tabindex="0"><b>0%</b><span class="tv">vs 9%</span><span class="ms">-9</span></td><td class="c dark" style="background:#fec877" title="Mixed/Mediterranean · true canopy 10–20%
+10,470 homes
+v1 reports 1.0% on average
+true average 15.8%
+miss -14.8 pts" tabindex="0"><b>1%</b><span class="tv">vs 16%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f88c51" title="Mixed/Mediterranean · true canopy 20–30%
+16,276 homes
+v1 reports 3.9% on average
+true average 25.1%
+miss -21.1 pts" tabindex="0"><b>4%</b><span class="tv">vs 25%</span><span class="ms">-21</span></td><td class="c light" style="background:#f0643f" title="Mixed/Mediterranean · true canopy 30–40%
+21,019 homes
+v1 reports 10.4% on average
+true average 35.3%
+miss -24.9 pts" tabindex="0"><b>10%</b><span class="tv">vs 35%</span><span class="ms">-25</span></td><td class="c light" style="background:#f06540" title="Mixed/Mediterranean · true canopy 40–50%
+14,197 homes
+v1 reports 20.6% on average
+true average 45.3%
+miss -24.7 pts" tabindex="0"><b>21%</b><span class="tv">vs 45%</span><span class="ms">-25</span></td><td class="c dark" style="background:#f88b51" title="Mixed/Mediterranean · true canopy 50–60%
+14,403 homes
+v1 reports 33.4% on average
+true average 54.6%
+miss -21.2 pts" tabindex="0"><b>33%</b><span class="tv">vs 55%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fdbf6f" title="Mixed/Mediterranean · true canopy 60–70%
+12,400 homes
+v1 reports 48.8% on average
+true average 64.7%
+miss -16.0 pts" tabindex="0"><b>49%</b><span class="tv">vs 65%</span><span class="ms">-16</span></td><td class="c dark" style="background:#e9de83" title="Mixed/Mediterranean · true canopy 70–80%
+10,339 homes
+v1 reports 64.3% on average
+true average 74.9%
+miss -10.6 pts" tabindex="0"><b>64%</b><span class="tv">vs 75%</span><span class="ms">-11</span></td><td class="c dark" style="background:#98d267" title="Mixed/Mediterranean · true canopy 80–90%
+5,061 homes
+v1 reports 78.7% on average
+true average 84.1%
+miss -5.4 pts" tabindex="0"><b>79%</b><span class="tv">vs 84%</span><span class="ms">-5</span></td><td class="c dark" style="background:#58b55c" title="Mixed/Mediterranean · true canopy 90–100%
+1,175 homes
+v1 reports 90.6% on average
+true average 93.2%
+miss -2.7 pts" tabindex="0"><b>91%</b><span class="tv">vs 93%</span><span class="ms">-3</span></td><td class="n">106,533</td><td class="st"><b>-19</b></td><td class="st">0.90</td><td class="st">0.80</td></tr><tr><th class="lab">Forest</th><td class="c dark" style="background:#cedc79" title="Forest · true canopy 0–10%
+1,474 homes
+v1 reports 0.0% on average
+true average 8.8%
+miss -8.7 pts" tabindex="0"><b>0%</b><span class="tv">vs 9%</span><span class="ms">-9</span></td><td class="c dark" style="background:#fed380" title="Forest · true canopy 10–20%
+5,217 homes
+v1 reports 1.4% on average
+true average 15.0%
+miss -13.6 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fba05a" title="Forest · true canopy 20–30%
+6,506 homes
+v1 reports 6.0% on average
+true average 25.3%
+miss -19.3 pts" tabindex="0"><b>6%</b><span class="tv">vs 25%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f7864e" title="Forest · true canopy 30–40%
+8,221 homes
+v1 reports 13.5% on average
+true average 35.2%
+miss -21.7 pts" tabindex="0"><b>13%</b><span class="tv">vs 35%</span><span class="ms">-22</span></td><td class="c dark" style="background:#f88950" title="Forest · true canopy 40–50%
+7,881 homes
+v1 reports 23.8% on average
+true average 45.2%
+miss -21.4 pts" tabindex="0"><b>24%</b><span class="tv">vs 45%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fca75e" title="Forest · true canopy 50–60%
+7,760 homes
+v1 reports 35.9% on average
+true average 54.6%
+miss -18.7 pts" tabindex="0"><b>36%</b><span class="tv">vs 55%</span><span class="ms">-19</span></td><td class="c dark" style="background:#feca79" title="Forest · true canopy 60–70%
+8,069 homes
+v1 reports 50.1% on average
+true average 64.7%
+miss -14.6 pts" tabindex="0"><b>50%</b><span class="tv">vs 65%</span><span class="ms">-15</span></td><td class="c dark" style="background:#d5dd7b" title="Forest · true canopy 70–80%
+7,217 homes
+v1 reports 66.0% on average
+true average 75.2%
+miss -9.2 pts" tabindex="0"><b>66%</b><span class="tv">vs 75%</span><span class="ms">-9</span></td><td class="c dark" style="background:#56b45b" title="Forest · true canopy 80–90%
+4,345 homes
+v1 reports 81.4% on average
+true average 84.0%
+miss -2.6 pts" tabindex="0"><b>81%</b><span class="tv">vs 84%</span><span class="ms">-3</span></td><td class="c dark" style="background:#53b25b" title="Forest · true canopy 90–100%
+999 homes
+v1 reports 91.4% on average
+true average 93.9%
+miss -2.4 pts" tabindex="0"><b>91%</b><span class="tv">vs 94%</span><span class="ms">-2</span></td><td class="n">57,689</td><td class="st"><b>-16</b></td><td class="st">0.91</td><td class="st">0.83</td></tr><tr><th class="lab">Grass/Shrub/Desert</th><td class="c dark" style="background:#afda6d" title="Grass/Shrub/Desert · true canopy 0–10%
+6,490 homes
+v1 reports 0.1% on average
+true average 6.7%
+miss -6.6 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fee08b" title="Grass/Shrub/Desert · true canopy 10–20%
+7,263 homes
+v1 reports 2.6% on average
+true average 14.6%
+miss -12.0 pts" tabindex="0"><b>3%</b><span class="tv">vs 15%</span><span class="ms">-12</span></td><td class="c dark" style="background:#fdba6b" title="Grass/Shrub/Desert · true canopy 20–30%
+5,947 homes
+v1 reports 8.2% on average
+true average 24.8%
+miss -16.5 pts" tabindex="0"><b>8%</b><span class="tv">vs 25%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fdad60" title="Grass/Shrub/Desert · true canopy 30–40%
+4,379 homes
+v1 reports 16.4% on average
+true average 34.5%
+miss -18.1 pts" tabindex="0"><b>16%</b><span class="tv">vs 34%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fdbd6d" title="Grass/Shrub/Desert · true canopy 40–50%
+2,016 homes
+v1 reports 28.3% on average
+true average 44.6%
+miss -16.3 pts" tabindex="0"><b>28%</b><span class="tv">vs 45%</span><span class="ms">-16</span></td><td class="c dark" style="background:#fedf8a" title="Grass/Shrub/Desert · true canopy 50–60%
+1,188 homes
+v1 reports 42.4% on average
+true average 54.5%
+miss -12.1 pts" tabindex="0"><b>42%</b><span class="tv">vs 54%</span><span class="ms">-12</span></td><td class="c dark" style="background:#cedc79" title="Grass/Shrub/Desert · true canopy 60–70%
+741 homes
+v1 reports 56.0% on average
+true average 64.8%
+miss -8.7 pts" tabindex="0"><b>56%</b><span class="tv">vs 65%</span><span class="ms">-9</span></td><td class="c dark" style="background:#b1da6e" title="Grass/Shrub/Desert · true canopy 70–80%
+444 homes
+v1 reports 68.1% on average
+true average 74.8%
+miss -6.7 pts" tabindex="0"><b>68%</b><span class="tv">vs 75%</span><span class="ms">-7</span></td><td class="c dark" style="background:#6fbf60" title="Grass/Shrub/Desert · true canopy 80–90%
+145 homes
+v1 reports 80.4% on average
+true average 84.0%
+miss -3.6 pts" tabindex="0"><b>80%</b><span class="tv">vs 84%</span><span class="ms">-4</span></td><td class="c dark" style="background:#93d066" title="Grass/Shrub/Desert · true canopy 90–100%
+18 homes
+v1 reports 87.2% on average
+true average 92.3%
+miss -5.2 pts" tabindex="0"><b>87%</b><span class="tv">vs 92%</span><span class="ms">-5</span></td><td class="n">28,631</td><td class="st"><b>-13</b></td><td class="st">0.87</td><td class="st">0.75</td></tr><tr class="sec"><th colspan="15">State</th></tr><tr><th class="lab">NM</th><td class="c empty" title="fewer than 15 homes">·</td><td class="c dark" style="background:#fecb79" title="NM · true canopy 10–20%
+26 homes
+v1 reports 0.9% on average
+true average 15.4%
+miss -14.5 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f88c51" title="NM · true canopy 20–30%
+34 homes
+v1 reports 3.6% on average
+true average 24.7%
+miss -21.1 pts" tabindex="0"><b>4%</b><span class="tv">vs 25%</span><span class="ms">-21</span></td><td class="c light" style="background:#e75136" title="NM · true canopy 30–40%
+100 homes
+v1 reports 9.1% on average
+true average 35.9%
+miss -26.7 pts" tabindex="0"><b>9%</b><span class="tv">vs 36%</span><span class="ms">-27</span></td><td class="c light" style="background:#d73027" title="NM · true canopy 40–50%
+194 homes
+v1 reports 14.5% on average
+true average 45.3%
+miss -30.8 pts" tabindex="0"><b>15%</b><span class="tv">vs 45%</span><span class="ms">-31</span></td><td class="c light" style="background:#d73027" title="NM · true canopy 50–60%
+129 homes
+v1 reports 22.7% on average
+true average 54.2%
+miss -31.5 pts" tabindex="0"><b>23%</b><span class="tv">vs 54%</span><span class="ms">-32</span></td><td class="c light" style="background:#ed5e3c" title="NM · true canopy 60–70%
+78 homes
+v1 reports 38.6% on average
+true average 64.0%
+miss -25.4 pts" tabindex="0"><b>39%</b><span class="tv">vs 64%</span><span class="ms">-25</span></td><td class="c dark" style="background:#f2df86" title="NM · true canopy 70–80%
+15 homes
+v1 reports 62.9% on average
+true average 74.1%
+miss -11.2 pts" tabindex="0"><b>63%</b><span class="tv">vs 74%</span><span class="ms">-11</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">580</td><td class="st"><b>-28</b></td><td class="st">0.66</td><td class="st">0.44</td></tr><tr><th class="lab">AZ</th><td class="c dark" style="background:#cfdc79" title="AZ · true canopy 0–10%
+52 homes
+v1 reports 0.0% on average
+true average 8.8%
+miss -8.8 pts" tabindex="0"><b>0%</b><span class="tv">vs 9%</span><span class="ms">-9</span></td><td class="c dark" style="background:#fecc7b" title="AZ · true canopy 10–20%
+226 homes
+v1 reports 0.6% on average
+true average 14.9%
+miss -14.3 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#f77f4b" title="AZ · true canopy 20–30%
+314 homes
+v1 reports 2.8% on average
+true average 25.1%
+miss -22.3 pts" tabindex="0"><b>3%</b><span class="tv">vs 25%</span><span class="ms">-22</span></td><td class="c light" style="background:#e0422f" title="AZ · true canopy 30–40%
+335 homes
+v1 reports 7.2% on average
+true average 35.4%
+miss -28.2 pts" tabindex="0"><b>7%</b><span class="tv">vs 35%</span><span class="ms">-28</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 40–50%
+323 homes
+v1 reports 13.3% on average
+true average 45.0%
+miss -31.7 pts" tabindex="0"><b>13%</b><span class="tv">vs 45%</span><span class="ms">-32</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 50–60%
+265 homes
+v1 reports 22.1% on average
+true average 54.6%
+miss -32.5 pts" tabindex="0"><b>22%</b><span class="tv">vs 55%</span><span class="ms">-32</span></td><td class="c light" style="background:#d73027" title="AZ · true canopy 60–70%
+193 homes
+v1 reports 31.5% on average
+true average 64.2%
+miss -32.7 pts" tabindex="0"><b>31%</b><span class="tv">vs 64%</span><span class="ms">-33</span></td><td class="c light" style="background:#ee613e" title="AZ · true canopy 70–80%
+53 homes
+v1 reports 49.0% on average
+true average 74.1%
+miss -25.2 pts" tabindex="0"><b>49%</b><span class="tv">vs 74%</span><span class="ms">-25</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,765</td><td class="st"><b>-26</b></td><td class="st">0.68</td><td class="st">0.46</td></tr><tr><th class="lab">UT</th><td class="c dark" style="background:#c6dc76" title="UT · true canopy 0–10%
+26 homes
+v1 reports 0.0% on average
+true average 8.2%
+miss -8.2 pts" tabindex="0"><b>0%</b><span class="tv">vs 8%</span><span class="ms">-8</span></td><td class="c dark" style="background:#fecb79" title="UT · true canopy 10–20%
+63 homes
+v1 reports 0.5% on average
+true average 15.0%
+miss -14.5 pts" tabindex="0"><b>0%</b><span class="tv">vs 15%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f7804c" title="UT · true canopy 20–30%
+44 homes
+v1 reports 3.1% on average
+true average 25.3%
+miss -22.2 pts" tabindex="0"><b>3%</b><span class="tv">vs 25%</span><span class="ms">-22</span></td><td class="c light" style="background:#df412f" title="UT · true canopy 30–40%
+101 homes
+v1 reports 7.1% on average
+true average 35.4%
+miss -28.3 pts" tabindex="0"><b>7%</b><span class="tv">vs 35%</span><span class="ms">-28</span></td><td class="c light" style="background:#d73027" title="UT · true canopy 40–50%
+93 homes
+v1 reports 15.2% on average
+true average 45.2%
+miss -30.0 pts" tabindex="0"><b>15%</b><span class="tv">vs 45%</span><span class="ms">-30</span></td><td class="c light" style="background:#f36a42" title="UT · true canopy 50–60%
+80 homes
+v1 reports 29.9% on average
+true average 54.2%
+miss -24.3 pts" tabindex="0"><b>30%</b><span class="tv">vs 54%</span><span class="ms">-24</span></td><td class="c dark" style="background:#ecdf84" title="UT · true canopy 60–70%
+75 homes
+v1 reports 53.7% on average
+true average 64.5%
+miss -10.8 pts" tabindex="0"><b>54%</b><span class="tv">vs 65%</span><span class="ms">-11</span></td><td class="c dark" style="background:#f4df87" title="UT · true canopy 70–80%
+36 homes
+v1 reports 63.8% on average
+true average 75.1%
+miss -11.3 pts" tabindex="0"><b>64%</b><span class="tv">vs 75%</span><span class="ms">-11</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">527</td><td class="st"><b>-21</b></td><td class="st">0.80</td><td class="st">0.64</td></tr><tr><th class="lab">CA</th><td class="c dark" style="background:#cddc79" title="CA · true canopy 0–10%
+1,610 homes
+v1 reports 0.0% on average
+true average 8.7%
+miss -8.6 pts" tabindex="0"><b>0%</b><span class="tv">vs 9%</span><span class="ms">-9</span></td><td class="c dark" style="background:#fec978" title="CA · true canopy 10–20%
+12,123 homes
+v1 reports 1.0% on average
+true average 15.7%
+miss -14.7 pts" tabindex="0"><b>1%</b><span class="tv">vs 16%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f88d52" title="CA · true canopy 20–30%
+18,426 homes
+v1 reports 4.1% on average
+true average 25.1%
+miss -21.0 pts" tabindex="0"><b>4%</b><span class="tv">vs 25%</span><span class="ms">-21</span></td><td class="c light" style="background:#f16740" title="CA · true canopy 30–40%
+24,145 homes
+v1 reports 10.8% on average
+true average 35.3%
+miss -24.6 pts" tabindex="0"><b>11%</b><span class="tv">vs 35%</span><span class="ms">-25</span></td><td class="c light" style="background:#f46d43" title="CA · true canopy 40–50%
+17,709 homes
+v1 reports 21.3% on average
+true average 45.3%
+miss -24.0 pts" tabindex="0"><b>21%</b><span class="tv">vs 45%</span><span class="ms">-24</span></td><td class="c dark" style="background:#f99153" title="CA · true canopy 50–60%
+18,522 homes
+v1 reports 33.9% on average
+true average 54.6%
+miss -20.7 pts" tabindex="0"><b>34%</b><span class="tv">vs 55%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fdc070" title="CA · true canopy 60–70%
+17,279 homes
+v1 reports 48.9% on average
+true average 64.8%
+miss -15.9 pts" tabindex="0"><b>49%</b><span class="tv">vs 65%</span><span class="ms">-16</span></td><td class="c dark" style="background:#ebde84" title="CA · true canopy 70–80%
+14,992 homes
+v1 reports 64.3% on average
+true average 75.0%
+miss -10.7 pts" tabindex="0"><b>64%</b><span class="tv">vs 75%</span><span class="ms">-11</span></td><td class="c dark" style="background:#8dcd65" title="CA · true canopy 80–90%
+7,927 homes
+v1 reports 79.2% on average
+true average 84.1%
+miss -4.9 pts" tabindex="0"><b>79%</b><span class="tv">vs 84%</span><span class="ms">-5</span></td><td class="c dark" style="background:#63ba5e" title="CA · true canopy 90–100%
+1,828 homes
+v1 reports 90.3% on average
+true average 93.4%
+miss -3.1 pts" tabindex="0"><b>90%</b><span class="tv">vs 93%</span><span class="ms">-3</span></td><td class="n">134,561</td><td class="st"><b>-18</b></td><td class="st">0.90</td><td class="st">0.81</td></tr><tr><th class="lab">WY</th><td class="c dark" style="background:#aeda6d" title="WY · true canopy 0–10%
+333 homes
+v1 reports 0.0% on average
+true average 6.6%
+miss -6.6 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fed683" title="WY · true canopy 10–20%
+156 homes
+v1 reports 1.1% on average
+true average 14.2%
+miss -13.2 pts" tabindex="0"><b>1%</b><span class="tv">vs 14%</span><span class="ms">-13</span></td><td class="c dark" style="background:#f99053" title="WY · true canopy 20–30%
+88 homes
+v1 reports 4.4% on average
+true average 25.2%
+miss -20.8 pts" tabindex="0"><b>4%</b><span class="tv">vs 25%</span><span class="ms">-21</span></td><td class="c light" style="background:#e85438" title="WY · true canopy 30–40%
+128 homes
+v1 reports 8.7% on average
+true average 35.2%
+miss -26.5 pts" tabindex="0"><b>9%</b><span class="tv">vs 35%</span><span class="ms">-26</span></td><td class="c light" style="background:#d73027" title="WY · true canopy 40–50%
+103 homes
+v1 reports 14.2% on average
+true average 44.8%
+miss -30.6 pts" tabindex="0"><b>14%</b><span class="tv">vs 45%</span><span class="ms">-31</span></td><td class="c light" style="background:#d73027" title="WY · true canopy 50–60%
+102 homes
+v1 reports 23.9% on average
+true average 54.2%
+miss -30.2 pts" tabindex="0"><b>24%</b><span class="tv">vs 54%</span><span class="ms">-30</span></td><td class="c light" style="background:#f0643f" title="WY · true canopy 60–70%
+76 homes
+v1 reports 39.0% on average
+true average 63.9%
+miss -24.9 pts" tabindex="0"><b>39%</b><span class="tv">vs 64%</span><span class="ms">-25</span></td><td class="c light" style="background:#f06640" title="WY · true canopy 70–80%
+44 homes
+v1 reports 49.5% on average
+true average 74.2%
+miss -24.7 pts" tabindex="0"><b>49%</b><span class="tv">vs 74%</span><span class="ms">-25</span></td><td class="c dark" style="background:#7ac462" title="WY · true canopy 80–90%
+15 homes
+v1 reports 79.1% on average
+true average 83.2%
+miss -4.1 pts" tabindex="0"><b>79%</b><span class="tv">vs 83%</span><span class="ms">-4</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,045</td><td class="st"><b>-18</b></td><td class="st">0.83</td><td class="st">0.69</td></tr><tr><th class="lab">CO</th><td class="c dark" style="background:#bcdb72" title="CO · true canopy 0–10%
+557 homes
+v1 reports 0.0% on average
+true average 7.6%
+miss -7.5 pts" tabindex="0"><b>0%</b><span class="tv">vs 8%</span><span class="ms">-8</span></td><td class="c dark" style="background:#fed27f" title="CO · true canopy 10–20%
+1,276 homes
+v1 reports 1.1% on average
+true average 14.9%
+miss -13.7 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#fa9b58" title="CO · true canopy 20–30%
+1,697 homes
+v1 reports 5.7% on average
+true average 25.5%
+miss -19.8 pts" tabindex="0"><b>6%</b><span class="tv">vs 25%</span><span class="ms">-20</span></td><td class="c dark" style="background:#f7824d" title="CO · true canopy 30–40%
+2,075 homes
+v1 reports 12.6% on average
+true average 34.7%
+miss -22.1 pts" tabindex="0"><b>13%</b><span class="tv">vs 35%</span><span class="ms">-22</span></td><td class="c light" style="background:#f16640" title="CO · true canopy 40–50%
+1,178 homes
+v1 reports 20.4% on average
+true average 45.0%
+miss -24.7 pts" tabindex="0"><b>20%</b><span class="tv">vs 45%</span><span class="ms">-25</span></td><td class="c dark" style="background:#fdaf62" title="CO · true canopy 50–60%
+845 homes
+v1 reports 36.8% on average
+true average 54.7%
+miss -17.9 pts" tabindex="0"><b>37%</b><span class="tv">vs 55%</span><span class="ms">-18</span></td><td class="c dark" style="background:#e7de82" title="CO · true canopy 60–70%
+694 homes
+v1 reports 54.3% on average
+true average 64.8%
+miss -10.4 pts" tabindex="0"><b>54%</b><span class="tv">vs 65%</span><span class="ms">-10</span></td><td class="c dark" style="background:#7ac462" title="CO · true canopy 70–80%
+441 homes
+v1 reports 70.7% on average
+true average 74.8%
+miss -4.1 pts" tabindex="0"><b>71%</b><span class="tv">vs 75%</span><span class="ms">-4</span></td><td class="c dark" style="background:#64ba5e" title="CO · true canopy 80–90%
+129 homes
+v1 reports 80.5% on average
+true average 83.7%
+miss -3.2 pts" tabindex="0"><b>81%</b><span class="tv">vs 84%</span><span class="ms">-3</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">8,897</td><td class="st"><b>-17</b></td><td class="st">0.87</td><td class="st">0.76</td></tr><tr><th class="lab">ID</th><td class="c dark" style="background:#cedc79" title="ID · true canopy 0–10%
+216 homes
+v1 reports 0.0% on average
+true average 8.8%
+miss -8.7 pts" tabindex="0"><b>0%</b><span class="tv">vs 9%</span><span class="ms">-9</span></td><td class="c dark" style="background:#fed784" title="ID · true canopy 10–20%
+417 homes
+v1 reports 1.5% on average
+true average 14.5%
+miss -13.0 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fba05b" title="ID · true canopy 20–30%
+359 homes
+v1 reports 5.8% on average
+true average 25.1%
+miss -19.3 pts" tabindex="0"><b>6%</b><span class="tv">vs 25%</span><span class="ms">-19</span></td><td class="c dark" style="background:#f88c51" title="ID · true canopy 30–40%
+328 homes
+v1 reports 13.6% on average
+true average 34.8%
+miss -21.2 pts" tabindex="0"><b>14%</b><span class="tv">vs 35%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fa9656" title="ID · true canopy 40–50%
+242 homes
+v1 reports 24.7% on average
+true average 44.9%
+miss -20.2 pts" tabindex="0"><b>25%</b><span class="tv">vs 45%</span><span class="ms">-20</span></td><td class="c dark" style="background:#fdae61" title="ID · true canopy 50–60%
+105 homes
+v1 reports 36.7% on average
+true average 54.6%
+miss -18.0 pts" tabindex="0"><b>37%</b><span class="tv">vs 55%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fdb768" title="ID · true canopy 60–70%
+66 homes
+v1 reports 47.0% on average
+true average 64.0%
+miss -16.9 pts" tabindex="0"><b>47%</b><span class="tv">vs 64%</span><span class="ms">-17</span></td><td class="c dark" style="background:#fec977" title="ID · true canopy 70–80%
+26 homes
+v1 reports 59.8% on average
+true average 74.6%
+miss -14.8 pts" tabindex="0"><b>60%</b><span class="tv">vs 75%</span><span class="ms">-15</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,763</td><td class="st"><b>-17</b></td><td class="st">0.88</td><td class="st">0.78</td></tr><tr><th class="lab">NV</th><td class="c dark" style="background:#b1da6e" title="NV · true canopy 0–10%
+213 homes
+v1 reports 0.1% on average
+true average 6.8%
+miss -6.8 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fecd7b" title="NV · true canopy 10–20%
+268 homes
+v1 reports 0.7% on average
+true average 15.0%
+miss -14.3 pts" tabindex="0"><b>1%</b><span class="tv">vs 15%</span><span class="ms">-14</span></td><td class="c dark" style="background:#f88a50" title="NV · true canopy 20–30%
+177 homes
+v1 reports 3.0% on average
+true average 24.3%
+miss -21.3 pts" tabindex="0"><b>3%</b><span class="tv">vs 24%</span><span class="ms">-21</span></td><td class="c light" style="background:#e34a33" title="NV · true canopy 30–40%
+89 homes
+v1 reports 6.9% on average
+true average 34.3%
+miss -27.4 pts" tabindex="0"><b>7%</b><span class="tv">vs 34%</span><span class="ms">-27</span></td><td class="c light" style="background:#dd3d2d" title="NV · true canopy 40–50%
+45 homes
+v1 reports 15.7% on average
+true average 44.4%
+miss -28.7 pts" tabindex="0"><b>16%</b><span class="tv">vs 44%</span><span class="ms">-29</span></td><td class="c dark" style="background:#f2df86" title="NV · true canopy 50–60%
+31 homes
+v1 reports 44.9% on average
+true average 56.1%
+miss -11.2 pts" tabindex="0"><b>45%</b><span class="tv">vs 56%</span><span class="ms">-11</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">842</td><td class="st"><b>-16</b></td><td class="st">0.79</td><td class="st">0.62</td></tr><tr><th class="lab">OR</th><td class="c dark" style="background:#cadc77" title="OR · true canopy 0–10%
+477 homes
+v1 reports 0.0% on average
+true average 8.5%
+miss -8.5 pts" tabindex="0"><b>0%</b><span class="tv">vs 8%</span><span class="ms">-8</span></td><td class="c dark" style="background:#fed481" title="OR · true canopy 10–20%
+1,935 homes
+v1 reports 1.8% on average
+true average 15.2%
+miss -13.4 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fdad60" title="OR · true canopy 20–30%
+2,788 homes
+v1 reports 7.2% on average
+true average 25.3%
+miss -18.1 pts" tabindex="0"><b>7%</b><span class="tv">vs 25%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fba15b" title="OR · true canopy 30–40%
+2,731 homes
+v1 reports 15.7% on average
+true average 34.8%
+miss -19.2 pts" tabindex="0"><b>16%</b><span class="tv">vs 35%</span><span class="ms">-19</span></td><td class="c dark" style="background:#fdb264" title="OR · true canopy 40–50%
+1,813 homes
+v1 reports 27.5% on average
+true average 45.1%
+miss -17.5 pts" tabindex="0"><b>28%</b><span class="tv">vs 45%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fdc675" title="OR · true canopy 50–60%
+1,599 homes
+v1 reports 39.3% on average
+true average 54.4%
+miss -15.1 pts" tabindex="0"><b>39%</b><span class="tv">vs 54%</span><span class="ms">-15</span></td><td class="c dark" style="background:#f7df88" title="OR · true canopy 60–70%
+1,401 homes
+v1 reports 53.1% on average
+true average 64.6%
+miss -11.5 pts" tabindex="0"><b>53%</b><span class="tv">vs 65%</span><span class="ms">-11</span></td><td class="c dark" style="background:#b8da71" title="OR · true canopy 70–80%
+1,028 homes
+v1 reports 67.7% on average
+true average 75.0%
+miss -7.3 pts" tabindex="0"><b>68%</b><span class="tv">vs 75%</span><span class="ms">-7</span></td><td class="c dark" style="background:#5ab65c" title="OR · true canopy 80–90%
+540 homes
+v1 reports 81.0% on average
+true average 83.7%
+miss -2.8 pts" tabindex="0"><b>81%</b><span class="tv">vs 84%</span><span class="ms">-3</span></td><td class="c dark" style="background:#5ab65c" title="OR · true canopy 90–100%
+153 homes
+v1 reports 92.0% on average
+true average 94.8%
+miss -2.7 pts" tabindex="0"><b>92%</b><span class="tv">vs 95%</span><span class="ms">-3</span></td><td class="n">14,465</td><td class="st"><b>-15</b></td><td class="st">0.95</td><td class="st">0.90</td></tr><tr><th class="lab">WA</th><td class="c dark" style="background:#b4da6f" title="WA · true canopy 0–10%
+2,507 homes
+v1 reports 0.1% on average
+true average 7.0%
+miss -6.9 pts" tabindex="0"><b>0%</b><span class="tv">vs 7%</span><span class="ms">-7</span></td><td class="c dark" style="background:#fed985" title="WA · true canopy 10–20%
+2,851 homes
+v1 reports 1.7% on average
+true average 14.5%
+miss -12.8 pts" tabindex="0"><b>2%</b><span class="tv">vs 15%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fdab60" title="WA · true canopy 20–30%
+1,916 homes
+v1 reports 6.5% on average
+true average 24.8%
+miss -18.3 pts" tabindex="0"><b>7%</b><span class="tv">vs 25%</span><span class="ms">-18</span></td><td class="c dark" style="background:#f88a51" title="WA · true canopy 30–40%
+1,457 homes
+v1 reports 13.6% on average
+true average 34.9%
+miss -21.3 pts" tabindex="0"><b>14%</b><span class="tv">vs 35%</span><span class="ms">-21</span></td><td class="c dark" style="background:#f98f53" title="WA · true canopy 40–50%
+941 homes
+v1 reports 23.9% on average
+true average 44.8%
+miss -20.9 pts" tabindex="0"><b>24%</b><span class="tv">vs 45%</span><span class="ms">-21</span></td><td class="c dark" style="background:#fcaa5f" title="WA · true canopy 50–60%
+541 homes
+v1 reports 36.0% on average
+true average 54.4%
+miss -18.4 pts" tabindex="0"><b>36%</b><span class="tv">vs 54%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fece7c" title="WA · true canopy 60–70%
+332 homes
+v1 reports 50.2% on average
+true average 64.3%
+miss -14.1 pts" tabindex="0"><b>50%</b><span class="tv">vs 64%</span><span class="ms">-14</span></td><td class="c dark" style="background:#d8dd7d" title="WA · true canopy 70–80%
+193 homes
+v1 reports 65.3% on average
+true average 74.7%
+miss -9.4 pts" tabindex="0"><b>65%</b><span class="tv">vs 75%</span><span class="ms">-9</span></td><td class="c dark" style="background:#75c261" title="WA · true canopy 80–90%
+52 homes
+v1 reports 79.3% on average
+true average 83.2%
+miss -3.9 pts" tabindex="0"><b>79%</b><span class="tv">vs 83%</span><span class="ms">-4</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">10,791</td><td class="st"><b>-14</b></td><td class="st">0.88</td><td class="st">0.77</td></tr><tr><th class="lab">MT</th><td class="c dark" style="background:#acd96c" title="MT · true canopy 0–10%
+396 homes
+v1 reports 0.1% on average
+true average 6.5%
+miss -6.4 pts" tabindex="0"><b>0%</b><span class="tv">vs 6%</span><span class="ms">-6</span></td><td class="c dark" style="background:#fedb87" title="MT · true canopy 10–20%
+253 homes
+v1 reports 1.6% on average
+true average 14.2%
+miss -12.6 pts" tabindex="0"><b>2%</b><span class="tv">vs 14%</span><span class="ms">-13</span></td><td class="c dark" style="background:#fcaa5f" title="MT · true canopy 20–30%
+186 homes
+v1 reports 6.6% on average
+true average 24.9%
+miss -18.3 pts" tabindex="0"><b>7%</b><span class="tv">vs 25%</span><span class="ms">-18</span></td><td class="c dark" style="background:#fa9556" title="MT · true canopy 30–40%
+139 homes
+v1 reports 14.6% on average
+true average 34.9%
+miss -20.3 pts" tabindex="0"><b>15%</b><span class="tv">vs 35%</span><span class="ms">-20</span></td><td class="c dark" style="background:#fa9857" title="MT · true canopy 40–50%
+107 homes
+v1 reports 24.9% on average
+true average 44.9%
+miss -20.0 pts" tabindex="0"><b>25%</b><span class="tv">vs 45%</span><span class="ms">-20</span></td><td class="c dark" style="background:#fdbe6f" title="MT · true canopy 50–60%
+76 homes
+v1 reports 38.8% on average
+true average 54.8%
+miss -16.0 pts" tabindex="0"><b>39%</b><span class="tv">vs 55%</span><span class="ms">-16</span></td><td class="c dark" style="background:#efdf85" title="MT · true canopy 60–70%
+54 homes
+v1 reports 53.8% on average
+true average 64.8%
+miss -11.0 pts" tabindex="0"><b>54%</b><span class="tv">vs 65%</span><span class="ms">-11</span></td><td class="c dark" style="background:#e2de81" title="MT · true canopy 70–80%
+36 homes
+v1 reports 65.2% on average
+true average 75.3%
+miss -10.1 pts" tabindex="0"><b>65%</b><span class="tv">vs 75%</span><span class="ms">-10</span></td><td class="c empty" title="fewer than 15 homes">·</td><td class="c empty" title="fewer than 15 homes">·</td><td class="n">1,256</td><td class="st"><b>-13</b></td><td class="st">0.91</td><td class="st">0.84</td></tr></tbody></table></div>
+
+<h2>How “truth” was chosen</h2>
+<p>No remote measurement is ground truth; only a visit is. Airborne lidar is the closest available because it measures vegetation height directly, so panel A uses lidar alone. Other sources were tested against it on the same homes and not blended in, because each would make the reference less accurate:</p>
+<div class="scroll"><table class="rr"><thead><tr><th>Source vs lidar (same homes)</th><th>r</th><th>Average miss</th><th>Used as truth?</th></tr></thead><tbody>
+<tr><th>Meta CHMv2 on the same NAIP</th><td>0.96</td><td>−6 pts</td><td>Panel B only, after calibration to lidar</td></tr>
+<tr><th>Meta v1 on Maxar satellite imagery</th><td>0.93</td><td>−8 pts</td><td>No</td></tr>
+<tr><th><b>Meta v1 on NAIP (the paper)</b></th><td><b>0.89</b></td><td><b>−12 pts</b></td><td>— (the measure being tested)</td></tr>
+<tr><th>USFS Tree Canopy Cover, 30 m Landsat</th><td>0.80</td><td>−20 pts</td><td>No: 30 m pixels blur yards</td></tr>
+</tbody></table></div>
+
+<h2>What this means for the paper</h2>
+<p>v1 is close to right where there is little canopy (0–10%: about 5 pts low) and where there is a lot (70–100%: within a few points). It misses most in the middle, 20–60% canopy, by 15–25 points: mixed yards where shrubs and small trees (1–5 m) carry much of the cover and v1 does not see them. The Southwest (Arizona, New Mexico and their mountains) is worst, with misses near 30 points in those bands; the Pacific coast forests are best. v1 still ranks homes in the right order within each region, which is what the paper's comparisons rely on.</p>
+<p>To test whether the misses change the paper's conclusions, Cat's model was re-run <b>unchanged</b> on the same 192,754 homes and 242 fires, swapping only the canopy column (95% intervals from a fire-cluster bootstrap):</p>
+<div class="scroll"><table class="rr"><thead><tr><th>Paper result (Cat's model, unchanged)</th><th>Original v1</th><th>v1 corrected to lidar</th><th>CHMv2 on the same images</th></tr></thead><tbody><tr><th>Vegetation raises destruction risk (log-odds per 1 SD of canopy)</th><td>0.20<span class="ci">[0.06, 0.37]</span></td><td>0.25<span class="ci">[0.09, 0.42]</span></td><td>0.39<span class="ci">[0.26, 0.51]</span></td></tr><tr><th>Average added destruction risk from vegetation (pts)</th><td>12.9<span class="ci">[5.7, 19.3]</span></td><td>20.5<span class="ci">[10.1, 31.3]</span></td><td>18.0<span class="ci">[8.0, 27.2]</span></td></tr><tr><th>Homes where clearing vegetation helps</th><td>48%<span class="ci">[33%, 62%]</span></td><td>77%<span class="ci">[61%, 84%]</span></td><td>68%<span class="ci">[49%, 77%]</span></td></tr><tr><th>— Mediterranean</th><td>53%<span class="ci">[31%, 72%]</span></td><td>81%<span class="ci">[54%, 91%]</span></td><td>76%<span class="ci">[46%, 86%]</span></td></tr><tr><th>— Forest</th><td>51%<span class="ci">[36%, 67%]</span></td><td>76%<span class="ci">[62%, 92%]</span></td><td>66%<span class="ci">[48%, 81%]</span></td></tr><tr><th>— Grass / shrub / desert</th><td>21%<span class="ci">[2%, 36%]</span></td><td>62%<span class="ci">[6%, 73%]</span></td><td>41%<span class="ci">[10%, 53%]</span></td></tr><tr><th>Vegetation × density interaction, p</th><td>&lt;0.001</td><td>&lt;0.001</td><td>0.004</td></tr><tr><th>Forest three-way term, p</th><td>&lt;0.001</td><td>&lt;0.001</td><td>&lt;0.001</td></tr><tr><th>Grass/shrub/desert three-way term, p</th><td>&lt;0.001</td><td>0.003</td><td>0.122</td></tr><tr><th>Forest: vegetation hurts above 40 structures</th><td>20%<span class="ci">[0%, 62%]</span></td><td>58%<span class="ci">[0%, 100%]</span></td><td>51%<span class="ci">[0%, 97%]</span></td></tr></tbody></table></div>
+<p>Every vegetation term keeps its direction and the vegetation effect gets stronger when canopy is measured more accurately, so v1's under-read makes the paper conservative rather than wrong. The one claim that depends on it is the grass/shrub/desert density interaction, which is no longer significant with CHMv2. The forest “hurts above 40 structures” result was unresolved before and still is. The share of homes where clearing helps also rises partly because, on the true scale, removing canopy is a larger change, so fewer homes fall in the “no meaningful effect” band.</p>
+<p class="sub">Built with DINOv3 (CHMv2). Lidar: USGS 3DEP. Imagery: USDA NAIP via Microsoft Planetary Computer.</p>
+</main><div id="tip" role="tooltip"></div>
+<script>
+const tip=document.getElementById('tip');
+document.querySelectorAll('td.c[title]').forEach(td=>{const t=td.getAttribute('title');td.removeAttribute('title');td.dataset.t=t;
+ const show=e=>{tip.textContent=t;tip.style.display='block';const r=td.getBoundingClientRect();
+  let x=r.right+8,y=r.top;if(x+220>innerWidth)x=r.left-228;tip.style.left=Math.max(4,x)+'px';tip.style.top=Math.max(4,y)+'px';};
+ td.addEventListener('mouseenter',show);td.addEventListener('focus',show);
+ td.addEventListener('mouseleave',()=>tip.style.display='none');td.addEventListener('blur',()=>tip.style.display='none');});
+</script></body></html>
