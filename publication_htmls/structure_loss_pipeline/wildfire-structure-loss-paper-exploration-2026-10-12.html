@@ -1,9 +1,9 @@
 <!doctype html>
-<!-- Generated 2026-10-12 15:23 PDT (2026-10-12T15:23:56-07:00) -->
+<!-- Generated 2026-10-12 15:41 PDT (2026-10-12T15:41:32-07:00) -->
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wildfire structure loss: paper exploration · 2026-10-12</title>
-<meta name="description" content="Everything we have tested for the paper, in one place: losses by year 2002–2026, which fires lose buildings, whether building density raises loss, and mobile homes. Urban-conflagration and mobile-home analyses are being added.">
-<meta name="generated" content="2026-10-12T15:23:56-07:00">
+<meta name="description" content="Everything we have tested for the paper, in one place: what makes an urban conflagration, losses by year 2002–2026, how concentrated losses are, which fires lose buildings, whether building density raises loss, and mobile homes. A full mobile-home analysis is being added.">
+<meta name="generated" content="2026-10-12T15:41:32-07:00">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
@@ -75,9 +75,10 @@ html[data-lang="tech"] .tech{display:revert} html[data-lang="tech"] .plain{displ
 .hb .area{position:relative;margin-right:72px;display:grid;gap:3px}
 .hb .grid{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px solid var(--line)}
 .hb .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--ink-2);z-index:1}
+.hb .brow{position:relative;height:20px}
 .hb .bar{position:relative;height:20px;border-radius:0 4px 4px 0;min-width:2px;transition:filter .15s,box-shadow .15s;z-index:2}
 .hb .bar:hover,.hb .bar:focus{filter:brightness(1.12);box-shadow:0 0 0 2px var(--ink)}
-.hb .val{position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);font:500 13px var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface);padding:0 3px;border-radius:3px;z-index:4}
+.hb .val{position:absolute;top:50%;transform:translateY(-50%);font:500 13px var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface);padding:0 3px;border-radius:3px;z-index:4}
 .hb .ci{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-left:1.5px solid var(--ink);border-right:1.5px solid var(--ink);z-index:3}
 .hb .ci::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid var(--ink)}
 .hb .axis{position:relative;height:18px;margin-right:72px;font:400 12px var(--f-mono);color:var(--ink-3)}
@@ -234,8 +235,1449 @@ footer.site ul{padding-left:18px;margin:0 0 12px} footer.site li{margin:4px 0}
 </style></head>
 <body><div class="wrap">
 <header><div class="topbar"><div class="eyebrow">Structure-loss paper</div><div class="btns"><button type="button" class="themebtn" id="langbtn" aria-pressed="false" aria-label="Switch between plain-language and technical explanations">Plain language</button><button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark">Light / dark</button></div></div>
-<h1>Wildfire structure loss: paper exploration · 2026-10-12</h1><p class="subtitle">Everything we have tested for the paper, in one place: losses by year 2002–2026, which fires lose buildings, whether building density raises loss, and mobile homes. Urban-conflagration and mobile-home analyses are being added.</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-12 15:23 PDT</time></p><p class="lede">Three findings so far. Losses grew because the worst fires got worse, not because more fires destroy buildings. Inside a fire, building density barely changes a building's chance of loss; there is no density threshold. The high-density losses that do stand out are mobile-home parks.</p><div class="note"><h3>How to read this page</h3><p>Each section answers one question; every point and bar explains itself on hover. Use the <b>Plain language / Technical</b> switch at the top for definitions and methods. Tick or untick a line in a key to show or hide it.</p></div></header>
-<section class="sec" id="status"><h2>Where we are on each question</h2><div class="card"><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th>Question</th><th>Status</th><th>Answer so far / where</th></tr></thead><tbody><tr><td data-label="Question">Top-fire share (top 1, 5, 10%)</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 5: concentration curve and rolling 5-year top-1% share</td></tr><tr><td data-label="Question">Concentration curve</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 5</td></tr><tr><td data-label="Question">Gini coefficient</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 5: rolling 5-year Gini</td></tr><tr><td data-label="Question">Chance of any loss, given exposure</td><td data-label="Status">Done (2002–2020)</td><td data-label="Answer so far / where">Section 5: flat, no trend</td></tr><tr><td data-label="Question">Tail vs broad growth</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Sections 1 and 5: tail growth; fires with losses not rising</td></tr><tr><td data-label="Question">Cat: cumulative losses vs density, breakpoint</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 3: no step inside fires; the dense-end rise is mobile-home parks</td></tr><tr><td data-label="Question">What makes an urban conflagration (fire level)</td><td data-label="Status">Running</td><td data-label="Answer so far / where">Will be section 6</td></tr><tr><td data-label="Question">Mobile homes, quantified</td><td data-label="Status">Running</td><td data-label="Answer so far / where">Will replace section 4</td></tr></tbody></table></div></div></section><section class="sec" id="by-year"><h2>1. Losses by year, 2002–2026</h2><div class="card"><h3>Buildings destroyed per year, by source</h3><p class="cap"><span class="plain">The sources rise and fall together; compare shapes, not heights. Carlson is lower because it maps only fires that destroyed 10 or more; our model is lower because it finds about two-thirds of losses. 2026* is a partial year.</span><span class="tech">Reported structures destroyed (incident reports), hand-mapped destroyed buildings (Carlson), first-call destroyed Direct-zone buildings (model).</span></p><div class="legend"><span class="k" data-tip="Incident reports (ICS-209-PLUS)
+<h1>Wildfire structure loss: paper exploration · 2026-10-12</h1><p class="subtitle">Everything we have tested for the paper, in one place: what makes an urban conflagration, losses by year 2002–2026, how concentrated losses are, which fires lose buildings, whether building density raises loss, and mobile homes. A full mobile-home analysis is being added.</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-12 15:41 PDT</time></p><p class="lede">Four findings so far. An urban conflagration happens when a fire reaches one connected cluster of roughly 90 or more buildings standing within 20 m of each other. Losses grew because the worst fires got worse, not because more fires destroy buildings. Inside a fire, building density barely changes a building's chance of loss; there is no density threshold. The high-density losses that do stand out are mobile-home parks.</p><div class="note"><h3>How to read this page</h3><p>Each section answers one question; every point and bar explains itself on hover. Use the <b>Plain language / Technical</b> switch at the top for definitions and methods. Tick or untick a line in a key to show or hide it.</p></div></header>
+<section class="sec" id="status"><h2>Where we are on each question</h2><div class="card"><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th>Question</th><th>Status</th><th>Answer so far / where</th></tr></thead><tbody><tr><td data-label="Question">Top-fire share (top 1, 5, 10%)</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 3: concentration curve and rolling 5-year top-1% share</td></tr><tr><td data-label="Question">Concentration curve</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 3</td></tr><tr><td data-label="Question">Gini coefficient</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 3: rolling 5-year Gini</td></tr><tr><td data-label="Question">Chance of any loss, given exposure</td><td data-label="Status">Done (2002–2020)</td><td data-label="Answer so far / where">Section 3: flat, no trend</td></tr><tr><td data-label="Question">Tail vs broad growth</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Sections 2 and 3: tail growth (the five largest fires each year = most of the increase); fires with losses not rising</td></tr><tr><td data-label="Question">Cat: cumulative losses vs density, breakpoint</td><td data-label="Status">Done</td><td data-label="Answer so far / where">Section 5: no step inside fires; the dense-end rise is mobile-home parks</td></tr><tr><td data-label="Question">What makes an urban conflagration (fire level)</td><td data-label="Status">Done (exploratory; back-cast test registered)</td><td data-label="Answer so far / where">Section 1: a fire reaching a connected cluster of ~90+ buildings within 20 m</td></tr><tr><td data-label="Question">Mobile homes, quantified</td><td data-label="Status">Running</td><td data-label="Answer so far / where">Will replace section 6</td></tr></tbody></table></div></div></section><section class="sec" id="conflagration"><h2>1. What makes an urban conflagration?</h2><div class="card"><h3>Chance a fire becomes an urban conflagration, by the size of its largest connected cluster of buildings</h3><p class="cap"><span class="plain">An urban conflagration here means 50 or more destroyed buildings, each within 30 m of the next. It almost never happens unless the fire reaches a cluster of more than about 50–90 buildings standing within 20 m of each other; above that, it becomes likely. The rise is steep but smooth: a practical line, not a hard threshold. With the looser 50 m definition, a few small-cluster fires also count.</span><span class="tech">Unit = fire (2002–26 record, ≥100 exposed buildings, 355 fires, 10 conflagrations; labels or CAL FIRE inspection). Exact binomial 95% ranges. Step on a smooth logit rejected (bootstrap p 0.67); AUC 0.99 (0.97–1.00) vs 0.95 for dense-exposure share.</span></p><div class="legend"><span class="k"><span class="sw" style="background:var(--s4)"></span>Destroyed buildings linked within 30 m (main definition)</span><span class="k"><span class="sw" style="background:var(--s7)"></span>Linked within 50 m (looser)</span></div><div class="hb"><div class="lab">Fewer than 50 buildings</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.00%"></i><i class="grid" style="left:40.00%"></i><i class="grid" style="left:60.00%"></i><i class="grid" style="left:80.00%"></i><i class="grid" style="left:100.00%"></i><div class="brow"><div class="bar" style="width:0.00%;background:var(--s4)" data-tip="Largest connected cluster: fewer than 50 buildings
+0 of 313 fires became conflagrations (0%)
+95% range 0%–1% (exact binomial)"></div><i class="ci" style="left:0.00%;width:1.17%"></i><span class="val" style="left:calc(1.17% + 6px)">0%</span></div><div class="brow"><div class="bar" style="width:2.56%;background:var(--s7)" data-tip="Largest connected cluster: fewer than 50 buildings
+8 of 313 fires became conflagrations (3%)
+95% range 1%–5% (exact binomial)
+fires: Yarnell Hill AZ 2013, Angora CA 2007, Tea CA 2008, Valley CA 2015, Erskine CA 2016, Echo Mtn Complex OR 2020, Holiday Farm OR 2020, Double Diamond TX 2014"></div><i class="ci" style="left:1.11%;width:3.86%"></i><span class="val" style="left:calc(4.97% + 6px)">3%</span></div></div><div class="lab">50–199 buildings</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.00%"></i><i class="grid" style="left:40.00%"></i><i class="grid" style="left:60.00%"></i><i class="grid" style="left:80.00%"></i><i class="grid" style="left:100.00%"></i><div class="brow"><div class="bar" style="width:16.22%;background:var(--s4)" data-tip="Largest connected cluster: 50–199 buildings
+6 of 37 fires became conflagrations (16%)
+95% range 6%–32% (exact binomial)
+fires: Camp CA 2018, Woolsey CA 2018, Sandalwood CA 2019, Glass CA 2020, Marshall CO 2021, Palisades CA 2025"></div><i class="ci" style="left:6.19%;width:25.82%"></i><span class="val" style="left:calc(32.01% + 6px)">16%</span></div><div class="brow"><div class="bar" style="width:32.43%;background:var(--s7)" data-tip="Largest connected cluster: 50–199 buildings
+12 of 37 fires became conflagrations (32%)
+95% range 18%–50% (exact binomial)
+fires: Cedar CA 2003, Sulfur CA 2017, Thomas CA 2017, Camp CA 2018, Carr CA 2018, Woolsey CA 2018, Sandalwood CA 2019, Glass CA 2020, Hennessey CA 2020, Dixie CA 2021, Marshall CO 2021, Palisades CA 2025"></div><i class="ci" style="left:18.01%;width:31.77%"></i><span class="val" style="left:calc(49.79% + 6px)">32%</span></div></div><div class="lab">200–999 buildings</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.00%"></i><i class="grid" style="left:40.00%"></i><i class="grid" style="left:60.00%"></i><i class="grid" style="left:80.00%"></i><i class="grid" style="left:100.00%"></i><div class="brow"><div class="bar" style="width:80.00%;background:var(--s4)" data-tip="Largest connected cluster: 200–999 buildings
+4 of 5 fires became conflagrations (80%)
+95% range 28%–99% (exact binomial)
+fires: Sayre CA 2008, Tubbs CA 2017, Eaton CA 2025, Almeda Drive OR 2020"></div><i class="ci" style="left:28.36%;width:71.14%"></i><span class="val" style="left:calc(99.49% + 6px)">80%</span></div><div class="brow"><div class="bar" style="width:80.00%;background:var(--s7)" data-tip="Largest connected cluster: 200–999 buildings
+4 of 5 fires became conflagrations (80%)
+95% range 28%–99% (exact binomial)
+fires: Sayre CA 2008, Tubbs CA 2017, Eaton CA 2025, Almeda Drive OR 2020"></div><i class="ci" style="left:28.36%;width:71.14%"></i><span class="val" style="left:calc(99.49% + 6px)">80%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:20.00%">20%</span><span style="left:40.00%">40%</span><span style="left:60.00%">60%</span><span style="left:80.00%">80%</span><span style="left:100.00%">100%</span></div></div></div><div class="card"><h3>Every fire with 100 or more exposed buildings</h3><p class="cap">Each dot is a fire; hover for its numbers. Every conflagration sits to the right of the line; most fires to the right still did not conflagrate (orange), all of them in California. Fire weather, road egress and WUI class added nothing once cluster size was known.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s4)"></span>Urban conflagration</span><span class="k"><span class="sw" style="background:var(--s2)"></span>Crossed the line, no conflagration</span><span class="k"><span class="sw" style="background:var(--ink-3)"></span>Other fires with 100+ exposed buildings</span></div><div class="svgwrap"><svg viewBox="0 0 760 420" width="100%" role="img" aria-label="Fires by largest exposed cluster and dense share"><line class="gridl" x1="56" x2="744" y1="368.0" y2="368.0"/><text x="48" y="372.0" text-anchor="end">0%</text><line class="gridl" x1="56" x2="744" y1="279.5" y2="279.5"/><text x="48" y="283.5" text-anchor="end">25%</text><line class="gridl" x1="56" x2="744" y1="191.0" y2="191.0"/><text x="48" y="195.0" text-anchor="end">50%</text><line class="gridl" x1="56" x2="744" y1="102.5" y2="102.5"/><text x="48" y="106.5" text-anchor="end">75%</text><line class="gridl" x1="56" x2="744" y1="14.0" y2="14.0"/><text x="48" y="18.0" text-anchor="end">100%</text><text x="56.0" y="386" text-anchor="middle">1</text><text x="285.3" y="386" text-anchor="middle">10</text><text x="514.7" y="386" text-anchor="middle">100</text><text x="744.0" y="386" text-anchor="middle">1,000</text><line class="axisl" x1="56" x2="744" y1="368" y2="368"/><text x="400.0" y="410" text-anchor="middle">Largest connected cluster of exposed buildings (each within 20 m of the next), log scale</text><line x1="503.2" x2="503.2" y1="14" y2="368" stroke="var(--ink-2)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="509.2" y="26">about 89 buildings</text><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Aspen AZ 2003
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+158 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Monument AZ 2011
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+128 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="423.4" cy="283.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Yarnell Hill AZ 2013
+no conflagration
+largest exposed cluster: 40 buildings
+dense-exposure share: 24%
+197 destroyed; largest linked group of destroyed buildings: 11" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Goodwin AZ 2017
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tinder AZ 2018
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+45 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="368.3" cy="312.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Margo AZ 2021
+no conflagration
+largest exposed cluster: 23 buildings
+dense-exposure share: 16%
+59 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Telegraph AZ 2021
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+29 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tunnel AZ 2022
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+48 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="398.0" cy="304.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Gavilan CA 2002
+no conflagration
+largest exposed cluster: 31 buildings
+dense-exposure share: 18%
+19 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="263.1" cy="365.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Pines CA 2002
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 1%
+17 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="487.3" cy="316.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cedar CA 2003
+no conflagration
+largest exposed cluster: 76 buildings
+dense-exposure share: 15%
+1,715 destroyed; largest linked group of destroyed buildings: 25" tabindex="0"/><circle cx="423.4" cy="301.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Grand Prix CA 2003
+no conflagration
+largest exposed cluster: 40 buildings
+dense-exposure share: 19%
+27 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="338.2" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mountain CA 2003
+no conflagration
+largest exposed cluster: 17 buildings
+dense-exposure share: 0%
+11 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="499.6" cy="243.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Old CA 2003
+no conflagration
+largest exposed cluster: 86 buildings
+dense-exposure share: 35%
+571 destroyed; largest linked group of destroyed buildings: 14" tabindex="0"/><circle cx="343.9" cy="351.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Padua CA 2003
+no conflagration
+largest exposed cluster: 18 buildings
+dense-exposure share: 5%
+16 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Manton CA 2005
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="343.9" cy="346.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Paradise CA 2005
+no conflagration
+largest exposed cluster: 18 buildings
+dense-exposure share: 6%
+12 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="359.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Angora CA 2007
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 2%
+249 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="471.8" cy="244.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Buckweed CA 2007
+no conflagration
+largest exposed cluster: 65 buildings
+dense-exposure share: 35%
+27 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="467.1" cy="305.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Corral CA 2007
+no conflagration
+largest exposed cluster: 62 buildings
+dense-exposure share: 18%
+76 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="418.3" cy="291.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Grass Valley CA 2007
+no conflagration
+largest exposed cluster: 38 buildings
+dense-exposure share: 22%
+98 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="435.1" cy="348.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Poomacha CA 2007
+no conflagration
+largest exposed cluster: 45 buildings
+dense-exposure share: 5%
+66 destroyed; largest linked group of destroyed buildings: 13" tabindex="0"/><circle cx="449.5" cy="179.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Santiago CA 2007
+no conflagration
+largest exposed cluster: 52 buildings
+dense-exposure share: 53%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="376.6" cy="364.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Btu Lightning Complex (Long Branch-Jack) CA 2008
+no conflagration
+largest exposed cluster: 25 buildings
+dense-exposure share: 1%
+135 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Gladding CA 2008
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+20 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="311.5" cy="358.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Humboldt CA 2008
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 3%
+120 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="484.7" cy="211.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sesnon CA 2008
+no conflagration
+largest exposed cluster: 74 buildings
+dense-exposure share: 44%
+12 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Summit CA 2008
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+74 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="359.2" cy="338.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tea CA 2008
+no conflagration
+largest exposed cluster: 21 buildings
+dense-exposure share: 8%
+247 destroyed; largest linked group of destroyed buildings: 15" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Telegraph CA 2008
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="415.6" cy="330.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Jesusita CA 2009
+no conflagration
+largest exposed cluster: 37 buildings
+dense-exposure share: 11%
+49 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Canyon CA 2011
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+45 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Clover CA 2013
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="263.1" cy="356.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Colby CA 2014
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 3%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Eiler CA 2014
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="King CA 2014
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+16 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="491.2" cy="295.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="San Diego Complex CA 2014
+no conflagration
+largest exposed cluster: 79 buildings
+dense-exposure share: 20%
+46 destroyed; largest linked group of destroyed buildings: 23" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Way CA 2014
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="338.2" cy="366.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Butte CA 2015
+no conflagration
+largest exposed cluster: 17 buildings
+dense-exposure share: 0%
+1,360 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Rocky CA 2015
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+64 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Round CA 2015
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+62 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="372.5" cy="350.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Valley CA 2015
+no conflagration
+largest exposed cluster: 24 buildings
+dense-exposure share: 5%
+1,724 destroyed; largest linked group of destroyed buildings: 18" tabindex="0"/><circle cx="318.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Blue Cut CA 2016
+no conflagration
+largest exposed cluster: 14 buildings
+dense-exposure share: 0%
+314 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="484.7" cy="269.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Border 3 CA 2016
+no conflagration
+largest exposed cluster: 74 buildings
+dense-exposure share: 28%
+6 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Chimney CA 2016
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+57 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="384.3" cy="324.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Clayton CA 2016
+no conflagration
+largest exposed cluster: 27 buildings
+dense-exposure share: 12%
+254 destroyed; largest linked group of destroyed buildings: 19" tabindex="0"/><circle cx="420.9" cy="280.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Erskine CA 2016
+no conflagration
+largest exposed cluster: 39 buildings
+dense-exposure share: 25%
+371 destroyed; largest linked group of destroyed buildings: 30" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Loma CA 2016
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+42 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="332.1" cy="366.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sand CA 2016
+no conflagration
+largest exposed cluster: 16 buildings
+dense-exposure share: 0%
+52 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Soberanes CA 2016
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+46 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="325.7" cy="362.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Atlas CA 2017
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 1%
+612 destroyed; largest linked group of destroyed buildings: 10" tabindex="0"/><circle cx="483.3" cy="249.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Canyon 2 CA 2017
+no conflagration
+largest exposed cluster: 73 buildings
+dense-exposure share: 34%
+20 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cascade CA 2017
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+459 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Detwiler CA 2017
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+223 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="294.8" cy="366.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Helena CA 2017
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+146 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="401.2" cy="350.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Nuns CA 2017
+no conflagration
+largest exposed cluster: 32 buildings
+dense-exposure share: 5%
+1,025 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Redwood Valley Incident CA 2017
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+491 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wall CA 2017
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+106 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Whittier CA 2017
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+45 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="468.6" cy="332.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Carr CA 2018
+no conflagration
+largest exposed cluster: 63 buildings
+dense-exposure share: 10%
+1,680 destroyed; largest linked group of destroyed buildings: 31" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="County CA 2018
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+26 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Donnell CA 2018
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+53 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="325.7" cy="362.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ferguson CA 2018
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 2%
+18 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="435.1" cy="290.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Holy CA 2018
+no conflagration
+largest exposed cluster: 45 buildings
+dense-exposure share: 22%
+20 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Klamathon CA 2018
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+78 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="311.5" cy="367.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ranch CA 2018
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+398 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="332.1" cy="361.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Kincade CA 2019
+no conflagration
+largest exposed cluster: 16 buildings
+dense-exposure share: 2%
+273 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="489.9" cy="203.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tick CA 2019
+no conflagration
+largest exposed cluster: 78 buildings
+dense-exposure share: 46%
+30 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Apple CA 2020
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="August Complex CA 2020
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+335 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bobcat CA 2020
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+131 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="387.9" cy="330.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bond CA 2020
+no conflagration
+largest exposed cluster: 28 buildings
+dense-exposure share: 11%
+35 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Carmel CA 2020
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+61 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="338.2" cy="367.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Castle CA 2020
+no conflagration
+largest exposed cluster: 17 buildings
+dense-exposure share: 0%
+150 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="343.9" cy="364.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Czu Lightning Complex CA 2020
+no conflagration
+largest exposed cluster: 18 buildings
+dense-exposure share: 1%
+848 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="234.5" cy="345.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dolan CA 2020
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 6%
+18 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="311.5" cy="361.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="El Dorado CA 2020
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 2%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="467.1" cy="351.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hennessey CA 2020
+no conflagration
+largest exposed cluster: 62 buildings
+dense-exposure share: 5%
+1,015 destroyed; largest linked group of destroyed buildings: 41" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lake CA 2020
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+34 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Loyalton CA 2020
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+35 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="North Complex CA 2020
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+1,294 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="303.5" cy="356.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="River CA 2020
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 3%
+26 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Scu Lightning Complex CA 2020
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+338 destroyed; largest linked group of destroyed buildings: 11" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sheep CA 2020
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+11 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="285.3" cy="360.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Slater CA 2020
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 2%
+320 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Stagecoach CA 2020
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+23 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Valley CA 2020
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+32 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wallbridge CA 2020
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+121 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Zogg CA 2020
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+111 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="311.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Alisal CA 2021
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="398.0" cy="188.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Antelope CA 2021
+no conflagration
+largest exposed cluster: 31 buildings
+dense-exposure share: 51%
+18 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="354.4" cy="362.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Caldor CA 2021
+no conflagration
+largest exposed cluster: 20 buildings
+dense-exposure share: 1%
+943 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="500.8" cy="324.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dixie CA 2021
+no conflagration
+largest exposed cluster: 87 buildings
+dense-exposure share: 12%
+1,031 destroyed; largest linked group of destroyed buildings: 36" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Fawn CA 2021
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+124 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="311.5" cy="367.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="French CA 2021
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+28 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Haypress CA 2021
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+53 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lava CA 2021
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+81 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mcfarland CA 2021
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+30 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Monument CA 2021
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+20 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="River CA 2021
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+120 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sugar CA 2021
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+107 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="398.0" cy="356.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tamarack CA 2021
+no conflagration
+largest exposed cluster: 31 buildings
+dense-exposure share: 3%
+41 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="303.5" cy="353.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Windy CA 2021
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 4%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="384.3" cy="279.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Border 32 CA 2022
+no conflagration
+largest exposed cluster: 27 buildings
+dense-exposure share: 25%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Fairview CA 2022
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+50 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mckinney CA 2022
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+212 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="418.3" cy="302.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mill CA 2022
+no conflagration
+largest exposed cluster: 38 buildings
+dense-exposure share: 19%
+116 destroyed; largest linked group of destroyed buildings: 27" tabindex="0"/><circle cx="311.5" cy="364.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mosquito CA 2022
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 1%
+51 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oak CA 2022
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+181 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hayman CO 2002
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+122 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="325.7" cy="328.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ordway Crowley Co CO 2008
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 11%
+46 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Black Forest CO 2013
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+785 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="437.3" cy="284.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Beulah Hill CO 2016
+no conflagration
+largest exposed cluster: 46 buildings
+dense-exposure share: 23%
+18 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Logan CO 2017
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+27 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Badger Hole CO 2018
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+53 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Spring Creek CO 2018
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+225 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="325.7" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cameron Peak CO 2020
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 0%
+248 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="430.6" cy="327.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="East Troublesome CO 2020
+no conflagration
+largest exposed cluster: 43 buildings
+dense-exposure share: 11%
+618 destroyed; largest linked group of destroyed buildings: 20" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Airport CA 2024
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+92 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Borel CA 2024
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+161 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="423.4" cy="258.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bridge CA 2024
+no conflagration
+largest exposed cluster: 40 buildings
+dense-exposure share: 31%
+55 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="343.9" cy="355.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Franklin CA 2024
+no conflagration
+largest exposed cluster: 18 buildings
+dense-exposure share: 3%
+315 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="325.7" cy="279.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="French CA 2024
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 25%
+5 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="349.3" cy="276.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Line CA 2024
+no conflagration
+largest exposed cluster: 19 buildings
+dense-exposure share: 26%
+6 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="359.2" cy="350.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mountain CA 2024
+no conflagration
+largest exposed cluster: 21 buildings
+dense-exposure share: 5%
+236 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="249.8" cy="367.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Park CA 2024
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+314 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Thompson CA 2024
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Canyon CA 2025
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="460.4" cy="39.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Coches 2 CA 2025
+no conflagration
+largest exposed cluster: 58 buildings
+dense-exposure share: 93%
+5 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="285.3" cy="350.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tcu Complex CA 2025
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 5%
+71 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cr630 E FL 2017
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+242 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lime Rock Rd (19) FL 2018
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+31 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="36Th Ave Se FL 2020
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="5 Mile Swamp FL 2020
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sweat Farm Road GA 2007
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Unnamed IA 2005
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+11 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="365.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Elk Complex ID 2013
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 1%
+21 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Kamiah Gulch ID 2015
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+215 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="311.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Municipal ID 2015
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+14 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Clover ID 2020
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+38 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Woodhead ID 2020
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+41 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bedrock ID 2021
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+28 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Grassfires 30617 KS 2017
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Highlands KS 2017
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Four County KS 2021
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+154 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cottonwood Complex KS 2022
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+98 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Derby MT 2006
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+80 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dahl MT 2012
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+104 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bobcat MT 2020
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+36 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bridger Foothills MT 2020
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+61 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Huff MT 2020
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+25 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Richard Spring MT 2021
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+10 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="349.3" cy="310.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="West Wind MT 2021
+no conflagration
+largest exposed cluster: 19 buildings
+dense-exposure share: 16%
+57 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="471.8" cy="186.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Stony Ridge NC 2009
+no conflagration
+largest exposed cluster: 65 buildings
+dense-exposure share: 51%
+11 destroyed; largest linked group of destroyed buildings: 10" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Road 739 NE 2022
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+76 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="359.2" cy="360.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mcbride NM 2022
+no conflagration
+largest exposed cluster: 21 buildings
+dense-exposure share: 2%
+168 destroyed; largest linked group of destroyed buildings: 21" tabindex="0"/><circle cx="332.1" cy="352.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="South Fork NM 2024
+no conflagration
+largest exposed cluster: 16 buildings
+dense-exposure share: 4%
+855 destroyed; largest linked group of destroyed buildings: 10" tabindex="0"/><circle cx="404.2" cy="332.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Waterfall NV 2004
+no conflagration
+largest exposed cluster: 33 buildings
+dense-exposure share: 10%
+15 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="437.3" cy="263.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Caughlin NV 2011
+no conflagration
+largest exposed cluster: 46 buildings
+dense-exposure share: 29%
+7 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="274.8" cy="367.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Washoe Drive NV 2012
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Little Valley NV 2016
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+42 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oil Well NV 2017
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+10 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Perry NV 2018
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+26 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="South Sugarloaf NV 2018
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="349.3" cy="243.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Numbers NV 2020
+no conflagration
+largest exposed cluster: 19 buildings
+dense-exposure share: 35%
+41 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="401.2" cy="279.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Poeville Road NV 2020
+no conflagration
+largest exposed cluster: 32 buildings
+dense-exposure share: 25%
+12 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Flat Rock OK 2005
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+11 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="354.4" cy="345.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mission OK 2005
+no conflagration
+largest exposed cluster: 20 buildings
+dense-exposure share: 6%
+50 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Texanna Road OK 2005
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+14 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wewoka Creek OK 2005
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+17 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Prague OK 2006
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+24 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ratliff City OK 2006
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+55 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Brushy Mountain OK 2009
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+14 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="455.1" cy="297.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Choctaw OK 2009
+no conflagration
+largest exposed cluster: 55 buildings
+dense-exposure share: 20%
+49 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lindsay OK 2009
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+36 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="343.9" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Loco-Healdton OK 2009
+no conflagration
+largest exposed cluster: 18 buildings
+dense-exposure share: 0%
+95 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="274.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Putnam OK 2009
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+24 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ratcliff City-Tatums OK 2009
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+73 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="63Rdstreet OK 2011
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+28 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Luther Fire OK 2012
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+40 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="274.8" cy="367.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Noble OK 2012
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 0%
+138 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Guthrie OK 2014
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+63 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Anderson Creek Fire OK 2016
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+108 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oks - 283 OK 2017
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+37 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oks - Selman OK 2017
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+80 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="380.5" cy="353.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oks - Starbuck OK 2017
+no conflagration
+largest exposed cluster: 26 buildings
+dense-exposure share: 4%
+386 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="34 Complex OK 2018
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+69 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Rhea OK 2018
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+429 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="412 Fire OK 2020
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+20 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Canyon Creek Complex OR 2015
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+86 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cornet-Windy Ridge OR 2015
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+31 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Graham 0420 Od OR 2018
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+11 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="South Valley Road OR 2018
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Substation 0730 Rn OR 2018
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+37 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="311.5" cy="366.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Archie Creek OR 2020
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+140 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="432.9" cy="325.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Beachie Creek OR 2020
+no conflagration
+largest exposed cluster: 44 buildings
+dense-exposure share: 12%
+862 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="418.3" cy="281.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Echo Mtn Complex OR 2020
+no conflagration
+largest exposed cluster: 38 buildings
+dense-exposure share: 25%
+355 destroyed; largest linked group of destroyed buildings: 14" tabindex="0"/><circle cx="384.3" cy="364.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Holiday Farm OR 2020
+no conflagration
+largest exposed cluster: 27 buildings
+dense-exposure share: 1%
+727 destroyed; largest linked group of destroyed buildings: 10" tabindex="0"/><circle cx="376.6" cy="338.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lionshead OR 2020
+no conflagration
+largest exposed cluster: 25 buildings
+dense-exposure share: 8%
+284 destroyed; largest linked group of destroyed buildings: 12" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Riverside OR 2020
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+158 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="S Obenchain OR 2020
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+123 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Two Four Two OR 2020
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+38 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bootleg OR 2021
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+160 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Miller Road OR 2022
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+32 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="418.3" cy="333.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Highway 31 SC 2009
+no conflagration
+largest exposed cluster: 38 buildings
+dense-exposure share: 10%
+30 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Alabaugh SD 2007
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+36 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="435.1" cy="353.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Chimney Tops 2 TN 2016
+no conflagration
+largest exposed cluster: 45 buildings
+dense-exposure share: 4%
+1,517 destroyed; largest linked group of destroyed buildings: 16" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cobbly Nob TN 2016
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+91 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Indigo Lane TN 2022
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+106 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Callisburg TX 2005
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+17 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="332.1" cy="355.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Crossroads TX 2005
+no conflagration
+largest exposed cluster: 16 buildings
+dense-exposure share: 4%
+102 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Montague County Complex TX 2009
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+95 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Two Mile Hill Complex TX 2009
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+13 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="101Ranch TX 2011
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+28 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bastropcountycomplex TX 2011
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+1,403 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Coopermountainranch TX 2011
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+40 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dyermill TX 2011
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+25 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Enminfire TX 2011
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+13 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="311.5" cy="350.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hickman TX 2011
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 5%
+43 destroyed; largest linked group of destroyed buildings: 12" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mitchellcountycomplex TX 2011
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+46 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Northeasttexasfirecomplex TX 2011
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+131 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oldmagnolia TX 2011
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+21 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="332.1" cy="356.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Pkcomplex TX 2011
+no conflagration
+largest exposed cluster: 16 buildings
+dense-exposure share: 3%
+13 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="428.3" cy="350.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Rockhouse TX 2011
+no conflagration
+largest exposed cluster: 42 buildings
+dense-exposure share: 5%
+51 destroyed; largest linked group of destroyed buildings: 15" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="S839Concordrobbins TX 2011
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+28 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Spicewood TX 2011
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+41 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="274.8" cy="357.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Stoneridge TX 2011
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 3%
+10 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tanglewoodcomplex TX 2011
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+17 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="420.9" cy="228.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Double Diamond TX 2014
+no conflagration
+largest exposed cluster: 39 buildings
+dense-exposure share: 40%
+352 destroyed; largest linked group of destroyed buildings: 20" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hidden Pines TX 2015
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+37 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="I40 TX 2016
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Perryton TX 2017
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+76 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Big L TX 2022
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+10 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Canadian River Bottom TX 2022
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Chalk Mountain TX 2022
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+38 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Kidd TX 2022
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+240 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mesquite Heat TX 2022
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+44 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wood Hollow UT 2012
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+32 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Brianhead UT 2017
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+16 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dollar Ridge UT 2018
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+173 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="School WA 2005
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+106 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="263.1" cy="366.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Barker Canyon Complex WA 2012
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+40 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Byrd WA 2012
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+13 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="338.2" cy="358.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Taylor Bridge WA 2012
+no conflagration
+largest exposed cluster: 17 buildings
+dense-exposure share: 3%
+122 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="363.9" cy="361.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Carlton Complex WA 2014
+no conflagration
+largest exposed cluster: 22 buildings
+dense-exposure share: 2%
+702 destroyed; largest linked group of destroyed buildings: 20" tabindex="0"/><circle cx="387.9" cy="328.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Black Canyon WA 2015
+no conflagration
+largest exposed cluster: 28 buildings
+dense-exposure share: 11%
+111 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="285.3" cy="365.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Butte Creek WA 2015
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 1%
+32 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Carpenter Rd. WA 2015
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+39 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="372.5" cy="317.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="First Creek WA 2015
+no conflagration
+largest exposed cluster: 24 buildings
+dense-exposure share: 14%
+30 destroyed; largest linked group of destroyed buildings: 12" tabindex="0"/><circle cx="311.5" cy="367.3" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Limebelt WA 2015
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 0%
+221 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Marble Valley WA 2015
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="318.8" cy="340.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Sleepy Hollow WA 2015
+no conflagration
+largest exposed cluster: 14 buildings
+dense-exposure share: 8%
+32 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tunk Block WA 2015
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+356 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Twisp River WA 2015
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+20 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Spokane Complex WA 2016
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+26 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="249.8" cy="365.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Grass Valley WA 2018
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 1%
+40 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="363.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cold Springs WA 2020
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 1%
+198 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Evans Canyon WA 2020
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Inchelium Hiway WA 2020
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+40 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Palmer WA 2020
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+68 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="458.7" cy="310.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Pearl Hill WA 2020
+no conflagration
+largest exposed cluster: 57 buildings
+dense-exposure share: 16%
+141 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Whitney WA 2020
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 0%
+100 destroyed; largest linked group of destroyed buildings: 10" tabindex="0"/><circle cx="303.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Chuweah Creek Fire WA 2021
+no conflagration
+largest exposed cluster: 12 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Ford Corkscrew WA 2021
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+75 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Walker Creek WA 2021
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+21 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hwy 123 OK 2023
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+13 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="354.4" cy="306.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Gray WA 2023
+no conflagration
+largest exposed cluster: 20 buildings
+dense-exposure share: 17%
+365 destroyed; largest linked group of destroyed buildings: 13" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hansen Road WA 2023
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+4 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="274.8" cy="354.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Highland CA 2023
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 4%
+33 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="318.8" cy="274.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Jimmys Water Hole NJ 2023
+no conflagration
+largest exposed cluster: 14 buildings
+dense-exposure share: 26%
+1 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Oregon WA 2023
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+263 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Tunnel Five WA 2023
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+8 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Aero CA 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+3 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Alexander Mountain CO 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+38 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Corral CA 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+6 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Davis NV 2024
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+17 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Durkee OR 2024
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+36 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="216.3" cy="363.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Elk WY 2024
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 1%
+39 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Gwen ID 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+107 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="356.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lone Rock OR 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 3%
+35 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wfigs_2024_Monkey_Creek OR 2024
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+21 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Paddock ID 2024
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+6 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Remington WY 2024
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+45 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="325.7" cy="313.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Watch AZ 2024
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 15%
+21 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wfigs_2024_Waterfall_Mountain VA 2024
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+2 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="33 Road OK 2025
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+119 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="840 Road OK 2025
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+4 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="318.8" cy="331.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Big Eagle OK 2025
+no conflagration
+largest exposed cluster: 14 buildings
+dense-exposure share: 10%
+0 destroyed; largest linked group of destroyed buildings: 0" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Burdoin WA 2025
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+46 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Camp House MN 2025
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+20 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bdu/Ranch CA 2025
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+26 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="285.3" cy="217.1" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Wfigs_2025_Cotton_2 NM 2025
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 43%
+5 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Crabapple TX 2025
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+10 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cram OR 2025
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+14 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="294.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Dragon Bravo AZ 2025
+no conflagration
+largest exposed cluster: 11 buildings
+dense-exposure share: 0%
+40 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Flat OR 2025
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+7 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="274.8" cy="362.2" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Forsyth UT 2025
+no conflagration
+largest exposed cluster: 9 buildings
+dense-exposure share: 2%
+14 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Green Acres WA 2025
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Greer AZ 2025
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+6 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Lee CO 2025
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+18 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="354.4" cy="332.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Little Salt Creek OK 2025
+no conflagration
+largest exposed cluster: 20 buildings
+dense-exposure share: 10%
+42 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Monroe Canyon UT 2025
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="359.2" cy="322.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Rowena OR 2025
+no conflagration
+largest exposed cluster: 21 buildings
+dense-exposure share: 13%
+76 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="410.1" cy="183.9" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Welder TX 2025
+no conflagration
+largest exposed cluster: 35 buildings
+dense-exposure share: 52%
+21 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" OR 2026
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+35 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" OR 2026
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+25 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="354.4" cy="360.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Aspen Acres CO 2026
+no conflagration
+largest exposed cluster: 20 buildings
+dense-exposure share: 2%
+467 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Bronson IA 2026
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+19 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="216.3" cy="357.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 3%
+12 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Country Meadow WA 2026
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+1 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" OR 2026
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+15 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="387.9" cy="316.4" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hunggate TX 2026
+no conflagration
+largest exposed cluster: 28 buildings
+dense-exposure share: 15%
+27 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Hwy 82 GA 2026
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+62 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="311.5" cy="358.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 3%
+86 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+15 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" OR 2026
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+27 destroyed; largest linked group of destroyed buildings: 4" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Meade Lake KS 2026
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+24 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+75 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="165.4" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cottonwood NE 2026
+no conflagration
+largest exposed cluster: 3 buildings
+dense-exposure share: 0%
+53 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="249.8" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Qury SD 2026
+no conflagration
+largest exposed cluster: 7 buildings
+dense-exposure share: 0%
+14 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="263.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 8 buildings
+dense-exposure share: 0%
+78 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" ID 2026
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+22 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="349.3" cy="236.6" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Upriver WA 2026
+no conflagration
+largest exposed cluster: 19 buildings
+dense-exposure share: 37%
+12 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="234.5" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cottonwood UT 2026
+no conflagration
+largest exposed cluster: 6 buildings
+dense-exposure share: 0%
+116 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="285.3" cy="355.5" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Verona CA 2026
+no conflagration
+largest exposed cluster: 10 buildings
+dense-exposure share: 4%
+7 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="311.5" cy="355.8" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip=" WA 2026
+no conflagration
+largest exposed cluster: 13 buildings
+dense-exposure share: 3%
+6 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="216.3" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Cottonville Incident WI 2005
+no conflagration
+largest exposed cluster: 5 buildings
+dense-exposure share: 0%
+48 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Station WY 2015
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+29 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="194.1" cy="368.0" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Roosevelt WY 2018
+no conflagration
+largest exposed cluster: 4 buildings
+dense-exposure share: 0%
+61 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="325.7" cy="362.7" r="3.5" fill="var(--ink-3)" fill-opacity="0.45" stroke="var(--surface)" stroke-width="1" data-tip="Mullen WY 2020
+no conflagration
+largest exposed cluster: 15 buildings
+dense-exposure share: 1%
+60 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="507.4" cy="337.0" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Paradise CA 2003
+crossed the line, no conflagration
+largest exposed cluster: 93 buildings
+dense-exposure share: 9%
+164 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="539.3" cy="265.8" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Simi CA 2003
+crossed the line, no conflagration
+largest exposed cluster: 128 buildings
+dense-exposure share: 29%
+16 destroyed; largest linked group of destroyed buildings: 1" tabindex="0"/><circle cx="548.9" cy="323.6" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Harris CA 2007
+crossed the line, no conflagration
+largest exposed cluster: 141 buildings
+dense-exposure share: 13%
+188 destroyed; largest linked group of destroyed buildings: 29" tabindex="0"/><circle cx="528.6" cy="286.1" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Ranch CA 2007
+crossed the line, no conflagration
+largest exposed cluster: 115 buildings
+dense-exposure share: 23%
+15 destroyed; largest linked group of destroyed buildings: 3" tabindex="0"/><circle cx="574.3" cy="328.6" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Rice CA 2007
+crossed the line, no conflagration
+largest exposed cluster: 182 buildings
+dense-exposure share: 11%
+155 destroyed; largest linked group of destroyed buildings: 41" tabindex="0"/><circle cx="526.0" cy="225.9" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Slide CA 2007
+crossed the line, no conflagration
+largest exposed cluster: 112 buildings
+dense-exposure share: 40%
+107 destroyed; largest linked group of destroyed buildings: 8" tabindex="0"/><circle cx="544.6" cy="319.4" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Witch CA 2007
+crossed the line, no conflagration
+largest exposed cluster: 135 buildings
+dense-exposure share: 14%
+683 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="572.1" cy="219.0" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Freeway Complex CA 2008
+crossed the line, no conflagration
+largest exposed cluster: 178 buildings
+dense-exposure share: 42%
+52 destroyed; largest linked group of destroyed buildings: 2" tabindex="0"/><circle cx="522.3" cy="145.1" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Marek CA 2008
+crossed the line, no conflagration
+largest exposed cluster: 108 buildings
+dense-exposure share: 63%
+42 destroyed; largest linked group of destroyed buildings: 7" tabindex="0"/><circle cx="506.4" cy="247.1" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Station CA 2009
+crossed the line, no conflagration
+largest exposed cluster: 92 buildings
+dense-exposure share: 34%
+100 destroyed; largest linked group of destroyed buildings: 5" tabindex="0"/><circle cx="623.8" cy="204.4" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Creek CA 2017
+crossed the line, no conflagration
+largest exposed cluster: 299 buildings
+dense-exposure share: 46%
+152 destroyed; largest linked group of destroyed buildings: 6" tabindex="0"/><circle cx="578.6" cy="272.1" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Lilac 5 CA 2017
+crossed the line, no conflagration
+largest exposed cluster: 190 buildings
+dense-exposure share: 27%
+139 destroyed; largest linked group of destroyed buildings: 39" tabindex="0"/><circle cx="551.7" cy="245.1" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Sulfur CA 2017
+crossed the line, no conflagration
+largest exposed cluster: 145 buildings
+dense-exposure share: 35%
+211 destroyed; largest linked group of destroyed buildings: 28" tabindex="0"/><circle cx="531.2" cy="274.7" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Thomas CA 2017
+crossed the line, no conflagration
+largest exposed cluster: 118 buildings
+dense-exposure share: 26%
+976 destroyed; largest linked group of destroyed buildings: 12" tabindex="0"/><circle cx="504.2" cy="348.2" r="5" fill="var(--s2)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Creek CA 2020
+crossed the line, no conflagration
+largest exposed cluster: 90 buildings
+dense-exposure share: 6%
+682 destroyed; largest linked group of destroyed buildings: 9" tabindex="0"/><circle cx="613.2" cy="50.9" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Sayre CA 2008
+urban conflagration
+largest exposed cluster: 269 buildings
+dense-exposure share: 90%
+923 destroyed; largest linked group of destroyed buildings: 162" tabindex="0"/><text x="621.2" y="54.9" text-anchor="start" style="fill:var(--ink)">Sayre</text><circle cx="608.7" cy="241.7" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Tubbs CA 2017
+urban conflagration
+largest exposed cluster: 257 buildings
+dense-exposure share: 36%
+5,185 destroyed; largest linked group of destroyed buildings: 143" tabindex="0"/><text x="616.7" y="245.7" text-anchor="start" style="fill:var(--ink)">Tubbs</text><circle cx="579.1" cy="302.9" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Camp CA 2018
+urban conflagration
+largest exposed cluster: 191 buildings
+dense-exposure share: 18%
+16,493 destroyed; largest linked group of destroyed buildings: 94" tabindex="0"/><text x="587.1" y="306.9" text-anchor="start" style="fill:var(--ink)">Camp</text><circle cx="557.0" cy="271.2" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Woolsey CA 2018
+urban conflagration
+largest exposed cluster: 153 buildings
+dense-exposure share: 27%
+1,508 destroyed; largest linked group of destroyed buildings: 101" tabindex="0"/><text x="565.0" y="275.2" text-anchor="start" style="fill:var(--ink)">Woolsey</text><circle cx="509.6" cy="127.0" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Sandalwood CA 2019
+urban conflagration
+largest exposed cluster: 95 buildings
+dense-exposure share: 68%
+75 destroyed; largest linked group of destroyed buildings: 56" tabindex="0"/><text x="517.6" y="131.0" text-anchor="start" style="fill:var(--ink)">Sandalwood</text><circle cx="536.9" cy="338.4" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Glass CA 2020
+urban conflagration
+largest exposed cluster: 125 buildings
+dense-exposure share: 8%
+1,237 destroyed; largest linked group of destroyed buildings: 73" tabindex="0"/><text x="544.9" y="342.4" text-anchor="start" style="fill:var(--ink)">Glass</text><circle cx="522.3" cy="188.2" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Marshall CO 2021
+urban conflagration
+largest exposed cluster: 108 buildings
+dense-exposure share: 51%
+1,196 destroyed; largest linked group of destroyed buildings: 57" tabindex="0"/><text x="530.3" y="192.2" text-anchor="start" style="fill:var(--ink)">Marshall</text><circle cx="590.9" cy="55.5" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Eaton CA 2025
+urban conflagration
+largest exposed cluster: 215 buildings
+dense-exposure share: 88%
+7,066 destroyed; largest linked group of destroyed buildings: 103" tabindex="0"/><text x="582.9" y="59.5" text-anchor="end" style="fill:var(--ink)">Eaton</text><circle cx="571.0" cy="156.1" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Palisades CA 2025
+urban conflagration
+largest exposed cluster: 176 buildings
+dense-exposure share: 60%
+5,257 destroyed; largest linked group of destroyed buildings: 111" tabindex="0"/><text x="579.0" y="160.1" text-anchor="start" style="fill:var(--ink)">Palisades</text><circle cx="656.2" cy="118.3" r="6" fill="var(--s4)" fill-opacity="1" stroke="var(--surface)" stroke-width="1" data-tip="Almeda Drive OR 2020
+urban conflagration
+largest exposed cluster: 414 buildings
+dense-exposure share: 71%
+2,402 destroyed; largest linked group of destroyed buildings: 378" tabindex="0"/><text x="648.2" y="122.3" text-anchor="end" style="fill:var(--ink)">Almeda Drive</text><text transform="translate(14,191.0) rotate(-90)" text-anchor="middle">Share of exposed buildings with 20+ neighbours</text></svg></div></div><div class="card"><h3>Two candidate rules, scored</h3><p class="cap"><span class="plain">The cluster rule catches every conflagration with far fewer false alarms than the density rule. In fires chosen regardless of loss (2023–25), only Eaton and Palisades crossed the cluster line, and both conflagrated.</span><span class="tech">Cut fitted on the 2002–26 record (Youden), then applied unchanged to the unselected frame. Caveats: 10 events, 8 in California; exposure from the final perimeter is partly an outcome — with exposure fixed before the fire (buildings within 5 km of ignition) the cluster measure still ranks first (AUC 0.90) but misses Tubbs, Camp, Glass and Almeda Drive, whose towns lay beyond 5 km. The held-out 2016–22 fires will test the 'below the line' side (prereg 0b07f98).</span></p><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th>Rule</th><th>Applied to</th><th class=n>Fires</th><th>Conflagrations caught</th><th class=n>False alarms</th></tr></thead><tbody><tr><td data-label="Rule">Largest connected cluster ≥ 89 buildings</td><td data-label="Applied to">2002–26 record (fires with 100+ exposed)</td><td class="n" data-label="Fires">355</td><td data-label="Conflagrations caught">10 of 10</td><td class="n" data-label="False alarms"><span data-tip="Fires flagged that did not conflagrate
+Paradise CA 2003, Simi CA 2003, Harris CA 2007, Ranch CA 2007, Rice CA 2007, Slide CA 2007, Witch CA 2007, Freeway Complex CA 2008, Marek CA 2008, Station CA 2009, Creek CA 2017, Lilac 5 CA 2017, Sulfur CA 2017, Thomas CA 2017, Creek CA 2020">15</span></td></tr><tr><td data-label="Rule">Largest connected cluster ≥ 89 buildings</td><td data-label="Applied to">Fires chosen regardless of loss, 2023–25</td><td class="n" data-label="Fires">58</td><td data-label="Conflagrations caught">2 of 2</td><td class="n" data-label="False alarms"><span data-tip="Fires flagged that did not conflagrate
+none">0</span></td></tr><tr><td data-label="Rule">Dense-exposure share ≥ 7.9%</td><td data-label="Applied to">2002–26 record (fires with 100+ exposed)</td><td class="n" data-label="Fires">355</td><td data-label="Conflagrations caught">10 of 10</td><td class="n" data-label="False alarms"><span data-tip="Fires flagged that did not conflagrate
+Yarnell Hill AZ 2013, Margo AZ 2021, Gavilan CA 2002, Cedar CA 2003, Grand Prix CA 2003, Old CA 2003, Paradise CA 2003, Simi CA 2003, Buckweed CA 2007, Corral CA 2007, Grass Valley CA 2007, Harris CA 2007, Ranch CA 2007, Rice CA 2007, Santiago CA 2007, Slide CA 2007, Witch CA 2007, Freeway Complex CA 2008, Marek CA 2008, Sesnon CA 2008, Tea CA 2008, Jesusita CA 2009, Station CA 2009, San Diego Complex CA 2014, Border 3 CA 2016, Clayton CA 2016, Erskine CA 2016, Canyon 2 CA 2017, Creek CA 2017, Lilac 5 CA 2017, Sulfur CA 2017, Thomas CA 2017, Carr CA 2018, Holy CA 2018, Tick CA 2019, Bond CA 2020, Antelope CA 2021, Dixie CA 2021, Border 32 CA 2022, Mill CA 2022, Ordway Crowley Co CO 2008, Beulah Hill CO 2016, East Troublesome CO 2020, Bridge CA 2024, French CA 2024, Line CA 2024, Coches 2 CA 2025, West Wind MT 2021, Stony Ridge NC 2009, Waterfall NV 2004, Caughlin NV 2011, Numbers NV 2020, Poeville Road NV 2020, Choctaw OK 2009, Beachie Creek OR 2020, Echo Mtn Complex OR 2020, Lionshead OR 2020, Highway 31 SC 2009, Double Diamond TX 2014, Black Canyon WA 2015, First Creek WA 2015, Pearl Hill WA 2020, Gray WA 2023, Jimmys Water Hole NJ 2023, Watch AZ 2024, Big Eagle OK 2025, Wfigs_2025_Cotton_2 NM 2025, Little Salt Creek OK 2025, Rowena OR 2025, Welder TX 2025, Hunggate TX 2026, Upriver WA 2026">72</span></td></tr><tr><td data-label="Rule">Dense-exposure share ≥ 7.9%</td><td data-label="Applied to">Fires chosen regardless of loss, 2023–25</td><td class="n" data-label="Fires">58</td><td data-label="Conflagrations caught">2 of 2</td><td class="n" data-label="False alarms"><span data-tip="Fires flagged that did not conflagrate
+Bridge CA 2024, French CA 2024, Line CA 2024, Gray WA 2023, Jimmys Water Hole NJ 2023, Parmer Lane TX 2023, Smokehouse Creek TX 2024, Watch AZ 2024, Windy Deuce TX 2024, Wfigs_2025_Cotton_2 NM 2025, Rowena OR 2025">11</span></td></tr></tbody></table></div></div></section><section class="sec" id="by-year"><h2>2. Losses by year, 2002–2026</h2><div class="card"><h3>Buildings destroyed per year, by source</h3><p class="cap"><span class="plain">The sources rise and fall together; compare shapes, not heights. Carlson is lower because it maps only fires that destroyed 10 or more; our model is lower because it finds about two-thirds of losses. 2026* is a partial year.</span><span class="tech">Reported structures destroyed (incident reports), hand-mapped destroyed buildings (Carlson), first-call destroyed Direct-zone buildings (model).</span></p><div class="legend"><span class="k" data-tip="Incident reports (ICS-209-PLUS)
 Federal incident reports, every incident of any size, 2002–2020.
 @@tech
 Incident reports (ICS-209-PLUS)
@@ -638,35 +2080,35 @@ fires with 1–9 destroyed: 281
 fires with 1–9 destroyed: 288
 10–99: 1,006
 100–999: 2,307
-1,000 or more: 0"><div class="seg" style="height:0.00%;background:var(--s4)"></div><div class="seg" style="height:5.77%;background:var(--s2)"></div><div class="seg" style="height:2.51%;background:var(--s3)"></div><div class="seg" style="height:0.72%;background:var(--s5)"></div></div></div><div class="xl dense"><span>2007</span><span></span><span class=alt>2009</span><span></span><span>2011</span><span></span><span class=alt>2013</span><span></span><span>2015</span><span></span><span class=alt>2017</span><span></span><span>2019</span><span></span><span class=alt>2021</span><span></span><span>2023</span><span></span><span class=alt>2025</span><span></span></div></div><div class="card"><h3>Where did the growth come from? Share of the increase in buildings destroyed per year, by size of fire</h3><p class="cap"><span class="plain">Comparing two equal periods (2007–2015 vs 2016–2025 in the situation reports, 2002–2010 vs 2011–2020 in ICS-209-PLUS), almost all of the growth is in fires that destroyed hundreds or thousands of buildings; fires under 100 add almost nothing. The size classes don't drive this: with 1–4 / 5–49 / 50–499 / 500+ the top class takes 96%, and with 1–24 / 25–249 / 250–2,499 / 2,500+ the top two take 97%.</span><span class="tech">Change in mean destroyed per year between periods, split by fire-size class; classes are order-of-magnitude bins because the loss distribution is heavy-tailed (a power law with exponent about 1.6); 10 matches Carlson's inclusion rule. 95% ranges resample fires within year (500 draws); shares and ranges below 0 (a class that shrank slightly) are drawn at 0.</span></p><div class="legend"><span class="k"><span class="sw" style="background:var(--s5)"></span>Situation reports</span><span class="k"><span class="sw" style="background:var(--s1)"></span>ICS-209-PLUS</span></div><div class="hb"><div class="lab">Fires with 1–9 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:0.00%;background:var(--s5)" data-tip="Situation reports: Fires with 1–9 destroyed
+1,000 or more: 0"><div class="seg" style="height:0.00%;background:var(--s4)"></div><div class="seg" style="height:5.77%;background:var(--s2)"></div><div class="seg" style="height:2.51%;background:var(--s3)"></div><div class="seg" style="height:0.72%;background:var(--s5)"></div></div></div><div class="xl dense"><span>2007</span><span></span><span class=alt>2009</span><span></span><span>2011</span><span></span><span class=alt>2013</span><span></span><span>2015</span><span></span><span class=alt>2017</span><span></span><span>2019</span><span></span><span class=alt>2021</span><span></span><span>2023</span><span></span><span class=alt>2025</span><span></span></div></div><div class="card"><h3>Where did the growth come from? Share of the increase in buildings destroyed per year, by size of fire</h3><p class="cap"><span class="plain">Comparing two equal periods (2007–2015 vs 2016–2025 in the situation reports, 2002–2010 vs 2011–2020 in ICS-209-PLUS), almost all of the growth is in fires that destroyed hundreds or thousands of buildings; fires under 100 add almost nothing. The size classes don't drive this: with 1–4 / 5–49 / 50–499 / 500+ the top class takes 96%, and with 1–24 / 25–249 / 250–2,499 / 2,500+ the top two take 97%.</span><span class="tech">Change in mean destroyed per year between periods, split by fire-size class; classes are order-of-magnitude bins because the loss distribution is heavy-tailed (a power law with exponent about 1.6); 10 matches Carlson's inclusion rule. 95% ranges resample fires within year (500 draws); shares and ranges below 0 (a class that shrank slightly) are drawn at 0.</span></p><div class="legend"><span class="k"><span class="sw" style="background:var(--s5)"></span>Situation reports</span><span class="k"><span class="sw" style="background:var(--s1)"></span>ICS-209-PLUS</span></div><div class="hb"><div class="lab">Fires with 1–9 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:0.00%;background:var(--s5)" data-tip="Situation reports: Fires with 1–9 destroyed
 0% of the increase (95% range -0% to 0%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:-16844.75%;width:33353.60%"></i><span class="val" style="left:calc(16508.84% + 6px)">0%</span></div><div class="bar" style="width:0.00%;background:var(--s1)" data-tip="ICS-209-PLUS: Fires with 1–9 destroyed
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:0.00%;width:0.38%"></i><span class="val" style="left:calc(0.38% + 6px)">0%</span></div><div class="brow"><div class="bar" style="width:0.00%;background:var(--s1)" data-tip="ICS-209-PLUS: Fires with 1–9 destroyed
 -0% of the increase (95% range -1% to 0%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:-103847307399.98%;width:121192596007.77%"></i><span class="val" style="left:calc(17345288607.79% + 6px)">-0%</span></div></div><div class="lab">10–99</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:0.00%;background:var(--s5)" data-tip="Situation reports: 10–99
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:0.00%;width:0.17%"></i><span class="val" style="left:calc(0.17% + 6px)">-0%</span></div></div><div class="lab">10–99</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:0.00%;background:var(--s5)" data-tip="Situation reports: 10–99
 -0% of the increase (95% range -4% to 3%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:-349353708408.40%;width:666271977250.99%"></i><span class="val" style="left:calc(316918268842.59% + 6px)">-0%</span></div><div class="bar" style="width:3.73%;background:var(--s1)" data-tip="ICS-209-PLUS: 10–99
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:0.00%;width:3.17%"></i><span class="val" style="left:calc(3.17% + 6px)">-0%</span></div><div class="brow"><div class="bar" style="width:3.73%;background:var(--s1)" data-tip="ICS-209-PLUS: 10–99
 4% of the increase (95% range 1% to 12%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:26.25%;width:258.91%"></i><span class="val" style="left:calc(285.16% + 6px)">4%</span></div></div><div class="lab">100–999</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:6.32%;background:var(--s5)" data-tip="Situation reports: 100–999
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:0.98%;width:9.67%"></i><span class="val" style="left:calc(10.65% + 6px)">4%</span></div></div><div class="lab">100–999</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:6.32%;background:var(--s5)" data-tip="Situation reports: 100–999
 7% of the increase (95% range -6% to 27%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:-91.11%;width:478.11%"></i><span class="val" style="left:calc(387.00% + 6px)">7%</span></div><div class="bar" style="width:20.09%;background:var(--s1)" data-tip="ICS-209-PLUS: 100–999
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:0.00%;width:24.47%"></i><span class="val" style="left:calc(24.47% + 6px)">7%</span></div><div class="brow"><div class="bar" style="width:20.09%;background:var(--s1)" data-tip="ICS-209-PLUS: 100–999
 22% of the increase (95% range 10% to 60%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:44.64%;width:225.79%"></i><span class="val" style="left:calc(270.43% + 6px)">22%</span></div></div><div class="lab">1,000 or more</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:84.72%;background:var(--s5)" data-tip="Situation reports: 1,000 or more
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:8.97%;width:45.36%"></i><span class="val" style="left:calc(54.32% + 6px)">22%</span></div></div><div class="lab">1,000 or more</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:84.72%;background:var(--s5)" data-tip="Situation reports: 1,000 or more
 93% of the increase (95% range 73% to 106%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:78.51%;width:35.38%"></i><span class="val" style="left:calc(113.88% + 6px)">93%</span></div><div class="bar" style="width:67.34%;background:var(--s1)" data-tip="ICS-209-PLUS: 1,000 or more
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:66.51%;width:29.97%"></i><span class="val" style="left:calc(96.48% + 6px)">93%</span></div><div class="brow"><div class="bar" style="width:67.34%;background:var(--s1)" data-tip="ICS-209-PLUS: 1,000 or more
 74% of the increase (95% range 28% to 87%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:37.64%;width:80.43%"></i><span class="val" style="left:calc(118.07% + 6px)">74%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:22.73%">25%</span><span style="left:45.45%">50%</span><span style="left:68.18%">75%</span><span style="left:90.91%">100%</span></div></div></div><div class="card"><h3>The same growth, by rank: the largest fires of each year</h3><p class="cap">Ranking fires within each year avoids choosing size classes at all. The single largest fire of each year accounts for 48% of the increase (situation reports) and 54% (ICS-209-PLUS); the five largest, most of the rest.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s5)"></span>Situation reports</span><span class="k"><span class="sw" style="background:var(--s1)"></span>ICS-209-PLUS</span></div><div class="hb"><div class="lab">The single largest fire of each year</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:43.76%;background:var(--s5)" data-tip="Situation reports: The single largest fire of each year
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:25.35%;width:54.16%"></i><span class="val" style="left:calc(79.51% + 6px)">74%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:22.73%">25%</span><span style="left:45.45%">50%</span><span style="left:68.18%">75%</span><span style="left:90.91%">100%</span></div></div></div><div class="card"><h3>The same growth, by rank: the largest fires of each year</h3><p class="cap">Ranking fires within each year avoids choosing size classes at all. The single largest fire of each year accounts for 48% of the increase (situation reports) and 54% (ICS-209-PLUS); the five largest, most of the rest.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s5)"></span>Situation reports</span><span class="k"><span class="sw" style="background:var(--s1)"></span>ICS-209-PLUS</span></div><div class="hb"><div class="lab">The single largest fire of each year</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:43.76%;background:var(--s5)" data-tip="Situation reports: The single largest fire of each year
 48% of the increase (95% range 19% to 69%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:39.46%;width:103.99%"></i><span class="val" style="left:calc(143.45% + 6px)">48%</span></div><div class="bar" style="width:48.66%;background:var(--s1)" data-tip="ICS-209-PLUS: The single largest fire of each year
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:17.27%;width:45.51%"></i><span class="val" style="left:calc(62.77% + 6px)">48%</span></div><div class="brow"><div class="bar" style="width:48.66%;background:var(--s1)" data-tip="ICS-209-PLUS: The single largest fire of each year
 54% of the increase (95% range 15% to 61%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:27.68%;width:85.70%"></i><span class="val" style="left:calc(113.38% + 6px)">54%</span></div></div><div class="lab">The 5 largest fires of each year</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:77.82%;background:var(--s5)" data-tip="Situation reports: The 5 largest fires of each year
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:13.47%;width:41.70%"></i><span class="val" style="left:calc(55.17% + 6px)">54%</span></div></div><div class="lab">The 5 largest fires of each year</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:77.82%;background:var(--s5)" data-tip="Situation reports: The 5 largest fires of each year
 86% of the increase (95% range 63% to 94%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:74.04%;width:35.49%"></i><span class="val" style="left:calc(109.53% + 6px)">86%</span></div><div class="bar" style="width:70.70%;background:var(--s1)" data-tip="ICS-209-PLUS: The 5 largest fires of each year
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:57.62%;width:27.62%"></i><span class="val" style="left:calc(85.24% + 6px)">86%</span></div><div class="brow"><div class="bar" style="width:70.70%;background:var(--s1)" data-tip="ICS-209-PLUS: The 5 largest fires of each year
 78% of the increase (95% range 48% to 88%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:62.09%;width:51.02%"></i><span class="val" style="left:calc(113.11% + 6px)">78%</span></div></div><div class="lab">Every other fire</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="bar" style="width:13.09%;background:var(--s5)" data-tip="Situation reports: Every other fire
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:43.90%;width:36.07%"></i><span class="val" style="left:calc(79.97% + 6px)">78%</span></div></div><div class="lab">Every other fire</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:22.73%"></i><i class="grid" style="left:45.45%"></i><i class="grid" style="left:68.18%"></i><i class="grid" style="left:90.91%"></i><div class="brow"><div class="bar" style="width:13.09%;background:var(--s5)" data-tip="Situation reports: Every other fire
 14% of the increase (95% range 6% to 37%)
-2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"><i class="ci" style="left:43.34%;width:211.04%"></i><span class="val" style="left:calc(254.38% + 6px)">14%</span></div><div class="bar" style="width:20.21%;background:var(--s1)" data-tip="ICS-209-PLUS: Every other fire
+2007–2015 → 2016–2025: 3,619 → 10,277 destroyed per year"></div><i class="ci" style="left:5.67%;width:27.62%"></i><span class="val" style="left:calc(33.29% + 6px)">14%</span></div><div class="brow"><div class="bar" style="width:20.21%;background:var(--s1)" data-tip="ICS-209-PLUS: Every other fire
 22% of the increase (95% range 12% to 52%)
-2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"><i class="ci" style="left:54.13%;width:178.48%"></i><span class="val" style="left:calc(232.61% + 6px)">22%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:22.73%">25%</span><span style="left:45.45%">50%</span><span style="left:68.18%">75%</span><span style="left:90.91%">100%</span></div></div></div></section><section class="sec" id="concentration"><h2>5. How concentrated are losses, and is that changing?</h2><div class="card"><h3>Concentration curve: share of all losses held by the most destructive fires</h3><p class="cap">Fires ranked from most to least destructive. In the situation reports, the top 1% of loss fires hold 60% of all destroyed buildings, the top 5% hold 83% and the top 10% 90%. Carlson looks less concentrated only because it leaves out fires with 1–9 losses.</p><div class="tgs"><label class="tg" data-tip="ICS-209-PLUS
+2002–2010 → 2011–2020: 2,655 → 8,176 destroyed per year"></div><i class="ci" style="left:10.94%;width:36.07%"></i><span class="val" style="left:calc(47.01% + 6px)">22%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:22.73%">25%</span><span style="left:45.45%">50%</span><span style="left:68.18%">75%</span><span style="left:90.91%">100%</span></div></div></div></section><section class="sec" id="concentration"><h2>3. How concentrated are losses, and is that changing?</h2><div class="card"><h3>Concentration curve: share of all losses held by the most destructive fires</h3><p class="cap">Fires ranked from most to least destructive. In the situation reports, the top 1% of loss fires hold 60% of all destroyed buildings, the top 5% hold 83% and the top 10% 90%. Carlson looks less concentrated only because it leaves out fires with 1–9 losses.</p><div class="tgs"><label class="tg" data-tip="ICS-209-PLUS
 Federal incident reports, every incident of any size, 2002–2020."><input type="checkbox" checked data-group="lor" data-set="I209"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s1)" stroke-width="3"/></svg>ICS-209-PLUS</label><label class="tg" data-tip="Situation reports
 National situation reports, every incident of any size, 2007–2026."><input type="checkbox" checked data-group="lor" data-set="IMSR"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s5)" stroke-width="3"/></svg>Situation reports</label><label class="tg" data-tip="Carlson (fires with ≥10 only)
 USGS hand-mapped buildings; only fires that destroyed 10 or more; 2002–2022."><input type="checkbox" checked data-group="lor" data-set="CARL"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s3)" stroke-width="3"/></svg>Carlson (fires with ≥10 only)</label></div><div class="svgwrap"><svg viewBox="0 0 760 380" width="100%" role="img" aria-label="Concentration curve"><line class="gridl" x1="56" x2="744" y1="328.0" y2="328.0"/><text x="48" y="332.0" text-anchor="end">0%</text><line class="gridl" x1="56" x2="744" y1="249.5" y2="249.5"/><text x="48" y="253.5" text-anchor="end">25%</text><line class="gridl" x1="56" x2="744" y1="171.0" y2="171.0"/><text x="48" y="175.0" text-anchor="end">50%</text><line class="gridl" x1="56" x2="744" y1="92.5" y2="92.5"/><text x="48" y="96.5" text-anchor="end">75%</text><line class="gridl" x1="56" x2="744" y1="14.0" y2="14.0"/><text x="48" y="18.0" text-anchor="end">100%</text><text x="56.0" y="346" text-anchor="middle">0%</text><text x="228.0" y="346" text-anchor="middle">25%</text><text x="400.0" y="346" text-anchor="middle">50%</text><text x="572.0" y="346" text-anchor="middle">75%</text><text x="744.0" y="346" text-anchor="middle">100%</text><line class="axisl" x1="56" x2="744" y1="328" y2="328"/><text x="400.0" y="370" text-anchor="middle">Share of fires with any loss, from most to least destructive</text><line x1="56" y1="328" x2="744" y2="14" stroke="var(--ink-2)" stroke-width="1.5" stroke-dasharray="2 4"/><g class="ser" data-group="lor" data-set="I209"><path d="M56.0,328.0 L61.8,130.4 L63.0,122.4 L67.5,100.6 L73.3,84.9 L79.1,75.0 L84.8,68.3 L90.5,63.1 L90.6,63.0 L96.4,58.8 L102.1,55.2 L107.9,52.3 L113.8,49.8 L119.6,47.7 L124.8,46.1 L125.3,45.9 L131.1,44.3 L136.9,42.8 L142.6,41.5 L148.4,40.3 L154.2,39.2 L159.9,38.2 L165.8,37.3 L171.6,36.5 L177.4,35.8 L183.1,35.0 L188.9,34.4 L194.7,33.8 L200.4,33.1 L206.2,32.6 L212.0,32.1 L217.9,31.5 L223.6,31.0 L229.4,30.5 L235.2,30.1 L240.9,29.7 L246.7,29.3 L252.5,28.9 L258.2,28.5 L264.0,28.2 L269.9,27.8 L275.7,27.4 L281.4,27.0 L287.2,26.7 L293.0,26.4 L298.7,26.2 L304.5,25.9 L310.3,25.7 L316.0,25.4 L321.9,25.1 L327.7,24.9 L333.5,24.6 L339.2,24.4 L345.0,24.1 L350.8,23.9 L356.5,23.6 L362.3,23.3 L368.1,23.1 L374.0,22.8 L379.7,22.6 L385.5,22.3 L391.3,22.1 L397.0,21.8 L402.8,21.6 L408.6,21.4 L414.4,21.3 L420.1,21.2 L425.9,21.0 L431.8,20.9 L437.6,20.8 L443.3,20.7 L449.1,20.5 L454.9,20.4 L460.6,20.3 L466.4,20.2 L472.2,20.0 L477.9,19.9 L483.8,19.8 L489.6,19.6 L495.4,19.5 L501.1,19.4 L506.9,19.3 L512.7,19.1 L518.4,19.0 L524.2,18.9 L530.0,18.7 L535.9,18.6 L541.6,18.5 L547.4,18.4 L553.2,18.2 L558.9,18.1 L564.7,18.0 L570.5,17.8 L576.2,17.7 L582.0,17.6 L587.9,17.5 L593.7,17.3 L599.4,17.2 L605.2,17.1 L611.0,16.9 L616.7,16.8 L622.5,16.7 L628.3,16.6 L634.0,16.4 L639.9,16.3 L645.7,16.2 L651.5,16.1 L657.2,15.9 L663.0,15.8 L668.8,15.7 L674.5,15.5 L680.3,15.4 L686.1,15.3 L692.0,15.2 L697.7,15.0 L703.5,14.9 L709.3,14.8 L715.0,14.6 L720.8,14.5 L726.6,14.4 L732.3,14.3 L738.1,14.1 L744.0,14.0" fill="none" stroke="var(--s1)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="63.0" cy="122.4" r="5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" data-tip="ICS-209-PLUS: the top 1% of fires
@@ -942,14 +2384,14 @@ ICS-209-PLUS incidents with STR_THREATENED_MAX ≥ 1; logit with year fixed effe
 26% of 809 fires that threatened any structure destroyed one"/><circle class="pt" cx="878.3" cy="106.1" r="4" fill="var(--s7)" stroke="var(--surface)" stroke-width="1.5" data-tip="2018
 28% of 672 fires that threatened any structure destroyed one"/><circle class="pt" cx="930.2" cy="115.8" r="4" fill="var(--s7)" stroke="var(--surface)" stroke-width="1.5" data-tip="2019
 26% of 381 fires that threatened any structure destroyed one"/><circle class="pt" cx="982.0" cy="93.0" r="4" fill="var(--s7)" stroke="var(--surface)" stroke-width="1.5" data-tip="2020
-31% of 580 fires that threatened any structure destroyed one"/></svg></div></div></section><section class="sec" id="tiers"><h2>2. Most fires that reach buildings destroy few or none</h2><div class="card"><h3>Fires chosen regardless of loss, 2023–25 (383 fires with 25 or more buildings inside)</h3><p class="cap"><span class="plain">Picked by how many buildings stood inside the perimeter, not by what burned. Fires with more than 100 destroyed are a few per cent of fires but hold most of the losses; fires with 1–9 destroyed are common but hold a few per cent.</span><span class="tech">Unselected WFIGS perimeter frame (N ≥ 25 buildings), first-call Direct counts; 95% fire-bootstrap ranges. Model calls only: small-fire calls are right about 70% of the time on CAL FIRE inspections.</span></p><div class="legend"><span class="k"><span class="sw" style="background:var(--s1)"></span>Share of fires</span><span class="k"><span class="sw" style="background:var(--s4)"></span>Share of destroyed buildings</span></div><div class="hb"><div class="lab">No building destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="bar" style="width:45.95%;background:var(--s1)" data-tip="No building destroyed: share of fires
-44% of the 383 fires (95% range 39%–49%)"><i class="ci" style="left:88.76%;width:22.49%"></i><span class="val" style="left:calc(111.24% + 6px)">44%</span></div><div class="bar" style="width:0;background:transparent"></div></div><div class="lab">1–9 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="bar" style="width:32.35%;background:var(--s1)" data-tip="1–9 destroyed: share of fires
-31% of the 383 fires (95% range 26%–36%)"><i class="ci" style="left:84.85%;width:29.43%"></i><span class="val" style="left:calc(114.29% + 6px)">31%</span></div><div class="bar" style="width:2.10%;background:var(--s4)" data-tip="1–9 destroyed: share of destroyed buildings
-2% (95% range 1%–7%)"><i class="ci" style="left:47.12%;width:315.91%"></i><span class="val" style="left:calc(363.03% + 6px)">2%</span></div></div><div class="lab">10–100 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="bar" style="width:21.48%;background:var(--s1)" data-tip="10–100 destroyed: share of fires
-21% of the 383 fires (95% range 17%–25%)"><i class="ci" style="left:81.01%;width:39.24%"></i><span class="val" style="left:calc(120.25% + 6px)">21%</span></div><div class="bar" style="width:11.05%;background:var(--s4)" data-tip="10–100 destroyed: share of destroyed buildings
-11% (95% range 5%–38%)"><i class="ci" style="left:45.88%;width:313.14%"></i><span class="val" style="left:calc(359.03% + 6px)">11%</span></div></div><div class="lab">More than 100 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="bar" style="width:4.35%;background:var(--s1)" data-tip="More than 100 destroyed: share of fires
-4% of the 383 fires (95% range 2%–6%)"><i class="ci" style="left:56.25%;width:93.75%"></i><span class="val" style="left:calc(150.00% + 6px)">4%</span></div><div class="bar" style="width:90.98%;background:var(--s4)" data-tip="More than 100 destroyed: share of destroyed buildings
-87% (95% range 55%–94%)"><i class="ci" style="left:63.07%;width:44.69%"></i><span class="val" style="left:calc(107.76% + 6px)">87%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:20.83%">20%</span><span style="left:41.65%">40%</span><span style="left:62.48%">60%</span><span style="left:83.31%">80%</span></div></div></div></section><section class="sec" id="density"><h2>3. Building density and loss inside a fire</h2><div class="card"><h3>Destroyed, compared with the rest of the same fire</h3><p class="cap"><span class="plain">Flat near 1× up to about 60 neighbours within 100 m. The rise above that rests on few fires (hollow dots) and disappears without mobile-home parks.</span><span class="tech">Observed/expected by n100 bin, expected from each building's own-fire rate (removes between-fire differences); 95% fire-bootstrap ranges; hollow = fewer than 10 fires.</span></p><div class="tgs"><label class="tg" data-tip="Carlson 2002–22
+31% of 580 fires that threatened any structure destroyed one"/></svg></div></div></section><section class="sec" id="tiers"><h2>4. Most fires that reach buildings destroy few or none</h2><div class="card"><h3>Fires chosen regardless of loss, 2023–25 (383 fires with 25 or more buildings inside)</h3><p class="cap"><span class="plain">Picked by how many buildings stood inside the perimeter, not by what burned. Fires with more than 100 destroyed are a few per cent of fires but hold most of the losses; fires with 1–9 destroyed are common but hold a few per cent.</span><span class="tech">Unselected WFIGS perimeter frame (N ≥ 25 buildings), first-call Direct counts; 95% fire-bootstrap ranges. Model calls only: small-fire calls are right about 70% of the time on CAL FIRE inspections.</span></p><div class="legend"><span class="k"><span class="sw" style="background:var(--s1)"></span>Share of fires</span><span class="k"><span class="sw" style="background:var(--s4)"></span>Share of destroyed buildings</span></div><div class="hb"><div class="lab">No building destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="brow"><div class="bar" style="width:45.95%;background:var(--s1)" data-tip="No building destroyed: share of fires
+44% of the 383 fires (95% range 39%–49%)"></div><i class="ci" style="left:40.78%;width:10.33%"></i><span class="val" style="left:calc(51.11% + 6px)">44%</span></div><div class="bar" style="width:0;background:transparent"></div></div><div class="lab">1–9 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="brow"><div class="bar" style="width:32.35%;background:var(--s1)" data-tip="1–9 destroyed: share of fires
+31% of the 383 fires (95% range 26%–36%)"></div><i class="ci" style="left:27.45%;width:9.52%"></i><span class="val" style="left:calc(36.98% + 6px)">31%</span></div><div class="brow"><div class="bar" style="width:2.10%;background:var(--s4)" data-tip="1–9 destroyed: share of destroyed buildings
+2% (95% range 1%–7%)"></div><i class="ci" style="left:0.99%;width:6.64%"></i><span class="val" style="left:calc(7.63% + 6px)">2%</span></div></div><div class="lab">10–100 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="brow"><div class="bar" style="width:21.48%;background:var(--s1)" data-tip="10–100 destroyed: share of fires
+21% of the 383 fires (95% range 17%–25%)"></div><i class="ci" style="left:17.40%;width:8.43%"></i><span class="val" style="left:calc(25.83% + 6px)">21%</span></div><div class="brow"><div class="bar" style="width:11.05%;background:var(--s4)" data-tip="10–100 destroyed: share of destroyed buildings
+11% (95% range 5%–38%)"></div><i class="ci" style="left:5.07%;width:34.60%"></i><span class="val" style="left:calc(39.67% + 6px)">11%</span></div></div><div class="lab">More than 100 destroyed</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.83%"></i><i class="grid" style="left:41.65%"></i><i class="grid" style="left:62.48%"></i><i class="grid" style="left:83.31%"></i><div class="brow"><div class="bar" style="width:4.35%;background:var(--s1)" data-tip="More than 100 destroyed: share of fires
+4% of the 383 fires (95% range 2%–6%)"></div><i class="ci" style="left:2.45%;width:4.08%"></i><span class="val" style="left:calc(6.53% + 6px)">4%</span></div><div class="brow"><div class="bar" style="width:90.98%;background:var(--s4)" data-tip="More than 100 destroyed: share of destroyed buildings
+87% (95% range 55%–94%)"></div><i class="ci" style="left:57.38%;width:40.66%"></i><span class="val" style="left:calc(98.04% + 6px)">87%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:20.83%">20%</span><span style="left:41.65%">40%</span><span style="left:62.48%">60%</span><span style="left:83.31%">80%</span></div></div></div></section><section class="sec" id="density"><h2>5. Building density and loss inside a fire</h2><div class="card"><h3>Destroyed, compared with the rest of the same fire</h3><p class="cap"><span class="plain">Flat near 1× up to about 60 neighbours within 100 m. The rise above that rests on few fires (hollow dots) and disappears without mobile-home parks.</span><span class="tech">Observed/expected by n100 bin, expected from each building's own-fire rate (removes between-fire differences); 95% fire-bootstrap ranges; hollow = fewer than 10 fires.</span></p><div class="tgs"><label class="tg" data-tip="Carlson 2002–22
 358 hand-mapped fires, every building inside"><input type="checkbox" checked data-group="oe" data-set="C"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s1)" stroke-width="3"/></svg>Carlson 2002–22</label><label class="tg" data-tip="Our 2002–26 record
 Carlson plus our 2023–26 fires, CAL FIRE inspections where available"><input type="checkbox" checked data-group="oe" data-set="ALL"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s3)" stroke-width="3"/></svg>Our 2002–26 record</label><label class="tg" data-tip="Carlson without mobile-home parks
 the 32 fires with dense buildings, leaving out parks and apartment buildings"><input type="checkbox" checked data-group="oe" data-set="C_dense32_noMHP_noMulti"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s4)" stroke-width="3"/></svg>Carlson, no mobile-home parks</label></div><div class="svgwrap"><svg viewBox="0 0 760 340" width="100%" role="img" aria-label="Loss ratio by neighbour count"><line class="gridl" x1="56" x2="744" y1="288.0" y2="288.0"/><text x="48" y="292.0" text-anchor="end">0×</text><line class="gridl" x1="56" x2="744" y1="242.3" y2="242.3"/><text x="48" y="246.3" text-anchor="end">0.5×</text><line class="gridl" x1="56" x2="744" y1="196.7" y2="196.7"/><text x="48" y="200.7" text-anchor="end">1×</text><line class="gridl" x1="56" x2="744" y1="151.0" y2="151.0"/><text x="48" y="155.0" text-anchor="end">1.5×</text><line class="gridl" x1="56" x2="744" y1="105.3" y2="105.3"/><text x="48" y="109.3" text-anchor="end">2×</text><line class="gridl" x1="56" x2="744" y1="59.7" y2="59.7"/><text x="48" y="63.7" text-anchor="end">2.5×</text><line class="gridl" x1="56" x2="744" y1="14.0" y2="14.0"/><text x="48" y="18.0" text-anchor="end">3×</text><text x="78.0" y="306" text-anchor="middle">0</text><text x="131.7" y="306" text-anchor="middle">1-2</text><text x="185.3" y="306" text-anchor="middle">3-5</text><text x="239.0" y="306" text-anchor="middle">6-10</text><text x="292.7" y="306" text-anchor="middle">11-20</text><text x="346.3" y="306" text-anchor="middle">21-30</text><text x="400.0" y="306" text-anchor="middle">31-40</text><text x="453.7" y="306" text-anchor="middle">41-50</text><text x="507.3" y="306" text-anchor="middle">51-60</text><text x="561.0" y="306" text-anchor="middle">61-70</text><text x="614.7" y="306" text-anchor="middle">71-80</text><text x="668.3" y="306" text-anchor="middle">81-100</text><text x="722.0" y="306" text-anchor="middle">101+</text><line class="axisl" x1="56" x2="744" y1="288" y2="288"/><text x="400.0" y="330" text-anchor="middle">Neighbours within 100 m</text><line x1="56" x2="744" y1="196.7" y2="196.7" stroke="var(--ink-2)" stroke-width="1.5" stroke-dasharray="5 4"/><g class="ser" data-group="oe" data-set="C"><path d="M71.0,183.3 L124.7,196.1 L178.3,198.2 L232.0,200.7 L285.7,200.3 L339.3,196.8 L393.0,196.0 L446.7,184.8 L500.3,186.0 L554.0,170.8 L607.7,135.0 L661.3,108.1 L715.0,97.8" fill="none" stroke="var(--s1)" stroke-width="1.5" stroke-opacity=".5"/><line x1="71.0" x2="71.0" y1="191.9" y2="173.6" stroke="var(--s1)" stroke-width="2"/><circle cx="71.0" cy="183.3" r="5" fill="var(--s1)" stroke="var(--s1)" stroke-width="2" data-tip="Carlson 2002–22 · 0 neighbours
@@ -1180,27 +2622,27 @@ destroyed 0.00× as often as the rest of their own fire
 What it suggests: too few fires to trust
 @@tech
 Carlson, no mobile-home parks · 81-100 neighbours
-observed / expected, expected = each building&#x27;s own-fire loss rate; 95% fire-bootstrap 0.00–0.00" tabindex="0"/></g></svg></div></div><div class="card"><h3>Is there a step? The jump in the odds of loss at 60 neighbours</h3><p class="cap"><span class="plain">A step test asks whether loss jumps at some density, instead of rising smoothly. Here: how much higher the odds of loss are just above 60 neighbours than just below, in the same fire. Carlson's estimates point up (about 2–3.5×), but every range includes 1 and the jump comes from Sayre's mobile-home park; in our full 2002–26 record it is about 1.1×. Searching every possible step location from 1 to about 62 neighbours gave the same answer: no step that holds up.</span><span class="tech">Fixed step at n100 = 60 added to a 4-df spline in log2(1+n100) with fire fixed effects; free-location hinge and step models (ψ grid 1–99.5th percentile, Davies test, AIC vs spline) in docs/ledger.d/2026-10-12-2134-high-density-step--exploratory.md.</span></p><div class="hb"><div class="lab">Carlson 2002–22<small>1,662 buildings above 60, 20 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="bar" style="width:34.44%;background:var(--s1)" data-tip="Carlson 2002–22
+observed / expected, expected = each building&#x27;s own-fire loss rate; 95% fire-bootstrap 0.00–0.00" tabindex="0"/></g></svg></div></div><div class="card"><h3>Is there a step? The jump in the odds of loss at 60 neighbours</h3><p class="cap"><span class="plain">A step test asks whether loss jumps at some density, instead of rising smoothly. Here: how much higher the odds of loss are just above 60 neighbours than just below, in the same fire. Carlson's estimates point up (about 2–3.5×), but every range includes 1 and the jump comes from Sayre's mobile-home park; in our full 2002–26 record it is about 1.1×. Searching every possible step location from 1 to about 62 neighbours gave the same answer: no step that holds up.</span><span class="tech">Fixed step at n100 = 60 added to a 4-df spline in log2(1+n100) with fire fixed effects; free-location hinge and step models (ψ grid 1–99.5th percentile, Davies test, AIC vs spline) in docs/ledger.d/2026-10-12-2134-high-density-step--exploratory.md.</span></p><div class="hb"><div class="lab">Carlson 2002–22<small>1,662 buildings above 60, 20 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="brow"><div class="bar" style="width:34.44%;background:var(--s1)" data-tip="Carlson 2002–22
 jump at 60 neighbours: odds × 2.26 (95% range 0.47–4.57)
 What it suggests: no clear jump: the range includes 1
 @@tech
 Carlson 2002–22
-step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"><i class="ci" style="left:20.85%;width:181.56%"></i><span class="val" style="left:calc(202.41% + 6px)">2.26 ×</span></div></div><div class="lab">Carlson, five largest fires removed<small>1,294 buildings above 60, 16 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="bar" style="width:53.47%;background:var(--s1)" data-tip="Carlson, five largest fires removed
+step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"></div><i class="ci" style="left:7.18%;width:62.53%"></i><span class="val" style="left:calc(69.71% + 6px)">2.26 ×</span></div></div><div class="lab">Carlson, five largest fires removed<small>1,294 buildings above 60, 16 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="brow"><div class="bar" style="width:53.47%;background:var(--s1)" data-tip="Carlson, five largest fires removed
 jump at 60 neighbours: odds × 3.51 (95% range 0.04–6.43)
 What it suggests: no clear jump: the range includes 1
 @@tech
 Carlson, five largest fires removed
-step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"><i class="ci" style="left:1.24%;width:182.12%"></i><span class="val" style="left:calc(183.36% + 6px)">3.51 ×</span></div></div><div class="lab">Our 2002–26 record<small>2,035 buildings above 60, 23 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="bar" style="width:17.39%;background:var(--s1)" data-tip="Our 2002–26 record
+step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"></div><i class="ci" style="left:0.66%;width:97.38%"></i><span class="val" style="left:calc(98.04% + 6px)">3.51 ×</span></div></div><div class="lab">Our 2002–26 record<small>2,035 buildings above 60, 23 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="brow"><div class="bar" style="width:17.39%;background:var(--s1)" data-tip="Our 2002–26 record
 jump at 60 neighbours: odds × 1.14 (95% range 0.41–3.24)
 What it suggests: no clear jump: the range includes 1
 @@tech
 Our 2002–26 record
-step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"><i class="ci" style="left:35.51%;width:248.62%"></i><span class="val" style="left:calc(284.13% + 6px)">1.14 ×</span></div></div><div class="lab">Inspected buildings only<small>1,981 buildings above 60, 22 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="bar" style="width:18.32%;background:var(--s1)" data-tip="Inspected buildings only
+step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"></div><i class="ci" style="left:6.18%;width:43.24%"></i><span class="val" style="left:calc(49.41% + 6px)">1.14 ×</span></div></div><div class="lab">Inspected buildings only<small>1,981 buildings above 60, 22 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:30.48%"></i><i class="grid" style="left:60.97%"></i><i class="grid" style="left:91.45%"></i><i class="ref" style="left:15.24%"></i><div class="brow"><div class="bar" style="width:18.32%;background:var(--s1)" data-tip="Inspected buildings only
 jump at 60 neighbours: odds × 1.20 (95% range 0.41–3.02)
 What it suggests: no clear jump: the range includes 1
 @@tech
 Inspected buildings only
-step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"><i class="ci" style="left:34.00%;width:216.98%"></i><span class="val" style="left:calc(250.99% + 6px)">1.20 ×</span></div></div><div></div><div class="axis"><span style="left:0.00%">0</span><span style="left:30.48%">2</span><span style="left:60.97%">4</span><span style="left:91.45%">6</span></div></div></div><div class="card"><h3>Where the losses pile up, from sparsest to densest</h3><p class="cap"><span class="plain">Walk from the sparsest unit (left) to the densest (right); the line is the share of all losses passed so far. On the dotted diagonal, losses follow exposure; below it, the dense end lost more than its share. With all fires, buildings with more than 20 neighbours are 19% of exposed and 24% of destroyed; without the five largest fires (dashed), 13% and 7%. A handful of conflagrations make density look dangerous.</span><span class="tech">Pooled across fires, so it mixes between- and within-fire differences; the within-fire chart above isolates the latter. Five largest by destroyed: Carlson — Camp, Tubbs, Almeda Drive, Valley, Cedar; 2002–26 — Camp, Eaton, Palisades, Tubbs, Almeda Drive.</span></p><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th>Unit</th><th>One point on the line is…</th><th>Its density is…</th><th>Use it for</th></tr></thead><tbody><tr><td data-label="Unit">Each building</td><td data-label="One point on the line is…">one exposed building</td><td data-label="Its density is…">buildings within 100 m of it</td><td data-label="Use it for">does density raise a building's own risk?</td></tr><tr><td data-label="Unit">500 m neighbourhood</td><td data-label="One point on the line is…">one 500 m square the fire reached</td><td data-label="Its density is…">buildings per km² in the square</td><td data-label="Use it for">do dense neighbourhoods burn out? (least reliable after 2022)</td></tr><tr><td data-label="Unit">Whole fire</td><td data-label="One point on the line is…">one fire</td><td data-label="Its density is…">neighbours of its typical building</td><td data-label="Use it for">do denser fires lose a larger share?</td></tr></tbody></table></div><div class="ctl"><label>Unit of comparison <select id="dd-scale"><option value="building">Each building</option><option value="cell">500 m neighbourhood</option><option value="fire">Whole fire</option></select></label></div><div class="tgs"><label class="tg" data-tip="Carlson 2002–22
+step term at n100 = 60 added to a 4-df spline in log2(1+n100), fire fixed effects; 1,000 fire-bootstrap draws"></div><i class="ci" style="left:6.23%;width:39.76%"></i><span class="val" style="left:calc(45.99% + 6px)">1.20 ×</span></div></div><div></div><div class="axis"><span style="left:0.00%">0</span><span style="left:30.48%">2</span><span style="left:60.97%">4</span><span style="left:91.45%">6</span></div></div></div><div class="card"><h3>Where the losses pile up, from sparsest to densest</h3><p class="cap"><span class="plain">Walk from the sparsest unit (left) to the densest (right); the line is the share of all losses passed so far. On the dotted diagonal, losses follow exposure; below it, the dense end lost more than its share. With all fires, buildings with more than 20 neighbours are 19% of exposed and 24% of destroyed; without the five largest fires (dashed), 13% and 7%. A handful of conflagrations make density look dangerous.</span><span class="tech">Pooled across fires, so it mixes between- and within-fire differences; the within-fire chart above isolates the latter. Five largest by destroyed: Carlson — Camp, Tubbs, Almeda Drive, Valley, Cedar; 2002–26 — Camp, Eaton, Palisades, Tubbs, Almeda Drive.</span></p><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th>Unit</th><th>One point on the line is…</th><th>Its density is…</th><th>Use it for</th></tr></thead><tbody><tr><td data-label="Unit">Each building</td><td data-label="One point on the line is…">one exposed building</td><td data-label="Its density is…">buildings within 100 m of it</td><td data-label="Use it for">does density raise a building's own risk?</td></tr><tr><td data-label="Unit">500 m neighbourhood</td><td data-label="One point on the line is…">one 500 m square the fire reached</td><td data-label="Its density is…">buildings per km² in the square</td><td data-label="Use it for">do dense neighbourhoods burn out? (least reliable after 2022)</td></tr><tr><td data-label="Unit">Whole fire</td><td data-label="One point on the line is…">one fire</td><td data-label="Its density is…">neighbours of its typical building</td><td data-label="Use it for">do denser fires lose a larger share?</td></tr></tbody></table></div><div class="ctl"><label>Unit of comparison <select id="dd-scale"><option value="building">Each building</option><option value="cell">500 m neighbourhood</option><option value="fire">Whole fire</option></select></label></div><div class="tgs"><label class="tg" data-tip="Carlson 2002–22
 solid = all fires; dashed = five largest fires removed"><input type="checkbox" checked data-group="cum" data-set="C"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s1)" stroke-width="3"/></svg>Carlson 2002–22</label><label class="tg" data-tip="Carlson, five largest removed
 solid = all fires; dashed = five largest fires removed"><input type="checkbox" checked data-group="cum" data-set="C_noTop5"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s1)" stroke-width="3" stroke-dasharray="6 4"/></svg>Carlson, five largest removed</label><label class="tg" data-tip="Our 2002–26 record
 solid = all fires; dashed = five largest fires removed"><input type="checkbox" checked data-group="cum" data-set="ALL"><svg width="26" height="10" aria-hidden="true"><line x1="1" y1="5" x2="25" y2="5" stroke="var(--s3)" stroke-width="3"/></svg>Our 2002–26 record</label><label class="tg" data-tip="Our 2002–26 record, five largest removed
@@ -2044,10 +3486,10 @@ What it suggests: losses follow exposure" tabindex="0"/><circle cx="737.6" cy="1
 What it suggests: losses follow exposure" tabindex="0"/><circle cx="744.0" cy="14.0" r="9" fill="transparent" data-tip="Our 2002–26 record, five largest removed · up to typical building has 49 neighbours
 100% of exposed (291,491 of 291,491)
 100% of destroyed (53,815 of 53,815)
-What it suggests: losses follow exposure" tabindex="0"/></g></svg></div></div></div></section><section class="sec" id="mobile-homes"><h2>4. Mobile homes</h2><div class="card"><h3>Buildings with more than 60 neighbours within 100 m, by type (Carlson 2002–22)</h3><p class="cap">At the same density, mobile-home parks burned about twice their fire's rate; houses and apartments burned less. Ranges are wide: few fires. A full national analysis of mobile homes is running and will replace this panel.</p><div class="hb"><div class="lab">Mobile-home parks<small>635 destroyed of 966, 14 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="bar" style="width:50.41%;background:var(--s4)" data-tip="Mobile-home parks
-destroyed 2.07× as often as the rest of their fire (95% range 0.88–4.02)"><i class="ci" style="left:42.51%;width:151.98%"></i><span class="val" style="left:calc(194.49% + 6px)">2.07 ×</span></div></div><div class="lab">Single-family homes<small>9 destroyed of 246, 5 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="bar" style="width:4.92%;background:var(--s4)" data-tip="Single-family homes
-destroyed 0.20× as often as the rest of their fire (95% range 0.00–2.42)"><i class="ci" style="left:0.00%;width:1198.36%"></i><span class="val" style="left:calc(1198.36% + 6px)">0.20 ×</span></div></div><div class="lab">Apartment and multi-family buildings<small>0 destroyed of 352, 9 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="bar" style="width:0.00%;background:var(--s4)" data-tip="Apartment and multi-family buildings
-destroyed 0.00× as often as the rest of their fire (95% range 0.00–0.00)"><i class="ci" style="left:0.00%;width:0.00%"></i><span class="val">0.00 ×</span></div></div><div></div><div class="axis"><span style="left:0.00%">0</span><span style="left:24.40%">1</span><span style="left:48.80%">2</span><span style="left:73.20%">3</span><span style="left:97.60%">4</span></div></div></div></section><script>(function(){
+What it suggests: losses follow exposure" tabindex="0"/></g></svg></div></div></div></section><section class="sec" id="mobile-homes"><h2>6. Mobile homes</h2><div class="card"><h3>Buildings with more than 60 neighbours within 100 m, by type (Carlson 2002–22)</h3><p class="cap">At the same density, mobile-home parks burned about twice their fire's rate; houses and apartments burned less. Ranges are wide: few fires. A full national analysis of mobile homes is running and will replace this panel.</p><div class="hb"><div class="lab">Mobile-home parks<small>635 destroyed of 966, 14 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="brow"><div class="bar" style="width:50.41%;background:var(--s4)" data-tip="Mobile-home parks
+destroyed 2.07× as often as the rest of their fire (95% range 0.88–4.02)"></div><i class="ci" style="left:21.43%;width:76.61%"></i><span class="val" style="left:calc(98.04% + 6px)">2.07 ×</span></div></div><div class="lab">Single-family homes<small>9 destroyed of 246, 5 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="brow"><div class="bar" style="width:4.92%;background:var(--s4)" data-tip="Single-family homes
+destroyed 0.20× as often as the rest of their fire (95% range 0.00–2.42)"></div><i class="ci" style="left:0.00%;width:58.97%"></i><span class="val" style="left:calc(58.97% + 6px)">0.20 ×</span></div></div><div class="lab">Apartment and multi-family buildings<small>0 destroyed of 352, 9 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:24.40%"></i><i class="grid" style="left:48.80%"></i><i class="grid" style="left:73.20%"></i><i class="grid" style="left:97.60%"></i><i class="ref" style="left:24.40%"></i><div class="brow"><div class="bar" style="width:0.00%;background:var(--s4)" data-tip="Apartment and multi-family buildings
+destroyed 0.00× as often as the rest of their fire (95% range 0.00–0.00)"></div><i class="ci" style="left:0.00%;width:0.00%"></i><span class="val" style="left:calc(0.00% + 6px)">0.00 ×</span></div></div><div></div><div class="axis"><span style="left:0.00%">0</span><span style="left:24.40%">1</span><span style="left:48.80%">2</span><span style="left:73.20%">3</span><span style="left:97.60%">4</span></div></div></div></section><script>(function(){
 var sc=document.getElementById('dd-scale');function upd(){document.querySelectorAll('.scale-chart').forEach(function(e){e.hidden=e.dataset.scale!==sc.value})}
 sc.addEventListener('change',upd);upd();
 document.querySelectorAll('.tgs input').forEach(function(c){c.addEventListener('change',function(){
