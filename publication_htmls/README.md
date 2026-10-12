@@ -20,3 +20,6 @@ Defensible-space paper: how far the canopy predictor (Meta v1 on NAIP) is from l
 
 ### [structure_loss_pipeline/](structure_loss_pipeline/)
 Camp Fire structure-loss QA maps — USA Structures + U-Net predictions + Carlson labels, and a Google / Microsoft building-footprint comparison.
+
+### [style_archetypes/](style_archetypes/)
+Reference pages for how our interactive maps and chart pages look and behave: the archetypes the map-html and viz-html skills build from. Public data only.

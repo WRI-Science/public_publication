@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Structure loss in 191 Carlson fires, 2016–2022</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --raised:#FBFCFD; --ink:#13202C; --ink-2:#465667; --ink-3:#768494;
+  --line:#E1E6EB; --line-2:#CBD3DB; --accent:#1B4F8A; --accent-ink:#FFFFFF; --accent-soft:#E7EFF8; --empty:#ECEFF2;
+  --s1:#0072B2; --s2:#E69F00; --s3:#009E73; --s4:#D55E00; --s5:#56B4E9; --s6:#CC79A7; --s7:#8A949E;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.12);
+  --f-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }}
+:root[data-theme="dark"]{
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 20px 72px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.eyebrow{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-size:clamp(26px,3.4vw,36px);line-height:1.2;letter-spacing:-.015em;margin:10px 0 0;font-weight:600}
+.lede{font-size:clamp(16.5px,1.6vw,18.5px);color:var(--ink-2);max-width:64ch;margin:14px 0 0}
+h2{font-size:22px;line-height:1.3;letter-spacing:-.01em;margin:0;font-weight:600}
+h3{font-size:16.5px;line-height:1.35;margin:0;font-weight:600}
+section.sec{margin-top:52px}
+.sec-lede{color:var(--ink-2);max-width:70ch;margin:8px 0 0}
+p{max-width:75ch}
+.note{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 18px;margin:24px 0 0}
+.note h3{font-size:15px;margin-bottom:4px}
+.note p{margin:6px 0;color:var(--ink-2);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:16px}
+.cap{font-size:14px;color:var(--ink-2);margin:4px 0 0}
+.src{font-size:12.5px;color:var(--ink-3);margin:12px 0 0}
+.muted{color:var(--ink-2)} .faint{color:var(--ink-3)} .num{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.themebtn{white-space:nowrap;flex:none;font:500 13px var(--f-sans);border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:6px 12px}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-top:24px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .v{font:600 30px/1.1 var(--f-sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tile .l{font-size:14.5px;margin-top:6px}
+.tile .s{font-size:13px;color:var(--ink-3);margin-top:2px}
+/* legend: big, friendly keys */
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0 14px;font-size:14.5px}
+.legend .k{display:inline-flex;align-items:center;gap:8px}
+.legend .sw{width:18px;height:14px;border-radius:4px;flex:none}
+.legend .ln{width:22px;height:0;border-top:2px dashed var(--ink-2)}
+/* horizontal bars */
+.hb{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr);gap:12px 14px;align-items:center}
+.hb .lab{font-size:14.5px;line-height:1.25;text-align:right}
+.hb .lab small{display:block;color:var(--ink-3);font-size:12.5px}
+.hb .area{position:relative;margin-right:72px;display:grid;gap:3px}
+.hb .grid{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px solid var(--line)}
+.hb .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--ink-2);z-index:1}
+.hb .bar{position:relative;height:20px;border-radius:0 4px 4px 0;min-width:2px;transition:filter .15s,box-shadow .15s;z-index:2}
+.hb .bar:hover,.hb .bar:focus{filter:brightness(1.12);box-shadow:0 0 0 2px var(--ink)}
+.hb .val{position:absolute;left:calc(100% + 6px);top:50%;transform:translateY(-50%);font:500 13px var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface);padding:0 3px;border-radius:3px;z-index:4}
+.hb .ci{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-left:1.5px solid var(--ink);border-right:1.5px solid var(--ink);z-index:3}
+.hb .ci::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid var(--ink)}
+.hb .axis{position:relative;height:18px;margin-right:72px;font:400 12px var(--f-mono);color:var(--ink-3)}
+.hb .axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.axis-t{font-size:13px;color:var(--ink-2);text-align:center;margin:4px 72px 0 0}
+@media (max-width:560px){
+  .hb{grid-template-columns:minmax(0,1fr);gap:4px}
+  .hb .lab{text-align:left;margin-top:8px}
+  .hb .lab small{display:inline;margin-left:6px}
+  .hb .area,.hb .axis{margin-right:64px}
+}
+/* columns (e.g. one per year) */
+.cols{display:flex;align-items:flex-end;gap:3px;height:240px;margin-top:30px;border-bottom:1px solid var(--line-2);position:relative}
+.cols .c{flex:1 1 0;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.cols .seg{width:100%;transition:filter .15s}
+.cols .c:hover .seg,.cols .c:focus .seg{filter:brightness(1.12)}
+.cols .c .seg:first-child{border-radius:3px 3px 0 0}
+.cols .cv{position:absolute;left:50%;transform:translateX(-50%);font:500 11.5px var(--f-mono);white-space:nowrap;color:var(--ink-2)}
+.xl{display:flex;gap:3px;margin-top:6px}
+.xl span{flex:1 1 0;min-width:0;text-align:center;font:400 11.5px var(--f-mono);color:var(--ink-3);white-space:nowrap;overflow:visible}
+.cols .gl{position:absolute;left:0;right:0;border-top:1px dashed var(--line);font:400 11px var(--f-mono);color:var(--ink-3)}
+.cols .gl span{position:absolute;top:-16px;left:0}
+/* line chart (SVG; scrolls sideways on a phone rather than shrinking its text) */
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgwrap svg{display:block;width:100%;min-width:720px;height:auto}
+.svgwrap text{font-family:var(--f-mono);font-size:calc(12.5px * var(--k, 1));fill:var(--ink-3)}
+.svgwrap .gridl{stroke:var(--line);stroke-width:1}
+.svgwrap .axisl{stroke:var(--line-2);stroke-width:1}
+.svgwrap .pt{transition:r .15s}
+.svgwrap .pt:hover,.svgwrap .pt:focus{r:7}
+/* heatmap table */
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:8px}
+table.hm{border-collapse:separate;border-spacing:3px;font-variant-numeric:tabular-nums}
+table.hm caption{text-align:left;font-size:13px;color:var(--ink-2);padding:0 0 6px}
+table.hm thead th{font:500 12px var(--f-mono);color:var(--ink-3);padding:2px 4px;white-space:nowrap}
+table.hm th.rl{text-align:right;font-weight:400;padding-right:10px;white-space:nowrap;font-size:14px}
+table.hm tr.grp th{text-align:left;font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:14px 0 3px;border-bottom:1px solid var(--line)}
+table.hm td.c{min-width:58px;height:50px;text-align:center;border-radius:5px;line-height:1.15;padding:3px 4px;transition:box-shadow .15s}
+table.hm td.c:hover,table.hm td.c:focus{box-shadow:0 0 0 2px var(--ink)}
+table.hm td.c b{display:block;font-size:16px;font-weight:600}
+table.hm td.c i{display:block;font-style:normal;font-size:10.5px;margin-top:2px;opacity:.85}
+table.hm td.c.dk{color:#0B0B0B} table.hm td.c.lt{color:#FFFFFF}
+table.hm td.c.empty{background:var(--empty);color:var(--ink-3)}
+table.hm td.x{font-size:13px;color:var(--ink-2);padding:0 8px;text-align:right;white-space:nowrap}
+.ramp{display:inline-flex;vertical-align:middle;margin:0 8px;border-radius:3px;overflow:hidden}
+.ramp i{width:18px;height:14px}
+/* plain tables */
+table.tb{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+table.tb th,table.tb td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.tb thead th{font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--line-2)}
+table.tb td.n,table.tb th.n{text-align:right;white-space:nowrap}
+table.tb tbody tr:hover{background:var(--raised)}
+/* tooltip */
+#tip{position:fixed;z-index:50;pointer-events:none;max-width:300px;background:var(--surface);color:var(--ink);border:1px solid var(--line-2);
+  border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.45;box-shadow:var(--shadow);display:none}
+#tip b{display:block;margin-bottom:2px;font-size:13.5px}
+[data-tip]{cursor:default}
+footer.site{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+footer.site h3{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+footer.site ul{padding-left:18px;margin:0 0 12px} footer.site li{margin:4px 0}
+@media (max-width:560px){
+  .wrap{padding:22px 14px 56px}
+  .card{padding:14px 12px}
+  table.hm td.c{min-width:46px;height:46px}
+  table.hm td.c b{font-size:15px}
+  table.hm th.rl{font-size:13px;padding-right:6px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap">
+<header><div class="topbar"><div class="eyebrow">Chart archetype · Carlson record</div><button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark">Light / dark</button></div>
+<h1>Structure loss in 191 Carlson fires, 2016–2022</h1><p class="lede">Every structure exposed to fire, and whether it burned, in <span data-tip="The 191 Carlson fires
+Fires in the USGS Carlson record that started 2016–2022 and have Sentinel-2 satellite scenes, keeping fires that burned at least 10 structures.
+The full record covers 2002–2022 and more fires." style="border-bottom:1px dotted var(--ink-3)">the 191 Carlson fires</span> our structure-loss work trains and scores on: 787,067 structures in 18 states, 2016–2022.</p><div class="note"><h3>How to read this page</h3><p>Hover over, tap or tab to any bar, dot, cell or tile for its exact numbers. Colours mean the same thing on every chart: <b style='color:var(--s4)'>vermillion</b> is burned, <b style='color:var(--s1)'>blue</b> is directly exposed (inside the fire perimeter or at its edge), <b style='color:var(--s5)'>light blue</b> is indirectly exposed (outside it, within reach of embers).</p><p>"Burned" is Carlson's label, read from photos taken before and after each fire.</p></div><div class="tiles"><div class="tile" data-tip="Structures exposed
+Every structure Carlson lists as exposed to a wildfire: inside the perimeter or within reach of embers outside it."><div class="v">787,067</div><div class="l">structures exposed</div><div class="s">2016–2022, 18 states</div></div><div class="tile" data-tip="Burned
+56,003 of 787,067 structures
+Carlson&#x27;s label, from photos before and after the fire."><div class="v">56,003</div><div class="l">burned</div><div class="s">7.1% of all structures</div></div><div class="tile" data-tip="Direct exposure
+Inside the fire perimeter or right at its edge.
+55,416 burned of 170,412"><div class="v">32.5%</div><div class="l">of directly exposed structures burned</div><div class="s">55,416 of 170,412</div></div><div class="tile" data-tip="Structures burned per fire
+median 44, largest 16,493 (Camp)"><div class="v">191</div><div class="l">fires</div><div class="s">half burned 44 structures or fewer</div></div></div></header>
+<section class="sec"><h2>Over time</h2><div class="card"><h3>Structures burned, by year</h3><p class="cap">A few very large fires dominate: hover over or tap a year for its count, the structures exposed, and the number of fires.</p><div class="cols" style="height:240px"><div class="gl" style="bottom:25.00%"><span>5,000</span></div><div class="gl" style="bottom:50.00%"><span>10,000</span></div><div class="gl" style="bottom:75.00%"><span>15,000</span></div><div class="gl" style="bottom:100.00%"><span>20,000</span></div><div class="c" data-tip="2016
+2,985 burned
+of 43,728 structures exposed (6.8%)
+18 fires"><div class="seg" style="height:14.92%;background:var(--s4)"></div><span class="cv" style="bottom:calc(14.92% + 3px)">2,985</span></div><div class="c" data-tip="2017
+10,806 burned
+of 242,476 structures exposed (4.5%)
+30 fires"><div class="seg" style="height:54.03%;background:var(--s4)"></div><span class="cv" style="bottom:calc(54.03% + 3px)">10,806</span></div><div class="c" data-tip="2018
+21,622 burned
+of 155,906 structures exposed (13.9%)
+29 fires"><div class="seg" style="height:108.11%;background:var(--s4)"></div><span class="cv" style="bottom:calc(108.11% + 3px)">21,622</span></div><div class="c" data-tip="2019
+378 burned
+of 32,238 structures exposed (1.2%)
+3 fires"><div class="seg" style="height:1.89%;background:var(--s4)"></div><span class="cv" style="bottom:calc(1.89% + 3px)">378</span></div><div class="c" data-tip="2020
+14,069 burned
+of 206,549 structures exposed (6.8%)
+57 fires"><div class="seg" style="height:70.34%;background:var(--s4)"></div><span class="cv" style="bottom:calc(70.34% + 3px)">14,069</span></div><div class="c" data-tip="2021
+4,569 burned
+of 66,455 structures exposed (6.9%)
+32 fires"><div class="seg" style="height:22.84%;background:var(--s4)"></div><span class="cv" style="bottom:calc(22.84% + 3px)">4,569</span></div><div class="c" data-tip="2022
+1,574 burned
+of 39,715 structures exposed (4.0%)
+22 fires"><div class="seg" style="height:7.87%;background:var(--s4)"></div><span class="cv" style="bottom:calc(7.87% + 3px)">1,574</span></div></div><div class="xl"><span>2016</span><span>2017</span><span>2018</span><span>2019</span><span>2020</span><span>2021</span><span>2022</span></div></div><div class="card"><h3>Structures exposed, by year</h3><p class="cap">Indirectly exposed structures (outside the perimeter, within ember reach) far outnumber those inside it.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s1)"></span>Directly exposed</span><span class="k"><span class="sw" style="background:var(--s5)"></span>Indirectly exposed</span></div><div class="svgwrap"><svg viewBox="0 0 1000 320" role="img"><line class="gridl" x1="93" x2="982" y1="286.0" y2="286.0"/><text x="85" y="290.0" text-anchor="end">0</text><line class="gridl" x1="93" x2="982" y1="222.4" y2="222.4"/><text x="85" y="226.4" text-anchor="end">50,000</text><line class="gridl" x1="93" x2="982" y1="158.9" y2="158.9"/><text x="85" y="162.9" text-anchor="end">100,000</text><line class="gridl" x1="93" x2="982" y1="95.3" y2="95.3"/><text x="85" y="99.3" text-anchor="end">150,000</text><line class="gridl" x1="93" x2="982" y1="31.7" y2="31.7"/><text x="85" y="35.7" text-anchor="end">200,000</text><text x="93.0" y="312" text-anchor="middle">2016</text><text x="241.2" y="312" text-anchor="middle">2017</text><text x="389.3" y="312" text-anchor="middle">2018</text><text x="537.5" y="312" text-anchor="middle">2019</text><text x="685.7" y="312" text-anchor="middle">2020</text><text x="833.8" y="312" text-anchor="middle">2021</text><text x="982.0" y="312" text-anchor="middle">2022</text><line class="axisl" x1="93" x2="982" y1="286.0" y2="286.0"/><polyline points="93.0,275.7 241.2,236.8 389.3,218.8 537.5,280.9 685.7,228.1 833.8,266.7 982.0,278.3" fill="none" stroke="var(--s1)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="93.0" cy="275.7" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2016 · directly exposed
+8,129 structures"/><circle class="pt" cx="241.2" cy="236.8" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2017 · directly exposed
+38,709 structures"/><circle class="pt" cx="389.3" cy="218.8" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2018 · directly exposed
+52,853 structures"/><circle class="pt" cx="537.5" cy="280.9" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2019 · directly exposed
+4,015 structures"/><circle class="pt" cx="685.7" cy="228.1" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2020 · directly exposed
+45,508 structures"/><circle class="pt" cx="833.8" cy="266.7" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2021 · directly exposed
+15,153 structures"/><circle class="pt" cx="982.0" cy="278.3" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="1.5" data-tip="2022 · directly exposed
+6,045 structures"/><polyline points="93.0,240.7 241.2,27.0 389.3,155.0 537.5,250.1 685.7,81.3 833.8,220.8 982.0,243.2" fill="none" stroke="var(--s5)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="93.0" cy="240.7" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2016 · indirectly exposed
+35,599 structures"/><circle class="pt" cx="241.2" cy="27.0" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2017 · indirectly exposed
+203,767 structures"/><circle class="pt" cx="389.3" cy="155.0" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2018 · indirectly exposed
+103,053 structures"/><circle class="pt" cx="537.5" cy="250.1" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2019 · indirectly exposed
+28,223 structures"/><circle class="pt" cx="685.7" cy="81.3" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2020 · indirectly exposed
+161,041 structures"/><circle class="pt" cx="833.8" cy="220.8" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2021 · indirectly exposed
+51,302 structures"/><circle class="pt" cx="982.0" cy="243.2" r="4" fill="var(--s5)" stroke="var(--surface)" stroke-width="1.5" data-tip="2022 · indirectly exposed
+33,670 structures"/></svg></div></div></section><section class="sec"><h2>Where</h2><p class=sec-lede>Inside the perimeter, between 15% and 48% of structures burned, depending on the state. Outside it, no state passed 0.7%.</p><div class="card"><h3>Share burned inside the perimeter, by state (12 states with the most structures)</h3><p class="cap">Whiskers: 95% interval from resampling fires, so a state with few fires gets a wide one. Hover over a bar for counts and the share outside the perimeter.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s1)"></span>Directly exposed</span><span class="k"><span class="ln"></span>All states together (33%)</span></div><div class="hb"><div class="lab">TN<small>3 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:88.22%;background:var(--s1)" data-tip="TN · directly exposed
+47.6% burned (1,701 of 3,575)
+95% interval 21–52% (fires resampled)
+Outside the perimeter: 0.19% burned"><i class="ci" style="left:44.74%;width:64.83%"></i><span class="val" style="left:calc(109.57% + 6px)">48%</span></div></div><div class="lab">OR<small>17 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:70.18%;background:var(--s1)" data-tip="OR · directly exposed
+37.8% burned (5,359 of 14,159)
+95% interval 23–53% (fires resampled)
+Outside the perimeter: 0.09% burned"><i class="ci" style="left:60.69%;width:79.01%"></i><span class="val" style="left:calc(139.70% + 6px)">38%</span></div></div><div class="lab">NM<small>2 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:62.34%;background:var(--s1)" data-tip="NM · directly exposed
+33.6% burned (195 of 580)
+95% interval 32–43% (fires resampled)
+Outside the perimeter: 0.12% burned"><i class="ci" style="left:95.35%;width:32.13%"></i><span class="val" style="left:calc(127.47% + 6px)">34%</span></div></div><div class="lab">CO<small>11 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:61.71%;background:var(--s1)" data-tip="CO · directly exposed
+33.3% burned (2,437 of 7,322)
+95% interval 23–39% (fires resampled)
+Outside the perimeter: 0.08% burned"><i class="ci" style="left:69.83%;width:48.20%"></i><span class="val" style="left:calc(118.03% + 6px)">33%</span></div></div><div class="lab">CA<small>82 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:61.57%;background:var(--s1)" data-tip="CA · directly exposed
+33.2% burned (41,691 of 125,544)
+95% interval 19–49% (fires resampled)
+Outside the perimeter: 0.07% burned"><i class="ci" style="left:56.51%;width:89.69%"></i><span class="val" style="left:calc(146.21% + 6px)">33%</span></div></div><div class="lab">FL<small>4 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:47.71%;background:var(--s1)" data-tip="FL · directly exposed
+25.7% burned (300 of 1,166)
+95% interval 10–36% (fires resampled)
+Outside the perimeter: 0.14% burned"><i class="ci" style="left:37.35%;width:101.50%"></i><span class="val" style="left:calc(138.85% + 6px)">26%</span></div></div><div class="lab">WA<small>16 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:42.20%;background:var(--s1)" data-tip="WA · directly exposed
+22.8% burned (831 of 3,651)
+95% interval 18–29% (fires resampled)
+Outside the perimeter: 0.22% burned"><i class="ci" style="left:77.02%;width:49.62%"></i><span class="val" style="left:calc(126.64% + 6px)">23%</span></div></div><div class="lab">MT<small>14 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:38.35%;background:var(--s1)" data-tip="MT · directly exposed
+20.7% burned (302 of 1,460)
+95% interval 14–27% (fires resampled)
+Outside the perimeter: 0.28% burned"><i class="ci" style="left:68.77%;width:62.10%"></i><span class="val" style="left:calc(130.88% + 6px)">21%</span></div></div><div class="lab">KS<small>4 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:36.23%;background:var(--s1)" data-tip="KS · directly exposed
+19.5% burned (279 of 1,428)
+95% interval 6–30% (fires resampled)
+Outside the perimeter: 0.13% burned"><i class="ci" style="left:28.62%;width:124.30%"></i><span class="val" style="left:calc(152.92% + 6px)">20%</span></div></div><div class="lab">OK<small>8 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:35.18%;background:var(--s1)" data-tip="OK · directly exposed
+19.0% burned (996 of 5,249)
+95% interval 15–24% (fires resampled)
+Outside the perimeter: 0.71% burned"><i class="ci" style="left:81.53%;width:45.41%"></i><span class="val" style="left:calc(126.94% + 6px)">19%</span></div></div><div class="lab">NV<small>6 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:33.69%;background:var(--s1)" data-tip="NV · directly exposed
+18.2% burned (153 of 842)
+95% interval 11–26% (fires resampled)
+Outside the perimeter: 0.00% burned"><i class="ci" style="left:58.00%;width:87.25%"></i><span class="val" style="left:calc(145.24% + 6px)">18%</span></div></div><div class="lab">AZ<small>5 fires</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:37.08%"></i><i class="grid" style="left:74.17%"></i><i class="ref" style="left:60.29%"></i><div class="bar" style="width:28.36%;background:var(--s1)" data-tip="AZ · directly exposed
+15.3% burned (182 of 1,190)
+95% interval 13–20% (fires resampled)
+Outside the perimeter: 0.23% burned"><i class="ci" style="left:82.37%;width:50.57%"></i><span class="val" style="left:calc(132.94% + 6px)">15%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:37.08%">20%</span><span style="left:74.17%">40%</span></div></div><div class="axis-t">Share of directly exposed structures that burned</div></div><div class="card"><h3>Share burned among directly exposed structures, by state and year</h3><p class="cap">The 8 states with the most directly exposed structures, 2016–2022.</p><div class="legend"><span class="k"><span class="nw">0%</span><span class="ramp"><i style="background:#FFF5D6"></i><i style="background:#FEE3A2"></i><i style="background:#FEC771"></i><i style="background:#FDA54F"></i><i style="background:#F67F3A"></i><i style="background:#E5582C"></i><i style="background:#C73A23"></i><i style="background:#9E2418"></i><i style="background:#6E1610"></i></span><span class="nw">100% burned</span></span><span class="k"><span class="sw" style="background:var(--empty)"></span>fewer than 50 structures</span></div><p class="cap">Big number: % of directly exposed structures that burned. Small number: how many structures.</p><div class="scroll"><table class="hm"><thead><tr><th></th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>structures</th><th>all years</th></tr></thead><tbody><tr><th class="rl">CA</th><td class="c dk" style="background:#FEC46E" data-tip="CA · 2016
+26.0% burned
+1,090 of 4,196 directly exposed structures
+7 fires"><b>26</b><i>4,196</i></td><td class="c dk" style="background:#FEBB65" data-tip="CA · 2017
+29.3% burned
+9,792 of 33,465 directly exposed structures
+15 fires"><b>29</b><i>33,465</i></td><td class="c dk" style="background:#FA9647" data-tip="CA · 2018
+42.5% burned
+20,282 of 47,727 directly exposed structures
+10 fires"><b>42</b><i>47,727</i></td><td class="c dk" style="background:#FEE8AF" data-tip="CA · 2019
+9.3% burned
+374 of 4,015 directly exposed structures
+3 fires"><b>9</b><i>4,015</i></td><td class="c dk" style="background:#FEBE68" data-tip="CA · 2020
+28.2% burned
+6,898 of 24,478 directly exposed structures
+26 fires"><b>28</b><i>24,478</i></td><td class="c dk" style="background:#FEC06A" data-tip="CA · 2021
+27.7% burned
+2,634 of 9,501 directly exposed structures
+15 fires"><b>28</b><i>9,501</i></td><td class="c dk" style="background:#FEBD67" data-tip="CA · 2022
+28.7% burned
+621 of 2,162 directly exposed structures
+6 fires"><b>29</b><i>2,162</i></td><td class="x">125,544</td><td class="x">33%</td></tr><tr><th class="rl">OR</th><td class="c empty" data-tip="OR · 2016
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FEE19E" data-tip="OR · 2017
+13.4% burned
+11 of 82 directly exposed structures
+1 fires"><b>13</b><i>82</i></td><td class="c dk" style="background:#FEDF9A" data-tip="OR · 2018
+14.5% burned
+66 of 456 directly exposed structures
+3 fires"><b>14</b><i>456</i></td><td class="c empty" data-tip="OR · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FCA24D" data-tip="OR · 2020
+38.6% burned
+5,070 of 13,142 directly exposed structures
+9 fires"><b>39</b><i>13,142</i></td><td class="c lt" style="background:#ED6B33" data-tip="OR · 2021
+56.5% burned
+170 of 301 directly exposed structures
+2 fires"><b>56</b><i>301</i></td><td class="c dk" style="background:#FECA77" data-tip="OR · 2022
+23.6% burned
+42 of 178 directly exposed structures
+2 fires"><b>24</b><i>178</i></td><td class="x">14,159</td><td class="x">38%</td></tr><tr><th class="rl">CO</th><td class="c dk" style="background:#FEDC96" data-tip="CO · 2016
+15.5% burned
+43 of 278 directly exposed structures
+3 fires"><b>15</b><i>278</i></td><td class="c dk" style="background:#FECD7C" data-tip="CO · 2017
+22.3% burned
+27 of 121 directly exposed structures
+1 fires"><b>22</b><i>121</i></td><td class="c dk" style="background:#FDA44E" data-tip="CO · 2018
+38.0% burned
+278 of 732 directly exposed structures
+2 fires"><b>38</b><i>732</i></td><td class="c empty" data-tip="CO · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FEC16B" data-tip="CO · 2020
+27.2% burned
+894 of 3,283 directly exposed structures
+3 fires"><b>27</b><i>3,283</i></td><td class="c dk" style="background:#FB9A49" data-tip="CO · 2021
+41.2% burned
+1,187 of 2,882 directly exposed structures
+1 fires"><b>41</b><i>2,882</i></td><td class="c empty" data-tip="CO · 2022
+26 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="x">7,322</td><td class="x">33%</td></tr><tr><th class="rl">OK</th><td class="c empty" data-tip="OK · 2016
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FEDA91" data-tip="OK · 2017
+16.7% burned
+460 of 2,750 directly exposed structures
+3 fires"><b>17</b><i>2,750</i></td><td class="c dk" style="background:#FECD7C" data-tip="OK · 2018
+22.2% burned
+503 of 2,262 directly exposed structures
+3 fires"><b>22</b><i>2,262</i></td><td class="c empty" data-tip="OK · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FEE3A3" data-tip="OK · 2020
+12.2% burned
+18 of 148 directly exposed structures
+1 fires"><b>12</b><i>148</i></td><td class="c dk" style="background:#FED991" data-tip="OK · 2021
+16.9% burned
+15 of 89 directly exposed structures
+1 fires"><b>17</b><i>89</i></td><td class="c empty" data-tip="OK · 2022
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="x">5,249</td><td class="x">19%</td></tr><tr><th class="rl">WA</th><td class="c dk" style="background:#FEC872" data-tip="WA · 2016
+24.7% burned
+70 of 283 directly exposed structures
+3 fires"><b>25</b><i>283</i></td><td class="c dk" style="background:#FED488" data-tip="WA · 2017
+19.0% burned
+12 of 63 directly exposed structures
+1 fires"><b>19</b><i>63</i></td><td class="c dk" style="background:#FECA76" data-tip="WA · 2018
+23.7% burned
+40 of 169 directly exposed structures
+1 fires"><b>24</b><i>169</i></td><td class="c empty" data-tip="WA · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FEC974" data-tip="WA · 2020
+24.2% burned
+587 of 2,430 directly exposed structures
+7 fires"><b>24</b><i>2,430</i></td><td class="c dk" style="background:#FEDA92" data-tip="WA · 2021
+16.6% burned
+109 of 658 directly exposed structures
+3 fires"><b>17</b><i>658</i></td><td class="c empty" data-tip="WA · 2022
+48 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="x">3,651</td><td class="x">23%</td></tr><tr><th class="rl">TN</th><td class="c dk" style="background:#F47938" data-tip="TN · 2016
+51.8% burned
+1,595 of 3,077 directly exposed structures
+2 fires"><b>52</b><i>3,077</i></td><td class="c empty" data-tip="TN · 2017
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TN · 2018
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TN · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TN · 2020
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TN · 2021
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FECF80" data-tip="TN · 2022
+21.3% burned
+106 of 498 directly exposed structures
+1 fires"><b>21</b><i>498</i></td><td class="x">3,575</td><td class="x">48%</td></tr><tr><th class="rl">TX</th><td class="c empty" data-tip="TX · 2016
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FED990" data-tip="TX · 2017
+17.0% burned
+75 of 440 directly exposed structures
+1 fires"><b>17</b><i>440</i></td><td class="c dk" style="background:#FED78E" data-tip="TX · 2018
+17.6% burned
+12 of 68 directly exposed structures
+1 fires"><b>18</b><i>68</i></td><td class="c empty" data-tip="TX · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TX · 2020
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c empty" data-tip="TX · 2021
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FECE7E" data-tip="TX · 2022
+21.7% burned
+348 of 1,606 directly exposed structures
+5 fires"><b>22</b><i>1,606</i></td><td class="x">2,114</td><td class="x">21%</td></tr><tr><th class="rl">MT</th><td class="c dk" style="background:#FDB55F" data-tip="MT · 2016
+31.5% burned
+28 of 89 directly exposed structures
+1 fires"><b>31</b><i>89</i></td><td class="c dk" style="background:#FEBC66" data-tip="MT · 2017
+29.0% burned
+27 of 93 directly exposed structures
+2 fires"><b>29</b><i>93</i></td><td class="c dk" style="background:#FDAF59" data-tip="MT · 2018
+33.8% burned
+23 of 68 directly exposed structures
+2 fires"><b>34</b><i>68</i></td><td class="c empty" data-tip="MT · 2019
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="c dk" style="background:#FECE7E" data-tip="MT · 2020
+21.8% burned
+129 of 593 directly exposed structures
+4 fires"><b>22</b><i>593</i></td><td class="c dk" style="background:#FEDD97" data-tip="MT · 2021
+15.4% burned
+95 of 617 directly exposed structures
+5 fires"><b>15</b><i>617</i></td><td class="c empty" data-tip="MT · 2022
+0 directly exposed structures
+Fewer than 50: too few to show a share.">–</td><td class="x">1,460</td><td class="x">21%</td></tr></tbody></table></div></div></section><section class="sec"><h2>Which fires</h2><div class="card"><h3>A third of the fires hold almost all of the loss</h3><p class="cap">Fires grouped by how many structures each burned. The 65 fires that burned more than 100 (34% of fires) account for 93% of burned structures. Every fire in this set burned at least 10.</p><div class="legend"><span class="k"><span class="sw" style="background:var(--s7)"></span>Share of fires</span><span class="k"><span class="sw" style="background:var(--s4)"></span>Share of all burned structures</span></div><div class="hb"><div class="lab">10–100 burned</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.00%"></i><i class="grid" style="left:40.00%"></i><i class="grid" style="left:60.00%"></i><i class="grid" style="left:80.00%"></i><i class="grid" style="left:100.00%"></i><div class="bar" style="width:65.97%;background:var(--s7)" data-tip="10–100 burned · fires
+126 of 191 fires (66.0%)"><span class="val">66%</span></div><div class="bar" style="width:7.43%;background:var(--s4)" data-tip="10–100 burned · structures burned
+4,159 of 56,003 burned structures (7.4%)"><span class="val">7%</span></div></div><div class="lab">More than 100 burned</div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:20.00%"></i><i class="grid" style="left:40.00%"></i><i class="grid" style="left:60.00%"></i><i class="grid" style="left:80.00%"></i><i class="grid" style="left:100.00%"></i><div class="bar" style="width:34.03%;background:var(--s7)" data-tip="More than 100 burned · fires
+65 of 191 fires (34.0%)"><span class="val">34%</span></div><div class="bar" style="width:92.57%;background:var(--s4)" data-tip="More than 100 burned · structures burned
+51,844 of 56,003 burned structures (92.6%)"><span class="val">93%</span></div></div><div></div><div class="axis"><span style="left:0.00%">0%</span><span style="left:20.00%">20%</span><span style="left:40.00%">40%</span><span style="left:60.00%">60%</span><span style="left:80.00%">80%</span><span style="left:100.00%">100%</span></div></div></div><div class="card"><h3>The ten fires that burned the most structures</h3><p class="cap">Together 33,543 burned structures, 60% of all burned in these 191 fires.</p><div class="scroll"><table class="tb"><thead><tr><th>Fire</th><th>State</th><th class=n>Year</th><th class=n>Structures</th><th class=n>Burned</th><th class=n>Share burned</th></tr></thead><tbody><tr><td>Camp</td><td>CA</td><td class=n>2018</td><td class=n>29,948</td><td class=n>16,493</td><td class=n>55%</td></tr><tr><td>Tubbs</td><td>CA</td><td class=n>2017</td><td class=n>32,832</td><td class=n>5,185</td><td class=n>16%</td></tr><tr><td>Almeda Drive</td><td>OR</td><td class=n>2020</td><td class=n>14,976</td><td class=n>2,402</td><td class=n>16%</td></tr><tr><td>Carr</td><td>CA</td><td class=n>2018</td><td class=n>14,543</td><td class=n>1,680</td><td class=n>12%</td></tr><tr><td>Chimney Tops 2</td><td>TN</td><td class=n>2016</td><td class=n>5,827</td><td class=n>1,517</td><td class=n>26%</td></tr><tr><td>Woolsey</td><td>CA</td><td class=n>2018</td><td class=n>68,833</td><td class=n>1,508</td><td class=n>2%</td></tr><tr><td>North Complex</td><td>CA</td><td class=n>2020</td><td class=n>6,396</td><td class=n>1,294</td><td class=n>20%</td></tr><tr><td>Glass</td><td>CA</td><td class=n>2020</td><td class=n>26,180</td><td class=n>1,237</td><td class=n>5%</td></tr><tr><td>Marshall</td><td>CO</td><td class=n>2021</td><td class=n>14,194</td><td class=n>1,196</td><td class=n>8%</td></tr><tr><td>Dixie</td><td>CA</td><td class=n>2021</td><td class=n>8,732</td><td class=n>1,031</td><td class=n>12%</td></tr></tbody></table></div></div></section>
+<footer class="site"><h3>Sources</h3><ul><li>Carlson, A.R., et al., 2025, <i>Wildfire building destruction and exposure in the conterminous United States, 2002–2022</i>, U.S. Geological Survey data release, <a href="https://doi.org/10.5066/P1QX6UXD">doi:10.5066/P1QX6UXD</a> (CC0 1.0).</li></ul><div class="faint">Built 2026-10-12 with the viz-html skill (examples/carlson_record_demo.py).</div></footer>
+</div><div id="tip" role="tooltip"></div><script>
+(function(){
+  const tip = document.getElementById('tip');
+  let pinned = null;
+  function fill(el){ tip.textContent = ''; el.dataset.tip.split('\n').forEach((t, i) => {
+    const n = document.createElement(i ? 'div' : 'b'); n.textContent = t; tip.appendChild(n); }); }
+  function place(el){ const r = el.getBoundingClientRect(); tip.style.display = 'block';
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = r.right + 10, y = r.top + r.height / 2 - h / 2;
+    if(x + w > innerWidth - 8) x = r.left - w - 10;
+    if(x < 8){ x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8); y = r.bottom + 8;
+      if(y + h > innerHeight - 8) y = r.top - h - 8; }
+    tip.style.left = x + 'px'; tip.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px'; }
+  function show(el){ fill(el); place(el); }
+  function hide(){ tip.style.display = 'none'; pinned = null; }
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    el.addEventListener('mouseenter', () => show(el));
+    el.addEventListener('mouseleave', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('focus', () => show(el));
+    el.addEventListener('blur', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('click', e => { e.stopPropagation(); if(pinned === el){ hide(); return; } pinned = el; show(el); });
+  });
+  document.addEventListener('click', hide);
+  addEventListener('scroll', () => { if(!pinned) tip.style.display = 'none'; else place(pinned); }, {passive:true});
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') hide(); });
+  // keep SVG chart text the same size on screen when the chart is drawn narrower than its viewBox
+  function fitText(){ document.querySelectorAll('.svgwrap svg').forEach(svg => {
+    const vb = svg.viewBox.baseVal.width, w = svg.getBoundingClientRect().width || vb;
+    svg.style.setProperty('--k', Math.min(1.4, Math.max(1, vb / w)).toFixed(3)); }); }
+  fitText(); addEventListener('resize', fitText);
+  const tb = document.getElementById('themebtn');
+  if(tb) tb.addEventListener('click', () => { const r = document.documentElement;
+    const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = dark ? 'light' : 'dark'; });
+})();
+</script></body></html>
