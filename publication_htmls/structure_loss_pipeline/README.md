@@ -33,3 +33,6 @@ above, or open the file locally.
 * The NCEAS wordmark is copied from
   <https://www.nceas.ucsb.edu/themes/custom/nceas/components/images/logo-nceas.svg>
   and is also embedded in each map so the map stays self-contained.
+
+## Pages
+- [`structure-loss-vs-building-density-is-there-threshold-2026-10-12.html`](structure-loss-vs-building-density-is-there-threshold-2026-10-12.html): **Structure loss vs building density: is there a threshold? · 2026-10-12**. Cumulative share of destroyed buildings against density, and breakpoint tests matched to the roads paper (Fong et al. 2026). Carlson 2002–22, CAL FIRE inspections 2023–26, and our proposed 2002–26 record with and without fires that destroyed 1–9 buildings (614 fires, 346,852 exposed and 90,176 destroyed buildings), each also with its five largest fires removed. Density uses Carlson's own buildings for 2002–22 and our inventory for 2023–26, counted the way Carlson counts and calibrated to Carlson on overlapping fires. Live: <https://wri-science.github.io/public_publication/publication_htmls/structure_loss_pipeline/structure-loss-vs-building-density-is-there-threshold-2026-10-12.html>
