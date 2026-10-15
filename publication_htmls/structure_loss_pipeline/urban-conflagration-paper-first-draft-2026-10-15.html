@@ -1,9 +1,9 @@
 <!doctype html>
-<!-- Generated 2026-10-14 18:09 PDT (2026-10-14T18:09:46-07:00) -->
+<!-- Generated 2026-10-14 22:57 PDT (2026-10-14T22:57:14-07:00) -->
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Urban conflagration paper: first draft · 2026-10-15</title>
 <meta name="description" content="Draft v0 of a paper on when U.S. wildfires become urban conflagrations · three full records: Carlson 2002–22 (361 fires), our 2002–26 record (726), CAL FIRE inspections 2013–25 (445) · built around two conditions every event met, the unexplained remainder and the house-to-house share · 13 places still waiting on running analyses">
-<meta name="generated" content="2026-10-14T18:09:46-07:00"><style>
+<meta name="generated" content="2026-10-14T22:57:14-07:00"><style>
 .ms{max-width:860px;overflow-wrap:anywhere}
 .card .src,.note li,.toc a{overflow-wrap:anywhere}
 .ms hr{display:none}
@@ -253,7 +253,7 @@ footer.site ul{padding-left:18px;margin:0 0 12px} footer.site li{margin:4px 0}
 </style></head>
 <body><div class="wrap">
 <header><div class="topbar"><div class="eyebrow">Structure-loss project · paper draft</div><div class="btns"><button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark">Light / dark</button></div></div>
-<h1>Urban conflagration paper: first draft · 2026-10-15</h1><p class="subtitle">Draft v0 of a paper on when U.S. wildfires become urban conflagrations · three full records: Carlson 2002–22 (361 fires), our 2002–26 record (726), CAL FIRE inspections 2013–25 (445) · built around two conditions every event met, the unexplained remainder and the house-to-house share · 13 places still waiting on running analyses</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-14 18:09 PDT</time></p><p class="lede">Every urban conflagration in three national building records had a big block of close buildings and burned in a regional wind event, but most fires with both did not become one. This draft sets out that finding, what does not explain the rest, and how much of the loss spread house to house.</p><div class="note"><h3>How to read this page</h3><p>This is a working draft, not a published paper. Small grey tags after a number name the result file it was copied from: hover or tap them. Orange boxes mark results that are still running. Section links are just below.</p></div></header>
+<h1>Urban conflagration paper: first draft · 2026-10-15</h1><p class="subtitle">Draft v0 of a paper on when U.S. wildfires become urban conflagrations · three full records: Carlson 2002–22 (361 fires), our 2002–26 record (726), CAL FIRE inspections 2013–25 (445) · built around two conditions every event met, the unexplained remainder and the house-to-house share · 13 places still waiting on running analyses</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-14 22:57 PDT</time></p><p class="lede">Every urban conflagration in three national building records had a big block of close buildings and burned in a regional wind event, but most fires with both did not become one. This draft sets out that finding, what does not explain the rest, and how much of the loss spread house to house.</p><div class="note"><h3>How to read this page</h3><p>This is a working draft, not a published paper. Small grey tags after a number name the result file it was copied from: hover or tap them. Orange boxes mark results that are still running. Section links are just below.</p></div></header>
 <section class="sec" id="contents"><h2>Contents</h2><ol class="toc"><li><a href="#title-options">Title options</a></li><li><a href="#abstract">Abstract</a></li><li><a href="#introduction">Introduction</a></li><li><a href="#data">Data</a></li><li><a href="#defining-an-urban-conflagration">Defining an urban conflagration</a></li><li><a href="#results">Results</a></li><li><a href="#discussion">Discussion</a></li><li><a href="#methods-appendix">Methods appendix</a></li><li><a href="#list-of-figures">List of figures</a></li><li><a href="#reproducibility-scripts-and-tables-behind-each-claim">Reproducibility: scripts and tables behind each claim</a></li><li><a href="#references">References</a></li></ol><div class="note"><h3>Still pending</h3><p>These parts of the draft wait on analyses that are still running. The draft does not guess their results; each place is marked in orange.</p><ul><li><b>PA62</b> (4 places): How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.</li><li><b>PA63</b> (4 places): Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.</li><li><b>PA65</b> (3 places): A national map of where an urban conflagration is possible: blocks above the 89 line within reach of wildland, in wind-event regions, checked on the known events.</li><li><b>back-cast</b> (2 places): The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.</li></ul></div></section><div class="card"><h3>Condition 1 at a glance (read live from the pipeline's table)</h3><p class="cap">The same counts appear in the draft below; the page build stops if they disagree.</p><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th data-tip="Each record is used in full">Record</th><th class=n data-tip="Fires with at least one building in reach">Fires</th><th data-tip="Fires whose largest group of close buildings (centres within 35 m) held 89 or fewer">Block ≤ 89: urban conflagrations</th><th data-tip="Fires whose largest group held more than 89">Block > 89: urban conflagrations</th><th class=n data-tip="Area under the ROC curve for block size">AUC</th></tr></thead><tbody><tr><td data-label="Record">Carlson 2002–22</td><td class="n" data-tip="Fires · 361
 Fires in the record with at least one building in reach of the fire; 8 urban conflagrations" data-label="Fires">361</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 338
 0 urban conflagrations among 338 fires whose block was 89 buildings or fewer
@@ -261,8 +261,8 @@ Exact 95 % upper limit: 1.1 %
 What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 338</td><td data-tip="Block &gt; 89: urban conflagrations · 8 of 23 (35 %)
 8 urban conflagrations among 23 fires whose block exceeded 89
 Exact 95 % range 16–57 %
-What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">8 of 23 (35 %)</td><td class="n" data-tip="AUC · 0.986
-How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.986</td></tr><tr><td data-label="Record">Our 2002–26 record</td><td class="n" data-tip="Fires · 726
+What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">8 of 23 (35 %)</td><td class="n" data-tip="AUC · 0.987
+How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.987</td></tr><tr><td data-label="Record">Our 2002–26 record</td><td class="n" data-tip="Fires · 726
 Fires in the record with at least one building in reach of the fire; 10 urban conflagrations" data-label="Fires">726</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 701
 0 urban conflagrations among 701 fires whose block was 89 buildings or fewer
 Exact 95 % upper limit: 0.5 %
@@ -271,14 +271,14 @@ What it suggests: no exception seen; a rate above the upper limit is unlikely" d
 Exact 95 % range 21–61 %
 What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">10 of 25 (40 %)</td><td class="n" data-tip="AUC · 0.994
 How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.994</td></tr><tr><td data-label="Record">CAL FIRE DINS 2013–25</td><td class="n" data-tip="Fires · 445
-Fires in the record with at least one building in reach of the fire; 7 urban conflagrations" data-label="Fires">445</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 431
-0 urban conflagrations among 431 fires whose block was 89 buildings or fewer
+Fires in the record with at least one building in reach of the fire; 7 urban conflagrations" data-label="Fires">445</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 429
+0 urban conflagrations among 429 fires whose block was 89 buildings or fewer
 Exact 95 % upper limit: 0.9 %
-What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 431</td><td data-tip="Block &gt; 89: urban conflagrations · 7 of 14 (50 %)
-7 urban conflagrations among 14 fires whose block exceeded 89
-Exact 95 % range 23–77 %
-What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">7 of 14 (50 %)</td><td class="n" data-tip="AUC · 0.994
-How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.994</td></tr></tbody></table></div><p class="src">docs/paper/tables/p33_headline.csv (current building set and outline, all fires with ≥ 1 building in reach)</p><details class="checks"><summary>How this panel was checked</summary><ul><li>All three full records shown; none is a subset.</li><li>Intervals are exact (Clopper–Pearson) for the rates; the records overlap (same California fires), so their counts do not add.</li><li>The draft text is checked against this table on every build.</li></ul></details></div><article class="ms"><p><strong>Status.</strong> First full draft. Results are exploratory unless a pre-registration is named. Three sections wait on running analyses and one on the held-out back-cast.</p>
+What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 429</td><td data-tip="Block &gt; 89: urban conflagrations · 7 of 16 (44 %)
+7 urban conflagrations among 16 fires whose block exceeded 89
+Exact 95 % range 20–70 %
+What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">7 of 16 (44 %)</td><td class="n" data-tip="AUC · 0.994
+How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.994</td></tr></tbody></table></div><p class="src">docs/paper/tables/p67_condition1.csv (Forest Service outline + 100 m, the paper's main outline from 15 October 2026; all fires with ≥ 1 building in reach)</p><details class="checks"><summary>How this panel was checked</summary><ul><li>All three full records shown; none is a subset.</li><li>Intervals are exact (Clopper–Pearson) for the rates; the records overlap (same California fires), so their counts do not add.</li><li>The draft text is checked against this table on every build.</li></ul></details></div><article class="ms"><p><strong>Status.</strong> First full draft. Results are exploratory unless a pre-registration is named. Three sections wait on running analyses and one on the held-out back-cast.</p>
 <h2 id="title-options">Title options</h2>
 <ol>
 <li>Two conditions met by every recent U.S. urban conflagration, and what they leave unexplained</li>
@@ -294,10 +294,9 @@ How well block size ranks fires with and without an urban conflagration (1 = per
 SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> We define an urban conflagration as at least 50 destroyed buildings joined in one chain, each within 30 m (centre to centre) of another. This is a stated convention: patch sizes show no natural break. <span class="srcref" data-tip="Where this number comes from
 DEF: docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> Two conditions were met by every event. First, the fire reached a block of more than 89 closely spaced buildings. No fire with a smaller block had an urban conflagration: 0 of 338 (Carlson), 0 of 701 (our record) and 0 of 431 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
-SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
-FOR: docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·FOR</span> Second, the town burned during a recognised regional wind event: 10 of the 10 urban conflagrations in our record did. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> Two conditions were met by every event. First, the fire reached a block of more than 89 closely spaced buildings. No fire with a smaller block had an urban conflagration: 0 of 338 (Carlson), 0 of 701 (our record) and 0 of 429 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> Second, the town burned during a recognised regional wind event: 10 of the 10 urban conflagrations in our record did. <span class="srcref" data-tip="Where this number comes from
 WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> Neither condition is enough. Of the 25 fires that reached a block above the line, 10 became urban conflagrations. Of the 15 that did not, 14 also burned in a wind event. <span class="srcref" data-tip="Where this number comes from
 SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
@@ -309,15 +308,17 @@ WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.c
 DWL: docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
 NET: docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
 FC: docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW·TW·WC·DWL·NET·FC</span> A final-map spread model puts the share of destroyed buildings lit by a burning neighbour at most 32–39 % across the three records. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW·TW·WC·DWL·NET·FC</span> A final-map spread model puts the share of destroyed buildings lit by a burning neighbour at most 28–39 % across the three records. <span class="srcref" data-tip="Where this number comes from
 H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> That share is larger in bigger blocks, and clearest in Marshall, Camp and Almeda Drive. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·OUT</span> That share is larger in bigger blocks, and clearest in Marshall, Camp and Almeda Drive. <span class="srcref" data-tip="Where this number comes from
 H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Whether the ~89-building line is a true tipping point cannot be told. Percolation theory predicts a rounded climb at town sizes, and a test would detect sharpening at most 13 % of the time. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Whether the ~89-building line is a true tipping point cannot be told. Percolation theory predicts a rounded climb at town sizes, and a test would detect sharpening at most 12 % of the time. <span class="srcref" data-tip="Where this number comes from
 STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
 FSS: docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
 LRN: docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FSS·LRN</span> The wildfire does most of the work. Big blocks let house-to-house spread add to it.</p>
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FSS·LRN·OUT</span> The wildfire does most of the work. Big blocks let house-to-house spread add to it.</p>
 <hr />
 <h2 id="introduction">Introduction</h2>
 <p>A few fires cause most wildfire building loss in the United States. Fires driven by downslope winds were 13.4 % of western U.S. fires but caused 60.1 % of the structures lost since 1999 (Abatzoglou et al. 2023). <span class="srcref" data-tip="Where this number comes from
@@ -420,9 +421,9 @@ QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> CAL FIRE's seven are Camp, Eaton, Glass, Palisades, Sandalwood, Tubbs and Woolsey. Almeda Drive and Marshall lie outside California. <span class="srcref" data-tip="Where this number comes from
 SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
-<p><strong>Unselected check.</strong> Our 2023–25 frame is chosen whatever each fire's reported loss, so it is free of selection on the outcome. It holds 58 fires with at least 100 buildings in reach. <span class="srcref" data-tip="Where this number comes from
-QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></p>
+<p><strong>Unselected check.</strong> Our 2023–25 frame is chosen whatever each fire's reported loss, so it is free of selection on the outcome. It holds 59 fires with at least 100 buildings in reach. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span></p>
 <p><strong>Outside the three records.</strong> Two events have open per-building damage data:
 - Lahaina 2023, from the BRIGHT labels (CC BY-SA 4.0): 3,862 buildings in reach and 1,876 destroyed;
 - Waldo Canyon 2012, from the NIST/USFS Mountain Shadows database (public domain).</p>
@@ -438,7 +439,9 @@ What it suggests: an analysis still running; this draft does not guess its resul
 <li><strong>Carlson points.</strong> USGS Carlson points sit on Microsoft footprint centres, not address points: median offset 0.0001 m for 206,061 matched surviving buildings of 221,487. <span class="srcref" data-tip="Where this number comes from
 PAT (&quot;Assumptions so far&quot;): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> They carry no footprint, so spacing is measured centre to centre.</li>
-<li><strong>CAL FIRE.</strong> The 169,597 buildings in reach come from Microsoft footprints plus every inspection record. Of the inspection records, 57.9 % matched a footprint within 20 m; most of the rest are missing from post-fire footprint imagery. <span class="srcref" data-tip="Where this number comes from
+<li><strong>CAL FIRE.</strong> The 190,967 buildings in reach come from Microsoft footprints plus every inspection record. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> Of the inspection records, 57.9 % matched a footprint within 20 m; most of the rest are missing from post-fire footprint imagery. <span class="srcref" data-tip="Where this number comes from
 SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> Inspection points sit a few metres off building centres (median 4.2 m). <span class="srcref" data-tip="Where this number comes from
 PAT (&quot;Assumptions so far&quot;): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
@@ -449,15 +452,22 @@ FOR (plain answer): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.m
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">USC·FOR</span></li>
 </ul>
 <h3 id="outlines-what-reached-by-the-fire-means">Outlines: what "reached by the fire" means</h3>
-<p>A building is <strong>in reach of the fire</strong> (exposed) when it lies inside the fire outline or within 100 m of it. The outlines are:
-- Carlson's own hand-drawn outline for 2002–22;
-- public perimeters for 2023–26 (WFIGS, CAL FIRE FRAP, NIFC, MTBS);
-- for CAL FIRE incidents, the matched perimeter (MTBS for 134 incidents, FRAP 74, WFIGS 22, none 221), plus 100 m around every inspected building. <span class="srcref" data-tip="Where this number comes from
-MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></p>
-<p>The Forest Service outline (MTBS, Monitoring Trends in Burn Severity) is the check. It exists for 356 of 361 Carlson fires (98.9 % of the buildings in reach), 471 of 754 fires in our record (93.7 %) and 133 of 445 CAL FIRE incidents (93.6 %). <span class="srcref" data-tip="Where this number comes from
-MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></p>
+<p>A building is <strong>in reach of the fire</strong> (exposed) when it lies inside the fire outline or within 100 m of it, the same 100 m as Carlson's own rule for buildings directly exposed. The outline is the Forest Service / USGS burned-area outline (MTBS, Monitoring Trends in Burn Severity), which is public, so the count can be repeated. It exists for 356 of 361 Carlson fires (98.9 % of the buildings in reach), 471 of the 726 fires with a building in reach in our record (93.7 %) and 133 of 445 CAL FIRE incidents (94.0 %). <span class="srcref" data-tip="Where this number comes from
+OUT ((p67_outline_basis.csv)): docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> Where it does not exist yet:
+- 2023–26 fires without an MTBS outline (mostly 2025–26, and fires below its mapping size) keep the public outline already used (WFIGS, CAL FIRE FRAP, NIFC), plus 100 m: 250 fires, 5.3 % of the buildings in reach in our record;
+- the 5 Carlson fires without an MTBS outline keep Carlson's hand-drawn outline (1.1 % of Carlson's buildings in reach);
+- CAL FIRE incidents without an MTBS outline use their matched public outline plus 100 m (85 incidents) or, with no outline at all, 100 m around every inspected building (232 incidents, 3.3 % of buildings in reach). Every CAL FIRE area also includes 100 m around every inspected building. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span></p>
+<p>Canadian buildings are also in reach within 100 m of Canada's national burned-area map (NBAC) for the fire year; this adds 38 buildings, 1 of them counted. Mexico has no open burned-area outline. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+MTB: docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT·MTB</span></p>
+<p>Two checks are shown beside the main outline: the same outline with unburned patches inside it removed (buildings not destroyed whose surroundings the MTBS or Landsat burn map shows as unburned, with no burned ground within 100 m), and Carlson's hand-drawn outline, which every number in this paper used until 15 October 2026. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+MTB: docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT·MTB</span></p>
 <h3 id="wind-and-fire-weather-description-only">Wind and fire weather (description only)</h3>
 <p>Wind is never part of the definition or a model input. We use it only to describe fires.
 - <strong>When the town burned.</strong> NASA FIRMS satellite fire detections timed 309 of 376 study fires. The rest fall back to incident reports or the ignition date. The median timing uncertainty is 7.8 h. <span class="srcref" data-tip="Where this number comes from
@@ -542,7 +552,7 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <td>8</td>
 <td>0 / 338 (1.1 %)</td>
 <td>8 / 23, 35 % [16, 57]</td>
-<td>0.986 [0.970, 0.998]</td>
+<td>0.987 [0.971, 0.998]</td>
 </tr>
 <tr>
 <td>our 2002–26 record</td>
@@ -550,25 +560,26 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <td>10</td>
 <td>0 / 701 (0.5 %)</td>
 <td>10 / 25, 40 % [21, 61]</td>
-<td>0.994 [0.987, 0.999]</td>
+<td>0.994 [0.988, 0.999]</td>
 </tr>
 <tr>
 <td>CAL FIRE DINS 2013–25</td>
 <td>445</td>
 <td>7</td>
-<td>0 / 431 (0.9 %)</td>
-<td>7 / 14, 50 % [23, 77]</td>
-<td>0.994 [0.985, 0.999]</td>
+<td>0 / 429 (0.9 %)</td>
+<td>7 / 16, 44 % [20, 70]</td>
+<td>0.994 [0.985, 1.000]</td>
 </tr>
 </tbody>
 </table></div>
 <p><span class="srcref" data-tip="Where this number comes from
-SIG (table &quot;PA31 cluster rule on the three full records&quot;): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
-FOR (§&quot;Three full records&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·FOR</span></p>
-<p>The line at 89 was set on our record's fires with at least 100 buildings in reach, where the fitted line was 89 (fire-bootstrap range 79–120). There, 0 of 330 fires at or below the line and 10 of 25 above it had an urban conflagration. <span class="srcref" data-tip="Where this number comes from
+OUT ((p67_condition1.csv, Forest Service outline + 100 m): docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+AUC intervals from the fire bootstrap in p28_predictor_link.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT·file</span></p>
+<p>The line at 89 was set on our record's fires with at least 100 buildings in reach, where the fitted line was 89 (fire-bootstrap range 79–120). There, 0 of 330 fires at or below the line and 10 of 25 above it had an urban conflagration (Carlson's outline, on which the line was set); on the Forest Service outline the same rule gives 0 of 331 and 10 of 25. <span class="srcref" data-tip="Where this number comes from
 QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> CAL FIRE is a new test of the line, because its buildings come from footprints and inspections rather than Carlson's points. All 7 CAL FIRE events lie above the line, which meets the pre-registered bar. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·OUT</span> CAL FIRE is a new test of the line, because its buildings come from footprints and inspections rather than Carlson's points. All 7 CAL FIRE events lie above the line, which meets the pre-registered bar. <span class="srcref" data-tip="Where this number comes from
 SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> In our record, fires with blocks of 90–199 buildings had urban conflagrations in 6 of 20 cases (30 %). Fires with blocks of 200–999 had them in 4 of 5. <span class="srcref" data-tip="Where this number comes from
 SIG (§5): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
@@ -585,19 +596,7 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 </thead>
 <tbody>
 <tr>
-<td>current (all buildings, current outline)</td>
-<td>0/338, 8/23</td>
-<td>0/701, 10/25</td>
-<td>0/431, 7/14</td>
-</tr>
-<tr>
-<td>U.S. buildings only (Mexico, Canada removed)</td>
-<td>0/339, 8/22</td>
-<td>0/702, 10/24</td>
-<td>0/431, 7/14</td>
-</tr>
-<tr>
-<td>Forest Service outline + 100 m</td>
+<td>main: Forest Service outline + 100 m, all buildings</td>
 <td>0/338, 8/23</td>
 <td>0/701, 10/25</td>
 <td>0/429, 7/16</td>
@@ -608,19 +607,32 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <td>0/703, 10/23</td>
 <td>0/432, 7/13</td>
 </tr>
+<tr>
+<td>Carlson's hand-drawn outline (the rule before 15 October 2026)</td>
+<td>0/338, 8/23</td>
+<td>0/701, 10/25</td>
+<td>0/431, 7/14</td>
+</tr>
+<tr>
+<td>U.S. buildings only (Mexico, Canada removed; Carlson's outline)</td>
+<td>0/339, 8/22</td>
+<td>0/702, 10/24</td>
+<td>0/431, 7/14</td>
+</tr>
 </tbody>
 </table></div>
 <p><span class="srcref" data-tip="Where this number comes from
+OUT ((p67_condition1.csv)): docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
 FOR (&quot;Numbers that changed&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
-MTB (plain answer table): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FOR·MTB</span></p>
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT·FOR</span></p>
 <ul>
-<li><strong>Buildings across the border.</strong> Only Harris 2007 changes side. Its block of 141 lies in Tecate, Mexico, inside Carlson's outline, which runs along the border. Satellite burn evidence shows the fire did not reach it: 0 of the 141 buildings show any burn (Landsat dNBR ≥ 0.10). Counting U.S. buildings only, its block is 42. <span class="srcref" data-tip="Where this number comes from
+<li><strong>Buildings across the border.</strong> Only Harris 2007 changes side. Its block of 141 lies in Tecate, Mexico, inside both Carlson's outline and the Forest Service outline, which both run along the border. Satellite burn evidence shows the fire did not reach it: 0 of the 141 buildings show any burn (Landsat dNBR ≥ 0.10). Counting U.S. buildings only, its block is 42. <span class="srcref" data-tip="Where this number comes from
 FOR (&quot;Harris 2007&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FOR</span></li>
-<li><strong>Outline.</strong> The Forest Service outline moves the biggest block in 9 of 361 Carlson fires and 29 of 754 fires in our record, by a median of 1 building. Removing unburned patches inside the outline moves Paradise 2003 (93 → 82) and Slide 2007 (112 → 87) below the line. Neither had an urban conflagration. <span class="srcref" data-tip="Where this number comes from
-MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></li>
+<li><strong>Outline.</strong> Against Carlson's hand-drawn outline, the Forest Service outline moves the biggest block in 9 of 361 Carlson fires and 29 of 754 fires in our record, by a median of 1 building. In CAL FIRE it moves 32 of 445 incidents' blocks, because the 100 m margin is now added there; Cocos 2014 (58 → 112) and Thomas 2017 (88 → 115) move above the line, and neither had an urban conflagration. Removing unburned patches inside the outline moves Paradise 2003 (93 → 82) and Slide 2007 (112 → 87) below the line, and Coches 2 2025 (104 → 33) in CAL FIRE. None had an urban conflagration. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+MTB: docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT·MTB</span></li>
 <li><strong>Counting every building, not only those reached.</strong> Blocks built from every counted building sort fires less sharply: AUC 0.986 → 0.923 (Carlson) and 0.994 → 0.962 (ours). Still no event falls at or below 89. <span class="srcref" data-tip="Where this number comes from
 PA2 (&quot;Perimeter check&quot;): docs/ledger.d/2026-10-14-0150-conflagration-patches--result-addendum-2.md (patch study on the current building set; tables p31_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PA2</span></li>
@@ -629,9 +641,10 @@ QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></li>
 </ul>
 <p><strong>Out of sample.</strong>
-- In the unselected 2023–25 frame, only 2 of the 58 fires reached a block above the line, Eaton and Palisades, and both became urban conflagrations. None of the other 56 did. <span class="srcref" data-tip="Where this number comes from
+- In the unselected 2023–25 frame, only 2 of the 59 fires reached a block above the line, Eaton and Palisades, and both became urban conflagrations. None of the other 57 did. <span class="srcref" data-tip="Where this number comes from
 QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span>
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·OUT</span>
 - Lahaina 2023 sits far above the line (block 884 buildings, or 273 counting the labelled buildings only) and had an urban conflagration (largest destroyed patch 97). <span class="srcref" data-tip="Where this number comes from
 SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span>
@@ -641,15 +654,18 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 - Three of the largest sparse losses lie below the line and had no urban conflagration, as the rule predicts. Chimney Tops 2 (Gatlinburg) lost 1,517 buildings, Black Forest 785 and Bastrop 1,403. Their blocks were 45, 7 and 10. <span class="srcref" data-tip="Where this number comes from
 SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
-<p><strong>What "necessary" can and cannot mean here.</strong> Part of the line is built in. The block contains the destroyed patch in 99.7 % (Carlson), 99.7 % (ours) and 100 % (CAL FIRE) of fires, so no event can occur with a block below about 50. The evidence for 89 in particular is 0 events among the 16, 17 and 13 fires with blocks of 50–89. Their exact upper limits are 21 %, 20 % and 25 %. <span class="srcref" data-tip="Where this number comes from
+<p><strong>What "necessary" can and cannot mean here.</strong> Part of the line is built in. The block contains the destroyed patch in 99.7 % (Carlson), 99.5 % (ours) and 100 % (CAL FIRE) of fires, so no event can occur with a block below about 50. The evidence for 89 in particular is 0 events among the 16, 18 and 12 fires with blocks of 50–89. Their exact upper limits are 21 %, 19 % and 26 %. <span class="srcref" data-tip="Where this number comes from
 DEF (plain answer, §6): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> The line belongs to the 30 m rule: with 50 m links, 12 events in our record fall at or below 89. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF·OUT</span> The line belongs to the 30 m rule: with 50 m links, 12 events in our record fall at or below 89. <span class="srcref" data-tip="Where this number comes from
 DEF (plain answer): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> We call condition 1 necessary in the sense that no exception has been seen in any of the three records (701 fires below the line in our record alone; the records overlap, so their counts do not add). It is not proven. <span class="pending" data-tip="Pending: back-cast C1, C2
 The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.">Pending back-cast C1, C2</span> The held-out 2016–22 sample tests the "below" side. Only 1 of its fires (Hill 2018, block 91) lies above the line. <span class="srcref" data-tip="Where this number comes from
 QNT (§6): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></p>
-<p><strong>Other measures of the town add nothing.</strong> The share of buildings with more than 20 neighbours within 100 m is a looser necessary condition. No conflagration happened with less than 7.9 % of buildings that dense: 0 of 273 fires. Given the block, though, it adds nothing. <span class="srcref" data-tip="Where this number comes from
+<p><strong>Other measures of the town add nothing.</strong> The share of buildings with more than 20 neighbours within 100 m is a looser necessary condition. No conflagration happened with less than 7.9 % of buildings that dense: 0 of 272 fires. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> Given the block, though, it adds nothing. <span class="srcref" data-tip="Where this number comes from
 QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
 SIG (§4): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> The share of mobile homes adds nothing beyond dense share. <span class="srcref" data-tip="Where this number comes from
@@ -686,15 +702,16 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <tr>
 <td>CAL FIRE DINS</td>
 <td>7 of 7</td>
-<td>4 of 7</td>
-<td>0.19</td>
+<td>6 of 9</td>
+<td>0.21</td>
 </tr>
 </tbody>
 </table></div>
 <p><span class="srcref" data-tip="Where this number comes from
 WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
-docs/paper/tables/p31x_compare.csv rows wind_event_yes
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·file</span></p>
+OUT ((docs/paper/tables/p31x_compare.csv rows wind_event_yes): docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+CAL FIRE adds Cocos 2014, within the San Diego Complex, and Thomas 2017 as near misses)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·OUT·file</span></p>
 <ul>
 <li><strong>The ten events</strong> were Santa Ana fires (Sayre, Woolsey, Sandalwood, Eaton, Palisades) and Diablo or north-wind fires (Tubbs, Camp, Glass). The other two were the Labor Day 2020 east wind (Almeda Drive) and a Front Range downslope wind (Marshall). <span class="srcref" data-tip="Where this number comes from
 WC (§5): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
@@ -730,7 +747,9 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> The share of links whose gap has at least 25 % canopy was 7.1 % against 0.0 % (Holm p 0.49). Carlson and CAL FIRE agree. <span class="srcref" data-tip="Where this number comes from
 FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Linking buildings through trees, 35–60 m apart where at least 25 % canopy runs between them, predicts no better than buildings alone. Leave-one-fire-out AUC was 0.983 → 0.974 (Carlson), 0.992 → 0.990 (ours) and 0.992 → 0.985 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Linking buildings through trees, 35–60 m apart where at least 25 % canopy runs between them, predicts no better than buildings alone. Leave-one-fire-out AUC was 0.983 → 0.974 (Carlson), 0.992 → 0.989 (ours) and 0.992 → 0.986 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Trees do matter for a different kind of loss: big losses in sparse, treed housing below the line. Gatlinburg's destroyed chain grows from 16 at 30 m to 326 when links through canopy are allowed. <span class="srcref" data-tip="Where this number comes from
 FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
@@ -742,38 +761,48 @@ FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Fences are a known path in experiments and in Marshall (NIST TN 2228; Metz et al. 2024). <span class="srcref" data-tip="Where this number comes from
 LRC (§2.2): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> No public national layer can test them.</p>
-<p><strong>Wind at the town: not shown.</strong> We timed when each town burned and read the peak hourly wind over it. The 10 urban conflagrations and the 15 near misses had about the same peak: median 12.0 vs 10.9 m/s in our record (Mann–Whitney p 0.85). Carlson gave 10.8 vs 10.9 (p 0.51) and CAL FIRE 12.6 vs 8.5 (p 0.46). Peak gust in our record was 18.0 vs 14.7 m/s (p 0.14). <span class="srcref" data-tip="Where this number comes from
+<p><strong>Wind at the town: not shown.</strong> We timed when each town burned and read the peak hourly wind over it. The 10 urban conflagrations and the 15 near misses had about the same peak: median 12.0 vs 10.9 m/s in our record (Mann–Whitney p 0.85). Carlson gave 10.8 vs 10.9 (p 0.51) and CAL FIRE 12.6 vs 9.5 (p 0.61). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> Peak gust in our record was 18.0 vs 14.7 m/s (p 0.14). <span class="srcref" data-tip="Where this number comes from
 TW (§5): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span> A first comparison did find a difference, but it came from mixing weather products. The pre-registered "best product" switches between them in 2014, and 10 of the 15 near misses were from 2003–09, read with a product that reads peaks about 3.4 m/s low. With one product for every fire, the gap disappears. <span class="srcref" data-tip="Where this number comes from
 TW (§5): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span></p>
-<p><strong>Wind across the region: not shown.</strong> None of eight pre-registered measures separated the two groups in all three records. These measures covered the windiest spot within 25 or 100 km, region-wide wind, hours of strong gusts over the whole fire, and how unusual the fire-day wind was for that place. They also covered the strength of the offshore push. Every Holm-adjusted p was 0.30 or more. <span class="srcref" data-tip="Where this number comes from
+<p><strong>Wind across the region: not shown.</strong> None of eight pre-registered measures separated the two groups in all three records. These measures covered the windiest spot within 25 or 100 km, region-wide wind, hours of strong gusts over the whole fire, and how unusual the fire-day wind was for that place. They also covered the strength of the offshore push. Every Holm-adjusted p was 0.57 or more. <span class="srcref" data-tip="Where this number comes from
 WC (§2): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> For example, the windiest spot within 100 km while the town burned was 10.4 vs 11.2 m/s in our record (p 0.98). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·OUT</span> For example, the windiest spot within 100 km while the town burned was 10.4 vs 11.2 m/s in our record (p 0.98). <span class="srcref" data-tip="Where this number comes from
 WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span></p>
-<p><strong>Downwind lean: not shown.</strong> We took every destroyed building and its neighbours within 60 m. A neighbour downwind was lost about as often as one upwind. The lean (downwind minus upwind, average over fires) was −0.51 points (−2.23 to +1.15) in Carlson's 140 fires. It was −0.54 (−2.08 to +1.05) in 159 fires of our record and −0.58 (−2.82 to +1.82) in 44 CAL FIRE incidents. A lean larger than +1.2, +1.1 and +1.8 points is ruled out. <span class="srcref" data-tip="Where this number comes from
+<p><strong>Downwind lean: not shown.</strong> We took every destroyed building and its neighbours within 60 m. A neighbour downwind was lost about as often as one upwind. The lean (downwind minus upwind, average over fires) was −0.51 points (−2.23 to +1.15) in Carlson's 140 fires. It was −0.54 (−2.04 to +1.07) in 159 fires of our record and −0.58 (−2.85 to +1.84) in 44 CAL FIRE incidents. <span class="srcref" data-tip="Where this number comes from
+DWL: docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·OUT</span> A lean larger than +1.2, +1.1 and +1.8 points is ruled out. <span class="srcref" data-tip="Where this number comes from
 DWL (plain answer): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL</span> IBHS reported 83 % vs 71 % for homes within 3 m downwind of a burning neighbour in Eaton and Palisades (Monroy et al. 2025). That measure differs from ours: it counts damaged homes, including minor damage, at wall gaps of 3 m or less. <span class="srcref" data-tip="Where this number comes from
 DWL (plain answer): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
 LRC (§2.1): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·LRC</span> Our closest band (0–30 m) is also null: +0.59 (−0.73 to +1.93) in our record. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·LRC</span> Our closest band (0–30 m) is also null: +0.59 (−0.80 to +1.99) in our record. <span class="srcref" data-tip="Where this number comes from
 DWL (checks): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL</span></p>
-<p><strong>Network position: does not add.</strong> Within fires, density and position predicted which buildings were lost at about coin-flip level. Per-fire AUC was 0.506, 0.503 and 0.521 (Carlson, ours, CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·OUT</span></p>
+<p><strong>Network position: does not add.</strong> Within fires, density and position predicted which buildings were lost at about coin-flip level. Per-fire AUC was 0.506, 0.502 and 0.526 (Carlson, ours, CAL FIRE). <span class="srcref" data-tip="Where this number comes from
 NET (T1–T3): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> Network shape added 0.009, 0.007 and 0.013, below the pre-set bar of 0.01 in two records. A disease-style spread on the network added at most 0.015. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET·OUT</span> Network shape added 0.009, 0.008 and 0.013, below the pre-set bar of 0.01 in two records. A disease-style spread on the network added at most 0.013. <span class="srcref" data-tip="Where this number comes from
 NET (§2): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> "Bridges" between groups of buildings show no sign of mattering (gap coefficient −0.01, −0.14 to +0.08, in our record). <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> "Bridges" between groups of buildings show no sign of mattering (gap coefficient −0.02, −0.16 to +0.07, in our record). <span class="srcref" data-tip="Where this number comes from
 NET (§3): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> This matches the one earlier test against real losses, in two fires (Chulahwat et al. 2022). <span class="srcref" data-tip="Where this number comes from
 LRN (summary 2): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span></p>
 <p><strong>Clumping beyond fair chance: little.</strong> Against buildings picked at random from the town, real losses join up earlier in 90 of 93 decided fires in our record. That mostly shows that fire burns places, not scattered houses. <span class="srcref" data-tip="Where this number comes from
 FC (table, headline): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against a solid burned area of the same size, real losses are less clumped. In our record the biggest group at 50 m is 1.9 points smaller (−3.1 to −1.0). <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against a solid burned area of the same size, real losses are less clumped. In our record the biggest group at 50 m is 2.0 points smaller (−2.8 to −0.9). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 FC (table): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against the fire's own broad loss map (smoothed at 200 m), a small extra clumping remains. That is +1.0 point (+0.6 to +1.4) in the biggest group at 50 m, on a base of 3.3 %. It is consistent with house-to-house spread, but equally with small ember showers, wind channels or firefighting. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against the fire's own broad loss map (smoothed at 200 m), a small extra clumping remains. That is +0.9 point (+0.7 to +1.4) in the biggest group at 50 m, on a base of 3.3 %. It is consistent with house-to-house spread, but equally with small ember showers, wind channels or firefighting. <span class="srcref" data-tip="Where this number comes from
 FC (table, headline): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span></p>
 <p><strong>Within the same fire.</strong> We compared blocks of 50 or more buildings inside fires that had both kinds of block. Only block size holds in all three records. The share of buildings on ridges holds in two records but is fragile: only 7 % of blocks have any building on a ridge. Spacing, building size, canopy, depth into the town, slope, valley share, mobile-home share and building use could not be told apart. Only 6 to 9 fires carry these tests. <span class="srcref" data-tip="Where this number comes from
@@ -797,13 +826,17 @@ LRN (§6): docs/paper/lit-review-network-science-fire-2026-10-14.md (references 
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·LRN</span> The model form follows Sellke (1983), which is cited in the PA59 note but in neither review (flag: verify). <span class="srcref" data-tip="Where this number comes from
 H2H (Literature): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
-<p><strong>The method partly recovers known answers.</strong> We simulated fires on each real fire's own buildings. The estimate was typically 2–3 points off the true share (median absolute error 0.025). Its 95 % ranges held the truth only 78–79 % of the time, so we read them as about 80 % ranges. <span class="srcref" data-tip="Where this number comes from
+<p><strong>The method partly recovers known answers.</strong> We simulated fires on each real fire's own buildings. The estimate was typically 2–3 points off the true share (median absolute error 0.025). Its 95 % ranges held the truth only 77–79 % of the time, so we read them as about 80 % ranges. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
-<p><strong>It cannot tell house-to-house spread from a patchy front.</strong> We built "trap" fires in which no house lit another, but the wildfire's push changed sharply over 50 m. The method still reported 31 % (Carlson), 31 % (ours) and 22 % (CAL FIRE) lit by neighbours. <span class="srcref" data-tip="Where this number comes from
+<p><strong>It cannot tell house-to-house spread from a patchy front.</strong> We built "trap" fires in which no house lit another, but the wildfire's push changed sharply over 50 m. The method still reported 31 % (Carlson), 31 % (ours) and 23 % (CAL FIRE) lit by neighbours. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Every share below is therefore an upper bound.</p>
-<p><strong>At most a third to two-fifths.</strong> Share of destroyed buildings lit by a neighbour, upper bounds:</p>
+<p><strong>At most a quarter to two-fifths.</strong> Share of destroyed buildings lit by a neighbour, upper bounds:</p>
 <div class="scroll"><table class="tb">
 <thead>
 <tr>
@@ -819,53 +852,57 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <tr>
 <td>Carlson 2002–22</td>
 <td>135</td>
-<td>67,446</td>
-<td>37 % [30, 43]</td>
+<td>67,450</td>
+<td>36 % [30, 42]</td>
 <td>26 % [24, 32]</td>
-<td>24 % / 42 %</td>
+<td>23 % / 41 %</td>
 </tr>
 <tr>
 <td>our 2002–26 record</td>
 <td>155</td>
-<td>83,339</td>
-<td>39 % [32, 45]</td>
-<td>26 % [24, 31]</td>
-<td>28 % / 47 %</td>
+<td>83,308</td>
+<td>39 % [31, 47]</td>
+<td>26 % [23, 32]</td>
+<td>27 % / 47 %</td>
 </tr>
 <tr>
 <td>CAL FIRE DINS</td>
 <td>51</td>
 <td>48,890</td>
-<td>32 % [21, 39]</td>
-<td>18 % [11, 27]</td>
-<td>19 % / 45 %</td>
+<td>28 % [19, 38]</td>
+<td>15 % [11, 27]</td>
+<td>20 % / 45 %</td>
 </tr>
 </tbody>
 </table></div>
 <p><span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
-docs/paper/tables/p34_pooled.csv
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·file</span></p>
+OUT ((docs/paper/tables/p34_pooled.csv, Forest Service outline)): docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·OUT</span></p>
 <p>Even as an upper bound, the share stays below 50 % in every record. So <strong>most destroyed buildings were lit by the wildfire itself.</strong> Whether house-to-house spread is a large part of the typical fire's loss cannot be said, because a patchy front alone gives about the same number. <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Camp holds 24 % of Carlson's destroyed buildings; without it the Carlson share is 35 %. <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
-<p><strong>The share rises with block size.</strong> Its rank correlation with block size is +0.54 (Carlson), +0.55 (ours) and +0.63 (CAL FIRE). In our record the mean share is 56 % in the 22 fires above the 89 line and 28 % in the 133 at or below it, a difference of +28 points (+18 to +40). <span class="srcref" data-tip="Where this number comes from
+<p><strong>The share rises with block size.</strong> Its rank correlation with block size is +0.53 (Carlson), +0.55 (ours) and +0.62 (CAL FIRE). In our record the mean share is 57 % in the 22 fires above the 89 line and 28 % in the 133 at or below it, a difference of +29 points (+18 to +40). <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 p34_traits.csv
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·file</span> A patchy front alone also rises with block size (trap 48 % vs 33 % in our record). Roughly half of that gap could therefore come from a patchy front in close-built blocks. The excess over each fire's own trap still rises with block size (rank correlation 0.45 in Carlson and ours, 0.24 in CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·file</span> A patchy front alone also rises with block size (trap 48 % vs 33 % in our record). Roughly half of that gap could therefore come from a patchy front in close-built blocks. The excess over each fire's own trap still rises with block size (rank correlation 0.42 in Carlson, 0.41 in ours and 0.21 in CAL FIRE). <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers (exploratory)): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
-<p><strong>Where it shows clearly.</strong> In 9 of 155 fires in our record, the estimate's lower bound exceeds what a patchy front gives on the same buildings (exploratory). They are Camp, Almeda Drive, Marshall, Dixie, Thomas, Yarnell Hill, Lilac, Summit 2008 and Mosquito. In CAL FIRE only Camp does. <span class="srcref" data-tip="Where this number comes from
+<p><strong>Where it shows clearly.</strong> In 6 of 155 fires in our record, the estimate's lower bound exceeds what a patchy front gives on the same buildings (exploratory). They are Camp, Almeda Drive, Marshall, Dixie, Summit 2008 and Mosquito; Thomas, Yarnell Hill and Lilac, which passed on Carlson's outline, no longer do. In CAL FIRE only Boles 2014 does; Camp (CAL FIRE outcomes), which passed on the old outline, no longer does. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span>
-- <strong>Marshall 2021:</strong> 81 % (69–99 %), against 47 % from a patchy front.
-- <strong>Camp 2018:</strong> 40 % against 23 % (CAL FIRE outcomes: 36 % against 20 %).
-- <strong>Almeda Drive 2020:</strong> 95 % against 81 %.</p>
+- <strong>Marshall 2021:</strong> 85 % (72–99 %), against 49 % from a patchy front.
+- <strong>Camp 2018:</strong> 37 % against 23 % (CAL FIRE outcomes: 21 % against 20 %, no longer clear).
+- <strong>Almeda Drive 2020:</strong> 91 % against 75 %.</p>
 <p><span class="srcref" data-tip="Where this number comes from
 H2H (named fires): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> By contrast, Eaton (60 % vs a trap of 49 %), Palisades (44 % vs 36 %) and Tubbs (33 % vs 28 %) cannot be told from a patchy front. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> By contrast, Eaton (71 % vs a trap of 54 %), Palisades (47 % vs 42 %) and Tubbs (35 % vs 28 %) cannot be told from a patchy front. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 H2H (named fires): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Mobile homes recur. Most 30 m house-to-house patches whose building types are known are mostly mobile homes: 18 of 25 typed patches in Carlson and 16 of 30 in CAL FIRE. <span class="srcref" data-tip="Where this number comes from
 PAT (side finding): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
@@ -882,13 +919,19 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 H2H (&quot;Kernel and push&quot;): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
 <h3 id="is-89-a-tipping-point-we-cannot-tell-and-theory-says-why">Is 89 a tipping point? We cannot tell, and theory says why</h3>
-<p><strong>The climb.</strong> The chance of an urban conflagration is about 5 % at a block of about 70 buildings. It reaches about 50 % at about 188 buildings in our record (Carlson 70 → 209; CAL FIRE 61 → 201). That is a 2.7-fold range of block size (1.7–3.9). <span class="srcref" data-tip="Where this number comes from
+<p><strong>The climb.</strong> The chance of an urban conflagration is about 5 % at a block of about 70 buildings. It reaches about 50 % at about 188 buildings in our record (Carlson 70 → 209; CAL FIRE 67 → 209). <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> That is a 2.7-fold range of block size (1.7–3.9). <span class="srcref" data-tip="Where this number comes from
 STP (table): docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
 FOR (&quot;PA35&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FOR</span> Fig. 5 shows the climb.</p>
-<p><strong>The step test could not have found a step.</strong> The test behind the earlier wording "smooth, no step" would have missed a real step at 89 about half the time: power 0.57 on fires with at least 100 buildings in reach and 0.43 in Carlson. On the full records the step search stops at about 60 buildings, so power is 0.06 and 0.00. <span class="srcref" data-tip="Where this number comes from
+<p><strong>The step test could not have found a step.</strong> The test behind the earlier wording "smooth, no step" would have missed a real step at 89 about half the time: power 0.57 on fires with at least 100 buildings in reach and 0.44 in Carlson. On the full records the step search stops at about 60 buildings, so power is 0.06 and 0.01. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP</span> Predicting each fire with it left out, a gradual rise beats a hard step: log score better by +4.6 (Carlson), +5.1 (ours) and +3.1 (CAL FIRE), against a bar of 2. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP</span> Predicting each fire with it left out, a gradual rise beats a hard step: log score better by +4.6 (Carlson), +5.1 (ours) and +3.2 (CAL FIRE), against a bar of 2. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> <span class="srcref" data-tip="Where this number comes from
 STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
 FOR (&quot;PA35&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FOR</span> This reading is fragile in Carlson. It falls to −0.5 with U.S. buildings only and to −0.05 when unburned patches are removed from the outline, because two fires move from just above 89 to just below. <span class="srcref" data-tip="Where this number comes from
@@ -902,9 +945,11 @@ LRN (summary 1): docs/paper/lit-review-network-science-fire-2026-10-14.md (refer
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span> Mixing fires with different winds widens the climb further (Sander et al. 2003; Cardoso et al. 2022), and disorder rounds abrupt transitions in two dimensions (Aizenman &amp; Wehr 1989). <span class="srcref" data-tip="Where this number comes from
 LRN (summary 1): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span></p>
-<p><strong>A simulation on the real layouts.</strong> If fire spread like a simple building-to-building process, bigger blocks would switch more sharply. The width of the climb shrinks as block size to the power −0.68 (−0.87 to −0.51) in our record. That is steeper than the textbook −3/8. <span class="srcref" data-tip="Where this number comes from
+<p><strong>A simulation on the real layouts.</strong> If fire spread like a simple building-to-building process, bigger blocks would switch more sharply. The width of the climb shrinks as block size to the power −0.64 (−0.81 to −0.50) in our record. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">OUT</span> That is steeper than the textbook −3/8. <span class="srcref" data-tip="Where this number comes from
 FSS (plain answer): docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> But a test on our fires would detect it at best 13 % of the time in our record (10 % Carlson, 11 % CAL FIRE), against an 80 % bar. Even with each fire's true spread strength, which can never be measured, detection would take about 8 times as many fires. <span class="srcref" data-tip="Where this number comes from
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> But a test on our fires would detect it at best 10 % of the time in our record (12 % Carlson, 9 % CAL FIRE), against an 80 % bar. Even with each fire's true spread strength, which can never be measured, detection would take about 8 times as many fires. <span class="srcref" data-tip="Where this number comes from
 FSS (plain answer, data needed): docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> The test on real fires was therefore not run, as pre-registered. <span class="srcref" data-tip="Where this number comes from
 FSS: docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
@@ -933,9 +978,10 @@ What it suggests: an analysis still running; this draft does not guess its resul
 LRC (§2.4): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
 <p><strong>A mechanism: the wildfire does most of the work, and big blocks let house-to-house spread add to it.</strong> Three results fit together:
-1. At most a third to two-fifths of destroyed buildings were lit by a neighbour (32–39 %, upper bounds). <span class="srcref" data-tip="Where this number comes from
+1. At most a quarter to two-fifths of destroyed buildings were lit by a neighbour (28–39 %, upper bounds). <span class="srcref" data-tip="Where this number comes from
 H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span>
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·OUT</span>
 2. Even in fires with an urban conflagration, only 11 % of destroyed buildings sit in patches of 50. <span class="srcref" data-tip="Where this number comes from
 PAT: docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span>
@@ -1014,10 +1060,11 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.">Pending back-cast C1, C2</span></p>
 <hr />
 <h2 id="methods-appendix">Methods appendix</h2>
-<p><strong>Building rows and reach.</strong> Buildings standing before the fire come from Carlson's points (2002–22) and our Structure Inventory Model (2023–26), with CAL FIRE inspection outcomes where inspected. For CAL FIRE, the buildings in reach are Microsoft footprints within the incident's matched perimeter plus 100 m around every inspected building, with every inspection record kept. <span class="srcref" data-tip="Where this number comes from
+<p><strong>Building rows and reach.</strong> Buildings standing before the fire come from Carlson's points (2002–22) and our Structure Inventory Model (2023–26), with CAL FIRE inspection outcomes where inspected. A building is in reach when it lies inside the fire's MTBS burned-area outline or within 100 m of it; fires without an MTBS outline use the public outline already in use plus 100 m (Carlson fires without one: Carlson's outline). For CAL FIRE, the buildings in reach are Microsoft footprints within that area plus 100 m around every inspected building, with every inspection record kept. <span class="srcref" data-tip="Where this number comes from
 QNT (§1): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
 SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
-What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> Scripts: <code>scripts/paper/p24a_conflag_fire_rows.py</code>, <code>scripts/paper/p27a_rows.py</code>. Building points are projected to EPSG:5070. Every bearing is converted to true north. <span class="srcref" data-tip="Where this number comes from
+OUT: docs/ledger.d/2026-10-15-0335-paper-outline-mtbs--result.md (PA67; tables p67_*.csv: every number below under the three outlines)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG·OUT</span> Scripts: <code>scripts/paper/p24a_conflag_fire_rows.py</code>, <code>scripts/paper/p27a_rows.py</code> (switch <code>--outline</code>, paper default <code>mtbs100</code> in <code>run_conflag_chain.sh</code>; checks <code>mtbs100_unburned</code> and <code>current</code>), outline rules in <code>scripts/paper/p67_outline.py</code>. Building points are projected to EPSG:5070. Every bearing is converted to true north. <span class="srcref" data-tip="Where this number comes from
 DWL (&quot;Data checks&quot;): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
 TW (addendum): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
 What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·TW</span></p>
@@ -1072,7 +1119,7 @@ What it suggests: every number in the draft is copied from a file the pipeline w
 <hr />
 <h2 id="list-of-figures">List of figures</h2>
 <p>Each figure points to an existing panel on a live page in <code>publication_htmls/structure_loss_pipeline/</code>. Final paper figures will be redrawn from the same tables.</p>
-<p><strong>Fig. 1. Condition 1: the block line on three records.</strong> (A) Chance of an urban conflagration by block size, with the line at 89, for Carlson, our record and CAL FIRE. Points are fires; events are named. (B) Robustness: U.S.-only buildings, foreign buildings kept, Forest Service outline, unburned patches removed. Live panels: "Wildfire structure loss: paper exploration · 2026-10-12", section 1 "What makes an urban conflagration?" (<code>#conflagration</code>). Also "Defining an urban conflagration · 2026-10-13", sections "Which fire outline?" (<code>#s-outline</code>) and "Canadian and Mexican buildings kept" (<code>#update-foreign-kept</code>). Tables <code>p27_rule_three_records.csv</code>, <code>p28_predictor_link.csv</code>, <code>p33_headline.csv</code>, <code>p24_foreign_three_ways.csv</code>.</p>
+<p><strong>Fig. 1. Condition 1: the block line on three records.</strong> (A) Chance of an urban conflagration by block size, with the line at 89, for Carlson, our record and CAL FIRE. Points are fires; events are named. (B) Robustness: main Forest Service outline, unburned patches removed, Carlson's hand-drawn outline, U.S.-only buildings. Live panels: "Wildfire structure loss: paper exploration · 2026-10-12", section 1 "What makes an urban conflagration?" (<code>#conflagration</code>). Also "Defining an urban conflagration · 2026-10-13", sections "The paper now uses the Forest Service / USGS fire outline" (<code>#s-outline-switch</code>), "Which fire outline?" (<code>#s-outline</code>) and "Canadian and Mexican buildings kept" (<code>#update-foreign-kept</code>). Tables <code>p27_rule_three_records.csv</code>, <code>p28_predictor_link.csv</code>, <code>p33_headline.csv</code>, <code>p24_foreign_three_ways.csv</code>.</p>
 <p><strong>Fig. 2. Condition 2: wind events.</strong> (A) Known wind events fire by fire for the 10 urban conflagrations and the 15 near misses. (B) Share of destroyed buildings in wind-event fires. Live panels: "Trees, fences and wind in urban conflagrations · 2026-10-13", panels "Known wind events, fire by fire" and "Broader wind and how much was lost, all fires". Tables <code>p31x_named_events.csv</code>, <code>p31x_compare.csv</code>, <code>p31x_loss_bins.csv</code>.</p>
 <p><strong>Fig. 3. The remainder: what does not separate the 10 from the 15.</strong> One small panel per tested explanation, each showing the two groups in all three records: gap canopy, fuel-linked block, town wind, regional wind, downwind lean, network gain, and clumping beyond chance. Live panels: on "Trees, fences and wind…": "Trees between the houses of the biggest block", "Does a 'fuel-linked' block predict better?", "Wind over the town, not at the airport", "Wind around the fire: did it separate urban conflagrations?" and "Do losses lean downwind?". On "Urban conflagrations as networks · 2026-10-13": section 3 "Does the network explain which buildings were lost?" and section 0 "Do losses clump more than a fire that burns a connected area?". <span class="pending" data-tip="Pending: PA62
 How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.
@@ -1125,6 +1172,12 @@ What it suggests: an analysis still running; this draft does not guess its resul
 <td><code>p33a_mtbs_outline.py</code>, <code>p33b_abroad.py</code></td>
 <td><code>p33_headline.csv</code>, <code>p33_record_summary.csv</code>, <code>p33_fire_versions.csv</code></td>
 <td>2026-10-14-0520-mtbs-outline--result.md</td>
+</tr>
+<tr>
+<td>Main outline switched to MTBS + 100 m; every number under three outlines</td>
+<td><code>p67_outline.py</code>, <code>p67_compare.py</code>, <code>p67_sandbox.sh</code>, <code>p67_downstream.sh</code>, <code>p67_rc.sh</code></td>
+<td><code>p67_headline_three_outlines.csv</code>, <code>p67_condition1.csv</code>, <code>p67_outline_basis.csv</code>, <code>p67_sentences.csv</code></td>
+<td>2026-10-15-0335-paper-outline-mtbs--result.md</td>
 </tr>
 <tr>
 <td>Definition is a convention; 30 m range; knife-edge</td>
