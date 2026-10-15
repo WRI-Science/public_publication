@@ -9,7 +9,7 @@ Evacuation route analysis: road exits and wildfire burn hazard for 30,728 U.S. c
 - Interactive national map with community search; opens with a notice that it is research, not for emergency use
 
 ### [fsim_nps_places/](fsim_nps_places/)
-Wildfire burn hazard for 56,106 places on the National Register of Historic Places (Farnisa, Halpern & Fong, *Scientific Reports*).
+Wildfire burn hazard for 56,106 places on the National Register of Historic Places ([Farnisa, Halpern & Fong, *Scientific Reports* 2026](https://doi.org/10.1038/s41598-026-52407-9)).
 - Interactive national map with search and a colour-by switch; opens with a notice that it is research, not for emergency use
 
 ### [de_space_carlson_structureSize/](de_space_carlson_structureSize/)

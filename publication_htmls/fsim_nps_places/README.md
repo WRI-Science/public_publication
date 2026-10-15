@@ -1,7 +1,7 @@
 # FSIM NPS places: wildfire risk to U.S. cultural resources
 
-Interactive map for *Wildfire risk to United States cultural resources* (Mona M. Farnisa, Benjamin S. Halpern,
-Caitlin R. Fong, *Scientific Reports*). This is scientific research from the National Center for Ecological
+Interactive map for [*Wildfire risk to United States cultural resources*](https://doi.org/10.1038/s41598-026-52407-9)
+(Mona M. Farnisa, Benjamin S. Halpern, Caitlin R. Fong, *Scientific Reports* 16, 21599, 2026; open access). This is scientific research from the National Center for Ecological
 Analysis and Synthesis (NCEAS), University of California, Santa Barbara, shared for information only.
 **It is not for use in an emergency or during an active wildfire.**
 
@@ -53,6 +53,11 @@ The map is drawn with MapLibre GL (WebGL), with each place drawn once. The page 
 the May 2026 leaflet version, which drew every place three times, once for each colouring. The places,
 positions and colours are the same as in that version.
 
+## Paper
+
+Farnisa, M. M., Halpern, B. S. & Fong, C. R. Wildfire risk to United States cultural resources. *Scientific Reports*
+16, 21599 (2026). <https://doi.org/10.1038/s41598-026-52407-9>
+
 ## Data sources
 
 | Data | Source |
@@ -65,5 +70,6 @@ positions and colours are the same as in that version.
 
 ## Analysis code
 
-The scripts that build the data and the paper's figures are in the WRI-Science papers repository (private),
-under `fsim_nps_places/scripts for publication/`.
+The scripts are in the WRI-Science papers repository (private), on `main`, under
+`fsim_nps_places/scripts for publication/`: steps 01–04 build the data and the paper's figures, and
+`05b-interactive-us-map-webgl.py` builds this map.

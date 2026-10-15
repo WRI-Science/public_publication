@@ -66,5 +66,5 @@ version.
 
 ## Analysis code
 
-The road-network processing scripts are in the WRI-Science papers repository (`roads/roads_processing_scripts`),
-which is private.
+The road-network processing scripts are in the WRI-Science papers repository (private), on `main`, under
+`roads/roads_processing_scripts/`: steps 01–07 build the data, and `09_us_interactive_map_webgl.py` builds this map.
