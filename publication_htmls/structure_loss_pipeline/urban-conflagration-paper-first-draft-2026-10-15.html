@@ -1,0 +1,1362 @@
+<!doctype html>
+<!-- Generated 2026-10-14 18:09 PDT (2026-10-14T18:09:46-07:00) -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urban conflagration paper: first draft · 2026-10-15</title>
+<meta name="description" content="Draft v0 of a paper on when U.S. wildfires become urban conflagrations · three full records: Carlson 2002–22 (361 fires), our 2002–26 record (726), CAL FIRE inspections 2013–25 (445) · built around two conditions every event met, the unexplained remainder and the house-to-house share · 13 places still waiting on running analyses">
+<meta name="generated" content="2026-10-14T18:09:46-07:00"><style>
+.ms{max-width:860px;overflow-wrap:anywhere}
+.card .src,.note li,.toc a{overflow-wrap:anywhere}
+.ms hr{display:none}
+.ms h2{margin:2.2em 0 .5em;padding-top:.6em;border-top:1px solid var(--line);font-size:1.45em}
+.ms h3{margin:1.6em 0 .4em;font-size:1.12em}
+.ms p,.ms li{line-height:1.6}
+.ms li{margin:.25em 0}
+.ms code{font-size:.88em;word-break:break-word}
+.ms table.tb td,.ms table.tb th{vertical-align:top}
+.srcref{font-size:.72em;color:var(--ink-3);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:3px;
+        white-space:nowrap;vertical-align:1px}
+.pending{display:inline-block;background:color-mix(in srgb,#E69F00 22%,transparent);border:1px dashed #E69F00;
+         border-radius:6px;padding:1px 7px;font-weight:600}
+.toc{columns:2;column-gap:28px;margin:.4em 0 0;padding-left:1.1em}
+.toc li{break-inside:avoid}
+@media (max-width:640px){.toc{columns:1}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --raised:#FBFCFD; --ink:#13202C; --ink-2:#465667; --ink-3:#768494;
+  --line:#E1E6EB; --line-2:#CBD3DB; --accent:#1B4F8A; --accent-ink:#FFFFFF; --accent-soft:#E7EFF8; --empty:#ECEFF2; --flag:#C62828;
+  --s1:#0072B2; --s2:#E69F00; --s3:#009E73; --s4:#D55E00; --s5:#56B4E9; --s6:#CC79A7; --s7:#8A949E;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.12);
+  --f-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730; --flag:#FF6B5E;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }}
+:root[data-theme="dark"]{
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730; --flag:#FF6B5E;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 20px 72px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.eyebrow{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-size:clamp(26px,3.4vw,36px);line-height:1.2;letter-spacing:-.015em;margin:10px 0 0;font-weight:600}
+h1.long{font-size:clamp(21px,2.4vw,27px);line-height:1.3;max-width:62ch}
+.subtitle{font-size:clamp(16.5px,1.6vw,18.5px);color:var(--ink);max-width:70ch;margin:10px 0 0;line-height:1.5}
+.lede{font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2);max-width:64ch;margin:14px 0 0}
+h2{font-size:22px;line-height:1.3;letter-spacing:-.01em;margin:0;font-weight:600}
+h3{font-size:16.5px;line-height:1.35;margin:0;font-weight:600}
+section.sec{margin-top:52px}
+.sec-lede{color:var(--ink-2);max-width:70ch;margin:8px 0 0}
+p{max-width:75ch}
+.note{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 18px;margin:24px 0 0}
+.note h3{font-size:15px;margin-bottom:4px}
+.note p{margin:6px 0;color:var(--ink-2);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:16px}
+.cap{font-size:14px;color:var(--ink-2);margin:4px 0 0}
+.src{font-size:12.5px;color:var(--ink-3);margin:12px 0 0}
+.muted{color:var(--ink-2)} .faint{color:var(--ink-3)} .num{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.tech{display:none}
+html[data-lang="tech"] .tech{display:revert} html[data-lang="tech"] .plain{display:none}
+.btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ax-y{font-size:12.5px;color:var(--ink-2);margin:8px 0 6px;width:fit-content}
+.ax-x{font-size:12.5px;color:var(--ink-2);margin:6px auto 0;width:fit-content}
+.legend .k[data-tip],.ax-y[data-tip],.ax-x[data-tip],.axis-t[data-tip],h3[data-tip],th[data-tip]{text-decoration:underline dotted var(--ink-3);text-underline-offset:3px}
+.themebtn{white-space:nowrap;flex:none;font:500 13px var(--f-sans);border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:6px 12px}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-top:24px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .v{font:600 30px/1.1 var(--f-sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tile .l{font-size:14.5px;margin-top:6px}
+.tile .s{font-size:13px;color:var(--ink-3);margin-top:2px}
+/* legend: big, friendly keys */
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0 14px;font-size:14.5px}
+.legend .k{display:inline-flex;align-items:center;gap:4px 8px;flex-wrap:wrap;max-width:100%}
+.legend .sw{width:18px;height:14px;border-radius:4px;flex:none}
+.legend .ln{width:22px;height:0;border-top:2px dashed var(--ink-2)}
+/* horizontal bars */
+.hb{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr);gap:12px 14px;align-items:center;margin-top:14px}
+.hb .lab{font-size:14.5px;line-height:1.25;text-align:right}
+.hb .lab small{display:block;color:var(--ink-3);font-size:12.5px}
+.hb .area{position:relative;margin-right:72px;display:grid;gap:3px}
+.hb .grid{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px solid var(--line)}
+.hb .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--ink-2);z-index:1}
+.hb .brow{position:relative;height:20px}
+.hb .bar{position:relative;height:20px;border-radius:0 4px 4px 0;min-width:2px;transition:filter .15s,box-shadow .15s;z-index:2}
+.hb .bar:hover,.hb .bar:focus{filter:brightness(1.12);box-shadow:0 0 0 2px var(--ink)}
+.hb .val{position:absolute;top:50%;transform:translateY(-50%);font:500 13px var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface);padding:0 3px;border-radius:3px;z-index:4}
+.hb .ci{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-left:1.5px solid var(--ink);border-right:1.5px solid var(--ink);z-index:3}
+.hb .ci::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid var(--ink)}
+.hb .axis{position:relative;height:18px;margin-right:72px;font:400 12px var(--f-mono);color:var(--ink-3)}
+.hb .axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.axis-t{font-size:13px;color:var(--ink-2);text-align:center;margin:4px 72px 0 0}
+@media (max-width:560px){
+  .hb{grid-template-columns:minmax(0,1fr);gap:4px}
+  .hb .lab{text-align:left;margin-top:8px}
+  .hb .lab small{display:inline;margin-left:6px}
+  .hb .area,.hb .axis{margin-right:64px}
+}
+/* columns (e.g. one per year) */
+.cols{display:flex;align-items:flex-end;gap:3px;height:240px;margin-top:30px;border-bottom:1px solid var(--line-2);position:relative}
+.ax-y + .cols{margin-top:40px}   /* room for the top tick label under the axis title */
+.cols .c{flex:1 1 0;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.cols .seg{width:100%;transition:filter .15s}
+.cols .c:hover .seg,.cols .c:focus .seg{filter:brightness(1.12)}
+.cols .c .seg:first-child{border-radius:3px 3px 0 0}
+.cols .cv{position:absolute;left:50%;transform:translateX(-50%);font:500 11.5px var(--f-mono);white-space:nowrap;color:var(--ink-2)}
+.xl{display:flex;gap:3px;margin-top:6px}
+.xl span{flex:1 1 0;min-width:0;text-align:center;font:400 11.5px var(--f-mono);color:var(--ink-3);white-space:nowrap;overflow:visible}
+.cols .gl{position:absolute;left:0;right:0;border-top:1px dashed var(--line);font:400 11px var(--f-mono);color:var(--ink-3)}
+.cols .gl span{position:absolute;top:-16px;left:0}
+.cols .short{display:none}
+/* line chart: a wide drawing for desktop and a narrow one for phones, so nothing scrolls sideways */
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgwrap svg{display:block;width:100%;height:auto}
+.svgwrap svg.narrow{display:none}
+.svgwrap svg.keep{min-width:600px}
+.svgwrap text{font-family:var(--f-mono);font-size:calc(12.5px * var(--k, 1));fill:var(--ink-3)}
+.svgwrap .gridl{stroke:var(--line);stroke-width:1}
+.svgwrap .axisl{stroke:var(--line-2);stroke-width:1}
+.svgwrap .pt{transition:r .15s}
+.svgwrap .pt:hover,.svgwrap .pt:focus{r:7}
+/* heatmap table */
+.scroll{overflow:auto;-webkit-overflow-scrolling:touch;margin-top:8px;max-height:78vh}
+/* frozen panes: header row and first column stay put while a big table scrolls */
+.scroll table thead th{position:sticky;top:0;z-index:2;background:var(--surface)}
+.scroll table tbody th:first-child,.scroll table tbody td:first-child,.scroll table thead th:first-child{position:sticky;left:0;z-index:1;background:var(--surface)}
+.scroll table thead th:first-child{z-index:3}
+.scroll table.tb tbody tr:hover td:first-child{background:var(--raised)}
+table.hm{border-collapse:separate;border-spacing:3px;font-variant-numeric:tabular-nums}
+table.hm caption{text-align:left;font-size:13px;color:var(--ink-2);padding:0 0 6px}
+table.hm thead th{font:500 12px var(--f-mono);color:var(--ink-3);padding:2px 4px;white-space:nowrap}
+table.hm th.rl{text-align:right;font-weight:400;padding-right:10px;white-space:nowrap;font-size:14px}
+table.hm tr.grp th{text-align:left;font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:14px 0 3px;border-bottom:1px solid var(--line)}
+table.hm td.c{min-width:58px;height:50px;text-align:center;border-radius:5px;line-height:1.15;padding:3px 4px;transition:box-shadow .15s}
+table.hm td.c:hover,table.hm td.c:focus{box-shadow:0 0 0 2px var(--ink)}
+table.hm td.c b{display:block;font-size:16px;font-weight:600}
+table.hm td.c i{display:block;font-style:normal;font-size:10.5px;margin-top:2px;opacity:.85}
+table.hm td.c.dk{color:#0B0B0B} table.hm td.c.lt{color:#FFFFFF}
+table.hm td.c.empty{background:var(--empty);color:var(--ink-3)}
+table.hm td.x{font-size:13px;color:var(--ink-2);padding:0 8px;text-align:right;white-space:nowrap}
+.ramp{display:inline-flex;vertical-align:middle;margin:0 8px;border-radius:3px;overflow:hidden}
+.ramp i{width:18px;height:14px}
+/* phone="cards" layouts (chosen per chart; see charts.md, "Phone layout") */
+.hm-m{display:none}
+.hm-g{font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 2px;padding-bottom:3px;border-bottom:1px solid var(--line)}
+.hm-r{padding:9px 0;border-bottom:1px solid var(--line)}
+.hm-r:last-child{border-bottom:0}
+.hm-rh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.hm-rh b{font-size:15px}
+.hm-rh span{font-size:12.5px;color:var(--ink-2);text-align:right}
+.hm-cells{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:4px}
+.hm-c{border-radius:5px;text-align:center;padding:3px 2px 4px;line-height:1.12;font-variant-numeric:tabular-nums}
+.hm-c small{display:block;font:400 9.5px var(--f-mono);opacity:.8}
+.hm-c b{display:block;font-size:14.5px;font-weight:600;margin-top:1px}
+.hm-c i{display:block;font-style:normal;font-size:9.5px;opacity:.85;margin-top:1px}
+.hm-c.dk{color:#0B0B0B} .hm-c.lt{color:#FFFFFF} .hm-c.empty{background:var(--empty);color:var(--ink-3)}
+/* an interactive map as a panel in a chart page (map_panel) */
+.mapframe{display:block;width:100%;height:var(--h,520px);border:1px solid var(--line);border-radius:10px;background:var(--bg);margin-top:10px}
+@media (max-width:560px){.mapframe{height:var(--ph,440px)}}
+/* shaded table cells (table(shade=...)) and flagged cells (a cell dict with "flag") */
+table.tb td.sh{font-variant-numeric:tabular-nums}
+table.tb td.flag{box-shadow:inset 0 0 0 2px var(--flag);font-weight:600}
+table.hm td.c.flag{outline:2.5px solid var(--flag);outline-offset:-2.5px}
+.legend .flagsw{width:18px;height:14px;border-radius:3px;box-shadow:inset 0 0 0 2px var(--flag)}
+/* the rigor pass under a panel */
+details.checks{margin-top:12px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
+details.checks summary{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--ink-3);list-style:none;display:flex;align-items:center;gap:6px}
+details.checks summary::-webkit-details-marker{display:none}
+details.checks summary::marker{content:""}
+details.checks summary::before{content:"";width:6px;height:6px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(-45deg);transition:transform .15s}
+details.checks[open] summary::before{transform:rotate(45deg)}
+details.checks ul{margin:6px 0 0;padding-left:18px} details.checks li{margin:3px 0}
+/* living pages: each panel carries when it was added / updated; page history at the foot */
+.pstamp{float:right;margin:0 0 6px 12px;font:400 11.5px var(--f-mono);color:var(--ink-3);white-space:nowrap}
+@media (max-width:560px){.pstamp{float:none;display:block;margin:0 0 4px;white-space:normal}}
+section.panel{margin-top:22px}
+details.history{margin-top:40px;font-size:13.5px;color:var(--ink-2)}
+details.history summary{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+details.history li{margin:3px 0}
+/* plain tables */
+table.tb{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+table.tb th,table.tb td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.tb thead th{font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--line-2)}
+table.tb td.n,table.tb th.n{text-align:right;white-space:nowrap}
+table.tb tbody tr:hover{background:var(--raised)}
+/* tooltip */
+#tip{position:fixed;z-index:50;pointer-events:none;max-width:300px;background:var(--surface);color:var(--ink);border:1px solid var(--line-2);
+  border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.45;box-shadow:var(--shadow);display:none}
+#tip b{display:block;margin-bottom:2px;font-size:13.5px}
+#tip .mean{margin-top:5px;padding-top:5px;border-top:1px solid var(--line);color:var(--ink)}
+[data-tip]{cursor:default}
+footer.site{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+footer.site h3{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+footer.site ul{padding-left:18px;margin:0 0 12px} footer.site li{margin:4px 0}
+@media (max-width:560px){
+  /* phones: reflow charts to the width instead of scrolling them sideways */
+  .svgwrap svg.wide{display:none} .svgwrap svg.narrow{display:block}
+  .cols .full{display:none} .cols .short{display:inline}
+  .cols.dense .cv{display:none} .xl.dense span.alt{visibility:hidden}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .tile{padding:11px 12px} .tile .v{font-size:23px} .tile .l{font-size:13.5px} .tile .s{font-size:12px}
+  /* phone="cards": heatmap rows and table rows become cards */
+  .hm-desk{display:none} .hm-m{display:block}
+  .scroll.tb-cards-box{overflow:visible;max-height:none}
+  table.tb.tb-cards thead{display:none}
+  table.tb.tb-cards,table.tb.tb-cards tbody{display:block;width:100%}
+  /* compact card: the first cell is the heading, the rest sit three across with the label above the value */
+  table.tb.tb-cards tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 10px;border:1px solid var(--line);
+    border-radius:10px;padding:9px 12px;margin:0 0 8px;background:var(--surface)}
+  table.tb.tb-cards td,table.tb.tb-cards td.n{position:static;display:block;border:0;padding:0;text-align:left;white-space:normal;background:none}
+  table.tb.tb-cards td::before{content:attr(data-label);display:block;color:var(--ink-3);font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.04em}
+  table.tb.tb-cards td:first-child{grid-column:1/-1;font-weight:600;font-size:15.5px}
+  table.tb.tb-cards td:first-child::before{content:none}
+  /* phone="scroll" (default for tables): tighter cells; the scroll box keeps row labels and headers frozen */
+  table.hm{border-spacing:2px}
+  table.hm td.c{min-width:40px;height:42px;padding:2px}
+  table.hm td.c b{font-size:14px} table.hm td.c i{font-size:9.5px}
+  table.hm th.rl{font-size:13px;padding-right:6px}
+  table.hm thead th{font-size:11px;padding:2px}
+  table.hm td.x{font-size:12px;padding:0 5px}
+  table.tb{font-size:13.5px} table.tb th,table.tb td{padding:7px 8px}
+  .wrap{padding:22px 14px 56px}
+  .card{padding:14px 12px}
+  table.hm td.c{min-width:46px;height:46px}
+  table.hm td.c b{font-size:15px}
+  table.hm th.rl{font-size:13px;padding-right:6px}
+}
+/* byline and the NCEAS / WRI / GitHub strip (identity.json) */
+.byline{margin:10px 0 0;font-size:14px;color:var(--ink-2)}
+.byline time{font-family:var(--f-mono);font-size:13px;white-space:nowrap}
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.brand .org{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;transition:transform .18s ease}
+.brand .org:hover,.brand .org:focus-visible{transform:translateY(-2px) rotate(-1.5deg)}
+.brand .logo{height:40px;width:auto;flex:none;display:block}
+.brand svg.logo{color:var(--ink)}
+.brand .org b{display:block;font-size:14px;line-height:1.2}
+.brand .org small{display:block;font-size:12px;color:var(--ink-3);line-height:1.3;max-width:24ch}
+.brand .gh{flex-basis:100%;margin:0;font-size:13px;color:var(--ink-2)}
+.brand .gh{max-width:none}
+.brand .gh a{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap">
+<header><div class="topbar"><div class="eyebrow">Structure-loss project · paper draft</div><div class="btns"><button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark">Light / dark</button></div></div>
+<h1>Urban conflagration paper: first draft · 2026-10-15</h1><p class="subtitle">Draft v0 of a paper on when U.S. wildfires become urban conflagrations · three full records: Carlson 2002–22 (361 fires), our 2002–26 record (726), CAL FIRE inspections 2013–25 (445) · built around two conditions every event met, the unexplained remainder and the house-to-house share · 13 places still waiting on running analyses</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-14 18:09 PDT</time></p><p class="lede">Every urban conflagration in three national building records had a big block of close buildings and burned in a regional wind event, but most fires with both did not become one. This draft sets out that finding, what does not explain the rest, and how much of the loss spread house to house.</p><div class="note"><h3>How to read this page</h3><p>This is a working draft, not a published paper. Small grey tags after a number name the result file it was copied from: hover or tap them. Orange boxes mark results that are still running. Section links are just below.</p></div></header>
+<section class="sec" id="contents"><h2>Contents</h2><ol class="toc"><li><a href="#title-options">Title options</a></li><li><a href="#abstract">Abstract</a></li><li><a href="#introduction">Introduction</a></li><li><a href="#data">Data</a></li><li><a href="#defining-an-urban-conflagration">Defining an urban conflagration</a></li><li><a href="#results">Results</a></li><li><a href="#discussion">Discussion</a></li><li><a href="#methods-appendix">Methods appendix</a></li><li><a href="#list-of-figures">List of figures</a></li><li><a href="#reproducibility-scripts-and-tables-behind-each-claim">Reproducibility: scripts and tables behind each claim</a></li><li><a href="#references">References</a></li></ol><div class="note"><h3>Still pending</h3><p>These parts of the draft wait on analyses that are still running. The draft does not guess their results; each place is marked in orange.</p><ul><li><b>PA62</b> (4 places): How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.</li><li><b>PA63</b> (4 places): Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.</li><li><b>PA65</b> (3 places): A national map of where an urban conflagration is possible: blocks above the 89 line within reach of wildland, in wind-event regions, checked on the known events.</li><li><b>back-cast</b> (2 places): The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.</li></ul></div></section><div class="card"><h3>Condition 1 at a glance (read live from the pipeline's table)</h3><p class="cap">The same counts appear in the draft below; the page build stops if they disagree.</p><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th data-tip="Each record is used in full">Record</th><th class=n data-tip="Fires with at least one building in reach">Fires</th><th data-tip="Fires whose largest group of close buildings (centres within 35 m) held 89 or fewer">Block ≤ 89: urban conflagrations</th><th data-tip="Fires whose largest group held more than 89">Block > 89: urban conflagrations</th><th class=n data-tip="Area under the ROC curve for block size">AUC</th></tr></thead><tbody><tr><td data-label="Record">Carlson 2002–22</td><td class="n" data-tip="Fires · 361
+Fires in the record with at least one building in reach of the fire; 8 urban conflagrations" data-label="Fires">361</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 338
+0 urban conflagrations among 338 fires whose block was 89 buildings or fewer
+Exact 95 % upper limit: 1.1 %
+What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 338</td><td data-tip="Block &gt; 89: urban conflagrations · 8 of 23 (35 %)
+8 urban conflagrations among 23 fires whose block exceeded 89
+Exact 95 % range 16–57 %
+What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">8 of 23 (35 %)</td><td class="n" data-tip="AUC · 0.986
+How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.986</td></tr><tr><td data-label="Record">Our 2002–26 record</td><td class="n" data-tip="Fires · 726
+Fires in the record with at least one building in reach of the fire; 10 urban conflagrations" data-label="Fires">726</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 701
+0 urban conflagrations among 701 fires whose block was 89 buildings or fewer
+Exact 95 % upper limit: 0.5 %
+What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 701</td><td data-tip="Block &gt; 89: urban conflagrations · 10 of 25 (40 %)
+10 urban conflagrations among 25 fires whose block exceeded 89
+Exact 95 % range 21–61 %
+What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">10 of 25 (40 %)</td><td class="n" data-tip="AUC · 0.994
+How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.994</td></tr><tr><td data-label="Record">CAL FIRE DINS 2013–25</td><td class="n" data-tip="Fires · 445
+Fires in the record with at least one building in reach of the fire; 7 urban conflagrations" data-label="Fires">445</td><td data-tip="Block ≤ 89: urban conflagrations · 0 of 431
+0 urban conflagrations among 431 fires whose block was 89 buildings or fewer
+Exact 95 % upper limit: 0.9 %
+What it suggests: no exception seen; a rate above the upper limit is unlikely" data-label="Block ≤ 89: urban conflagrations">0 of 431</td><td data-tip="Block &gt; 89: urban conflagrations · 7 of 14 (50 %)
+7 urban conflagrations among 14 fires whose block exceeded 89
+Exact 95 % range 23–77 %
+What it suggests: a big block was needed but not enough" data-label="Block &gt; 89: urban conflagrations">7 of 14 (50 %)</td><td class="n" data-tip="AUC · 0.994
+How well block size ranks fires with and without an urban conflagration (1 = perfectly)" data-label="AUC">0.994</td></tr></tbody></table></div><p class="src">docs/paper/tables/p33_headline.csv (current building set and outline, all fires with ≥ 1 building in reach)</p><details class="checks"><summary>How this panel was checked</summary><ul><li>All three full records shown; none is a subset.</li><li>Intervals are exact (Clopper–Pearson) for the rates; the records overlap (same California fires), so their counts do not add.</li><li>The draft text is checked against this table on every build.</li></ul></details></div><article class="ms"><p><strong>Status.</strong> First full draft. Results are exploratory unless a pre-registration is named. Three sections wait on running analyses and one on the held-out back-cast.</p>
+<h2 id="title-options">Title options</h2>
+<ol>
+<li>Two conditions met by every recent U.S. urban conflagration, and what they leave unexplained</li>
+<li>A big block of close buildings and a regional wind event: what every U.S. urban conflagration of 2002–2026 had in common</li>
+<li>Most fires that reach a big block of close buildings in a wind event still do not become urban conflagrations</li>
+<li>When a wildfire becomes an urban conflagration: three national building records, two conditions and an open remainder</li>
+</ol>
+<p><strong>Working choice:</strong> option 1 (it states the finding and the gap).</p>
+<p><strong>Keywords.</strong> wildfire; urban conflagration; structure-to-structure spread; building loss; percolation; downslope wind</p>
+<hr />
+<h2 id="abstract">Abstract</h2>
+<p>An urban conflagration is a fire that spreads through a built-up area from building to building faster than firefighters can stop it. Such fires caused the worst U.S. wildfire disasters of the last two decades, yet no numeric definition exists. We use three full per-building records: the USGS Carlson record (2002–22, 361 fires with buildings in reach of the fire), our 2002–26 record (726 fires) and the CAL FIRE damage inspections (2013–25, 445 incidents). <span class="srcref" data-tip="Where this number comes from
+SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> We define an urban conflagration as at least 50 destroyed buildings joined in one chain, each within 30 m (centre to centre) of another. This is a stated convention: patch sizes show no natural break. <span class="srcref" data-tip="Where this number comes from
+DEF: docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> Two conditions were met by every event. First, the fire reached a block of more than 89 closely spaced buildings. No fire with a smaller block had an urban conflagration: 0 of 338 (Carlson), 0 of 701 (our record) and 0 of 431 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+FOR: docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·FOR</span> Second, the town burned during a recognised regional wind event: 10 of the 10 urban conflagrations in our record did. <span class="srcref" data-tip="Where this number comes from
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> Neither condition is enough. Of the 25 fires that reached a block above the line, 10 became urban conflagrations. Of the 15 that did not, 14 also burned in a wind event. <span class="srcref" data-tip="Where this number comes from
+SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·WC</span> Tree canopy between houses, wind at the town or across the region, downwind lean, network position and clumping beyond chance do not explain which ones did; fences could not be tested for lack of data. <span class="srcref" data-tip="Where this number comes from
+FW: docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+TW: docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+DWL: docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+NET: docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+FC: docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW·TW·WC·DWL·NET·FC</span> A final-map spread model puts the share of destroyed buildings lit by a burning neighbour at most 32–39 % across the three records. <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> That share is larger in bigger blocks, and clearest in Marshall, Camp and Almeda Drive. <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Whether the ~89-building line is a true tipping point cannot be told. Percolation theory predicts a rounded climb at town sizes, and a test would detect sharpening at most 13 % of the time. <span class="srcref" data-tip="Where this number comes from
+STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+FSS: docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+LRN: docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FSS·LRN</span> The wildfire does most of the work. Big blocks let house-to-house spread add to it.</p>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<p>A few fires cause most wildfire building loss in the United States. Fires driven by downslope winds were 13.4 % of western U.S. fires but caused 60.1 % of the structures lost since 1999 (Abatzoglou et al. 2023). <span class="srcref" data-tip="Where this number comes from
+LRC (§2.3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Expert accounts describe these disasters as the same sequence: wind-driven embers ignite many houses at once, burning houses ignite their neighbours, and firefighters are overwhelmed (Cohen 2008; Calkin et al. 2014, 2023). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(b)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Calkin et al. (2014) found that sequence in each of the 14 wildfires they examined that destroyed more than 100 homes. <span class="srcref" data-tip="Where this number comes from
+LRC (§1(b)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
+<p><strong>No numeric definition exists.</strong> The National Wildfire Coordinating Group glossary defines a conflagration as "a raging, destructive fire", often with a moving front, and has no entry for an urban conflagration (NWCG glossary). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(0)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Countryman (1964) wrote that where a fire becomes a "mass" fire "has never been specifically defined". The only numeric rule that applies to part of a city is a firestorm rule about simultaneous burning, not spread (Glasstone &amp; Dolan 1977). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(0)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Fire-service and insurance writers define an urban conflagration by spread past barriers (NFSA 2022; Dunn 2008). Dunn (2008) separates a block-sized "group fire" from a conflagration that crosses streets. <span class="srcref" data-tip="Where this number comes from
+LRC (§1(a)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Wildland-fire researchers attach numbers only to whole fires: "more than 100 homes" (Calkin et al. 2014), "hundreds to thousands" (Cohen 2017). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(b)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Engineering work gives distances between pairs of buildings, from 1.8 m to about 18 m wall to wall, not sizes (McNamara &amp; Mell 2024; Knapp et al. 2021; NIST reports reviewed in LRC). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(c), §2.1): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
+<p><strong>The newer view treats an urban conflagration as part of a fire.</strong> Investigators now describe a wildland fire that "becomes" an urban fire in some neighbourhoods. Lahaina was "rapidly transforming from a grassland fire into an urban conflagration" (FSRI 2024). In Palisades and Eaton, fire behaviour "transcended initial WUI character" (FSRI 2025). In Marshall, "a fast-moving low-intensity grass fire became a highly destructive urban fire" (FEMA 2025). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(e)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> The National Fire Protection Association's report on the 1991 Oakland Hills fire already said that one subdivision's burning was "more characteristic of an urban conflagration than a typical wildland/urban interface fire" (NFPA 1992). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(e)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Calkin et al. (2023) call these "urban fires initiated by wildfires" and name Camp, Marshall, Lahaina, Almeda Drive and Gatlinburg as fires that did their damage as urban conflagrations. <span class="srcref" data-tip="Where this number comes from
+LRC (§1(b), §1(e)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Zamanialaei et al. (2025) and Norlen et al. (2026) use the same framing. <span class="srcref" data-tip="Where this number comes from
+LRC (§1(e)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> If an urban conflagration is a part of a fire, a fire can hold none, one or several. No study has counted such parts across many fires. <span class="srcref" data-tip="Where this number comes from
+LRC (&quot;What nobody knows yet&quot;): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
+<p><strong>What is known, and what is disputed.</strong> Inside a burning town, how close buildings stand is the strongest measured predictor of loss (Knapp et al. 2021; McNamara &amp; Mell 2024; Zamanialaei et al. 2025; Monroy et al. 2025 for IBHS). <span class="srcref" data-tip="Where this number comes from
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Across whole landscapes, loss peaks at low to intermediate housing density (Syphard et al. 2012). Inside burning towns, denser means more loss (Alexandre et al. 2016). <span class="srcref" data-tip="Where this number comes from
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Tree canopy near houses predicts loss in the Camp Fire (Knapp et al. 2021) but not in Woolsey (Mockrin et al. 2023), and only weakly or inconsistently in Eaton and Palisades (Kenny et al. 2026; Norlen et al. 2026). <span class="srcref" data-tip="Where this number comes from
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> How much loss spreads house to house has been estimated for very few places. One is Waldo Canyon's Mountain Shadows, where 296 of 344 destroyed homes were ignited by other structures (NIST TN 1910). The other is the Witch Fire's Trails community, where house-to-house spread was "not a significant contributor". <span class="srcref" data-tip="Where this number comes from
+LRC (summary, gap 3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Percolation theory says fire spread through scattered fuel has a critical density (Beer 1990; Spyratos et al. 2007). No paper has applied it to observed building loss. <span class="srcref" data-tip="Where this number comes from
+LRC (§4): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Graph centrality has been scored against real losses in two fires only, where it performed at about coin-flip level (Chulahwat et al. 2022). <span class="srcref" data-tip="Where this number comes from
+LRN (summary 2): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span></p>
+<p><strong>This paper.</strong> We ask four questions across three full national records. (1) What did every urban conflagration have in common? (2) Is that enough to predict one? (3) If not, what does not explain the rest? (4) How much of the loss was house to house? We also ask whether the line we find is a tipping point. Several explanations proposed in the literature turn out not to hold in our data: trees between houses, wind strength, downwind lean and network position. We report these nulls as results.</p>
+<hr />
+<h2 id="data">Data</h2>
+<h3 id="three-full-records-side-by-side">Three full records, side by side</h3>
+<p>Every analysis is run on all three records. Subsets appear only as labelled checks. The records overlap: CAL FIRE's conflagrations are the same California fires as in the other two records, with independent inspection outcomes. They are therefore not independent fires. <span class="srcref" data-tip="Where this number comes from
+SIG (§7): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th></th>
+<th>(1) Carlson 2002–22</th>
+<th>(2) our 2002–26 record</th>
+<th>(3) CAL FIRE DINS, all incidents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Years</td>
+<td>2002–2022</td>
+<td>2002–2026</td>
+<td>2013–2025</td>
+</tr>
+<tr>
+<td>Fires with ≥ 1 building in reach of the fire</td>
+<td>361</td>
+<td>726</td>
+<td>445</td>
+</tr>
+<tr>
+<td>Who decided "destroyed"</td>
+<td>USGS analysts from imagery (Carlson et al. 2025)</td>
+<td>Carlson labels; CAL FIRE inspection where inspected; our damage model for the rest</td>
+<td>CAL FIRE inspectors on the ground</td>
+</tr>
+<tr>
+<td>Urban conflagrations (rule below)</td>
+<td>8</td>
+<td>10</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Buildings standing before the fire</td>
+<td>Carlson's points</td>
+<td>Carlson's points; our Structure Inventory Model after 2022</td>
+<td>Microsoft footprints plus every inspection record</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="srcref" data-tip="Where this number comes from
+SIG (§1, §5): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+QNT (§1): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·QNT</span></p>
+<p>The ten urban conflagrations in our record are Sayre 2008, Tubbs 2017, Camp 2018, Woolsey 2018, Sandalwood 2019, Glass 2020, Almeda Drive 2020 (Oregon), Marshall 2021 (Colorado), Eaton 2025 and Palisades 2025. The rest are in California. Eight rest on Carlson's labels and two (Eaton, Palisades) on CAL FIRE inspection. None rests on model calls alone. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> CAL FIRE's seven are Camp, Eaton, Glass, Palisades, Sandalwood, Tubbs and Woolsey. Almeda Drive and Marshall lie outside California. <span class="srcref" data-tip="Where this number comes from
+SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<p><strong>Unselected check.</strong> Our 2023–25 frame is chosen whatever each fire's reported loss, so it is free of selection on the outcome. It holds 58 fires with at least 100 buildings in reach. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></p>
+<p><strong>Outside the three records.</strong> Two events have open per-building damage data:
+- Lahaina 2023, from the BRIGHT labels (CC BY-SA 4.0): 3,862 buildings in reach and 1,876 destroyed;
+- Waldo Canyon 2012, from the NIST/USFS Mountain Shadows database (public domain).</p>
+<p><span class="srcref" data-tip="Where this number comes from
+SIG (§6): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> Chimney Tops 2 (Gatlinburg) 2016, Black Forest 2013 and Bastrop 2011 are already in Carlson. <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> <span class="pending" data-tip="Pending: PA63
+Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA63</span> adds events outside the U.S.</p>
+<h3 id="buildings-standing-before-the-fire">Buildings standing before the fire</h3>
+<ul>
+<li><strong>Carlson points.</strong> USGS Carlson points sit on Microsoft footprint centres, not address points: median offset 0.0001 m for 206,061 matched surviving buildings of 221,487. <span class="srcref" data-tip="Where this number comes from
+PAT (&quot;Assumptions so far&quot;): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> They carry no footprint, so spacing is measured centre to centre.</li>
+<li><strong>CAL FIRE.</strong> The 169,597 buildings in reach come from Microsoft footprints plus every inspection record. Of the inspection records, 57.9 % matched a footprint within 20 m; most of the rest are missing from post-fire footprint imagery. <span class="srcref" data-tip="Where this number comes from
+SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> Inspection points sit a few metres off building centres (median 4.2 m). <span class="srcref" data-tip="Where this number comes from
+PAT (&quot;Assumptions so far&quot;): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span></li>
+<li><strong>Buildings across the border.</strong> 27,181 of 2,994,710 building rows, in 13 border fires, lie in Mexico or Canada. They are kept and flagged. None was destroyed in Carlson's record or in CAL FIRE's inspections, and our damage model called none destroyed where Sentinel-2 allows a call. <span class="srcref" data-tip="Where this number comes from
+USC (plain answer): docs/ledger.d/2026-10-13-2250-conflag-us-clip--result.md (PA37; tables archived in docs/paper/tables/archive/2026-10-13_pa37_us_only/)
+FOR (plain answer): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">USC·FOR</span></li>
+</ul>
+<h3 id="outlines-what-reached-by-the-fire-means">Outlines: what "reached by the fire" means</h3>
+<p>A building is <strong>in reach of the fire</strong> (exposed) when it lies inside the fire outline or within 100 m of it. The outlines are:
+- Carlson's own hand-drawn outline for 2002–22;
+- public perimeters for 2023–26 (WFIGS, CAL FIRE FRAP, NIFC, MTBS);
+- for CAL FIRE incidents, the matched perimeter (MTBS for 134 incidents, FRAP 74, WFIGS 22, none 221), plus 100 m around every inspected building. <span class="srcref" data-tip="Where this number comes from
+MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></p>
+<p>The Forest Service outline (MTBS, Monitoring Trends in Burn Severity) is the check. It exists for 356 of 361 Carlson fires (98.9 % of the buildings in reach), 471 of 754 fires in our record (93.7 %) and 133 of 445 CAL FIRE incidents (93.6 %). <span class="srcref" data-tip="Where this number comes from
+MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></p>
+<h3 id="wind-and-fire-weather-description-only">Wind and fire weather (description only)</h3>
+<p>Wind is never part of the definition or a model input. We use it only to describe fires.
+- <strong>When the town burned.</strong> NASA FIRMS satellite fire detections timed 309 of 376 study fires. The rest fall back to incident reports or the ignition date. The median timing uncertainty is 7.8 h. <span class="srcref" data-tip="Where this number comes from
+TW (§1–2): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span>
+- <strong>Wind at the town.</strong> For 2014 onward we use RTMA, a 2.5 km hourly analysis of observations from NOAA. For 2002 to September 2024 we use CONUS404, a 4 km hourly simulation from USGS/NCAR. Against weather stations, RTMA had the best hour-by-hour agreement in every period it covers (0.74 in 2016–24). CONUS404 matched station peaks to within about 1 m/s (−0.77 m/s in 2002–13). ERA5-Land read peaks about 3.4 m/s low. <span class="srcref" data-tip="Where this number comes from
+TW (§4): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span>
+- <strong>Regional wind.</strong> ERA5 (hourly, about 28 × 22 km cells) gives every fire one source for 2002–26. <span class="srcref" data-tip="Where this number comes from
+WC (§1): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span>
+- <strong>A recognised wind event</strong> has either of two signs. One is an offshore pressure push in the most offshore 5 % of 1991–2020 hours for that pair of places (California, Oregon, Washington). The other is a National Weather Service High Wind Warning, Extreme Wind Warning or Wind Advisory in effect during the burn. A Red Flag Warning alone does not count. <span class="srcref" data-tip="Where this number comes from
+WC ((prereg 2026-10-14-0425-wind-context--prereg.md §4)): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span></p>
+<h3 id="fuel-between-buildings">Fuel between buildings</h3>
+<p>Pre-fire tree canopy comes from USFS Science Tree Canopy Cover v2025-6 (annual, 30 m, public domain), read two years before ignition. That is the pre-registered choice after a leak check flagged the year before. <span class="srcref" data-tip="Where this number comes from
+FW (&quot;Pre-fire fuel data&quot;): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Fences: OpenStreetMap has no usable fence data for these places (below). <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span></p>
+<hr />
+<h2 id="defining-an-urban-conflagration">Defining an urban conflagration</h2>
+<p><strong>The rule.</strong> An urban conflagration is a chain of at least 50 destroyed buildings, each standing within 30 m (centre to centre) of another destroyed building in the chain. We call such a chain a <strong>patch</strong>. A fire has an urban conflagration if any of its patches reaches 50. <span class="srcref" data-tip="Where this number comes from
+DEF (plain answer): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+PAT (PA39): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF·PAT</span></p>
+<p><strong>Why 30 m.</strong> No single natural linking distance exists, but there is a range. Destroyed buildings cluster more than chance at every distance above 5 m. Half the excess is reached by 20 m and 90 % by 50 m, in all three records. 30 m lies inside that range. It also lies inside the published house-to-house separations, most often 9.1–18 m wall to wall. On equal-area circles, 30 m between centres selects the same fires as about 15 m between walls. <span class="srcref" data-tip="Where this number comes from
+DEF (plain answer, §3): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span></p>
+<p><strong>Why 50 is a convention.</strong> Patch sizes thin out smoothly. No test found a second peak at any linking distance from 5 to 100 m in any record (Silverman test, Holm-adjusted p = 1.0 everywhere). <span class="srcref" data-tip="Where this number comes from
+DEF (§3): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> Sizes are heavy-tailed but do not follow a power law. <span class="srcref" data-tip="Where this number comes from
+NET (T7): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> The rule matches published descriptions where they are clear. It catches 4 of 4 fires that reports call urban or house-to-house fires in CAL FIRE, 6 of 10 in our record and 4 of 8 in Carlson, and counts none of 5 spread-out losses. It misses Angora, Grass Valley, Witch 2007 and Chimney Tops 2 (Gatlinburg). <span class="srcref" data-tip="Where this number comes from
+DEF (plain answer): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> It is not inside a stable plateau of nearby rules. Its stability against neighbouring rules is 0.535 (Carlson), 0.604 (ours) and 0.715 (CAL FIRE). The pre-registered verdict was "can't tell (knife-edge)". <span class="srcref" data-tip="Where this number comes from
+DEF (§2, plain answer): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> We keep it as a stated convention and give 50 m links as the sensitivity check.</p>
+<p><strong>A fire holds parts.</strong> Six of the 10 fires in our record with an urban conflagration hold two or more patches of 50; they hold 50 such patches in all. <span class="srcref" data-tip="Where this number comes from
+PAT (PA39): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> At 30 m a burned town splits into street-sized pieces:
+- Tubbs: 7 patches of 50 or more; the largest holds 143 of 5,185 destroyed buildings (2.8 %);
+- Camp: 12 patches; the largest holds 94 of 16,493 (0.6 %);
+- Marshall: one patch of 57 of 1,196 (4.8 %).</p>
+<p><span class="srcref" data-tip="Where this number comes from
+PAT (PA39): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> Only 11 % of the destroyed buildings in those 10 fires (4,470 of 41,342) sit in any patch of 50. <span class="srcref" data-tip="Where this number comes from
+PAT (PA39): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> So the rule marks the part of a fire where loss linked up through the town, not the whole loss.</p>
+<p><strong>The compound alternative.</strong> A compound urban conflagration is a group, linked at 75 m, that holds at least two patches of at least 20 destroyed buildings (patches at 30 m). It picks 8 fires in Carlson, 10 in ours and 5 in CAL FIRE. It catches the same named urban fires as the 30 m rule and is steadier: stability 0.89, 0.91 and 0.94. In our record it drops Woolsey and Sandalwood (one big patch each, not several) and adds Erskine and Dixie (several patches, none of 50). <span class="srcref" data-tip="Where this number comes from
+NET (§4): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> Compound groups hold 79 % of Camp's destroyed buildings (13,012 of 16,493), 42 % of Tubbs's (2,165 of 5,185) and 51 % of Marshall's (612 of 1,196). <span class="srcref" data-tip="Where this number comes from
+NET (§4): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> We report the 30 m rule as primary and the compound rule beside it.</p>
+<p><strong>A second kind, through trees.</strong> A house-and-tree patch links destroyed buildings up to 60 m apart when pre-fire canopy is at least 25 % at every 10 m along the line. It catches Angora and Chimney Tops 2, which the house rule misses, but misses Palisades. It is well defined by the pre-set bar. Combining it with the house rule ("either link") could not be told apart from the house rule alone. <span class="srcref" data-tip="Where this number comes from
+PAT (PA40): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> One fire dominates the tree kind: 31 of Carlson's 43 house-and-tree patches are in Camp (Paradise). <span class="srcref" data-tip="Where this number comes from
+PAT (PA40): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span></p>
+<p><strong>The block.</strong> The predictor used throughout is the <strong>block</strong>: the largest connected group of buildings in reach of the fire whose centres stand within 35 m of each other. On a 159 m² footprint that is about a 20 m gap between walls. <span class="srcref" data-tip="Where this number comes from
+QNT (§5): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> It is counted from the buildings that stood before the fire, whatever happened to them.</p>
+<hr />
+<h2 id="results">Results</h2>
+<h3 id="condition-1-a-block-of-more-than-89-close-buildings">Condition 1: a block of more than 89 close buildings</h3>
+<p><strong>No fire with a smaller block had an urban conflagration, in any record</strong> (Fig. 1).</p>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th>record (all fires with ≥ 1 building in reach)</th>
+<th>fires</th>
+<th>urban conflagrations</th>
+<th>block ≤ 89: events / fires (exact upper 95 %)</th>
+<th>block &gt; 89: events / fires, rate [exact 95 %]</th>
+<th>AUC [95 %]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carlson 2002–22</td>
+<td>361</td>
+<td>8</td>
+<td>0 / 338 (1.1 %)</td>
+<td>8 / 23, 35 % [16, 57]</td>
+<td>0.986 [0.970, 0.998]</td>
+</tr>
+<tr>
+<td>our 2002–26 record</td>
+<td>726</td>
+<td>10</td>
+<td>0 / 701 (0.5 %)</td>
+<td>10 / 25, 40 % [21, 61]</td>
+<td>0.994 [0.987, 0.999]</td>
+</tr>
+<tr>
+<td>CAL FIRE DINS 2013–25</td>
+<td>445</td>
+<td>7</td>
+<td>0 / 431 (0.9 %)</td>
+<td>7 / 14, 50 % [23, 77]</td>
+<td>0.994 [0.985, 0.999]</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="srcref" data-tip="Where this number comes from
+SIG (table &quot;PA31 cluster rule on the three full records&quot;): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+FOR (§&quot;Three full records&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG·FOR</span></p>
+<p>The line at 89 was set on our record's fires with at least 100 buildings in reach, where the fitted line was 89 (fire-bootstrap range 79–120). There, 0 of 330 fires at or below the line and 10 of 25 above it had an urban conflagration. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> CAL FIRE is a new test of the line, because its buildings come from footprints and inspections rather than Carlson's points. All 7 CAL FIRE events lie above the line, which meets the pre-registered bar. <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> In our record, fires with blocks of 90–199 buildings had urban conflagrations in 6 of 20 cases (30 %). Fires with blocks of 200–999 had them in 4 of 5. <span class="srcref" data-tip="Where this number comes from
+SIG (§5): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<p><strong>Robustness.</strong> The headline does not move with which buildings are counted or which outline is used (Table 2; Fig. 1B).</p>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th>version</th>
+<th>Carlson: ≤ 89 / &gt; 89</th>
+<th>our record: ≤ 89 / &gt; 89</th>
+<th>CAL FIRE: ≤ 89 / &gt; 89</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>current (all buildings, current outline)</td>
+<td>0/338, 8/23</td>
+<td>0/701, 10/25</td>
+<td>0/431, 7/14</td>
+</tr>
+<tr>
+<td>U.S. buildings only (Mexico, Canada removed)</td>
+<td>0/339, 8/22</td>
+<td>0/702, 10/24</td>
+<td>0/431, 7/14</td>
+</tr>
+<tr>
+<td>Forest Service outline + 100 m</td>
+<td>0/338, 8/23</td>
+<td>0/701, 10/25</td>
+<td>0/429, 7/16</td>
+</tr>
+<tr>
+<td>Forest Service outline, unburned patches removed</td>
+<td>0/340, 8/21</td>
+<td>0/703, 10/23</td>
+<td>0/432, 7/13</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="srcref" data-tip="Where this number comes from
+FOR (&quot;Numbers that changed&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+MTB (plain answer table): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FOR·MTB</span></p>
+<ul>
+<li><strong>Buildings across the border.</strong> Only Harris 2007 changes side. Its block of 141 lies in Tecate, Mexico, inside Carlson's outline, which runs along the border. Satellite burn evidence shows the fire did not reach it: 0 of the 141 buildings show any burn (Landsat dNBR ≥ 0.10). Counting U.S. buildings only, its block is 42. <span class="srcref" data-tip="Where this number comes from
+FOR (&quot;Harris 2007&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FOR</span></li>
+<li><strong>Outline.</strong> The Forest Service outline moves the biggest block in 9 of 361 Carlson fires and 29 of 754 fires in our record, by a median of 1 building. Removing unburned patches inside the outline moves Paradise 2003 (93 → 82) and Slide 2007 (112 → 87) below the line. Neither had an urban conflagration. <span class="srcref" data-tip="Where this number comes from
+MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">MTB</span></li>
+<li><strong>Counting every building, not only those reached.</strong> Blocks built from every counted building sort fires less sharply: AUC 0.986 → 0.923 (Carlson) and 0.994 → 0.962 (ours). Still no event falls at or below 89. <span class="srcref" data-tip="Where this number comes from
+PA2 (&quot;Perimeter check&quot;): docs/ledger.d/2026-10-14-0150-conflagration-patches--result-addendum-2.md (patch study on the current building set; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PA2</span></li>
+<li><strong>Fixing the ring before the fire.</strong> In this check, exposure is the buildings within 5 km of the ignition point. It ranks fires the same way, at a lower AUC of 0.90 [0.80, 0.97]. It misses Tubbs, Camp, Glass and Almeda Drive, whose towns lay outside the 5 km ring. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></li>
+</ul>
+<p><strong>Out of sample.</strong>
+- In the unselected 2023–25 frame, only 2 of the 58 fires reached a block above the line, Eaton and Palisades, and both became urban conflagrations. None of the other 56 did. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span>
+- Lahaina 2023 sits far above the line (block 884 buildings, or 273 counting the labelled buildings only) and had an urban conflagration (largest destroyed patch 97). <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span>
+- Waldo Canyon 2012 also fits (block 114, destroyed patch 72). <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span>
+- Three of the largest sparse losses lie below the line and had no urban conflagration, as the rule predicts. Chimney Tops 2 (Gatlinburg) lost 1,517 buildings, Black Forest 785 and Bastrop 1,403. Their blocks were 45, 7 and 10. <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<p><strong>What "necessary" can and cannot mean here.</strong> Part of the line is built in. The block contains the destroyed patch in 99.7 % (Carlson), 99.7 % (ours) and 100 % (CAL FIRE) of fires, so no event can occur with a block below about 50. The evidence for 89 in particular is 0 events among the 16, 17 and 13 fires with blocks of 50–89. Their exact upper limits are 21 %, 20 % and 25 %. <span class="srcref" data-tip="Where this number comes from
+DEF (plain answer, §6): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> The line belongs to the 30 m rule: with 50 m links, 12 events in our record fall at or below 89. <span class="srcref" data-tip="Where this number comes from
+DEF (plain answer): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span> We call condition 1 necessary in the sense that no exception has been seen in any of the three records (701 fires below the line in our record alone; the records overlap, so their counts do not add). It is not proven. <span class="pending" data-tip="Pending: back-cast C1, C2
+The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.">Pending back-cast C1, C2</span> The held-out 2016–22 sample tests the "below" side. Only 1 of its fires (Hill 2018, block 91) lies above the line. <span class="srcref" data-tip="Where this number comes from
+QNT (§6): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></p>
+<p><strong>Other measures of the town add nothing.</strong> The share of buildings with more than 20 neighbours within 100 m is a looser necessary condition. No conflagration happened with less than 7.9 % of buildings that dense: 0 of 273 fires. Given the block, though, it adds nothing. <span class="srcref" data-tip="Where this number comes from
+QNT (plain answer): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+SIG (§4): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> The share of mobile homes adds nothing beyond dense share. <span class="srcref" data-tip="Where this number comes from
+QNT (§2): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> Burn probability near the buildings is null or ranks against loss. <span class="srcref" data-tip="Where this number comes from
+SIG (§4): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> There is no separate "urban conflagration" class of fire: mixtures fitted to six loss signatures put the events at the tip of a continuous fan. <span class="srcref" data-tip="Where this number comes from
+SIG (plain answer): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<h3 id="condition-2-a-regional-wind-event">Condition 2: a regional wind event</h3>
+<p><strong>Every urban conflagration burned in a recognised wind event. So did most fires that reached a big block and did not have one</strong> (Fig. 2).</p>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th>record</th>
+<th>urban conflagrations in a wind event</th>
+<th>big block (&gt; 89), no urban conflagration, in a wind event</th>
+<th>Fisher p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carlson 2002–22</td>
+<td>8 of 8</td>
+<td>14 of 15</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>our 2002–26 record</td>
+<td>10 of 10</td>
+<td>14 of 15</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>CAL FIRE DINS</td>
+<td>7 of 7</td>
+<td>4 of 7</td>
+<td>0.19</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="srcref" data-tip="Where this number comes from
+WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+docs/paper/tables/p31x_compare.csv rows wind_event_yes
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·file</span></p>
+<ul>
+<li><strong>The ten events</strong> were Santa Ana fires (Sayre, Woolsey, Sandalwood, Eaton, Palisades) and Diablo or north-wind fires (Tubbs, Camp, Glass). The other two were the Labor Day 2020 east wind (Almeda Drive) and a Front Range downslope wind (Marshall). <span class="srcref" data-tip="Where this number comes from
+WC (§5): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> Published accounts confirm the event for Tubbs (Mass &amp; Ovens 2019) and Marshall (Fovell et al. 2022). <span class="srcref" data-tip="Where this number comes from
+WC (§7): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+LRC (§2.3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·LRC</span></li>
+<li><strong>The near misses.</strong> They include the October 2003 and 2007 Santa Ana fires and the December 2017 fires (Creek, Lilac, Thomas). The only one not recognised is Station 2009, which had a Red Flag Warning only. <span class="srcref" data-tip="Where this number comes from
+WC (§5): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span></li>
+<li><strong>Wind events carry most loss in every record.</strong> In our record, 139 of 354 fires with at least one destroyed building were wind-event fires, but they held 64,289 of 89,287 destroyed buildings (72 %). In Carlson the figures are 121 of 279 fires and 51,039 of 72,053 destroyed (71 %). In CAL FIRE they are 38 of 103 incidents and 39,736 of 49,698 destroyed (80 %). <span class="srcref" data-tip="Where this number comes from
+WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> This agrees with Abatzoglou et al. (2023): downslope-wind fires were 13.4 % of fires and caused 60.1 % of structures lost. <span class="srcref" data-tip="Where this number comes from
+LRC (§2.3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></li>
+<li><strong>Outside the records.</strong> Lahaina burned in a mountain-wave windstorm (Mass &amp; Ovens 2024). <span class="srcref" data-tip="Where this number comes from
+LRC (§2.3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> Our test did not flag Waldo Canyon 2012 as a wind event. <span class="srcref" data-tip="Where this number comes from
+WC (§5): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> Colorado has no standard pressure pair, so only warnings count there, and the town burned on day 4. <span class="srcref" data-tip="Where this number comes from
+WC (§6): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+TW (§6): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC·TW</span> Waldo Canyon is therefore an open exception to condition 2 that a better measure might remove. We do not count it either way.</li>
+</ul>
+<p><strong>What the condition means.</strong> Among fires that reach a big block, nearly all burn in a wind event: 24 of 25 in our record. <span class="srcref" data-tip="Where this number comes from
+WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> So our data cannot separate the two conditions. What they show is narrower. We found no urban conflagration outside a regional wind event in the three records. Wind events are also when fires reach towns at all. Condition 2 is the trigger that is nearly always pulled when condition 1 is met. It does not say which loaded block fires.</p>
+<h3 id="the-remainder-about-4-in-10-above-the-line">The remainder: about 4 in 10 above the line</h3>
+<p>Above the line, 10 of 25 fires in our record had an urban conflagration (40 %). In Carlson the figure is 8 of 23 (35 %) and in CAL FIRE 7 of 14 (50 %). <span class="srcref" data-tip="Where this number comes from
+SIG (table): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> The other 15 fires in our record reached a block of the same size, almost all in a wind event, and stopped short. What separates them is not known. Others have proposed several explanations. We tested each one we could, on all three records. With 10 against 15 fires, only large differences can show. "Not shown" is therefore not "no effect" (Fig. 3).</p>
+<p><strong>Tree canopy between houses: not shown.</strong> In the biggest block, median pre-fire canopy in the gaps between neighbouring buildings was 10.9 % in the 10 fires that had an urban conflagration and 12.0 % in the 14 that did not (Harris 2007 has no reading). The Holm-adjusted p was 0.71. <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> The share of links whose gap has at least 25 % canopy was 7.1 % against 0.0 % (Holm p 0.49). Carlson and CAL FIRE agree. <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Linking buildings through trees, 35–60 m apart where at least 25 % canopy runs between them, predicts no better than buildings alone. Leave-one-fire-out AUC was 0.983 → 0.974 (Carlson), 0.992 → 0.990 (ours) and 0.992 → 0.985 (CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Trees do matter for a different kind of loss: big losses in sparse, treed housing below the line. Gatlinburg's destroyed chain grows from 16 at 30 m to 326 when links through canopy are allowed. <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> This agrees with the mixed published record on trees (Knapp et al. 2021; Mockrin et al. 2023; Kenny et al. 2026). <span class="srcref" data-tip="Where this number comes from
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
+<p><strong>Fences: not testable.</strong> In 22 of 28 OpenStreetMap boxes around the big blocks, no fence is mapped. The median is 0.0 m of fence per mapped building, and the map shows the present day, after the fire. <span class="srcref" data-tip="Where this number comes from
+FW (plain answer): docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span> Fences are a known path in experiments and in Marshall (NIST TN 2228; Metz et al. 2024). <span class="srcref" data-tip="Where this number comes from
+LRC (§2.2): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> No public national layer can test them.</p>
+<p><strong>Wind at the town: not shown.</strong> We timed when each town burned and read the peak hourly wind over it. The 10 urban conflagrations and the 15 near misses had about the same peak: median 12.0 vs 10.9 m/s in our record (Mann–Whitney p 0.85). Carlson gave 10.8 vs 10.9 (p 0.51) and CAL FIRE 12.6 vs 8.5 (p 0.46). Peak gust in our record was 18.0 vs 14.7 m/s (p 0.14). <span class="srcref" data-tip="Where this number comes from
+TW (§5): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span> A first comparison did find a difference, but it came from mixing weather products. The pre-registered "best product" switches between them in 2014, and 10 of the 15 near misses were from 2003–09, read with a product that reads peaks about 3.4 m/s low. With one product for every fire, the gap disappears. <span class="srcref" data-tip="Where this number comes from
+TW (§5): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span></p>
+<p><strong>Wind across the region: not shown.</strong> None of eight pre-registered measures separated the two groups in all three records. These measures covered the windiest spot within 25 or 100 km, region-wide wind, hours of strong gusts over the whole fire, and how unusual the fire-day wind was for that place. They also covered the strength of the offshore push. Every Holm-adjusted p was 0.30 or more. <span class="srcref" data-tip="Where this number comes from
+WC (§2): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> For example, the windiest spot within 100 km while the town burned was 10.4 vs 11.2 m/s in our record (p 0.98). <span class="srcref" data-tip="Where this number comes from
+WC (plain answer): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span></p>
+<p><strong>Downwind lean: not shown.</strong> We took every destroyed building and its neighbours within 60 m. A neighbour downwind was lost about as often as one upwind. The lean (downwind minus upwind, average over fires) was −0.51 points (−2.23 to +1.15) in Carlson's 140 fires. It was −0.54 (−2.08 to +1.05) in 159 fires of our record and −0.58 (−2.82 to +1.82) in 44 CAL FIRE incidents. A lean larger than +1.2, +1.1 and +1.8 points is ruled out. <span class="srcref" data-tip="Where this number comes from
+DWL (plain answer): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL</span> IBHS reported 83 % vs 71 % for homes within 3 m downwind of a burning neighbour in Eaton and Palisades (Monroy et al. 2025). That measure differs from ours: it counts damaged homes, including minor damage, at wall gaps of 3 m or less. <span class="srcref" data-tip="Where this number comes from
+DWL (plain answer): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+LRC (§2.1): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·LRC</span> Our closest band (0–30 m) is also null: +0.59 (−0.73 to +1.93) in our record. <span class="srcref" data-tip="Where this number comes from
+DWL (checks): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL</span></p>
+<p><strong>Network position: does not add.</strong> Within fires, density and position predicted which buildings were lost at about coin-flip level. Per-fire AUC was 0.506, 0.503 and 0.521 (Carlson, ours, CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+NET (T1–T3): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> Network shape added 0.009, 0.007 and 0.013, below the pre-set bar of 0.01 in two records. A disease-style spread on the network added at most 0.015. <span class="srcref" data-tip="Where this number comes from
+NET (§2): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> "Bridges" between groups of buildings show no sign of mattering (gap coefficient −0.01, −0.14 to +0.08, in our record). <span class="srcref" data-tip="Where this number comes from
+NET (§3): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> This matches the one earlier test against real losses, in two fires (Chulahwat et al. 2022). <span class="srcref" data-tip="Where this number comes from
+LRN (summary 2): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span></p>
+<p><strong>Clumping beyond fair chance: little.</strong> Against buildings picked at random from the town, real losses join up earlier in 90 of 93 decided fires in our record. That mostly shows that fire burns places, not scattered houses. <span class="srcref" data-tip="Where this number comes from
+FC (table, headline): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against a solid burned area of the same size, real losses are less clumped. In our record the biggest group at 50 m is 1.9 points smaller (−3.1 to −1.0). <span class="srcref" data-tip="Where this number comes from
+FC (table): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span> Against the fire's own broad loss map (smoothed at 200 m), a small extra clumping remains. That is +1.0 point (+0.6 to +1.4) in the biggest group at 50 m, on a base of 3.3 %. It is consistent with house-to-house spread, but equally with small ember showers, wind channels or firefighting. <span class="srcref" data-tip="Where this number comes from
+FC (table, headline): docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span></p>
+<p><strong>Within the same fire.</strong> We compared blocks of 50 or more buildings inside fires that had both kinds of block. Only block size holds in all three records. The share of buildings on ridges holds in two records but is fragile: only 7 % of blocks have any building on a ridge. Spacing, building size, canopy, depth into the town, slope, valley share, mobile-home share and building use could not be told apart. Only 6 to 9 fires carry these tests. <span class="srcref" data-tip="Where this number comes from
+PAT (group B): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+PA2: docs/ledger.d/2026-10-14-0150-conflagration-patches--result-addendum-2.md (patch study on the current building set; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT·PA2</span></p>
+<p><span class="pending" data-tip="Pending: PA62
+How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA62</span>: how the fire met the town. This covers whether the wind pushed the front into or along the block, the fire's run before the town, upwind wildland fuel and night arrival. It also covers other fires burning at once, fuel dryness, an upslope approach and the width of the front.</p>
+<p><strong>What remains untested for lack of public data:</strong> firefighting per block, water pressure, ember density at houses and building hardening outside California. <span class="srcref" data-tip="Where this number comes from
+NET (§6): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+LRN (§3): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+LRC (§2.4): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET·LRN·LRC</span></p>
+<h3 id="how-much-of-the-loss-spread-house-to-house">How much of the loss spread house to house</h3>
+<p>We fitted a spread model to the final loss map of every fire with at least 50 destroyed buildings. That is 135 fires in Carlson, 155 in our record and 51 in CAL FIRE (Fig. 4). <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> In the model, each building can be lit in two ways. The first is a smooth wildfire background, taken from the fire's own loss map at a 200 m scale. The second is a burning neighbour, with a chance that falls with distance. The model is fitted from the final map alone, as plant-disease statisticians fit spread from a single snapshot (Keeling et al. 2004; Demiris &amp; O'Neill 2005; Kypraios et al. 2017). <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+LRN (§6): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·LRN</span> The model form follows Sellke (1983), which is cited in the PA59 note but in neither review (flag: verify). <span class="srcref" data-tip="Where this number comes from
+H2H (Literature): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<p><strong>The method partly recovers known answers.</strong> We simulated fires on each real fire's own buildings. The estimate was typically 2–3 points off the true share (median absolute error 0.025). Its 95 % ranges held the truth only 78–79 % of the time, so we read them as about 80 % ranges. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<p><strong>It cannot tell house-to-house spread from a patchy front.</strong> We built "trap" fires in which no house lit another, but the wildfire's push changed sharply over 50 m. The method still reported 31 % (Carlson), 31 % (ours) and 22 % (CAL FIRE) lit by neighbours. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Every share below is therefore an upper bound.</p>
+<p><strong>At most a third to two-fifths.</strong> Share of destroyed buildings lit by a neighbour, upper bounds:</p>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th>record</th>
+<th>fires</th>
+<th>destroyed buildings</th>
+<th>share lit by a neighbour [95 %]</th>
+<th>typical fire [95 %]</th>
+<th>background scale 100 m / 400 m</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carlson 2002–22</td>
+<td>135</td>
+<td>67,446</td>
+<td>37 % [30, 43]</td>
+<td>26 % [24, 32]</td>
+<td>24 % / 42 %</td>
+</tr>
+<tr>
+<td>our 2002–26 record</td>
+<td>155</td>
+<td>83,339</td>
+<td>39 % [32, 45]</td>
+<td>26 % [24, 31]</td>
+<td>28 % / 47 %</td>
+</tr>
+<tr>
+<td>CAL FIRE DINS</td>
+<td>51</td>
+<td>48,890</td>
+<td>32 % [21, 39]</td>
+<td>18 % [11, 27]</td>
+<td>19 % / 45 %</td>
+</tr>
+</tbody>
+</table></div>
+<p><span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+docs/paper/tables/p34_pooled.csv
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·file</span></p>
+<p>Even as an upper bound, the share stays below 50 % in every record. So <strong>most destroyed buildings were lit by the wildfire itself.</strong> Whether house-to-house spread is a large part of the typical fire's loss cannot be said, because a patchy front alone gives about the same number. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Camp holds 24 % of Carlson's destroyed buildings; without it the Carlson share is 35 %. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<p><strong>The share rises with block size.</strong> Its rank correlation with block size is +0.54 (Carlson), +0.55 (ours) and +0.63 (CAL FIRE). In our record the mean share is 56 % in the 22 fires above the 89 line and 28 % in the 133 at or below it, a difference of +28 points (+18 to +40). <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+p34_traits.csv
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·file</span> A patchy front alone also rises with block size (trap 48 % vs 33 % in our record). Roughly half of that gap could therefore come from a patchy front in close-built blocks. The excess over each fire's own trap still rises with block size (rank correlation 0.45 in Carlson and ours, 0.24 in CAL FIRE). <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers (exploratory)): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<p><strong>Where it shows clearly.</strong> In 9 of 155 fires in our record, the estimate's lower bound exceeds what a patchy front gives on the same buildings (exploratory). They are Camp, Almeda Drive, Marshall, Dixie, Thomas, Yarnell Hill, Lilac, Summit 2008 and Mosquito. In CAL FIRE only Camp does. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span>
+- <strong>Marshall 2021:</strong> 81 % (69–99 %), against 47 % from a patchy front.
+- <strong>Camp 2018:</strong> 40 % against 23 % (CAL FIRE outcomes: 36 % against 20 %).
+- <strong>Almeda Drive 2020:</strong> 95 % against 81 %.</p>
+<p><span class="srcref" data-tip="Where this number comes from
+H2H (named fires): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> By contrast, Eaton (60 % vs a trap of 49 %), Palisades (44 % vs 36 %) and Tubbs (33 % vs 28 %) cannot be told from a patchy front. <span class="srcref" data-tip="Where this number comes from
+H2H (named fires): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> Mobile homes recur. Most 30 m house-to-house patches whose building types are known are mostly mobile homes: 18 of 25 typed patches in Carlson and 16 of 30 in CAL FIRE. <span class="srcref" data-tip="Where this number comes from
+PAT (side finding): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span> Almeda Drive and Sayre burned mobile-home parks and strips. <span class="srcref" data-tip="Where this number comes from
+SIG (§2 caveat): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span></p>
+<p><strong>A check against the one detailed timeline.</strong> For Waldo Canyon the model gives 72 % (45–96 %). NIST attributed 296 of 344 destroyed homes (86 %) to structure-to-structure spread (NIST TN 1910). The trap also gives 72 % on Waldo's buildings, so the match does not confirm the method. <span class="srcref" data-tip="Where this number comes from
+H2H (plain answers): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·LRC</span></p>
+<p><strong>Why spread cannot keep itself going on its own.</strong> A co-author's earlier kernel fit (C. Fong, unpublished; flag: not a published source) has a house-to-house push about 30 times too weak for fire to sustain itself through any town in the median fire. Its largest spreading number is 0.198 (Carlson), 0.198 (ours) and 0.138 (CAL FIRE), and the threshold is 1. <span class="srcref" data-tip="Where this number comes from
+NET (plain answers, §1): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span> The final-map fits give larger pushes, near that threshold, but they too are upper bounds. <span class="srcref" data-tip="Where this number comes from
+H2H (&quot;Kernel and push&quot;): docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<h3 id="is-89-a-tipping-point-we-cannot-tell-and-theory-says-why">Is 89 a tipping point? We cannot tell, and theory says why</h3>
+<p><strong>The climb.</strong> The chance of an urban conflagration is about 5 % at a block of about 70 buildings. It reaches about 50 % at about 188 buildings in our record (Carlson 70 → 209; CAL FIRE 61 → 201). That is a 2.7-fold range of block size (1.7–3.9). <span class="srcref" data-tip="Where this number comes from
+STP (table): docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+FOR (&quot;PA35&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FOR</span> Fig. 5 shows the climb.</p>
+<p><strong>The step test could not have found a step.</strong> The test behind the earlier wording "smooth, no step" would have missed a real step at 89 about half the time: power 0.57 on fires with at least 100 buildings in reach and 0.43 in Carlson. On the full records the step search stops at about 60 buildings, so power is 0.06 and 0.00. <span class="srcref" data-tip="Where this number comes from
+STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP</span> Predicting each fire with it left out, a gradual rise beats a hard step: log score better by +4.6 (Carlson), +5.1 (ours) and +3.1 (CAL FIRE), against a bar of 2. <span class="srcref" data-tip="Where this number comes from
+STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+FOR (&quot;PA35&quot;): docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP·FOR</span> This reading is fragile in Carlson. It falls to −0.5 with U.S. buildings only and to −0.05 when unburned patches are removed from the outline, because two fires move from just above 89 to just below. <span class="srcref" data-tip="Where this number comes from
+USC: docs/ledger.d/2026-10-13-2250-conflag-us-clip--result.md (PA37; tables archived in docs/paper/tables/archive/2026-10-13_pa37_us_only/)
+MTB (plain answer): docs/ledger.d/2026-10-14-0520-mtbs-outline--result.md (PA55; tables p33_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">USC·MTB</span></p>
+<p><strong>What finite-size theory predicts.</strong> In percolation, a large system switches sharply from "connected" to "not connected". A small one switches over a window. The window narrows only as side length to the power −3/4 in two dimensions (Newman &amp; Ziff 2001; Mertens &amp; Moore 2012). In buildings, that is block size to the power −3/8 (the review's own derivation). <span class="srcref" data-tip="Where this number comes from
+LRN (summary 1): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span> Across our 2.7-fold range, theory predicts only about a 1.45-fold narrowing. <span class="srcref" data-tip="Where this number comes from
+LRN (summary 1): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span> Mixing fires with different winds widens the climb further (Sander et al. 2003; Cardoso et al. 2022), and disorder rounds abrupt transitions in two dimensions (Aizenman &amp; Wehr 1989). <span class="srcref" data-tip="Where this number comes from
+LRN (summary 1): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRN</span></p>
+<p><strong>A simulation on the real layouts.</strong> If fire spread like a simple building-to-building process, bigger blocks would switch more sharply. The width of the climb shrinks as block size to the power −0.68 (−0.87 to −0.51) in our record. That is steeper than the textbook −3/8. <span class="srcref" data-tip="Where this number comes from
+FSS (plain answer): docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> But a test on our fires would detect it at best 13 % of the time in our record (10 % Carlson, 11 % CAL FIRE), against an 80 % bar. Even with each fire's true spread strength, which can never be measured, detection would take about 8 times as many fires. <span class="srcref" data-tip="Where this number comes from
+FSS (plain answer, data needed): docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> The test on real fires was therefore not run, as pre-registered. <span class="srcref" data-tip="Where this number comes from
+FSS: docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span></p>
+<p><strong>What this means.</strong> A smooth climb is what we should expect at town sizes whether or not a real threshold lies underneath. "Not detectable" describes our data. It is not evidence against a threshold. <span class="srcref" data-tip="Where this number comes from
+FSS (&quot;What it means&quot;): docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span> The line at 89 is a practical line on a steep climb, not a proven tipping point. Linking distance shows the same picture. The distance at which burned groups join up is a smooth climb with a median of about 125 m, set mostly by the town's own layout. <span class="srcref" data-tip="Where this number comes from
+NET (§10): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span></p>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<p><strong>A loaded gun and a trigger, and a third thing we cannot see.</strong> Every urban conflagration in three national records had a big block of close buildings, the loaded gun. It also burned in a regional wind event, the trigger. Those two conditions are what the newer literature describes: urban fires started by wildfires in close-built towns under extreme wind (Calkin et al. 2023; FSRI 2024, 2025). <span class="srcref" data-tip="Where this number comes from
+LRC (§1(e), §2.5): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> But the trigger was pulled in 14 of the 15 near misses in our record, and they did not go off. <span class="srcref" data-tip="Where this number comes from
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">WC</span> Something decides which loaded, triggered block becomes an urban conflagration. It is not tree canopy between houses, fences as far as public data show, wind strength at the town or across the region, downwind lean, or position in the building network. Clumping beyond what a burned place produces is small. <span class="srcref" data-tip="Where this number comes from
+FW: docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+TW: docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+DWL: docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+NET: docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+FC: docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW·TW·WC·DWL·NET·FC</span> Candidates that public data cannot yet measure include how the fire met the town (<span class="pending" data-tip="Pending: PA62
+How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA62</span>). Others are how many ignitions arrived at once, how many crews and how much water were available, and how the buildings were built. The literature names suppression saturation as the step that turns ignitions into a disaster. It has not measured it across fires (Cohen 2008; Calkin et al. 2014; Cohen 2017). <span class="srcref" data-tip="Where this number comes from
+LRC (§2.4): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span></p>
+<p><strong>A mechanism: the wildfire does most of the work, and big blocks let house-to-house spread add to it.</strong> Three results fit together:
+1. At most a third to two-fifths of destroyed buildings were lit by a neighbour (32–39 %, upper bounds). <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span>
+2. Even in fires with an urban conflagration, only 11 % of destroyed buildings sit in patches of 50. <span class="srcref" data-tip="Where this number comes from
+PAT: docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PAT</span>
+3. Losses are no more clumped than a burned place of the same size. <span class="srcref" data-tip="Where this number comes from
+FC: docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span></p>
+<p>So the wildfire, mostly through embers and the front, lit most of the buildings. Where the block was big, the house-to-house share was larger, about twice the share below the line, though part of that gap is a patchy front. <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span> The clearest house-to-house fires were mobile-home parks and dense subdivisions: Almeda Drive, Marshall and Paradise in the Camp Fire. <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+PAT: docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·PAT</span> This reconciles two views in the literature. Ember exposure decides where fire enters (Cohen 2000; Caggiano et al. 2020). Close spacing decides how far it runs once inside (Knapp et al. 2021; Alexandre et al. 2016). <span class="srcref" data-tip="Where this number comes from
+LRC (summary, §2.3): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> It is also consistent with Waldo Canyon's 86 % house-to-house share (NIST TN 1910) being a dense-subdivision case rather than a typical fire, though our model cannot confirm that share (its trap gives the same 72 % there). <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+LRC (summary): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H·LRC</span></p>
+<p><strong>Implications for mitigation.</strong> These are observational results, not tests of interventions.
+- <strong>Where to look.</strong> Because no measured factor picks which loaded block fires, every big block of close buildings within reach of wildland in a wind-event region is a candidate. <span class="pending" data-tip="Pending: PA65
+A national map of where an urban conflagration is possible: blocks above the 89 line within reach of wildland, in wind-event regions, checked on the known events.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA65</span> maps where these are.
+- <strong>Spacing and block size.</strong> The data are consistent with FEMA's Marshall recommendation of about 30 ft (9.1 m) between structures (FEMA 2025). They are also consistent with blocks smaller than about 70 buildings being far less likely to burn through. <span class="srcref" data-tip="Where this number comes from
+LRC (§1(c)): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC·STP</span> We did not test breaking up a block, and a 20 m centre-to-centre gap is not a building code.
+- <strong>Building-scale measures matter more in big blocks,</strong> where the house-to-house share is larger. Ember-resistant construction and clearing the first few metres (Syphard &amp; Keeley 2019; Monroy et al. 2025) act on both ignition paths. <span class="srcref" data-tip="Where this number comes from
+LRC (§3 table): docs/paper/lit-review-urban-conflagration-2026-10-13.md (references docs/paper/tables/lit_conflag_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">LRC</span> These variables are not in our records.
+- <strong>Network targeting is not supported by real losses.</strong> Protecting chokepoint buildings has been tested only in simulation (LRN §3). In our data, bridges between groups showed no sign of mattering. <span class="srcref" data-tip="Where this number comes from
+NET (§3): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+LRN (summary 4): docs/paper/lit-review-network-science-fire-2026-10-14.md (references docs/paper/tables/lit_network_refs.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET·LRN</span>
+- <strong>Trees between houses</strong> are not the deciding factor among big blocks. They do link losses in sparse, treed towns such as Gatlinburg. <span class="srcref" data-tip="Where this number comes from
+FW: docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span></p>
+<p><span class="pending" data-tip="Pending: PA63
+Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA63</span>: what international urban conflagrations and near misses add to the two conditions and to the remainder.</p>
+<p><strong>Limits.</strong>
+- <strong>About ten events.</strong> There are 8, 10 and 7 urban conflagrations in the three records. The same California fires appear in all three, and 8 of 10 in our record are in California. <span class="srcref" data-tip="Where this number comes from
+QNT (§5): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+SIG (§7): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> Intervals on rates above the line are wide (40 %, 21–61 %, in our record). <span class="srcref" data-tip="Where this number comes from
+SIG (table): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> Every "not shown" compares about 10 fires with about 15. Lahaina and Waldo Canyon are out-of-sample checks, not enough to estimate a rate. <span class="srcref" data-tip="Where this number comes from
+SIG (§6): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span>
+- <strong>Outline error.</strong> "Reached by the fire" depends on an outline drawn after the fire, so the block is partly an outcome. A fire that ran into town had its outline drawn around the town. <span class="srcref" data-tip="Where this number comes from
+QNT (§5): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> Counting every building lowers the AUC (0.994 → 0.962 in our record). <span class="srcref" data-tip="Where this number comes from
+PA2: docs/ledger.d/2026-10-14-0150-conflagration-patches--result-addendum-2.md (patch study on the current building set; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">PA2</span> Harris 2007 shows an outline can cross unburned ground. <span class="srcref" data-tip="Where this number comes from
+FOR: docs/ledger.d/2026-10-14-0015-conflag-keep-foreign--result.md (PA43; tables p24_foreign_three_ways.csv, p28_predictor_link.csv, p24_harris_mexico_dnbr.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FOR</span> The ring fixed before the fire agrees at a lower AUC (0.90). <span class="srcref" data-tip="Where this number comes from
+QNT: docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span>
+- <strong>Inventory error.</strong> Carlson points carry no footprints, so spacing is centre to centre and large houses on large lots are under-linked. <span class="srcref" data-tip="Where this number comes from
+QNT (§5): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span> CAL FIRE footprints are mostly from imagery after the fire. <span class="srcref" data-tip="Where this number comes from
+SIG (§7): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">SIG</span> Equal-area circles understate how connected real outlines are: at Lahaina, a 10 m gap links 43 buildings with circles and 111 with true outlines. <span class="srcref" data-tip="Where this number comes from
+DEF (§3): docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF</span>
+- <strong>Coarse wind.</strong> Wind cells are 2.5–31 km and ERA5 reads peaks 2.4–2.9 m/s low. Each fire gets one direction, with no wind inside the town. Valley airports and grids under-read some downslope winds, for example Camp's town gust of 15.8 m/s against 23.2 m/s at the nearest fire-weather station. <span class="srcref" data-tip="Where this number comes from
+TW (§6): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+WC (§2): docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+DWL (caveats): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW·WC·DWL</span>
+- <strong>Many tests.</strong> We report every pre-registered test, with Holm adjustment where pre-set. Results marked exploratory were not pre-registered.
+- <strong>The definition is a convention on a knife-edge.</strong> The compound and house-and-tree alternatives agree on the named urban fires but differ at the margin. <span class="srcref" data-tip="Where this number comes from
+DEF: docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+NET: docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+PAT: docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DEF·NET·PAT</span>
+- <strong>Hold-out.</strong> The confirmatory back-cast is not yet scored. <span class="pending" data-tip="Pending: back-cast C1, C2
+The pre-registered confirmatory test on the held-out 2016–22 sample (C1: under 5 % conflagrations below the line; C2: block-size AUC above 0.8). Not yet scored; nothing in that sample was read.">Pending back-cast C1, C2</span></p>
+<hr />
+<h2 id="methods-appendix">Methods appendix</h2>
+<p><strong>Building rows and reach.</strong> Buildings standing before the fire come from Carlson's points (2002–22) and our Structure Inventory Model (2023–26), with CAL FIRE inspection outcomes where inspected. For CAL FIRE, the buildings in reach are Microsoft footprints within the incident's matched perimeter plus 100 m around every inspected building, with every inspection record kept. <span class="srcref" data-tip="Where this number comes from
+QNT (§1): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+SIG (§1): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> Scripts: <code>scripts/paper/p24a_conflag_fire_rows.py</code>, <code>scripts/paper/p27a_rows.py</code>. Building points are projected to EPSG:5070. Every bearing is converted to true north. <span class="srcref" data-tip="Where this number comes from
+DWL (&quot;Data checks&quot;): docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+TW (addendum): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL·TW</span></p>
+<p><strong>Patch (outcome).</strong> Single-linkage groups of destroyed buildings at 30 m between centres. LDC30 is the size of the largest. An urban conflagration is LDC30 ≥ 50. Checks: 50 m links; ≥ 100. <span class="srcref" data-tip="Where this number comes from
+QNT: docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+DEF: docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·DEF</span> Compound rule: a 75 m group holding ≥ 2 patches of ≥ 20 at 30 m. House-and-tree rule: links ≤ 60 m with canopy ≥ 25 % at every 10 m (USFS TCC, ignition year − 2). <span class="srcref" data-tip="Where this number comes from
+NET (§4): docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+PAT (PA40): docs/ledger.d/2026-10-13-2355-conflagration-patches--result.md (PA39/40/42; tables p31_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET·PAT</span></p>
+<p><strong>Block (predictor).</strong> The largest single-linkage group of buildings in reach at 35 m between centres (b20: about a 20 m wall gap on a 159 m² footprint). <span class="srcref" data-tip="Where this number comes from
+QNT (§5): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT</span></p>
+<p><strong>Rule tests.</strong> The line is 89.09, fixed from PA31 (Firth logit, Youden cut on fires with ≥ 100 in reach, our record). Rates below and above use exact (Clopper–Pearson) 95 % intervals. AUC intervals and cut intervals come from a fire bootstrap. Leave-one-fire-out AUC uses a Firth logit. <span class="srcref" data-tip="Where this number comes from
+QNT (§2): docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+SIG (§5): docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG</span> Pre-registrations: PA31 commit 5850b8d; PA33 fce86f7; PA34 cd8073d + 9958f05; back-cast C1/C2 in <code>docs/ledger.d/2026-10-12-2240-conflagration-rule-backcast--prereg.md</code>. <span class="srcref" data-tip="Where this number comes from
+QNT: docs/ledger.d/2026-10-12-2235-conflagration-quantification--result.md (PA31; tables p24_*.csv)
+SIG: docs/ledger.d/2026-10-13-0005-conflagration-signatures--result.md (PA33; tables p27_*.csv)
+DEF: docs/ledger.d/2026-10-13-2245-conflagration-definition--result.md (PA34; tables p28_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">QNT·SIG·DEF</span></p>
+<p><strong>Step and climb.</strong> Sup-likelihood-ratio step and hinge tests use a parametric bootstrap. Step power is from simulation (T1). The leave-one-fire-out log score compares a smooth logit with a pure step. Transition points are where the fitted chance reaches 5 % and 50 %. Prereg commit f6fc5a2. <span class="srcref" data-tip="Where this number comes from
+STP: docs/ledger.d/2026-10-13-2105-conflagration-step-power--result.md (PA35; tables p29_step_power.csv, p29_above_bins.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">STP</span></p>
+<p><strong>Finite-size simulation.</strong> Bond-percolation spread on each fire's real layout uses a distance kernel, with log spread strength drawn from Normal(μ, σ). μ is calibrated so the simulated share of fires with ≥ 50 joined destroyed buildings equals each record's (8/361, 10/726, 7/445). A Firth model with a size-dependent width gives the power of the sharpening test along the true strength and along stand-ins with correlation 0.5 and 0.9. Prereg 6df0782 plus amendment 8922e52. <span class="srcref" data-tip="Where this number comes from
+FSS: docs/ledger.d/2026-10-14-1655-finite-size-sharpening--result.md (PA57; tables p57_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FSS</span></p>
+<p><strong>Wind.</strong> Each town point is the destroyed building with the most destroyed buildings within 1 km. The burn window starts at the first FIRMS detection within 1 km of the loss area and ends when 90 % of loss-area buildings have a detection nearby (capped at 72 h). Wind is read over the window ± 12 h. <span class="srcref" data-tip="Where this number comes from
+TW (§1–2, §8): docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW</span> The town measure <code>axis_wmax</code> uses CONUS404 to September 2024 and RTMA after. Gust <code>axis_gmax</code> uses RTMA from 2014 and ERA5 before. Regional measures use ERA5 only. The recognised-wind-event rule is given in Data. Group comparisons use Mann–Whitney and Fisher tests, with Holm adjustment across the 8 primary regional measures. <span class="srcref" data-tip="Where this number comes from
+TW: docs/ledger.d/2026-10-14-0125-town-wind--result.md (PA41/49; tables p31w_*.csv)
+WC: docs/ledger.d/2026-10-14-0525-wind-context--result.md (PA53; tables p31x_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">TW·WC</span></p>
+<p><strong>Trees and fences.</strong> Canopy is measured in the 30 m square around each gap between neighbouring buildings of the biggest block. The comparison uses Mann–Whitney tests with Holm adjustment, and the fuel-linked block is scored by leave-one-fire-out AUC. Fence lengths come from OSM <code>barrier=fence</code> in the box around each above-line block. Prereg 46db1c3. <span class="srcref" data-tip="Where this number comes from
+FW: docs/ledger.d/2026-10-13-2240-conflagration-fuel-wind--result.md (PA36; tables p30_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FW</span></p>
+<p><strong>Downwind lean.</strong> For each destroyed building, neighbours ≤ 60 m are sorted by bearing relative to the town's wind while it burned (vector mean over the burn window ± 3 h). Lean = share lost downwind − share lost upwind, averaged over fires. Intervals come from a 95 % fire bootstrap. The null rotates each fire's wind direction 999 times. Prereg 4301b39 plus amendment c8508f2. <span class="srcref" data-tip="Where this number comes from
+DWL: docs/ledger.d/2026-10-15-0040-downwind-lean--result.md (PA58; tables p37_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">DWL</span></p>
+<p><strong>Network tests.</strong> Buildings are nodes, linked within distance d. Per-fire AUC comes from 10 fire-grouped folds with a fire bootstrap of 2,000 draws and Holm adjustment over 9 tests. The bridge test uses neighbouring 30 m groups. The tipping distance is where the second-biggest group peaks over 10–150 m. Prereg fd02ae4 plus amendments. <span class="srcref" data-tip="Where this number comes from
+NET: docs/ledger.d/2026-10-14-0010-conflagration-network--result.md (PA47/48; tables p32_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">NET</span></p>
+<p><strong>Fair chance.</strong> Five baselines are compared on fires with ≥ 100 destroyed: (B1) random picks from the whole town; (B2) random picks inside the fire area; (B3) a solid round burned area of the same size; (B4) the whole fire-area town; and (B5) random picks following the fire's broad loss map (σ 200 m). The comparisons are the joining distance and the biggest-group share at 30, 50 and 75 m. Prereg 78ed1bc. <span class="srcref" data-tip="Where this number comes from
+FC: docs/ledger.d/2026-10-14-0420-losses-vs-fair-chance--result.md (PA52; tables p32_fairchance_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">FC</span></p>
+<p><strong>House-to-house share.</strong> The final-outcome model has a smooth wildfire background, built from the loss map with a 100 m hole and σ 200 m, plus a distance kernel exp(−d/λ). It is fitted by pseudo-likelihood summaries and approximate Bayesian computation on 400 simulated fires per fire, on the real layout. Checks: a recovery test on 40 held-out simulations per fire; a patchy-front trap (no house-to-house push, background varying over 50 m); and background σ of 100 and 400 m. The pooled share is destroyed-weighted, with 95 % intervals from 2,000 fire-bootstrap × posterior draws. Prereg 58abce5. <span class="srcref" data-tip="Where this number comes from
+H2H: docs/ledger.d/2026-10-14-2355-house-to-house-share--result.md (PA59; tables p34_*.csv)
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">H2H</span></p>
+<p><strong>Hold-out.</strong> Nothing under <code>outputs/paper_backcast_2016_2022</code> was read for any analysis here. <span class="srcref" data-tip="Where this number comes from
+every note
+What it suggests: every number in the draft is copied from a file the pipeline wrote; this names it">file</span></p>
+<hr />
+<h2 id="list-of-figures">List of figures</h2>
+<p>Each figure points to an existing panel on a live page in <code>publication_htmls/structure_loss_pipeline/</code>. Final paper figures will be redrawn from the same tables.</p>
+<p><strong>Fig. 1. Condition 1: the block line on three records.</strong> (A) Chance of an urban conflagration by block size, with the line at 89, for Carlson, our record and CAL FIRE. Points are fires; events are named. (B) Robustness: U.S.-only buildings, foreign buildings kept, Forest Service outline, unburned patches removed. Live panels: "Wildfire structure loss: paper exploration · 2026-10-12", section 1 "What makes an urban conflagration?" (<code>#conflagration</code>). Also "Defining an urban conflagration · 2026-10-13", sections "Which fire outline?" (<code>#s-outline</code>) and "Canadian and Mexican buildings kept" (<code>#update-foreign-kept</code>). Tables <code>p27_rule_three_records.csv</code>, <code>p28_predictor_link.csv</code>, <code>p33_headline.csv</code>, <code>p24_foreign_three_ways.csv</code>.</p>
+<p><strong>Fig. 2. Condition 2: wind events.</strong> (A) Known wind events fire by fire for the 10 urban conflagrations and the 15 near misses. (B) Share of destroyed buildings in wind-event fires. Live panels: "Trees, fences and wind in urban conflagrations · 2026-10-13", panels "Known wind events, fire by fire" and "Broader wind and how much was lost, all fires". Tables <code>p31x_named_events.csv</code>, <code>p31x_compare.csv</code>, <code>p31x_loss_bins.csv</code>.</p>
+<p><strong>Fig. 3. The remainder: what does not separate the 10 from the 15.</strong> One small panel per tested explanation, each showing the two groups in all three records: gap canopy, fuel-linked block, town wind, regional wind, downwind lean, network gain, and clumping beyond chance. Live panels: on "Trees, fences and wind…": "Trees between the houses of the biggest block", "Does a 'fuel-linked' block predict better?", "Wind over the town, not at the airport", "Wind around the fire: did it separate urban conflagrations?" and "Do losses lean downwind?". On "Urban conflagrations as networks · 2026-10-13": section 3 "Does the network explain which buildings were lost?" and section 0 "Do losses clump more than a fire that burns a connected area?". <span class="pending" data-tip="Pending: PA62
+How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA62</span> adds a panel on how the fire met the town.</p>
+<p><strong>Fig. 4. The house-to-house share.</strong> (A) Lit by the front or by a neighbour, as a house-icon explainer. (B) Recovery test and patchy-front trap. (C) Share by fire, with each fire's own trap value. (D) Share above vs below the 89 line. (E) Named fires: Marshall, Camp, Almeda Drive. Live panels: "Urban conflagrations as networks · 2026-10-13", section "How much of the loss spread house to house?" (all six panels). Tables <code>p34_pooled.csv</code>, <code>p34_fires.csv</code>, <code>p34_traits.csv</code>, <code>p34_recovery.csv</code>, <code>p34_trap.csv</code>.</p>
+<p><strong>Fig. 5. Tipping point: cannot tell.</strong> (A) The climb from 5 % to 50 %, with the step-test power. (B) Simulated sharpening on real layouts, with test power by number of fires. Live panels: "Defining an urban conflagration · 2026-10-13", section "Is there a real tipping point hidden by town size?" (<code>#s-fss</code>). Tables <code>p29_step_power.csv</code>, <code>p57_sharpening.csv</code>, <code>p57_power.csv</code>, <code>p57_data_needed.csv</code>.</p>
+<p><strong>Fig. 6. A fire holds parts.</strong> Fragmentation of Tubbs, Camp and Marshall at 30, 50 and 75 m, and the compound rule. Live panels: "Defining an urban conflagration · 2026-10-13", section "One fire, many patches" (<code>#s-patches</code>). Also "Urban conflagrations as networks · 2026-10-13", sections 2 "Real fires: patches and groups of groups" and 7 "A compound urban conflagration". Tables <code>p31_named_patch_share.csv</code>, <code>p32_compound_named.csv</code>.</p>
+<p><strong>Fig. 7. Where an urban conflagration is possible.</strong> <span class="pending" data-tip="Pending: PA65
+A national map of where an urban conflagration is possible: blocks above the 89 line within reach of wildland, in wind-event regions, checked on the known events.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA65</span></p>
+<p><strong>Supplementary.</strong>
+- S1, the definition space and the scorecard: "Defining an urban conflagration", sections 2 and 5.
+- S2, wind products validated against stations: "Trees, fences and wind…", "Wind over the town".
+- S3, how researchers define the term: "How researchers think about urban conflagrations · 2026-10-13".
+- S4, international events: <span class="pending" data-tip="Pending: PA63
+Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.
+What it suggests: an analysis still running; this draft does not guess its result">Pending PA63</span>.</p>
+<hr />
+<h2 id="reproducibility-scripts-and-tables-behind-each-claim">Reproducibility: scripts and tables behind each claim</h2>
+<div class="scroll"><table class="tb">
+<thead>
+<tr>
+<th>claim</th>
+<th>scripts (<code>scripts/paper/</code>)</th>
+<th>tables (<code>docs/paper/tables/</code>)</th>
+<th>result note (<code>docs/ledger.d/</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 events at or below 89 in three records; rates above</td>
+<td><code>p24a</code>–<code>p24d</code>, <code>p27a</code>–<code>p27d</code></td>
+<td><code>p27_rule_three_records.csv</code>, <code>p28_predictor_link.csv</code>, <code>p26_conflag_records.csv</code></td>
+<td>2026-10-13-0005-conflagration-signatures--result.md</td>
+</tr>
+<tr>
+<td>Line fitted at 89 (79–120), AUC 0.987, unselected frame 2/2</td>
+<td><code>p24c_conflag_tests.py</code></td>
+<td><code>p24_models.csv</code>, <code>p24_rules.csv</code>, <code>p24_verdict.json</code></td>
+<td>2026-10-12-2235-conflagration-quantification--result.md</td>
+</tr>
+<tr>
+<td>U.S.-only and foreign-kept versions; Harris 2007</td>
+<td><code>p24_us_mask.py</code>, <code>p24g</code>, <code>p24h_table_diff.py</code>, <code>p24i_three_ways.py</code>, <code>run_conflag_chain.sh</code></td>
+<td><code>p24_foreign_three_ways.csv</code>, <code>p24_harris_mexico_dnbr.csv</code></td>
+<td>2026-10-13-2250-conflag-us-clip--result.md; 2026-10-14-0015-conflag-keep-foreign--result.md</td>
+</tr>
+<tr>
+<td>Forest Service outline and unburned-patch mask</td>
+<td><code>p33a_mtbs_outline.py</code>, <code>p33b_abroad.py</code></td>
+<td><code>p33_headline.csv</code>, <code>p33_record_summary.csv</code>, <code>p33_fire_versions.csv</code></td>
+<td>2026-10-14-0520-mtbs-outline--result.md</td>
+</tr>
+<tr>
+<td>Definition is a convention; 30 m range; knife-edge</td>
+<td><code>p28a_ldc_grid.py</code>, <code>p28b_tests.py</code></td>
+<td><code>p28_definition_space.csv</code>, <code>p28_size_breaks.csv</code>, <code>p28_linkage_scale.csv</code>, <code>p28_scorecard.csv</code>, <code>p28_mechanical_bound.csv</code></td>
+<td>2026-10-13-2245-conflagration-definition--result.md</td>
+</tr>
+<tr>
+<td>Patches, fragmentation, house-and-tree kind, within-fire blocks</td>
+<td><code>p31a_patches.py</code>, <code>p31b_tests.py</code>, <code>p31e_triggers.py</code>, <code>p31f_vars_tables.py</code></td>
+<td><code>p31_fire_patches.csv</code>, <code>p31_named_patch_share.csv</code>, <code>p31_kind_fires.csv</code>, <code>p31_vulnerability.csv</code>, <code>p31_perimeter_check.csv</code></td>
+<td>2026-10-13-2355-conflagration-patches--result.md (+ addendum 2)</td>
+</tr>
+<tr>
+<td>Compound rule; network position; bridges; tipping distance</td>
+<td><code>p32a_network.py</code>, <code>p32b_tests.py</code>, <code>p32e_tipping.py</code></td>
+<td><code>p32_compound_scorecard.csv</code>, <code>p32_pred_auc.csv</code>, <code>p32_bridges.csv</code>, <code>p32_tipping_fires.csv</code></td>
+<td>2026-10-14-0010-conflagration-network--result.md</td>
+</tr>
+<tr>
+<td>Wind events: 10 of 10 vs 14 of 15; loss share</td>
+<td><code>p31x_a_fetch.py</code>, <code>p31x_b_measures.py</code></td>
+<td><code>p31x_compare.csv</code>, <code>p31x_loss_bins.csv</code>, <code>p31x_named_events.csv</code></td>
+<td>2026-10-14-0525-wind-context--result.md</td>
+</tr>
+<tr>
+<td>Town wind not shown; product validation</td>
+<td><code>p31w_a</code>–<code>p31w_f</code></td>
+<td><code>p31w_compare.csv</code>, <code>p31w_validation.csv</code>, <code>p31w_town_wind.csv</code></td>
+<td>2026-10-14-0125-town-wind--result.md</td>
+</tr>
+<tr>
+<td>Trees, fuel-linked block, fences</td>
+<td><code>p30a</code>–<code>p30f</code></td>
+<td><code>p30_t1_tests.csv</code>, <code>p30_t2_flb.csv</code>, <code>p30_t3_named.csv</code>, <code>p30_fences.csv</code></td>
+<td>2026-10-13-2240-conflagration-fuel-wind--result.md</td>
+</tr>
+<tr>
+<td>Downwind lean</td>
+<td><code>p37a_downwind.py</code></td>
+<td><code>p37_pooled.csv</code>, <code>p37_fire.csv</code>, <code>p37_verdict.json</code></td>
+<td>2026-10-15-0040-downwind-lean--result.md</td>
+</tr>
+<tr>
+<td>Clumping vs fair chance</td>
+<td><code>p32f_fair_chance.py</code></td>
+<td><code>p32_fairchance_fires.csv</code>, <code>p32_fairchance_tests.csv</code></td>
+<td>2026-10-14-0420-losses-vs-fair-chance--result.md</td>
+</tr>
+<tr>
+<td>House-to-house share; rises with block; named fires</td>
+<td><code>p34_house_to_house.py</code></td>
+<td><code>p34_pooled.csv</code>, <code>p34_fires.csv</code>, <code>p34_traits.csv</code>, <code>p34_recovery.csv</code>, <code>p34_trap.csv</code>, <code>p34_exploratory.csv</code></td>
+<td>2026-10-14-2355-house-to-house-share--result.md</td>
+</tr>
+<tr>
+<td>Climb 5 % → 50 %; step-test power</td>
+<td><code>p29a_step_power.py</code></td>
+<td><code>p29_step_power.csv</code>, <code>p29_above_bins.csv</code></td>
+<td>2026-10-13-2105-conflagration-step-power--result.md</td>
+</tr>
+<tr>
+<td>Finite-size sharpening, power ≤ 13 %</td>
+<td><code>p57a_fss_sim.py</code>, <code>p57b_fss_power.py</code></td>
+<td><code>p57_sharpening.csv</code>, <code>p57_power.csv</code>, <code>p57_data_needed.csv</code></td>
+<td>2026-10-14-1655-finite-size-sharpening--result.md</td>
+</tr>
+<tr>
+<td>Literature claims</td>
+<td><code>p46_lit_conflag_page.py</code>, <code>p46n_network_panel.py</code></td>
+<td><code>lit_conflag_refs.csv</code>, <code>lit_network_refs.csv</code></td>
+<td><code>docs/paper/lit-review-*.md</code></td>
+</tr>
+<tr>
+<td>How the fire met the town</td>
+<td>&lt;span class="pending" data-tip="Pending: PA62</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>How the fire met the town: wind pushing the front into or along the block, the fire&#x27;s run before the town, upwind wildland fuel, night arrival, other fires burning at once, fuel dryness, upslope approach, front width.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>What it suggests: an analysis still running; this draft does not guess its result"&gt;Pending PA62</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Events outside the U.S.</td>
+<td>&lt;span class="pending" data-tip="Pending: PA63</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Urban conflagrations and near misses outside the United States (Chile, Greece, Canada, Australia, Portugal, Korea, Japan and others): buildings before the fire, damage, block size and wind event.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>What it suggests: an analysis still running; this draft does not guess its result"&gt;Pending PA63</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>National map of possible urban conflagrations</td>
+<td>&lt;span class="pending" data-tip="Pending: PA65</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>A national map of where an urban conflagration is possible: blocks above the 89 line within reach of wildland, in wind-event regions, checked on the known events.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>What it suggests: an analysis still running; this draft does not guess its result"&gt;Pending PA65</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>The page for this draft is built by <code>scripts/paper/p64_conflag_manuscript_page.py</code>.</p>
+<hr />
+<h2 id="references">References</h2>
+<p>All sources below were verified in <code>docs/paper/lit-review-urban-conflagration-2026-10-13.md</code> (table <code>lit_conflag_refs.csv</code>) or <code>docs/paper/lit-review-network-science-fire-2026-10-14.md</code> (table <code>lit_network_refs.csv</code>), except where flagged.</p>
+<ul>
+<li>Abatzoglou, J.T., Kolden, C.A., Williams, A.P., Sadegh, M., et al. (2023). Downslope wind-driven fires in the western United States. <em>Earth's Future</em> 11:e2022EF003471. https://doi.org/10.1029/2022EF003471</li>
+<li>Aizenman, M., Wehr, J. (1989). Rounding of first-order phase transitions in systems with quenched disorder. <em>Physical Review Letters</em>. https://doi.org/10.1103/PhysRevLett.62.2503</li>
+<li>Alexandre, P.M., Stewart, S.I., Keuler, N.S., et al. (2016). Factors related to building loss due to wildfires in the conterminous United States. <em>Ecological Applications</em> 26:2323–2338. https://doi.org/10.1002/eap.1376</li>
+<li>Beer, T. (1990). Percolation theory and fire spread. <em>Combustion Science and Technology</em> 72:297–304. https://doi.org/10.1080/00102209008951653</li>
+<li>Butler, K., Johnsson, E., Maranghides, A., et al. (2022). Wind-driven fire spread to a structure from fences and mulch (NIST TN 2228). https://doi.org/10.6028/NIST.TN.2228</li>
+<li>Caggiano, M.D., Hawbaker, T.J., Gannon, B.M., Hoffman, C.M. (2020). Building loss in WUI disasters. <em>Fire</em> 3:73. https://doi.org/10.3390/fire3040073</li>
+<li>Calkin, D.E., Barrett, K., Cohen, J.D., Finney, M.A., Pyne, S.J., et al. (2023). Wildland-urban fire disasters aren't actually a wildfire problem. <em>PNAS</em>. https://doi.org/10.1073/pnas.2315797120</li>
+<li>Calkin, D.E., Cohen, J.D., Finney, M.A., Thompson, M.P. (2014). How risk management can prevent future wildfire disasters in the wildland-urban interface. <em>PNAS</em>. https://doi.org/10.1073/pnas.1315088111</li>
+<li>Cardoso, A.W., Archibald, S., Bond, W.J., et al. (2022). Quantifying the environmental limits to fire spread in grassy ecosystems. <em>PNAS</em>. https://doi.org/10.1073/pnas.2110364119</li>
+<li>Carlson, A.R., Hawbaker, T.J., Mockrin, M.H., et al. (2025). Rising rates of wildfire building destruction in the conterminous United States. <em>PNAS</em>. https://doi.org/10.1073/pnas.2505886122</li>
+<li>Chulahwat, A., Mahmoud, H., Monedero, S., et al. (2022). Integrated graph measures reveal survival likelihood for buildings in wildfire events. <em>Scientific Reports</em> 12:15954. https://doi.org/10.1038/s41598-022-19875-1</li>
+<li>Cohen, J. (2008). The wildland-urban interface fire problem. <em>Forest History Today</em>. https://research.fs.usda.gov/treesearch/33787</li>
+<li>Cohen, J.D. (2000). Preventing disaster: home ignitability in the wildland-urban interface. <em>Journal of Forestry</em> 98:15–21.</li>
+<li>Cohen, J.D. (2017). An examination of home destruction: Roaring Lion Fire. Montana DNRC report.</li>
+<li>Countryman, C.M. (1964). Mass fires and fire behavior. USDA Forest Service Research Paper PSW-19.</li>
+<li>Demiris, N., O'Neill, P.D. (2005). Bayesian inference for stochastic multitype epidemics in structured populations. <em>JRSS B</em>. https://doi.org/10.1111/j.1467-9868.2005.00524.x</li>
+<li>Dunn, V. (2008). Dunn's Dispatch: Conflagrations. <em>Fire Engineering</em>.</li>
+<li>FEMA Marshall Fire Mitigation Assessment Team (2025). Decreasing risk of structure-to-structure fire spread in a wildfire. FEMA DR-4634.</li>
+<li>Fire Safety Research Institute; Kerber, S., Alkonis, D. (2024). Lahaina Fire comprehensive timeline report. https://doi.org/10.54206/102376/VQKQ5427</li>
+<li>Fovell, R.G., Brewer, M.J., Garmong, R.J. (2022). The December 2021 Marshall Fire. <em>Atmosphere</em> 13:765. https://doi.org/10.3390/atmos13050765</li>
+<li>Glasstone, S., Dolan, P.J. (eds) (1977). <em>The Effects of Nuclear Weapons</em>, 3rd ed., chapter VII.</li>
+<li>Keeling, M.J., Brooks, S.P., Gilligan, C.A. (2004). Using conservation of pattern to estimate spatial parameters from a single snapshot. <em>PNAS</em>. https://doi.org/10.1073/pnas.0400335101</li>
+<li>Kenny, R., et al. (2026). Urban trees and structure loss in the 2025 Eaton and Palisades fires. <em>Urban Forestry &amp; Urban Greening</em> 121:129470. https://doi.org/10.1016/j.ufug.2026.129470</li>
+<li>Kerber, S., Alkonis, D., Gorham, D., Horn, G.P. (2025). Southern California Fires timeline report (FSRI). https://doi.org/10.60752/102376.29905157.v1</li>
+<li>Knapp, E.E., Valachovic, Y.S., Quarles, S.L., Johnson, N.G. (2021). Housing arrangement and vegetation factors associated with single-family home survival in the 2018 Camp Fire. <em>Fire Ecology</em> 17:25. https://doi.org/10.1186/s42408-021-00117-0</li>
+<li>Kypraios, T., Neal, P., Prangle, D. (2017). A tutorial introduction to Bayesian inference for stochastic epidemic models. <em>Mathematical Biosciences</em>. https://doi.org/10.1016/j.mbs.2016.07.001</li>
+<li>Maranghides, A., McNamara, D., et al. (2015). A case study of a community affected by the Waldo Fire (NIST TN 1910). https://doi.org/10.6028/NIST.TN.1910</li>
+<li>Mass, C., Ovens, D. (2024). The meteorology of the August 2023 Maui wildfire. <em>Weather and Forecasting</em> 39:1097–1115. https://doi.org/10.1175/WAF-D-23-0210.1</li>
+<li>Mass, C.F., Ovens, D. (2019). The Northern California wildfires of 8–9 October 2017. <em>BAMS</em>. https://doi.org/10.1175/BAMS-D-18-0037.1</li>
+<li>McNamara, D., Mell, W.E. (2024). Examining exposure fires from the United States National Fire Incident Reporting System. <em>Fire</em> 7:74. https://doi.org/10.3390/fire7030074</li>
+<li>Mertens, S., Moore, C. (2012). Continuum percolation thresholds in two dimensions. <em>Physical Review E</em>. https://doi.org/10.1103/PhysRevE.86.061109</li>
+<li>Metz, A.J., Fischer, E.C., Liel, A.B. (2024). The influence of housing, parcel, and neighborhood characteristics on structure loss (Marshall Fire). <em>Fire Technology</em> 60:4065–4097. https://doi.org/10.1007/s10694-024-01616-7</li>
+<li>Mockrin, M.H., Locke, D.H., Syphard, A.D., O'Neil-Dunne, J. (2023). Using high-resolution land cover data to assess structure loss in the Woolsey Fire. <em>Journal of Environmental Management</em>. https://doi.org/10.1016/j.jenvman.2023.118960</li>
+<li>Monroy, X., Sluder, E., Hedayati, F., Pogorzelski, H., et al. (2025). The 2025 LA conflagrations (IBHS).</li>
+<li>National Fire Protection Association (1992). Oakland/Berkeley Hills Fire, October 20, 1991 (fire investigation report).</li>
+<li>National Fire Sprinkler Association (2022). What is conflagration?</li>
+<li>Newman, M.E.J., Ziff, R.M. (2001). Fast Monte Carlo algorithm for site or bond percolation. <em>Physical Review E</em>. https://doi.org/10.1103/PhysRevE.64.016706</li>
+<li>Norlen, C.A., Sharma, S., Escobedo, F.J. (2026). Socio-ecological impacts of the 2025 Los Angeles urban fires. <em>Nature Communications</em> 17:3941. https://doi.org/10.1038/s41467-026-71376-1</li>
+<li>NWCG (2026). Glossary of Wildland Fire (PMS 205), accessed 2026-10-13.</li>
+<li>Sander, L.M., Warren, C.P., Sokolov, I.M. (2003). Epidemics, disorder, and percolation. <em>Physica A</em>. https://doi.org/10.1016/S0378-4371(03)00176-6</li>
+<li>Sellke, T. (1983). <em>Journal of Applied Probability</em>. https://doi.org/10.2307/3213811 <strong>(flag: cited in the PA59 result note, not in either review; verify before submission)</strong></li>
+<li>Spyratos, V., Bourgeron, P.S., Ghil, M. (2007). Development at the wildland-urban interface and the mitigation of forest-fire risk. <em>PNAS</em>. https://doi.org/10.1073/pnas.0704488104</li>
+<li>Syphard, A.D., Keeley, J.E. (2019). Factors associated with structure loss in the 2013–2018 California wildfires. <em>Fire</em> 2:49. https://doi.org/10.3390/fire2030049</li>
+<li>Syphard, A.D., Keeley, J.E., Massada, A.B., Brennan, T.J., et al. (2012). Housing arrangement and location determine the likelihood of housing loss due to wildfire. <em>PLoS ONE</em> 7:e33954. https://doi.org/10.1371/journal.pone.0033954</li>
+<li>Zamanialaei, M., San Martin, D., Theodori, M., et al. (2025). Fire risk to structures in California's wildland-urban interface. <em>Nature Communications</em> 16:8041. https://doi.org/10.1038/s41467-025-63386-2</li>
+<li><strong>Unpublished (flag):</strong> C. Fong's kernel fit (β ≈ 0.035, λ ≈ 12.5 m), as described in the PA47/48 result note.</li>
+</ul>
+<p><strong>Data sources</strong> (citations to be completed from the project's data catalogue before submission): USGS Carlson record (ScienceBase); CAL FIRE DINS (public inspection service); Microsoft building footprints (ODbL); MTBS (USGS/USFS, public domain); USFS Science Tree Canopy Cover v2025-6 (public domain); NOAA RTMA and HRRR (public domain); USGS/NCAR CONUS404 (public domain); ERA5 and ERA5-Land (Copernicus, CC BY 4.0); NASA FIRMS; IEM NWS warning archive; BRIGHT Lahaina labels (CC BY-SA 4.0); NIST/USFS Waldo Canyon database RDS-2023-0055 (U.S. Government).</p></article>
+<footer class="site"><h3>Sources</h3><ul><li>USGS Carlson wildfire building-loss record, 2002–2022 (Carlson et al. 2025, PNAS)</li><li>CAL FIRE Damage Inspection (DINS) records, 2013–2025</li><li>Our 2002–26 record: Carlson labels, CAL FIRE inspections and the project's damage model</li><li>Literature: docs/paper/lit-review-urban-conflagration-2026-10-13.md and docs/paper/lit-review-network-science-fire-2026-10-14.md (verified sources only)</li></ul><div class="faint">Built from docs/paper/conflagration-manuscript-draft-v0.md by scripts/paper/p64_conflag_manuscript_page.py. Internal draft; numbers may change before submission.</div><div class="brand"><a class="org" href="https://www.nceas.ucsb.edu/" target="_blank" rel="noopener"><svg class="logo" viewBox="0 0 107 96" width="107" height="96" role="img" aria-label="NCEAS" xmlns="http://www.w3.org/2000/svg"><path d="M107 94.351V96H0v-1.649h107zm-2.368-26.311c2.173 1.751-.13 4.521-2.047 3.12-2.365-1.496-7.736-2.197-8.407 1.115-.863 5.222 13.043 2.23 12.82 10.7-.225 8.088-11.989 8.279-16.401 4.649-1.055-.86-1.023-2.262-.448-3.121.831-.828 1.758-1.114 2.845-.223 2.621 1.784 9.368 3.12 9.847-1.401-.416-4.713-13.714-1.879-12.724-10.923.736-6.176 10.103-7.292 14.515-3.916zm-69.72-1.433c2.781 0 4.987.827 7.32 2.834.864.796.96 2.197.097 3.089-.863.764-2.174.669-2.942-.096-1.31-1.369-2.653-1.751-4.475-1.751-4.923 0-7.29 3.471-7.29 7.356 0 3.949 2.335 7.579 7.29 7.579 1.822 0 3.516-.733 4.987-2.038.991-.765 2.366-.383 2.94.382.513.7.768 1.879-.35 2.993-2.238 2.07-4.924 2.484-7.577 2.484-7.737 0-11.221-5.255-11.221-11.4 0-6.146 3.868-11.432 11.22-11.432zm43.41 1.687l9.016 17.865c1.31 2.483-2.558 4.458-3.708 1.974l-1.407-2.802H70.426l-1.374 2.802c-.512 1.083-1.695 1.306-2.845 1.083-1.024-.574-1.663-1.72-1.024-3.057l9.175-17.865c.864-1.687 3.165-1.75 3.965 0zm-59.265-1.4c1.151 0 2.27 1.146 2.27 2.197v17.928c0 1.401-.864 1.942-1.695 2.197-1.118 0-1.662-.255-2.59-1.114L6.463 74.727v12.292c0 1.401-.864 2.197-2.015 2.197-1.15 0-2.173-.796-2.173-2.197v-17.61c0-1.146.255-2.26 1.918-2.26 1.15 0 1.406.285 2.27 1.114l10.58 13.183V69.091c0-1.051.928-2.197 2.015-2.197zm41.365.286c2.94 0 2.877 4.14 0 4.14h-9.208v4.776h8.057c2.845 0 2.845 4.172 0 4.172h-8.057v4.776h9.75c2.91 0 3.134 4.172 0 4.172h-12.02c-1.118 0-1.981-.86-1.981-1.974V69.154c0-1.146.863-1.974 1.981-1.974h11.478zm15.918 6.082l-3.932 7.866h7.545l-3.613-7.866zM35.802.298c10.265-2.536 23.123 11.385 21.687 30.859l.374-1.055a71.591 71.591 0 002.305-7.693c.626-2.594 1.043-5.235 1.123-7.877.05-2.625-.261-5.315-1.489-7.633-1.184-2.314-3.473-4.11-6.172-4.564 1.365.04 2.722.485 3.913 1.209 1.196.723 2.201 1.763 2.958 2.951 1.504 2.412 2.018 5.279 2.077 8.037.081 5.576-1.387 10.96-3.153 16.115l-.15.408c13.665-12.969 33.586-13.957 38.398-4.929 5.05 9.476-9.756 16.64-9.756 16.64-2.336 1.263-4.924 2.35-7.438 3.259 1.099 4.961-1.512 10.914-6.472 14.25H107v1.648H70.787c-.94.348-1.934.609-2.977.768-2.62.4-4.984.078-7.01-.767H0v-1.65l58.006.001c-4.38-3.475-6.119-9.875-3.685-15.559 2.99-6.983 11.752-5.9 11.752-5.9-1.608-1.098-2.378-2.629-2.262-3.882.08-.878.158-1.398.716-2.234 1.452-2.174 5.04-4.331 7.35-5.446 4.47-2.157 10.919-3.926 16.45-1.504 5.53 2.424 5.228 6.466.905 10.513-4.323 4.045-12.007 4.49-12.007 4.49.915 1.025 2.641 3.198 3.032 4.442l.122-.041C92.37 40.589 99.312 32.587 94.614 26.24c-3.837-4.615-11.03-5.232-20.843-2.37-6.782 1.978-12.061 5.617-14.676 7.677l.33-.9a106.177 106.177 0 01-3.062 7.594c-1.134 2.478-2.315 4.933-3.599 7.333a150.073 150.073 0 01-8.384 13.979c2.451-4.847 4.918-9.668 7.228-14.553 1.138-2.45 2.28-4.896 3.319-7.383a122.98 122.98 0 002.48-6.233c-.034-2.049-.485-7.636-3.96-14.87-4.413-9.187-9.676-14.109-15.689-13.87-7.879.754-9.224 11.243-4.628 23.184l.05.116c1.19-.54 3.967-.712 5.345-.717 0 0-4.8-5.993-4.663-11.9.138-5.908 2.958-8.83 8.46-6.35 5.504 2.483 8.489 8.448 9.862 13.201.709 2.458 1.492 6.56.837 9.087-.252.972-.589 1.378-1.19 2.023-.86.923-2.519 1.374-4.413.914 0 0 6.66 5.776 3.44 12.654-4.124 8.8-16.445 11.137-22.441 2.002-4.873-7.425-2.043-17.128 3.995-20.524-1-2.47-1.917-5.115-2.531-7.691 0 0-4.533-15.762 5.921-18.345zm30.319 39.736c-2.353-.428-5.163-.039-7.33 1.502-1.14.81-1.49 1.338-2.114 2.341-4.34 7.598 2.652 15.83 8.66 16.27 7.97.584 13.105-4.898 14.032-9.764a7.895 7.895 0 00-.221-3.89c-.86.294-1.704.566-2.52.815.928 4.841-3.224 8.625-6.847 9.735-1.707.522-3.522.676-5.33.225-2.102-.522-4.157-1.894-5.45-4.974-2.406-5.733 4.347-14.016 11.956-9.845 0 0 .274.124.437.123.161-.002.606-.06-.32-.628a13.672 13.672 0 00-4.953-1.91zm6.18 6.056c-2.752-3.96-8.301-2.195-10.156 1.026-.913 1.584-1.16 3.493-.603 5.008.574 1.561 1.984 2.713 3.237 3.245 1.74.736 3.482.3 4.338.017.308-.102.407-.18.407-.18-.044-.046-.418-.021-.94-.034-.577-.013-1.544-.156-3.21-1.062-3.052-1.665-1.327-3.567-1.192-3.708 1.709-1.522 5.712-2.15 6.36-2.244.74-.218 1.548-.458 2.378-.705-.25-.8-.62-1.363-.62-1.363zm.816 2.228c-2.985.797-5.027 1.194-5.027 1.194s-.357.087-.84.197c-2.625.712-4.063 1.787-1.595 3.48 2.844 1.95 5.554-.1 5.554-.1 1.846-1.39 2.128-3.29 1.908-4.771zM32.95 27.635a7.936 7.936 0 00-3.055 2.433c-3.018 3.937-3.687 11.406 2.072 16.924 4.341 4.16 15.161 3.848 17.943-4.443.332-1.133.492-1.744.337-3.128-.296-2.638-1.881-4.982-3.772-6.44a13.661 13.661 0 00-4.735-2.398c-1.041-.307-.788.061-.682.183.107.12.383.242.383.242 8.198 2.856 6.517 13.394.626 15.439-3.166 1.099-5.562.49-7.356-.72-1.544-1.04-2.641-2.49-3.391-4.102-1.59-3.429-1.534-9.034 2.702-11.578a87.333 87.333 0 01-1.072-2.412zm36.795 13.052l.121.04c1.413.466 5.325 2.06 6.53 5.683.898-.273 1.735-.53 2.438-.753-1.352-3.115-4.198-4.698-4.198-4.698s-2.243.448-4.891-.272zm-25.906-.03c1.166-3.526-1.22-8.818-6.017-8.213 0 0-.667.102-1.431.448.37.783.731 1.541 1.062 2.235.363.543 2.566 3.931 2.57 6.215-.016.194-.287 2.743-3.568 1.59-1.79-.628-2.542-1.25-2.939-1.67-.357-.377-.588-.671-.651-.675 0 0 .007.127.137.423.36.825 1.197 2.406 2.91 3.205 1.232.574 3.035.85 4.586.233 1.504-.599 2.766-2.056 3.34-3.79zm-8.226-7.333c-1.254.826-2.485 2.305-2.29 4.601 0 0 .276 3.378 3.632 4.185 2.913.7 2.756-1.085 1.536-3.505-.242-.433-.415-.755-.415-.755s-1.066-1.78-2.463-4.526zm33.738 7.248c.132.042.264.079.394.115-.249-.078-.394-.115-.394-.115zm14.82-12.228c-2.576-.954-6.15-.92-10.644 1.313-.42.21-1.049.459-1.463.785-.412.222-.682.42-1.046.654-2.43 1.562-4.59 3.885-4.013 5.654l.017.067c.213.848.545 1.09 1.018 1.46 2.367 1.846 5.783 1.618 5.783 1.618l-.901-.892-.37-.091s-2.695-.356-2.916-2.487c-.222-2.133 3.434-4.622 5.836-5.615 2.022-.835 7.213-1.63 8.36 1.23 1.147 2.86-4.79 5.71-8.699 6.812l.866.737s4.692-.842 7.815-3.3c.784-.618 1.516-1.36 1.965-2.107.671-1.115.82-2.313.667-3.23-.199-1.19-1.342-2.263-2.274-2.608zm-4.099 7.581c2.526-2.125 1.584-5.692-2.793-4.504-4.371 1.186-6.222 3.115-5.674 4.884.047.15.077.487.276.755.254.345.704.63.969.803.197.13.36.186.49.207.101.031.635.169 1.396.083l.007.007s2.804-.111 5.33-2.235zm-36.501-5.193l.167.105.17.102c-.03-.02-.15-.097-.341-.21l.004.003zm-3.474-3.448s-3.083-1.053-6.314.025c.303.67.67 1.462 1.064 2.31 3.62-1.573 7.549.425 8.72 1.11-2.306-1.483-3.47-3.445-3.47-3.445zm3.06-15.495c-.881-.461-2.445-.592-3.467.056-.787.498-1.584 1.408-1.969 2.65-.257.832-.325 1.87-.262 2.865.248 3.957 2.752 7.998 2.752 7.998l1.128.15c-1.786-3.634-3.62-9.94-.718-10.999 2.904-1.06 5.777 3.322 6.503 5.378.862 2.445 1.442 6.817-.299 8.076-1.74 1.26-3.806-.5-3.806-.5l-.316-.215-1.267-.073s2.11 2.686 5.071 3.209c.59.104.993.189 1.77-.22.02-.01.041-.02.061-.032 1.708-.754 2.002-3.906 1.546-6.751-.069-.426-.1-.76-.21-1.213-.032-.523-.266-1.157-.39-1.609-1.332-4.824-3.693-7.497-6.128-8.77zm2.303 7.166c-2.034-4.04-5.329-2.355-5.231.936.1 3.29 1.888 5.444 1.888 5.444h.011c.443.622.904.927.994.983.102.078.254.164.481.223.307.08.82.224 1.247.182.334-.032.606-.235.749-.3 1.689-.774 1.893-3.435-.139-7.468zm38.58-5.665a10.77 10.77 0 00-6.939-1.013c-2.292.442-4.386 1.607-6.2 3.107a23.468 23.468 0 00-2.583 2.448c-.824.867-1.571 1.808-2.318 2.756-1.472 1.913-2.813 3.945-4.17 5.996a33.292 33.292 0 013.289-6.613c1.34-2.085 2.953-4.032 4.907-5.65.99-.79 2.057-1.503 3.222-2.049 1.164-.532 2.413-.928 3.698-1.052 2.559-.282 5.221.447 7.095 2.07z" fill="currentColor" /></svg><span><b>NCEAS</b><small>National Center for Ecological Analysis and Synthesis</small></span></a><a class="org" href="https://wildfireindex.org/" target="_blank" rel="noopener"><img class="logo" alt="WRI logo" src="data:image/png;base64,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"><span><b>WRI</b><small>Wildfire Resilience Index</small></span></a><p class="gh">WRI-Science on GitHub: <a href="https://github.com/WRI-Science" target="_blank" rel="noopener">github.com/WRI-Science</a> · pages: <a href="https://github.com/WRI-Science/public_publication" target="_blank" rel="noopener">WRI-Science/public_publication</a></p></div></footer>
+</div><div id="tip" role="tooltip"></div><script>
+(function(){
+  const tip = document.getElementById('tip');
+  let pinned = null;
+  const tech = () => document.documentElement.dataset.lang === 'tech';
+  function fill(el){ tip.textContent = ''; const parts = el.dataset.tip.split('\n@@tech\n');
+    const txt = (tech() && parts[1]) ? parts[1] : parts[0];
+    txt.split('\n').forEach((t, i) => { const n = document.createElement(i ? 'div' : 'b');
+      if(i && t.startsWith('What it suggests: ')){ n.className = 'mean'; }
+      n.textContent = t; tip.appendChild(n); }); }
+  function place(el){ const r = el.getBoundingClientRect(); tip.style.display = 'block';
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = r.right + 10, y = r.top + r.height / 2 - h / 2;
+    if(x + w > innerWidth - 8) x = r.left - w - 10;
+    if(x < 8){ x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8); y = r.bottom + 8;
+      if(y + h > innerHeight - 8) y = r.top - h - 8; }
+    tip.style.left = x + 'px'; tip.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px'; }
+  function show(el){ fill(el); place(el); }
+  function hide(){ tip.style.display = 'none'; pinned = null; }
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    el.addEventListener('mouseenter', () => show(el));
+    el.addEventListener('mouseleave', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('focus', () => show(el));
+    el.addEventListener('blur', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('click', e => { e.stopPropagation(); if(pinned === el){ hide(); return; } pinned = el; show(el); });
+  });
+  document.addEventListener('click', hide);
+  addEventListener('scroll', () => { if(!pinned) tip.style.display = 'none'; else place(pinned); }, {passive:true});
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') hide(); });
+  // keep SVG chart text the same size on screen when the chart is drawn narrower than its viewBox
+  function fitText(){ document.querySelectorAll('.svgwrap svg').forEach(svg => {
+    const vb = svg.viewBox.baseVal.width, w = svg.getBoundingClientRect().width || vb;
+    svg.style.setProperty('--k', Math.min(1.4, Math.max(1, vb / w)).toFixed(3)); }); }
+  fitText(); addEventListener('resize', fitText);
+  // map panels follow the page's light / dark and plain / technical switches
+  function syncFrames(){ const r = document.documentElement, msg = {};
+    if(r.dataset.theme) msg.theme = r.dataset.theme; msg.lang = r.dataset.lang || 'plain';
+    document.querySelectorAll('iframe.mapframe').forEach(f => { try { f.contentWindow.postMessage(msg, '*'); } catch(e){} }); }
+  // plain language / technical switch (shown only on pages that have both versions); remembered per reader
+  const lb = document.getElementById('langbtn');
+  function setLang(l){ document.documentElement.dataset.lang = l; if(lb){ lb.textContent = l === 'tech' ? 'Technical' : 'Plain language';
+    lb.setAttribute('aria-pressed', String(l === 'tech')); } hide(); syncFrames(); try { localStorage.setItem('vk_lang', l); } catch(e){} }
+  if(lb){ let l0 = 'plain'; try { l0 = localStorage.getItem('vk_lang') || 'plain'; } catch(e){}
+    setLang(l0); lb.addEventListener('click', () => setLang(tech() ? 'plain' : 'tech')); }
+  document.querySelectorAll('iframe.mapframe').forEach(f => f.addEventListener('load', syncFrames));
+  const tb = document.getElementById('themebtn');
+  if(tb) tb.addEventListener('click', () => { const r = document.documentElement;
+    const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = dark ? 'light' : 'dark'; syncFrames(); });
+})();
+</script></body></html>
