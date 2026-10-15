@@ -9,7 +9,8 @@ Evacuation route analysis: road exits and wildfire burn hazard for 30,728 U.S. c
 - Interactive national map with community search; opens with a notice that it is research, not for emergency use
 
 ### [fsim_nps_places/](fsim_nps_places/)
-Wildfire risk and significance layers for cultural-resource places nationwide (interactive map aligned with FSIM/NRHP linkage analysis).
+Wildfire burn hazard for 56,106 places on the National Register of Historic Places (Farnisa, Halpern & Fong, *Scientific Reports*).
+- Interactive national map with search and a colour-by switch; opens with a notice that it is research, not for emergency use
 
 ### [de_space_carlson_structureSize/](de_space_carlson_structureSize/)
 Carlson validation fork QA maps — structure-size-aware 0-100 ft predictor extraction (landcover, NDMI, density) per fire.
