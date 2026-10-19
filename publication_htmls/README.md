@@ -23,3 +23,6 @@ Camp Fire structure-loss QA maps — USA Structures + U-Net predictions + Carlso
 
 ### [style_archetypes/](style_archetypes/)
 Reference pages for how our interactive maps and chart pages look and behave: the archetypes the map-html and viz-html skills build from. Public data only.
+
+### [site_assets/](site_assets/)
+Shared images every page uses: the WRI flame for link previews
