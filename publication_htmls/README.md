@@ -26,3 +26,6 @@ Reference pages for how our interactive maps and chart pages look and behave: th
 
 ### [site_assets/](site_assets/)
 Shared images every page uses: the WRI flame for link previews
+
+### [science_communication/](science_communication/)
+Public-facing explainers of research papers (pollinators, flowers, conservation)
