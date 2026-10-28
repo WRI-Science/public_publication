@@ -29,3 +29,6 @@ Shared images every page uses: the WRI flame for link previews
 
 ### [science_communication/](science_communication/)
 Public-facing explainers of research papers (pollinators, flowers, conservation)
+
+### [wri_index_rebuild/](wri_index_rebuild/)
+Wildfire Resilience Index 2005-2025 rebuild: exploratory pages and checks
