@@ -1,0 +1,1074 @@
+<!doctype html>
+<!-- Generated 2026-10-27 18:19 PDT (2026-10-27T18:19:31-07:00) -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chart archetype: Palmer penguins, size by species and sex · 2026-10-27</title>
+<meta name="description" content="Bill, flipper and body-mass measurements of 344 adult Adélie, Chinstrap and Gentoo penguins at three sites in the Palmer Archipelago, Antarctica, 2007–08 to 2009–10: differences by species and sex with bootstrap intervals, and why pooling the species misleads.">
+<meta name="generated" content="2026-10-27T18:19:31-07:00">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wildfire Resilience Index · NCEAS">
+<meta property="og:title" content="Chart archetype: Palmer penguins, size by species and sex · 2026-10-27">
+<meta property="og:description" content="Bill, flipper and body-mass measurements of 344 adult Adélie, Chinstrap and Gentoo penguins at three sites in the Palmer Archipelago, Antarctica, 2007–08 to 2009–10: differences by species and sex with bootstrap intervals, and why pooling the species misleads.">
+<meta property="og:image" content="https://wri-science.github.io/public_publication/publication_htmls/site_assets/wri-flame-preview.png">
+<meta property="og:image:alt" content="Wildfire Resilience Index flame">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wri-science.github.io/public_publication/publication_htmls/site_assets/wri-flame-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --raised:#FBFCFD; --ink:#13202C; --ink-2:#465667; --ink-3:#768494;
+  --line:#E1E6EB; --line-2:#CBD3DB; --accent:#1B4F8A; --accent-ink:#FFFFFF; --accent-soft:#E7EFF8; --empty:#ECEFF2; --flag:#C62828;
+  --s1:#0072B2; --s2:#E69F00; --s3:#009E73; --s4:#D55E00; --s5:#56B4E9; --s6:#CC79A7; --s7:#8A949E;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.12);
+  --f-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730; --flag:#FF6B5E;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }}
+:root[data-theme="dark"]{
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A; --empty:#1E2730; --flag:#FF6B5E;
+  --s1:#4AA3E0; --s2:#F2B33D; --s3:#2EC496; --s4:#F07B3F; --s5:#86CDF2; --s6:#E59CC8; --s7:#8D99A6;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 20px 72px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.eyebrow{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-size:clamp(26px,3.4vw,36px);line-height:1.2;letter-spacing:-.015em;margin:10px 0 0;font-weight:600}
+h1.long{font-size:clamp(21px,2.4vw,27px);line-height:1.3;max-width:62ch}
+.subtitle{font-size:clamp(16.5px,1.6vw,18.5px);color:var(--ink);max-width:70ch;margin:10px 0 0;line-height:1.5}
+.lede{font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2);max-width:64ch;margin:14px 0 0}
+h2{font-size:22px;line-height:1.3;letter-spacing:-.01em;margin:0;font-weight:600}
+h3{font-size:16.5px;line-height:1.35;margin:0;font-weight:600}
+section.sec{margin-top:52px}
+.sec-lede{color:var(--ink-2);max-width:70ch;margin:8px 0 0}
+p{max-width:75ch}
+.note{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 18px;margin:24px 0 0}
+.note h3{font-size:15px;margin-bottom:4px}
+.note p{margin:6px 0;color:var(--ink-2);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-top:16px}
+.cap{font-size:14px;color:var(--ink-2);margin:4px 0 0}
+.src{font-size:12.5px;color:var(--ink-3);margin:12px 0 0}
+.muted{color:var(--ink-2)} .faint{color:var(--ink-3)} .num{font-variant-numeric:tabular-nums}
+.nw{white-space:nowrap}
+.tech{display:none}
+.langseg{float:right;display:inline-flex;margin:0 0 6px 12px;border:1px solid var(--line-2);border-radius:999px;overflow:hidden;position:relative;z-index:1}
+header .btns .langseg{float:none;margin:0}
+.langseg button{font:500 12px var(--f-sans);border:0;background:var(--surface);color:var(--ink-3);padding:4px 10px;cursor:pointer}
+.langseg button[aria-pressed="true"]{background:var(--ink-2);color:var(--surface)}
+@media (max-width:560px){.langseg{float:none;display:flex;width:fit-content;margin:0 0 8px auto}}
+.btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ax-y{font-size:12.5px;color:var(--ink-2);margin:8px 0 6px;width:fit-content}
+.ax-x{font-size:12.5px;color:var(--ink-2);margin:6px auto 0;width:fit-content}
+.legend .k[data-tip],.ax-y[data-tip],.ax-x[data-tip],.axis-t[data-tip],h3[data-tip],th[data-tip]{text-decoration:underline dotted var(--ink-3);text-underline-offset:3px}
+.themebtn{white-space:nowrap;flex:none;font:500 13px var(--f-sans);border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:6px 12px}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-top:24px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .v{font:600 30px/1.1 var(--f-sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tile .l{font-size:14.5px;margin-top:6px}
+.tile .s{font-size:13px;color:var(--ink-3);margin-top:2px}
+/* legend: big, friendly keys */
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0 14px;font-size:14.5px}
+.legend .k{display:inline-flex;align-items:center;gap:4px 8px;flex-wrap:wrap;max-width:100%}
+.legend .sw{width:18px;height:14px;border-radius:4px;flex:none}
+.legend .ln{width:22px;height:0;border-top:2px dashed var(--ink-2)}
+/* horizontal bars */
+.hb{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr);gap:12px 14px;align-items:center;margin-top:14px}
+.hb .lab{font-size:14.5px;line-height:1.25;text-align:right}
+.hb .lab small{display:block;color:var(--ink-3);font-size:12.5px}
+.hb .area{position:relative;margin-right:72px;display:grid;gap:3px}
+.hb .grid{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px solid var(--line)}
+.hb .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--ink-2);z-index:1}
+.hb .brow{position:relative;height:20px}
+.hb .bar{position:relative;height:20px;border-radius:0 4px 4px 0;min-width:2px;transition:filter .15s,box-shadow .15s;z-index:2}
+.hb .bar:hover,.hb .bar:focus{filter:brightness(1.12);box-shadow:0 0 0 2px var(--ink)}
+.hb .val{position:absolute;top:50%;transform:translateY(-50%);font:500 13px var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface);padding:0 3px;border-radius:3px;z-index:4}
+.hb .ci{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-left:1.5px solid var(--ink);border-right:1.5px solid var(--ink);z-index:3}
+.hb .ci::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid var(--ink)}
+.hb .axis{position:relative;height:18px;margin-right:72px;font:400 12px var(--f-mono);color:var(--ink-3)}
+.hb .axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.axis-t{font-size:13px;color:var(--ink-2);text-align:center;margin:4px 72px 0 0}
+@media (max-width:560px){
+  .hb{grid-template-columns:minmax(0,1fr);gap:4px}
+  .hb .lab{text-align:left;margin-top:8px}
+  .hb .lab small{display:inline;margin-left:6px}
+  .hb .area,.hb .axis{margin-right:64px}
+}
+/* columns (e.g. one per year) */
+.cols{display:flex;align-items:flex-end;gap:3px;height:240px;margin-top:30px;border-bottom:1px solid var(--line-2);position:relative}
+.ax-y + .cols{margin-top:40px}   /* room for the top tick label under the axis title */
+.cols .c{flex:1 1 0;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.cols .seg{width:100%;transition:filter .15s}
+.cols .c:hover .seg,.cols .c:focus .seg{filter:brightness(1.12)}
+.cols .c .seg:first-child{border-radius:3px 3px 0 0}
+.cols .cv{position:absolute;left:50%;transform:translateX(-50%);font:500 11.5px var(--f-mono);white-space:nowrap;color:var(--ink-2)}
+.xl{display:flex;gap:3px;margin-top:6px}
+.xl span{flex:1 1 0;min-width:0;text-align:center;font:400 11.5px var(--f-mono);color:var(--ink-3);white-space:nowrap;overflow:visible}
+.cols .gl{position:absolute;left:0;right:0;border-top:1px dashed var(--line);font:400 11px var(--f-mono);color:var(--ink-3)}
+.cols .gl span{position:absolute;top:-16px;left:0}
+.cols .short{display:none}
+/* line chart: a wide drawing for desktop and a narrow one for phones, so nothing scrolls sideways */
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgwrap svg{display:block;width:100%;height:auto}
+.svgwrap svg.narrow{display:none}
+.svgwrap svg.keep{min-width:600px}
+.svgwrap text{font-family:var(--f-mono);font-size:calc(12.5px * var(--k, 1));fill:var(--ink-3)}
+.svgwrap .gridl{stroke:var(--line);stroke-width:1}
+.svgwrap .axisl{stroke:var(--line-2);stroke-width:1}
+.svgwrap .pt{transition:r .15s}
+.svgwrap .pt:hover,.svgwrap .pt:focus{r:7}
+/* heatmap table */
+.scroll{overflow:auto;-webkit-overflow-scrolling:touch;margin-top:8px;max-height:78vh}
+/* frozen panes: header row and first column stay put while a big table scrolls */
+.scroll table thead th{position:sticky;top:0;z-index:2;background:var(--surface)}
+.scroll table tbody th:first-child,.scroll table tbody td:first-child,.scroll table thead th:first-child{position:sticky;left:0;z-index:1;background:var(--surface)}
+.scroll table thead th:first-child{z-index:3}
+.scroll table.tb tbody tr:hover td:first-child{background:var(--raised)}
+table.hm{border-collapse:separate;border-spacing:3px;font-variant-numeric:tabular-nums}
+table.hm caption{text-align:left;font-size:13px;color:var(--ink-2);padding:0 0 6px}
+table.hm thead th{font:500 12px var(--f-mono);color:var(--ink-3);padding:2px 4px;white-space:nowrap}
+table.hm th.rl{text-align:right;font-weight:400;padding-right:10px;white-space:nowrap;font-size:14px}
+table.hm tr.grp th{text-align:left;font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:14px 0 3px;border-bottom:1px solid var(--line)}
+table.hm td.c{min-width:58px;height:50px;text-align:center;border-radius:5px;line-height:1.15;padding:3px 4px;transition:box-shadow .15s}
+table.hm td.c:hover,table.hm td.c:focus{box-shadow:0 0 0 2px var(--ink)}
+table.hm td.c b{display:block;font-size:16px;font-weight:600}
+table.hm td.c i{display:block;font-style:normal;font-size:10.5px;margin-top:2px;opacity:.85}
+table.hm td.c.dk{color:#0B0B0B} table.hm td.c.lt{color:#FFFFFF}
+table.hm td.c.empty{background:var(--empty);color:var(--ink-3)}
+table.hm td.x{font-size:13px;color:var(--ink-2);padding:0 8px;text-align:right;white-space:nowrap}
+.ramp{display:inline-flex;vertical-align:middle;margin:0 8px;border-radius:3px;overflow:hidden}
+.ramp i{width:18px;height:14px}
+/* phone="cards" layouts (chosen per chart; see charts.md, "Phone layout") */
+.hm-m{display:none}
+.hm-g{font:500 11.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 2px;padding-bottom:3px;border-bottom:1px solid var(--line)}
+.hm-r{padding:9px 0;border-bottom:1px solid var(--line)}
+.hm-r:last-child{border-bottom:0}
+.hm-rh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.hm-rh b{font-size:15px}
+.hm-rh span{font-size:12.5px;color:var(--ink-2);text-align:right}
+.hm-cells{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:4px}
+.hm-c{border-radius:5px;text-align:center;padding:3px 2px 4px;line-height:1.12;font-variant-numeric:tabular-nums}
+.hm-c small{display:block;font:400 9.5px var(--f-mono);opacity:.8}
+.hm-c b{display:block;font-size:14.5px;font-weight:600;margin-top:1px}
+.hm-c i{display:block;font-style:normal;font-size:9.5px;opacity:.85;margin-top:1px}
+.hm-c.dk{color:#0B0B0B} .hm-c.lt{color:#FFFFFF} .hm-c.empty{background:var(--empty);color:var(--ink-3)}
+/* an interactive map as a panel in a chart page (map_panel) */
+.mapframe{display:block;width:100%;height:var(--h,520px);border:1px solid var(--line);border-radius:10px;background:var(--bg);margin-top:10px}
+.maplink{display:flex;justify-content:flex-end;margin:10px 0 -2px}
+.mapopen{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--line-2);border-radius:999px;padding:4px 12px;background:var(--surface)}
+.mapopen:hover,.mapopen:focus-visible{background:var(--accent-soft)}
+.ptools{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin:10px 0 0}
+.pbtn{font:500 12.5px var(--f-sans);color:var(--accent);background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:4px 11px;text-decoration:none;cursor:pointer;white-space:nowrap}
+.pbtn:hover,.pbtn:focus-visible{background:var(--accent-soft)}
+.pbtn.ok{color:var(--ink);background:var(--accent-soft)}
+.backlink{color:var(--ink-2);text-decoration:none;text-transform:none;letter-spacing:0;font:500 13px var(--f-sans)}
+.backlink:hover{text-decoration:underline}
+@media (max-width:560px){.mapframe{height:var(--ph,440px)}}
+/* shaded table cells (table(shade=...)) and flagged cells (a cell dict with "flag") */
+table.tb td.sh{font-variant-numeric:tabular-nums}
+table.tb td.flag{box-shadow:inset 0 0 0 2px var(--flag);font-weight:600}
+table.hm td.c.flag{outline:2.5px solid var(--flag);outline-offset:-2.5px}
+.legend .flagsw{width:18px;height:14px;border-radius:3px;box-shadow:inset 0 0 0 2px var(--flag)}
+/* the rigor pass under a panel */
+details.checks{margin-top:12px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
+details.checks summary{font:500 12px var(--f-mono);letter-spacing:.04em;color:var(--ink-3);list-style:none;display:flex;align-items:center;gap:6px}
+details.checks summary::-webkit-details-marker{display:none}
+details.checks summary::marker{content:""}
+details.checks summary::before{content:"";width:6px;height:6px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(-45deg);transition:transform .15s}
+details.checks[open] summary::before{transform:rotate(45deg)}
+details.checks ul{margin:6px 0 0;padding-left:18px} details.checks li{margin:3px 0}
+/* living pages: each panel carries when it was added / updated; page history at the foot */
+.pstamp{float:right;margin:0 0 6px 12px;font:400 11.5px var(--f-mono);color:var(--ink-3);white-space:nowrap}
+@media (max-width:560px){.pstamp{float:none;display:block;margin:0 0 4px;white-space:normal}}
+section.panel{margin-top:22px}
+details.history{margin-top:40px;font-size:13.5px;color:var(--ink-2)}
+details.history summary{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+details.history li{margin:3px 0}
+/* plain tables */
+table.tb{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+table.tb th,table.tb td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.tb thead th{font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--line-2)}
+table.tb td.n,table.tb th.n{text-align:right;white-space:nowrap}
+table.tb tbody tr:hover{background:var(--raised)}
+/* tooltip */
+#tip{position:fixed;z-index:50;pointer-events:none;max-width:300px;background:var(--surface);color:var(--ink);border:1px solid var(--line-2);
+  border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.45;box-shadow:var(--shadow);display:none}
+#tip b{display:block;margin-bottom:2px;font-size:13.5px}
+#tip .mean{margin-top:5px;padding-top:5px;border-top:1px solid var(--line);color:var(--ink)}
+[data-tip]{cursor:default}
+footer.site{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+footer.site h3{font:500 12px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+footer.site ul{padding-left:18px;margin:0 0 12px} footer.site li{margin:4px 0}
+@media (max-width:560px){
+  /* phones: reflow charts to the width instead of scrolling them sideways */
+  .svgwrap svg.wide{display:none} .svgwrap svg.narrow{display:block}
+  .cols .full{display:none} .cols .short{display:inline}
+  .cols.dense .cv{display:none} .xl.dense span.alt{visibility:hidden}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .tile{padding:11px 12px} .tile .v{font-size:23px} .tile .l{font-size:13.5px} .tile .s{font-size:12px}
+  /* phone="cards": heatmap rows and table rows become cards */
+  .hm-desk{display:none} .hm-m{display:block}
+  .scroll.tb-cards-box{overflow:visible;max-height:none}
+  table.tb.tb-cards thead{display:none}
+  table.tb.tb-cards,table.tb.tb-cards tbody{display:block;width:100%}
+  /* compact card: the first cell is the heading, the rest sit three across with the label above the value */
+  table.tb.tb-cards tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 10px;border:1px solid var(--line);
+    border-radius:10px;padding:9px 12px;margin:0 0 8px;background:var(--surface)}
+  table.tb.tb-cards td,table.tb.tb-cards td.n{position:static;display:block;border:0;padding:0;text-align:left;white-space:normal;background:none}
+  table.tb.tb-cards td::before{content:attr(data-label);display:block;color:var(--ink-3);font:500 10.5px var(--f-mono);text-transform:uppercase;letter-spacing:.04em}
+  table.tb.tb-cards td:first-child{grid-column:1/-1;font-weight:600;font-size:15.5px}
+  table.tb.tb-cards td:first-child::before{content:none}
+  /* phone="scroll" (default for tables): tighter cells; the scroll box keeps row labels and headers frozen */
+  table.hm{border-spacing:2px}
+  table.hm td.c{min-width:40px;height:42px;padding:2px}
+  table.hm td.c b{font-size:14px} table.hm td.c i{font-size:9.5px}
+  table.hm th.rl{font-size:13px;padding-right:6px}
+  table.hm thead th{font-size:11px;padding:2px}
+  table.hm td.x{font-size:12px;padding:0 5px}
+  table.tb{font-size:13.5px} table.tb th,table.tb td{padding:7px 8px}
+  .wrap{padding:22px 14px 56px}
+  .card{padding:14px 12px}
+  table.hm td.c{min-width:46px;height:46px}
+  table.hm td.c b{font-size:15px}
+  table.hm th.rl{font-size:13px;padding-right:6px}
+}
+/* byline and the NCEAS / WRI / GitHub strip (identity.json) */
+.byline{margin:10px 0 0;font-size:14px;color:var(--ink-2)}
+.byline time{font-family:var(--f-mono);font-size:13px;white-space:nowrap}
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.brand .org{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;transition:transform .18s ease}
+.brand .org:hover,.brand .org:focus-visible{transform:translateY(-2px) rotate(-1.5deg)}
+.brand .logo{height:40px;width:auto;flex:none;display:block}
+.brand svg.logo{color:var(--ink)}
+.brand .org b{display:block;font-size:14px;line-height:1.2}
+.brand .org small{display:block;font-size:12px;color:var(--ink-3);line-height:1.3;max-width:24ch}
+.brand .gh{flex-basis:100%;margin:0;font-size:13px;color:var(--ink-2)}
+.brand .gh{max-width:none}
+.brand .gh a{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media print{.ptools,.maplink,.themebtn,.langseg{display:none!important}}
+</style></head>
+<body><div class="wrap">
+<header><div class="topbar"><div class="eyebrow">Chart archetype · open ecological data</div><div class="btns"><button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark">Light / dark</button></div></div>
+<h1>Chart archetype: Palmer penguins, size by species and sex · 2026-10-27</h1><p class="subtitle">Bill, flipper and body-mass measurements of 344 adult Adélie, Chinstrap and Gentoo penguins at three sites in the Palmer Archipelago, Antarctica, 2007–08 to 2009–10: differences by species and sex with bootstrap intervals, and why pooling the species misleads.</p><p class="byline">By <b>Carlo Broderick</b>, NCEAS, UC Santa Barbara · <time>2026-10-27 18:19 PDT</time></p><div class="note"><h3>How to read this page</h3><p>Hover over, tap or tab to any bar, dot, cell, tile, axis title, legend entry or column heading for what it means and its exact numbers. The <b>Plain language / Technical</b> switch at the top changes the explanations from plain readings to the statistical detail.</p><p>Colours mean the same thing on every chart: <b style='color:var(--s2)'>orange</b> is Adélie, <b style='color:var(--s6)'>pink</b> is Chinstrap, <b style='color:var(--s3)'>green</b> is Gentoo; <b style='color:var(--s1)'>blue</b> is females and <b style='color:var(--s5)'>light blue</b> males.</p></div><div class="tiles"><div class="tile" data-tip="Penguins measured
+344 adult penguins at their nests; 2 have no measurements.
+@@tech
+Penguins measured
+rows = 344; complete body measurements = 342"><div class="v">344</div><div class="l">penguins measured</div><div class="s">2007–08 to 2009–10 breeding seasons</div></div><div class="tile" data-tip="Species
+Adélie, Chinstrap and Gentoo: the three brush-tailed penguins (genus Pygoscelis)."><div class="v">3</div><div class="l">species</div><div class="s">Adélie 152, Chinstrap 68, Gentoo 124</div></div><div class="tile" data-tip="Pairs
+At 163 nests both the male and the female were measured.
+What it suggests: partners share a nest and a season, so they are not fully independent; the charts compare within one sex to keep each bird independent
+@@tech
+Pairs
+nest = season × island × N-number from Individual ID (penguins_raw)"><div class="v">163</div><div class="l">nests with both partners measured</div><div class="s">birds come in pairs</div></div><div class="tile" data-tip="Body mass
+Average weight of each species, males and females together.
+@@tech
+Body mass
+Adélie mean 3701 g, Chinstrap mean 3733 g, Gentoo mean 5076 g"><div class="v">5.1 kg</div><div class="l">average Gentoo, the largest</div><div class="s">Adélie 3.7 kg, Chinstrap 3.7 kg</div></div></div></header>
+<section class="sec"><h2>Who was measured</h2><div class="card"><h3>Penguins measured each season</h3><p class="cap"><span class="plain">Roughly the same number of each species every season: the study followed a set of nests each summer.</span><span class="tech">Counts per season × species; sampling effort (nests followed) sets n, not abundance.</span></p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/penguins-measured-each-season.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/penguins-measured-each-season.html" data-build="c711115bf726" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/penguins-measured-each-season.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Adélie penguin
+Pygoscelis adeliae"><span class="sw" style="background:var(--s2)"></span>Adélie</span><span class="k" data-tip="Chinstrap penguin
+Pygoscelis antarcticus"><span class="sw" style="background:var(--s6)"></span>Chinstrap</span><span class="k" data-tip="Gentoo penguin
+Pygoscelis papua"><span class="sw" style="background:var(--s3)"></span>Gentoo</span></div><div class="ax-y" data-tip="Penguins measured
+How many birds were measured, set by how many nests were studied.
+@@tech
+Penguins measured
+Row counts by season and species.">Penguins measured</div><div class="cols" style="height:240px"><div class="gl" style="bottom:33.33%"><span><span class="full">50</span><span class="short">50</span></span></div><div class="gl" style="bottom:66.67%"><span><span class="full">100</span><span class="short">100</span></span></div><div class="gl" style="bottom:100.00%"><span><span class="full">150</span><span class="short">150</span></span></div><div class="c" data-tip="2007–08
+110 penguins
+Adélie 50, Chinstrap 26, Gentoo 34"><div class="seg" style="height:22.67%;background:var(--s3)"></div><div class="seg" style="height:17.33%;background:var(--s6)"></div><div class="seg" style="height:33.33%;background:var(--s2)"></div><span class="cv" style="bottom:calc(73.33% + 3px)"><span class="full">110</span><span class="short">110</span></span></div><div class="c" data-tip="2008–09
+114 penguins
+Adélie 50, Chinstrap 18, Gentoo 46"><div class="seg" style="height:30.67%;background:var(--s3)"></div><div class="seg" style="height:12.00%;background:var(--s6)"></div><div class="seg" style="height:33.33%;background:var(--s2)"></div><span class="cv" style="bottom:calc(76.00% + 3px)"><span class="full">114</span><span class="short">114</span></span></div><div class="c" data-tip="2009–10
+120 penguins
+Adélie 52, Chinstrap 24, Gentoo 44"><div class="seg" style="height:29.33%;background:var(--s3)"></div><div class="seg" style="height:16.00%;background:var(--s6)"></div><div class="seg" style="height:34.67%;background:var(--s2)"></div><span class="cv" style="bottom:calc(80.00% + 3px)"><span class="full">120</span><span class="short">120</span></span></div></div><div class="xl"><span>2007–08</span><span class=alt>2008–09</span><span>2009–10</span></div><div class="ax-x" data-tip="Breeding season
+Southern summer, November to January; each bird is counted in its season.
+@@tech
+Breeding season
+palmerpenguins `year` = first year of the season (PAL0708 = 2007).">Breeding season</div><details class="checks"><summary>How this panel was checked</summary><ul><li>Counts of birds measured, fixed by the study design; they are not population sizes or trends.</li><li>All three species in every season, so seasons can be compared like for like.</li></ul></details></div><div class="card"><h3>Which species were measured where</h3><p class="cap"><span class="plain">Only Adélie penguins were measured on all three islands. A chart of islands would really be a chart of species.</span><span class="tech">Species × island contingency table; two structural zeros per row for Gentoo and Chinstrap (complete confounding).</span></p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/which-species-were-measured-where.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/which-species-were-measured-where.html" data-build="0ba3a2abea92" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/which-species-were-measured-where.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Colour
+Darker = more birds measured."><span class="nw">fewer</span><span class="ramp"><i style="background:#EFF5FB"></i><i style="background:#D3E4F3"></i><i style="background:#AFCDE8"></i><i style="background:#84B1DA"></i><i style="background:#5A93CA"></i><i style="background:#3A76B6"></i><i style="background:#245B9C"></i><i style="background:#16427A"></i><i style="background:#0E2C55"></i></span><span class="nw">more penguins</span></span><span class="k"><span class="sw" style="background:var(--empty)"></span>none measured</span></div><p class="cap">Number of penguins measured, by species and island.</p><div class="scroll"><table class="hm"><thead><tr><th></th><th data-tip="Biscoe
+168 penguins measured
+Biscoe Point">Biscoe</th><th data-tip="Dream
+124 penguins measured
+Dream Island">Dream</th><th data-tip="Torgersen
+52 penguins measured
+Torgersen Island">Torgersen</th></tr></thead><tbody><tr><th class="rl" data-tip="Adélie
+152 penguins">Adélie</th><td class="c dk" style="background:#8BB6DC" data-tip="Adélie · Biscoe
+44 penguins measured"><b>44</b></td><td class="c lt" style="background:#6A9FD0" data-tip="Adélie · Dream
+56 penguins measured"><b>56</b></td><td class="c dk" style="background:#75A6D4" data-tip="Adélie · Torgersen
+52 penguins measured"><b>52</b></td></tr><tr><th class="rl" data-tip="Chinstrap
+68 penguins">Chinstrap</th><td class="c empty" data-tip="Chinstrap · Biscoe
+None measured here.">–</td><td class="c lt" style="background:#4E88C2" data-tip="Chinstrap · Dream
+68 penguins measured"><b>68</b></td><td class="c empty" data-tip="Chinstrap · Torgersen
+None measured here.">–</td></tr><tr><th class="rl" data-tip="Gentoo
+124 penguins">Gentoo</th><td class="c lt" style="background:#0E2C55" data-tip="Gentoo · Biscoe
+124 penguins measured"><b>124</b></td><td class="c empty" data-tip="Gentoo · Dream
+None measured here.">–</td><td class="c empty" data-tip="Gentoo · Torgersen
+None measured here.">–</td></tr></tbody></table></div><details class="checks"><summary>How this panel was checked</summary><ul><li>Island and species are entangled: Gentoo only on Biscoe, Chinstrap only on Dream. Island comparisons are therefore mostly species comparisons, so the charts below compare species, and islands only within Adélie.</li></ul></details></div><div class="card"><h3>Where the three sites are</h3><p class="cap">The three sites are at most 22 km apart, around Palmer Station on Anvers Island. Hover over or tap a ring for who was measured there; use two fingers (or Ctrl + scroll) to move the map.</p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/where-three-sites-are-map.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/where-three-sites-are-map.html" data-build="19dbe233671c" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/where-three-sites-are-map.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><iframe class="mapframe" data-own-page="1" title="Map of the three study sites" allow="fullscreen" allowfullscreen style="--h:420px;--ph:360px" srcdoc="&lt;!doctype html&gt;
+&lt;!-- Generated 2026-10-27 18:19 PDT (2026-10-27T18:19:31-07:00) --&gt;
+&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+&lt;title&gt;Study sites&lt;/title&gt;
+&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;
+&lt;meta name=&quot;generated&quot; content=&quot;2026-10-27T18:19:31-07:00&quot;&gt;
+
+
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAANbklEQVR42u2be4xd1XXGf9/e53XvnaefgDFPNYEEQkihCdSlIcY2DaldbGwkSlUFxRAHipMoFY8qFWoLatKopVFTpUQNpEkAKXUekKpCUWOqRBWRmrSJ2gBpCA9jA7Y7Ho9nxjP33rNX/9jn3jvm0WhszzgEr39mzr1n77PWt7+19lprnwvH5bgclzey6Fg89PELL3G59zcC/3rGY9t/dCwBcMfioalzg8C1wMefeue7B99wAEg6GzgLWC9p6xMXXOLfWADAbwADgJP0kVojX3OsAEjm+4E/ufA3a8C75URapGT92ZBP/fI3DAB5Izs5zZNzskZGkifI6YCZ/dexAmDeXaA2XHupvrD+SFpLTU6Y2U4z+9kbBoAlX3tozOBWM3vAzACeDGZ7jxUA8+oCz61a7c1g+P5te/dds+Gjggbwnwsf/Frr+VVrTjXYtfxbj7TmU6d5Y8Dzq9YMeLmt3rm3AQzfv+0lg5sMvrTjsjWLJX3WSVfMp/HzBsDzqy8/RdJngD8XvL3z+fD9254fvn/bT53TxcBK4FM7V19+0S8VADtXX/4uwQPEzC8F3jrz+2dWrvLAOkEq6Uzg0ztXX37W6x6AHZetSXeuvvwa4EFJF0tCEsBbnrtsdd65L/H+dOBS4ndIugC4+/lVa0563QLw4m9f0fCJux34LHCqmVFFfIAznHMLOheCy4BTO9dmhgVbk2TJXTtWrp7zOmFOAAjtcEHaSD+WDxb9SS3FJQ5JHRBOwFgOsGPVmjqwVhU1QhloT7WRRNbIrnXO3f7E+SuK1yEAtrw9VTZ87imGC2oL6xQLauQDOUkj7feN5EwAJ52L9E4LRnuqTWuyBQGKwQKfep/kyc1FI9/ys4svnbNiaU7yAIlloVWquX+aYnEN30jwNYfqHlLtKJvlE3wdLNj7QrtcEFqBUAYkUQwVJHlUK62lxfT49Mdp8yIxkB51masgeDJU/pwR3BkF/pQCtyhta8j/5eCffvk/dq5/n3e5Pw0i9TFIayl5fzc+4lJHWkuHgU8+s2LlytcFAE+/57IEWJYUCcVQQTnSdu3dTSpAHg6l3Qew7KvfLBvL+r7cf/rgWN+yfrKBjGK4oKoPADqxAOfdycDdz6xYed4vPACJ97W0kS3NhwrkHdYKtJ+epBxpPovXn/V/+L6xzr3BbLvL3MPFohr9pw2SDmbg6QVMA595kiIBOAf49NMrVp562MrNBwDpQNbMB/IXnHdQrWSYDs3px8c/2bjp8z+Yee/w574yjfG3ZrZHTih1UDioufi/67FATgCXCD719K+/Z+EvLAAnbHt4GvE54IAZEDH4ajhY/sOr3d9ql98DHuxcS0JeqAKCTCS1pBsYJW1wqb9j15VX1I+GvnPSFd73+1cVzuk+a4arWxOtJ83YsOQbD/33a90/8nsbLrEyPBSCDWKGBQAjG8pxqcMMyqm2lWWQEodL1HRyd9Cyvxj6/FfaR6LrUd0G937gKoeRDv/9P07tf//Gv7NgKzDu+v+M371u7WnlWOvDZavsb443CSF0vzOgdkIdAUl/qiR1ccmCZTYZbiXhhZvgC3/T4dlhyFF1gUTurYnTewHM7LEQ7IMG217r/j3r1p4r+IKkK5MscTN8HYDmyBTldNlDowqMBJAxANx15/WbjqihetQAGNm8sS5xm6RfA3j2qb1TO18a/afdY+OTr2r8+rXvAr4IXNIFME/I6j0QyumS5r7p7phuOVH9FToR+Kv912/61WMOgJeuBjYSuzyc951H7W2Pbrdztn/7FfR84pwVjSD7Yz+QnCcft7zO3p/kCVkt61SOr2TBof8g6Szg7tHrN51+zAAYvX7T2cAtkhKgn58TXPP+7ILWeOtiN5iSLM7N1X1375dEUiSk9RRJkQUjU5XdFk3vuEPvKSskPjG6ZdPAvAOwb/PGmuA24M3VR30vXbf+Nec1e0Au9+vLqfZgOV3i6l7JwoxkYYrLe8PSIiWtpQho7pumnC5Rx/BwyISRLalbTeFn3Ug5YgBcRf0OZYH+xLnX3F0OfOQbp9dOqL+XAO2xJri477t6QrIoxw8mKIlqpbWUpJb2WNBZ9G4sMEyCVJCpLrFkXgHYH6l/q6SZNXu9coVXFSvtt7Lh/Exf87QPtLDSwCtmfV74gZR0cYbvT5AXWS0jLdIuCzB6zRUJReNBpMCJ8wbAvs0ba8Ct9KjfkT4ge9UxN24axNjoEqdsuKA82KacboMUQRCR0qnDD6UkCzNcw8dUGHVY0IuAXePVYcWs22iHDUBF/U0zqN+RmkPZa4y5CLgQIB3KkBftA9UxgIQlAqeuX7vCkyzISBZmFEOFlRNtKyfbMRak7hDjKz2WzQsA+3tRP1LfrJekiAaOvpeP2bvlKg9slKhDrPKywTy6wYzyNzJB3fnkhG8kpEsL5QtrlJPtYF5GPmPle2twwt6tm7Kfa8CRADASqX+L4Kyu4R3FU4xUJynVB0dv3FSbOS71/s3A6pnaZsM51gyE5oyw7gRJZVzFazMDB+miTPmvNKRB3/ODQwm4xDvXmFMAvLQRuBrAXIzAlstIZThJkgf+QNLWkQ9tSrsDxVqkkw95eOHxhbdy4mWnYY4uEzrscH2e5E010jfVnD8pQ4lmdpo7skDxvYO5AWB088ZzEbfgVVgWa3dLHYAsmDoZnVAO/JF3ug5g3+9uWMyUbSDMULjy23QoVznZfpklcVcwB0qEPykjObuOW5CChBtM5BYm1skiZ8ggaNFsbJpVNaiav0NOb6lWKD65HYSI1K0Mq5TqA+4c/dCmPYyUfTZRvl3TwgoHqbr5flJPKA+2Ca2Ai2D2YkIi3ILE/KmF5NV1NyXCDSeyaYMDJVZaJwg2EEvnDoC6G6ByTeXO3OJUalQkKg3KSvmyug4sBPvrsLs9YfvaiU0GmAjgOQSIpJ4QmmVV+1fGuKidTQaVu5r4pSnKeoRVw6P+ELPC8RKL7Co0y51gdv0A8RDiUsATTDZeCoFbkMQOzquJ2cl4B8tyCIaNldhoGztQYtNm5k0u8wohmJlJTuDptsMsGDbSgqmAOzHD9cUjAnnh+jyhWQXi8YCZeWBWr9vMCgCD7TJ2AcsxRMsIB0rsYMANJWjQI99zhRihK3/e18KdlOMGE2xZBi3DJoPsQGk2WaKDpckLPOpE9g4bzIwwWWLPTWFLsgi4E6o7GBeYi7nBRMDMTpkzAEIIP/XOfb+DssXGBNY2wv+2YKKMytUdMxMkFY4wGQh7WrglafT/TCh3MJTIpgPa38aaAUqMthmlgSHMuhNZywi7mtjBEF0id7j+yAKru+gOk+WsGDCrXWD4Ew9OAf/So4RBaZ0MFjsYCC+0CHsqYzoA5JHWtr8d6V8FOWsZYaxNGG1DQEqdVHfScCK3JMUtTUsVriWnUlLosmGkRfnsNOFAGVmQVyfLDYcaflb1wOH0BL8L7AXidlMSe/lVVLdg0cjJgBv2qN/HnD0V1gqEvS1cJiN32FSIHjLgRRqrQjpu4CSawZXjAcUIZ2aUCkBAdjCofG46AtWoWBBsRHX3pTkFoAz2P97ph8Q3OioWUHGpegfAiBnebkMTAQ35GMEDuAGPEpkymRqJA3RoPdHb18PBYDZRVhPPyPlU3dQ2C7uapkHv8HqOwB+WFrYxCzmstvjYbdfcLqc7SSutVFVlHRbMSE7kFKlZOJRGvw/jpdECLfBxfEAxgYoaWdX4tOkQ2j+ccIxFpsR8g5iDJFUpXDiR60kybem//YvbZ2vLYbXFzXhUsB8Y7BYuJeB6bS1SoZrD1Q9NfMxhtKxKYjCGvOQwlRJm0fgqj1DdyZ9ZUD45FedIqzohkdQJoql7HM8NjZvv/c7h2HJ4AITwY/P+x4KLuowN9Nq2mfCLU5TMIJhVjQ8MOkcZEybSYPR5IcNKGU0TpXVbfm55Bm0jjJURxETRnRKB40cYNzRuvvexw7EDDrMcHvrkg6OIRwGskwb7GcaWNqOHTS8nSIAWIkSnNjNsLMimQpyn8oiZHiQvtDRFdW9q+JgBZg7EDzCua2w9fOMPG4Bq5D/jtYOs8v9uCRsBsKlDOpcVSGDTVQtcVaZXGjYWU9puCvwyUZ/DLU6k3qs23wPe39h67/ePxPgjAiCk/Bup1iE+Y/DSzKaGGdhk6OTn3dU3A5q95TWzeBDaJyOpnKnTGuuMq+aM2ymY2XeB6xpb7z0qvzQ54sPR0buuTbxz5wEfANZD7MzKC78kZms4IAdrg73YxqrqV6nQkDc1JKRYK7SAyaqsrslUc+qAZQfCt8Pu9pa+j973k6Nh/FEBoCP7IhDnKwJxJbDYDyW4oSS2SBNhEwHbU0bjcoeGHCo0o5SuTobHLZa49XhMXrHrWya21Nfe89TR0vmoAtCR0buuTb1z5wObVbjf8Semi1TE+BD2ldhoTF816OO25qwXO6hyiIOGTVm8rxBm9ojBlvq6e54+2vrO2a/G9v/Jtalr+Hckp2SbyXUlgQW2pwQvNODiluYPNb4LQjCYsPhibaFvmnFTfd09z86FnnP+s7nxr2/OnHSp2nyMyfAOapXxsg71X6mDwNomSvt3y3VDfe09x+wHFcfluByXX275P+wHaLRWdYM0AAAAAElFTkSuQmCC&quot;&gt;
+&lt;meta property=&quot;og:type&quot; content=&quot;website&quot;&gt;
+&lt;meta property=&quot;og:site_name&quot; content=&quot;Wildfire Resilience Index · NCEAS&quot;&gt;
+&lt;meta property=&quot;og:title&quot; content=&quot;Study sites&quot;&gt;
+&lt;meta property=&quot;og:image&quot; content=&quot;https://wri-science.github.io/public_publication/publication_htmls/site_assets/wri-flame-preview.png&quot;&gt;
+&lt;meta property=&quot;og:image:alt&quot; content=&quot;Wildfire Resilience Index flame&quot;&gt;
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary&quot;&gt;
+&lt;meta name=&quot;twitter:image&quot; content=&quot;https://wri-science.github.io/public_publication/publication_htmls/site_assets/wri-flame-preview.png&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css&quot; integrity=&quot;sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js&quot; integrity=&quot;sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;style&gt;
+/* ---- design tokens: the same set as the chart pages (one design system across maps and charts) ---- */
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --raised:#FBFCFD; --ink:#13202C; --ink-2:#465667; --ink-3:#768494;
+  --line:#E1E6EB; --line-2:#CBD3DB; --accent:#1B4F8A; --accent-ink:#FFFFFF; --accent-soft:#E7EFF8;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.14);
+  --f-sans:&quot;IBM Plex Sans&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:&quot;IBM Plex Mono&quot;,ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ph:0px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme=&quot;light&quot;]){
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }}
+:root[data-theme=&quot;dark&quot;]{
+  --bg:#0D1217; --surface:#141B22; --raised:#18212A; --ink:#E7EDF3; --ink-2:#A8B5C2; --ink-3:#7B8895;
+  --line:#243039; --line-2:#33414D; --accent:#7EB2EE; --accent-ink:#0D1217; --accent-soft:#18283A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45); color-scheme:dark; }
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--f-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#map{position:fixed;inset:0}
+/* ---- side panel (desktop) / bottom drawer (phone) ---- */
+#panel{position:fixed;z-index:5;top:12px;left:12px;width:368px;max-height:calc(100% - 24px);display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.ph{display:flex;gap:10px;align-items:flex-start;padding:14px 12px 10px 16px}
+.ph .t{flex:1;min-width:0}
+.eyebrow{font:500 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+h1{font-size:16.5px;line-height:1.35;margin:0;font-weight:600;letter-spacing:-.01em}
+#pbody{overflow-y:auto;padding:0 16px 16px;overscroll-behavior:contain}
+#panel.closed #pbody{display:none}
+#panel h2{font:500 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 8px}
+.subtitle{color:var(--ink);margin:0 0 8px;font-size:14.5px;line-height:1.45}
+.lede{color:var(--ink-2);margin:0 0 12px;font-size:14.5px}
+details.howto{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--raised);font-size:14px}
+/* the open/close chevron is a real icon inside the box: the browser&#x27;s own triangle sits on the border in some browsers */
+details.howto summary{font-weight:600;list-style:none;display:flex;align-items:center;gap:8px;padding:2px 0}
+details.howto summary::-webkit-details-marker{display:none}
+details.howto summary::marker{content:&quot;&quot;}
+details.howto .chev{flex:none;width:14px;height:14px;color:var(--ink-2);transition:transform .15s}
+details.howto[open] .chev{transform:rotate(90deg)}
+details.howto[open] summary{margin-bottom:6px}
+details.howto p{margin:6px 0;color:var(--ink-2)}
+.seg,.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.tabs button{font:500 13.5px/1 var(--f-sans);padding:8px 12px;border-radius:999px;border:1px solid var(--line-2);
+  background:var(--surface);color:var(--ink-2);transition:background .15s,border-color .15s,color .15s}
+.seg button:hover,.tabs button:hover{border-color:var(--ink-3);color:var(--ink)}
+.seg button[aria-pressed=&quot;true&quot;],.tabs button[aria-selected=&quot;true&quot;]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.note{font-size:13px;color:var(--ink-2);margin:8px 0 0}
+.lay{border-top:1px solid var(--line);padding:12px 0}
+.lay:first-child{border-top:0;padding-top:2px}
+.lrow{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px}
+.lrow .cnt{font-weight:400}
+.ldesc{font-size:13px;color:var(--ink-2);margin:4px 0 0 28px}
+.cats{list-style:none;margin:8px 0 0 28px;padding:0;display:grid;gap:7px}
+.cats label{display:flex;align-items:center;gap:9px;font-size:14px}
+.sw{width:15px;height:15px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.35)}
+.sw.sq{border-radius:3px}
+.sw.ln{width:24px;height:0;border-radius:2px;border-top:3px solid;box-shadow:0 0 0 1.5px rgba(11,18,24,.55)}
+.cnt{margin-left:auto;font:400 12.5px var(--f-mono);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.grad{height:12px;border-radius:6px;margin:10px 0 4px 28px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.gl{display:flex;justify-content:space-between;margin-left:28px;font:400 12px var(--f-mono);color:var(--ink-3)}
+.gt{margin:6px 0 0 28px;font-size:13px;color:var(--ink-2)}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);margin:0;flex:none}
+.srcs ul{padding-left:18px;margin:0;font-size:13px;color:var(--ink-2)}
+.srcs li{margin:3px 0}
+.foot{font-size:12.5px;color:var(--ink-3);margin-top:10px}
+.iconbtn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);
+  display:grid;place-items:center;flex:none;font:500 18px/1 var(--f-sans);padding:0}
+.iconbtn svg{transition:transform .2s}
+#panel.closed #panelToggle svg{transform:rotate(180deg)}
+.fitbtn{margin-top:8px;font:500 13px var(--f-sans);padding:7px 11px;border-radius:8px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2)}
+/* ---- hover cards and the phone details sheet ---- */
+.maplibregl-popup-content{background:var(--surface);color:var(--ink);border-radius:10px;box-shadow:var(--shadow);padding:10px 12px;font:400 13.5px/1.45 var(--f-sans)}
+.maplibregl-popup-anchor-top .maplibregl-popup-tip,.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,.maplibregl-popup-anchor-top-right .maplibregl-popup-tip{border-bottom-color:var(--surface)}
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip{border-top-color:var(--surface)}
+.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:var(--surface)}
+.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:var(--surface)}
+.maplibregl-popup-close-button{font-size:18px;width:28px;height:28px;color:var(--ink-2)}
+.card .ct{font-weight:600;display:flex;gap:8px;align-items:center;margin:0 18px 2px 0;font-size:14px}
+.card p{margin:4px 0;color:var(--ink-2)}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:8px 0 0;font-size:13px}
+.card dt{color:var(--ink-3)} .card dd{margin:0;font-variant-numeric:tabular-nums}
+#sheet{display:none;position:fixed;z-index:8;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));max-height:52vh;overflow:auto;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px}
+#sheetClose{position:absolute;top:8px;right:8px}
+.maplibregl-ctrl-attrib{font:400 11px var(--f-sans)}
+@media (min-width:761px){body:not(.pclosed) .maplibregl-ctrl-bottom-left{left:392px} html.embed body:not(.pclosed) .maplibregl-ctrl-bottom-left{left:322px}}   /* scale bars clear the open panel */
+/* ---- phone ---- */
+@media (max-width:760px){
+  #panel{top:auto;left:0;right:0;bottom:0;width:auto;border-radius:16px 16px 0 0;max-height:64vh;border-bottom:0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .ph{padding:10px 10px 10px 16px}
+  h1{font-size:15px}
+  #panel.closed h1{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .eyebrow{font-size:10.5px;margin-bottom:3px}
+  .maplibregl-ctrl-bottom-left,.maplibregl-ctrl-bottom-right{bottom:var(--ph)}
+}
+.backlink{margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}.backlink a{font-size:12.5px;color:var(--ink-2);text-decoration:underline}.backlink a:hover{color:var(--ink)}
+@media print{#cplink,.backlink{display:none!important}}
+.cplink{font:500 12px var(--f-sans,system-ui,sans-serif);color:var(--ink-2);background:var(--surface,transparent);border:1px solid var(--line-2,#ccc);border-radius:999px;padding:2px 10px;cursor:pointer;white-space:nowrap}.cplink:hover,.cplink:focus-visible{color:var(--ink)}
+/* byline and the NCEAS / WRI / GitHub strip (identity.json) */
+.byline{margin:0 0 10px;font-size:14px;color:var(--ink-2)}
+.byline time{font-family:var(--f-mono);font-size:13px;white-space:nowrap}
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.brand .org{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;transition:transform .18s ease}
+.brand .org:hover,.brand .org:focus-visible{transform:translateY(-2px) rotate(-1.5deg)}
+.brand .logo{height:40px;width:auto;flex:none;display:block}
+.brand svg.logo{color:var(--ink)}
+.brand .org b{display:block;font-size:14px;line-height:1.2}
+.brand .org small{display:block;font-size:12px;color:var(--ink-3);line-height:1.3;max-width:24ch}
+.brand .gh{flex-basis:100%;margin:0;font-size:13px;color:var(--ink-2)}
+.brand .gh{max-width:none}
+.brand .gh a{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.brand .logo{height:34px}
+/* plain language / technical (spec fields *_tech) */
+.tech{display:none}
+html[data-lang=&quot;tech&quot;] .tech{display:revert} html[data-lang=&quot;tech&quot;] .plain{display:none}
+/* embedded in a chart page (vizkit.map_panel): slimmer panel, no title block */
+.eyebrow:empty{display:none}
+html.embed #panel{width:300px}
+html.embed h1{font-size:14.5px}
+html.embed .ph{padding:11px 10px 8px 14px}
+html.embed #pbody{padding:0 14px 12px}
+html.embed #pbody &gt; section:first-of-type h2{margin-top:4px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;map&quot; role=&quot;region&quot; aria-label=&quot;Interactive map&quot;&gt;&lt;/div&gt;
+&lt;aside id=&quot;panel&quot; aria-label=&quot;Map key and controls&quot;&gt;
+  &lt;div class=&quot;ph&quot;&gt;
+    &lt;div class=&quot;t&quot;&gt;&lt;div class=&quot;eyebrow&quot; id=&quot;eyebrow&quot;&gt;&lt;/div&gt;&lt;h1 id=&quot;title&quot;&gt;&lt;/h1&gt;&lt;div class=&quot;backlink&quot; id=&quot;backlink&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;button id=&quot;panelToggle&quot; class=&quot;iconbtn&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;pbody&quot; aria-label=&quot;Hide or show the key&quot;&gt;
+      &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 10l4-4 4 4&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;pbody&quot;&gt;
+    &lt;p class=&quot;subtitle&quot; id=&quot;subtitle&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;byline&quot; id=&quot;byline&quot;&gt;&lt;/p&gt;
+    &lt;p class=&quot;lede&quot; id=&quot;lede&quot;&gt;&lt;/p&gt;
+    &lt;details class=&quot;howto&quot; id=&quot;howtoWrap&quot;&gt;&lt;summary&gt;&lt;svg class=&quot;chev&quot; viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M6 3.5 10.5 8 6 12.5&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;How to read this map&lt;/summary&gt;&lt;div id=&quot;howto&quot;&gt;&lt;/div&gt;&lt;/details&gt;
+    &lt;section id=&quot;langSec&quot;&gt;&lt;h2&gt;Explanations&lt;/h2&gt;&lt;div class=&quot;seg&quot; id=&quot;langSeg&quot;&gt;
+      &lt;button type=&quot;button&quot; data-l=&quot;plain&quot; aria-pressed=&quot;true&quot;&gt;Plain language&lt;/button&gt;&lt;button type=&quot;button&quot; data-l=&quot;tech&quot; aria-pressed=&quot;false&quot;&gt;Technical&lt;/button&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;section id=&quot;sitesSec&quot;&gt;&lt;h2&gt;Places to look&lt;/h2&gt;&lt;div class=&quot;tabs&quot; id=&quot;sites&quot; role=&quot;tablist&quot;&gt;&lt;/div&gt;&lt;p class=&quot;note&quot; id=&quot;siteNote&quot;&gt;&lt;/p&gt;&lt;/section&gt;
+    &lt;section&gt;&lt;h2&gt;Base map&lt;/h2&gt;&lt;div class=&quot;seg&quot; id=&quot;bm&quot;&gt;&lt;/div&gt;&lt;p class=&quot;note&quot; id=&quot;bmNote&quot;&gt;&lt;/p&gt;&lt;/section&gt;
+    &lt;section&gt;&lt;h2&gt;Layers&lt;/h2&gt;&lt;div id=&quot;layers&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+    &lt;section class=&quot;srcs&quot; id=&quot;srcsSec&quot;&gt;&lt;h2&gt;Sources&lt;/h2&gt;&lt;ul id=&quot;sources&quot;&gt;&lt;/ul&gt;&lt;p class=&quot;foot&quot; id=&quot;footer&quot;&gt;&lt;/p&gt;&lt;div id=&quot;brand&quot;&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;
+&lt;div id=&quot;sheet&quot; role=&quot;dialog&quot; aria-label=&quot;Details&quot; tabindex=&quot;-1&quot;&gt;&lt;button id=&quot;sheetClose&quot; class=&quot;iconbtn&quot; aria-label=&quot;Close details&quot;&gt;&amp;times;&lt;/button&gt;&lt;div id=&quot;sheetBody&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;cfg&quot;&gt;{&quot;panel_title&quot;:&quot;Study sites&quot;,&quot;basemap&quot;:&quot;satellite&quot;,&quot;basemaps&quot;:[&quot;satellite&quot;,&quot;map&quot;],&quot;vector_style&quot;:&quot;positron&quot;,&quot;max_fit_zoom&quot;:10,&quot;embed&quot;:true,&quot;hash&quot;:false,&quot;eyebrow&quot;:&quot;&quot;,&quot;subtitle&quot;:&quot;&quot;,&quot;lede&quot;:&quot;&quot;,&quot;byline&quot;:&quot;&quot;,&quot;brand&quot;:&quot;&quot;,&quot;footer&quot;:&quot;&quot;,&quot;sources&quot;:[],&quot;title&quot;:&quot;Study sites&quot;,&quot;layers&quot;:[{&quot;id&quot;:&quot;sites&quot;,&quot;name&quot;:&quot;Palmer Penguins study sites&quot;,&quot;kind&quot;:&quot;point&quot;,&quot;description&quot;:&quot;Where the penguins were measured.&quot;,&quot;show_count&quot;:false,&quot;description_tech&quot;:&quot;SCAR Composite Gazetteer positions (arc-minute precision).&quot;,&quot;style&quot;:{&quot;color&quot;:&quot;#FFFFFF&quot;,&quot;radius&quot;:[[6,7],[10,10]],&quot;opacity&quot;:0.9,&quot;outline&quot;:&quot;#1B2430&quot;,&quot;outline_width&quot;:2},&quot;tooltip&quot;:{&quot;title_field&quot;:&quot;site&quot;,&quot;text&quot;:&quot;A Palmer Penguins study site.&quot;,&quot;fields&quot;:[{&quot;field&quot;:&quot;n&quot;,&quot;label&quot;:&quot;Penguins measured&quot;,&quot;format&quot;:&quot;int&quot;},{&quot;field&quot;:&quot;who&quot;,&quot;label&quot;:&quot;By species&quot;}]},&quot;count&quot;:null}],&quot;bounds&quot;:[-64.233333,-64.816667,-63.816667,-64.733333]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;d-sites&quot;&gt;{&quot;type&quot;:&quot;FeatureCollection&quot;,&quot;features&quot;:[{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-64.083333,-64.766667]},&quot;properties&quot;:{&quot;site&quot;:&quot;Torgersen Island&quot;,&quot;n&quot;:52,&quot;who&quot;:&quot;Adélie 52&quot;}},{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-64.233333,-64.733333]},&quot;properties&quot;:{&quot;site&quot;:&quot;Dream Island&quot;,&quot;n&quot;:124,&quot;who&quot;:&quot;Adélie 56, Chinstrap 68&quot;}},{&quot;type&quot;:&quot;Feature&quot;,&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-63.816667,-64.816667]},&quot;properties&quot;:{&quot;site&quot;:&quot;Biscoe Point&quot;,&quot;n&quot;:168,&quot;who&quot;:&quot;Adélie 44, Gentoo 124&quot;}}]}&lt;/script&gt;
+&lt;script&gt;
+&quot;use strict&quot;;
+const C = JSON.parse(document.getElementById(&#x27;cfg&#x27;).textContent);
+const $ = id =&gt; document.getElementById(id);
+const esc = s =&gt; String(s == null ? &#x27;&#x27; : s).replace(/[&amp;&lt;&gt;&quot;]/g, c =&gt; ({&#x27;&amp;&#x27;:&#x27;&amp;amp;&#x27;,&#x27;&lt;&#x27;:&#x27;&amp;lt;&#x27;,&#x27;&gt;&#x27;:&#x27;&amp;gt;&#x27;,&#x27;&quot;&#x27;:&#x27;&amp;quot;&#x27;}[c]));
+const phone = () =&gt; innerWidth &lt;= 760;
+if(C.embed) document.documentElement.classList.add(&#x27;embed&#x27;);
+// a host chart page can switch light / dark for the map too
+addEventListener(&#x27;message&#x27;, e =&gt; { if(e.data &amp;&amp; (e.data.theme === &#x27;light&#x27; || e.data.theme === &#x27;dark&#x27;)) document.documentElement.dataset.theme = e.data.theme; });
+const canHover = matchMedia(&#x27;(hover:hover) and (pointer:fine)&#x27;).matches;
+
+// ---------- panel text (spec text fields are trusted HTML written by the page author)
+$(&#x27;eyebrow&#x27;).innerHTML = C.eyebrow || &#x27;&#x27;; $(&#x27;title&#x27;).innerHTML = C.title || &#x27;&#x27;;
+if(C.back_link &amp;&amp; C.back_link.href &amp;&amp; !C.embed){ $(&#x27;backlink&#x27;).innerHTML = &#x27;&lt;a href=&quot;&#x27; + esc(C.back_link.href) + &#x27;&quot;&gt;← &#x27; + esc(C.back_link.label || &#x27;Back to the page&#x27;) + &#x27;&lt;/a&gt;&lt;button type=&quot;button&quot; class=&quot;cplink&quot; id=&quot;cplink&quot;&gt;⧉ Copy link to this map&lt;/button&gt;&#x27;;
+  const cp = $(&#x27;cplink&#x27;), cpLabel = cp.textContent; let cpTimer = null;
+  const cpFlash = t =&gt; { cp.textContent = t; clearTimeout(cpTimer); cpTimer = setTimeout(() =&gt; { cp.textContent = cpLabel; }, 1800); };
+  cp.addEventListener(&#x27;click&#x27;, () =&gt; { const url = location.href.split(&#x27;#&#x27;)[0];
+    if(location.protocol === &#x27;file:&#x27;){ cpFlash(&#x27;Publish first: this is a local file&#x27;); return; }
+    const fb = () =&gt; { const ta = document.createElement(&#x27;textarea&#x27;); ta.value = url; ta.style.cssText = &#x27;position:fixed;top:0;left:0;opacity:0&#x27;; document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand(&#x27;copy&#x27;); } catch(e){} document.body.removeChild(ta); if(ok) cpFlash(&#x27;✓ Copied&#x27;); else window.prompt(&#x27;Copy this link&#x27;, url); };
+    if(navigator.clipboard &amp;&amp; window.isSecureContext) navigator.clipboard.writeText(url).then(() =&gt; cpFlash(&#x27;✓ Copied&#x27;), fb); else fb(); }); }
+else $(&#x27;backlink&#x27;).remove();
+$(&#x27;subtitle&#x27;).innerHTML = C.subtitle || &#x27;&#x27;; if(!C.subtitle) $(&#x27;subtitle&#x27;).remove();
+$(&#x27;lede&#x27;).innerHTML = C.lede || &#x27;&#x27;; if(!C.lede) $(&#x27;lede&#x27;).remove();
+const both = (pl, te) =&gt; te ? &#x27;&lt;div class=&quot;plain&quot;&gt;&#x27; + (pl || &#x27;&#x27;) + &#x27;&lt;/div&gt;&lt;div class=&quot;tech&quot;&gt;&#x27; + te + &#x27;&lt;/div&gt;&#x27; : (pl || &#x27;&#x27;);
+if(C.how_to_read) $(&#x27;howto&#x27;).innerHTML = both(C.how_to_read, C.how_to_read_tech); else $(&#x27;howtoWrap&#x27;).remove();
+// plain / technical: shown only when the spec has technical text; a host chart page can switch it too
+const hasTech = !!(C.how_to_read_tech || (C.layers || []).some(L =&gt; L.description_tech || (L.tooltip || {}).text_tech));
+function setLang(l){ document.documentElement.dataset.lang = l;
+  document.querySelectorAll(&#x27;#langSeg button&#x27;).forEach(b =&gt; b.setAttribute(&#x27;aria-pressed&#x27;, String(b.dataset.l === l))); }
+if(hasTech) document.querySelectorAll(&#x27;#langSeg button&#x27;).forEach(b =&gt; b.addEventListener(&#x27;click&#x27;, () =&gt; setLang(b.dataset.l)));
+else $(&#x27;langSec&#x27;).remove();
+addEventListener(&#x27;message&#x27;, e =&gt; { if(e.data &amp;&amp; (e.data.lang === &#x27;plain&#x27; || e.data.lang === &#x27;tech&#x27;)) setLang(e.data.lang); });
+$(&#x27;footer&#x27;).innerHTML = C.footer || &#x27;&#x27;;
+$(&#x27;byline&#x27;).outerHTML = C.byline || &#x27;&#x27;; $(&#x27;brand&#x27;).outerHTML = C.brand || &#x27;&#x27;;
+(C.sources || []).forEach(s =&gt; { const li = document.createElement(&#x27;li&#x27;); li.innerHTML = s; $(&#x27;sources&#x27;).appendChild(li); });
+if(C.embed || (!(C.sources || []).length &amp;&amp; !C.footer &amp;&amp; !C.brand)) $(&#x27;srcsSec&#x27;).remove();
+const panel = $(&#x27;panel&#x27;);
+function setPanel(open){ panel.classList.toggle(&#x27;closed&#x27;, !open); document.body.classList.toggle(&#x27;pclosed&#x27;, !open); $(&#x27;panelToggle&#x27;).setAttribute(&#x27;aria-expanded&#x27;, String(open)); syncPh(); }
+function syncPh(){ document.documentElement.style.setProperty(&#x27;--ph&#x27;, phone() ? panel.offsetHeight + &#x27;px&#x27; : &#x27;0px&#x27;); }
+$(&#x27;panelToggle&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; setPanel(panel.classList.contains(&#x27;closed&#x27;)));
+setPanel(!phone());
+new ResizeObserver(syncPh).observe(panel);
+
+// ---------- formatting for hover cards
+function fmt(v, f){
+  if(v === null || v === undefined || v === &#x27;&#x27;) return null;
+  if(f.labels &amp;&amp; f.labels[String(v)] !== undefined) v = f.labels[String(v)];
+  const n = Number(v), fm = f.format || &#x27;text&#x27;;
+  let s;
+  if(fm === &#x27;int&#x27; &amp;&amp; isFinite(n)) s = Math.round(n).toLocaleString(&#x27;en-US&#x27;);
+  else if(/^num[0-9]$/.test(fm) &amp;&amp; isFinite(n)) s = n.toLocaleString(&#x27;en-US&#x27;, {minimumFractionDigits:+fm[3], maximumFractionDigits:+fm[3]});
+  else if(fm === &#x27;pct&#x27; &amp;&amp; isFinite(n)) s = (n * 100).toLocaleString(&#x27;en-US&#x27;, {maximumFractionDigits:f.decimals ?? 0}) + &#x27;%&#x27;;
+  else if(fm === &#x27;pct100&#x27; &amp;&amp; isFinite(n)) s = n.toLocaleString(&#x27;en-US&#x27;, {maximumFractionDigits:f.decimals ?? 0}) + &#x27;%&#x27;;
+  else s = String(v);
+  return (f.prefix || &#x27;&#x27;) + s + (f.suffix || &#x27;&#x27;);
+}
+function catOf(L, p){ const cb = L.color_by; if(!cb || cb.type !== &#x27;categorical&#x27;) return null;
+  const v = String(p[cb.field]); return cb.categories.find(c =&gt; String(c.value) === v) || null; }
+function card(L, p){
+  const t = L.tooltip || {};
+  if(t.html_field &amp;&amp; p[t.html_field]) return &#x27;&lt;div class=&quot;card&quot;&gt;&#x27; + p[t.html_field] + &#x27;&lt;/div&gt;&#x27;;
+  const c = catOf(L, p);
+  let title = t.title_field ? fmt(p[t.title_field], {format:t.title_format, labels:t.title_labels}) : (t.title || (c ? c.label : L.name));
+  const sw = c ? &#x27;&lt;span class=&quot;sw&quot; style=&quot;background:&#x27; + c.color + &#x27;&quot;&gt;&lt;/span&gt;&#x27; : &#x27;&#x27;;
+  let h = &#x27;&lt;div class=&quot;card&quot;&gt;&lt;div class=&quot;ct&quot;&gt;&#x27; + sw + esc(title) + &#x27;&lt;/div&gt;&#x27;;
+  if(t.text) h += &#x27;&lt;p&gt;&#x27; + both(t.text, t.text_tech) + &#x27;&lt;/p&gt;&#x27;;
+  const rows = (t.fields || []).map(f =&gt; [f.label, fmt(p[f.field], f)]).filter(r =&gt; r[1] !== null);
+  if(rows.length) h += &#x27;&lt;dl&gt;&#x27; + rows.map(r =&gt; &#x27;&lt;dt&gt;&#x27; + esc(r[0]) + &#x27;&lt;/dt&gt;&lt;dd&gt;&#x27; + esc(r[1]) + &#x27;&lt;/dd&gt;&#x27;).join(&#x27;&#x27;) + &#x27;&lt;/dl&gt;&#x27;;
+  return h + &#x27;&lt;/div&gt;&#x27;;
+}
+
+// ---------- style expressions
+function colorExpr(L){
+  const cb = L.color_by, st = L.style || {};
+  if(!cb) return st.color || &#x27;#3B82F6&#x27;;
+  if(cb.type === &#x27;categorical&#x27;){
+    const e = [&#x27;match&#x27;, [&#x27;to-string&#x27;, [&#x27;get&#x27;, cb.field]]];
+    cb.categories.forEach(c =&gt; e.push(String(c.value), c.color)); e.push(cb.other_color || &#x27;#9AA3AD&#x27;); return e;
+  }
+  const e = [&#x27;interpolate&#x27;, [&#x27;linear&#x27;], [&#x27;to-number&#x27;, [&#x27;get&#x27;, cb.field]]]; cb.stops.forEach(s =&gt; e.push(s[0], s[1]));
+  return [&#x27;case&#x27;, [&#x27;==&#x27;, [&#x27;get&#x27;, cb.field], null], cb.nodata_color || &#x27;#9AA3AD&#x27;, e];
+}
+function edgeExpr(L){
+  const cb = L.color_by, st = L.style || {};
+  if(cb &amp;&amp; cb.type === &#x27;categorical&#x27; &amp;&amp; cb.categories.some(c =&gt; c.edge)){
+    const e = [&#x27;match&#x27;, [&#x27;to-string&#x27;, [&#x27;get&#x27;, cb.field]]];
+    cb.categories.forEach(c =&gt; e.push(String(c.value), c.edge || st.outline || &#x27;#FFFFFF&#x27;)); e.push(st.outline || &#x27;#FFFFFF&#x27;); return e;
+  }
+  return st.outline || (L.kind === &#x27;polygon&#x27; ? colorExpr(L) : &#x27;#FFFFFF&#x27;);
+}
+const hov = (a, b) =&gt; [&#x27;case&#x27;, [&#x27;boolean&#x27;, [&#x27;feature-state&#x27;, &#x27;hover&#x27;], false], a, b];
+
+// ---------- map
+const basePad = () =&gt; phone() ? {top:24, right:24, left:24, bottom:panel.offsetHeight + 24}
+                              : {top:40, right:40, bottom:40, left:panel.classList.contains(&#x27;closed&#x27;) ? 40 : (C.embed ? 330 : 400)};
+let map = null;
+// The map is created only once its final style is known, and overlays go on at &#x27;style.load&#x27;. (Adding them on
+// the first &#x27;styledata&#x27; event raced the style load and sometimes left the map without overlays.)
+function start(style){
+  map = new maplibregl.Map({container:&#x27;map&#x27;, style:style,
+    bounds:[[C.bounds[0], C.bounds[1]], [C.bounds[2], C.bounds[3]]], fitBoundsOptions:{padding:basePad()},
+    maxZoom:20, dragRotate:false, pitchWithRotate:false, attributionControl:false, hash:C.hash === false ? false : &#x27;view&#x27;,
+    cooperativeGestures:!!C.embed});           // embedded: two fingers / Ctrl+scroll move the map, so the page still scrolls
+  map.touchZoomRotate.disableRotation();
+  map.addControl(new maplibregl.NavigationControl({showCompass:false}), &#x27;top-right&#x27;);
+  if(C.embed) map.addControl(new maplibregl.FullscreenControl(), &#x27;top-right&#x27;);
+  map.addControl(new maplibregl.ScaleControl({unit:&#x27;imperial&#x27;, maxWidth:110}), &#x27;bottom-left&#x27;);
+  map.addControl(new maplibregl.ScaleControl({unit:&#x27;metric&#x27;, maxWidth:110}), &#x27;bottom-left&#x27;);
+  map.addControl(new maplibregl.AttributionControl({compact:true}), &#x27;bottom-right&#x27;);
+  map.once(&#x27;style.load&#x27;, addOverlays);
+  map.once(&#x27;load&#x27;, () =&gt; {
+    addOverlays();                                   // no-op if &#x27;style.load&#x27; already added them
+    if(!location.hash.includes(&#x27;view=&#x27;)) fly(C.bounds, false);
+    document.querySelectorAll(&#x27;.maplibregl-ctrl-attrib&#x27;).forEach(e =&gt; {      // start the credits folded
+      e.classList.remove(&#x27;maplibregl-compact-show&#x27;); e.removeAttribute(&#x27;open&#x27;); });
+  });
+}
+
+const NAIP_URL = &#x27;https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPPlus/ImageServer/exportImage?bbox={bbox-epsg-3857}&amp;bboxSR=3857&amp;imageSR=3857&amp;size=512,512&amp;format=jpg&amp;f=image&#x27;;
+const ESRI_URL = &#x27;https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#x27;;
+const ESRI_ATTR = &#x27;Imagery: Esri, Maxar, Earthstar Geographics, and the GIS User Community&#x27;;
+const NAIP_ATTR = &#x27;Aerial photo: USDA NAIP via USGS The National Map (public domain)&#x27;;
+const BM = {
+  satellite:{label:&#x27;Satellite&#x27;, note:&#x27;Esri World Imagery. Image dates vary by place and can be before or after an event; check before reading damage from the photo.&#x27;},
+  aerial:{label:&#x27;Aerial (NAIP)&#x27;, note:&#x27;USDA NAIP aerial photography via USGS The National Map: the most recent flight here, which can be after an event.&#x27;},
+  map:{label:&#x27;Map&#x27;, note:&#x27;Street map: OpenStreetMap data via OpenFreeMap.&#x27;},
+  hybrid:{label:&#x27;Hybrid&#x27;, note:&#x27;Esri World Imagery with street and place labels from OpenStreetMap.&#x27;}
+};
+Object.entries(C.basemap_notes || {}).forEach(([k, v]) =&gt; { if(BM[k]) BM[k].note = v; });
+const modes = (C.basemaps || [&#x27;satellite&#x27;,&#x27;aerial&#x27;,&#x27;map&#x27;,&#x27;hybrid&#x27;]).filter(m =&gt; BM[m]);
+let mode = modes.includes(C.basemap) ? C.basemap : modes[0];
+let vecLayers = [], symLayers = [];
+modes.forEach(m =&gt; { const b = document.createElement(&#x27;button&#x27;); b.type = &#x27;button&#x27;; b.dataset.m = m; b.textContent = BM[m].label;
+  b.addEventListener(&#x27;click&#x27;, () =&gt; setBase(m)); $(&#x27;bm&#x27;).appendChild(b); });
+function vis(id, on){ if(map &amp;&amp; map.getLayer(id)) map.setLayoutProperty(id, &#x27;visibility&#x27;, on ? &#x27;visible&#x27; : &#x27;none&#x27;); }
+function setBase(m){
+  mode = m; vis(&#x27;bm-esri&#x27;, m === &#x27;satellite&#x27; || m === &#x27;hybrid&#x27;); vis(&#x27;bm-naip&#x27;, m === &#x27;aerial&#x27;);
+  vecLayers.forEach(id =&gt; vis(id, m === &#x27;map&#x27; || (m === &#x27;hybrid&#x27; &amp;&amp; symLayers.includes(id))));
+  document.querySelectorAll(&#x27;#bm button&#x27;).forEach(b =&gt; b.setAttribute(&#x27;aria-pressed&#x27;, String(b.dataset.m === m)));
+  $(&#x27;bmNote&#x27;).textContent = BM[m].note;
+}
+const rasterBase = {
+  sources:{ &#x27;bm-esri&#x27;:{type:&#x27;raster&#x27;, tiles:[ESRI_URL], tileSize:256, maxzoom:19, attribution:ESRI_ATTR},
+            &#x27;bm-naip&#x27;:{type:&#x27;raster&#x27;, tiles:[NAIP_URL], tileSize:256, maxzoom:20, attribution:NAIP_ATTR} },
+  layers:[ {id:&#x27;bm-esri&#x27;, type:&#x27;raster&#x27;, source:&#x27;bm-esri&#x27;, layout:{visibility:&#x27;none&#x27;}},
+           {id:&#x27;bm-naip&#x27;, type:&#x27;raster&#x27;, source:&#x27;bm-naip&#x27;, layout:{visibility:&#x27;none&#x27;}} ]
+};
+// the street-map style is optional: if it has not arrived in 6 s, start with imagery only rather than a blank page
+const styleCtl = new AbortController(); setTimeout(() =&gt; styleCtl.abort(), 6000);
+fetch(&#x27;https://tiles.openfreemap.org/styles/&#x27; + (C.vector_style || &#x27;liberty&#x27;), {signal:styleCtl.signal}).then(r =&gt; r.json()).then(st =&gt; {
+  st.layers.forEach(l =&gt; { l.layout = l.layout || {}; });
+  vecLayers = st.layers.filter(l =&gt; l.type !== &#x27;background&#x27;).map(l =&gt; l.id);
+  symLayers = st.layers.filter(l =&gt; l.type === &#x27;symbol&#x27;).map(l =&gt; l.id);
+  Object.assign(st.sources, rasterBase.sources);
+  st.layers.splice(1, 0, ...rasterBase.layers);
+  start(st);
+}).catch(() =&gt; {
+  modes.splice(0, modes.length, ...modes.filter(m =&gt; m === &#x27;satellite&#x27; || m === &#x27;aerial&#x27;));
+  document.querySelectorAll(&#x27;#bm button&#x27;).forEach(b =&gt; { if(!modes.includes(b.dataset.m)) b.remove(); });
+  if(!modes.includes(mode)) mode = &#x27;satellite&#x27;;
+  start({version:8, sources:rasterBase.sources, layers:rasterBase.layers});
+});
+
+// ---------- overlays
+const hidden = {};         // layer id -&gt; Set of hidden category values
+const sub = {};            // layer id -&gt; map layer ids drawn for it
+const hitLayers = [];      // map layer ids that answer hover/tap, top-most first
+function dataFor(L){ if(L.url) return L.url; const el = $(&#x27;d-&#x27; + L.id); return el ? JSON.parse(el.textContent) : {type:&#x27;FeatureCollection&#x27;, features:[]}; }
+function addOverlays(){
+  if(map.getSource(&#x27;ov-&#x27; + (C.layers[0] || {}).id)) return;
+  C.layers.forEach(L =&gt; {
+    const src = &#x27;ov-&#x27; + L.id, st = L.style || {}, ids = [], v = L.visible === false ? &#x27;none&#x27; : &#x27;visible&#x27;;
+    const zoom = o =&gt; { if(L.minzoom != null) o.minzoom = L.minzoom; if(L.maxzoom != null) o.maxzoom = L.maxzoom; return o; };
+    if(L.kind === &#x27;raster&#x27;){
+      map.addSource(src, {type:&#x27;image&#x27;, url:L.image.src, coordinates:L.image.coordinates});
+      map.addLayer(zoom({id:L.id + &#x27;-img&#x27;, type:&#x27;raster&#x27;, source:src, layout:{visibility:v},
+        paint:{&#x27;raster-opacity&#x27;:L.opacity ?? .75, &#x27;raster-resampling&#x27;:L.resampling || &#x27;nearest&#x27;, &#x27;raster-fade-duration&#x27;:0}})); ids.push(L.id + &#x27;-img&#x27;);
+    } else {
+      map.addSource(src, {type:&#x27;geojson&#x27;, data:dataFor(L), generateId:true});
+      if(L.kind === &#x27;line&#x27;){
+        const w = st.width ?? 2;
+        if(st.halo !== false) { map.addLayer(zoom({id:L.id + &#x27;-halo&#x27;, type:&#x27;line&#x27;, source:src, layout:{visibility:v, &#x27;line-join&#x27;:&#x27;round&#x27;},
+          paint:{&#x27;line-color&#x27;:st.halo_color || &#x27;#0B1218&#x27;, &#x27;line-width&#x27;:w + 2.6, &#x27;line-opacity&#x27;:.45}})); ids.push(L.id + &#x27;-halo&#x27;); }
+        const p = {&#x27;line-color&#x27;:colorExpr(L), &#x27;line-width&#x27;:hov(w + 1.5, w), &#x27;line-opacity&#x27;:st.opacity ?? 1};
+        if(st.dash) p[&#x27;line-dasharray&#x27;] = st.dash;
+        map.addLayer(zoom({id:L.id + &#x27;-line&#x27;, type:&#x27;line&#x27;, source:src, layout:{visibility:v, &#x27;line-join&#x27;:&#x27;round&#x27;}, paint:p})); ids.push(L.id + &#x27;-line&#x27;);
+        map.addLayer(zoom({id:L.id + &#x27;-hit&#x27;, type:&#x27;line&#x27;, source:src, layout:{visibility:v}, paint:{&#x27;line-color&#x27;:&#x27;#000&#x27;, &#x27;line-width&#x27;:14, &#x27;line-opacity&#x27;:0.001}}));
+        ids.push(L.id + &#x27;-hit&#x27;); if(L.tooltip) hitLayers.unshift(L.id + &#x27;-hit&#x27;);
+      } else if(L.kind === &#x27;polygon&#x27;){
+        map.addLayer(zoom({id:L.id + &#x27;-fill&#x27;, type:&#x27;fill&#x27;, source:src, layout:{visibility:v},
+          paint:{&#x27;fill-color&#x27;:colorExpr(L), &#x27;fill-opacity&#x27;:hov(Math.min(1, (st.fill_opacity ?? .55) + .2), st.fill_opacity ?? .55)}}));
+        map.addLayer(zoom({id:L.id + &#x27;-line&#x27;, type:&#x27;line&#x27;, source:src, layout:{visibility:v},
+          paint:{&#x27;line-color&#x27;:edgeExpr(L), &#x27;line-width&#x27;:hov((st.outline_width ?? 1) + 1.6, st.outline_width ?? 1), &#x27;line-opacity&#x27;:.95}}));
+        ids.push(L.id + &#x27;-fill&#x27;, L.id + &#x27;-line&#x27;); if(L.tooltip) hitLayers.unshift(L.id + &#x27;-fill&#x27;);
+      } else {
+        const r = st.radius || [[8, 2.5], [12, 4], [16, 7]], rad = [&#x27;interpolate&#x27;, [&#x27;linear&#x27;], [&#x27;zoom&#x27;]];
+        r.forEach(s =&gt; rad.push(s[0], s[1]));
+        const lay = {visibility:v}, cb = L.color_by;
+        if(cb &amp;&amp; cb.type === &#x27;categorical&#x27;){            // the first class in the key draws on top
+          const k = [&#x27;match&#x27;, [&#x27;to-string&#x27;, [&#x27;get&#x27;, cb.field]]], n = cb.categories.length;
+          cb.categories.forEach((c, i) =&gt; k.push(String(c.value), n - i)); k.push(0); lay[&#x27;circle-sort-key&#x27;] = k; }
+        map.addLayer(zoom({id:L.id + &#x27;-pt&#x27;, type:&#x27;circle&#x27;, source:src, layout:lay, paint:{
+          &#x27;circle-radius&#x27;:rad, &#x27;circle-color&#x27;:colorExpr(L), &#x27;circle-opacity&#x27;:st.opacity ?? .95,
+          &#x27;circle-stroke-color&#x27;:edgeExpr(L), &#x27;circle-stroke-width&#x27;:hov(2.6, st.outline_width ?? .7)}}));
+        ids.push(L.id + &#x27;-pt&#x27;); if(L.tooltip) hitLayers.unshift(L.id + &#x27;-pt&#x27;);
+      }
+    }
+    sub[L.id] = ids; hidden[L.id] = new Set();
+  });
+  setBase(mode); buildKey(); wire();
+}
+
+// ---------- key = layer control (visibility + category filters + counts)
+function swatch(L, color){
+  const s = document.createElement(&#x27;span&#x27;);
+  s.className = &#x27;sw&#x27; + (L.kind === &#x27;polygon&#x27; || L.kind === &#x27;raster&#x27; ? &#x27; sq&#x27; : L.kind === &#x27;line&#x27; ? &#x27; ln&#x27; : &#x27;&#x27;);
+  if(L.kind === &#x27;line&#x27;) s.style.borderTopColor = color, s.style.borderTopStyle = (L.style || {}).dash ? &#x27;dashed&#x27; : &#x27;solid&#x27;;
+  else s.style.background = color;
+  return s;
+}
+function applyFilter(L){
+  const cb = L.color_by, h = hidden[L.id];
+  const f = cb &amp;&amp; h.size ? [&#x27;!&#x27;, [&#x27;in&#x27;, [&#x27;to-string&#x27;, [&#x27;get&#x27;, cb.field]], [&#x27;literal&#x27;, [...h]]]] : null;
+  sub[L.id].forEach(id =&gt; { if(map.getLayer(id) &amp;&amp; L.kind !== &#x27;raster&#x27;) map.setFilter(id, f); });
+}
+function buildKey(){
+  const box = $(&#x27;layers&#x27;);
+  C.layers.forEach(L =&gt; {
+    if(L.in_key === false) return;
+    const d = document.createElement(&#x27;div&#x27;); d.className = &#x27;lay&#x27;;
+    const row = document.createElement(&#x27;label&#x27;); row.className = &#x27;lrow&#x27;;
+    const cb = document.createElement(&#x27;input&#x27;); cb.type = &#x27;checkbox&#x27;; cb.checked = L.visible !== false;
+    cb.addEventListener(&#x27;change&#x27;, () =&gt; sub[L.id].forEach(id =&gt; vis(id, cb.checked)));
+    row.appendChild(cb);
+    const cbx = L.color_by;
+    if(!cbx) row.appendChild(swatch(L, (L.style || {}).color || &#x27;#3B82F6&#x27;));
+    const nm = document.createElement(&#x27;span&#x27;); nm.textContent = L.name; row.appendChild(nm);
+    if(L.count != null){ const c = document.createElement(&#x27;span&#x27;); c.className = &#x27;cnt&#x27;; c.textContent = L.count.toLocaleString(&#x27;en-US&#x27;); row.appendChild(c); }
+    d.appendChild(row);
+    if(L.description){ const p = document.createElement(&#x27;p&#x27;); p.className = &#x27;ldesc&#x27;; p.innerHTML = both(L.description, L.description_tech); d.appendChild(p); }
+    if(cbx &amp;&amp; cbx.type === &#x27;categorical&#x27;){
+      const ul = document.createElement(&#x27;ul&#x27;); ul.className = &#x27;cats&#x27;;
+      cbx.categories.forEach(c =&gt; {
+        const li = document.createElement(&#x27;li&#x27;), lab = document.createElement(&#x27;label&#x27;), x = document.createElement(&#x27;input&#x27;);
+        x.type = &#x27;checkbox&#x27;; x.checked = true;
+        x.addEventListener(&#x27;change&#x27;, () =&gt; { x.checked ? hidden[L.id].delete(String(c.value)) : hidden[L.id].add(String(c.value)); applyFilter(L); });
+        lab.append(x, swatch(L, c.color));
+        const t = document.createElement(&#x27;span&#x27;); t.textContent = c.label; lab.appendChild(t);
+        if(c.count != null){ const n = document.createElement(&#x27;span&#x27;); n.className = &#x27;cnt&#x27;; n.textContent = c.count.toLocaleString(&#x27;en-US&#x27;); lab.appendChild(n); }
+        li.appendChild(lab); ul.appendChild(li);
+      });
+      d.appendChild(ul);
+    } else if(cbx &amp;&amp; cbx.type === &#x27;continuous&#x27;){
+      const g = document.createElement(&#x27;div&#x27;); g.className = &#x27;grad&#x27;;
+      const lo = cbx.stops[0][0], hi = cbx.stops[cbx.stops.length - 1][0];
+      g.style.background = &#x27;linear-gradient(90deg,&#x27; + cbx.stops.map(s =&gt; s[1] + &#x27; &#x27; + ((s[0] - lo) / (hi - lo) * 100).toFixed(1) + &#x27;%&#x27;).join(&#x27;,&#x27;) + &#x27;)&#x27;;
+      const gl = document.createElement(&#x27;div&#x27;); gl.className = &#x27;gl&#x27;;
+      gl.innerHTML = &#x27;&lt;span&gt;&#x27; + esc(cbx.min_label ?? lo) + &#x27;&lt;/span&gt;&lt;span&gt;&#x27; + esc(cbx.max_label ?? hi) + &#x27;&lt;/span&gt;&#x27;;
+      d.append(g, gl);
+      if(cbx.label){ const t = document.createElement(&#x27;div&#x27;); t.className = &#x27;gt&#x27;; t.textContent = cbx.label; d.appendChild(t); }
+    }
+    box.appendChild(d);
+  });
+}
+
+// ---------- places to look (tabs)
+const sites = [{name:C.whole_label || &#x27;Whole area&#x27;, bounds:C.bounds, note:&#x27;&#x27;}].concat(C.sites || []);
+function fly(b, anim){ if(map) map.fitBounds([[b[0], b[1]], [b[2], b[3]]], {padding:basePad(), maxZoom:C.max_fit_zoom || 17, duration:anim ? 900 : 0}); }
+if(!C.sites || !C.sites.length) $(&#x27;sitesSec&#x27;).remove();
+else sites.forEach((s, i) =&gt; {
+  const b = document.createElement(&#x27;button&#x27;); b.type = &#x27;button&#x27;; b.setAttribute(&#x27;role&#x27;, &#x27;tab&#x27;); b.textContent = s.name;
+  b.setAttribute(&#x27;aria-selected&#x27;, String(i === 0));
+  b.addEventListener(&#x27;click&#x27;, () =&gt; { document.querySelectorAll(&#x27;#sites button&#x27;).forEach(x =&gt; x.setAttribute(&#x27;aria-selected&#x27;, String(x === b)));
+    $(&#x27;siteNote&#x27;).innerHTML = s.note || &#x27;&#x27;; fly(s.bounds, true); if(phone()) setPanel(false); });
+  $(&#x27;sites&#x27;).appendChild(b);
+});
+
+// ---------- hover (desktop) and tap (phone)
+const pop = new maplibregl.Popup({closeButton:false, closeOnClick:false, maxWidth:&#x27;320px&#x27;, offset:12});
+let hovered = null;
+const layerOf = id =&gt; C.layers.find(L =&gt; sub[L.id] &amp;&amp; sub[L.id].includes(id));
+function pick(e){
+  const ids = hitLayers.filter(id =&gt; map.getLayer(id) &amp;&amp; map.getLayoutProperty(id, &#x27;visibility&#x27;) !== &#x27;none&#x27;);
+  if(!ids.length) return null;
+  const fs = map.queryRenderedFeatures(e.point, {layers:ids});
+  return fs.length ? fs[0] : null;
+}
+function setHover(f){
+  if(hovered) map.setFeatureState(hovered, {hover:false}); hovered = null;
+  if(f &amp;&amp; f.id !== undefined){ hovered = {source:f.source, id:f.id}; map.setFeatureState(hovered, {hover:true}); }
+}
+function wire(){
+  map.on(&#x27;mousemove&#x27;, e =&gt; { if(!canHover) return; const f = pick(e);
+    map.getCanvas().style.cursor = f ? &#x27;pointer&#x27; : &#x27;&#x27;;
+    if(!f){ pop.remove(); setHover(null); return; }
+    setHover(f); pop.setLngLat(e.lngLat).setHTML(card(layerOf(f.layer.id), f.properties)).addTo(map); });
+  map.on(&#x27;mouseout&#x27;, () =&gt; { pop.remove(); setHover(null); });
+  map.on(&#x27;click&#x27;, e =&gt; { const f = pick(e);
+    if(canHover){ if(f){ pop.remove(); new maplibregl.Popup({maxWidth:&#x27;320px&#x27;, offset:12}).setLngLat(e.lngLat).setHTML(card(layerOf(f.layer.id), f.properties)).addTo(map); } return; }
+    if(!f){ closeSheet(); return; }
+    setHover(f); $(&#x27;sheetBody&#x27;).innerHTML = card(layerOf(f.layer.id), f.properties); $(&#x27;sheet&#x27;).style.display = &#x27;block&#x27;; });
+}
+function closeSheet(){ $(&#x27;sheet&#x27;).style.display = &#x27;none&#x27;; setHover(null); }
+$(&#x27;sheetClose&#x27;).addEventListener(&#x27;click&#x27;, closeSheet);
+document.addEventListener(&#x27;keydown&#x27;, e =&gt; { if(e.key === &#x27;Escape&#x27;){ closeSheet(); pop.remove(); } });
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;
+"></iframe><details class="checks"><summary>How this panel was checked</summary><ul><li>Positions from the SCAR gazetteer, good to about a kilometre: enough to show the sites, not colonies.</li></ul></details></div></section><section class="sec"><h2>How big</h2><p class=sec-lede>Gentoo average 5.1 kg, about a third heavier than the other two species.</p><div class="card"><h3>Body mass by species and sex</h3><p class="cap"><span class="plain">Gentoo are by far the heaviest. In every species males outweigh females, by 12% to 20%; the whiskers don't overlap, so the gaps are real.</span><span class="tech">Means with 95% percentile bootstrap intervals (4000 resamples within species × sex). Male/female mean ratio − 1: Adélie 0.200, Chinstrap 0.117, Gentoo 0.172.</span></p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/body-mass-species-sex.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/body-mass-species-sex.html" data-build="6752f72f05a6" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/body-mass-species-sex.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Females
+Birds sexed as female."><span class="sw" style="background:var(--s1)"></span>Females</span><span class="k" data-tip="Males
+Birds sexed as male."><span class="sw" style="background:var(--s5)"></span>Males</span></div><div class="hb"><div class="lab">Adélie<small>146 birds</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:28.57%"></i><i class="grid" style="left:57.14%"></i><i class="grid" style="left:85.71%"></i><div class="brow"><div class="bar" style="width:48.13%;background:var(--s1)" data-tip="Adélie · females
+average 3.37 kg (73 birds)
+Range we can trust: 3.31–3.43 kg
+@@tech
+Adélie · females
+mean 3369 g, sd 269 g, n = 73
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:47.24%;width:1.76%"></i><span class="val" style="left:calc(49.00% + 6px)">3.37  kg</span></div><div class="brow"><div class="bar" style="width:57.76%;background:var(--s5)" data-tip="Adélie · males
+average 4.04 kg (73 birds)
+Range we can trust: 3.97–4.13 kg
+@@tech
+Adélie · males
+mean 4043 g, sd 347 g, n = 73
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:56.65%;width:2.28%"></i><span class="val" style="left:calc(58.93% + 6px)">4.04  kg</span></div></div><div class="lab">Chinstrap<small>68 birds</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:28.57%"></i><i class="grid" style="left:57.14%"></i><i class="grid" style="left:85.71%"></i><div class="brow"><div class="bar" style="width:50.39%;background:var(--s1)" data-tip="Chinstrap · females
+average 3.53 kg (34 birds)
+Range we can trust: 3.43–3.62 kg
+@@tech
+Chinstrap · females
+mean 3527 g, sd 285 g, n = 34
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:49.01%;width:2.66%"></i><span class="val" style="left:calc(51.67% + 6px)">3.53  kg</span></div><div class="brow"><div class="bar" style="width:56.27%;background:var(--s5)" data-tip="Chinstrap · males
+average 3.94 kg (34 birds)
+Range we can trust: 3.82–4.06 kg
+@@tech
+Chinstrap · males
+mean 3939 g, sd 362 g, n = 34
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:54.63%;width:3.34%"></i><span class="val" style="left:calc(57.97% + 6px)">3.94  kg</span></div></div><div class="lab">Gentoo<small>119 birds</small></div><div class="area"><i class="grid" style="left:0.00%"></i><i class="grid" style="left:28.57%"></i><i class="grid" style="left:57.14%"></i><i class="grid" style="left:85.71%"></i><div class="brow"><div class="bar" style="width:66.85%;background:var(--s1)" data-tip="Gentoo · females
+average 4.68 kg (58 birds)
+Range we can trust: 4.61–4.75 kg
+@@tech
+Gentoo · females
+mean 4680 g, sd 282 g, n = 58
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:65.84%;width:2.05%"></i><span class="val" style="left:calc(67.89% + 6px)">4.68  kg</span></div><div class="brow"><div class="bar" style="width:78.35%;background:var(--s5)" data-tip="Gentoo · males
+average 5.48 kg (61 birds)
+Range we can trust: 5.41–5.56 kg
+@@tech
+Gentoo · males
+mean 5485 g, sd 313 g, n = 61
+95% percentile CI from 4000 bootstrap resamples of birds (one per nest)"></div><i class="ci" style="left:77.25%;width:2.21%"></i><span class="val" style="left:calc(79.46% + 6px)">5.48  kg</span></div></div><div></div><div class="axis"><span style="left:0.00%">0</span><span style="left:28.57%">2</span><span style="left:57.14%">4</span><span style="left:85.71%">6</span></div></div><div class="axis-t"><span data-tip="Average body mass
+Weight at the nest, in kilograms; bars start at zero.
+@@tech
+Average body mass
+Arithmetic mean of body_mass_g / 1000 per species × sex.">Average body mass</span></div><details class="checks"><summary>How this panel was checked</summary><ul><li>Within a species and sex every bird is from a different nest (checked in the script), so resampling birds resamples independent nests.</li><li>9 measured birds of unknown sex are left out of this chart.</li><li>Bars start at zero; one axis for all species.</li></ul></details></div><div class="card"><h3>Flipper length, by season</h3><p class="cap"><span class="plain">Each species keeps its size from season to season; the differences are between species, not years.</span><span class="tech">Season means per species, n per point in the hover; season-to-season changes are within a few mm.</span></p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/flipper-length-season.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/flipper-length-season.html" data-build="0dbc6be29db8" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/flipper-length-season.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Adélie penguin
+Pygoscelis adeliae"><span class="sw" style="background:var(--s2)"></span>Adélie</span><span class="k" data-tip="Chinstrap penguin
+Pygoscelis antarcticus"><span class="sw" style="background:var(--s6)"></span>Chinstrap</span><span class="k" data-tip="Gentoo penguin
+Pygoscelis papua"><span class="sw" style="background:var(--s3)"></span>Gentoo</span></div><div class="ax-y" data-tip="Flipper length
+Wing (flipper) length in millimetres. The axis does not start at zero, to show the gaps between species; it is the same for all three.">Average flipper length</div><div class="svgwrap"><svg class="wide" viewBox="0 0 1000 320" role="img"><line class="gridl" x1="49" x2="982" y1="286.0" y2="286.0"/><text x="41" y="290.0" text-anchor="end">180</text><line class="gridl" x1="49" x2="982" y1="225.6" y2="225.6"/><text x="41" y="229.6" text-anchor="end">190</text><line class="gridl" x1="49" x2="982" y1="165.1" y2="165.1"/><text x="41" y="169.1" text-anchor="end">200</text><line class="gridl" x1="49" x2="982" y1="104.7" y2="104.7"/><text x="41" y="108.7" text-anchor="end">210</text><line class="gridl" x1="49" x2="982" y1="44.2" y2="44.2"/><text x="41" y="48.2" text-anchor="end">220</text><text x="49.0" y="312" text-anchor="middle">2007–08</text><text x="515.5" y="312" text-anchor="middle">2008–09</text><text x="982.0" y="312" text-anchor="end">2009–10</text><line class="axisl" x1="49" x2="982" y1="286.0" y2="286.0"/><polyline points="49.0,246.1 515.5,219.5 982.0,212.9" fill="none" stroke="var(--s2)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="49.0" cy="246.1" r="4" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2007–08
+average 186.6 mm (49 birds)
+@@tech
+Adélie · 2007–08
+sd 6.5 mm"/><circle class="pt" cx="515.5" cy="219.5" r="4" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2008–09
+average 191.0 mm (50 birds)
+@@tech
+Adélie · 2008–09
+sd 5.7 mm"/><circle class="pt" cx="982.0" cy="212.9" r="4" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2009–10
+average 192.1 mm (52 birds)
+@@tech
+Adélie · 2009–10
+sd 6.2 mm"/><polyline points="49.0,211.0 515.5,179.0 982.0,176.6" fill="none" stroke="var(--s6)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="49.0" cy="211.0" r="4" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2007–08
+average 192.4 mm (26 birds)
+@@tech
+Chinstrap · 2007–08
+sd 6.1 mm"/><circle class="pt" cx="515.5" cy="179.0" r="4" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2008–09
+average 197.7 mm (18 birds)
+@@tech
+Chinstrap · 2008–09
+sd 7.3 mm"/><circle class="pt" cx="982.0" cy="176.6" r="4" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2009–10
+average 198.1 mm (24 birds)
+@@tech
+Chinstrap · 2009–10
+sd 6.9 mm"/><polyline points="49.0,73.8 515.5,58.7 982.0,53.9" fill="none" stroke="var(--s3)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="49.0" cy="73.8" r="4" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2007–08
+average 215.1 mm (34 birds)
+@@tech
+Gentoo · 2007–08
+sd 5.5 mm"/><circle class="pt" cx="515.5" cy="58.7" r="4" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2008–09
+average 217.6 mm (46 birds)
+@@tech
+Gentoo · 2008–09
+sd 6.5 mm"/><circle class="pt" cx="982.0" cy="53.9" r="4" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2009–10
+average 218.4 mm (43 birds)
+@@tech
+Gentoo · 2009–10
+sd 6.9 mm"/></svg><svg class="narrow" viewBox="0 0 360 250" role="img"><line class="gridl" x1="43" x2="346" y1="216.0" y2="216.0"/><text x="35" y="220.0" text-anchor="end">180</text><line class="gridl" x1="43" x2="346" y1="171.1" y2="171.1"/><text x="35" y="175.1" text-anchor="end">190</text><line class="gridl" x1="43" x2="346" y1="126.2" y2="126.2"/><text x="35" y="130.2" text-anchor="end">200</text><line class="gridl" x1="43" x2="346" y1="81.3" y2="81.3"/><text x="35" y="85.3" text-anchor="end">210</text><line class="gridl" x1="43" x2="346" y1="36.4" y2="36.4"/><text x="35" y="40.4" text-anchor="end">220</text><text x="43.0" y="242" text-anchor="middle">2007–08</text><text x="194.5" y="242" text-anchor="middle">2008–09</text><text x="346.0" y="242" text-anchor="end">2009–10</text><line class="axisl" x1="43" x2="346" y1="216.0" y2="216.0"/><polyline points="43.0,186.4 194.5,166.6 346.0,161.7" fill="none" stroke="var(--s2)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="43.0" cy="186.4" r="3.5" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2007–08
+average 186.6 mm (49 birds)
+@@tech
+Adélie · 2007–08
+sd 6.5 mm"/><circle class="pt" cx="194.5" cy="166.6" r="3.5" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2008–09
+average 191.0 mm (50 birds)
+@@tech
+Adélie · 2008–09
+sd 5.7 mm"/><circle class="pt" cx="346.0" cy="161.7" r="3.5" fill="var(--s2)" stroke="var(--surface)" stroke-width="1.5" data-tip="Adélie · 2009–10
+average 192.1 mm (52 birds)
+@@tech
+Adélie · 2009–10
+sd 6.2 mm"/><polyline points="43.0,160.3 194.5,136.5 346.0,134.8" fill="none" stroke="var(--s6)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="43.0" cy="160.3" r="3.5" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2007–08
+average 192.4 mm (26 birds)
+@@tech
+Chinstrap · 2007–08
+sd 6.1 mm"/><circle class="pt" cx="194.5" cy="136.5" r="3.5" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2008–09
+average 197.7 mm (18 birds)
+@@tech
+Chinstrap · 2008–09
+sd 7.3 mm"/><circle class="pt" cx="346.0" cy="134.8" r="3.5" fill="var(--s6)" stroke="var(--surface)" stroke-width="1.5" data-tip="Chinstrap · 2009–10
+average 198.1 mm (24 birds)
+@@tech
+Chinstrap · 2009–10
+sd 6.9 mm"/><polyline points="43.0,58.4 194.5,47.2 346.0,43.6" fill="none" stroke="var(--s3)" stroke-width="2.4" stroke-linejoin="round"/><circle class="pt" cx="43.0" cy="58.4" r="3.5" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2007–08
+average 215.1 mm (34 birds)
+@@tech
+Gentoo · 2007–08
+sd 5.5 mm"/><circle class="pt" cx="194.5" cy="47.2" r="3.5" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2008–09
+average 217.6 mm (46 birds)
+@@tech
+Gentoo · 2008–09
+sd 6.5 mm"/><circle class="pt" cx="346.0" cy="43.6" r="3.5" fill="var(--s3)" stroke="var(--surface)" stroke-width="1.5" data-tip="Gentoo · 2009–10
+average 218.4 mm (43 birds)
+@@tech
+Gentoo · 2009–10
+sd 6.9 mm"/></svg></div><div class="ax-x" data-tip="Breeding season
+Southern summer, November to January; each bird is counted in its season.
+@@tech
+Breeding season
+palmerpenguins `year` = first year of the season (PAL0708 = 2007).">Breeding season</div><details class="checks"><summary>How this panel was checked</summary><ul><li>Three seasons: too few to call a trend, and none is claimed.</li><li>Axis runs 180–225 mm (not from zero) so the species gaps are visible; stated on the axis hover.</li></ul></details></div><div class="card"><h3>Average size by species and sex</h3><p class="cap">Gentoo are the largest on every measure except bill depth, where they are the smallest.</p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/average-size-species-sex.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/average-size-species-sex.html" data-build="52c6ddc343d7" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/average-size-species-sex.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Shading
+Darker = larger. Size only: no colour means good or bad."><span class="nw">smaller</span><span class="ramp"><i style="background:color-mix(in srgb, #EFF5FB 30%, transparent)"></i><i style="background:color-mix(in srgb, #C7DCEF 30%, transparent)"></i><i style="background:color-mix(in srgb, #92BADF 30%, transparent)"></i><i style="background:color-mix(in srgb, #5A93CA 30%, transparent)"></i><i style="background:color-mix(in srgb, #336DAD 30%, transparent)"></i><i style="background:color-mix(in srgb, #1B4A85 30%, transparent)"></i><i style="background:color-mix(in srgb, #0E2C55 30%, transparent)"></i></span><span class="nw">larger</span></span></div><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th data-tip="Species
+Adélie, Chinstrap or Gentoo.">Species</th><th data-tip="Sex
+Determined from blood samples.">Sex</th><th class=n data-tip="Birds
+Birds of known sex with measurements.">Birds</th><th class=n data-tip="Bill length (mm)
+Average for the group; each column shaded on its own.">Bill length (mm)</th><th class=n data-tip="Bill depth (mm)
+Average for the group; each column shaded on its own.">Bill depth (mm)</th><th class=n data-tip="Flipper (mm)
+Average for the group; each column shaded on its own.">Flipper (mm)</th><th class=n data-tip="Body mass (g)
+Average for the group; each column shaded on its own.">Body mass (g)</th></tr></thead><tbody><tr><td data-label="Species">Adélie</td><td data-label="Sex">female</td><td class="n" data-label="Birds">73</td><td class="n sh" style="background:color-mix(in srgb, #EFF5FB 30%, transparent)" data-tip="Bill length (mm) · 37.3
+Adélie females: average bill length (mm) 37.3" data-label="Bill length (mm)">37.3</td><td class="n sh" style="background:color-mix(in srgb, #316BAC 30%, transparent)" data-tip="Bill depth (mm) · 17.6
+Adélie females: average bill depth (mm) 17.6" data-label="Bill depth (mm)">17.6</td><td class="n sh" style="background:color-mix(in srgb, #EFF5FB 30%, transparent)" data-tip="Flipper (mm) · 188
+Adélie females: average flipper (mm) 188" data-label="Flipper (mm)">188</td><td class="n sh" style="background:color-mix(in srgb, #EFF5FB 30%, transparent)" data-tip="Body mass (g) · 3,369
+Adélie females: average body mass (g) 3,369" data-label="Body mass (g)">3,369</td></tr><tr><td data-label="Species">Adélie</td><td data-label="Sex">male</td><td class="n" data-label="Birds">73</td><td class="n sh" style="background:color-mix(in srgb, #B6D1EA 30%, transparent)" data-tip="Bill length (mm) · 40.4
+Adélie males: average bill length (mm) 40.4" data-label="Bill length (mm)">40.4</td><td class="n sh" style="background:color-mix(in srgb, #103260 30%, transparent)" data-tip="Bill depth (mm) · 19.1
+Adélie males: average bill depth (mm) 19.1" data-label="Bill depth (mm)">19.1</td><td class="n sh" style="background:color-mix(in srgb, #D0E2F2 30%, transparent)" data-tip="Flipper (mm) · 192
+Adélie males: average flipper (mm) 192" data-label="Flipper (mm)">192</td><td class="n sh" style="background:color-mix(in srgb, #97BEE0 30%, transparent)" data-tip="Body mass (g) · 4,043
+Adélie males: average body mass (g) 4,043" data-label="Body mass (g)">4,043</td></tr><tr><td data-label="Species">Chinstrap</td><td data-label="Sex">female</td><td class="n" data-label="Birds">34</td><td class="n sh" style="background:color-mix(in srgb, #326CAC 30%, transparent)" data-tip="Bill length (mm) · 46.6
+Chinstrap females: average bill length (mm) 46.6" data-label="Bill length (mm)">46.6</td><td class="n sh" style="background:color-mix(in srgb, #326DAD 30%, transparent)" data-tip="Bill depth (mm) · 17.6
+Chinstrap females: average bill depth (mm) 17.6" data-label="Bill depth (mm)">17.6</td><td class="n sh" style="background:color-mix(in srgb, #D5E5F4 30%, transparent)" data-tip="Flipper (mm) · 192
+Chinstrap females: average flipper (mm) 192" data-label="Flipper (mm)">192</td><td class="n sh" style="background:color-mix(in srgb, #DEEBF6 30%, transparent)" data-tip="Body mass (g) · 3,527
+Chinstrap females: average body mass (g) 3,527" data-label="Body mass (g)">3,527</td></tr><tr><td data-label="Species">Chinstrap</td><td data-label="Sex">male</td><td class="n" data-label="Birds">34</td><td class="n sh" style="background:color-mix(in srgb, #0E2C55 30%, transparent)" data-tip="Bill length (mm) · 51.1
+Chinstrap males: average bill length (mm) 51.1" data-label="Bill length (mm)">51.1</td><td class="n sh" style="background:color-mix(in srgb, #0E2C55 30%, transparent)" data-tip="Bill depth (mm) · 19.3
+Chinstrap males: average bill depth (mm) 19.3" data-label="Bill depth (mm)">19.3</td><td class="n sh" style="background:color-mix(in srgb, #89B5DC 30%, transparent)" data-tip="Flipper (mm) · 200
+Chinstrap males: average flipper (mm) 200" data-label="Flipper (mm)">200</td><td class="n sh" style="background:color-mix(in srgb, #A8C9E6 30%, transparent)" data-tip="Body mass (g) · 3,939
+Chinstrap males: average body mass (g) 3,939" data-label="Body mass (g)">3,939</td></tr><tr><td data-label="Species">Gentoo</td><td data-label="Sex">female</td><td class="n" data-label="Birds">58</td><td class="n sh" style="background:color-mix(in srgb, #407CBA 30%, transparent)" data-tip="Bill length (mm) · 45.6
+Gentoo females: average bill length (mm) 45.6" data-label="Bill length (mm)">45.6</td><td class="n sh" style="background:color-mix(in srgb, #EFF5FB 30%, transparent)" data-tip="Bill depth (mm) · 14.2
+Gentoo females: average bill depth (mm) 14.2" data-label="Bill depth (mm)">14.2</td><td class="n sh" style="background:color-mix(in srgb, #265E9E 30%, transparent)" data-tip="Flipper (mm) · 213
+Gentoo females: average flipper (mm) 213" data-label="Flipper (mm)">213</td><td class="n sh" style="background:color-mix(in srgb, #3B77B7 30%, transparent)" data-tip="Body mass (g) · 4,680
+Gentoo females: average body mass (g) 4,680" data-label="Body mass (g)">4,680</td></tr><tr><td data-label="Species">Gentoo</td><td data-label="Sex">male</td><td class="n" data-label="Birds">61</td><td class="n sh" style="background:color-mix(in srgb, #154178 30%, transparent)" data-tip="Bill length (mm) · 49.5
+Gentoo males: average bill length (mm) 49.5" data-label="Bill length (mm)">49.5</td><td class="n sh" style="background:color-mix(in srgb, #9FC3E3 30%, transparent)" data-tip="Bill depth (mm) · 15.7
+Gentoo males: average bill depth (mm) 15.7" data-label="Bill depth (mm)">15.7</td><td class="n sh" style="background:color-mix(in srgb, #0E2C55 30%, transparent)" data-tip="Flipper (mm) · 222
+Gentoo males: average flipper (mm) 222" data-label="Flipper (mm)">222</td><td class="n sh" style="background:color-mix(in srgb, #0E2C55 30%, transparent)" data-tip="Body mass (g) · 5,485
+Gentoo males: average body mass (g) 5,485" data-label="Body mass (g)">5,485</td></tr></tbody></table></div><details class="checks"><summary>How this panel was checked</summary><ul><li>Averages only; the bars above show how certain the body-mass averages are.</li><li>Each column is shaded on its own blue scale: size only, no judgement.</li></ul></details></div></section><section class="sec"><h2>A trap</h2><div class="card"><h3>Bill length and depth: together they point the wrong way</h3><p class="cap"><span class="plain">Within every species, penguins with longer bills also have deeper bills (r = +0.39 to +0.65). Pool the species and it seems to reverse (r = -0.24), because Gentoo have long but shallow bills. Always compare within species.</span><span class="tech">Simpson's paradox: the between-species association (Gentoo: long, shallow bills) dominates the pooled Pearson r and has the opposite sign to every within-species r.</span></p><div class="ptools" role="group" aria-label="This panel on its own page"><a class="pbtn pfull" href="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/bill-length-depth-together-they-point-wrong-way.html" target="_blank" rel="opener" data-companion="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/bill-length-depth-together-they-point-wrong-way.html" data-build="56df1b17a3bf" data-tip="Open this panel on its own page
+The panel alone, as large as the screen allows, in a new tab. You can interact with it there as you can here.">⤢ Full screen</a><button type="button" class="pbtn pcopy" data-copy="panels/chart-archetype-palmer-penguins-size-species-sex-2026-10-27/bill-length-depth-together-they-point-wrong-way.html" data-tip="Copy the web address of this panel&#x27;s own page
+Paste it into an email or chat to send this one panel on its own.
+The address points at the published copy of the panel, not at the whole page.">⧉ Copy link</button></div><div class="legend"><span class="k" data-tip="Shading
+Red = negative correlation, blue = positive; pale = near zero."><span class="nw">negative</span><span class="ramp"><i style="background:color-mix(in srgb, #B2182B 30%, transparent)"></i><i style="background:color-mix(in srgb, #E0775F 30%, transparent)"></i><i style="background:color-mix(in srgb, #FAC9B0 30%, transparent)"></i><i style="background:color-mix(in srgb, #F7F7F7 30%, transparent)"></i><i style="background:color-mix(in srgb, #BCDAEA 30%, transparent)"></i><i style="background:color-mix(in srgb, #5DA4CC 30%, transparent)"></i><i style="background:color-mix(in srgb, #2166AC 30%, transparent)"></i></span><span class="nw">positive</span></span><span class="k" data-tip="Red box
+The pooled number points the opposite way to every species: Simpson&#x27;s paradox.
+@@tech
+Red box
+Flag rule: pooled r has the opposite sign to all within-group r."><span class="flagsw"></span>misleading: opposite to every species</span></div><div class="scroll tb-cards-box"><table class="tb tb-cards"><thead><tr><th data-tip="Group
+All birds together, or one species.">Group</th><th class=n data-tip="Birds
+Birds with both bill measurements.">Birds</th><th class=n data-tip="Correlation
+How closely bill length and bill depth rise together: +1 in step, 0 unrelated, −1 opposite.
+@@tech
+Correlation
+Pearson r.">Correlation (r)</th><th class=n data-tip="95% interval
+The range of correlations the data are consistent with.
+@@tech
+95% interval
+Fisher z interval, birds treated as independent (partners share a nest, so slightly narrow).">95% interval</th><th data-tip="What it says
+The plain reading of the correlation.">What it says</th></tr></thead><tbody><tr><td data-label="Group"><b>All penguins together</b></td><td class="n" data-label="Birds">342</td><td class="n sh flag" style="background:color-mix(in srgb, #FDDDCA 30%, transparent)" data-tip="Correlation (r) · -0.24
+Pooled: r = -0.24 (95% interval -0.33 to -0.13, 342 birds)
+Flagged: opposite in sign to the correlation inside every species" data-label="Correlation (r)">-0.24</td><td class="n" data-label="95% interval">-0.33 to -0.13</td><td data-label="What it says">Longer bills look shallower</td></tr><tr><td data-label="Group">Adélie</td><td class="n" data-label="Birds">151</td><td class="n sh" style="background:color-mix(in srgb, #ADD3E6 30%, transparent)" data-tip="Correlation (r) · +0.39
+Adélie: r = +0.39 (95% interval +0.25 to +0.52, 151 birds)" data-label="Correlation (r)">+0.39</td><td class="n" data-label="95% interval">+0.25 to +0.52</td><td data-label="What it says">Longer bills are deeper</td></tr><tr><td data-label="Group">Chinstrap</td><td class="n" data-label="Birds">68</td><td class="n sh" style="background:color-mix(in srgb, #61A6CD 30%, transparent)" data-tip="Correlation (r) · +0.65
+Chinstrap: r = +0.65 (95% interval +0.49 to +0.77, 68 birds)" data-label="Correlation (r)">+0.65</td><td class="n" data-label="95% interval">+0.49 to +0.77</td><td data-label="What it says">Longer bills are deeper</td></tr><tr><td data-label="Group">Gentoo</td><td class="n" data-label="Birds">123</td><td class="n sh" style="background:color-mix(in srgb, #65A8CF 30%, transparent)" data-tip="Correlation (r) · +0.64
+Gentoo: r = +0.64 (95% interval +0.53 to +0.74, 123 birds)" data-label="Correlation (r)">+0.64</td><td class="n" data-label="95% interval">+0.53 to +0.74</td><td data-label="What it says">Longer bills are deeper</td></tr></tbody></table></div><details class="checks"><summary>How this panel was checked</summary><ul><li>Correlation computed within each species and pooled; the pooled one is flagged because it reverses every species.</li><li>Intervals treat birds as independent; partners from one nest are not, so the intervals are a little narrow, far less than the sign flip.</li><li>Red box rule set before looking: pooled sign opposite to all species.</li></ul></details></div></section>
+<footer class="site"><h3>Sources</h3><ul><li>Gorman, K.B., Williams, T.D., Fraser, W.R. (2014) Ecological sexual dimorphism and environmental variability within a community of Antarctic penguins (genus <i>Pygoscelis</i>). PLoS ONE 9(3): e90081, <a href="https://doi.org/10.1371/journal.pone.0090081">doi:10.1371/journal.pone.0090081</a>. Palmer Station Antarctica LTER.</li><li>Data via Horst, A.M., Hill, A.P., Gorman, K.B. (2020) palmerpenguins: Palmer Archipelago (Antarctica) penguin data, <a href="https://doi.org/10.5281/zenodo.3960218">doi:10.5281/zenodo.3960218</a> (CC0 1.0).</li><li>Site positions: SCAR Composite Gazetteer of Antarctica, Australian Antarctic Data Centre.</li><li>Map base layers: Esri World Imagery; OpenStreetMap contributors via OpenFreeMap (ODbL).</li></ul><div class="faint">Made with the wri-html-pages skill: examples/penguin_chart_demo.py.</div><div class="brand"><a class="org" href="https://www.nceas.ucsb.edu/" target="_blank" rel="noopener"><svg class="logo" viewBox="0 0 107 96" width="107" height="96" role="img" aria-label="NCEAS" xmlns="http://www.w3.org/2000/svg"><path d="M107 94.351V96H0v-1.649h107zm-2.368-26.311c2.173 1.751-.13 4.521-2.047 3.12-2.365-1.496-7.736-2.197-8.407 1.115-.863 5.222 13.043 2.23 12.82 10.7-.225 8.088-11.989 8.279-16.401 4.649-1.055-.86-1.023-2.262-.448-3.121.831-.828 1.758-1.114 2.845-.223 2.621 1.784 9.368 3.12 9.847-1.401-.416-4.713-13.714-1.879-12.724-10.923.736-6.176 10.103-7.292 14.515-3.916zm-69.72-1.433c2.781 0 4.987.827 7.32 2.834.864.796.96 2.197.097 3.089-.863.764-2.174.669-2.942-.096-1.31-1.369-2.653-1.751-4.475-1.751-4.923 0-7.29 3.471-7.29 7.356 0 3.949 2.335 7.579 7.29 7.579 1.822 0 3.516-.733 4.987-2.038.991-.765 2.366-.383 2.94.382.513.7.768 1.879-.35 2.993-2.238 2.07-4.924 2.484-7.577 2.484-7.737 0-11.221-5.255-11.221-11.4 0-6.146 3.868-11.432 11.22-11.432zm43.41 1.687l9.016 17.865c1.31 2.483-2.558 4.458-3.708 1.974l-1.407-2.802H70.426l-1.374 2.802c-.512 1.083-1.695 1.306-2.845 1.083-1.024-.574-1.663-1.72-1.024-3.057l9.175-17.865c.864-1.687 3.165-1.75 3.965 0zm-59.265-1.4c1.151 0 2.27 1.146 2.27 2.197v17.928c0 1.401-.864 1.942-1.695 2.197-1.118 0-1.662-.255-2.59-1.114L6.463 74.727v12.292c0 1.401-.864 2.197-2.015 2.197-1.15 0-2.173-.796-2.173-2.197v-17.61c0-1.146.255-2.26 1.918-2.26 1.15 0 1.406.285 2.27 1.114l10.58 13.183V69.091c0-1.051.928-2.197 2.015-2.197zm41.365.286c2.94 0 2.877 4.14 0 4.14h-9.208v4.776h8.057c2.845 0 2.845 4.172 0 4.172h-8.057v4.776h9.75c2.91 0 3.134 4.172 0 4.172h-12.02c-1.118 0-1.981-.86-1.981-1.974V69.154c0-1.146.863-1.974 1.981-1.974h11.478zm15.918 6.082l-3.932 7.866h7.545l-3.613-7.866zM35.802.298c10.265-2.536 23.123 11.385 21.687 30.859l.374-1.055a71.591 71.591 0 002.305-7.693c.626-2.594 1.043-5.235 1.123-7.877.05-2.625-.261-5.315-1.489-7.633-1.184-2.314-3.473-4.11-6.172-4.564 1.365.04 2.722.485 3.913 1.209 1.196.723 2.201 1.763 2.958 2.951 1.504 2.412 2.018 5.279 2.077 8.037.081 5.576-1.387 10.96-3.153 16.115l-.15.408c13.665-12.969 33.586-13.957 38.398-4.929 5.05 9.476-9.756 16.64-9.756 16.64-2.336 1.263-4.924 2.35-7.438 3.259 1.099 4.961-1.512 10.914-6.472 14.25H107v1.648H70.787c-.94.348-1.934.609-2.977.768-2.62.4-4.984.078-7.01-.767H0v-1.65l58.006.001c-4.38-3.475-6.119-9.875-3.685-15.559 2.99-6.983 11.752-5.9 11.752-5.9-1.608-1.098-2.378-2.629-2.262-3.882.08-.878.158-1.398.716-2.234 1.452-2.174 5.04-4.331 7.35-5.446 4.47-2.157 10.919-3.926 16.45-1.504 5.53 2.424 5.228 6.466.905 10.513-4.323 4.045-12.007 4.49-12.007 4.49.915 1.025 2.641 3.198 3.032 4.442l.122-.041C92.37 40.589 99.312 32.587 94.614 26.24c-3.837-4.615-11.03-5.232-20.843-2.37-6.782 1.978-12.061 5.617-14.676 7.677l.33-.9a106.177 106.177 0 01-3.062 7.594c-1.134 2.478-2.315 4.933-3.599 7.333a150.073 150.073 0 01-8.384 13.979c2.451-4.847 4.918-9.668 7.228-14.553 1.138-2.45 2.28-4.896 3.319-7.383a122.98 122.98 0 002.48-6.233c-.034-2.049-.485-7.636-3.96-14.87-4.413-9.187-9.676-14.109-15.689-13.87-7.879.754-9.224 11.243-4.628 23.184l.05.116c1.19-.54 3.967-.712 5.345-.717 0 0-4.8-5.993-4.663-11.9.138-5.908 2.958-8.83 8.46-6.35 5.504 2.483 8.489 8.448 9.862 13.201.709 2.458 1.492 6.56.837 9.087-.252.972-.589 1.378-1.19 2.023-.86.923-2.519 1.374-4.413.914 0 0 6.66 5.776 3.44 12.654-4.124 8.8-16.445 11.137-22.441 2.002-4.873-7.425-2.043-17.128 3.995-20.524-1-2.47-1.917-5.115-2.531-7.691 0 0-4.533-15.762 5.921-18.345zm30.319 39.736c-2.353-.428-5.163-.039-7.33 1.502-1.14.81-1.49 1.338-2.114 2.341-4.34 7.598 2.652 15.83 8.66 16.27 7.97.584 13.105-4.898 14.032-9.764a7.895 7.895 0 00-.221-3.89c-.86.294-1.704.566-2.52.815.928 4.841-3.224 8.625-6.847 9.735-1.707.522-3.522.676-5.33.225-2.102-.522-4.157-1.894-5.45-4.974-2.406-5.733 4.347-14.016 11.956-9.845 0 0 .274.124.437.123.161-.002.606-.06-.32-.628a13.672 13.672 0 00-4.953-1.91zm6.18 6.056c-2.752-3.96-8.301-2.195-10.156 1.026-.913 1.584-1.16 3.493-.603 5.008.574 1.561 1.984 2.713 3.237 3.245 1.74.736 3.482.3 4.338.017.308-.102.407-.18.407-.18-.044-.046-.418-.021-.94-.034-.577-.013-1.544-.156-3.21-1.062-3.052-1.665-1.327-3.567-1.192-3.708 1.709-1.522 5.712-2.15 6.36-2.244.74-.218 1.548-.458 2.378-.705-.25-.8-.62-1.363-.62-1.363zm.816 2.228c-2.985.797-5.027 1.194-5.027 1.194s-.357.087-.84.197c-2.625.712-4.063 1.787-1.595 3.48 2.844 1.95 5.554-.1 5.554-.1 1.846-1.39 2.128-3.29 1.908-4.771zM32.95 27.635a7.936 7.936 0 00-3.055 2.433c-3.018 3.937-3.687 11.406 2.072 16.924 4.341 4.16 15.161 3.848 17.943-4.443.332-1.133.492-1.744.337-3.128-.296-2.638-1.881-4.982-3.772-6.44a13.661 13.661 0 00-4.735-2.398c-1.041-.307-.788.061-.682.183.107.12.383.242.383.242 8.198 2.856 6.517 13.394.626 15.439-3.166 1.099-5.562.49-7.356-.72-1.544-1.04-2.641-2.49-3.391-4.102-1.59-3.429-1.534-9.034 2.702-11.578a87.333 87.333 0 01-1.072-2.412zm36.795 13.052l.121.04c1.413.466 5.325 2.06 6.53 5.683.898-.273 1.735-.53 2.438-.753-1.352-3.115-4.198-4.698-4.198-4.698s-2.243.448-4.891-.272zm-25.906-.03c1.166-3.526-1.22-8.818-6.017-8.213 0 0-.667.102-1.431.448.37.783.731 1.541 1.062 2.235.363.543 2.566 3.931 2.57 6.215-.016.194-.287 2.743-3.568 1.59-1.79-.628-2.542-1.25-2.939-1.67-.357-.377-.588-.671-.651-.675 0 0 .007.127.137.423.36.825 1.197 2.406 2.91 3.205 1.232.574 3.035.85 4.586.233 1.504-.599 2.766-2.056 3.34-3.79zm-8.226-7.333c-1.254.826-2.485 2.305-2.29 4.601 0 0 .276 3.378 3.632 4.185 2.913.7 2.756-1.085 1.536-3.505-.242-.433-.415-.755-.415-.755s-1.066-1.78-2.463-4.526zm33.738 7.248c.132.042.264.079.394.115-.249-.078-.394-.115-.394-.115zm14.82-12.228c-2.576-.954-6.15-.92-10.644 1.313-.42.21-1.049.459-1.463.785-.412.222-.682.42-1.046.654-2.43 1.562-4.59 3.885-4.013 5.654l.017.067c.213.848.545 1.09 1.018 1.46 2.367 1.846 5.783 1.618 5.783 1.618l-.901-.892-.37-.091s-2.695-.356-2.916-2.487c-.222-2.133 3.434-4.622 5.836-5.615 2.022-.835 7.213-1.63 8.36 1.23 1.147 2.86-4.79 5.71-8.699 6.812l.866.737s4.692-.842 7.815-3.3c.784-.618 1.516-1.36 1.965-2.107.671-1.115.82-2.313.667-3.23-.199-1.19-1.342-2.263-2.274-2.608zm-4.099 7.581c2.526-2.125 1.584-5.692-2.793-4.504-4.371 1.186-6.222 3.115-5.674 4.884.047.15.077.487.276.755.254.345.704.63.969.803.197.13.36.186.49.207.101.031.635.169 1.396.083l.007.007s2.804-.111 5.33-2.235zm-36.501-5.193l.167.105.17.102c-.03-.02-.15-.097-.341-.21l.004.003zm-3.474-3.448s-3.083-1.053-6.314.025c.303.67.67 1.462 1.064 2.31 3.62-1.573 7.549.425 8.72 1.11-2.306-1.483-3.47-3.445-3.47-3.445zm3.06-15.495c-.881-.461-2.445-.592-3.467.056-.787.498-1.584 1.408-1.969 2.65-.257.832-.325 1.87-.262 2.865.248 3.957 2.752 7.998 2.752 7.998l1.128.15c-1.786-3.634-3.62-9.94-.718-10.999 2.904-1.06 5.777 3.322 6.503 5.378.862 2.445 1.442 6.817-.299 8.076-1.74 1.26-3.806-.5-3.806-.5l-.316-.215-1.267-.073s2.11 2.686 5.071 3.209c.59.104.993.189 1.77-.22.02-.01.041-.02.061-.032 1.708-.754 2.002-3.906 1.546-6.751-.069-.426-.1-.76-.21-1.213-.032-.523-.266-1.157-.39-1.609-1.332-4.824-3.693-7.497-6.128-8.77zm2.303 7.166c-2.034-4.04-5.329-2.355-5.231.936.1 3.29 1.888 5.444 1.888 5.444h.011c.443.622.904.927.994.983.102.078.254.164.481.223.307.08.82.224 1.247.182.334-.032.606-.235.749-.3 1.689-.774 1.893-3.435-.139-7.468zm38.58-5.665a10.77 10.77 0 00-6.939-1.013c-2.292.442-4.386 1.607-6.2 3.107a23.468 23.468 0 00-2.583 2.448c-.824.867-1.571 1.808-2.318 2.756-1.472 1.913-2.813 3.945-4.17 5.996a33.292 33.292 0 013.289-6.613c1.34-2.085 2.953-4.032 4.907-5.65.99-.79 2.057-1.503 3.222-2.049 1.164-.532 2.413-.928 3.698-1.052 2.559-.282 5.221.447 7.095 2.07z" fill="currentColor" /></svg><span><b>NCEAS</b><small>National Center for Ecological Analysis and Synthesis</small></span></a><a class="org" href="https://wildfireindex.org/" target="_blank" rel="noopener"><img class="logo" alt="WRI logo" src="data:image/png;base64,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"><span><b>WRI</b><small>Wildfire Resilience Index</small></span></a><p class="gh">WRI-Science on GitHub: <a href="https://github.com/WRI-Science" target="_blank" rel="noopener">github.com/WRI-Science</a> · pages: <a href="https://github.com/WRI-Science/public_publication" target="_blank" rel="noopener">WRI-Science/public_publication</a></p></div></footer>
+</div><div id="tip" role="tooltip"></div><script>
+(function(){
+  const tip = document.getElementById('tip');
+  let pinned = null;
+  // plain language / technical is chosen per panel: each chart card (and each note, section intro or page
+  // header) that has a technical version carries its own small switch; text follows its nearest panel
+  const SCOPE = '.card, .note, section.panel, section.sec, header';
+  const scopeOf = el => el.closest(SCOPE);
+  const tech = el => { const s = el && scopeOf(el); return !!s && s.dataset.lang === 'tech'; };
+  function fill(el){ tip.textContent = ''; const parts = el.dataset.tip.split('\n@@tech\n');
+    const txt = (tech(el) && parts[1]) ? parts[1] : parts[0];
+    txt.split('\n').forEach((t, i) => { const n = document.createElement(i ? 'div' : 'b');
+      if(i && t.startsWith('What it suggests: ')){ n.className = 'mean'; }
+      n.textContent = t; tip.appendChild(n); }); }
+  function place(el){ const r = el.getBoundingClientRect(); tip.style.display = 'block';
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = r.right + 10, y = r.top + r.height / 2 - h / 2;
+    if(x + w > innerWidth - 8) x = r.left - w - 10;
+    if(x < 8){ x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8); y = r.bottom + 8;
+      if(y + h > innerHeight - 8) y = r.top - h - 8; }
+    tip.style.left = x + 'px'; tip.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px'; }
+  function show(el){ fill(el); place(el); }
+  function hide(){ tip.style.display = 'none'; pinned = null; }
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    el.addEventListener('mouseenter', () => show(el));
+    el.addEventListener('mouseleave', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('focus', () => show(el));
+    el.addEventListener('blur', () => { if(pinned !== el) tip.style.display = 'none'; });
+    el.addEventListener('click', e => { if(el.classList.contains('pbtn')) return;       // a button just acts; its hover tip is enough
+      e.stopPropagation(); if(pinned === el){ hide(); return; } pinned = el; show(el); });
+  });
+  document.addEventListener('click', hide);
+  addEventListener('scroll', () => { if(!pinned) tip.style.display = 'none'; else place(pinned); }, {passive:true});
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') hide(); });
+  // keep SVG chart text the same size on screen when the chart is drawn narrower than its viewBox
+  function fitText(){ document.querySelectorAll('.svgwrap svg').forEach(svg => {
+    const vb = svg.viewBox.baseVal.width, w = svg.getBoundingClientRect().width || vb;
+    svg.style.setProperty('--k', Math.min(1.4, Math.max(1, vb / w)).toFixed(3)); }); }
+  fitText(); addEventListener('resize', fitText);
+  // map panels follow the page's light / dark switch and their own panel's plain / technical switch
+  function syncFrames(){ const r = document.documentElement;
+    document.querySelectorAll('iframe.mapframe').forEach(f => { const msg = {lang: tech(f) ? 'tech' : 'plain'};
+      if(r.dataset.theme) msg.theme = r.dataset.theme;
+      try { f.contentWindow.postMessage(msg, '*'); } catch(e){} }); }
+  function setLang(sc, l){ sc.dataset.lang = l;
+    sc.querySelectorAll('.tech, .plain').forEach(e => { if(scopeOf(e) !== sc) return;
+      const isT = e.classList.contains('tech'), on = isT ? l === 'tech' : l !== 'tech';
+      e.style.display = on ? (isT ? 'revert' : '') : 'none'; });
+    sc.querySelectorAll(':scope .langseg button').forEach(b => { if(scopeOf(b) === sc) b.setAttribute('aria-pressed', String(b.dataset.l === l)); });
+    hide(); syncFrames(); }
+  const scopes = new Set();
+  document.querySelectorAll('.tech').forEach(e => { const s = scopeOf(e); if(s) scopes.add(s); });
+  document.querySelectorAll('[data-tip]').forEach(e => { if(e.dataset.tip.indexOf('\n@@tech\n') >= 0){ const s = scopeOf(e); if(s) scopes.add(s); } });
+  scopes.forEach(sc => {
+    const seg = document.createElement('div'); seg.className = 'langseg'; seg.setAttribute('role', 'group');
+    seg.setAttribute('aria-label', 'Explanations in this panel');
+    [['plain', 'Plain'], ['tech', 'Technical']].forEach(([l, t]) => { const b = document.createElement('button');
+      b.type = 'button'; b.dataset.l = l; b.textContent = t;
+      b.addEventListener('click', e => { e.stopPropagation(); setLang(sc, l); }); seg.appendChild(b); });
+    const btns = sc.matches('header') && sc.querySelector('.btns');
+    if(btns) btns.prepend(seg); else sc.prepend(seg);
+    setLang(sc, 'plain'); });
+  document.querySelectorAll('iframe.mapframe').forEach(f => f.addEventListener('load', syncFrames));
+  // "Copy link" buttons (every chart card and map panel has one): copy the absolute web address of the panel's own page
+  document.querySelectorAll('[data-copy]').forEach(b => { const label = b.textContent; let timer = null;
+    const flash = (t, ok) => { b.textContent = t; b.classList.toggle('ok', !!ok); clearTimeout(timer);
+      timer = setTimeout(() => { b.textContent = label; b.classList.remove('ok'); }, t === label ? 0 : 1800); };
+    b.addEventListener('click', () => {
+      const url = new URL(b.dataset.copy || location.href.split('#')[0], location.href).href;
+      if(location.protocol === 'file:'){ flash('Publish first: this is a local file'); return; }   // a local preview has no web address to share yet
+      const fallback = () => { const ta = document.createElement('textarea'); ta.value = url; ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta); ta.select();
+        let ok = false; try { ok = document.execCommand('copy'); } catch(e){} document.body.removeChild(ta);
+        if(ok) flash('✓ Copied', true); else window.prompt('Copy this link', url); };
+      if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(() => flash('✓ Copied', true), fallback); else fallback(); }); });
+  const tb = document.getElementById('themebtn');
+  if(tb) tb.addEventListener('click', () => { const r = document.documentElement;
+    const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = dark ? 'light' : 'dark'; syncFrames(); });
+})();
+</script></body></html>
