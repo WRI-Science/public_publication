@@ -32,3 +32,6 @@ Public-facing explainers of research papers (pollinators, flowers, conservation)
 
 ### [wri_index_rebuild/](wri_index_rebuild/)
 Wildfire Resilience Index 2005-2025 rebuild: exploratory pages and checks
+
+### [roofing_poc/](roofing_poc/)
+Roof material and roof shape from aerial imagery and lidar: proof-of-concept results
