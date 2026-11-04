@@ -35,3 +35,6 @@ Wildfire Resilience Index 2005-2025 rebuild: exploratory pages and checks
 
 ### [roofing_poc/](roofing_poc/)
 Roof material and roof shape from aerial imagery and lidar: proof-of-concept results
+
+### [sea_of_wealth/](sea_of_wealth/)
+Ben Halpern's A Sea of Wealth book website.
