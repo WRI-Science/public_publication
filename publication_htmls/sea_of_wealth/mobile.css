@@ -222,8 +222,8 @@ body[data-page="press"] main { background: var(--navy); }
 .press-placeholder, .press-card { min-height: 170px; padding: 1.3rem; border-radius: var(--radius); }
 /* before any coverage exists: three short stacked rows, not a carousel of empty cards */
 .press-grid:not([data-snap]), .praise-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-.praise-card { padding: 1.3rem; }
-.praise-card blockquote { font-size: 1.1rem; }
+.praise-card { padding: 1.1rem; }
+.praise-card blockquote { font-size: calc(1.1rem - 2px); }
 .press-placeholder { min-height: 0; padding: 1rem 1.1rem; justify-content: flex-start; }
 .press-placeholder p { margin-top: 0.35rem; font-size: 0.92rem; }
 .press-card h3 { font-size: 1.4rem; }

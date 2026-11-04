@@ -124,7 +124,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .release-tag {
   position: absolute;
   left: -1.2rem;
-  bottom: 2rem;
+  bottom: 5.5rem;
   padding: 0.72rem 1rem;
   color: var(--deep);
   background: var(--sand);
@@ -228,9 +228,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .press-placeholder span, .press-card > span { color: var(--sand); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .press-placeholder p { margin: 0.8rem 0 0; color: rgba(255,255,255,0.64); }
 .praise-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.praise-card { padding: 1.8rem; color: var(--deep); background: rgba(255,255,255,0.82); border-radius: 14px; }
-.praise-card blockquote { margin: 0; font-family: var(--display); font-size: clamp(1.15rem, 1.6vw, 1.5rem); line-height: 1.35; }
-.praise-card p { margin: 1.4rem 0 0; color: rgba(16,47,61,0.7); font-size: 0.8rem; font-weight: 700; }
+.praise-card { padding: 1.5rem; color: var(--deep); background: rgba(255,255,255,0.82); border-radius: 14px; }
+.praise-card blockquote { margin: 0; font-family: var(--display); font-size: clamp(1rem, calc(1.6vw - 2px), 1.375rem); line-height: 1.32; }
+.praise-card p { margin: 1rem 0 0; color: rgba(16,47,61,0.7); font-size: 0.8rem; font-weight: 700; }
 .coverage-heading { margin-top: clamp(4rem, 8vw, 7rem); }
 .press-card { display: flex; flex-direction: column; text-decoration: none; }
 .press-card h3 { font-size: 1.8rem; }
