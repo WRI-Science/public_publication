@@ -268,7 +268,7 @@ body[data-page="press"] main { background: var(--navy); }
 .preorder-cover { width: 104px; max-width: none; justify-self: start; transform: rotate(-3deg); }
 .preorder-cover::before { inset: 6% -12% -6% 12%; }
 .preorder-copy { display: contents; }
-.preorder-copy .eyebrow { grid-column: 2; grid-row: 1; align-self: end; margin: 0 0 0.3rem; }
+.preorder-copy .eyebrow { grid-column: 2; grid-row: 1; align-self: end; margin: 0 0 0.3rem; font-size: 1.32rem; }
 .preorder-copy h1 { grid-column: 2; grid-row: 2; align-self: start; margin: 0; font-size: 1.75rem; line-height: 1.08; }
 .preorder-cover { grid-row: 1 / 3; }
 .preorder-copy > p, .retailer-links, .retailer-secondary, .preorder-copy small, .preorder-facts { grid-column: 1 / -1; }

@@ -3,7 +3,7 @@ window.SEA_OF_WEALTH = {
     { region: "USA", label: "Bookshop", url: "https://bookshop.org/p/books/a-sea-of-wealth-the-blue-economy-and-the-future-of-the-ocean-ben-halpern/308700b73c9f7cb7?ean=9780691275659&bkshp-astro=t" },
     { region: "Canada", label: "Indigo", url: "https://www.indigo.ca/en-ca/search?q=9780691275659" },
     { region: "UK / Europe", label: "Bookshop UK", url: "https://uk.bookshop.org/books?keywords=9780691275659" },
-    { region: "Global", label: "Blackwell’s", note: "Preorders available in a few weeks", url: "https://blackwells.co.uk/bookshop/product/9780691275659" }
+    { region: "Global", label: "Blackwell’s", url: "https://blackwells.co.uk/bookshop/product/9780691275659" }
   ],
 
   secondaryRetailers: [

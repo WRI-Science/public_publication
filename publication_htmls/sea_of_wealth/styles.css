@@ -302,6 +302,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .author-page .author-copy h1 { margin: 0 0 1.5rem; color: var(--deep); font-family: var(--display); font-size: clamp(4rem, 7vw, 7rem); font-weight: 500; line-height: 1; }
 .preorder-full { min-height: calc(100svh - 72px); display: grid; align-items: center; }
 .preorder-copy h1 { margin: 0 0 1.4rem; max-width: 780px; font-family: var(--display); font-size: clamp(4rem, 7vw, 7rem); font-weight: 500; line-height: 1; letter-spacing: -.04em; }
+.preorder-copy .eyebrow { font-size: 1.44rem; }
 .preorder-facts { display: flex; gap: 3rem; margin: 2.5rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.18); }
 .preorder-facts dt { color: rgba(255,255,255,.5); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
 .preorder-facts dd { margin: .2rem 0 0; }
