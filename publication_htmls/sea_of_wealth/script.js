@@ -21,23 +21,25 @@
     if (secondary) secondary.innerHTML = `Also available via ${content.secondaryRetailers.map((item) => `<a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a>`).join(", ")}.`;
   };
 
-  const formatDate = (date) => new Intl.DateTimeFormat("en-US", {
-    month: "short", day: "numeric", year: "numeric"
-  }).format(new Date(`${date}T12:00:00`));
-
   const renderEvents = () => {
     const container = document.querySelector("[data-events]");
     if (!container) return;
-    if (!content.events.length) {
-      container.innerHTML = `<div class="empty-state reveal"><span>Tour dates coming soon</span><p>Check back for readings, talks, and conversations about the future of the ocean.</p></div>`;
-      return;
-    }
-    container.innerHTML = content.events.map((event) => `
-      <a class="event-row reveal" href="${event.url}" target="_blank" rel="noreferrer">
-        <time datetime="${event.date}">${formatDate(event.date)}</time>
-        <span><strong>${event.city}</strong><small>${event.venue}${event.note ? ` · ${event.note}` : ""}</small></span>
-        <b aria-hidden="true">↗</b>
-      </a>`).join("");
+    const rows = content.events.map((event) => {
+      const eventName = event.event || event.note || event.venue || "Event details to come";
+      const location = event.location || event.city || event.venue || "Location to come";
+      const rsvp = event.url
+        ? `<a class="event-rsvp" href="${event.url}" target="_blank" rel="noreferrer">RSVP <span aria-hidden="true">↗</span></a>`
+        : `<span class="event-rsvp-pending">Link coming soon</span>`;
+      return `<tr><td data-label="Event">${eventName}</td><td data-label="Location">${location}</td><td data-label="RSVP">${rsvp}</td></tr>`;
+    }).join("");
+
+    container.innerHTML = `
+      <div class="event-table-wrap reveal">
+        <table class="event-table">
+          <thead><tr><th scope="col">Event</th><th scope="col">Location</th><th scope="col">RSVP</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
   };
 
   const renderPress = () => {

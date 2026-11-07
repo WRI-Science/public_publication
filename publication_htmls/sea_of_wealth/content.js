@@ -13,8 +13,8 @@ window.SEA_OF_WEALTH = {
     { label: "Target", url: "https://www.target.com/p/-/A-1011913960" }
   ],
 
-  // Add announced events here. Example:
-  // { date: "2027-03-16", city: "Santa Barbara, CA", venue: "Venue name", url: "https://...", note: "Launch event" }
+  // Add announced events here. The RSVP link can stay empty until it is ready. Example:
+  // { event: "Book launch", location: "Santa Barbara, CA", url: "https://..." }
   events: [],
 
   // Add reviews, interviews, and media coverage here. Example:
