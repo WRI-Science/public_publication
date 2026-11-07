@@ -16,9 +16,9 @@ window.SEA_OF_WEALTH = {
   // Add announced events here. Keep the ISO date for reliable chronological sorting;
   // the RSVP link can stay empty until it is ready.
   events: [
-    { date: "2027-03-13", event: "Tucson Festival of Books", location: "Tucson, AZ", url: "" },
-    { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", url: "" },
-    { date: "2027-06-09", event: "Science on Tap", location: "Portland, OR", url: "" }
+    { date: "2027-03-13", event: "Tucson Festival of Books", location: "Tucson, AZ", details: "Invited Speaker, Y-Zpm MT", url: "" },
+    { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", details: "In discussion with X, Y-Zpm PT", url: "" },
+    { date: "2027-06-09", event: "Science on Tap", location: "Portland, OR", details: "Talk and lively pop quiz, 6-8pm PT", url: "" }
   ],
 
   // Add reviews, interviews, and media coverage here. Example:

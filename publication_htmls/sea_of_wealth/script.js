@@ -33,13 +33,13 @@
       const rsvp = event.url
         ? `<a class="event-rsvp" href="${event.url}" target="_blank" rel="noreferrer">RSVP <span aria-hidden="true">↗</span></a>`
         : `<span class="event-rsvp-pending">RSVP</span>`;
-      return `<tr><td data-label="Date"><time datetime="${event.date}">${formatEventDate(event.date)}</time></td><td data-label="Event">${eventName}</td><td data-label="Location">${location}</td><td data-label="RSVP">${rsvp}</td></tr>`;
+      return `<tr><td data-label="Location">${location}</td><td data-label="Date"><time datetime="${event.date}">${formatEventDate(event.date)}</time></td><td data-label="Event">${eventName}</td><td data-label="Details">${event.details || "Details to come"}</td><td data-label="RSVP">${rsvp}</td></tr>`;
     }).join("");
 
     container.innerHTML = `
       <div class="event-table-wrap reveal">
         <table class="event-table">
-          <thead><tr><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Location</th><th scope="col">RSVP</th></tr></thead>
+          <thead><tr><th scope="col">Location</th><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Details</th><th scope="col">RSVP</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>`;
