@@ -216,6 +216,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .empty-state p { max-width: 500px; margin: 0; color: var(--slate); }
 .updates .section-heading h2,
 .updates .section-heading > p { white-space: nowrap; }
+.event-heading { display: block; }
+.event-heading > p { max-width: none; margin: 0.85rem 0 0; }
 .event-table-wrap { overflow: hidden; border: 1px solid rgba(16,47,61,0.16); border-radius: 16px; background: rgba(255,255,255,0.38); box-shadow: 0 18px 50px rgba(9,35,47,0.07); }
 .event-table { width: 100%; border-collapse: collapse; text-align: left; }
 .event-table th { padding: 1rem 1.35rem; color: var(--slate); background: rgba(16,47,61,0.06); font-size: 0.72rem; letter-spacing: 0.13em; text-transform: uppercase; }
