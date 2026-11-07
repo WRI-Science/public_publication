@@ -218,15 +218,20 @@ body[data-page="press"] main { background: var(--navy); }
 /* events and press */
 .update-list { border-top: 0; }
 .event-table-wrap { border-radius: var(--radius); }
-.event-table { table-layout: fixed; }
-.event-table th { padding: 0.85rem 0.75rem; font-size: 0.63rem; }
-.event-table td { padding: 1rem 0.75rem; overflow-wrap: anywhere; }
-.event-table th:first-child,
-.event-table td:first-child { width: 40%; }
-.event-table th:nth-child(2),
-.event-table td:nth-child(2) { width: 38%; }
-.event-table th:last-child,
-.event-table td:last-child { width: 22%; }
+.event-table,
+.event-table tbody,
+.event-table tr,
+.event-table td { display: block; width: 100%; }
+.event-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.event-table tbody { display: grid; gap: 10px; }
+.event-table tr { padding: 0.35rem 1rem; border: 1px solid rgba(16,47,61,0.16); border-radius: 14px; background: rgba(255,255,255,0.38); }
+.event-table td,
+.event-table td:first-child,
+.event-table td:nth-child(2),
+.event-table td:nth-child(3),
+.event-table td:last-child { display: grid; grid-template-columns: 78px 1fr; gap: 0.75rem; width: 100%; padding: 0.6rem 0; border-top: 1px solid rgba(16,47,61,0.1); text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.event-table td:first-child { border-top: 0; }
+.event-table td::before { content: attr(data-label); color: var(--slate); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .event-rsvp-pending { white-space: normal; }
 .press-placeholder, .press-card { min-height: 170px; padding: 1.3rem; border-radius: var(--radius); }
 /* before any coverage exists: three short stacked rows, not a carousel of empty cards */

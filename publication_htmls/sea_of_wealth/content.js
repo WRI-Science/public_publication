@@ -13,9 +13,13 @@ window.SEA_OF_WEALTH = {
     { label: "Target", url: "https://www.target.com/p/-/A-1011913960" }
   ],
 
-  // Add announced events here. The RSVP link can stay empty until it is ready. Example:
-  // { event: "Book launch", location: "Santa Barbara, CA", url: "https://..." }
-  events: [],
+  // Add announced events here. Keep the ISO date for reliable chronological sorting;
+  // the RSVP link can stay empty until it is ready.
+  events: [
+    { date: "2027-03-13", event: "Tucson Festival of Books", location: "Tucson, AZ", url: "" },
+    { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", url: "" },
+    { date: "2027-06-09", event: "Science on Tap", location: "Portland, OR", url: "" }
+  ],
 
   // Add reviews, interviews, and media coverage here. Example:
   // { type: "Interview", outlet: "NPR", title: "A conversation with Ben Halpern", date: "2027-03-18", url: "https://..." }
