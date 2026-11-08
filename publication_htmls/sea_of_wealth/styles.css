@@ -189,12 +189,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .minerals { background: var(--navy); }
 .minerals::before { background: radial-gradient(circle at 80% 15%, rgba(131,170,165,0.7), transparent 32%), repeating-radial-gradient(ellipse at 100% 110%, transparent 0 17px, rgba(255,255,255,0.1) 18px 19px); }
 
-.immersive { position: relative; display: grid; place-items: center; min-height: 82svh; padding: 6rem 2rem; color: var(--white); background: url("assets/fishing-boat.webp") center / cover no-repeat; }
-.immersive-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,27,37,0.18), rgba(5,27,37,0.63)); }
-.immersive-copy { position: relative; max-width: 920px; text-align: center; }
-.immersive-copy p { margin: 0; font-family: var(--display); font-size: clamp(2.9rem, 5.5vw, 6rem); line-height: 1.04; letter-spacing: -0.03em; }
-.immersive-copy span { display: block; margin-top: 1.8rem; font-size: 0.8rem; letter-spacing: 0.08em; }
-
 .book { background: var(--mist); }
 .book-layout { display: grid; grid-template-columns: minmax(260px, 0.72fr) 1.35fr; gap: clamp(4rem, 9vw, 9rem); align-items: center; }
 .book-image { position: relative; max-width: 420px; justify-self: end; }

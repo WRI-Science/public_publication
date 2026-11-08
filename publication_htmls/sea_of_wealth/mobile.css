@@ -138,12 +138,6 @@ h2, h3 { text-wrap: balance; }
 .question .narrow > p:last-of-type { font-size: 1rem; }
 .question .text-link { margin-top: 1.2rem; min-height: 44px; }
 
-/* the quote */
-.immersive { min-height: 62svh; padding: 4rem 1.4rem; background-position: 100% center; }
-.immersive-shade { background: linear-gradient(180deg, rgba(5, 27, 37, 0.35), rgba(5, 27, 37, 0.7)); }
-.immersive-copy p { font-size: 1.9rem; line-height: 1.12; }
-.immersive-copy span { margin-top: 1.1rem; font-size: 0.74rem; }
-
 /* ---------------------------------------------------------------- swipe rows (page cards, the five uses, press) */
 [data-snap] {
   display: flex !important;
