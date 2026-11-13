@@ -122,9 +122,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .cover-wrap { position: relative; justify-self: end; width: min(100%, 360px); min-width: 0; }
 .book-cover { width: 100%; height: auto; box-shadow: var(--shadow); }
 .release-tag {
-  position: absolute;
-  left: -1.2rem;
-  bottom: 5.5rem;
+  display: inline-block;
+  margin-top: 1.1rem;
   padding: 0.72rem 1rem;
   color: var(--deep);
   background: var(--sand);

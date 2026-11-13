@@ -32,7 +32,7 @@
       const location = event.location || event.city || event.venue || "Location to come";
       const rsvp = event.url
         ? `<a class="event-rsvp" href="${event.url}" target="_blank" rel="noreferrer">RSVP <span aria-hidden="true">↗</span></a>`
-        : `<span class="event-rsvp-pending">RSVP</span>`;
+        : `<span class="event-rsvp-pending">Link forthcoming</span>`;
       return `<tr><td data-label="Location">${location}</td><td data-label="Date"><time datetime="${event.date}">${formatEventDate(event.date)}</time></td><td data-label="Event">${eventName}</td><td data-label="Details">${event.details || "Details to come"}</td><td data-label="RSVP">${rsvp}</td></tr>`;
     }).join("");
 
