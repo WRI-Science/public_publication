@@ -17,7 +17,11 @@ window.SEA_OF_WEALTH = {
   // the RSVP link can stay empty until it is ready.
   events: [
     { date: "2027-03-13", event: "Tucson Festival of Books", location: "Tucson, AZ", details: "Invited Speaker", url: "" },
+    { date: "2027-04-08", event: "CEC Hub", location: "Santa Barbara, CA", details: "Public talk", url: "" },
+    { date: "2027-04-22", event: "UGA", location: "Athens, GA", details: "Public talk", url: "" },
+    { date: "2027-04-24", event: "Duke", location: "Durham, NC", details: "Public talk", url: "" },
     { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", details: "In discussion with X", url: "" },
+    { date: "2027-06-08", event: "Bookstore", location: "Olympia, WA", details: "Public talk", url: "" },
     { date: "2027-06-09", event: "Science on Tap", location: "Portland, OR", details: "Talk and lively pop quiz, 6-8pm PT", url: "" }
   ],
 
