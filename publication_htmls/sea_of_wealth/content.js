@@ -20,7 +20,7 @@ window.SEA_OF_WEALTH = {
     { date: "2027-04-13", event: "CEC Hub", location: "Santa Barbara, CA", details: "Public talk", url: "" },
     { date: "2027-04-22", event: "UGA", location: "Athens, GA", details: "Public talk", url: "" },
     { date: "2027-04-24", event: "Duke", location: "Durham, NC", details: "Public talk", url: "" },
-    { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", details: "In discussion with X", url: "" },
+    { date: "2027-06-06", event: "Town Hall", location: "Seattle, WA", details: "In discussion with Sally Jewel<br>co-hosted by SeaGrant, UW's Earthlab, and the School of Marine and Environmental Affairs", url: "" },
     { date: "2027-06-08", event: "Bookstore", location: "Olympia, WA", details: "Public talk", url: "" },
     { date: "2027-06-09", event: "Science on Tap", location: "Portland, OR", details: "Talk and lively pop quiz, 6-8pm PT", url: "" }
   ],
